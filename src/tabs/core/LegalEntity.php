@@ -1,0 +1,143 @@
+<?php
+
+/**
+ * Tabs Rest API Person object.
+ *
+ * PHP Version 5.5
+ *
+ * @category  Tabs_Client
+ * @package   Tabs
+ * @author    Jon Beverley <jon@csdl.biz>
+ * @copyright 2014 Carlton Software
+ * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @link      http://www.carltonsoftware.co.uk
+ */
+
+namespace tabs\core;
+
+/**
+ * Tabs Rest API Legal Entity object.
+ *
+ * @category  Tabs_Client
+ * @package   Tabs
+ * @author    Jon Beverley <jon@csdl.biz>
+ * @copyright 2014 Carlton Software
+ * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version   Release: 1
+ * @link      http://www.carltonsoftware.co.uk
+ *
+ * @method integer                 getId()
+ * @method boolean                 getInactive()
+ * @method string                  getPassword()
+ * @method string                  getCompanyname()
+ * @method string                  getFirstname()
+ * @method string                  getSurname()
+ * @method string                  getTitle()
+ * @method string                  getSalutation()
+ * @method string                  getVatnumber()
+ * @method string                  getCompanynumber()
+ * @method ContactEntity|Array     getContactentities()
+ * @method BankAccount|Array       getBankaccounts()
+ *
+ * @method void                    setInactive(boolean $inactive)
+ * @method void                    setPassword(string $password)
+ * @method void                    setCompanyname(string $companyname)
+ * @method void                    setFirstname(string $firstname)
+ * @method void                    setSurname(string $surname)
+ * @method void                    setTitle(string $title)
+ * @method void                    setSalutation(string $salutation)
+ * @method void                    setVatnumber(string $vatnumber)
+ * @method void                    setCompanynumber(string $companynumber)
+ *
+ */
+
+class LegalEntity extends Base
+{
+    /**
+     * Id
+     *
+     * @var integer
+     */
+    protected $id;
+
+    /**
+     * Inactive
+     *
+     * @var boolean
+     */
+    protected $inactive;
+
+    /**
+     * Password
+     *
+     * @var string
+     */
+    protected $password;
+
+    /**
+     * Companyname
+     *
+     * @var string
+     */
+    protected $companyname;
+
+    /**
+     * Firstname
+     *
+     * @var string
+     */
+    protected $firstname;
+
+    /**
+     * Surname
+     *
+     * @var string
+     */
+    protected $surname;
+
+    /**
+     * Title
+     *
+     * @var string
+     */
+    protected $title;
+
+    /**
+     * Salutation
+     *
+     * @var string
+     */
+    protected $salutation;
+
+    /**
+     * VatNumber
+     *
+     * @var string
+     */
+    protected $vatnumber;
+
+    /**
+     * CompanyNumber
+     *
+     * @var string
+     */
+    protected $companynumber;
+
+    /**
+     * ContactEntities
+     *
+     * Array of ContactEntity
+     *
+     * @var array()
+     */
+    protected $contactentities = array();
+
+    /**
+     * BankAccount
+     *
+     * Array of BankAccount
+     *
+     * @var array()
+     */
+    protected $bankaccounts = array();
+}
