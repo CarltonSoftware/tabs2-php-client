@@ -1,0 +1,20 @@
+{
+    "name": "carltonsoftware/PlatoClient",
+    "description": "Tabs 2 PHP Client",
+    "homepage": "https://github.com/CarltonSoftware/PlatoClient",
+    "license": "proprietary",
+    "type": "library",
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4",
+        "guzzlehttp/guzzle": "4.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.1.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "tabs\\client\\": "src/"
+        }
+    }
+}
