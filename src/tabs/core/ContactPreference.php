@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tabs Rest API Actor object.
+ * Tabs Rest API ContactPreference object.
  *
  * PHP Version 5.5
  *
@@ -26,34 +26,28 @@ namespace tabs\core;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getTabscode()
- * @method string getType()
+ * @method string getRole()
+ * @method string getReason()
  *
- * @method void setTabscode(string $tabscode)
- * @method void setType(string $type)
+ * @method void setRole(string $role)
+ * @method void setReason(string $reason)
  *
  */
 
-class Actor extends Base
+class ContactPreference extends Base
 {
-    /**
-     * Notes
-     *
-     * @var array
-     */
-    protected $notes = array();
 
     /**
-     * Tabscode
+     * Role
      *
      * @var string
      */
-    protected $tabscode;
+    protected $role;
 
     /**
-     * Type
+     * Reason
      *
      * @var string
      */
-    protected $type;
+    protected $reason;
 }

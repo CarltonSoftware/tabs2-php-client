@@ -4,7 +4,7 @@
  * Tabs PHP Client Exception object.
  *
  * PHP Version 5.4
- * 
+ *
  * @category  Client
  * @package   Tabs
  * @author    Alex Wyett <alex@wyett.co.uk>
@@ -12,7 +12,7 @@
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @link      http://www.carltonsoftware.co.uk
  */
- 
+
 namespace tabs\client;
 
 /**
@@ -28,25 +28,25 @@ namespace tabs\client;
 class Exception extends \RuntimeException
 {
     /**
-     * Exception message 
-     * 
+     * Exception message
+     *
      * @var string
      */
     protected $apiExceptionDescription = '';
-    
+
     /**
-     * Exception code 
-     * 
+     * Exception code
+     *
      * @var integer
      */
     protected $apiExceptionCode = 0;
 
 
     // ------------------ Public Functions --------------------- //
-    
+
     /**
      * Constructor
-     * 
+     *
      * @param object     $response Api Response
      * @param string     $message  Exception message
      * @param integer    $code     Optional Exception code
@@ -54,24 +54,24 @@ class Exception extends \RuntimeException
      */
     public function __construct(
         $response,
-        $message, 
+        $message,
         $code = 0, 
         \Exception $previous = null
     ) {
         // Set overide params
-        $this->setMessageFromResponse($response, $message);
+        $this->setDescriptionFromResponse($response, $message);
         $this->setCodeFromResponse($response, $code);
-        
+
         parent::__construct(
-            $this->getApiDescription(), 
-            $this->getApiCode(), 
+            $this->getApiDescription(),
+            $this->getApiCode(),
             $previous
         );
     }
 
     /**
      * Custom string representation of object
-     * 
+     *
      * @return string
      */
     public function __toString()
@@ -83,13 +83,13 @@ class Exception extends \RuntimeException
             $this->message
         );
     }
-    
+
     /**
      * Set the message of exception to be the response from API
-     * 
+     *
      * @param object $response Object from the json response
      * @param string $message  Default client error message
-     * 
+     *
      * @return \tabs\client\Exception
      */
     public function setDescriptionFromResponse($response, $message)
@@ -99,16 +99,16 @@ class Exception extends \RuntimeException
             'errorDescription',
             $message
         );
-        
+
         return $this;
     }
-    
+
     /**
      * Set the code of exception to be the response from API
-     * 
+     *
      * @param object  $response Object from the json response
      * @param integer $code     Default client error code
-     * 
+     *
      * @return \tabs\client\Exception
      */
     public function setCodeFromResponse($response, $code)
@@ -118,51 +118,51 @@ class Exception extends \RuntimeException
             'errorCode',
             $code
         );
-        
+
         return $this;
     }
-    
+
     /**
      * Return the api exception code
-     * 
+     *
      * @return integer
      */
     public function getApiCode()
     {
         return $this->apiExceptionCode;
     }
-    
+
     /**
      * Return the api exception message
-     * 
+     *
      * @return string
      */
     public function getApiDescription()
     {
         return $this->apiExceptionDescription;
     }
-    
+
     // ------------------ Private Functions --------------------- //
-    
+
     /**
      * Checks the API response from the object
-     * 
+     *
      * @param object $response Object from the json response
      * @param string $key      Object key to return
      * @param string $default  Default property
-     * 
-     * @return mixed 
+     *
+     * @return mixed
      */
     private function _getErrorResponseFromObject($response, $key, $default = '')
     {
         $value = false;
-        if ($response 
+        if ($response
             && property_exists($response, 'response')
             && property_exists($response->response, $key)
         ) {
             $value = $response->response->$key;
         }
-        
+
         if (!$value) {
             return $default;
         } else {

@@ -17,7 +17,7 @@ spl_autoload_register(
     function ($class) {
 
         // Project specific namespace
-        $prefix = 'tabs\\client\\';
+        $prefix = 'tabs\\';
 
         // Base directory
         $base_dir = __DIR__ . '/src/';

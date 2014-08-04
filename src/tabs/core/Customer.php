@@ -26,25 +26,81 @@ namespace tabs\core;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getTabscode()
+ * @method tabs\core\LegalEntity getLegalentity()
  *
- * @method void   setTabscode(string $tabscode)
+ * @method void                  setLegalentity(tabs\core\LegalEntity $legalentity)
  *
  */
 
 class Customer extends Actor
 {
     /**
-     * TabsCode
-     *
-     * @var string
-     */
-    protected $tabscode = '';
-
-    /**
      * LegalEntity
      *
-     * @var LegalEntity
+     * @var Legalentity
      */
-    protected $legalEntity;
+    protected $legalentity;
+
+    // ------------------ Static Functions --------------------- //
+
+    /**
+     * Creates a basic customer object with a title and surname
+     *
+     * @param string $title   Customer Title
+     * @param string $surname Customer Surname
+     *
+     * @return \tabs\core\Customer
+     */
+    public static function factory($title, $surname)
+    {
+        $customer = new Customer();
+        $legalentity = new LegalEntity();
+        $legalentity->setTitle($title);
+        $legalentity->setSurname($surname);
+        $customer->setLegalentity($legalentity);
+
+        return $customer;
+    }
+
+    /**
+     * Create a customer object from a given customer reference
+     *
+     * @param string $reference Customer reference
+     *
+     * @return \tabs\core\Customer
+     */
+    public static function create($reference)
+    {
+        // Get the customer object
+        $customerRequest = \tabs\client\ApiClient::getApi()->get(
+            "/customer/{$reference}"
+        );
+
+        if ($customerRequest
+            && $customerRequest->status == 200
+            && $customerRequest->response != ''
+        ) {
+            return self::createFromNode($customerRequest->response);
+        } else {
+            throw new \tabs\client\ApiException(
+                $customerRequest,
+                'Unable to create customer'
+            );
+        }
+    }
+
+    /**
+     * Creates a customer object from a node returned by the api
+     *
+     * @param object $node JSON Customer object response
+     *
+     * @return \tabs\core\Customer
+     */
+    public static function createCustomerFromNode($node)
+    {
+        $customer = self::factory('', '');
+        self::flattenNode($customer->getLegalentity(), $node);
+
+        return $customer;
+    }
 }

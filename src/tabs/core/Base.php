@@ -4,7 +4,7 @@
  * Tabs Rest API Base object.
  *
  * PHP Version 5.3
- * 
+ *
  * @category  API_Client
  * @package   Tabs
  * @author    Alex Wyett <alex@wyett.co.uk>
@@ -13,15 +13,15 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\api\core;
+namespace tabs\core;
 
 /**
  * Tabs Rest API Base object.
- * 
+ *
  * Provides setter/getter methods for all child classes.
  *
  * PHP Version 5.3
- * 
+ *
  * @category  API_Client
  * @package   Tabs
  * @author    Alex Wyett <alex@wyett.co.uk>
@@ -34,11 +34,11 @@ abstract class Base
 {
     /**
      * Helper function foor setting object properties
-     * 
+     *
      * @param object $obj        Generic object passed by reference
      * @param object $node       Node object to iterate through
      * @param array  $exceptions Properties to ignore
-     * 
+     *
      * @return void
      */
     public static function setObjectProperties(&$obj, $node, $exceptions = array())
@@ -56,18 +56,18 @@ abstract class Base
     /**
      * Helper function, traverses a multi dimension node and calls
      * and objects accessors
-     * 
+     *
      * @param object $object         Object whos accessors are to be called
      * @param object $node           Node to be traversed
-     * @param string $nodePrefix     Any string required to prefix 
+     * @param string $nodePrefix     Any string required to prefix
      * the node key with
-     * @param array  $nodePrefixKeys An array of keys that require a 
-     * 
+     * @param array  $nodePrefixKeys An array of keys that require a
+     *
      * @return void
      */
     public static function flattenNode(
-        $object, 
-        $node, 
+        $object,
+        $node,
         $nodePrefix = '',
         $nodePrefixKeys = array()
     ) {
@@ -76,9 +76,33 @@ abstract class Base
                 if (strlen($nodePrefix) > 0) {
                     $key = $nodePrefix . ucfirst($key);
                 }
-                $func = "set" . ucfirst($key);
-                if (property_exists($object, $key)) {
-                    $object->$func($val);
+                if (is_array($val)) {
+                    foreach ($val as $subKey => $subVal) {
+                        if (is_numeric($subKey)) {
+                            $func = "add" . ucfirst($key) . "FromNode";
+                            if (is_array($subVal)) {
+                                if (method_exists($object, $func)) {
+                                    $object->$func($subVal);
+                                } else {
+                                    echo $func." does not exist\n";
+                                }
+                            }
+                        } else {
+                            $func = "set" . ucfirst($subKey);
+                            if (property_exists($object, $subKey)) {
+                                $object->$func($subVal);
+                            } else {
+                                echo $func." does not exist\n";
+                            }
+                        }
+                    }
+                } else {
+                    $func = "set" . ucfirst($key);
+                    if (property_exists($object, $key)) {
+                        $object->$func($val);
+                    } else {
+                        echo $func." does not exist\n";
+                    }
                 }
             } else {
                 if (in_array($key, $nodePrefixKeys)) {
@@ -87,8 +111,8 @@ abstract class Base
                     $nodePrefix = '';
                 }
                 self::flattenNode(
-                    $object, 
-                    $val, 
+                    $object,
+                    $val,
                     $nodePrefix,
                     $nodePrefixKeys
                 );
@@ -97,13 +121,13 @@ abstract class Base
     }
 
     /**
-     * Function used to assign a variable a value if it exists in an array 
+     * Function used to assign a variable a value if it exists in an array
      * else, assign failed value
-     * 
+     *
      * @param array  $array            the array to validate
      * @param string $key              the key to check exisitence
      * @param string $failed_key_value the value to use if check has failed
-     * 
+     *
      * @return mixed
      */
     public static function assignArrayValue($array, $key, $failed_key_value)
@@ -114,14 +138,14 @@ abstract class Base
             return $failed_key_value;
         }
     }
-    
+
     /**
      * Generic getter/setter
-     * 
+     *
      * @param string $name Name of property
      * @param array  $args Function arguments
-     * 
-     * @return void 
+     *
+     * @return void
      */
     public function __call($name, $args = array())
     {
@@ -139,7 +163,7 @@ abstract class Base
                     $this->setObjectProperty($this, $property, $args[0]);
                     return $this;
                 } else {
-                    throw new \tabs\api\client\ApiException(
+                    throw new \tabs\client\Exception(
                         null,
                         'Unknown method called:' . __CLASS__ . ':' . $name
                     );
@@ -149,7 +173,7 @@ abstract class Base
                 if (property_exists($this, $property)) {
                     return $this->$property;
                 } else {
-                    throw new \tabs\api\client\ApiException(
+                    throw new \tabs\client\Exception(
                         null,
                         'Unknown method called:' . __CLASS__ . ':' . $name
                     );
@@ -158,14 +182,14 @@ abstract class Base
             }
         }
     }
-    
+
     /**
      * Generic setter
-     * 
+     *
      * @param object $obj      Generic object to set properties
      * @param string $property Property of object to set
      * @param mixed  $value    Value of property
-     * 
+     *
      * @return void
      */
     protected function setObjectProperty($obj, $property, $value)
@@ -191,35 +215,35 @@ abstract class Base
             break;
         }
     }
-    
+
     /**
      * Generic float setter
-     * 
+     *
      * @param float  $float   Float val needed to set to variable
      * @param string $varName Variable name
-     * 
-     * @return void 
+     *
+     * @return void
      */
     protected function setFloatVal($float, $varName)
     {
         if (strpos($float, '.') < strpos($float, ',')) {
             $float = str_replace('.', '', $float);
-            $float = strtr($float, ',', '.');           
+            $float = strtr($float, ',', '.');
         } else {
-            $float = str_replace(',', '', $float);           
-        } 
+            $float = str_replace(',', '', $float);
+        }
         if (is_numeric(floatval($float))) {
             $this->$varName = floatval($float);
         }
     }
-    
+
     /**
      * Generic timestamp setter
-     * 
+     *
      * @param integer $timestamp TimeStamp val needed to set to variable
      * @param string  $varName   Variable name
-     * 
-     * @return void 
+     *
+     * @return void
      */
     protected function setTimeStamp($timestamp, $varName)
     {

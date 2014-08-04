@@ -28,6 +28,7 @@ namespace tabs\core;
  *
  * @method integer getId()
  * @method boolean getInvalid()
+ * @method string  getContactmethod()
  * @method string  getType()
  * @method string  getSubtype()
  * @method string  getValue()
@@ -43,6 +44,7 @@ namespace tabs\core;
  * @method integer getCountry()
  *
  * @method void    setInvalid(boolean $invalid)
+ * @method void    setContactmethod(string $contactmethod)
  * @method void    setType(string $type)
  * @method void    setSubtype(string $subtype)
  * @method void    setValue(string $value)
@@ -74,6 +76,13 @@ class ContactEntity extends Base
      * @var boolean
      */
     protected $invalid;
+
+    /**
+     * Contactmethod
+     *
+     * @var string
+     */
+    protected $contactmethod;
 
     /**
      * Type
@@ -118,6 +127,12 @@ class ContactEntity extends Base
     protected $addr2;
 
     /**
+     * Addr3
+     *
+     * @var string
+     */
+    protected $addr3;
+    /**
      * Town
      *
      * @var string
@@ -158,4 +173,28 @@ class ContactEntity extends Base
      * @var integer
      */
     protected $country;
+
+    /**
+     * Contactpreferences
+     *
+     * Array of Contactpreference
+     *
+     * @var array()
+     */
+    protected $contactpreferences = array();
+
+    /**
+     * Creates a bankaccount object from a node and adds it to the array
+     *
+     * @param object $node JSON Bank account object response
+     *
+     * @return \tabs\core\LegalEntity
+     */
+    public function addContactpreferencesFromNode($node)
+    {
+        $contactpreference = new ContactPreference();
+        self::flattenNode($contactpreference, $node);
+        array_push($this->contactpreferences, $contactpreference);
+        return $this;
+    }
 }
