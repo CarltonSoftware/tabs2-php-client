@@ -63,6 +63,13 @@ class BankAccount extends Base
     protected $id;
 
     /**
+     * Legalentityid
+     *
+     * @var integer
+     */
+    protected $legalentityid;
+
+    /**
      * Invalid
      *
      * @var string
@@ -138,5 +145,17 @@ class BankAccount extends Base
      * @var string
      */
     protected $rollnumber;
+
+    /**
+     * Constructor
+     *
+     * @param integer $legalentityid Id of the legalentity
+     *
+     * @return void
+     */
+    function __construct(integer $legalentityid) {
+        $this->legalentityid = $legalentityid;
+    }
+
 
 }

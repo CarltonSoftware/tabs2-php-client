@@ -181,7 +181,7 @@ class LegalEntity extends Base
      */
     public function addContactsFromNode($node)
     {
-        $contact = new ContactEntity();
+        $contact = new ContactEntity($this->id);
         self::flattenNode($contact, $node);
         array_push($this->contactentities, $contact);
         return $this;
@@ -211,7 +211,7 @@ class LegalEntity extends Base
      */
     public function addBankaccountsFromNode($node)
     {
-        $bankaccount = new BankAccount();
+        $bankaccount = new BankAccount($this->id);
         self::flattenNode($bankaccount, $node);
         array_push($this->bankaccounts, $bankaccount);
         return $this;

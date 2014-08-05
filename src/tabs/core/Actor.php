@@ -26,22 +26,23 @@ namespace tabs\core;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getTabscode()
- * @method string getType()
+ * @method integer getId()
+ * @method string  getTabscode()
+ * @method string  getType()
  *
- * @method void setTabscode(string $tabscode)
- * @method void setType(string $type)
+ * @method void    setTabscode(string $tabscode)
+ * @method void    setType(string $type)
  *
  */
 
 class Actor extends Base
 {
     /**
-     * Notes
+     * Id
      *
-     * @var array
+     * @var integer
      */
-    protected $notes = array();
+    protected $id;
 
     /**
      * Tabscode

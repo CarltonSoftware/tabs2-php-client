@@ -26,28 +26,97 @@ namespace tabs\core;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getRole()
- * @method string getReason()
+ * @method integer getId()
+ * @method integer getContactid()
+ * @method string  getRole()
+ * @method string  getReason()
  *
- * @method void setRole(string $role)
- * @method void setReason(string $reason)
+ * @method void    setContactid(integer $contactid)
+ * @method void    setRole(string $role)
+ * @method void    setReason(string $reason)
  *
  */
 
 class ContactPreference extends Base
 {
+    /**
+     * Id
+     *
+     * @var integer
+     */
+    protected $id = 0;
+
+    /**
+     * Legalentityid
+     *
+     * @var integer
+     */
+    protected $legalentityid;
+
+    /**
+     * Contactid
+     *
+     * @var integer
+     */
+    protected $contactid;
 
     /**
      * Role
      *
      * @var string
      */
-    protected $role;
+    protected $role = '';
 
     /**
      * Reason
      *
      * @var string
      */
-    protected $reason;
+    protected $reason = '';
+
+    /**
+     * Constructor
+     *
+     * @param integer $legalentityid Id of the legalentity
+     *
+     * @return void
+     */
+    function __construct(integer $legalentityid) {
+        $this->legalentityid = $legalentityid;
+    }
+
+    /**
+     * Update a contact preference
+     *
+     * @return boolean
+     *
+     * @throws \tabs\api\client\ApiException
+     */
+    public function update()
+    {
+        if ($this->id == 0) {
+            throw new Exception(
+                'Update called on new entity - use create instead'
+            );
+        }
+        $conf = \tabs\client\ApiClient::getApi()->put(
+            '/legalentity/' . $this->legalentityid .
+            '/contactpreference/' . $this->getId(),
+            array(
+                'contactid' => $this->getContactid(),
+                'role' => $this->getRole(),
+                'reason' => $this->getReason()
+            )
+        );
+
+        // Test api response
+        if ($conf && $conf->status == 204) {
+            return true;
+        } else {
+            throw new \tabs\client\Exception(
+                $conf,
+                'Invalid contact preference update'
+            );
+        }
+    }
 }

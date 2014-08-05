@@ -68,7 +68,14 @@ class ContactEntity extends Base
      *
      * @var integer
      */
-    protected $id;
+    protected $id = 0;
+
+    /**
+     * Legalentityid
+     *
+     * @var integer
+     */
+    protected $legalentityid;
 
     /**
      * Invalid
@@ -184,6 +191,17 @@ class ContactEntity extends Base
     protected $contactpreferences = array();
 
     /**
+     * Constructor
+     *
+     * @param integer $legalentityid Id of the legalentity
+     *
+     * @return void
+     */
+    function __construct(integer $legalentityid) {
+        $this->legalentityid = $legalentityid;
+    }
+
+    /**
      * Creates a bankaccount object from a node and adds it to the array
      *
      * @param object $node JSON Bank account object response
@@ -192,9 +210,61 @@ class ContactEntity extends Base
      */
     public function addContactpreferencesFromNode($node)
     {
-        $contactpreference = new ContactPreference();
+        $contactpreference = new ContactPreference($this->legalentityid);
         self::flattenNode($contactpreference, $node);
+        $contactpreference->setContactid($this->id);
         array_push($this->contactpreferences, $contactpreference);
         return $this;
+    }
+
+    /**
+     * Update a contact
+     *
+     * @return boolean
+     *
+     * @throws \tabs\api\client\ApiException
+     */
+    public function update()
+    {
+        if ($this->id == 0) {
+            throw new Exception(
+                'Update called on new entity - use create instead'
+            );
+        }
+        if ($this->type()=='C') {
+            $putArray = array(
+                'subtype' => $this->getSubtype(),
+                'value'   => $this->getValue(),
+                'comment' => $this->getComment()
+            );
+        } else {
+            $putArray = array(
+                'addr1'  => $this->getAddr1(),
+                'addr2'  => $this->getAddr2(),
+                'addr3'  => $this->getAddr3(),
+                'town'   => $this->getTown(),
+                'county' => $this->getCounty(),
+                'postcode' => $this->getPostcode(),
+                'latitude' => $this->getLatitude(),
+                'longitude' => $this->getLongitude(),
+                'country' => $this->getCountry()
+            );
+        }
+
+        $conf = \tabs\client\ApiClient::getApi()->put(
+            '/legalentity/' . $this->legalentityid .
+            '/contact/' . $this->getId(),
+            $putArray
+        );
+
+        // Test api response
+        if ($conf && $conf->status == 204) {
+            return true;
+        } else {
+            throw new \tabs\client\Exception(
+                $conf,
+                'Invalid contact preference update'
+            );
+        }
     }
 }
