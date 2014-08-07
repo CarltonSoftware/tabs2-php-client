@@ -103,6 +103,28 @@ class User extends \tabs\core\Base
 
         return $user;
     }
+
+    /**
+     * Authenticate and return a user object
+     *
+     * @param string $username Username
+     * @param string $password Password
+     *
+     * @return boolean
+     */
+    public static function authenticate($username, $password)
+    {
+        // Get the user object
+        $userRequest = \tabs\client\Client::getClient()->post(
+            '/hmac/user/authenticate',
+            array(
+                'username' => $username,
+                'password' => $password
+            )
+        );
+        
+        return ($userRequest->getStatusCode() == 204);
+    }
     
     // ------------------ Public Functions --------------------- //
     
