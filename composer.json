@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-0": {
-            "tabs\\client\\": "src/"
+            "tabs\\": "src/"
         }
     }
 }
