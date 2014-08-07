@@ -125,4 +125,30 @@ class Client extends \GuzzleHttp\Client
             );
         }
     }
+    
+    /**
+     * Overriden get request
+     * 
+     * @param string $url
+     * @param array  $params
+     * @param array  $options
+     * 
+     * @throws \tabs\client\Exception
+     * 
+     * @return \GuzzleHttp\Message\Response
+     */
+    public function post($url = null, array $params = [], array $options = [])
+    {
+        try {
+            $options['body'] = $params;
+            return parent::post($url, $options);
+        } catch (\RuntimeException $ex) {
+            $json = $ex->getResponse()->json();
+            throw new \tabs\client\Exception(
+                $ex,
+                $json['errorDescription'],
+                $ex->getCode()
+            );
+        }
+    }
 }
