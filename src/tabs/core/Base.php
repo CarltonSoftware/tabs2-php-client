@@ -84,7 +84,10 @@ abstract class Base
                                 if (method_exists($object, $func)) {
                                     $object->$func($subVal);
                                 } else {
-                                    echo $func." does not exist\n";
+                                    throw new \tabs\client\Exception(
+                                        null,
+                                        $func." does not exist\n"
+                                    );
                                 }
                             }
                         } else {
@@ -92,7 +95,10 @@ abstract class Base
                             if (property_exists($object, $subKey)) {
                                 $object->$func($subVal);
                             } else {
-                                echo $func." does not exist\n";
+                                throw new \tabs\client\Exception(
+                                    null,
+                                    $func." does not exist\n"
+                                );
                             }
                         }
                     }
@@ -101,7 +107,10 @@ abstract class Base
                     if (property_exists($object, $key)) {
                         $object->$func($val);
                     } else {
-                        echo $func." does not exist\n";
+                        throw new \tabs\client\Exception(
+                            null,
+                            $func." does not exist\n"
+                        );
                     }
                 }
             } else {
