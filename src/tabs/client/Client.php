@@ -48,12 +48,12 @@ class Client extends \GuzzleHttp\Client
      * @return \tabs\client\Client
      */
     public static function factory(
-        $apiUrl,
+        $baseUrl,
         $key = '',
         $secret = '',
         $config = array()
     ) {
-        self::$instance = new static($apiUrl, $key, $secret, $config);
+        self::$instance = new static($baseUrl, $key, $secret, $config);
         return self::$instance;
     }
 
@@ -87,6 +87,12 @@ class Client extends \GuzzleHttp\Client
     public function __construct($baseUrl, $key, $secret, $config = array())
     {
         $plugin = new \tabs\client\Hmac($key, $secret);
+        
+        if (isset($config['prefix'])) {
+            $plugin->setPrefix($config['prefix']);
+            unset($config['prefix']);
+        }
+        
         parent::__construct(
             array_merge(
                 array('base_url' => $baseUrl),
@@ -94,5 +100,29 @@ class Client extends \GuzzleHttp\Client
             )
         );
         $this->getEmitter()->attach($plugin);
+    }
+    
+    /**
+     * Overriden get request
+     * 
+     * @param string $url
+     * @param array  $options
+     * 
+     * @throws \tabs\client\Exception
+     * 
+     * @return \GuzzleHttp\Message\Response
+     */
+    public function get($url = null, $options = [])
+    {
+        try {
+            return parent::get($url, $options);
+        } catch (\RuntimeException $ex) {
+            $json = $ex->getResponse()->json();
+            throw new \tabs\client\Exception(
+                $ex,
+                $json['errorDescription'],
+                $ex->getCode()
+            );
+        }
     }
 }
