@@ -110,7 +110,7 @@ class User extends \tabs\core\Base
      * @param string $username Username
      * @param string $password Password
      *
-     * @return boolean
+     * @return \tabs\core\User
      */
     public static function authenticate($username, $password)
     {
@@ -123,7 +123,12 @@ class User extends \tabs\core\Base
             )
         );
         
-        return ($userRequest->getStatusCode() == 204);
+        $urlSegments = explode(
+            '/',
+            $userRequest->getHeader('Content-Location')
+        );
+
+        return self::get($urlSegments[count($urlSegments) - 1]);
     }
     
     // ------------------ Public Functions --------------------- //
