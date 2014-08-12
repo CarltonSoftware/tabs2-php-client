@@ -2,5 +2,6 @@
 /nbproject/*
 /nbproject/private/
 composer.lock
+composer.phar
 vendor
 vendor/*

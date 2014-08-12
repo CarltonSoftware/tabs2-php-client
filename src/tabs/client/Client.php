@@ -115,7 +115,8 @@ class Client extends \GuzzleHttp\Client
     public function get($url = null, $options = [])
     {
         try {
-            return parent::get($url, $options);
+            $response = parent::get($url, $options);
+            return $response;
         } catch (\RuntimeException $ex) {
             $json = $ex->getResponse()->json();
             throw new \tabs\client\Exception(
@@ -127,7 +128,7 @@ class Client extends \GuzzleHttp\Client
     }
     
     /**
-     * Overriden get request
+     * Overriden post request
      * 
      * @param string $url
      * @param array  $params

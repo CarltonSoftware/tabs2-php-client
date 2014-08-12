@@ -13,7 +13,7 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\core;
+namespace tabs\actor;
 
 /**
  * Tabs Rest API Actor object.
@@ -37,7 +37,7 @@ namespace tabs\core;
  *
  */
 
-class ContactPreference extends Base
+class ContactPreference extends \tabs\core\Base
 {
     /**
      * Id
@@ -74,16 +74,6 @@ class ContactPreference extends Base
      */
     protected $reason = '';
 
-    /**
-     * Constructor
-     *
-     * @param integer $legalentityid Id of the legalentity
-     *
-     * @return void
-     */
-    function __construct(integer $legalentityid) {
-        $this->legalentityid = $legalentityid;
-    }
 
     /**
      * Update a contact preference

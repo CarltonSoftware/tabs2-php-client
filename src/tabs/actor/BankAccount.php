@@ -13,7 +13,7 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\core;
+namespace tabs\actor;
 
 /**
  * Tabs Rest API BankAccount object.
@@ -53,7 +53,7 @@ namespace tabs\core;
  * @method void    setRollnumber(string $rollnumber)
  */
 
-class BankAccount extends Base
+class BankAccount extends \tabs\core\Base
 {
     /**
      * Id
@@ -61,13 +61,6 @@ class BankAccount extends Base
      * @var integer
      */
     protected $id;
-
-    /**
-     * Legalentityid
-     *
-     * @var integer
-     */
-    protected $legalentityid;
 
     /**
      * Invalid
@@ -145,17 +138,4 @@ class BankAccount extends Base
      * @var string
      */
     protected $rollnumber;
-
-    /**
-     * Constructor
-     *
-     * @param integer $legalentityid Id of the legalentity
-     *
-     * @return void
-     */
-    function __construct(integer $legalentityid) {
-        $this->legalentityid = $legalentityid;
-    }
-
-
 }

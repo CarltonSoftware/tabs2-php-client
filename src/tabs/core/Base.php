@@ -56,76 +56,47 @@ abstract class Base
     /**
      * Helper function, traverses a multi dimension node and calls
      * and objects accessors
-     *
+     * 
      * @param object $object         Object whos accessors are to be called
      * @param object $node           Node to be traversed
-     * @param string $nodePrefix     Any string required to prefix
+     * @param string $nodePrefix     Any string required to prefix 
      * the node key with
-     * @param array  $nodePrefixKeys An array of keys that require a
-     *
+     * @param array  $nodePrefixKeys An array of keys that require a 
+     * 
      * @return void
      */
     public static function flattenNode(
-        $object,
+        $object, 
         $node,
-        $nodePrefix = '',
-        $nodePrefixKeys = array()
+        $parentKey = ''
     ) {
         foreach ($node as $key => $val) {
-            if (!is_object($val)) {
-                if (strlen($nodePrefix) > 0) {
-                    $key = $nodePrefix . ucfirst($key);
-                }
-                if (is_array($val)) {
-                    foreach ($val as $subKey => $subVal) {
-                        if (is_numeric($subKey)) {
-                            $func = "add" . ucfirst($key) . "FromNode";
-                            if (is_array($subVal)) {
-                                if (method_exists($object, $func)) {
-                                    $object->$func($subVal);
-                                } else {
-                                    throw new \tabs\client\Exception(
-                                        null,
-                                        $func." does not exist\n"
-                                    );
-                                }
-                            }
-                        } else {
-                            $func = "set" . ucfirst($subKey);
-                            if (property_exists($object, $subKey)) {
-                                $object->$func($subVal);
-                            } else {
-                                throw new \tabs\client\Exception(
-                                    null,
-                                    $func." does not exist\n"
-                                );
-                            }
-                        }
+            
+            switch (gettype($val)) {
+                case 'array':
+                    // call function again recursively
+                    self::flattenNode(
+                        $object, 
+                        $val,
+                        $key
+                    );
+                    break;
+                case 'object':
+                    $thisKey = (is_numeric($key)) ? $parentKey : $key;
+                    $func = "add" . ucfirst($thisKey) . "FromNode";
+                    if (property_exists($object, $thisKey)) {
+                        $object->$func($val);
                     }
-                } else {
+                    break;
+                default:
+                    // call setter on object
                     $func = "set" . ucfirst($key);
                     if (property_exists($object, $key)) {
                         $object->$func($val);
-                    } else {
-                        throw new \tabs\client\Exception(
-                            null,
-                            $func." does not exist\n"
-                        );
                     }
-                }
-            } else {
-                if (in_array($key, $nodePrefixKeys)) {
-                    $nodePrefix = $key;
-                } else {
-                    $nodePrefix = '';
-                }
-                self::flattenNode(
-                    $object,
-                    $val,
-                    $nodePrefix,
-                    $nodePrefixKeys
-                );
+                    break;
             }
+            
         }
     }
 

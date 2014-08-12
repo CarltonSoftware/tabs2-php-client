@@ -13,7 +13,7 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\core;
+namespace tabs\actor;
 
 /**
  * Tabs Rest API Customer object.
@@ -26,39 +26,21 @@ namespace tabs\core;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method tabs\core\LegalEntity getLegalentity()
- *
- * @method void                  setLegalentity(tabs\core\LegalEntity $legalentity)
- *
  */
 
 class Customer extends Actor
 {
-    /**
-     * LegalEntity
-     *
-     * @var Legalentity
-     */
-    protected $legalentity;
 
     // ------------------ Static Functions --------------------- //
 
     /**
-     * Creates a basic customer object with a title and surname
-     *
-     * @param string $title   Customer Title
-     * @param string $surname Customer Surname
+     * Creates a basic customer object
      *
      * @return \tabs\core\Customer
      */
-    public static function factory($title, $surname)
+    public static function factory()
     {
         $customer = new Customer();
-        $legalentity = new LegalEntity();
-        $legalentity->setTitle($title);
-        $legalentity->setSurname($surname);
-        $customer->setLegalentity($legalentity);
-
         return $customer;
     }
 
@@ -72,17 +54,17 @@ class Customer extends Actor
     public static function create($reference)
     {
         // Get the customer object
-        $customerRequest = \tabs\client\ApiClient::getApi()->get(
-            "/customer/{$reference}"
+        $customerRequest = \tabs\client\Client::getClient()->get(
+            "customer/{$reference}"
         );
 
         if ($customerRequest
-            && $customerRequest->status == 200
-            && $customerRequest->response != ''
+            && $customerRequest->getStatusCode() == 200
+            && $customerRequest->getBody() != ''
         ) {
-            return self::createFromNode($customerRequest->response);
+            return self::createCustomerFromNode($customerRequest->json(array("object" => true)));
         } else {
-            throw new \tabs\client\ApiException(
+            throw new \tabs\client\Exception(
                 $customerRequest,
                 'Unable to create customer'
             );
@@ -98,9 +80,10 @@ class Customer extends Actor
      */
     public static function createCustomerFromNode($node)
     {
-        $customer = self::factory('', '');
-        self::flattenNode($customer->getLegalentity(), $node);
-
+        $customer = self::factory();
+        self::flattenNode($customer, $node);
         return $customer;
     }
+    
+    
 }

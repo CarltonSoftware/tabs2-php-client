@@ -13,7 +13,7 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\core;
+namespace tabs\actor;
 
 /**
  * Tabs Rest API ContactEntity object.
@@ -61,7 +61,7 @@ namespace tabs\core;
  *
  */
 
-class ContactEntity extends Base
+class ContactEntity extends \tabs\core\Base
 {
     /**
      * Id
@@ -69,13 +69,6 @@ class ContactEntity extends Base
      * @var integer
      */
     protected $id = 0;
-
-    /**
-     * Legalentityid
-     *
-     * @var integer
-     */
-    protected $legalentityid;
 
     /**
      * Invalid
@@ -190,33 +183,15 @@ class ContactEntity extends Base
      */
     protected $contactpreferences = array();
 
-    /**
-     * Constructor
-     *
-     * @param integer $legalentityid Id of the legalentity
-     *
-     * @return void
-     */
-    function __construct(integer $legalentityid) {
-        $this->legalentityid = $legalentityid;
+    
+    public function addContactPreferencesFromNode($node) {
+        $contactPreference = new ContactPreference();
+        self::flattenNode($contactPreference, $node);
+        $this->contactpreferences[] = $contactPreference;
     }
-
-    /**
-     * Creates a bankaccount object from a node and adds it to the array
-     *
-     * @param object $node JSON Bank account object response
-     *
-     * @return \tabs\core\LegalEntity
-     */
-    public function addContactpreferencesFromNode($node)
-    {
-        $contactpreference = new ContactPreference($this->legalentityid);
-        self::flattenNode($contactpreference, $node);
-        $contactpreference->setContactid($this->id);
-        array_push($this->contactpreferences, $contactpreference);
-        return $this;
-    }
-
+    
+    
+    
     /**
      * Update a contact
      *
