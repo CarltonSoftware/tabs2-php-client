@@ -60,7 +60,6 @@ namespace tabs\actor;
  * @method void    setCountry(integer $country)
  *
  */
-
 class ContactEntity extends \tabs\core\Base
 {
     /**
@@ -68,7 +67,7 @@ class ContactEntity extends \tabs\core\Base
      *
      * @var integer
      */
-    protected $id = 0;
+    protected $id;
 
     /**
      * Invalid
@@ -177,69 +176,46 @@ class ContactEntity extends \tabs\core\Base
     /**
      * Contactpreferences
      *
-     * Array of Contactpreference
+     * Array of ContactPreference
      *
-     * @var array()
+     * @var array
      */
     protected $contactpreferences = array();
 
-    
-    public function addContactPreferencesFromNode($node) {
-        $contactPreference = new ContactPreference();
-        self::flattenNode($contactPreference, $node);
-        $this->contactpreferences[] = $contactPreference;
+    // ------------------ Static Functions --------------------- //
+
+    /**
+     * Create a new contact entity object
+     * 
+     * @param array $array Array representation of a contact entity
+     * 
+     * @return \tabs\actor\ContactEntity
+     */
+    public static function createFromArray($array)
+    {
+        $contact = new static();
+        self::setObjectProperties($contact, $array);
+        
+        return $contact;
     }
-    
-    
+
+    // ------------------ Public Functions --------------------- //
     
     /**
-     * Update a contact
-     *
-     * @return boolean
-     *
-     * @throws \tabs\api\client\ApiException
+     * Set the contact preferences
+     * 
+     * @param array $contactPreferences Array of contact preference objects
+     * 
+     * @return \tabs\actor\ContactEntity
      */
-    public function update()
+    public function setContactPreferences($contactPreferences)
     {
-        if ($this->id == 0) {
-            throw new Exception(
-                'Update called on new entity - use create instead'
+        foreach ($contactPreferences as $contactPreference) {
+            $this->contactpreferences[] = ContactPreference::createFromArray(
+                $contactPreference
             );
         }
-        if ($this->type()=='C') {
-            $putArray = array(
-                'subtype' => $this->getSubtype(),
-                'value'   => $this->getValue(),
-                'comment' => $this->getComment()
-            );
-        } else {
-            $putArray = array(
-                'addr1'  => $this->getAddr1(),
-                'addr2'  => $this->getAddr2(),
-                'addr3'  => $this->getAddr3(),
-                'town'   => $this->getTown(),
-                'county' => $this->getCounty(),
-                'postcode' => $this->getPostcode(),
-                'latitude' => $this->getLatitude(),
-                'longitude' => $this->getLongitude(),
-                'country' => $this->getCountry()
-            );
-        }
-
-        $conf = \tabs\client\ApiClient::getApi()->put(
-            '/legalentity/' . $this->legalentityid .
-            '/contact/' . $this->getId(),
-            $putArray
-        );
-
-        // Test api response
-        if ($conf && $conf->status == 204) {
-            return true;
-        } else {
-            throw new \tabs\client\Exception(
-                $conf,
-                'Invalid contact preference update'
-            );
-        }
+        
+        return $this;
     }
 }
