@@ -25,33 +25,19 @@ namespace tabs\actor;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
- *
  */
-
 class Customer extends Actor
 {
-
     // ------------------ Static Functions --------------------- //
-
-    /**
-     * Creates a basic customer object
-     *
-     * @return \tabs\core\Customer
-     */
-    public static function factory()
-    {
-        $customer = new Customer();
-        return $customer;
-    }
 
     /**
      * Create a customer object from a given customer reference
      *
      * @param string $reference Customer reference
      *
-     * @return \tabs\core\Customer
+     * @return \tabs\actor\Customer
      */
-    public static function create($reference)
+    public static function get($reference)
     {
         // Get the customer object
         $customerRequest = \tabs\client\Client::getClient()->get(
@@ -62,28 +48,66 @@ class Customer extends Actor
             && $customerRequest->getStatusCode() == 200
             && $customerRequest->getBody() != ''
         ) {
-            return self::createCustomerFromNode($customerRequest->json(array("object" => true)));
-        } else {
-            throw new \tabs\client\Exception(
-                $customerRequest,
-                'Unable to create customer'
+            return self::factory(
+                $customerRequest->json(
+                    array(
+                        'object' => true
+                    )
+                )
             );
         }
+        
+        throw new \tabs\client\Exception(
+            $customerRequest,
+            'Unable to create customer'
+        );
     }
-
+    
     /**
-     * Creates a customer object from a node returned by the api
-     *
-     * @param object $node JSON Customer object response
-     *
-     * @return \tabs\core\Customer
+     * Fetch an array of customers
+     * 
+     * @return \tabs\actor\Customer[]
      */
-    public static function createCustomerFromNode($node)
+    public static function fetch()
     {
-        $customer = self::factory();
-        self::flattenNode($customer, $node);
+        // Get the customers index
+        $customersIndex = \tabs\client\Client::getClient()->get(
+            'customer'
+        );
+
+        if ($customersIndex
+            && $customersIndex->getStatusCode() == 200
+            && $customersIndex->getBody() != ''
+        ) {
+            $customers = array();
+            foreach ($customersIndex->json() as $cusArr) {
+                $customers[] = static::factory($cusArr);
+            }
+            
+            return $customers;
+        }
+        
+        throw new \tabs\client\Exception(
+            $customersIndex,
+            'Unable to fetch customers'
+        );
+    }
+    
+    /**
+     * Create a customer object from a json object
+     * 
+     * @param stdClass $json Json object
+     * 
+     * @return \tabs\actor\Customer
+     */
+    public static function factory($json)
+    {
+        $customer = new static();
+        self::setObjectProperties(
+            $customer,
+            $json
+        );
+
         return $customer;
     }
-    
-    
 }
