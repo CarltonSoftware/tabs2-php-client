@@ -26,34 +26,66 @@ namespace tabs\actor;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string                  getTabscode()
- * @method string                  getType()
- * @method string                  getLanguage()
- * @method boolean                 getInactive()
- * @method string                  getPassword()
- * @method Name                    getName()
- * @method string                  getCompanyname()
- * @method string                  getVatnumber()
- * @method string                  getCompanynumber()
- * @method ContactEntity|Array     getContacts()
- * @method BankAccount|Array       getBankaccounts()
+ * @method string  getFirstname()
+ * @method string  getSurname()
+ * @method string  getTitle()
+ * @method string  getSalutation()
+ * @method string  getTabscode()
+ * @method string  getType()
+ * @method string  getLanguage()
+ * @method boolean getInactive()
+ * @method string  getPassword()
+ * @method array   getName()
+ * @method string  getCompanyname()
+ * @method string  getVatnumber()
+ * @method string  getCompanynumber()
+ * @method array   getContacts()
+ * @method array   getBankaccounts()
  *
- * @method void                    setTabscode(string $tabscode)
- * @method void                    setType(string $type)
- * @method void                    setLanguage(string $language)
- * @method void                    setInactive(boolean $inactive)
- * @method void                    setPassword(string $password)
- * @method void                    setName(Name $name)
- * @method void                    setCompanyname(string $companyname)
- * @method void                    setVatnumber(string $vatnumber)
- * @method void                    setCompanynumber(string $companynumber)
- * @method void                    setContacts(ContactEntity $contacts)
- * @method void                    setBankaccounts(BankAccount $bankaccounts)
+ * @method void    setFirstname(string $firstname)
+ * @method void    setSurname(string $surname)
+ * @method void    setTitle(string $title)
+ * @method void    setSalutation(string $salutation)
+ * @method void    setTabscode(string $tabscode)
+ * @method void    setType(string $type)
+ * @method void    setLanguage(string $language)
+ * @method void    setInactive(boolean $inactive)
+ * @method void    setPassword(string $password)
+ * @method void    setCompanyname(string $companyname)
+ * @method void    setVatnumber(string $vatnumber)
+ * @method void    setCompanynumber(string $companynumber)
  *
  */
 
 class Actor extends \tabs\core\Base
 {
+    /**
+     * Firstname
+     *
+     * @var string
+     */
+    protected $firstname;
+    
+    /**
+     * Surname
+     *
+     * @var string
+     */
+    protected $surname;
+    
+    /**
+     * Title
+     *
+     * @var string
+     */
+    protected $title;
+    
+    /**
+     * Salutatino
+     *
+     * @var string
+     */
+    protected $salutation;
     
     /**
      * Tabscode
@@ -89,13 +121,6 @@ class Actor extends \tabs\core\Base
      * @var string
      */
     protected $password;
-    
-    /**
-     * Actor name
-     *
-     * @var array()
-     */
-    protected $name = array();
     
     /**
      * Companyname
@@ -136,22 +161,54 @@ class Actor extends \tabs\core\Base
      */
     protected $bankaccounts = array();
 
-    public function addContactsFromNode($node) {
-        $contact = new ContactEntity();
-        self::flattenNode($contact, $node);
-        $this->contacts[] = $contact;
+    // ------------------ Static Functions --------------------- //
+
+    /**
+     * Create a new actor object
+     * 
+     * @param array $array Array representation of a actor object
+     * 
+     * @return \tabs\actor\Actor
+     */
+    public static function createFromArray($array)
+    {
+        $actor = new static();
+        self::setObjectProperties($actor, $array);
+        
+        return $actor;
     }
+
+    // ------------------ Public Functions --------------------- //
     
-    public function addBankaccountsFromNode($node) {
-        $bankAccount = new BankAccount();
-        self::flattenNode($bankAccount, $node);
-        $this->bankaccounts[] = $bankAccount;
+    /**
+     * Set the contacts for the Actor
+     * 
+     * @param array $contacts Array of contact objects
+     * 
+     * @return \tabs\actor\Actor
+     */
+    public function setContacts($contacts)
+    {
+        foreach ($contacts as $contact) {
+            $this->contacts[] = ContactEntity::createFromArray($contact);
+        }
+        
+        return $this;
     }
-    
-    public function addNameFromNode($node) {
-        $name = new Name();
-        self::flattenNode($name, $node);
-        $this->name = $name;
+
+    /**
+     * Set the bank account objects
+     * 
+     * @param account $bankAccounts Bank accounts array
+     * 
+     * @return \tabs\actor\Actor
+     */
+    public function setBankaccounts($bankAccounts)
+    {
+        foreach ($bankAccounts as $account) {
+            $this->bankaccounts[] = BankAccount::createFromArray($account);
+        }
+        
+        return $this;
     }
-    
 }
