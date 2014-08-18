@@ -170,7 +170,7 @@ class Actor extends \tabs\core\Base
      * 
      * @return \tabs\actor\Actor
      */
-    public static function createFromArray($array)
+    public static function factory($array)
     {
         $actor = new static();
         self::setObjectProperties($actor, $array);
@@ -190,7 +190,7 @@ class Actor extends \tabs\core\Base
     public function setContacts($contacts)
     {
         foreach ($contacts as $contact) {
-            $this->contacts[] = ContactEntity::createFromArray($contact);
+            $this->contacts[] = ContactEntity::factory($contact);
         }
         
         return $this;
@@ -206,7 +206,7 @@ class Actor extends \tabs\core\Base
     public function setBankaccounts($bankAccounts)
     {
         foreach ($bankAccounts as $account) {
-            $this->bankaccounts[] = BankAccount::createFromArray($account);
+            $this->bankaccounts[] = BankAccount::factory($account);
         }
         
         return $this;

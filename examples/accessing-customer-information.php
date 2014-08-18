@@ -22,6 +22,8 @@ try {
     
     echo sprintf('<p>Tabs Code: %s</p>', $customer->getTabscode());
     echo sprintf('<p>Name: %s %s</p>', $customer->getName()->getTitle(), $customer->getName()->getSurname());
+    
+    var_dump($customer);
         
 } catch(Exception $e) {
     echo $e->getMessage();

@@ -148,7 +148,7 @@ class BankAccount extends \tabs\core\Base
      * 
      * @return \tabs\actor\BankAccount
      */
-    public static function createFromArray($array)
+    public static function factory($array)
     {
         $account = new static();
         self::setObjectProperties($account, $array);

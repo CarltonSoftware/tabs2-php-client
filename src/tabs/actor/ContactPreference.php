@@ -83,7 +83,7 @@ class ContactPreference extends \tabs\core\Base
      * 
      * @return \tabs\actor\ContactPreference
      */
-    public static function createFromArray($array)
+    public static function factory($array)
     {
         $contact = new static();
         self::setObjectProperties($contact, $array);

@@ -191,7 +191,7 @@ class ContactEntity extends \tabs\core\Base
      * 
      * @return \tabs\actor\ContactEntity
      */
-    public static function createFromArray($array)
+    public static function factory($array)
     {
         $contact = new static();
         self::setObjectProperties($contact, $array);
@@ -211,7 +211,7 @@ class ContactEntity extends \tabs\core\Base
     public function setContactPreferences($contactPreferences)
     {
         foreach ($contactPreferences as $contactPreference) {
-            $this->contactpreferences[] = ContactPreference::createFromArray(
+            $this->contactpreferences[] = ContactPreference::factory(
                 $contactPreference
             );
         }
