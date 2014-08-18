@@ -74,39 +74,20 @@ class ContactPreference extends \tabs\core\Base
      */
     protected $reason = '';
 
+    // ------------------ Static Functions --------------------- //
 
     /**
-     * Update a contact preference
-     *
-     * @return boolean
-     *
-     * @throws \tabs\api\client\ApiException
+     * Create a new contact preference object
+     * 
+     * @param array $array Array representation of a contact preference
+     * 
+     * @return \tabs\actor\ContactPreference
      */
-    public function update()
+    public static function createFromArray($array)
     {
-        if ($this->id == 0) {
-            throw new Exception(
-                'Update called on new entity - use create instead'
-            );
-        }
-        $conf = \tabs\client\ApiClient::getApi()->put(
-            '/legalentity/' . $this->legalentityid .
-            '/contactpreference/' . $this->getId(),
-            array(
-                'contactid' => $this->getContactid(),
-                'role' => $this->getRole(),
-                'reason' => $this->getReason()
-            )
-        );
-
-        // Test api response
-        if ($conf && $conf->status == 204) {
-            return true;
-        } else {
-            throw new \tabs\client\Exception(
-                $conf,
-                'Invalid contact preference update'
-            );
-        }
+        $contact = new static();
+        self::setObjectProperties($contact, $array);
+        
+        return $contact;
     }
 }
