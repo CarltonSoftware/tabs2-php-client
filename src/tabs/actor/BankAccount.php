@@ -138,4 +138,21 @@ class BankAccount extends \tabs\core\Base
      * @var string
      */
     protected $rollnumber;
+
+    // ------------------ Static Functions --------------------- //
+
+    /**
+     * Create a new bank account object
+     * 
+     * @param array $array Array representation of a bank account
+     * 
+     * @return \tabs\actor\BankAccount
+     */
+    public static function createFromArray($array)
+    {
+        $account = new static();
+        self::setObjectProperties($account, $array);
+        
+        return $account;
+    }
 }
