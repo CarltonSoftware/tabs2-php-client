@@ -7,7 +7,7 @@
  *
  * @category  Tabs_Client
  * @package   Tabs
- * @author    Jon Beverley <jon@csdl.biz>
+ * @author    Carlton Software <support@carltonsoftware.co.uk>
  * @copyright 2014 Carlton Software
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @link      http://www.carltonsoftware.co.uk
@@ -20,39 +20,39 @@ namespace tabs\actor;
  *
  * @category  Tabs_Client
  * @package   Tabs
- * @author    Jon Beverley <jon@csdl.biz>
+ * @author    Carlton Software <support@carltonsoftware.co.uk>
  * @copyright 2014 Carlton Software
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
  *
- * @method integer getId()
- * @method string  getAccountnumber()
- * @method string  getAccountname()
- * @method string  getBankname()
- * @method string  getAddr1()
- * @method string  getAddr2()
- * @method string  getTown()
- * @method string  getCounty()
- * @method string  getPostcode()
- * @method string  getSortcode()
- * @method string  getPaymentreference()
- * @method string  getRollnumber()
+ * @method integer getId()               Return the ID
+ * @method string  getAccountnumber()    Return the account number
+ * @method string  getAccountname()      Return the account name
+ * @method string  getBankname()         Return the bank name
+ * @method string  getAddr1()            Return the banks address line 1
+ * @method string  getAddr2()            Return the banks address line 2
+ * @method string  getTown()             Return the banks address town
+ * @method string  getCounty()           Return the banks address county
+ * @method string  getPostcode()         Return the banks address postcode
+ * @method string  getSortcode()         Return the account sort code
+ * @method string  getPaymentreference() Return the payment reference
+ * @method string  getRollnumber()       Return the bank roll number    
  *
- * @method void    setAccountnumber(string $accountnumber)
- * @method void    setAccountname(string $accountname)
- * @method void    setBankname(string $bankname)
- * @method void    setAddr1(string $addr1)
- * @method void    setAddr2(string $addr2)
- * @method void    setTown(string $town)
- * @method void    setCounty(string $county)
- * @method void    setPostcode(string $postcode)
- * @method void    setSortcode(string $sortcode)
- * @method void    setPaymentreference(string $paymentreference)
- * @method void    setRollnumber(string $rollnumber)
+ * @method \tabs\actor\BankAccount setId(integer $id)                            Set the account number
+ * @method \tabs\actor\BankAccount setAccountnumber(string $accountnumber)       Set the account number
+ * @method \tabs\actor\BankAccount setAccountname(string $accountname)           Set the account name
+ * @method \tabs\actor\BankAccount setBankname(string $bankname)                 Set the bank name
+ * @method \tabs\actor\BankAccount setAddr1(string $addr1)                       Set the banks address line 1
+ * @method \tabs\actor\BankAccount setAddr2(string $addr2)                       Set the banks address line 2
+ * @method \tabs\actor\BankAccount setTown(string $town)                         Set the banks address town
+ * @method \tabs\actor\BankAccount setCounty(string $county)                     Set the banks address county
+ * @method \tabs\actor\BankAccount setPostcode(string $postcode)                 Set the banks address postcode
+ * @method \tabs\actor\BankAccount setSortcode(string $sortcode)                 Set the account sort code
+ * @method \tabs\actor\BankAccount setPaymentreference(string $paymentreference) Set the payment reference
+ * @method \tabs\actor\BankAccount setRollnumber(string $rollnumber)             Set the bank roll number  
  */
-
 class BankAccount extends \tabs\core\Base
 {
     /**
@@ -138,21 +138,4 @@ class BankAccount extends \tabs\core\Base
      * @var string
      */
     protected $rollnumber;
-
-    // ------------------ Static Functions --------------------- //
-
-    /**
-     * Create a new bank account object
-     * 
-     * @param array $array Array representation of a bank account
-     * 
-     * @return \tabs\actor\BankAccount
-     */
-    public static function createFromArray($array)
-    {
-        $account = new static();
-        self::setObjectProperties($account, $array);
-        
-        return $account;
-    }
 }
