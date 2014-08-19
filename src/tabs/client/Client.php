@@ -130,9 +130,9 @@ class Client extends \GuzzleHttp\Client
     /**
      * Overriden post request
      * 
-     * @param string $url
-     * @param array  $params
-     * @param array  $options
+     * @param string $url     Api URL
+     * @param array  $params  POST Parameters
+     * @param array  $options Client options
      * 
      * @throws \tabs\client\Exception
      * 
@@ -145,11 +145,20 @@ class Client extends \GuzzleHttp\Client
             return parent::post($url, $options);
         } catch (\RuntimeException $ex) {
             $json = $ex->getResponse()->json();
-            throw new \tabs\client\Exception(
-                $ex,
-                $json['errorDescription'],
-                $ex->getCode()
-            );
+            switch ($json['errorType']) {
+                case 'ValidationException':
+                    throw new \tabs\client\ValidationException(
+                        $ex,
+                        $json['errorDescription'],
+                        $json['errorCode']
+                    );
+                default:
+                    throw new \tabs\client\Exception(
+                        $ex,
+                        $json['errorDescription'],
+                        $json['errorCode']
+                    );
+            }
         }
     }
 }
