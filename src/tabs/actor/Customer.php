@@ -26,42 +26,9 @@ namespace tabs\actor;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  */
-class Customer extends Actor
+class Customer extends Actor implements \tabs\core\BuilderInterface
 {
     // ------------------ Static Functions --------------------- //
-
-    /**
-     * Create a customer object from a given customer reference
-     *
-     * @param string $reference Customer reference
-     *
-     * @return \tabs\actor\Customer
-     */
-    public static function get($reference)
-    {
-        // Get the customer object
-        $customerRequest = \tabs\client\Client::getClient()->get(
-            "customer/{$reference}"
-        );
-
-        if ($customerRequest
-            && $customerRequest->getStatusCode() == 200
-            && $customerRequest->getBody() != ''
-        ) {
-            return self::factory(
-                $customerRequest->json(
-                    array(
-                        'object' => true
-                    )
-                )
-            );
-        }
-        
-        throw new \tabs\client\Exception(
-            $customerRequest,
-            'Unable to create customer'
-        );
-    }
     
     /**
      * Fetch an array of customers
@@ -81,7 +48,7 @@ class Customer extends Actor
         ) {
             $customers = array();
             foreach ($customersIndex->json() as $cusArr) {
-                $customers[] = static::factory($cusArr);
+                $customers[] = self::factory($cusArr);
             }
             
             return $customers;
@@ -93,21 +60,15 @@ class Customer extends Actor
         );
     }
     
-    /**
-     * Create a customer object from a json object
-     * 
-     * @param stdClass $json Json object
-     * 
-     * @return \tabs\actor\Customer
-     */
-    public static function factory($json)
+    // ------------------ Public Functions --------------------- //
+    
+    public function update()
     {
-        $customer = new static();
-        self::setObjectProperties(
-            $customer,
-            $json
-        );
-
-        return $customer;
+        return $this;
+    }
+    
+    public function delete()
+    {
+        return $this;
     }
 }
