@@ -3,12 +3,12 @@
 /**
  * Tabs Rest API Base object.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category  API_Client
  * @package   Tabs
- * @author    Alex Wyett <alex@wyett.co.uk>
- * @copyright 2013 Carlton Software
+ * @author    Carlton Software <support@carltonsoftware.co.uk>
+ * @copyright 2014 Carlton Software
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @link      http://www.carltonsoftware.co.uk
  */
@@ -20,18 +20,35 @@ namespace tabs\core;
  *
  * Provides setter/getter methods for all child classes.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category  API_Client
  * @package   Tabs
- * @author    Alex Wyett <alex@wyett.co.uk>
- * @copyright 2013 Carlton Software
+ * @author    Carlton Software <support@carltonsoftware.co.uk>
+ * @copyright 2014 Carlton Software
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @link      http://www.carltonsoftware.co.uk
  */
 
 abstract class Base
 {
+    // ------------------ Static Functions --------------------- //
+
+    /**
+     * Create a new object
+     * 
+     * @param array $array Array representation of the object
+     * 
+     * @return Base
+     */
+    public static function factory($array)
+    {
+        $object = new static();
+        self::setObjectProperties($object, $array);
+        
+        return $object;
+    }
+    
     /**
      * Helper function foor setting object properties
      *
@@ -44,81 +61,27 @@ abstract class Base
     public static function setObjectProperties(&$obj, $node, $exceptions = array())
     {
         foreach ($node as $key => $val) {
-            if (!in_array($key, $exceptions)) {
-                $func = 'set' . ucfirst($key);
-                if (property_exists($obj, $key)) {
-                    $obj->$func($val);
-                }
+            $func = 'set' . ucfirst($key);
+            if (!in_array($key, $exceptions) && property_exists($obj, $key)) {
+                $obj->$func($val);
             }
         }
     }
+    
+    // -------------------------- Public Functions -------------------------- //
 
     /**
-     * Helper function, traverses a multi dimension node and calls
-     * and objects accessors
+     * Return the name of the class which calls this method
      * 
-     * @param object $object         Object whos accessors are to be called
-     * @param object $node           Node to be traversed
-     * @param string $nodePrefix     Any string required to prefix 
-     * the node key with
-     * @param array  $nodePrefixKeys An array of keys that require a 
-     * 
-     * @return void
+     * @return string
      */
-    public static function flattenNode(
-        $object, 
-        $node,
-        $parentKey = ''
-    ) {
-        foreach ($node as $key => $val) {
-            
-            switch (gettype($val)) {
-                case 'array':
-                    // call function again recursively
-                    self::flattenNode(
-                        $object, 
-                        $val,
-                        $key
-                    );
-                    break;
-                case 'object':
-                    $thisKey = (is_numeric($key)) ? $parentKey : $key;
-                    $func = "add" . ucfirst($thisKey) . "FromNode";
-                    if (property_exists($object, $thisKey)) {
-                        $object->$func($val);
-                    }
-                    break;
-                default:
-                    // call setter on object
-                    $func = "set" . ucfirst($key);
-                    if (property_exists($object, $key)) {
-                        $object->$func($val);
-                    }
-                    break;
-            }
-            
-        }
-    }
-
-    /**
-     * Function used to assign a variable a value if it exists in an array
-     * else, assign failed value
-     *
-     * @param array  $array            the array to validate
-     * @param string $key              the key to check exisitence
-     * @param string $failed_key_value the value to use if check has failed
-     *
-     * @return mixed
-     */
-    public static function assignArrayValue($array, $key, $failed_key_value)
+    public function getClass()
     {
-        if (isset($array[$key])) {
-            return $array[$key];
-        } else {
-            return $failed_key_value;
-        }
+        $type = explode('\\', get_called_class());
+        
+        return $type[count($type) - 1];
     }
-
+    
     /**
      * Generic getter/setter
      *
@@ -157,6 +120,8 @@ abstract class Base
             'Unknown method called:' . get_called_class() . ':' . $name
         );
     }
+    
+    // ------------------------- Protected Functions ------------------------ //
 
     /**
      * Generic setter
