@@ -16,11 +16,6 @@ class ApiClientClassTest extends PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-        //\tabs\client\ApiClient::factory(
-        //    'http://zz.api.carltonsoftware.co.uk/',
-        //    'apiclienttest',
-        //    'f25997b366dcab50'
-        //);
+        // Create your api connection here.
     }
-
 }
