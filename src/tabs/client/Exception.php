@@ -7,7 +7,7 @@
  *
  * @category  Client
  * @package   Tabs
- * @author    Alex Wyett <alex@wyett.co.uk>
+ * @author    Carlton Software <support@carltonsoftware.co.uk>
  * @copyright 2014 Carlton Software
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @link      http://www.carltonsoftware.co.uk
@@ -78,9 +78,9 @@ class Exception extends \RuntimeException
     {
         return sprintf(
             '%s: [%s]: %s',
-            __CLASS__,
-            $this->code,
-            $this->message
+            get_called_class(),
+            $this->getApiCode(),
+            $this->getApiDescription()
         );
     }
 
@@ -163,7 +163,7 @@ class Exception extends \RuntimeException
             $value = $response->response->$key;
         }
 
-        if (!$value) {
+        if ($value === false) {
             return $default;
         } else {
             return $value;
