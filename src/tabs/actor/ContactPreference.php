@@ -3,11 +3,11 @@
 /**
  * Tabs Rest API ContactPreference object.
  *
- * PHP Version 5.5
+ * PHP Version 5.4
  *
  * @category  Tabs_Client
  * @package   Tabs
- * @author    Jon Beverley <jon@csdl.biz>
+ * @author    Carlton Software <support@carltonsoftware.co.uk>
  * @copyright 2014 Carlton Software
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @link      http://www.carltonsoftware.co.uk
@@ -20,23 +20,21 @@ namespace tabs\actor;
  *
  * @category  Tabs_Client
  * @package   Tabs
- * @author    Jon Beverley <jon@csdl.biz>
+ * @author    Carlton Software <support@carltonsoftware.co.uk>
  * @copyright 2014 Carlton Software
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method integer getId()
- * @method integer getContactid()
- * @method string  getRole()
- * @method string  getReason()
+ * @method integer getId()     Return the id
+ * @method string  getRole()   Return the contact role
+ * @method string  getReason() Return the contact reason
  *
- * @method void    setContactid(integer $contactid)
- * @method void    setRole(string $role)
- * @method void    setReason(string $reason)
+ * @method \tabs\actor\ContactPreference setId(integer $contactid) Set the contact id
+ * @method \tabs\actor\ContactPreference setRole(string $role)     Set the contact role
+ * @method \tabs\actor\ContactPreference setReason(string $reason) Set the contact reason
  *
  */
-
 class ContactPreference extends \tabs\core\Base
 {
     /**
@@ -44,21 +42,7 @@ class ContactPreference extends \tabs\core\Base
      *
      * @var integer
      */
-    protected $id = 0;
-
-    /**
-     * Legalentityid
-     *
-     * @var integer
-     */
-    protected $legalentityid;
-
-    /**
-     * Contactid
-     *
-     * @var integer
-     */
-    protected $contactid;
+    protected $id;
 
     /**
      * Role
@@ -73,21 +57,4 @@ class ContactPreference extends \tabs\core\Base
      * @var string
      */
     protected $reason = '';
-
-    // ------------------ Static Functions --------------------- //
-
-    /**
-     * Create a new contact preference object
-     * 
-     * @param array $array Array representation of a contact preference
-     * 
-     * @return \tabs\actor\ContactPreference
-     */
-    public static function createFromArray($array)
-    {
-        $contact = new static();
-        self::setObjectProperties($contact, $array);
-        
-        return $contact;
-    }
 }
