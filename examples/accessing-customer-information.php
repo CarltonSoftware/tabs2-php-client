@@ -18,10 +18,10 @@ require_once 'creating-a-new-connection.php';
 
 try {
     
-    $customer = \tabs\actor\Customer::create(1);
+    $customer = \tabs\actor\Customer::get(1);
     
     echo sprintf('<p>Tabs Code: %s</p>', $customer->getTabscode());
-    echo sprintf('<p>Name: %s %s</p>', $customer->getName()->getTitle(), $customer->getName()->getSurname());
+    echo sprintf('<p>Name: %s %s</p>', $customer->getTitle(), $customer->getSurname());
     
     var_dump($customer);
         

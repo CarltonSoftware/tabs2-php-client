@@ -15,11 +15,14 @@
  */
 
 // Include the autoloader
-require_once '../tabs/autoload.php';
+require_once '../autoload.php';
 require_once '../vendor/autoload.php';
 
 \tabs\client\Client::factory(
-    'http://localhost/plato/web/', // Api Url
+    'http://localhost/', // Api Url
     '', // Api Key
-    ''  // Api Secret
+    '', // Api Secret
+    array(
+        'prefix' => 'plato/web/v2'
+    )
 );
