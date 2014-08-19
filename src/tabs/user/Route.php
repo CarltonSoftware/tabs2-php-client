@@ -3,11 +3,11 @@
 /**
  * Tabs Rest API Route object.
  *
- * PHP Version 5.5
+ * PHP Version 5.4
  *
  * @category  Tabs_Client
  * @package   Tabs
- * @author    Alex Wyett <alex@wyett.co.uk>
+ * @author    Carlton Software <support@carltonsoftware.co.uk>
  * @copyright 2014 Carlton Software
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @link      http://www.carltonsoftware.co.uk
@@ -20,7 +20,7 @@ namespace tabs\user;
  *
  * @category  Tabs_Client
  * @package   Tabs
- * @author    Alex Wyett <alex@wyett.co.uk>
+ * @author    Carlton Software <support@carltonsoftware.co.uk>
  * @copyright 2014 Carlton Software
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
@@ -33,7 +33,6 @@ namespace tabs\user;
  * @method \tabs\user\Route setId(integer $id)      Set the user Id
  * @method \tabs\user\Route setRoute(string $route) Set the user route
  */
-
 class Route extends \tabs\core\Base
 {
     /**
@@ -49,21 +48,4 @@ class Route extends \tabs\core\Base
      * @var string
      */
     protected $route;
-
-    // ------------------ Static Functions --------------------- //
-
-    /**
-     * Create a new route from an array
-     * 
-     * @param array $array Array representation of a route
-     * 
-     * @return \tabs\user\Route
-     */
-    public static function createFromArray($array)
-    {
-        $route = new Route();
-        self::setObjectProperties($route, $array);
-        
-        return $route;
-    }
 }

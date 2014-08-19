@@ -3,11 +3,11 @@
 /**
  * Tabs Rest API Role object.
  *
- * PHP Version 5.5
+ * PHP Version 5.4
  *
  * @category  Tabs_Client
  * @package   Tabs
- * @author    Alex Wyett <alex@wyett.co.uk>
+ * @author    Carlton Software <support@carltonsoftware.co.uk>
  * @copyright 2014 Carlton Software
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @link      http://www.carltonsoftware.co.uk
@@ -20,7 +20,7 @@ namespace tabs\user;
  *
  * @category  Tabs_Client
  * @package   Tabs
- * @author    Alex Wyett <alex@wyett.co.uk>
+ * @author    Carlton Software <support@carltonsoftware.co.uk>
  * @copyright 2014 Carlton Software
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
@@ -30,8 +30,8 @@ namespace tabs\user;
  * @method integer getId()   Return the Role id
  * @method string  getRole() Return the Role name
  * 
- * @method \tabs\user\Role setId(integer $id)      Set the Role Id
- * @method \tabs\user\Role setRoute(string $route) Set the Role
+ * @method \tabs\user\Role setId(integer $id)       Set the Role Id
+ * @method \tabs\user\Role setRoute(string $route ) Set the Role
  */
 
 class Role extends \tabs\core\Base
@@ -58,22 +58,7 @@ class Role extends \tabs\core\Base
     protected $routes;
 
 
-    // ------------------ Static Functions --------------------- //
-
-    /**
-     * Create a new role from an array
-     * 
-     * @param array $array Array representation of a role
-     * 
-     * @return \tabs\user\Role
-     */
-    public static function createFromArray($array)
-    {
-        $role = new Role();
-        self::setObjectProperties($role, $array);
-        
-        return $role;
-    }
+    // ------------------ Public Functions --------------------- //
     
     /**
      * Set the routes applicable for a role
@@ -85,7 +70,7 @@ class Role extends \tabs\core\Base
     public function setRoutes($routes)
     {
         foreach ($routes as $route) {
-            $this->routes[] = Route::createFromArray($route);
+            $this->routes[] = Route::factory($route);
         }
         
         return $this;

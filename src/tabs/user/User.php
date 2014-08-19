@@ -3,11 +3,11 @@
 /**
  * Tabs Rest API User object.
  *
- * PHP Version 5.5
+ * PHP Version 5.4
  *
  * @category  Tabs_Client
  * @package   Tabs
- * @author    Alex Wyett <alex@wyett.co.uk>
+ * @author    Carlton Software <support@carltonsoftware.co.uk>
  * @copyright 2014 Carlton Software
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @link      http://www.carltonsoftware.co.uk
@@ -20,7 +20,7 @@ namespace tabs\user;
  *
  * @category  Tabs_Client
  * @package   Tabs
- * @author    Alex Wyett <alex@wyett.co.uk>
+ * @author    Carlton Software <support@carltonsoftware.co.uk>
  * @copyright 2014 Carlton Software
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
@@ -98,10 +98,7 @@ class User extends \tabs\core\Base
             "/hmac/user/{$id}"
         );
 
-        $user = new static();
-        self::setObjectProperties($user, $userRequest->json());
-
-        return $user;
+        return self::factory($userRequest->json());
     }
 
     /**
@@ -153,7 +150,7 @@ class User extends \tabs\core\Base
     public function setRoles($roles)
     {
         foreach ($roles as $role) {
-            $this->roles[] = Role::createFromArray($role);
+            $this->roles[] = Role::factory($role);
         }
         
         return $this;
