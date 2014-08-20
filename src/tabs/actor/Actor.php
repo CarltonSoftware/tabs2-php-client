@@ -32,7 +32,6 @@ namespace tabs\actor;
  * @method string                      getTitle()         Return the title
  * @method string                      getSalutation()    Return the saulation
  * @method string                      getTabscode()      Return the tabs code
- * @method string                      getType()          Return the type
  * @method string                      getLanguage()      Return the language
  * @method boolean                     getInactive()      Return the inactive state
  * @method string                      getPassword()      Return the password
@@ -48,7 +47,6 @@ namespace tabs\actor;
  * @method \tabs\actor\Actor setTitle(string $title) Set the title
  * @method \tabs\actor\Actor setSalutation(string $salutation) Set the salutation
  * @method \tabs\actor\Actor setTabscode(string $tabscode) Set the tabscode
- * @method \tabs\actor\Actor setType(string $type) Set the type
  * @method \tabs\actor\Actor setLanguage(string $language) Set the language
  * @method \tabs\actor\Actor setInactive(boolean $inactive) Set the inactive state
  * @method \tabs\actor\Actor setPassword(string $password) Set the password
@@ -99,13 +97,6 @@ abstract class Actor extends \tabs\core\Base
      * @var string
      */
     protected $tabscode;
-    
-    /**
-     * Type
-     *
-     * @var string
-     */
-    protected $type;
     
     /**
      * Language
