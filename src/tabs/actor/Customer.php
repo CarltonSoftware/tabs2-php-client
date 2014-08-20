@@ -62,11 +62,6 @@ class Customer extends Actor implements \tabs\core\BuilderInterface
     
     // ------------------ Public Functions --------------------- //
     
-    public function update()
-    {
-        return $this;
-    }
-    
     public function delete()
     {
         return $this;

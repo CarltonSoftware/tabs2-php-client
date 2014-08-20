@@ -21,8 +21,11 @@ class UserTest extends ApiClientClassTest
         $user = \tabs\user\User::factory($this->_fixture());
         
         $this->assertEquals(1, $user->getId());
+        $this->assertEquals(1, $user->id);
         $this->assertEquals('alex', $user->getUsername());
+        $this->assertEquals('alex', $user->username);
         $this->assertEquals('alex@wyett.co.uk', $user->getEmail());
+        $this->assertEquals('alex@wyett.co.uk', $user->email);
         $this->assertTrue($user->getEnabled());
         $this->assertTrue($user->isEnabled());
         $this->assertTrue(is_array($user->getRoles()));
