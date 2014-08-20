@@ -18,12 +18,17 @@ require_once 'creating-a-new-connection.php';
 
 try {
     
-    $customer = \tabs\actor\Customer::get(1);
+    $schema = \tabs\utility\Utility::getJsonSchema('customer_create');
     
-    echo sprintf('<p>Tabs Code: %s</p>', $customer->getTabscode());
-    echo sprintf('<p>Name: %s %s</p>', $customer->getTitle(), $customer->getSurname());
+    var_dump($schema);
     
-    var_dump($customer);
+    
+//    $customer = \tabs\actor\Customer::get(1);
+//    
+//    echo sprintf('<p>Tabs Code: %s</p>', $customer->getTabscode());
+//    echo sprintf('<p>Name: %s %s</p>', $customer->getTitle(), $customer->getSurname());
+//    
+//    var_dump($customer);
         
 } catch(Exception $e) {
     echo $e->getMessage();

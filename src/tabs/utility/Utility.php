@@ -18,18 +18,18 @@ namespace tabs\utility;
 class Utility
 {   
     /**
-     * Gets a json schema from the API
+     * Gets a json schema object from the API
      * 
      * @param string $name Name of the schema
      * 
      * @return string
      */
-    public function getJsonSchema($name)
+    public static function getJsonSchema($name)
     {
         $schema = \tabs\client\Client::getClient()->get(
             'utility/jsonschema/'.$name
         );
         
-        return $schema;
+        return $schema->json(array('object' => true));
     }
 }
