@@ -26,6 +26,7 @@ namespace tabs\actor;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
+ * @method integer                     getId()            Return the Id
  * @method string                      getFirstname()     Return the firstname
  * @method string                      getSurname()       Return the surname
  * @method string                      getTitle()         Return the title
@@ -41,21 +42,29 @@ namespace tabs\actor;
  * @method \tabs\actor\ContactEntity[] getContacts()      Return the array of contacts
  * @method \tabs\actor\BankAccount[]   getBankaccounts()  Return the array of bank account objects
  *
- * @method \tabs\actor\Actor setFirstname(string $firstname Firstname) Set the firstname
- * @method \tabs\actor\Actor setSurname(string $surname Surname) Set the surname
- * @method \tabs\actor\Actor setTitle(string $title Title) Set the title
- * @method \tabs\actor\Actor setSalutation(string $salutation Salutation) Set the salutation
- * @method \tabs\actor\Actor setTabscode(string $tabscode Tabscode) Set the tabscode
- * @method \tabs\actor\Actor setType(string $type Type) Set the type
- * @method \tabs\actor\Actor setLanguage(string $language Language) Set the language
- * @method \tabs\actor\Actor setInactive(boolean $inactive Inactive) Set the inactive state
- * @method \tabs\actor\Actor setPassword(string $password Password) Set the password
- * @method \tabs\actor\Actor setCompanyname(string $companyname Name) Set the company name
- * @method \tabs\actor\Actor setVatnumber(string $vatnumber VAT Number) Set the vat number
- * @method \tabs\actor\Actor setCompanynumber(string $companynumber Company Number) Set the company number
+ * @method \tabs\actor\Actor setId(string $id) Set the Id
+ * @method \tabs\actor\Actor setFirstname(string $firstname) Set the firstname
+ * @method \tabs\actor\Actor setSurname(string $surname) Set the surname
+ * @method \tabs\actor\Actor setTitle(string $title) Set the title
+ * @method \tabs\actor\Actor setSalutation(string $salutation) Set the salutation
+ * @method \tabs\actor\Actor setTabscode(string $tabscode) Set the tabscode
+ * @method \tabs\actor\Actor setType(string $type) Set the type
+ * @method \tabs\actor\Actor setLanguage(string $language) Set the language
+ * @method \tabs\actor\Actor setInactive(boolean $inactive) Set the inactive state
+ * @method \tabs\actor\Actor setPassword(string $password) Set the password
+ * @method \tabs\actor\Actor setCompanyname(string $companyname) Set the company name
+ * @method \tabs\actor\Actor setVatnumber(string $vatnumber) Set the vat number
+ * @method \tabs\actor\Actor setCompanynumber(string $companynumber) Set the company number
  */
 abstract class Actor extends \tabs\core\Base
 {
+    /**
+     * Id
+     *
+     * @var integer
+     */
+    protected $id;
+    
     /**
      * Firstname
      *
@@ -239,7 +248,7 @@ abstract class Actor extends \tabs\core\Base
     /**
      * Perform a post request to the api
      * 
-     * @return \tabs\actor\Customer
+     * @return \tabs\actor\Actor
      */
     public function create()
     {
@@ -265,6 +274,41 @@ abstract class Actor extends \tabs\core\Base
             throw new \tabs\client\Exception(
                 $req,
                 'Unable to create ' . get_called_class()
+            );
+        }
+        
+        return $this;
+    }
+    
+    /**
+     * Perform a post request to the api
+     * 
+     * @return \tabs\actor\Customer
+     */
+    public function update()
+    {
+        // Perform post request
+        $req = \tabs\client\Client::getClient()->put(
+            strtolower(get_called_class()) . '/' . $this->getId(),
+            array(
+                'title' => $this->getTitle(),
+                'firstname' => $this->getFirstname(),
+                'surname' => $this->getSurname(),
+                'salutation' => $this->getSalutation(),
+                'tabscode' => $this->getTabscode(),
+                'language' => $this->getLanguage(),
+                'companyname' => $this->getCompanyname(),
+                'vatnumber' => $this->getVatnumber(),
+                'companynumber' => $this->getCompanynumber()
+            )
+        );
+
+        if (!$req
+            || $req->getStatusCode() !== 201
+        ) {
+            throw new \tabs\client\Exception(
+                $req,
+                'Unable to update ' . get_called_class()
             );
         }
         
