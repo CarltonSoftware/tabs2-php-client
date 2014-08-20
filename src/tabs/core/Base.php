@@ -97,7 +97,7 @@ abstract class Base
             // Get the property
             $property = substr($name, 3, strlen($name));
 
-            // All properties will be camelcase, make first, letter lowercase
+            // All properties will be camelcase, make first letter lowercase
             $property[0] = strtolower($property[0]);
 
             switch (substr($name, 0, 3)) {
@@ -108,10 +108,7 @@ abstract class Base
                 }
                 break;
             case 'get':
-                if (property_exists($this, $property)) {
-                    return $this->$property;
-                }
-                break;
+                return $this->$property;
             }
         }
         
@@ -119,6 +116,38 @@ abstract class Base
             null,
             'Unknown method called:' . get_called_class() . ':' . $name
         );
+    }
+    
+    /**
+     * Get magic method.  Added for symfony forms.
+     * 
+     * @param string $name Name of property
+     * 
+     * @throws \tabs\client\Exception
+     * 
+     * @return mixed
+     */
+    public function __get($name)
+    {
+        if (property_exists($this, $name)) {
+            return $this->$name;
+        }
+    }
+    
+    /**
+     * Get magic method.  Added for symfony forms.
+     * 
+     * @param string $name Name of property
+     * 
+     * @throws \tabs\client\Exception
+     * 
+     * @return mixed
+     */
+    public function __set($name, $value)
+    {
+        if (property_exists($this, $name)) {
+            $this->setObjectProperty($this, $name, $value);
+        }
     }
     
     // ------------------------- Protected Functions ------------------------ //
