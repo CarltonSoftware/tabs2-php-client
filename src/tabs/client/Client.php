@@ -105,26 +105,49 @@ class Client extends \GuzzleHttp\Client
     /**
      * Overriden get request
      * 
-     * @param string $url
-     * @param array  $options
+     * @param string $url     Api URL
+     * @param array  $params  Query Parameters
+     * @param array  $options Client options
      * 
      * @throws \tabs\client\Exception
      * 
      * @return \GuzzleHttp\Message\Response
      */
-    public function get($url = null, $options = [])
+    public function get($url = null, $params = [], $options = [])
     {
-        try {
-            $response = parent::get($url, $options);
-            return $response;
-        } catch (\RuntimeException $ex) {
-            $json = $ex->getResponse()->json();
-            throw new \tabs\client\Exception(
-                $ex,
-                $json['errorDescription'],
-                $ex->getCode()
-            );
-        }
+        return $this->_queryRequest('get', $url, $params, $options);
+    }
+    
+    /**
+     * Overriden delete request
+     * 
+     * @param string $url     Api URL
+     * @param array  $params  Query Parameters
+     * @param array  $options Client options
+     * 
+     * @throws \tabs\client\Exception
+     * 
+     * @return \GuzzleHttp\Message\Response
+     */
+    public function delete($url = null, array $params = [], array $options = [])
+    {
+        return $this->_queryRequest('delete', $url, $params, $options);
+    }
+    
+    /**
+     * Overriden options request
+     * 
+     * @param string $url     Api URL
+     * @param array  $params  Query Parameters
+     * @param array  $options Client options
+     * 
+     * @throws \tabs\client\Exception
+     * 
+     * @return \GuzzleHttp\Message\Response
+     */
+    public function options($url = null, array $params = [], array $options = [])
+    {
+        return $this->_queryRequest('options', $url, $params, $options);
     }
     
     /**
@@ -140,25 +163,93 @@ class Client extends \GuzzleHttp\Client
      */
     public function post($url = null, array $params = [], array $options = [])
     {
+        return $this->_postRequest('post', $url, $params, $options);
+    }
+    
+    /**
+     * Overriden put request
+     * 
+     * @param string $url     Api URL
+     * @param array  $params  POST Parameters
+     * @param array  $options Client options
+     * 
+     * @throws \tabs\client\Exception
+     * 
+     * @return \GuzzleHttp\Message\Response
+     */
+    public function put($url = null, array $params = [], array $options = [])
+    {
+        return $this->_postRequest('put', $url, $params, $options);
+    }
+    
+    /**
+     * Perform a query request.  GET, OPTIONS, DELETE will use this method
+     * 
+     * @param string $method  Method name
+     * @param string $url     Url to call
+     * @param array  $params  Query Parameters
+     * @param array  $options Options array
+     * 
+     * @return \GuzzleHttp\Message\Response
+     */
+    private function _queryRequest($method, $url, $params, $options)
+    {
+        try {
+            $options['query'] = $params;
+            $response = parent::$method($url, $options);
+            return $response;
+        } catch (\RuntimeException $ex) {
+            $this->_setException($ex);
+        }
+    }
+    
+    /**
+     * Perform a post request.  POST, PUT will use this method
+     * 
+     * @param string $method  Method name
+     * @param string $url     Url to call
+     * @param array  $params  Query Parameters
+     * @param array  $options Options array
+     * 
+     * @return \GuzzleHttp\Message\Response
+     */
+    private function _postRequest($method, $url, $params, $options)
+    {
         try {
             $options['body'] = $params;
-            return parent::post($url, $options);
+            $response = parent::$method($url, $options);
+            return $response;
         } catch (\RuntimeException $ex) {
-            $json = $ex->getResponse()->json();
-            switch ($json['errorType']) {
-                case 'ValidationException':
-                    throw new \tabs\client\ValidationException(
-                        $ex,
-                        $json['errorDescription'],
-                        $json['errorCode']
-                    );
-                default:
-                    throw new \tabs\client\Exception(
-                        $ex,
-                        $json['errorDescription'],
-                        $json['errorCode']
-                    );
-            }
+            $this->_setException($ex);
+        }
+    }    
+    
+    /**
+     * Handle a put/post request exception
+     * 
+     * @param \RuntimeException $exception Exception object
+     * 
+     * @throws \tabs\client\ValidationException
+     * @throws \tabs\client\Exception
+     * 
+     * @return void
+     */
+    private function _setException($exception)
+    {
+        $json = $exception->getResponse()->json();
+        switch ($json['errorType']) {
+            case 'ValidationException':
+                throw new \tabs\client\ValidationException(
+                    $ex,
+                    $json['errorDescription'],
+                    $json['errorCode']
+                );
+            default:
+                throw new \tabs\client\Exception(
+                    $ex,
+                    $json['errorDescription'],
+                    $json['errorCode']
+                );
         }
     }
 }
