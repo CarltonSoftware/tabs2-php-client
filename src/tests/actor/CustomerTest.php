@@ -18,8 +18,9 @@ class CustomerTest extends ApiClientClassTest
      */
     public function testNewCustomer()
     {
-        $customer = \tabs\core\Customer::factory('Mr', 'Wyett');
-        $this->assertEquals('Mr', $customer->getLegalentity()->getTitle());
-        $this->assertEquals('Wyett', $customer->getLegalentity()->getSurname());
+        $customer = new \tabs\actor\Customer();
+        $customer->setTitle('Mr')->setSurname('Wyett');
+        $this->assertEquals('Mr', $customer->getTitle());
+        $this->assertEquals('Wyett', $customer->getSurname());
     }
 }
