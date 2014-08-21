@@ -54,7 +54,7 @@ namespace tabs\actor;
  * @method \tabs\actor\Actor setVatnumber(string $vatnumber) Set the vat number
  * @method \tabs\actor\Actor setCompanynumber(string $companynumber) Set the company number
  */
-abstract class Actor extends \tabs\core\Base
+abstract class Actor extends \tabs\core\Builder
 {
     /**
      * Id
@@ -204,8 +204,29 @@ abstract class Actor extends \tabs\core\Base
     public function setContacts($contacts)
     {
         foreach ($contacts as $contact) {
-            $this->contacts[] = ContactEntity::factory($contact);
+            if ($contact->type == 'P') {
+                $detail = \tabs\core\ContactAddress::factory($contact);
+            } else {
+                $detail = \tabs\core\ContactDetail::factory($contact);
+            }
+            
+            $this->addContact($detail);
         }
+        
+        return $this;
+    }
+    
+    /**
+     * Add a contact detail
+     * 
+     * @param \tabs\core\ContactAddress|\tabs\core\ContactDetail $contact Contact detail object
+     * 
+     * @return \tabs\actor\Actor
+     */
+    public function addContact(&$contact)
+    {
+        $contact->setParent($this);
+        $this->contacts[] = $contact;
         
         return $this;
     }
@@ -237,72 +258,57 @@ abstract class Actor extends \tabs\core\Base
     }
     
     /**
-     * Perform a post request to the api
+     * Delete function
      * 
      * @return \tabs\actor\Actor
      */
-    public function create()
+    public function delete()
     {
-        // Perform post request
-        $req = \tabs\client\Client::getClient()->post(
-            strtolower(get_called_class()),
-            array(
-                'title' => $this->getTitle(),
-                'firstname' => $this->getFirstname(),
-                'surname' => $this->getSurname(),
-                'salutation' => $this->getSalutation(),
-                'tabscode' => $this->getTabscode(),
-                'language' => $this->getLanguage(),
-                'companyname' => $this->getCompanyname(),
-                'vatnumber' => $this->getVatnumber(),
-                'companynumber' => $this->getCompanynumber()
+        throw new \tabs\client\Exception(
+            null,
+            sprintf(
+                'Deleting a %s is not permitted',
+                $this->getClass()
             )
         );
-
-        if (!$req
-            || $req->getStatusCode() !== 201
-        ) {
-            throw new \tabs\client\Exception(
-                $req,
-                'Unable to create ' . get_called_class()
-            );
-        }
-        
-        return $this;
     }
     
     /**
-     * Perform a post request to the api
+     * ToString magic method
      * 
-     * @return \tabs\actor\Customer
+     * @return string
      */
-    public function update()
+    public function __toString()
     {
-        // Perform post request
-        $req = \tabs\client\Client::getClient()->put(
-            strtolower(get_called_class()) . '/' . $this->getId(),
-            array(
-                'title' => $this->getTitle(),
-                'firstname' => $this->getFirstname(),
-                'surname' => $this->getSurname(),
-                'salutation' => $this->getSalutation(),
-                'tabscode' => $this->getTabscode(),
-                'language' => $this->getLanguage(),
-                'companyname' => $this->getCompanyname(),
-                'vatnumber' => $this->getVatnumber(),
-                'companynumber' => $this->getCompanynumber()
+        return implode(
+            ' ',
+            array_filter(
+                array(
+                    $this->getTitle(),
+                    $this->getFirstname(),
+                    $this->getSurname()
+                )
             )
         );
-
-        if (!$req
-            || $req->getStatusCode() !== 201
-        ) {
-            throw new \tabs\client\Exception(
-                $req,
-                'Unable to update ' . get_called_class()
-            );
-        }
-        
-        return $this;
+    }
+    
+    /**
+     * Array representation of the object
+     * 
+     * @return array
+     */
+    public function toArray()
+    {
+        return array(
+            'title' => $this->getTitle(),
+            'firstname' => $this->getFirstname(),
+            'surname' => $this->getSurname(),
+            'salutation' => $this->getSalutation(),
+            'tabscode' => $this->getTabscode(),
+            'language' => $this->getLanguage(),
+            'companyname' => $this->getCompanyname(),
+            'vatnumber' => $this->getVatnumber(),
+            'companynumber' => $this->getCompanynumber()
+        );
     }
 }
