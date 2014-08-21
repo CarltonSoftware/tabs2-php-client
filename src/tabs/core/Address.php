@@ -40,7 +40,7 @@ namespace tabs\core;
  * @method \tabs\user\Role setRoute(string $route ) Set the Role
  */
 
-class Address extends ContactEntity
+class Address extends Base
 {
     /**
      * Address line 1
@@ -116,6 +116,10 @@ class Address extends ContactEntity
      */
     public function setCountry($array)
     {
+        if (is_string($array)) {
+            $array = array('name' => $array);
+        }
+        
         $this->country = Country::factory($array);
         
         return $this;
@@ -150,7 +154,9 @@ class Address extends ContactEntity
             'town' => $this->getTown(),
             'county' => $this->getCounty(),
             'postcode' => $this->getPostcode(),
-            'country' => (string) $this->getCountry()
+            'country' => (string) $this->getCountry(),
+            'longitude' => $this->getLongitude(),
+            'latitude' => $this->getLatitude()
         );
     }
 }
