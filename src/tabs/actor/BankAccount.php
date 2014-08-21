@@ -31,11 +31,6 @@ namespace tabs\actor;
  * @method string  getAccountnumber()    Return the account number
  * @method string  getAccountname()      Return the account name
  * @method string  getBankname()         Return the bank name
- * @method string  getAddr1()            Return the banks address line 1
- * @method string  getAddr2()            Return the banks address line 2
- * @method string  getTown()             Return the banks address town
- * @method string  getCounty()           Return the banks address county
- * @method string  getPostcode()         Return the banks address postcode
  * @method string  getSortcode()         Return the account sort code
  * @method string  getPaymentreference() Return the payment reference
  * @method string  getRollnumber()       Return the bank roll number    
@@ -44,11 +39,6 @@ namespace tabs\actor;
  * @method \tabs\actor\BankAccount setAccountnumber(string $accountnumber)       Set the account number
  * @method \tabs\actor\BankAccount setAccountname(string $accountname)           Set the account name
  * @method \tabs\actor\BankAccount setBankname(string $bankname)                 Set the bank name
- * @method \tabs\actor\BankAccount setAddr1(string $addr1)                       Set the banks address line 1
- * @method \tabs\actor\BankAccount setAddr2(string $addr2)                       Set the banks address line 2
- * @method \tabs\actor\BankAccount setTown(string $town)                         Set the banks address town
- * @method \tabs\actor\BankAccount setCounty(string $county)                     Set the banks address county
- * @method \tabs\actor\BankAccount setPostcode(string $postcode)                 Set the banks address postcode
  * @method \tabs\actor\BankAccount setSortcode(string $sortcode)                 Set the account sort code
  * @method \tabs\actor\BankAccount setPaymentreference(string $paymentreference) Set the payment reference
  * @method \tabs\actor\BankAccount setRollnumber(string $rollnumber)             Set the bank roll number  
@@ -84,39 +74,11 @@ class BankAccount extends \tabs\core\Base
     protected $bankname;
 
     /**
-     * Addr1
+     * Address
      *
-     * @var string
+     * @var \tabs\core\Address
      */
-    protected $addr1;
-
-    /**
-     * Addr2
-     *
-     * @var string
-     */
-    protected $addr2;
-
-    /**
-     * Town
-     *
-     * @var string
-     */
-    protected $town;
-
-    /**
-     * County
-     *
-     * @var string
-     */
-    protected $county;
-
-    /**
-     * Postcode
-     *
-     * @var string
-     */
-    protected $postcode;
+    protected $address;
 
     /**
      * Sortcode
@@ -138,4 +100,20 @@ class BankAccount extends \tabs\core\Base
      * @var string
      */
     protected $rollnumber;
+
+    // ------------------ Public Functions --------------------- //
+    
+    /**
+     * Set the address contact
+     * 
+     * @param array $address Array of address information
+     * 
+     * @return \tabs\actor\ContactEntity
+     */
+    public function setAddress($address)
+    {
+        $this->address = \tabs\core\Address::factory($address);
+        
+        return $this;
+    }
 }
