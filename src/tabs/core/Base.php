@@ -35,6 +35,18 @@ abstract class Base
     // ------------------ Static Functions --------------------- //
 
     /**
+     * Return the name of the class which calls this method
+     * 
+     * @return string
+     */
+    public static function getClass()
+    {
+        $type = explode('\\', get_called_class());
+        
+        return $type[count($type) - 1];
+    }
+
+    /**
      * Create a new object
      * 
      * @param array $array Array representation of the object
@@ -69,18 +81,6 @@ abstract class Base
     }
     
     // -------------------------- Public Functions -------------------------- //
-
-    /**
-     * Return the name of the class which calls this method
-     * 
-     * @return string
-     */
-    public function getClass()
-    {
-        $type = explode('\\', get_called_class());
-        
-        return $type[count($type) - 1];
-    }
     
     /**
      * Generic getter/setter
