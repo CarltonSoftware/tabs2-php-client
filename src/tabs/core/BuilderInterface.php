@@ -29,22 +29,6 @@ namespace tabs\core;
 interface BuilderInterface
 {
     /**
-     * Request a single object instance
-     * 
-     * @param string $reference Object reference
-     * 
-     * @return $this
-     */
-    public static function get($reference);
-    
-    /**
-     * Fetch multiple instances of an object
-     * 
-     * @return array
-     */
-    public static function fetch();
-    
-    /**
      * Peform a post request
      * 
      * @return $this
@@ -64,4 +48,18 @@ interface BuilderInterface
      * @return $this
      */
     public function delete();
+    
+    /**
+     * Array representation of the object
+     * 
+     * @return array
+     */
+    public function toArray();
+    
+    /**
+     * Return a string of the url used for create/updates
+     * 
+     * @return string
+     */
+    public function getUrlStub();
 }
