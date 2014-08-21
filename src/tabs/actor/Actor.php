@@ -195,6 +195,21 @@ abstract class Actor extends \tabs\core\Builder
     // ------------------ Public Functions --------------------- //
     
     /**
+     * Add a contact detail
+     * 
+     * @param \tabs\actor\ContactAddress|\tabs\actor\ContactDetail $contact Contact detail object
+     * 
+     * @return \tabs\actor\Actor
+     */
+    public function addContact(&$contact)
+    {
+        $contact->setParent($this);
+        $this->contacts[] = $contact;
+        
+        return $this;
+    }
+    
+    /**
      * Set the contacts for the Actor
      * 
      * @param array $contacts Array of contact objects
@@ -205,9 +220,9 @@ abstract class Actor extends \tabs\core\Builder
     {
         foreach ($contacts as $contact) {
             if ($contact->type == 'P') {
-                $detail = \tabs\core\ContactAddress::factory($contact);
+                $detail = \tabs\actor\ContactAddress::factory($contact);
             } else {
-                $detail = \tabs\core\ContactDetail::factory($contact);
+                $detail = \tabs\actor\ContactDetail::factory($contact);
             }
             
             $this->addContact($detail);
@@ -217,16 +232,16 @@ abstract class Actor extends \tabs\core\Builder
     }
     
     /**
-     * Add a contact detail
+     * Add a bank account
      * 
-     * @param \tabs\core\ContactAddress|\tabs\core\ContactDetail $contact Contact detail object
+     * @param \tabs\actor\BankAccount $bankAccount Bank account object
      * 
      * @return \tabs\actor\Actor
      */
-    public function addContact(&$contact)
+    public function addBankAccount(&$bankAccount)
     {
-        $contact->setParent($this);
-        $this->contacts[] = $contact;
+        $bankAccount->setParent($this);
+        $this->bankaccounts[] = $bankAccount;
         
         return $this;
     }
@@ -241,7 +256,8 @@ abstract class Actor extends \tabs\core\Builder
     public function setBankaccounts($bankAccounts)
     {
         foreach ($bankAccounts as $account) {
-            $this->bankaccounts[] = BankAccount::factory($account);
+            $bankAccount = BankAccount::factory($account);
+            $this->addBankAccount($bankAccount);
         }
         
         return $this;
