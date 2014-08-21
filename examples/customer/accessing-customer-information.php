@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file documents how to create a Customer object from the Plato API.
+ * This file documents how to read a Customer object from the Plato API.
  *
  * PHP Version 5.5
  * 
@@ -14,7 +14,7 @@
  */
 
 // Include the connection
-require_once 'creating-a-new-connection.php';
+require_once __DIR__ . '/../creating-a-new-connection.php';
 
 try {
     $customer = \tabs\actor\Customer::get(1);

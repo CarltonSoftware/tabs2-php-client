@@ -27,13 +27,14 @@ namespace tabs\actor;
  * @link      http://www.carltonsoftware.co.uk
  *
  *
- * @method integer getId()               Return the ID
- * @method string  getAccountnumber()    Return the account number
- * @method string  getAccountname()      Return the account name
- * @method string  getBankname()         Return the bank name
- * @method string  getSortcode()         Return the account sort code
- * @method string  getPaymentreference() Return the payment reference
- * @method string  getRollnumber()       Return the bank roll number    
+ * @method integer            getId()               Return the ID
+ * @method string             getAccountnumber()    Return the account number
+ * @method string             getAccountname()      Return the account name
+ * @method string             getBankname()         Return the bank name
+ * @method string             getSortcode()         Return the account sort code
+ * @method string             getPaymentreference() Return the payment reference
+ * @method string             getRollnumber()       Return the bank roll number    
+ * @method \tabs\core\Address getAddress()          Return the bank roll number    
  *
  * @method \tabs\actor\BankAccount setId(integer $id)                            Set the account number
  * @method \tabs\actor\BankAccount setAccountnumber(string $accountnumber)       Set the account number
@@ -43,7 +44,7 @@ namespace tabs\actor;
  * @method \tabs\actor\BankAccount setPaymentreference(string $paymentreference) Set the payment reference
  * @method \tabs\actor\BankAccount setRollnumber(string $rollnumber)             Set the bank roll number  
  */
-class BankAccount extends \tabs\core\Base
+class BankAccount extends \tabs\core\Builder
 {
     /**
      * Id
@@ -115,5 +116,44 @@ class BankAccount extends \tabs\core\Base
         $this->address = \tabs\core\Address::factory($address);
         
         return $this;
+    }
+    
+    /**
+     * Return the string representation of a bank account
+     * 
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getBankname() . ' ' . (string) $this->getAddress();
+    }
+    
+    /**
+     * Array representation
+     * 
+     * @return array
+     */
+    public function toArray()
+    {
+        return array(
+            'id' => $this->getId(),
+            'accountnumber' => $this->getAccountnumber(),
+            'accountname' => $this->getAccountname(),
+            'bankname' => $this->getBankname(),
+            'address' => $this->getAddress()->toArray(),
+            'sortcode' => $this->getSortcode(),
+            'paymentreference' => $this->getPaymentreference(),
+            'rollnumber' => $this->getRollnumber()
+        );
+    }
+    
+    /**
+     * Return the url stub
+     * 
+     * @return string
+     */
+    public function getUrlStub()
+    {
+        return 'bankaccount';
     }
 }

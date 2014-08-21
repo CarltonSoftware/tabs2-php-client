@@ -13,7 +13,7 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\core;
+namespace tabs\actor;
 
 /**
  * Tabs Rest API ContactEntity object.
@@ -41,7 +41,7 @@ namespace tabs\core;
  * @method \tabs\actor\ContactEntity setValue(string $value)                 Set the contact value
  * @method \tabs\actor\ContactEntity setComment(string $comment)             Set the contact comnent
  */
-abstract class ContactEntity extends \tabs\core\Builder implements BuilderInterface
+abstract class ContactEntity extends \tabs\core\Builder
 {
     /**
      * Id
@@ -125,22 +125,6 @@ abstract class ContactEntity extends \tabs\core\Builder implements BuilderInterf
             );
         }
         
-        return $this;
-    }
-    
-    /**
-     * @inheritDoc
-     */
-    public function update()
-    {
-        return $this;
-    }
-    
-    /**
-     * @inheritDoc
-     */
-    public function delete()
-    {
         return $this;
     }
 }

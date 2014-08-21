@@ -13,7 +13,7 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\core;
+namespace tabs\actor;
 
 /**
  * Tabs Rest API ContactEntity object.
@@ -46,7 +46,7 @@ class ContactAddress extends ContactEntity
      */
     public function __construct()
     {
-        $this->address = new Address();
+        $this->address = new \tabs\core\Address();
     }
     
     /**
@@ -59,7 +59,7 @@ class ContactAddress extends ContactEntity
     public function setAddress($address)
     {
         if (is_array($address) || get_class($address) == 'stdClass') {
-            $this->address = Address::factory($address);
+            $this->address = \tabs\core\Address::factory($address);
         } else {
             $this->address = $address;
         }

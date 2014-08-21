@@ -4,7 +4,7 @@
  * This file documents how to create a new api instance object from a
  * tabs api instance.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category  API_Client
  * @package   Tabs
@@ -15,8 +15,8 @@
  */
 
 // Include the autoloader
-require_once '../autoload.php';
-require_once '../vendor/autoload.php';
+require_once __DIR__ . '/../autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 \tabs\client\Client::factory(
     'http://localhost/', // Api Url
