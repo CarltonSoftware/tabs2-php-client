@@ -1,9 +1,10 @@
 <?php
 
 /**
- * This file documents how to create a Customer object from the Plato API
+ * This file documents how to request a json schema from the api.  This is
+ * useful in case you wish to check validation on particular endpoints.
  *
- * PHP Version 5.5
+ * PHP Version 5.4
  * 
  * @category  API_Client
  * @package   Tabs
@@ -21,14 +22,6 @@ try {
     $schema = \tabs\utility\Utility::getJsonSchema('customer_create');
     
     var_dump($schema);
-    
-    
-//    $customer = \tabs\actor\Customer::get(1);
-//    
-//    echo sprintf('<p>Tabs Code: %s</p>', $customer->getTabscode());
-//    echo sprintf('<p>Name: %s %s</p>', $customer->getTitle(), $customer->getSurname());
-//    
-//    var_dump($customer);
         
 } catch(Exception $e) {
     echo $e->getMessage();
