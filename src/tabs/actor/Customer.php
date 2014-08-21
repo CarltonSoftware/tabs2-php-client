@@ -26,7 +26,7 @@ namespace tabs\actor;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  */
-class Customer extends Actor implements \tabs\core\BuilderInterface
+class Customer extends Actor
 {
     // -------------------------- Static Functions -------------------------- //
     
