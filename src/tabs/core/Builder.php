@@ -62,22 +62,6 @@ abstract class Builder extends Base implements BuilderInterface
     }
     
     /**
-     * @inheritDoc
-     */
-    public function getUrlStub()
-    {
-        return '';
-    }
-    
-    /**
-     * @inheritDoc
-     */
-    public function toArray()
-    {
-        return array();
-    }
-    
-    /**
      * Perform a create request
      * 
      * @throws \tabs\client\Exception
@@ -98,6 +82,14 @@ abstract class Builder extends Base implements BuilderInterface
             throw new \tabs\client\Exception(
                 $req,
                 'Unable to create ' . ucfirst($this->getStubClass())
+            );
+        }
+        
+        // Set the id of the element
+        $id = $this->_getId($req);
+        if ($id) {
+            $this->setId(
+                (integer) $id
             );
         }
         
@@ -140,15 +132,6 @@ abstract class Builder extends Base implements BuilderInterface
      */
     public function delete()
     {
-        if ($this->getId() === null) {
-            throw new \tabs\client\Exception(
-                $req,
-                'Unable to delete ' 
-                . ucfirst($this->getStubClass()) 
-                . ' without creating it first'
-            );
-        }
-        
         // Perform delete request
         $req = \tabs\client\Client::getClient()->delete(
             $this->getUpdateUrl()
@@ -250,5 +233,27 @@ abstract class Builder extends Base implements BuilderInterface
         }
         
         return $template;
+    }
+    
+    /**
+     * Return the ID from a content-location header
+     * 
+     * @param \GuzzleHttp\Message\Response $req Guzzle response
+     * 
+     * @return string|void
+     */
+    private function _getId($req)
+    {
+        if ($req->getHeader('content-location')) {
+            return preg_replace(
+                '/\D/',
+                '',
+                str_replace(
+                    $this->getCreateUrl(), 
+                    '',
+                    $req->getHeader('content-location')
+                )
+            );
+        }
     }
 }
