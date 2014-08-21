@@ -240,13 +240,13 @@ class Client extends \GuzzleHttp\Client
         switch ($json['errorType']) {
             case 'ValidationException':
                 throw new \tabs\client\ValidationException(
-                    $ex,
+                    $exception,
                     $json['errorDescription'],
                     $json['errorCode']
                 );
             default:
                 throw new \tabs\client\Exception(
-                    $ex,
+                    $exception,
                     $json['errorDescription'],
                     $json['errorCode']
                 );
