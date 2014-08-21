@@ -28,7 +28,7 @@ namespace tabs\actor;
  */
 class Customer extends Actor implements \tabs\core\BuilderInterface
 {
-    // ------------------ Static Functions --------------------- //
+    // -------------------------- Static Functions -------------------------- //
     
     /**
      * Fetch an array of customers
@@ -60,10 +60,13 @@ class Customer extends Actor implements \tabs\core\BuilderInterface
         );
     }
     
-    // ------------------ Public Functions --------------------- //
+    // -------------------------- Public Functions -------------------------- //
     
-    public function delete()
+    /**
+     * @inheritDoc
+     */
+    public function getUrlStub()
     {
-        return $this;
+        return 'customer';
     }
 }
