@@ -13,6 +13,9 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
+// Include the composer autoload
+require_once 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+
 spl_autoload_register(
     function ($class) {
 
