@@ -44,7 +44,7 @@ abstract class Builder extends Base implements BuilderInterface
      * 
      * @return \tabs\core\Builder
      */
-    public function setParent(\tabs\actor\Actor &$builder)
+    public function setParent(\tabs\core\Builder &$builder)
     {
         $this->parent = $builder;
         
@@ -152,87 +152,44 @@ abstract class Builder extends Base implements BuilderInterface
     /**
      * Generate a url string for a create url
      * 
+     * @param string $prefix Prefix
+     * 
      * @return string
      */
-    public function getCreateUrl()
+    public function getCreateUrl($prefix = '')
     {
-        return $this->generateUrl('{getUrlStub}', '{getUrlStub}/{getId}/');
+        if ($this->getParent()) {
+            $prefix = $this->getParent()->getUpdateUrl(
+                $prefix
+            );
+        }
+        return $prefix . '/' . $this->getUrlStub();
     }
     
     /**
      * Generate a url string for a create url
      * 
+     * @param string $prefix Prefix
+     * 
      * @return string
      */
-    public function getUpdateUrl()
+    public function getUpdateUrl($prefix = '')
     {
-        if ($this->getId() === null) {
-            throw new \tabs\client\Exception(
-                null,
-                'Unable to generate update url ' 
-                . ucfirst($this->getStubClass()) 
-                . ' without creating it first'
+        if ($this->getParent()) {
+            $prefix = $this->getParent()->getUpdateUrl(
+                $prefix
             );
         }
         
-        return $this->generateUrl('{getUrlStub}/{getId}', '{getUrlStub}/{getId}/');
+        return $prefix . '/' . $this->getUrlStub() . '/' . $this->getId();
     }
     
     /**
-     * Build a url from the parent/child tree
-     * 
-     * @param string             $childTemplate  Child template
-     * @param string             $parentTemplate Parent template
-     * @param string             $prefix         Previously generated string
-     * @param \tabs\core\Builder $object         Object whos methods to use
-     * 
-     * @return string
+     * @inheritDoc
      */
-    public function generateUrl(
-        $childTemplate,
-        $parentTemplate,
-        $prefix = '',
-        &$object = null
-    ) {
-        if (!$object) {
-            $object = $this;
-        }
-        if ($object->getParent() && $object->getParent()->getId()) {
-            return $object->generateUrl(
-                $childTemplate,
-                $parentTemplate,
-                $object->replaceObjectData($parentTemplate, $object->getParent()),
-                $object->getParent()
-            );
-        }
-        
-        return $prefix . $this->replaceObjectData($childTemplate, $this);
-    }
-   
-    /**
-     * Function used to overwrite a string with the output of any 
-     * accessor methods
-     *
-     * @param string   $template Template pattern
-     * @param stdClass &$object  Object
-     * 
-     * @return string
-     */
-    public function replaceObjectData($template, &$object)
+    public function getUrlStub()
     {
-        preg_match_all('#\{[^}]*\}#s', $template, $matches, PREG_SET_ORDER);
-        foreach ($matches as $match) {
-            if (isset($match[0])) {
-                $method = str_replace('}', '', str_replace('{', '', $match[0]));
-                $template = str_replace(
-                    '{'.$method.'}', 
-                    $object->$method(),
-                    $template
-                );
-            }
-        }
-        
-        return $template;
+        return strtolower($this->getClass());
     }
     
     /**
