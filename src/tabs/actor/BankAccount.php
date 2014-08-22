@@ -109,11 +109,15 @@ class BankAccount extends \tabs\core\Builder
      * 
      * @param array $address Array of address information
      * 
-     * @return \tabs\actor\ContactEntity
+     * @return \tabs\actor\BankAccount
      */
     public function setAddress($address)
     {
-        $this->address = \tabs\core\Address::factory($address);
+        if (is_array($address) || get_class($address) == 'stdClass') {
+            $this->address = \tabs\core\Address::factory($address);
+        } else {
+            $this->address = $address;
+        }
         
         return $this;
     }
@@ -125,7 +129,14 @@ class BankAccount extends \tabs\core\Builder
      */
     public function __toString()
     {
-        return $this->getBankname() . ' ' . (string) $this->getAddress();
+        return implode(', ',
+            array_filter(
+                array(
+                    $this->getBankname(),
+                    (string) $this->getAddress()
+                )
+            )
+        );
     }
     
     /**
@@ -145,15 +156,5 @@ class BankAccount extends \tabs\core\Builder
             'paymentreference' => $this->getPaymentreference(),
             'rollnumber' => $this->getRollnumber()
         );
-    }
-    
-    /**
-     * Return the url stub
-     * 
-     * @return string
-     */
-    public function getUrlStub()
-    {
-        return 'bankaccount';
     }
 }
