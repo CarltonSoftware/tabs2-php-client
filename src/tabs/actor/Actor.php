@@ -232,6 +232,55 @@ abstract class Actor extends \tabs\core\Builder
     }
     
     /**
+     * Return all of the Contact addresses object
+     * 
+     * @return array
+     */
+    public function getContactAdresses()
+    {
+        return array_filter(
+            $this->contacts,
+            function ($ele) {
+                return ($ele->getClass() == 'ContactAddress');
+            }
+        );
+    }
+    
+    /**
+     * Return all of the Contact Detail objects that are email addresses
+     * 
+     * @return array
+     */
+    public function getEmailAdresses()
+    {
+        return array_filter(
+            $this->contacts,
+            function ($ele) {
+                return ($ele->getClass() == 'ContactDetail'
+                    && $ele->getContactmethod() == 'Email'
+                );
+            }
+        );
+    }
+    
+    /**
+     * Return all of the Contact Detail objects that are phone numbers
+     * 
+     * @return array
+     */
+    public function getPhoneNumbers()
+    {
+        return array_filter(
+            $this->contacts,
+            function ($ele) {
+                return ($ele->getClass() == 'ContactDetail'
+                    && $ele->getContactmethod() == 'Phone'
+                );
+            }
+        );
+    }
+    
+    /**
      * Add a bank account
      * 
      * @param \tabs\actor\BankAccount $bankAccount Bank account object
