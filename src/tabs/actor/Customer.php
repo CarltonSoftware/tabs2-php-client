@@ -3,11 +3,11 @@
 /**
  * Tabs Rest API Customer object.
  *
- * PHP Version 5.5
+ * PHP Version 5.4
  *
  * @category  Tabs_Client
  * @package   Tabs
- * @author    Jon Beverley <jon@csdl.biz>
+ * @author    Carlton Software <support@carltonsoftware.co.uk>
  * @copyright 2014 Carlton Software
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @link      http://www.carltonsoftware.co.uk
@@ -20,7 +20,7 @@ namespace tabs\actor;
  *
  * @category  Tabs_Client
  * @package   Tabs
- * @author    Jon Beverley <jon@csdl.biz>
+ * @author    Carlton Software <support@carltonsoftware.co.uk>
  * @copyright 2014 Carlton Software
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
@@ -61,12 +61,4 @@ class Customer extends Actor
     }
     
     // -------------------------- Public Functions -------------------------- //
-    
-    /**
-     * @inheritDoc
-     */
-    public function getUrlStub()
-    {
-        return 'customer';
-    }
 }
