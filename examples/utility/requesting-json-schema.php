@@ -15,7 +15,7 @@
  */
 
 // Include the connection
-require_once 'creating-a-new-connection.php';
+require_once __DIR__ . '/../creating-a-new-connection.php';
 
 try {
     
