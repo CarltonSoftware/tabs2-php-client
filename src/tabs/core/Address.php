@@ -135,7 +135,10 @@ class Address extends Base
         return implode(
             ', ',
             array_filter(
-                $this->toArray()
+                $this->toArray(),
+                function ($ele) {
+                    return (gettype($ele) == 'string' && $ele !== '');
+                }
             )
         );
     }
@@ -155,8 +158,8 @@ class Address extends Base
             'county' => $this->getCounty(),
             'postcode' => $this->getPostcode(),
             'country' => (string) $this->getCountry(),
-            'longitude' => $this->getLongitude(),
-            'latitude' => $this->getLatitude()
+            'longitude' => (float) $this->getLongitude(),
+            'latitude' => (float) $this->getLatitude()
         );
     }
 }
