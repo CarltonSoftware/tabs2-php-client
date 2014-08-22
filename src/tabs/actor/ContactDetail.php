@@ -26,10 +26,37 @@ namespace tabs\actor;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\core\Address getAddress() Return the contact address
+ * @method string getSubtype() Return the contact sub type
+ * @method string getValue()   Return the value
+ * @method string getComment() Return the contact comment
+ * 
+ * @method \tabs\actor\ContactDetail setSubtype(string $subtype) Set the contact subtype
+ * @method \tabs\actor\ContactDetail setValue(string $value)     Set the contact value
+ * @method \tabs\actor\ContactDetail setComment(string $comment) Set the contact comnent
  */
 class ContactDetail extends ContactEntity
 {
+    /**
+     * SubType
+     *
+     * @var string
+     */
+    protected $subtype;
+
+    /**
+     * Value
+     *
+     * @var string
+     */
+    protected $value;
+
+    /**
+     * Comment
+     *
+     * @var string
+     */
+    protected $comment;
+    
     // ------------------ Public Functions --------------------- //
     
     /**
@@ -60,13 +87,5 @@ class ContactDetail extends ContactEntity
             'value' => $this->getValue(),
             'comment' => $this->getComment(),
         );
-    }
-    
-    /**
-     * @inheritDoc
-     */
-    public function getUrlStub()
-    {
-        return 'contactdetail';
     }
 }
