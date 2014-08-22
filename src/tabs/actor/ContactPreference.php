@@ -35,7 +35,7 @@ namespace tabs\actor;
  * @method \tabs\actor\ContactPreference setReason(string $reason) Set the contact reason
  *
  */
-class ContactPreference extends \tabs\core\Base
+class ContactPreference extends \tabs\core\Builder
 {
     /**
      * Id
@@ -57,4 +57,29 @@ class ContactPreference extends \tabs\core\Base
      * @var string
      */
     protected $reason = '';
+    
+    // --------------------------- Public Methods --------------------------- //
+    
+    /**
+     * Array representation of the contact preference
+     * 
+     * @return array
+     */
+    public function toArray()
+    {
+        return array(
+            'role' => $this->getRole(),
+            'reason' => $this->getReason()
+        );
+    }
+    
+    /**
+     * ToString magic method
+     * 
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getRole() . ': ' . $this->getReason();
+    }
 }
