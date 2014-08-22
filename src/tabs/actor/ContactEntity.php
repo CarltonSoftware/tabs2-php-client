@@ -26,20 +26,16 @@ namespace tabs\actor;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method integer            getId()            Return the id
- * @method boolean            getInvalid()       Return the invalid flag
- * @method string             getContactmethod() Return the contact method
- * @method string             getType()          Return the contact type
- * @method string             getSubtype()       Return the contact sub type
- * @method string             getValue()         Return the value
- * @method string             getComment()       Return the contact comment
+ * @method integer                         getId()                 Return the id
+ * @method boolean                         getInvalid()            Return the invalid flag
+ * @method string                          getContactmethod()      Return the contact method
+ * @method string                          getType()               Return the contact type
+ * @method \tabs\actor\ContactPreference[] getContactpreferences() Return the contact preference array
  *
+ * @method \tabs\actor\ContactEntity setId(integer $id)                      Set the id
  * @method \tabs\actor\ContactEntity setInvalid(boolean $invalid)            Set the invalid flag
  * @method \tabs\actor\ContactEntity setContactmethod(string $contactmethod) Set the contact method
  * @method \tabs\actor\ContactEntity setType(string $type)                   Set the contact type
- * @method \tabs\actor\ContactEntity setSubtype(string $subtype)             Set the contact subtype
- * @method \tabs\actor\ContactEntity setValue(string $value)                 Set the contact value
- * @method \tabs\actor\ContactEntity setComment(string $comment)             Set the contact comnent
  */
 abstract class ContactEntity extends \tabs\core\Builder
 {
@@ -72,34 +68,6 @@ abstract class ContactEntity extends \tabs\core\Builder
     protected $type;
 
     /**
-     * SubType
-     *
-     * @var string
-     */
-    protected $subtype;
-
-    /**
-     * Value
-     *
-     * @var string
-     */
-    protected $value;
-
-    /**
-     * Comment
-     *
-     * @var string
-     */
-    protected $comment;
-
-    /**
-     * Address
-     *
-     * @var \tabs\core\Address
-     */
-    protected $address;
-
-    /**
      * Contactpreferences
      *
      * Array of ContactPreference
@@ -117,13 +85,27 @@ abstract class ContactEntity extends \tabs\core\Builder
      * 
      * @return \tabs\actor\ContactEntity
      */
-    public function setContactPreferences($contactPreferences)
+    public function setContactpreferences($contactPreferences)
     {
-        foreach ($contactPreferences as $contactPreference) {
-            $this->contactpreferences[] = ContactPreference::factory(
-                $contactPreference
-            );
+        foreach ($contactPreferences as $preference) {
+            $contactPreference = ContactPreference::factory($preference);
+            $this->addContactPreference($contactPreference);
         }
+        
+        return $this;
+    }
+    
+    /**
+     * Add a contact preference
+     * 
+     * @param \tabs\actor\ContactPreference $contactPreference Contact Preference
+     * 
+     * @return \tabs\actor\ContactEntity
+     */
+    public function addContactpreference(&$contactPreference)
+    {
+        $contactPreference->setParent($this);
+        $this->contactpreferences[] = $contactPreference;
         
         return $this;
     }
