@@ -28,37 +28,5 @@ namespace tabs\actor;
  */
 class Customer extends Actor
 {
-    // -------------------------- Static Functions -------------------------- //
     
-    /**
-     * Fetch an array of customers
-     * 
-     * @return \tabs\actor\Customer[]
-     */
-    public static function fetch()
-    {
-        // Get the customers index
-        $customersIndex = \tabs\client\Client::getClient()->get(
-            'customer'
-        );
-
-        if ($customersIndex
-            && $customersIndex->getStatusCode() == 200
-            && $customersIndex->getBody() != ''
-        ) {
-            $customers = array();
-            foreach ($customersIndex->json() as $cusArr) {
-                $customers[] = self::factory($cusArr);
-            }
-            
-            return $customers;
-        }
-        
-        throw new \tabs\client\Exception(
-            $customersIndex,
-            'Unable to fetch customers'
-        );
-    }
-    
-    // -------------------------- Public Functions -------------------------- //
 }
