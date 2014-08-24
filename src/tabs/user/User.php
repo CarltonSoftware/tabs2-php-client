@@ -95,7 +95,7 @@ class User extends \tabs\core\Base
     {
         // Get the user object
         $userRequest = \tabs\client\Client::getClient()->get(
-            "/hmac/user/{$id}"
+            "/user/{$id}"
         );
 
         return self::factory($userRequest->json());
@@ -113,7 +113,7 @@ class User extends \tabs\core\Base
     {
         // Get the user object
         $userRequest = \tabs\client\Client::getClient()->post(
-            '/hmac/user/authenticate',
+            '/user/authenticate',
             array(
                 'username' => $username,
                 'password' => $password
