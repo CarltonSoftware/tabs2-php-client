@@ -68,77 +68,77 @@ abstract class Actor extends \tabs\core\Builder
      *
      * @var string
      */
-    protected $firstname;
+    protected $firstname = '';
     
     /**
      * Surname
      *
      * @var string
      */
-    protected $surname;
+    protected $surname = '';
     
     /**
      * Title
      *
      * @var string
      */
-    protected $title;
+    protected $title = '';
     
     /**
      * Salutatino
      *
      * @var string
      */
-    protected $salutation;
+    protected $salutation = '';
     
     /**
      * Tabscode
      *
      * @var string
      */
-    protected $tabscode;
+    protected $tabscode = '';
     
     /**
      * Language
      *
      * @var string
      */
-    protected $language;
+    protected $language = '';
     
     /**
      * Inactive
      *
      * @var boolean
      */
-    protected $inactive;
+    protected $inactive = false;
     
     /**
      * Password
      *
      * @var string
      */
-    protected $password;
+    protected $password = '';
     
     /**
      * Companyname
      *
      * @var string
      */
-    protected $companyname;
+    protected $companyname = '';
     
     /**
      * VatNumber
      *
      * @var string
      */
-    protected $vatnumber;
+    protected $vatnumber = '';
 
     /**
      * CompanyNumber
      *
      * @var string
      */
-    protected $companynumber;
+    protected $companynumber = '';
     
     /**
      * ContactEntities
