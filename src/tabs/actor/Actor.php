@@ -238,12 +238,7 @@ abstract class Actor extends \tabs\core\Builder
      */
     public function getContactAdresses()
     {
-        return array_filter(
-            $this->contacts,
-            function ($ele) {
-                return ($ele->getClass() == 'ContactAddress');
-            }
-        );
+        return $this->getContactFilter('ContactAddress');
     }
     
     /**
@@ -254,11 +249,9 @@ abstract class Actor extends \tabs\core\Builder
     public function getEmailAdresses()
     {
         return array_filter(
-            $this->contacts,
+            $this->getContactFilter(),
             function ($ele) {
-                return ($ele->getClass() == 'ContactDetail'
-                    && $ele->getContactmethod() == 'Email'
-                );
+                return ($ele->getContactmethod() == 'Email');
             }
         );
     }
@@ -271,11 +264,26 @@ abstract class Actor extends \tabs\core\Builder
     public function getPhoneNumbers()
     {
         return array_filter(
-            $this->contacts,
+            $this->getContactFilter(),
             function ($ele) {
-                return ($ele->getClass() == 'ContactDetail'
-                    && $ele->getContactmethod() == 'Phone'
-                );
+                return ($ele->getContactmethod() == 'Phone');
+            }
+        );
+    }
+    
+    /**
+     * Return a filtered contacts array
+     * 
+     * @param string $type Contact entity type
+     * 
+     * @return array
+     */
+    public function getContactFilter($type = 'ContactDetail')
+    {
+        return array_filter(
+            $this->contacts,
+            function ($ele) use ($type) {
+                return ($ele->getClass() == $type);
             }
         );
     }

@@ -17,12 +17,48 @@
 require_once __DIR__ . '/../creating-a-new-connection.php';
 
 try {
-    $customer = \tabs\actor\Customer::get(1);
-    
-    echo sprintf('<p>Tabs Code: %s</p>', $customer->getTabscode());
-    echo sprintf('<p>Name: %s %s</p>', $customer->getTitle(), $customer->getSurname());
-    
-    var_dump($customer);
+
+    if ($id = filter_input(INPUT_GET, 'id')) {
+        $customer = \tabs\actor\Customer::get($id);
+
+        echo sprintf('<p>Name: %s</p>', (string) $customer);
+        if (count($customer->getContactAdresses()) > 0) {
+            echo implode('<br>', $customer->getContactAdresses());
+            echo '<br>';
+        }
+
+        var_dump($customer);
+    } else {
+        $customerCol = new \tabs\actor\CustomerCollection();
+        $customerCol->setLimit(filter_input(INPUT_GET, 'limit'))
+            ->setPage(filter_input(INPUT_GET, 'page'))
+            ->fetch();
+
+        $pager = new tabs\utility\Pager();
+        $pager->setPagination($customerCol->getPagination());
+
+        foreach ($customerCol->getElements() as $customer) {
+            echo sprintf(
+                '<p><a href="accessing-customer-information.php?id=%s">%s</a></p>',
+                $customer->getId(),
+                (string) $customer
+            );
+        }
+
+        echo sprintf(
+            '<p><a href="?page=%s&limit=%s">Previous</a>',
+            $pager->getPrevPage(),
+            $pager->getPagination()->getLimit()
+        );
+        
+        echo ' | ';
+
+        echo sprintf(
+            '<a href="?page=%s&limit=%s">Next</a></p>',
+            $pager->getNextPage(),
+            $pager->getPagination()->getLimit()
+        );
+    }
         
 } catch(Exception $e) {
     echo $e->getMessage();
