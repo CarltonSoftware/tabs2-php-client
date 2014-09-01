@@ -17,7 +17,7 @@
 // Include the autoloader
 require_once __DIR__ . '/../autoload.php';
 
-\tabs\client\Client::factory(
+\tabs\apiclient\client\Client::factory(
     'http://localhost/', // Api Url
     '', // Api Key
     '', // Api Secret

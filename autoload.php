@@ -20,7 +20,7 @@ spl_autoload_register(
     function ($class) {
 
         // Project specific namespace
-        $prefix = 'tabs\\';
+        $prefix = 'tabs\\apiclient\\';
 
         // Base directory
         $base_dir = __DIR__ . '/src/';

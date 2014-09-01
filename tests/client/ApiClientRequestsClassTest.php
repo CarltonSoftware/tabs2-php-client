@@ -18,12 +18,12 @@ class ApiClientRequestsClassTest extends PHPUnit_Framework_TestCase
     public function testRequest($method, $status, $args = 'args', $hmac = false)
     {
         if ($hmac) {
-            \tabs\client\Client::factory('http://httpbin.org/', 'mouse', 'cottage');
+            \tabs\apiclient\client\Client::factory('http://httpbin.org/', 'mouse', 'cottage');
         } else {
-            \tabs\client\Client::factory('http://httpbin.org/');
+            \tabs\apiclient\client\Client::factory('http://httpbin.org/');
         }
         
-        $request = \tabs\client\Client::getClient()->$method(
+        $request = \tabs\apiclient\client\Client::getClient()->$method(
             $method,
             array(
                 'foo' => 'bar'
