@@ -62,70 +62,70 @@ abstract class Actor extends \tabs\core\Builder
      * @var integer
      */
     protected $id;
-    
+
     /**
      * Firstname
      *
      * @var string
      */
     protected $firstname = '';
-    
+
     /**
      * Surname
      *
      * @var string
      */
     protected $surname = '';
-    
+
     /**
      * Title
      *
      * @var string
      */
     protected $title = '';
-    
+
     /**
      * Salutatino
      *
      * @var string
      */
     protected $salutation = '';
-    
+
     /**
      * Tabscode
      *
      * @var string
      */
     protected $tabscode = '';
-    
+
     /**
      * Language
      *
      * @var string
      */
     protected $language = '';
-    
+
     /**
      * Inactive
      *
      * @var boolean
      */
     protected $inactive = false;
-    
+
     /**
      * Password
      *
      * @var string
      */
     protected $password = '';
-    
+
     /**
      * Companyname
      *
      * @var string
      */
     protected $companyname = '';
-    
+
     /**
      * VatNumber
      *
@@ -139,7 +139,7 @@ abstract class Actor extends \tabs\core\Builder
      * @var string
      */
     protected $companynumber = '';
-    
+
     /**
      * ContactEntities
      *
@@ -193,27 +193,27 @@ abstract class Actor extends \tabs\core\Builder
     }
 
     // ------------------ Public Functions --------------------- //
-    
+
     /**
      * Add a contact detail
-     * 
+     *
      * @param \tabs\actor\ContactAddress|\tabs\actor\ContactDetail $contact Contact detail object
-     * 
+     *
      * @return \tabs\actor\Actor
      */
     public function addContact(&$contact)
     {
         $contact->setParent($this);
         $this->contacts[] = $contact;
-        
+
         return $this;
     }
-    
+
     /**
      * Set the contacts for the Actor
-     * 
+     *
      * @param array $contacts Array of contact objects
-     * 
+     *
      * @return \tabs\actor\Actor
      */
     public function setContacts($contacts)
@@ -224,29 +224,29 @@ abstract class Actor extends \tabs\core\Builder
             } else {
                 $detail = \tabs\actor\ContactDetail::factory($contact);
             }
-            
+
             $this->addContact($detail);
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Return all of the Contact addresses object
-     * 
+     *
      * @return array
      */
-    public function getContactAdresses()
+    public function getContactAddresses()
     {
         return $this->getContactFilter('ContactAddress');
     }
-    
+
     /**
      * Return all of the Contact Detail objects that are email addresses
-     * 
+     *
      * @return array
      */
-    public function getEmailAdresses()
+    public function getEmailAddresses()
     {
         return array_filter(
             $this->getContactFilter(),
@@ -255,10 +255,10 @@ abstract class Actor extends \tabs\core\Builder
             }
         );
     }
-    
+
     /**
      * Return all of the Contact Detail objects that are phone numbers
-     * 
+     *
      * @return array
      */
     public function getPhoneNumbers()
@@ -270,12 +270,12 @@ abstract class Actor extends \tabs\core\Builder
             }
         );
     }
-    
+
     /**
      * Return a filtered contacts array
-     * 
+     *
      * @param string $type Contact entity type
-     * 
+     *
      * @return array
      */
     public function getContactFilter($type = 'ContactDetail')
@@ -287,27 +287,27 @@ abstract class Actor extends \tabs\core\Builder
             }
         );
     }
-    
+
     /**
      * Add a bank account
-     * 
+     *
      * @param \tabs\actor\BankAccount $bankAccount Bank account object
-     * 
+     *
      * @return \tabs\actor\Actor
      */
     public function addBankAccount(&$bankAccount)
     {
         $bankAccount->setParent($this);
         $this->bankaccounts[] = $bankAccount;
-        
+
         return $this;
     }
 
     /**
      * Set the bank account objects
-     * 
+     *
      * @param account $bankAccounts Bank accounts array
-     * 
+     *
      * @return \tabs\actor\Actor
      */
     public function setBankaccounts($bankAccounts)
@@ -316,23 +316,23 @@ abstract class Actor extends \tabs\core\Builder
             $bankAccount = BankAccount::factory($account);
             $this->addBankAccount($bankAccount);
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Return if a customer is active or not
-     * 
+     *
      * @return boolean
      */
     public function isActive()
     {
         return !$this->inactive;
     }
-    
+
     /**
      * Delete function
-     * 
+     *
      * @return \tabs\actor\Actor
      */
     public function delete()
@@ -345,10 +345,10 @@ abstract class Actor extends \tabs\core\Builder
             )
         );
     }
-    
+
     /**
      * ToString magic method
-     * 
+     *
      * @return string
      */
     public function __toString()
@@ -364,10 +364,10 @@ abstract class Actor extends \tabs\core\Builder
             )
         );
     }
-    
+
     /**
      * Array representation of the object
-     * 
+     *
      * @return array
      */
     public function toArray()

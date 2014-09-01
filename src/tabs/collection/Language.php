@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tabs Rest API Customer collection object.
+ * Tabs Rest API Language collection object.
  *
  * PHP Version 5.4
  *
@@ -16,7 +16,7 @@
 namespace tabs\collection;
 
 /**
- * Tabs Rest API Customer collection object.
+ * Tabs Rest API Language collection object.
  *
  * @category  Tabs_Client
  * @package   Tabs
@@ -26,14 +26,14 @@ namespace tabs\collection;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  */
-class Customer extends \tabs\collection\Collection
+class Language extends \tabs\collection\Collection
 {
     /**
      * Return an array of customer objects.  This object will need to be
      * instantiated and the method fetch will need to be called before this will
      * return any elements.
      *
-     * @return \tabs\actor\Customer[]
+     * @return \tabs\core\Language[]
      */
     public function getElements()
     {
@@ -53,6 +53,6 @@ class Customer extends \tabs\collection\Collection
      */
     public function getElementClass()
     {
-        return '\tabs\actor\Customer';
+        return '\tabs\core\Language';
     }
 }
