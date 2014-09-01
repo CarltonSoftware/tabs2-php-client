@@ -31,6 +31,7 @@ namespace tabs\user;
  * @method string            getUsername() Return the username
  * @method string            getEmail()    Return the user email
  * @method string            getPassword() Return the user password
+ * @method \tabs\user\Group  getGroup()    Return the user group
  * 
  * @method \tabs\user\User setId(integer $id)            Set the user Id
  * @method \tabs\user\User setUsername(string $username) Set the username
@@ -38,7 +39,7 @@ namespace tabs\user;
  * @method \tabs\user\User setPassword(string $password) Set the user password
  * @method \tabs\user\User setEnabled(boolean $enabled)  Set the enabled flag
  */
-class User extends \tabs\core\Base
+class User extends \tabs\core\Builder
 {
     /**
      * User Id
@@ -82,7 +83,14 @@ class User extends \tabs\core\Base
      */
     protected $roles = array();
     
-    // ------------------ Static Functions --------------------- //
+    /**
+     * User Group
+     * 
+     * @var \tabs\user\Group
+     */
+    protected $group;
+
+    // -------------------------- Static Functions -------------------------- //
 
     /**
      * Get a user from a given Id
@@ -94,11 +102,18 @@ class User extends \tabs\core\Base
     public static function get($id)
     {
         // Get the user object
-        $userRequest = \tabs\client\Client::getClient()->get(
-            "/user/{$id}"
-        );
+        return parent::get('/auth/user/' . $id);
+    }
 
-        return self::factory($userRequest->json());
+    /**
+     * Get the Users
+     *
+     * @return \tabs\core\User[]
+     */
+    public static function fetch()
+    {
+        // Get the user object
+        return parent::get('/auth/user');
     }
 
     /**
@@ -112,23 +127,20 @@ class User extends \tabs\core\Base
     public static function authenticate($username, $password)
     {
         // Get the user object
-        $userRequest = \tabs\client\Client::getClient()->post(
-            '/user/authenticate',
+        $request = \tabs\client\Client::getClient()->post(
+            '/auth/user/authenticate',
             array(
                 'username' => $username,
                 'password' => $password
             )
         );
-        
-        $urlSegments = explode(
-            '/',
-            $userRequest->getHeader('Content-Location')
-        );
 
-        return self::get($urlSegments[count($urlSegments) - 1]);
+        return self::get(
+            self::getRequestId($request)
+        );
     }
-    
-    // ------------------ Public Functions --------------------- //
+
+    // -------------------------- Public Functions -------------------------- //
     
     /**
      * Check if user is active or not
@@ -150,10 +162,84 @@ class User extends \tabs\core\Base
     public function setRoles($roles)
     {
         foreach ($roles as $role) {
-            $this->roles[] = Role::factory($role);
+            $_role = Role::factory($role);
+            $this->addRole($_role);
         }
         
         return $this;
+    }
+    
+    /**
+     * Add a role to the user
+     * 
+     * @param \tabs\user\Role $role   Role to add
+     * @param boolean         $commit Set to true if a create post is to be 
+     *                                created
+     * 
+     * @return \tabs\user\User
+     */
+    public function addRole(&$role, $commit = false)
+    {
+        if ($commit) {
+            $request = \tabs\client\Client::getClient()->put(
+                '/auth/user/' . $this->getId() . '/role/' . $role->getId()
+            );
+
+            if (!$request || $request->getStatusCode() !== '204') {
+                throw new \tabs\client\Exception(
+                    $request,
+                    'Unable to add role ' . $role->getRole() . ' user: ' . $this->getId()
+                );
+            }
+        }
+        
+        $role->setParent($this);
+        $this->roles[] = $role;
+        
+        return $this;
+    }
+    
+    /**
+     * Remove a role from a user
+     * 
+     * @param integer $roleId Role Id
+     * 
+     * @return \tabs\user\User
+     */
+    public function removeRole($roleId)
+    {
+        foreach ($this->getRoles() as $index => $role) {
+            if ($role->getId() == $roleId) {
+                $role->remove();
+                unset($this->roles[$index]);
+            }
+        }
+        
+        return $this;
+    }
+    
+    /**
+     * Enable the current user
+     * 
+     * @throws \tabs\client\Exception
+     * 
+     * @return \tabs\user\User
+     */
+    public function enable()
+    {
+        return $this->_toggleUser('enable');
+    }
+    
+    /**
+     * Disable the current user
+     * 
+     * @throws \tabs\client\Exception
+     * 
+     * @return \tabs\user\User
+     */
+    public function disable()
+    {
+        return $this->_toggleUser('disable');
     }
     
     /**
@@ -172,6 +258,25 @@ class User extends \tabs\core\Base
     }
     
     /**
+     * Set the usergroup
+     * 
+     * @param array|\tabs\user\Group $group User group array/object
+     * 
+     * @return \tabs\user\User
+     */
+    public function setGroup($group)
+    {
+        if (is_array($group)) {
+            $group = Group::factory($group);
+        }
+        
+        $group->setParent($this);
+        $this->group = $group;
+        
+        return $this;
+    }
+    
+    /**
      * Check if a user has access to a given route or not
      * 
      * @param string $route Route name
@@ -187,5 +292,65 @@ class User extends \tabs\core\Base
         }
         
         return false;
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function getCreateUrl()
+    {
+        return '/auth/user';
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function getUpdateUrl()
+    {
+        return '/auth/user/' . $this->getId();
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function toArray()
+    {
+        $roles = array();
+        foreach ($this->getRoles() as $role) {
+            array_push($roles, $role->toArray());
+        }
+        
+        return array(
+            'id' => $this->getId(),
+            'username' => $this->getUsername(),
+            'email' => $this->getEmail(),
+            'password' => $this->getPassword(),
+            'roles' => $this->getRoles(),
+            'group' => $this->getGroup()->getId()
+        );
+    }
+        
+    
+    /**
+     * Disable/Enable the current user
+     * 
+     * @throws \tabs\client\Exception
+     * 
+     * @return \tabs\user\User
+     */
+    private function _toggleUser($action = 'enable')
+    {
+        $request = \tabs\client\Client::getClient()->post(
+            '/auth/user/' . $this->getId() . '/' . $action
+        );
+        
+        if (!$request || $request->getStatusCode() !== '204') {
+            throw new \tabs\client\Exception(
+                $request,
+                'Unable to ' . $action . ' user: ' . $this->getId()
+            );
+        }
+        
+        return $this;
     }
 }

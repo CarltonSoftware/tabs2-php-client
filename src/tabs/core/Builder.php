@@ -35,6 +35,67 @@ abstract class Builder extends Base implements BuilderInterface
      */
     protected $parent;
 
+    // ------------------ Static Functions --------------------- //
+
+    /**
+     * Get an object from a given route
+     *
+     * @param string $route GET route
+     *
+     * @return mixed
+     */
+    public static function get($route)
+    {
+        $request = \tabs\client\Client::getClient()->get($route);
+
+        return self::factory($request->json());
+    }
+    
+    /**
+     * Fetch an array of elements
+     * 
+     * @return array
+     */
+    public static function fetch($route)
+    {
+        // Get the route
+        $request = \tabs\client\Client::getClient()->get($route);
+        $elements = array();
+
+        if ($request
+            && $request->getStatusCode() == 200
+        ) {
+            $json = $request->json(array('object' => true));
+            foreach ($json as $element) {
+                $ele = static::factory($element);
+                array_push($elements, $ele);
+            }
+            
+            return $elements;
+        }
+        
+        throw new \tabs\client\Exception(
+            $request,
+            'Unable to fetch element for route: ' . $route
+        );
+    }
+    
+    /**
+     * Return the ID from a content-location header
+     * 
+     * @param \GuzzleHttp\Message\Response $req Guzzle response
+     * 
+     * @return string|void
+     */
+    public static function getRequestId($req)
+    {
+        if ($req->getHeader('content-location')) {
+            $location = explode('/', $req->getHeader('content-location'));
+            
+            return $location[count($location) - 1];
+        }
+    }
+
     // -------------------------- Public Functions -------------------------- //
     
     /**
@@ -73,7 +134,7 @@ abstract class Builder extends Base implements BuilderInterface
         // Perform post request
         $req = \tabs\client\Client::getClient()->post(
             $this->getCreateUrl(),
-            $this->toArray()
+            $this->toCreateArray()
         );
 
         if (!$req
@@ -86,7 +147,7 @@ abstract class Builder extends Base implements BuilderInterface
         }
         
         // Set the id of the element
-        $id = $this->_getId($req);
+        $id = self::getRequestId($req);
         if ($id) {
             $this->setId(
                 (integer) $id
@@ -108,7 +169,7 @@ abstract class Builder extends Base implements BuilderInterface
         // Perform put request
         $req = \tabs\client\Client::getClient()->put(
             $this->getUpdateUrl(),
-            $this->toArray()
+            $this->toUpdateArray()
         );
 
         if (!$req
@@ -138,7 +199,7 @@ abstract class Builder extends Base implements BuilderInterface
         );
 
         if (!$req
-            || $req->getStatusCode() !== 204
+            || $req->getStatusCode() !== '204'
         ) {
             throw new \tabs\client\Exception(
                 $req,
@@ -193,24 +254,24 @@ abstract class Builder extends Base implements BuilderInterface
     }
     
     /**
-     * Return the ID from a content-location header
+     * Helpful accessor incase structure of create post is different to the
+     * toArray map
      * 
-     * @param \GuzzleHttp\Message\Response $req Guzzle response
-     * 
-     * @return string|void
+     * @return array
      */
-    private function _getId($req)
+    public function toCreateArray()
     {
-        if ($req->getHeader('content-location')) {
-            return preg_replace(
-                '/\D/',
-                '',
-                str_replace(
-                    $this->getCreateUrl(), 
-                    '',
-                    $req->getHeader('content-location')
-                )
-            );
-        }
+        return $this->toArray();
+    }
+    
+    /**
+     * Helpful accessor incase structure of update put is different to the
+     * toArray map
+     * 
+     * @return array
+     */
+    public function toUpdateArray()
+    {
+        return $this->toArray();
     }
 }

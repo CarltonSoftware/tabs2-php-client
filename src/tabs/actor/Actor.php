@@ -158,7 +158,7 @@ abstract class Actor extends \tabs\core\Builder
      */
     protected $bankaccounts = array();
 
-    // ------------------ Static Functions --------------------- //
+    // -------------------------- Static Functions -------------------------- //
 
     /**
      * Create a Actor object from a given customer reference
@@ -169,30 +169,10 @@ abstract class Actor extends \tabs\core\Builder
      */
     public static function get($reference)
     {
-        // Get the actor object
-        $request = \tabs\client\Client::getClient()->get(
-            strtolower(self::getClass()) . "/{$reference}"
-        );
-
-        if ($request
-            && $request->getStatusCode() == 200
-            && $request->getBody() != ''
-        ) {
-            return self::factory(
-                $request->json(
-                    array(
-                        'object' => true
-                    )
-                )
-            );
-        }
-        throw new \tabs\client\Exception(
-            $request,
-            'Unable to create ' . strtolower(self::getClass())
-        );
+        return parent::get('/customer/' . $reference);
     }
 
-    // ------------------ Public Functions --------------------- //
+    // -------------------------- Public Functions -------------------------- //
     
     /**
      * Add a contact detail
