@@ -301,6 +301,24 @@ abstract class Actor extends \tabs\apiclient\core\Builder
     }
 
     /**
+     * Set the language object
+     *
+     * @param array $array Language array
+     *
+     * @return \tabs\apiclient\core\Language
+     */
+    public function setLanguage($array)
+    {
+        if (is_string($array)) {
+            $array = array('name' => $array);
+        }
+
+        $this->language = Language::factory($array);
+
+        return $this;
+    }
+
+    /**
      * Return if a customer is active or not
      *
      * @return boolean
