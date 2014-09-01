@@ -21,11 +21,11 @@ class Fixtures
     /**
      * Return the test contact preference
      * 
-     * @return \tabs\actor\ContactPreference
+     * @return \tabs\apiclient\actor\ContactPreference
      */
     public static function getContactPreference()
     {
-        $preference = new \tabs\actor\ContactPreference();
+        $preference = new \tabs\apiclient\actor\ContactPreference();
         $preference->setId(1)->setRole('Customer')->setReason('Booking Confirmation');
         
         return $preference;
@@ -34,11 +34,11 @@ class Fixtures
     /**
      * Return the test contact detail
      * 
-     * @return \tabs\actor\ContactDetail
+     * @return \tabs\apiclient\actor\ContactDetail
      */
     public static function getContactDetail()
     {
-        $detail = new \tabs\actor\ContactDetail();
+        $detail = new \tabs\apiclient\actor\ContactDetail();
         $detail->setId(1)
             ->setType('C')
             ->setContactmethod('Phone')
@@ -54,11 +54,11 @@ class Fixtures
     /**
      * Return the test contact address
      * 
-     * @return \tabs\actor\ContactAddress
+     * @return \tabs\apiclient\actor\ContactAddress
      */
     public static function getContactAddress()
     {
-        $contactAddress = new \tabs\actor\ContactAddress();
+        $contactAddress = new \tabs\apiclient\actor\ContactAddress();
         $contactAddress->setId(1)
             ->setAddress(self::getAddress())
             ->setType('P')
@@ -70,11 +70,11 @@ class Fixtures
     /**
      * Return test address object
      * 
-     * @return \tabs\core\Address
+     * @return \tabs\apiclient\core\Address
      */
     public static function getAddress()
     {
-        return \tabs\core\Address::factory(
+        return \tabs\apiclient\core\Address::factory(
             array(
                 'line1' => 'Developer Room',
                 'line2' => 'Carlton House',
@@ -89,11 +89,11 @@ class Fixtures
     /**
      * Return a test country object
      * 
-     * @return \tabs\core\Country
+     * @return \tabs\apiclient\core\Country
      */
     public static function getCountry()
     {
-        return \tabs\core\Country::factory(
+        return \tabs\apiclient\core\Country::factory(
             array(
                 'alpha2' => 'GB',
                 'alpha3' => 'GBR',
@@ -106,11 +106,11 @@ class Fixtures
     /**
      * Create a new bank account object
      * 
-     * @return \tabs\actor\BankAccount
+     * @return \tabs\apiclient\actor\BankAccount
      */
     public static function getBankAccount()
     {
-        $bankAccount = new \tabs\actor\BankAccount();
+        $bankAccount = new \tabs\apiclient\actor\BankAccount();
         $bankAccount->setId(1)
             ->setAccountname('Piggy')
             ->setAccountnumber('1234')

@@ -18,7 +18,7 @@ class UserTest extends ApiClientClassTest
      */
     public function testNewUser()
     {
-        $user = \tabs\user\User::factory($this->_fixture());
+        $user = \tabs\apiclient\user\User::factory($this->_fixture());
         
         $this->assertEquals(1, $user->getId());
         $this->assertEquals(1, $user->id);

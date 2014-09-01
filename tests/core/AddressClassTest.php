@@ -13,7 +13,7 @@ class AddressClassTest extends ApiClientClassTest
     /**
      * Address object
      * 
-     * @var \tabs\core\Address
+     * @var \tabs\apiclient\core\Address
      */
     protected $address;
 
@@ -66,7 +66,7 @@ class AddressClassTest extends ApiClientClassTest
     /**
      * Test the address object
      * 
-     * @param \tabs\core\Address $address Address
+     * @param \tabs\apiclient\core\Address $address Address
      * 
      * @return void
      */
