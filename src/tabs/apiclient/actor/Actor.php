@@ -47,7 +47,6 @@ namespace tabs\apiclient\actor;
  * @method \tabs\apiclient\actor\Actor setTitle(string $title) Set the title
  * @method \tabs\apiclient\actor\Actor setSalutation(string $salutation) Set the salutation
  * @method \tabs\apiclient\actor\Actor setTabscode(string $tabscode) Set the tabscode
- * @method \tabs\apiclient\actor\Actor setLanguage(string $language) Set the language
  * @method \tabs\apiclient\actor\Actor setInactive(boolean $inactive) Set the inactive state
  * @method \tabs\apiclient\actor\Actor setPassword(string $password) Set the password
  * @method \tabs\apiclient\actor\Actor setCompanyname(string $companyname) Set the company name
@@ -173,7 +172,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
     }
 
     // -------------------------- Public Functions -------------------------- //
-    
+
     /**
      * Add a contact detail
      *
