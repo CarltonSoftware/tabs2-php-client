@@ -33,7 +33,7 @@ namespace tabs\apiclient\user;
  * @method \tabs\apiclient\user\Route setId(integer $id)      Set the user Id
  * @method \tabs\apiclient\user\Route setRoute(string $route) Set the user route
  */
-class Route extends \tabs\apiclient\core\Base
+class Route extends \tabs\apiclient\core\Builder
 {
     /**
      * Role Id

@@ -39,7 +39,7 @@ namespace tabs\apiclient\user;
  * @method \tabs\apiclient\user\User setPassword(string $password) Set the user password
  * @method \tabs\apiclient\user\User setEnabled(boolean $enabled)  Set the enabled flag
  */
-class User extends \tabs\apiclient\core\Base
+class User extends \tabs\apiclient\core\Builder
 {
     /**
      * User Id

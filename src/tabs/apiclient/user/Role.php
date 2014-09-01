@@ -34,7 +34,7 @@ namespace tabs\apiclient\user;
  * @method \tabs\apiclient\user\Role    setRoute(string $route) Set the Role
  */
 
-class Role extends \tabs\apiclient\core\Base
+class Role extends \tabs\apiclient\core\Builder
 {
     /**
      * Role Id
