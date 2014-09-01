@@ -80,7 +80,7 @@ class Role extends \tabs\apiclient\core\Builder
     public static function fetch()
     {
         // Get the user object
-        return parent::get('/auth/role');
+        return parent::_fetch('/auth/role');
     }
 
     // -------------------------- Public Functions -------------------------- //

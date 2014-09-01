@@ -113,7 +113,7 @@ class User extends \tabs\apiclient\core\Builder
     public static function fetch()
     {
         // Get the user object
-        return parent::get('/auth/user');
+        return parent::_fetch('/auth/user');
     }
 
     /**
@@ -266,7 +266,7 @@ class User extends \tabs\apiclient\core\Builder
      */
     public function setGroup($group)
     {
-        if (is_array($group)) {
+        if (is_array($group) || get_class($group) == 'stdClass') {
             $group = Group::factory($group);
         }
         

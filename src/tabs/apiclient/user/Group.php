@@ -58,7 +58,7 @@ class Group extends \tabs\apiclient\core\Builder
      */
     public static function fetch()
     {
-        return parent::fetch('/auth/group');
+        return parent::_fetch('/auth/group');
     }
 
     // -------------------------- Public Functions -------------------------- //

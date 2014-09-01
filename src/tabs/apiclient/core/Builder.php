@@ -54,9 +54,11 @@ abstract class Builder extends Base implements BuilderInterface
     /**
      * Fetch an array of elements
      * 
+     * @param string $route Url to fetch
+     * 
      * @return array
      */
-    public static function fetch($route)
+    public static function _fetch($route)
     {
         // Get the route
         $request = \tabs\apiclient\client\Client::getClient()->get($route);
@@ -213,36 +215,21 @@ abstract class Builder extends Base implements BuilderInterface
     /**
      * Generate a url string for a create url
      * 
-     * @param string $prefix Prefix
-     * 
      * @return string
      */
-    public function getCreateUrl($prefix = '')
+    public function getCreateUrl()
     {
-        if ($this->getParent()) {
-            $prefix = $this->getParent()->getUpdateUrl(
-                $prefix
-            );
-        }
-        return $prefix . '/' . $this->getUrlStub();
+        return $this->_createUrl();
     }
     
     /**
      * Generate a url string for a create url
      * 
-     * @param string $prefix Prefix
-     * 
      * @return string
      */
-    public function getUpdateUrl($prefix = '')
+    public function getUpdateUrl()
     {
-        if ($this->getParent()) {
-            $prefix = $this->getParent()->getUpdateUrl(
-                $prefix
-            );
-        }
-        
-        return $prefix . '/' . $this->getUrlStub() . '/' . $this->getId();
+        return $this->_updateUrl();
     }
     
     /**
@@ -273,5 +260,40 @@ abstract class Builder extends Base implements BuilderInterface
     public function toUpdateArray()
     {
         return $this->toArray();
+    }
+    
+    /**
+     * Generate a url string for a create url
+     * 
+     * @param string $prefix Prefix
+     * 
+     * @return string
+     */
+    private function _createUrl($prefix = '')
+    {
+        if ($this->getParent()) {
+            $prefix = $this->getParent()->_updateUrl(
+                $prefix
+            );
+        }
+        return $prefix . '/' . $this->_createUrl();
+    }
+    
+    /**
+     * Generate a url string for a create url
+     * 
+     * @param string $prefix Prefix
+     * 
+     * @return string
+     */
+    private function _updateUrl($prefix = '')
+    {
+        if ($this->getParent()) {
+            $prefix = $this->getParent()->_updateUrl(
+                $prefix
+            );
+        }
+        
+        return $prefix . '/' . $this->getUrlStub() . '/' . $this->getId();
     }
 }
