@@ -13,7 +13,7 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\core;
+namespace tabs\collection;
 
 /**
  * Collection Interface
@@ -41,4 +41,11 @@ interface CollectionInterface
      * @return string
      */
     public function getRoute();
+    
+    /**
+     * Return the class of the collections elements
+     * 
+     * @return string
+     */
+    public function getElementClass();
 }

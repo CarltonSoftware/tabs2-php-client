@@ -13,7 +13,7 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\core;
+namespace tabs\collection;
 
 /**
  * Tabs Rest Collection object. Handles groups of objects output from
@@ -29,7 +29,7 @@ namespace tabs\core;
  * 
  * @method \tabs\utility\Pagination getPagination() Return the pagination element
  */
-abstract class Collection extends Base implements CollectionInterface
+abstract class Collection extends \tabs\core\Base implements CollectionInterface
 {
     /**
      * Elements array
@@ -145,16 +145,6 @@ abstract class Collection extends Base implements CollectionInterface
         $this->elements[] = $element;
         
         return $this;
-    }
-    
-    /**
-     * Return the class of the element
-     * 
-     * @return string
-     */
-    public function getElementClass()
-    {
-        return str_replace('Collection', '', get_called_class());
     }
     
     /**

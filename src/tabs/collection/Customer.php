@@ -13,7 +13,7 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\actor;
+namespace tabs\collection;
 
 /**
  * Tabs Rest API Customer collection object.
@@ -26,7 +26,7 @@ namespace tabs\actor;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  */
-class CustomerCollection extends \tabs\core\Collection
+class Customer extends \tabs\collection\Collection
 {
     /**
      * Return an array of customer objects.  This object will need to be
@@ -46,5 +46,13 @@ class CustomerCollection extends \tabs\core\Collection
     public function getRoute()
     {
         return 'customer';
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function getElementClass()
+    {
+        return '\tabs\actor\Customer';
     }
 }
