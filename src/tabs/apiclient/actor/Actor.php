@@ -304,7 +304,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
      *
      * @param array $array Language array
      *
-     * @return \tabs\apiclient\core\Language
+     * @return \tabs\apiclient\actor\Actor
      */
     public function setLanguage($array)
     {
@@ -312,7 +312,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
             $array = array('name' => $array);
         }
 
-        $this->language = Language::factory($array);
+        $this->language = \tabs\apiclient\core\Language::factory($array);
 
         return $this;
     }
