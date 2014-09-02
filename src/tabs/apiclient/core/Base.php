@@ -96,7 +96,7 @@ abstract class Base
      * 
      * @return \tabs\apiclient\core\Base
      */
-    public function setParent(\tabs\apiclient\core\Base &$element)
+    public function setParent(&$element)
     {
         $this->parent = $element;
         
