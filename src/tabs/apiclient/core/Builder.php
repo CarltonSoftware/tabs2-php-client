@@ -48,7 +48,7 @@ abstract class Builder extends Base implements BuilderInterface
     {
         $request = \tabs\apiclient\client\Client::getClient()->get($route);
 
-        return self::factory($request->json());
+        return self::factory($request->json(array('object' => true)));
     }
     
     /**
