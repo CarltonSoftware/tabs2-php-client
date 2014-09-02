@@ -143,8 +143,6 @@ abstract class Builder extends Base implements BuilderInterface
             $this->getUpdateUrl(),
             $this->toUpdateArray()
         );
-        var_dump(
-            $this->toUpdateArray());
 
         if (!$req
             || $req->getStatusCode() !== '204'
