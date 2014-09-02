@@ -28,12 +28,6 @@ namespace tabs\apiclient\core;
  */
 abstract class Builder extends Base implements BuilderInterface
 {
-    /**
-     * Parent element
-     * 
-     * @var \tabs\apiclient\core\Builder
-     */
-    protected $parent;
 
     // ------------------ Static Functions --------------------- //
 
@@ -101,30 +95,6 @@ abstract class Builder extends Base implements BuilderInterface
     // -------------------------- Public Functions -------------------------- //
     
     /**
-     * Set the parent element
-     * 
-     * @param \tabs\apiclient\core\Builder $builder Parent element
-     * 
-     * @return \tabs\apiclient\core\Builder
-     */
-    public function setParent(\tabs\apiclient\core\Builder &$builder)
-    {
-        $this->parent = $builder;
-        
-        return $this;
-    }
-    
-    /**
-     * Return the builder parent element
-     * 
-     * @return \tabs\apiclient\core\Builder
-     */
-    public function getParent()
-    {
-        return $this->parent;
-    }
-    
-    /**
      * Perform a create request
      * 
      * @throws \tabs\apiclient\client\Exception
@@ -173,6 +143,8 @@ abstract class Builder extends Base implements BuilderInterface
             $this->getUpdateUrl(),
             $this->toUpdateArray()
         );
+        var_dump(
+            $this->toUpdateArray());
 
         if (!$req
             || $req->getStatusCode() !== '204'

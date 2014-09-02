@@ -30,8 +30,8 @@ namespace tabs\apiclient\core;
  * @method string getCode() Return the language code
  * @method string getName() Return the language name
  *
- * @method \tabs\apiclient\core\Base setCode(string $alpha2)      Set the Language code
- * @method \tabs\apiclient\core\Base setLanguage(string $country) Set the language name
+ * @method \tabs\apiclient\core\Base setCode(string $alpha2)   Set the Language code
+ * @method \tabs\apiclient\core\Base setLanguage(string $name) Set the language name
  */
 class Language extends Base
 {
@@ -40,14 +40,14 @@ class Language extends Base
      *
      * @var string
      */
-    protected $code = '';
+    protected $code = 'EN';
 
     /**
      * Language name
      *
      * @var type
      */
-    protected $name = '';
+    protected $name = 'English';
 
     // ------------------ Public Functions --------------------- //
 

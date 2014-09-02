@@ -32,6 +32,13 @@ namespace tabs\apiclient\core;
 
 abstract class Base
 {
+    /**
+     * Parent element
+     * 
+     * @var \tabs\apiclient\core\Base
+     */
+    protected $parent;
+    
     // ------------------ Static Functions --------------------- //
 
     /**
@@ -81,6 +88,30 @@ abstract class Base
     }
     
     // -------------------------- Public Functions -------------------------- //
+    
+    /**
+     * Set the parent element
+     * 
+     * @param \tabs\apiclient\core\Base $element Parent element
+     * 
+     * @return \tabs\apiclient\core\Base
+     */
+    public function setParent(\tabs\apiclient\core\Base &$element)
+    {
+        $this->parent = $element;
+        
+        return $this;
+    }
+    
+    /**
+     * Return the builder parent element
+     * 
+     * @return \tabs\apiclient\core\Base
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
     
     /**
      * Generic getter/setter

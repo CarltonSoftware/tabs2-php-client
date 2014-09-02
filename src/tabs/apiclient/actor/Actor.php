@@ -26,18 +26,18 @@ namespace tabs\apiclient\actor;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method integer                     getId()            Return the Id
- * @method string                      getFirstname()     Return the firstname
- * @method string                      getSurname()       Return the surname
- * @method string                      getTitle()         Return the title
- * @method string                      getSalutation()    Return the saulation
- * @method string                      getTabscode()      Return the tabs code
- * @method string                      getLanguage()      Return the language
- * @method boolean                     getInactive()      Return the inactive state
- * @method string                      getPassword()      Return the password
- * @method string                      getCompanyname()   Return the company name
- * @method string                      getVatnumber()     Return the vat number
- * @method string                      getCompanynumber() Return the company number
+ * @method integer                               getId()            Return the Id
+ * @method string                                getFirstname()     Return the firstname
+ * @method string                                getSurname()       Return the surname
+ * @method string                                getTitle()         Return the title
+ * @method string                                getSalutation()    Return the saulation
+ * @method string                                getTabscode()      Return the tabs code
+ * @method \tabs\apiclient\core\Language         getLanguage()      Return the language
+ * @method boolean                               getInactive()      Return the inactive state
+ * @method string                                getPassword()      Return the password
+ * @method string                                getCompanyname()   Return the company name
+ * @method string                                getVatnumber()     Return the vat number
+ * @method string                                getCompanynumber() Return the company number
  * @method \tabs\apiclient\actor\ContactEntity[] getContacts()      Return the array of contacts
  * @method \tabs\apiclient\actor\BankAccount[]   getBankaccounts()  Return the array of bank account objects
  *
@@ -100,9 +100,9 @@ abstract class Actor extends \tabs\apiclient\core\Builder
     /**
      * Language
      *
-     * @var string
+     * @var \tabs\apiclient\core\Language
      */
-    protected $language = '';
+    protected $language;
 
     /**
      * Inactive
@@ -172,6 +172,16 @@ abstract class Actor extends \tabs\apiclient\core\Builder
     }
 
     // -------------------------- Public Functions -------------------------- //
+    
+    /**
+     * Constructor
+     * 
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->setLanguage(array('name' => 'English'));
+    }
 
     /**
      * Add a contact detail
@@ -312,7 +322,10 @@ abstract class Actor extends \tabs\apiclient\core\Builder
             $array = array('name' => $array);
         }
 
-        $this->language = \tabs\apiclient\core\Language::factory($array);
+        $language = \tabs\apiclient\core\Language::factory($array);
+        $language->setParent($this);
+        
+        $this->language = $language;
 
         return $this;
     }
@@ -375,7 +388,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
             'surname' => $this->getSurname(),
             'salutation' => $this->getSalutation(),
             'tabscode' => $this->getTabscode(),
-            'language' => $this->getLanguage(),
+            'languagecode' => $this->getLanguage()->getCode(),
             'companyname' => $this->getCompanyname(),
             'vatnumber' => $this->getVatnumber(),
             'companynumber' => $this->getCompanynumber()
