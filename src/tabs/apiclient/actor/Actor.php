@@ -391,7 +391,8 @@ abstract class Actor extends \tabs\apiclient\core\Builder
             'languagecode' => $this->getLanguage()->getCode(),
             'companyname' => $this->getCompanyname(),
             'vatnumber' => $this->getVatnumber(),
-            'companynumber' => $this->getCompanynumber()
+            'companynumber' => $this->getCompanynumber(),
+            'inactive' => $this->getInactive()
         );
     }
 }
