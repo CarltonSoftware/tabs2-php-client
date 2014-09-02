@@ -157,7 +157,7 @@ class Address extends Base
             'town' => $this->getTown(),
             'county' => $this->getCounty(),
             'postcode' => $this->getPostcode(),
-            'country' => (string) $this->getCountry(),
+            'countrycode' => $this->getCountry()->getAlpha2(),
             'longitude' => (float) $this->getLongitude(),
             'latitude' => (float) $this->getLatitude()
         );
