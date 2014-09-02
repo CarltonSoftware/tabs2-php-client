@@ -45,7 +45,7 @@ class Language extends \tabs\apiclient\collection\Collection
      */
     public function getRoute()
     {
-        return 'customer';
+        return 'utility/language';
     }
 
     /**

@@ -65,8 +65,17 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
             && $elementsIndex->getStatusCode() == 200
         ) {
             $json = $elementsIndex->json(array('object' => true));
-            $this->pagination->setTotal($json->total);
-            foreach ($json->elements as $element) {
+            $elements = $json;
+            if (property_exists($json, 'elements') 
+                && property_exists($json, 'total')
+            ) {
+                $this->pagination->setTotal($json->total);
+                $elements = $json->elements;
+            } else {
+                $this->setTotal(count($elements))->setLimit(count($elements));
+            }
+            
+            foreach ($elements as $element) {
                 $ele = $class::factory($element);
                 $this->addElement($ele);
             }
