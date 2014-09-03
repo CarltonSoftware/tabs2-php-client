@@ -26,16 +26,13 @@ namespace tabs\apiclient\actor;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method integer getId()     Return the id
- * @method string  getRole()   Return the contact role
- * @method string  getReason() Return the contact reason
+ * @method integer getId()                                  Return the id
+ * @method \tabs\apiclient\actor\RoleReason getRolereason() Return the RoleReason    
  *
  * @method \tabs\apiclient\actor\ContactPreference setId(integer $contactid) Set the contact id
- * @method \tabs\apiclient\actor\ContactPreference setRole(string $role)     Set the contact role
- * @method \tabs\apiclient\actor\ContactPreference setReason(string $reason) Set the contact reason
  *
  */
-class ContactPreference extends \tabs\apiclient\core\Builder
+abstract class ContactPreference extends \tabs\apiclient\core\Builder
 {
     /**
      * Id
@@ -44,42 +41,5 @@ class ContactPreference extends \tabs\apiclient\core\Builder
      */
     protected $id;
 
-    /**
-     * Role
-     *
-     * @var string
-     */
-    protected $role = '';
-
-    /**
-     * Reason
-     *
-     * @var string
-     */
-    protected $reason = '';
     
-    // --------------------------- Public Methods --------------------------- //
-    
-    /**
-     * Array representation of the contact preference
-     * 
-     * @return array
-     */
-    public function toArray()
-    {
-        return array(
-            'role' => $this->getRole(),
-            'reason' => $this->getReason()
-        );
-    }
-    
-    /**
-     * ToString magic method
-     * 
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->getRole() . ': ' . $this->getReason();
-    }
 }
