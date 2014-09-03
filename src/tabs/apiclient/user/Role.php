@@ -27,14 +27,13 @@ namespace tabs\apiclient\user;
  * @link      http://www.carltonsoftware.co.uk
  * 
  * 
- * @method integer                      getId()                 Return the Role id
- * @method string                       getRole()               Return the Role name
- * @method \tabs\apiclient\user\Route[] getRoutes()             Return the Role routes
- * @method \tabs\apiclient\user\Role    setId(integer $id)      Set the Role Id
- * @method \tabs\apiclient\user\Role    setRoute(string $route) Set the Role
+ * @method integer                      getId()                Return the Role id
+ * @method string                       getRole()              Return the Role name
+ * @method \tabs\apiclient\user\Route[] getRoutes()            Return the Role routes
+ * @method \tabs\apiclient\user\Role    setId(integer $id)     Set the Role Id
+ * @method \tabs\apiclient\user\Role    setRole(string $route) Set the Role
  */
-
-class Role extends \tabs\apiclient\core\Builder
+class Role extends Builder
 {
     /**
      * Role Id
@@ -96,7 +95,7 @@ class Role extends \tabs\apiclient\core\Builder
     {
         foreach ($routes as $route) {
             $route = Route::factory($route);
-            $this->addRoute($route);
+            $this->_addRoute($route);
         }
         
         return $this;
@@ -111,27 +110,9 @@ class Role extends \tabs\apiclient\core\Builder
      * 
      * @return \tabs\apiclient\user\Role
      */
-    public function addRoute(&$route, $commit = false)
+    public function setRoute($route)
     {
-        if ($commit) {
-            $request = \tabs\apiclient\client\Client::getClient()->put(
-                '/auth/role/' . $this->getId() . '/route/' . $route->getId()
-            );
-
-            if (!$request || $request->getStatusCode() !== '204') {
-                throw new \tabs\apiclient\client\Exception(
-                    $request,
-                    'Unable to add route ' 
-                        . $route->getRoute() 
-                        . ' to role: ' . $this->getId()
-                );
-            }
-        }
-        
-        $route->setParent($this);
-        $this->routes[] = $route;
-        
-        return $this;
+        return $this->_addRoute($route, true);
     }
     
     /**
@@ -151,37 +132,6 @@ class Role extends \tabs\apiclient\core\Builder
         }
         
         return $this;
-    }
-    
-    /**
-     * Remove a role from a user
-     * 
-     * @return \tabs\apiclient\user\Role
-     */
-    public function remove()
-    {
-        if (!$this->getParent()) {
-            throw new \tabs\apiclient\client\Exception(
-                null,
-                'Unable remove role from user.  User not set.'
-            );
-        }
-        
-        $request = \tabs\apiclient\client\Client::getClient()->delete(
-            '/auth/user/' . $this->getParent()->getId() . '/role/' . $this->getId()
-        );
-
-        if (!$request || $request->getStatusCode() !== '204') {
-            throw new \tabs\apiclient\client\Exception(
-                $request,
-                'Unable to remove role ' 
-                    . $this->getId() 
-                    . ' from user: ' 
-                    . $this->getParent()->getId()
-            );
-        }
-        
-        return $this->getParent();
     }
     
     /**
@@ -215,5 +165,21 @@ class Role extends \tabs\apiclient\core\Builder
             'role' => $this->getRole(),
             'routes' => $routes
         );
+    }
+    
+    /**
+     * Add a route to a role.  This method was added as symfony forms does
+     * not like variables to be passed by reference.
+     * 
+     * @param \tabs\apiclient\user\Route $route Route to add
+     * 
+     * @return \tabs\apiclient\user\Role
+     */
+    private function _addRoute(&$route)
+    {
+        $route->setParent($this);
+        $this->routes[] = $route;
+        
+        return $this;
     }
 }
