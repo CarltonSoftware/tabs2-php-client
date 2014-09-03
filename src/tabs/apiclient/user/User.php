@@ -97,7 +97,7 @@ class User extends \tabs\apiclient\core\Builder
      *
      * @param string $id User reference
      *
-     * @return \tabs\apiclient\core\User
+     * @return \tabs\apiclient\user\User
      */
     public static function get($id)
     {
@@ -108,7 +108,7 @@ class User extends \tabs\apiclient\core\Builder
     /**
      * Get the Users
      *
-     * @return \tabs\apiclient\core\User[]
+     * @return \tabs\apiclient\user\User[]
      */
     public static function fetch()
     {
@@ -122,7 +122,7 @@ class User extends \tabs\apiclient\core\Builder
      * @param string $username Username
      * @param string $password Password
      *
-     * @return \tabs\apiclient\core\User
+     * @return \tabs\apiclient\user\User
      */
     public static function authenticate($username, $password)
     {
@@ -157,7 +157,7 @@ class User extends \tabs\apiclient\core\Builder
      * 
      * @param \tabs\apiclient\user\Role[] $roles Array of roles
      * 
-     * @return \tabs\apiclient\core\User
+     * @return \tabs\apiclient\user\User
      */
     public function setRoles($roles)
     {
