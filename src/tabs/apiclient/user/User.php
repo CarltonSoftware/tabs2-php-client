@@ -163,7 +163,7 @@ class User extends \tabs\apiclient\core\Builder
     {
         foreach ($roles as $role) {
             $_role = Role::factory($role);
-            $this->addRole($_role);
+            $this->setRole($_role);
         }
         
         return $this;
@@ -173,30 +173,12 @@ class User extends \tabs\apiclient\core\Builder
      * Add a role to the user
      * 
      * @param \tabs\apiclient\user\Role $role Role to add
-     * @param boolean         $commit         Set to true if a create post 
-     *                                        is to be created
      * 
      * @return \tabs\apiclient\user\User
      */
-    public function addRole(&$role, $commit = false)
+    public function setRole($role)
     {
-        if ($commit) {
-            $request = \tabs\apiclient\client\Client::getClient()->put(
-                '/auth/user/' . $this->getId() . '/role/' . $role->getId()
-            );
-
-            if (!$request || $request->getStatusCode() !== '204') {
-                throw new \tabs\apiclient\client\Exception(
-                    $request,
-                    'Unable to add role ' . $role->getRole() . ' user: ' . $this->getId()
-                );
-            }
-        }
-        
-        $role->setParent($this);
-        $this->roles[] = $role;
-        
-        return $this;
+        return $this->_addRole($role);
     }
     
     /**
@@ -325,7 +307,6 @@ class User extends \tabs\apiclient\core\Builder
             'username' => $this->getUsername(),
             'email' => $this->getEmail(),
             'password' => $this->getPassword(),
-            'roles' => $this->getRoles(),
             'group' => $this->getGroup()->getId()
         );
     }
@@ -350,6 +331,22 @@ class User extends \tabs\apiclient\core\Builder
                 'Unable to ' . $action . ' user: ' . $this->getId()
             );
         }
+        
+        return $this;
+    }
+    
+    /**
+     * Add a route to a role.  This method was added as symfony forms does
+     * not like variables to be passed by reference.
+     * 
+     * @param \tabs\apiclient\user\Role $role Role to add
+     * 
+     * @return \tabs\apiclient\user\User
+     */
+    private function _addRole(&$role)
+    {
+        $role->setParent($this);
+        $this->roles[] = $role;
         
         return $this;
     }

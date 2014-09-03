@@ -33,7 +33,7 @@ namespace tabs\apiclient\user;
  * @method \tabs\apiclient\user\Route setId(integer $id)      Set the user Id
  * @method \tabs\apiclient\user\Route setRoute(string $route) Set the user route
  */
-class Route extends \tabs\apiclient\core\Builder
+class Route extends Builder
 {
     /**
      * Role Id
@@ -91,37 +91,6 @@ class Route extends \tabs\apiclient\core\Builder
     public function getUpdateUrl()
     {
         return '/auth/route/' . $this->getId();
-    }
-    
-    /**
-     * Remove a route from a role
-     * 
-     * @return \tabs\apiclient\user\Route
-     */
-    public function remove()
-    {
-        if (!$this->getParent()) {
-            throw new \tabs\apiclient\client\Exception(
-                null,
-                'Unable remove route from role.  Role not set.'
-            );
-        }
-        
-        $request = \tabs\apiclient\client\Client::getClient()->delete(
-            '/auth/role/' . $this->getParent()->getId() . '/route/' . $this->getId()
-        );
-
-        if (!$request || $request->getStatusCode() !== '204') {
-            throw new \tabs\apiclient\client\Exception(
-                $request,
-                'Unable to remove route ' 
-                    . $this->getId() 
-                    . ' from role: ' 
-                    . $this->getParent()->getId()
-            );
-        }
-        
-        return $this->getParent();
     }
     
     /**
