@@ -80,9 +80,9 @@ abstract class Builder extends \tabs\apiclient\core\Builder
         if (!$request || $request->getStatusCode() !== '204') {
             throw new \tabs\apiclient\client\Exception(
                 $request,
-                'Unable to remove role ' 
+                'Unable to remove element ' 
                     . $this->getId() 
-                    . ' from user: ' 
+                    . ' from parent: ' 
                     . $this->getParent()->getId()
             );
         }

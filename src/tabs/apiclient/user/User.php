@@ -128,7 +128,7 @@ class User extends \tabs\apiclient\core\Builder
     {
         // Get the user object
         $request = \tabs\apiclient\client\Client::getClient()->post(
-            '/user/authenticate',
+            '/auth/user/authenticate',
             array(
                 'username' => $username,
                 'password' => $password
