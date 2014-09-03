@@ -26,22 +26,22 @@ namespace tabs\apiclient\actor;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getSubtype() Return the contact sub type
+ * @method string getContactmethodsubtype() Return the contact sub type
  * @method string getValue()   Return the value
  * @method string getComment() Return the contact comment
  * 
- * @method \tabs\apiclient\actor\ContactDetail setSubtype(string $subtype) Set the contact subtype
+ * @method \tabs\apiclient\actor\ContactDetail setContactmethodsubtype(string $contactmethodsubtype) Set the contact subtype
  * @method \tabs\apiclient\actor\ContactDetail setValue(string $value)     Set the contact value
  * @method \tabs\apiclient\actor\ContactDetail setComment(string $comment) Set the contact comnent
  */
 class ContactDetail extends ContactEntity
 {
     /**
-     * SubType
+     * ContactMethodSubType
      *
      * @var string
      */
-    protected $subtype;
+    protected $contactmethodsubtype;
 
     /**
      * Value
@@ -83,7 +83,7 @@ class ContactDetail extends ContactEntity
     {
         return array(
             'contactmethod' => $this->getContactmethod(),
-            'subtype' => $this->getSubtype(),
+            'subtype' => $this->getContactmethodsubtype(),
             'value' => $this->getValue(),
             'comment' => $this->getComment(),
         );
