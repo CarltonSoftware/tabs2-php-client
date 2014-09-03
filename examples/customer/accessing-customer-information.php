@@ -21,15 +21,22 @@ try {
     if ($id = filter_input(INPUT_GET, 'id')) {
         $customer = \tabs\apiclient\actor\Customer::get($id);
 
-//        echo sprintf('<p>Name: %s</p>', (string) $customer);
-//        if (count($customer->getContactAdresses()) > 0) {
-//            echo implode('<br>', $customer->getContactAdresses());
-//            echo '<br>';
-//        }
+        echo sprintf('<p>Name: %s</p>', (string) $customer);
+        if (count($customer->getContactAdresses()) > 0) {
+            echo implode('<br>', $customer->getContactAdresses());
+            echo '<br>';
+        }
+        if (count($customer->getEmailAddresses()) > 0) {
+            echo implode('<br>', $customer->getEmailAddresses());
+            echo '<br>';
+        }
+        if (count($customer->getPhoneNumbers()) > 0) {
+            echo implode('<br>', $customer->getPhoneNumbers());
+            echo '<br>';
+        }
 
-        var_dump($customer);
     } else {
-        $customerCol = new \tabs\apiclient\actor\CustomerCollection();
+        $customerCol = new \tabs\apiclient\collection\Customer();
         $customerCol->setLimit(filter_input(INPUT_GET, 'limit'))
             ->setPage(filter_input(INPUT_GET, 'page'))
             ->fetch();

@@ -71,7 +71,9 @@ class ContactPreference extends \tabs\apiclient\core\Builder
         return $this;
     }
     
-    
+    /**
+     * @inheritDoc
+     */
     public function toArray()
     {
         return array(
@@ -79,5 +81,4 @@ class ContactPreference extends \tabs\apiclient\core\Builder
             'rolereason' => $this->getRolereason()->toArray()
         );
     }
-    
 }
