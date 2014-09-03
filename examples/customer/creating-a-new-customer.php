@@ -17,12 +17,12 @@
 require_once __DIR__ . '/../creating-a-new-connection.php';
 
 try {
-    $customer = new \tabs\actor\Customer();
+    $customer = new \tabs\apiclient\actor\Customer();
     $customer->setTitle('Mr')->setFirstname('Joe')->setSurname('Bloggs')->setLanguage('English')->create();
     
-    $address = new tabs\actor\ContactAddress();
+    $address = new tabs\apiclient\actor\ContactAddress();
     $address->setAddress(
-        \tabs\core\Address::factory(
+        \tabs\apiclient\core\Address::factory(
             array(
                 'line1' => 'Buckingham Palace',
                 'town' => 'London',

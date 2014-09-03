@@ -19,7 +19,7 @@ require_once __DIR__ . '/../creating-a-new-connection.php';
 
 try {
     
-    $schema = \tabs\utility\Utility::getJsonSchema('customer_create');
+    $schema = \tabs\apiclient\utility\Utility::getJsonSchema('customer_create');
     
     var_dump($schema);
         

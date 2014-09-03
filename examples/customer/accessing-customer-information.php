@@ -19,7 +19,7 @@ require_once __DIR__ . '/../creating-a-new-connection.php';
 try {
 
     if ($id = filter_input(INPUT_GET, 'id')) {
-        $customer = \tabs\actor\Customer::get($id);
+        $customer = \tabs\apiclient\actor\Customer::get($id);
 
         echo sprintf('<p>Name: %s</p>', (string) $customer);
         if (count($customer->getContactAdresses()) > 0) {
@@ -29,12 +29,12 @@ try {
 
         var_dump($customer);
     } else {
-        $customerCol = new \tabs\actor\CustomerCollection();
+        $customerCol = new \tabs\apiclient\actor\CustomerCollection();
         $customerCol->setLimit(filter_input(INPUT_GET, 'limit'))
             ->setPage(filter_input(INPUT_GET, 'page'))
             ->fetch();
 
-        $pager = new tabs\utility\Pager();
+        $pager = new tabs\apiclient\utility\Pager();
         $pager->setPagination($customerCol->getPagination());
 
         foreach ($customerCol->getElements() as $customer) {
