@@ -32,7 +32,7 @@ namespace tabs\apiclient\actor;
  * @method \tabs\apiclient\actor\ContactPreference setId(integer $contactid) Set the contact id
  *
  */
-abstract class ContactPreference extends \tabs\apiclient\core\Builder
+class ContactPreference extends \tabs\apiclient\core\Builder
 {
     /**
      * Id
@@ -40,6 +40,44 @@ abstract class ContactPreference extends \tabs\apiclient\core\Builder
      * @var integer
      */
     protected $id;
+    
+    
+    /**
+     * RoleReason
+     * 
+     * @var \tabs\apiclient\actor\RoleReason
+     */
+    protected $rolereason;
+    
+    
+    /**
+     * Set the language object
+     *
+     * @param array $array RoleReason array
+     *
+     * @return \tabs\apiclient\actor\RoleReason
+     */
+    public function setRoleReason($array)
+    {
+        if (is_string($array)) {
+            $array = array('id' => $array);
+        }
 
+        $roleReason = \tabs\apiclient\actor\RoleReason::factory($array);
+        $roleReason->setParent($this);
+        
+        $this->rolereason = $roleReason;
+
+        return $this;
+    }
+    
+    
+    public function toArray()
+    {
+        return array(
+            'id' => $this->getId(),
+            'rolereason' => $this->getRolereason()->toArray()
+        );
+    }
     
 }

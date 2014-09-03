@@ -21,11 +21,11 @@ try {
     if ($id = filter_input(INPUT_GET, 'id')) {
         $customer = \tabs\apiclient\actor\Customer::get($id);
 
-        echo sprintf('<p>Name: %s</p>', (string) $customer);
-        if (count($customer->getContactAdresses()) > 0) {
-            echo implode('<br>', $customer->getContactAdresses());
-            echo '<br>';
-        }
+//        echo sprintf('<p>Name: %s</p>', (string) $customer);
+//        if (count($customer->getContactAdresses()) > 0) {
+//            echo implode('<br>', $customer->getContactAdresses());
+//            echo '<br>';
+//        }
 
         var_dump($customer);
     } else {
