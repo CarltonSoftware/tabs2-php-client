@@ -27,11 +27,11 @@ namespace tabs\apiclient\user;
  * @link      http://www.carltonsoftware.co.uk
  * 
  * 
- * @method integer                      getId()                Return the Role id
- * @method string                       getRole()              Return the Role name
- * @method \tabs\apiclient\user\Route[] getRoutes()            Return the Role routes
- * @method \tabs\apiclient\user\Role    setId(integer $id)     Set the Role Id
- * @method \tabs\apiclient\user\Role    setRole(string $route) Set the Role
+ * @method integer                      getId()               Return the Role id
+ * @method string                       getRole()             Return the Role name
+ * @method \tabs\apiclient\user\Route[] getRoutes()           Return the Role routes
+ * @method \tabs\apiclient\user\Role    setId(integer $id)    Set the Role Id
+ * @method \tabs\apiclient\user\Role    setRole(string $role) Set the Role
  */
 class Role extends Builder
 {
@@ -112,7 +112,7 @@ class Role extends Builder
      */
     public function setRoute($route)
     {
-        return $this->_addRoute($route, true);
+        return $this->_addRoute($route);
     }
     
     /**
