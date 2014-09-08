@@ -246,7 +246,7 @@ abstract class Builder extends Base implements BuilderInterface
                 $prefix
             );
         }
-        return $prefix . '/' . $this->_createUrl();
+        return $prefix . '/' . $this->getUrlStub();
     }
     
     /**
