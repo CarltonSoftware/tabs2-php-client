@@ -237,10 +237,40 @@ class Pagination extends \tabs\apiclient\core\Base
      *
      * @return array
      */
-    public function getRange()
+    public function getRange($numPages = 5)
     {
         if ($this->getMaxPages() > 1) {
-            return range(1, $this->getMaxPages());
+            
+            $rangeStart = 1;
+            $rangeEnd = $this->getMaxPages();
+
+            // If $numPages is set and is less than the maximum number of pages
+            // in the search, then start to slice up the range of pages
+            if ($numPages > 0
+                && $this->getMaxPages() > $numPages
+            ) {
+                // Find middle of numPages
+                $rangePad = floor($numPages / 2);
+
+                // Set start and end.
+                $rangeStart = $this->getPage() - $rangePad;
+                $rangeEnd = $this->getPage() + $rangePad;
+
+                // If the start of the range is out of bounds, reset the bounds
+                if ($rangeStart < 1) {
+                    $rangeStart = 1;
+                    $rangeEnd = $numPages;
+                }
+
+                // If the end of the range is out of bounds, reset also
+                if ($rangeEnd >= $this->getMaxPages()) {
+                    $numPages -= 1;
+                    $rangeEnd = $this->getMaxPages();
+                    $rangeStart = $rangeEnd - $numPages;
+                }
+            }
+            
+            return range($rangeStart, $rangeEnd);
         } else {
             return array(1);
         }
