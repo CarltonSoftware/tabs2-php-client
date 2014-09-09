@@ -53,6 +53,7 @@ class ValidationException extends Exception
         // Set overide params
         $this->setDescriptionFromResponse($response, $message['description']);
         $this->setCodeFromResponse($response, $code);
+        $this->setErrors($message['errors']);
 
         parent::__construct(
             $response,
