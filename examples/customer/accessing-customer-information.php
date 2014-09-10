@@ -21,17 +21,31 @@ try {
     if ($id = filter_input(INPUT_GET, 'id')) {
         $customer = \tabs\apiclient\actor\Customer::get($id);
 
-        echo sprintf('<p>Name: %s</p>', (string) $customer);
-        if (count($customer->getContactAdresses()) > 0) {
-            echo implode('<br>', $customer->getContactAdresses());
+        echo '<h3>Customer</h3>';
+        echo sprintf('<p>%s</p>', (string) $customer);
+        if (count($customer->getContactAddresses()) > 0) {
+            echo '<h3>Contact Addresses</h3>';
+            echo implode('<br>', $customer->getContactAddresses());
             echo '<br>';
         }
         if (count($customer->getEmailAddresses()) > 0) {
+            echo '<h3>Email Addresses</h3>';
             echo implode('<br>', $customer->getEmailAddresses());
             echo '<br>';
         }
         if (count($customer->getPhoneNumbers()) > 0) {
+            echo '<h3>Phone Numbers</h3>';
             echo implode('<br>', $customer->getPhoneNumbers());
+            echo '<br>';
+        }
+        if (count($customer->getBankaccounts()) > 0) {
+            echo '<h3>Bank Accounts</h3>';
+            echo implode('<br>', $customer->getBankaccounts());
+            echo '<br>';
+        }
+        if (count($customer->getNotes()) > 0) {
+            echo '<h3>Notes</h3>';
+            echo implode('<br>', $customer->getNotes());
             echo '<br>';
         }
 
@@ -41,9 +55,7 @@ try {
             ->setPage(filter_input(INPUT_GET, 'page'))
             ->fetch();
 
-        $pager = new tabs\apiclient\utility\Pager();
-        $pager->setPagination($customerCol->getPagination());
-
+        $pager = $customerCol->getPagination();
         foreach ($customerCol->getElements() as $customer) {
             echo sprintf(
                 '<p><a href="accessing-customer-information.php?id=%s">%s</a></p>',
@@ -55,7 +67,7 @@ try {
         echo sprintf(
             '<p><a href="?page=%s&limit=%s">Previous</a>',
             $pager->getPrevPage(),
-            $pager->getPagination()->getLimit()
+            $pager->getLimit()
         );
         
         echo ' | ';
@@ -63,7 +75,7 @@ try {
         echo sprintf(
             '<a href="?page=%s&limit=%s">Next</a></p>',
             $pager->getNextPage(),
-            $pager->getPagination()->getLimit()
+            $pager->getLimit()
         );
     }
         
