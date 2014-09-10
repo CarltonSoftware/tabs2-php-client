@@ -192,6 +192,16 @@ class Hmac implements \GuzzleHttp\Event\SubscriberInterface
     }
     
     /**
+     * Return the parameters
+     * 
+     * @return array
+     */
+    public function getParams()
+    {
+        return $this->params;
+    }
+    
+    /**
      * Return the hash required for the api
      * 
      * @param \GuzzleHttp\Message\Request $request Request object
