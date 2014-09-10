@@ -166,7 +166,7 @@ class Pagination extends \tabs\apiclient\core\Base
     }
     
     /**
-     * Get the filters string read for a request
+     * Get the filters string ready for a request
      * 
      * @return string
      */
@@ -186,10 +186,12 @@ class Pagination extends \tabs\apiclient\core\Base
      */
     public function toArray()
     {
-        return array(
-            'page' => $this->getPage(),
-            'limit' => $this->getLimit(),
-            'filter' => urldecode($this->getFiltersString())
+        return array_filter(
+            array(
+                'page' => $this->getPage(),
+                'limit' => $this->getLimit(),
+                'filter' => urldecode($this->getFiltersString())
+            )
         );
     }
 
@@ -220,16 +222,42 @@ class Pagination extends \tabs\apiclient\core\Base
     /**
      * Get the end of the selection
      *
-     * @return int
+     * @return integer
      */
     public function getEnd()
     {
-        $end = (($this->getStart()-1) + $this->getLimit());
+        $end = ($this->getStart() - 1) + $this->getLimit();
         if ($end > $this->getTotal()) {
             return $this->getTotal();
         } else {
             return $end;
         }
+    }
+
+    /**
+     * Get perious page integer
+     *
+     * @return integer
+     */
+    public function getPrevPage()
+    {
+        $page = $this->getPage();
+        $prevPage = $page - 1;
+        
+        return ($prevPage < 1) ? 1 : $prevPage;
+    }
+
+    /**
+     * Get next page integer
+     *
+     * @return integer
+     */
+    public function getNextPage()
+    {
+        $page = $this->getPage();
+        $nextPage = $page + 1;
+        
+        return ($nextPage > $this->getMaxPages()) ? 1 : $nextPage;
     }
 
     /**
@@ -260,13 +288,6 @@ class Pagination extends \tabs\apiclient\core\Base
                 if ($rangeStart < 1) {
                     $rangeStart = 1;
                     $rangeEnd = $numPages;
-                }
-
-                // If the end of the range is out of bounds, reset also
-                if ($rangeEnd >= $this->getMaxPages()) {
-                    $numPages -= 1;
-                    $rangeEnd = $this->getMaxPages();
-                    $rangeStart = $rangeEnd - $numPages;
                 }
             }
             
