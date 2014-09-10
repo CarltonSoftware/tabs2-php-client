@@ -30,9 +30,9 @@ namespace tabs\apiclient\actor;
  * @method string  getRole()   Return the contact role
  * @method string  getReason() Return the contact reason
  *
- * @method \tabs\apiclient\actor\RoleReason setId(integer $contactid) Set the contact id
- * @method \tabs\apiclient\actor\RoleReason setRole(string $role)     Set the contact role
- * @method \tabs\apiclient\actor\RoleReason setReason(string $reason) Set the contact reason
+ * @method RoleReason setId(integer $contactid) Set the contact id
+ * @method RoleReason setRole(string $role)     Set the contact role
+ * @method RoleReason setReason(string $reason) Set the contact reason
  *
  */
 class RoleReason extends \tabs\apiclient\core\Builder
