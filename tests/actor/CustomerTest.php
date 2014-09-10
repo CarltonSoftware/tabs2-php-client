@@ -17,14 +17,16 @@ class CustomerTest extends ApiClientClassTest
      */
     public function testNewCustomer()
     {
-        $customer = new \tabs\apiclient\actor\Customer();
-        $customer->setTitle('Mr')->setSurname('Wyett');
+        $customer = Fixtures::getCustomer();
+        $this->assertEquals(1, $customer->getId());
         $this->assertEquals('Mr', $customer->getTitle());
         $this->assertEquals('Wyett', $customer->getSurname());
         
         // Check other accessors are working
         $customer->salutation = 'Alex';
         $this->assertEquals('Alex', $customer->salutation);
+        $this->assertEquals($customer->toArray(), $customer->toCreateArray());
+        $this->assertEquals($customer->toArray(), $customer->toUpdateArray());
     }
     
     /**
@@ -68,5 +70,10 @@ class CustomerTest extends ApiClientClassTest
         $contactAddress->addContactpreference($preference2);
         $this->assertEquals('/customer/1/address/1/contactpreference', $preference2->getCreateUrl());
         $this->assertEquals('/customer/1/address/1/contactpreference/1', $preference2->getUpdateUrl());
+        
+        $note = Fixtures::getNote();
+        $customer->addNote($note);
+        $this->assertEquals('/customer/1/note', $note->getCreateUrl());
+        $this->assertEquals('/note/1', $note->getUpdateUrl());
     }
 }

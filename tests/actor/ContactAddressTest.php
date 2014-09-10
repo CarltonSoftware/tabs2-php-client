@@ -11,7 +11,7 @@ require_once $file;
 class ContactAddressTest extends ApiClientClassTest
 {
     /**
-     * Test creating a new contact address
+     * Test contact address accessors
      *
      * @return void
      */
@@ -25,5 +25,20 @@ class ContactAddressTest extends ApiClientClassTest
             (string) $contactAddress
         );
         $this->assertEquals(9, count($contactAddress->toArray()));
+    }
+    
+    /**
+     * Test creating a new contact address
+     *
+     * @return void
+     */
+    public function testNewContactAddress()
+    {
+        $contactAddress = new tabs\apiclient\actor\ContactAddress();
+        $contactAddress->setAddress(array('line1' => 'House', 'country' => 'United Kingdom'));
+        $this->assertEquals(
+            'House', 
+            (string) $contactAddress
+        );
     }
 }

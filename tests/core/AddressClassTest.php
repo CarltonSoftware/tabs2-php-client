@@ -48,7 +48,7 @@ class AddressClassTest extends ApiClientClassTest
             Fixtures::getCountry()
         );
         $this->assertEquals(
-            'Developer Room, Carlton House, Market Place, Reepham, Norfolk, NR104JJ, United Kingdom', 
+            'Developer Room, Carlton House, Market Place, Reepham, Norfolk, NR104JJ, GB', 
             (string) $this->address
         );
     }

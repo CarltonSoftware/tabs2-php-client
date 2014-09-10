@@ -20,10 +20,10 @@ class ContactPreferenceTest extends ApiClientClassTest
         $preference = Fixtures::getContactPreference();
         
         $this->assertEquals(1, $preference->getId());
-        $this->assertEquals('Customer', $preference->getRole());
-        $this->assertEquals('Booking Confirmation', $preference->getReason());
+        $this->assertEquals('Customer', $preference->getRolereason()->getRole());
+        $this->assertEquals('Booking Confirmation', $preference->getRolereason()->getReason());
         $this->assertEquals(2, count($preference->toArray()));
         $this->assertEquals('contactpreference', $preference->getUrlStub());
-        $this->assertEquals('Customer: Booking Confirmation', (string) $preference);
+        $this->assertEquals('Customer: Booking Confirmation', (string) $preference->getRolereason());
     }
 }

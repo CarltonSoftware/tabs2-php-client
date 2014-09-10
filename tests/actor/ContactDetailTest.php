@@ -24,11 +24,12 @@ class ContactDetailTest extends ApiClientClassTest
         $this->assertEquals(1, $contactDetail->getId());
         $this->assertEquals('C', $contactDetail->getType());
         $this->assertEquals('Phone', $contactDetail->getContactmethod());
-        $this->assertEquals('Home', $contactDetail->getSubtype());
+        $this->assertEquals('Home', $contactDetail->getContactmethodsubtype());
         $this->assertEquals('0800 100 100', $contactDetail->getValue());
         $this->assertFalse($contactDetail->getInvalid());
         $this->assertEquals('Home Phone Number', $contactDetail->getComment());
         $this->assertEquals(4, count($contactDetail->toArray()));
         $this->assertEquals('Phone Home: 0800 100 100', (string) $contactDetail);
+        
     }
 }

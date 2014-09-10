@@ -19,6 +19,19 @@ require_once $file;
 class Fixtures
 {
     /**
+     * Create a new customer
+     * 
+     * @return \tabs\apiclient\actor\Customer
+     */
+    public static function getCustomer()
+    {
+        $customer = new \tabs\apiclient\actor\Customer();
+        $customer->setId(1)->setTitle('Mr')->setSurname('Wyett');
+        
+        return $customer;
+    }
+    
+    /**
      * Return the test contact preference
      * 
      * @return \tabs\apiclient\actor\ContactPreference
@@ -26,7 +39,12 @@ class Fixtures
     public static function getContactPreference()
     {
         $preference = new \tabs\apiclient\actor\ContactPreference();
-        $preference->setId(1)->setRole('Customer')->setReason('Booking Confirmation');
+        $preference->setId(1)->setRolereason(
+            array(
+                'role' => 'Customer',
+                'reason' => 'Booking Confirmation'
+            )
+        );
         
         return $preference;
     }
@@ -42,11 +60,13 @@ class Fixtures
         $detail->setId(1)
             ->setType('C')
             ->setContactmethod('Phone')
-            ->setSubtype('Home')
+            ->setContactmethodsubtype('Home')
             ->setValue('0800 100 100')
             ->setComment('Home Phone Number')
             ->setInvalid(false)
-            ->addContactpreference(self::getContactPreference());
+            ->setContactpreferences(
+                array(self::getContactPreference())
+            );
         
         return $detail;
     }
@@ -120,5 +140,40 @@ class Fixtures
             ->setSortcode('12-34-56');
         
         return $bankAccount;
+    }
+    
+    /**
+     * Create a new note a note text and assign a customer to each of them
+     * 
+     * @return \tabs\apiclient\core\Note
+     */
+    public static function getNote()
+    {
+        $actor = Fixtures::getCustomer();
+        
+        $note = new \tabs\apiclient\core\Note();
+        $note->setId(1)
+            ->setCreatedby($actor)
+            ->setCreated('2014-08-09 12:34:56');
+        
+        $noteText = new tabs\apiclient\core\Notetext();
+        $noteText->setId(1)
+            ->setText('This is a note.')
+            ->setCreatedby($actor)
+            ->setCreated('2014-08-09 12:34:56');
+        $note->setNotetext(array($noteText));
+        
+        return $note;
+    }
+    
+    /**
+     * Return a new language object
+     * 
+     * @return \tabs\apiclient\core\Language
+     */
+    public static function getLanguage()
+    {
+        $language = new tabs\apiclient\core\Language();
+        return $language;
     }
 }
