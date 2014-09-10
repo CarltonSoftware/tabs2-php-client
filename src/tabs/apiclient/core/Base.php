@@ -131,15 +131,15 @@ abstract class Base
             // All properties will be camelcase, make first letter lowercase
             $property[0] = strtolower($property[0]);
 
-            switch (substr($name, 0, 3)) {
-            case 'set':
-                if (property_exists($this, $property)) {
-                    $this->setObjectProperty($this, $property, $args[0]);
-                    return $this;
+            if (property_exists($this, $property)) {
+                switch (substr($name, 0, 3)) {
+                    case 'set':
+                        $this->setObjectProperty($this, $property, $args[0]);
+                        return $this;
+                    break;
+                    case 'get':
+                        return $this->$property;
                 }
-                break;
-            case 'get':
-                return $this->$property;
             }
         }
         
@@ -210,7 +210,7 @@ abstract class Base
         case 'string':
             $obj->$property = trim($value);
             break;
-        case 'double':
+        case 'float':
             $obj->setFloatVal($value, $property);
             break;
         }
