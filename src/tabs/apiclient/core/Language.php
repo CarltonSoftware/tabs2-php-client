@@ -30,8 +30,8 @@ namespace tabs\apiclient\core;
  * @method string getCode() Return the language code
  * @method string getName() Return the language name
  *
- * @method \tabs\apiclient\core\Base setCode(string $alpha2)   Set the Language code
- * @method \tabs\apiclient\core\Base setLanguage(string $name) Set the language name
+ * @method Language setCode(string $alpha2)   Set the Language code
+ * @method Language setLanguage(string $name) Set the language name
  */
 class Language extends Base
 {
