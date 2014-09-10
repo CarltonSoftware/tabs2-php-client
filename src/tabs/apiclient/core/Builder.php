@@ -193,7 +193,7 @@ abstract class Builder extends Base implements BuilderInterface
     }
     
     /**
-     * Generate a url string for a create url
+     * Generate a url string for a update url
      * 
      * @return string
      */
