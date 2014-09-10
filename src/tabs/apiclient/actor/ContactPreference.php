@@ -26,11 +26,10 @@ namespace tabs\apiclient\actor;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method integer getId()                                  Return the id
- * @method \tabs\apiclient\actor\RoleReason getRolereason() Return the RoleReason    
+ * @method integer getId()            Return the id
+ * @method RoleReason getRolereason() Return the RoleReason    
  *
- * @method \tabs\apiclient\actor\ContactPreference setId(integer $contactid) Set the contact id
- *
+ * @method ContactPreference setId(integer $contactid) Set the contact id
  */
 class ContactPreference extends \tabs\apiclient\core\Builder
 {
@@ -51,19 +50,15 @@ class ContactPreference extends \tabs\apiclient\core\Builder
     
     
     /**
-     * Set the language object
+     * Set the role reason object
      *
-     * @param array $array RoleReason array
+     * @param array|stdClass $array RoleReason array/object
      *
-     * @return \tabs\apiclient\actor\RoleReason
+     * @return RoleReason
      */
-    public function setRoleReason($array)
+    public function setRolereason($array)
     {
-        if (is_string($array)) {
-            $array = array('id' => $array);
-        }
-
-        $roleReason = \tabs\apiclient\actor\RoleReason::factory($array);
+        $roleReason = RoleReason::factory($array);
         $roleReason->setParent($this);
         
         $this->rolereason = $roleReason;
