@@ -108,6 +108,16 @@ class Address extends Base
     // ------------------ Public Functions --------------------- //
     
     /**
+     * Constructor
+     * 
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->country = new Country();
+    }
+    
+    /**
      * Set the country object
      * 
      * @param array $array Country array
