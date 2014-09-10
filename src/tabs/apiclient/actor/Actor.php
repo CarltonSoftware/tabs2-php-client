@@ -14,6 +14,7 @@
  */
 
 namespace tabs\apiclient\actor;
+use tabs\apiclient\core\Note;
 
 /**
  * Tabs Rest API Actor object.
@@ -26,32 +27,33 @@ namespace tabs\apiclient\actor;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method integer                               getId()            Return the Id
- * @method string                                getFirstname()     Return the firstname
- * @method string                                getSurname()       Return the surname
- * @method string                                getTitle()         Return the title
- * @method string                                getSalutation()    Return the saulation
- * @method string                                getTabscode()      Return the tabs code
- * @method \tabs\apiclient\core\Language         getLanguage()      Return the language
- * @method boolean                               getInactive()      Return the inactive state
- * @method string                                getPassword()      Return the password
- * @method string                                getCompanyname()   Return the company name
- * @method string                                getVatnumber()     Return the vat number
- * @method string                                getCompanynumber() Return the company number
- * @method \tabs\apiclient\actor\ContactEntity[] getContacts()      Return the array of contacts
- * @method \tabs\apiclient\actor\BankAccount[]   getBankaccounts()  Return the array of bank account objects
+ * @method integer                       getId()            Return the Id
+ * @method string                        getFirstname()     Return the firstname
+ * @method string                        getSurname()       Return the surname
+ * @method string                        getTitle()         Return the title
+ * @method string                        getSalutation()    Return the saulation
+ * @method string                        getTabscode()      Return the tabs code
+ * @method \tabs\apiclient\core\Language getLanguage()      Return the language
+ * @method boolean                       getInactive()      Return the inactive state
+ * @method string                        getPassword()      Return the password
+ * @method string                        getCompanyname()   Return the company name
+ * @method string                        getVatnumber()     Return the vat number
+ * @method string                        getCompanynumber() Return the company number
+ * @method ContactEntity[]               getContacts()      Return the array of contacts
+ * @method BankAccount[]                 getBankaccounts()  Return the array of bank account objects
+ * @method Note[]                        getNotes           Return the notes for this actor
  *
- * @method \tabs\apiclient\actor\Actor setId(string $id) Set the Id
- * @method \tabs\apiclient\actor\Actor setFirstname(string $firstname) Set the firstname
- * @method \tabs\apiclient\actor\Actor setSurname(string $surname) Set the surname
- * @method \tabs\apiclient\actor\Actor setTitle(string $title) Set the title
- * @method \tabs\apiclient\actor\Actor setSalutation(string $salutation) Set the salutation
- * @method \tabs\apiclient\actor\Actor setTabscode(string $tabscode) Set the tabscode
- * @method \tabs\apiclient\actor\Actor setInactive(boolean $inactive) Set the inactive state
- * @method \tabs\apiclient\actor\Actor setPassword(string $password) Set the password
- * @method \tabs\apiclient\actor\Actor setCompanyname(string $companyname) Set the company name
- * @method \tabs\apiclient\actor\Actor setVatnumber(string $vatnumber) Set the vat number
- * @method \tabs\apiclient\actor\Actor setCompanynumber(string $companynumber) Set the company number
+ * @method Actor setId(string $id) Set the Id
+ * @method Actor setFirstname(string $firstname) Set the firstname
+ * @method Actor setSurname(string $surname) Set the surname
+ * @method Actor setTitle(string $title) Set the title
+ * @method Actor setSalutation(string $salutation) Set the salutation
+ * @method Actor setTabscode(string $tabscode) Set the tabscode
+ * @method Actor setInactive(boolean $inactive) Set the inactive state
+ * @method Actor setPassword(string $password) Set the password
+ * @method Actor setCompanyname(string $companyname) Set the company name
+ * @method Actor setVatnumber(string $vatnumber) Set the vat number
+ * @method Actor setCompanynumber(string $companynumber) Set the company number
  */
 abstract class Actor extends \tabs\apiclient\core\Builder
 {
@@ -144,7 +146,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
      *
      * Array of ContactEntity
      *
-     * @var array()
+     * @var ContactEntity[]
      */
     protected $contacts = array();
 
@@ -153,9 +155,18 @@ abstract class Actor extends \tabs\apiclient\core\Builder
      *
      * Array of BankAccount
      *
-     * @var array()
+     * @var BankAccount[]
      */
     protected $bankaccounts = array();
+
+    /**
+     * Array of notes
+     *
+     * Array of BankAccount
+     *
+     * @var Note[]
+     */
+    protected $notes = array();
 
     // -------------------------- Static Functions -------------------------- //
 
@@ -186,9 +197,9 @@ abstract class Actor extends \tabs\apiclient\core\Builder
     /**
      * Add a contact detail
      *
-     * @param \tabs\apiclient\actor\ContactAddress|\tabs\apiclient\actor\ContactDetail $contact Contact detail object
+     * @param ContactAddress|ContactDetail $contact Contact detail object
      *
-     * @return \tabs\apiclient\actor\Actor
+     * @return Actor
      */
     public function addContact(&$contact)
     {
@@ -203,7 +214,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
      *
      * @param array $contacts Array of contact objects
      *
-     * @return \tabs\apiclient\actor\Actor
+     * @return Actor
      */
     public function setContacts($contacts)
     {
@@ -240,7 +251,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
         return array_filter(
             $this->getContactFilter(),
             function ($ele) {
-                return ($ele->getContactmethod() == 'Email');
+                return (strtolower($ele->getContactmethod()) == 'email');
             }
         );
     }
@@ -255,7 +266,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
         return array_filter(
             $this->getContactFilter(),
             function ($ele) {
-                return ($ele->getContactmethod() == 'Phone');
+                return (strtolower($ele->getContactmethod()) == 'phone');
             }
         );
     }
@@ -280,9 +291,9 @@ abstract class Actor extends \tabs\apiclient\core\Builder
     /**
      * Add a bank account
      *
-     * @param \tabs\apiclient\actor\BankAccount $bankAccount Bank account object
+     * @param BankAccount $bankAccount Bank account object
      *
-     * @return \tabs\apiclient\actor\Actor
+     * @return Actor
      */
     public function addBankAccount(&$bankAccount)
     {
@@ -295,9 +306,9 @@ abstract class Actor extends \tabs\apiclient\core\Builder
     /**
      * Set the bank account objects
      *
-     * @param account $bankAccounts Bank accounts array
+     * @param BankAccount $bankAccounts Bank accounts array
      *
-     * @return \tabs\apiclient\actor\Actor
+     * @return Actor
      */
     public function setBankaccounts($bankAccounts)
     {
@@ -310,11 +321,43 @@ abstract class Actor extends \tabs\apiclient\core\Builder
     }
 
     /**
+     * Add a bank account
+     *
+     * @param Note $bankAccount Note object
+     *
+     * @return Actor
+     */
+    public function addNote(&$note)
+    {
+        $note->setParent($this);
+        $this->notes[] = $note;
+
+        return $this;
+    }
+
+    /**
+     * Set the notes array
+     *
+     * @param Note[] $notes Notes array
+     *
+     * @return Actor
+     */
+    public function setNotes($notes)
+    {
+        foreach ($notes as $note) {
+            $_note = Note::factory($note);
+            $this->addNote($_note);
+        }
+
+        return $this;
+    }
+
+    /**
      * Set the language object
      *
      * @param array $array Language array
      *
-     * @return \tabs\apiclient\actor\Actor
+     * @return Actor
      */
     public function setLanguage($array)
     {
@@ -341,9 +384,11 @@ abstract class Actor extends \tabs\apiclient\core\Builder
     }
 
     /**
-     * Delete function
+     * Delete function.  Not allowed!
      *
-     * @return \tabs\apiclient\actor\Actor
+     * @throws \tabs\apiclient\client\Exception
+     * 
+     * @return void
      */
     public function delete()
     {
