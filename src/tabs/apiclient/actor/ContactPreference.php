@@ -52,15 +52,17 @@ class ContactPreference extends \tabs\apiclient\core\Builder
     /**
      * Set the role reason object
      *
-     * @param array|stdClass $array RoleReason array/object
+     * @param array|stdClass|RoleReason $roleReason RoleReason array/object
      *
      * @return RoleReason
      */
-    public function setRolereason($array)
+    public function setRolereason($roleReason)
     {
-        $roleReason = RoleReason::factory($array);
-        $roleReason->setParent($this);
+        if (!$roleReason instanceof RoleReason) {
+            $roleReason = RoleReason::factory($roleReason);
+        }
         
+        $roleReason->setParent($this);
         $this->rolereason = $roleReason;
 
         return $this;
@@ -73,7 +75,27 @@ class ContactPreference extends \tabs\apiclient\core\Builder
     {
         return array(
             'id' => $this->getId(),
-            'rolereason' => $this->getRolereason()->toArray()
+            'role' => $this->getRolereason()->getRole(),
+            'reason' => $this->getRolereason()->getReason(),
+            'contactentityid' => $this->getParent()->getId()
         );
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function getCreateUrl()
+    {
+        $actor = $this->getParentActor();
+        
+        return $actor->getUpdateUrl() . '/contactpreference';
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function getUpdateUrl()
+    {
+        return $this->getCreateUrl() . '/' . $this->getId();
     }
 }
