@@ -66,7 +66,7 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
         ) {
             $json = $elementsIndex->json(array('object' => true));
             $elements = $json;
-            if (property_exists($json, 'elements') 
+            if (is_object($json) && property_exists($json, 'elements') 
                 && property_exists($json, 'total')
             ) {
                 $this->pagination->setTotal($json->total);
