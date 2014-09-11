@@ -234,7 +234,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
     /**
      * Return all of the Contact addresses object
      *
-     * @return array
+     * @return ContactAddress[]
      */
     public function getContactAddresses()
     {
@@ -286,6 +286,23 @@ abstract class Actor extends \tabs\apiclient\core\Builder
                 return ($ele->getClass() == $type);
             }
         );
+    }
+    
+    /**
+     * Return the contact preferences for this customer
+     * 
+     * @return ContactPreference[]
+     */
+    public function getContactPreferences()
+    {
+        $preferences = array();
+        foreach ($this->getContacts() as $contact) {
+            foreach ($contact->getContactpreferences() as $preference) {
+                array_push($preferences, $preference);
+            }
+        }
+        
+        return $preferences;
     }
 
     /**
