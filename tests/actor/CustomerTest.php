@@ -56,8 +56,8 @@ class CustomerTest extends ApiClientClassTest
         $preference = new tabs\apiclient\actor\ContactPreference();
         $preference->setId(1);
         $contactDetail->addContactpreference($preference);
-        $this->assertEquals('/customer/1/contactdetail/1/contactpreference', $preference->getCreateUrl());
-        $this->assertEquals('/customer/1/contactdetail/1/contactpreference/1', $preference->getUpdateUrl());
+        $this->assertEquals('/customer/1/contactpreference', $preference->getCreateUrl());
+        $this->assertEquals('/customer/1/contactpreference/1', $preference->getUpdateUrl());
 
         $contactAddress = new tabs\apiclient\actor\ContactAddress();
         $customer->addContact($contactAddress);
@@ -68,8 +68,8 @@ class CustomerTest extends ApiClientClassTest
         $preference2 = new tabs\apiclient\actor\ContactPreference();
         $preference2->setId(1);
         $contactAddress->addContactpreference($preference2);
-        $this->assertEquals('/customer/1/address/1/contactpreference', $preference2->getCreateUrl());
-        $this->assertEquals('/customer/1/address/1/contactpreference/1', $preference2->getUpdateUrl());
+        $this->assertEquals('/customer/1/contactpreference', $preference2->getCreateUrl());
+        $this->assertEquals('/customer/1/contactpreference/1', $preference2->getUpdateUrl());
         
         $note = Fixtures::getNote();
         $customer->addNote($note);
