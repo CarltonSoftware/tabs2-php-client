@@ -233,6 +233,37 @@ abstract class Builder extends Base implements BuilderInterface
     }
     
     /**
+     * Return the actor object within the relationship between the builder
+     * objects.
+     * 
+     * @return \tabs\apiclient\actor\Actor
+     */
+    public function getParentActor()
+    {
+        return $this->_getParentActor($this);
+    }
+    
+    /**
+     * Traverse through the relationship to look for an actor object
+     * 
+     * @param \tabs\apiclient\actor\Actor $object Actor object
+     * @throws \RuntimeException
+     * 
+     * @return \tabs\apiclient\actor\Actor
+     */
+    private function _getParentActor($object)
+    {
+        if ($object->getParent() instanceof \tabs\apiclient\actor\Actor) {
+            return $object->getParent();
+        } else if ($object->getParent()) {
+            return $this->_getParentActor($object->getParent());
+        } else {
+            throw new \RuntimeException('Parent actor not found');
+        }
+    }
+
+
+    /**
      * Generate a url string for a create url
      * 
      * @param string $prefix Prefix
