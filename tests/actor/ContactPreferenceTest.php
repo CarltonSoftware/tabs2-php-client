@@ -17,12 +17,13 @@ class ContactPreferenceTest extends ApiClientClassTest
      */
     public function testContactPreference()
     {
-        $preference = Fixtures::getContactPreference();
+        $detail = Fixtures::getContactDetail();
+        $preference = array_shift($detail->getContactpreferences());
         
         $this->assertEquals(1, $preference->getId());
         $this->assertEquals('Customer', $preference->getRolereason()->getRole());
         $this->assertEquals('Booking Confirmation', $preference->getRolereason()->getReason());
-        $this->assertEquals(2, count($preference->toArray()));
+        $this->assertEquals(4, count($preference->toArray()));
         $this->assertEquals('contactpreference', $preference->getUrlStub());
         $this->assertEquals('Customer: Booking Confirmation', (string) $preference->getRolereason());
     }
