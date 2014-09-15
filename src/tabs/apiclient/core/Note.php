@@ -26,11 +26,11 @@ use tabs\apiclient\actor\Actor;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
- * 
- * 
+ *
+ *
  * @method string     getSubject()   Returns the Note subject
  * @method NoteText[] getNotetext()  Returns the array of NoteText items
- * 
+ *
  * @method Note setSubject(string $subject)          Set the note subject
  * @method Note setVisibletocustomer(boolean $bool)  Visible to customer bool
  * @method Note setVisibletoowner(boolean $bool)     Visible to owner bool
@@ -42,150 +42,150 @@ class Note extends Notemeta
 {
     /**
      * Subject
-     * 
+     *
      * @var string
      */
     protected $subject = '';
 
     /**
      * Visible to customer
-     * 
+     *
      * @var boolean
      */
     protected $visibletocustomer = false;
 
     /**
      * Visible to owner
-     * 
+     *
      * @var boolean
      */
     protected $visibletoowner = false;
 
     /**
      * Visible to cleaner
-     * 
+     *
      * @var boolean
      */
     protected $visibletocleaner = false;
 
     /**
      * Visible to keyholder
-     * 
+     *
      * @var boolean
      */
     protected $visibletokeyholder = false;
 
     /**
      * Note highlight
-     * 
+     *
      * @var boolean
      */
     protected $highlight = false;
-    
+
     /**
      * Array of note text objects
-     * 
+     *
      * @var Notetext[]
      */
-    protected $notetext = array();
+    protected $notetexts = array();
 
     // ------------------ Public Functions --------------------- //
-    
+
     /**
      * Add an array of note text objects
-     * 
+     *
      * @param Notetext[] $notetexts Array of notetext objects
-     * 
+     *
      * @return Note
      */
-    public function setNotetext($notetexts)
+    public function setNotetexts($notetexts)
     {
         foreach ($notetexts as $notetext) {
             $_notetext = Notetext::factory($notetext);
             $this->addNoteText($_notetext);
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Add a note text object to the note
-     * 
+     *
      * @param Notetext $notetext Note text object
-     * 
+     *
      * @return Note
      */
     public function addNoteText(Notetext &$notetext)
     {
         $notetext->setParent($this);
-        $this->notetext[] = $notetext;
-        
+        $this->notetexts[] = $notetext;
+
         return $this;
     }
-    
+
     /**
      * Return the visible to customer flag
-     * 
+     *
      * @return boolean
      */
     public function isVisibletocustomer()
     {
         return $this->visibletocustomer;
     }
-    
+
     /**
      * Return the visible to cleaner flag
-     * 
+     *
      * @return boolean
      */
     public function isVisibletocleaner()
     {
         return $this->visibletocleaner;
     }
-    
+
     /**
      * Return the visible to owner flag
-     * 
+     *
      * @return boolean
      */
     public function isVisibletoowner()
     {
         return $this->visibletoowner;
     }
-    
+
     /**
      * Return the visible to keyholder flag
-     * 
+     *
      * @return boolean
      */
     public function isVisibletokeyholder()
     {
         return $this->visibletokeyholder;
     }
-    
+
     /**
      * Return the highlight flag
-     * 
+     *
      * @return boolean
      */
     public function isHighlight()
     {
         return $this->highlight;
     }
-    
+
     /**
      * Generate a url string for a create url
-     * 
+     *
      * @return string
      */
     public function getUpdateUrl()
     {
         return '/note/' . $this->getId();
     }
-    
+
     /**
      * Array representation of the address.  Used for creates/updates.
-     * 
+     *
      * @return array
      */
     public function toArray()
@@ -201,7 +201,7 @@ class Note extends Notemeta
             'highlight' => $this->isHighlight()
         );
     }
-    
+
     /**
      * @inheritDoc
      */

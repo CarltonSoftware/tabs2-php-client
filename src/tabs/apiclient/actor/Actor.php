@@ -179,14 +179,27 @@ abstract class Actor extends \tabs\apiclient\core\Builder
      */
     public static function get($reference)
     {
-        return parent::get('/customer/' . $reference);
+        $className = get_called_class();
+
+        switch($className) {
+            case 'tabs\apiclient\actor\Customer':
+                $routeName = 'customer';
+                break;
+            case 'tabs\apiclient\actor\Tabsuser':
+                $routeName = 'tabsuser';
+                break;
+            default:
+                $routeName = 'customer';
+        }
+
+        return parent::get(sprintf('/%s/%s', $routeName, $reference));
     }
 
     // -------------------------- Public Functions -------------------------- //
-    
+
     /**
      * Constructor
-     * 
+     *
      * @return void
      */
     public function __construct()
@@ -287,10 +300,10 @@ abstract class Actor extends \tabs\apiclient\core\Builder
             }
         );
     }
-    
+
     /**
      * Return the contact preferences for this customer
-     * 
+     *
      * @return ContactPreference[]
      */
     public function getContactPreferences()
@@ -301,7 +314,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
                 array_push($preferences, $preference);
             }
         }
-        
+
         return $preferences;
     }
 
@@ -384,7 +397,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
 
         $language = \tabs\apiclient\core\Language::factory($array);
         $language->setParent($this);
-        
+
         $this->language = $language;
 
         return $this;
@@ -404,7 +417,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
      * Delete function.  Not allowed!
      *
      * @throws \tabs\apiclient\client\Exception
-     * 
+     *
      * @return void
      */
     public function delete()
