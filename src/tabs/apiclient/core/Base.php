@@ -91,6 +91,18 @@ abstract class Base
     // -------------------------- Public Functions -------------------------- //
 
     /**
+     * Convert a boolean value to a string
+     * 
+     * @param boolean $boolean Boolean value
+     * 
+     * @return string
+     */
+    public function boolToStr($boolean)
+    {
+        return ($boolean === true) ? 'true' : 'false';
+    }
+    
+    /**
      * Set the parent element
      *
      * @param \tabs\apiclient\core\Base $element Parent element
