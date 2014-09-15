@@ -193,12 +193,12 @@ class Note extends Notemeta
         return array(
             'subject' => $this->getSubject(),
             'created' => $this->getCreated()->format('Y-m-d H:i:s'),
-            'createdby' => $this->getCreatedBy()->getId(),
-            'visbletocustomer' => $this->isVisibletocustomer(),
-            'visbletoowner' => $this->isVisibletoowner(),
-            'visbletocleaner' => $this->isVisibletocleaner(),
-            'visbletokeyholder' => $this->isVisibletokeyholder(),
-            'highlight' => $this->isHighlight()
+            'createdbyactorid' => $this->getCreatedBy()->getId(),
+            'visibletocustomer' => $this->boolToStr($this->isVisibletocustomer()),
+            'visibletoowner' => $this->boolToStr($this->isVisibletoowner()),
+            'visibletocleaner' => $this->boolToStr($this->isVisibletocleaner()),
+            'visibletokeyholder' => $this->boolToStr($this->isVisibletokeyholder()),
+            'highlight' => $this->boolToStr($this->isHighlight())
         );
     }
 
