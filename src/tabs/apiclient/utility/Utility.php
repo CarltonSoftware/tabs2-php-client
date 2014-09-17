@@ -30,4 +30,18 @@ namespace tabs\apiclient\utility;
 class Utility
 {   
 
+    /**
+     * Gets an array of roles/reasons
+     * 
+     * @return string
+     */
+    public static function getRoleReason()
+    {
+        $schema = \tabs\apiclient\client\Client::getClient()->get(
+            'utility/rolereason'
+        );
+        
+        return $schema->json(array('object' => true));
+    }
+    
 }
