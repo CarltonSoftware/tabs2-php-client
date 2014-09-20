@@ -43,11 +43,11 @@ class NoteClassTest extends ApiClientClassTest
         $this->assertEquals(8, count($note->toArray()));
         $this->assertArrayHasKey('subject', $note->toArray());
         $this->assertArrayHasKey('created', $note->toArray());
-        $this->assertArrayHasKey('createdby', $note->toArray());
-        $this->assertArrayHasKey('visbletocustomer', $note->toArray());
-        $this->assertArrayHasKey('visbletoowner', $note->toArray());
-        $this->assertArrayHasKey('visbletocleaner', $note->toArray());
-        $this->assertArrayHasKey('visbletokeyholder', $note->toArray());
+        $this->assertArrayHasKey('createdbyactorid', $note->toArray());
+        $this->assertArrayHasKey('visibletocustomer', $note->toArray());
+        $this->assertArrayHasKey('visibletoowner', $note->toArray());
+        $this->assertArrayHasKey('visibletocleaner', $note->toArray());
+        $this->assertArrayHasKey('visibletokeyholder', $note->toArray());
         $this->assertArrayHasKey('highlight', $note->toArray());
     }
     
@@ -59,7 +59,7 @@ class NoteClassTest extends ApiClientClassTest
     public function testNoteText()
     {
         $note = Fixtures::getNote();
-        $notetexts = $note->getNotetext();
+        $notetexts = $note->getNotetexts();
         
         $notetext = array_shift($notetexts);
         $this->assertEquals('2014-08-09 12:34:56', $notetext->getCreated()->format('Y-m-d H:i:s'));

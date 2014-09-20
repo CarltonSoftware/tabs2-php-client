@@ -80,7 +80,7 @@ abstract class Notemeta extends Builder
     public function setCreated($createdDate)
     {
         if (!$createdDate instanceof \DateTime) {
-            $createdDate = new \DateTime($createdDate->date);
+            $createdDate = new \DateTime($createdDate);
         }
 
         $this->created = $createdDate;

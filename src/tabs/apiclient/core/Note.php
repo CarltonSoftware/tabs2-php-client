@@ -29,7 +29,7 @@ use tabs\apiclient\actor\Actor;
  *
  *
  * @method string     getSubject()   Returns the Note subject
- * @method NoteText[] getNotetext()  Returns the array of NoteText items
+ * @method NoteText[] getNotetexts() Returns the array of NoteText items
  *
  * @method Note setSubject(string $subject)          Set the note subject
  * @method Note setVisibletocustomer(boolean $bool)  Visible to customer bool
@@ -207,6 +207,6 @@ class Note extends Notemeta
      */
     public function __toString()
     {
-        return implode("\n", $this->getNotetext());
+        return implode("\n", $this->getNotetexts());
     }
 }
