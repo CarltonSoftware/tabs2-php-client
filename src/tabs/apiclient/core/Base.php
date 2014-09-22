@@ -34,40 +34,40 @@ abstract class Base
 {
     /**
      * Parent element
-     * 
+     *
      * @var \tabs\apiclient\core\Base
      */
     protected $parent;
-    
+
     // ------------------ Static Functions --------------------- //
 
     /**
      * Return the name of the class which calls this method
-     * 
+     *
      * @return string
      */
     public static function getClass()
     {
         $type = explode('\\', get_called_class());
-        
+
         return $type[count($type) - 1];
     }
 
     /**
      * Create a new object
-     * 
+     *
      * @param array $array Array representation of the object
-     * 
+     *
      * @return Base
      */
     public static function factory($array)
     {
         $object = new static();
         self::setObjectProperties($object, $array);
-        
+
         return $object;
     }
-    
+
     /**
      * Helper function foor setting object properties
      *
@@ -81,38 +81,51 @@ abstract class Base
     {
         foreach ($node as $key => $val) {
             $func = 'set' . ucfirst($key);
+
             if (!in_array($key, $exceptions) && property_exists($obj, $key)) {
                 $obj->$func($val);
             }
         }
     }
-    
+
     // -------------------------- Public Functions -------------------------- //
+
+    /**
+     * Convert a boolean value to a string
+     * 
+     * @param boolean $boolean Boolean value
+     * 
+     * @return string
+     */
+    public function boolToStr($boolean)
+    {
+        return ($boolean === true) ? 'true' : 'false';
+    }
     
     /**
      * Set the parent element
-     * 
+     *
      * @param \tabs\apiclient\core\Base $element Parent element
-     * 
+     *
      * @return \tabs\apiclient\core\Base
      */
     public function setParent(&$element)
     {
         $this->parent = $element;
-        
+
         return $this;
     }
-    
+
     /**
      * Return the builder parent element
-     * 
+     *
      * @return \tabs\apiclient\core\Base
      */
     public function getParent()
     {
         return $this->parent;
     }
-    
+
     /**
      * Generic getter/setter
      *
@@ -142,20 +155,20 @@ abstract class Base
                 }
             }
         }
-        
+
         throw new \tabs\apiclient\client\Exception(
             null,
             'Unknown method called:' . get_called_class() . ':' . $name
         );
     }
-    
+
     /**
      * Get magic method.  Added for symfony forms.
-     * 
+     *
      * @param string $name Name of property
-     * 
+     *
      * @throws \tabs\apiclient\client\Exception
-     * 
+     *
      * @return mixed
      */
     public function __get($name)
@@ -164,14 +177,14 @@ abstract class Base
             return $this->$name;
         }
     }
-    
+
     /**
      * Get magic method.  Added for symfony forms.
-     * 
+     *
      * @param string $name Name of property
-     * 
+     *
      * @throws \tabs\apiclient\client\Exception
-     * 
+     *
      * @return mixed
      */
     public function __set($name, $value)
@@ -180,7 +193,7 @@ abstract class Base
             $this->setObjectProperty($this, $name, $value);
         }
     }
-    
+
     // ------------------------- Protected Functions ------------------------ //
 
     /**

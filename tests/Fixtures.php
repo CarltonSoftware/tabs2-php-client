@@ -161,7 +161,7 @@ class Fixtures
             ->setText('This is a note.')
             ->setCreatedby($actor)
             ->setCreated('2014-08-09 12:34:56');
-        $note->setNotetext(array($noteText));
+        $note->setNotetexts(array($noteText));
         
         return $note;
     }

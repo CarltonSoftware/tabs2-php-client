@@ -27,54 +27,54 @@ use tabs\apiclient\actor\Actor;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
- * 
- * 
+ *
+ *
  * @method string     getId()        Returns Note Id
  * @method \DateTime  getCreated()   Returns the created time of the note
- * 
+ *
  * @method Note setId(integer $id)                   Set the note id
  */
 abstract class Notemeta extends Builder
 {
     /**
      * Note Id
-     * 
+     *
      * @var integer
      */
     protected $id;
-    
+
     /**
      * Created
-     * 
+     *
      * @var \DateTime
      */
     protected $created;
 
     /**
      * Actor who created the entity
-     * 
+     *
      * @var Actor
      */
     protected $createdby;
 
     // ------------------ Public Functions --------------------- //
-    
+
     /**
      * Constructor
-     * 
+     *
      * @return void
      */
     public function __construct()
     {
         $this->created = new \DateTime();
     }
-    
+
     /**
      * Set the created date of the note
-     * 
+     *
      * @param \DateTime|string $createdDate Created date either as a string
      *                                      or \DateTime object
-     * 
+     *
      * @return Notemeta
      */
     public function setCreated($createdDate)
@@ -82,29 +82,29 @@ abstract class Notemeta extends Builder
         if (!$createdDate instanceof \DateTime) {
             $createdDate = new \DateTime($createdDate);
         }
-        
+
         $this->created = $createdDate;
-        
+
         return $this;
     }
-    
+
     /**
      * Set the actor which created this notemeta object
-     * 
+     *
      * @param Actor|string $actor Actor object or path to object
-     * 
+     *
      * @return Notemeta
      */
     public function setCreatedby($actor)
     {
         $this->createdby = $actor;
-        
+
         return $this;
     }
-    
+
     /**
      * Set the actor which created this notemeta object
-     * 
+     *
      * @return Actor
      */
     public function getCreatedby()
@@ -114,10 +114,10 @@ abstract class Notemeta extends Builder
             $id = $parts[count($parts) - 1];
             $type = ucfirst($parts[count($parts) - 2]);
             $class = 'tabs\apiclient\actor\\' . $type;
-            
+
             $this->createdby = $class::get($id);
         }
-        
+
         return $this->createdby;
     }
 }

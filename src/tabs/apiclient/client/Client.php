@@ -241,7 +241,7 @@ class Client extends \GuzzleHttp\Client
             case 'ValidationException':
                 throw new \tabs\apiclient\client\ValidationException(
                     $exception,
-                    $json['errorDescription'],
+                    \json_decode($json['errorDescription'], true),
                     $json['errorCode']
                 );
             default:

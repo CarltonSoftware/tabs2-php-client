@@ -29,7 +29,7 @@ use tabs\apiclient\actor\Actor;
  *
  *
  * @method string     getSubject()   Returns the Note subject
- * @method NoteText[] getNotetext()  Returns the array of NoteText items
+ * @method NoteText[] getNotetexts() Returns the array of NoteText items
  *
  * @method Note setSubject(string $subject)          Set the note subject
  * @method Note setVisibletocustomer(boolean $bool)  Visible to customer bool
@@ -118,7 +118,7 @@ class Note extends Notemeta
     public function addNoteText(Notetext &$notetext)
     {
         $notetext->setParent($this);
-        $this->notetext[] = $notetext;
+        $this->notetexts[] = $notetext;
 
         return $this;
     }
@@ -193,12 +193,12 @@ class Note extends Notemeta
         return array(
             'subject' => $this->getSubject(),
             'created' => $this->getCreated()->format('Y-m-d H:i:s'),
-            'createdby' => $this->getCreatedBy()->getId(),
-            'visbletocustomer' => $this->isVisibletocustomer(),
-            'visbletoowner' => $this->isVisibletoowner(),
-            'visbletocleaner' => $this->isVisibletocleaner(),
-            'visbletokeyholder' => $this->isVisibletokeyholder(),
-            'highlight' => $this->isHighlight()
+            'createdbyactorid' => $this->getCreatedBy()->getId(),
+            'visibletocustomer' => $this->boolToStr($this->isVisibletocustomer()),
+            'visibletoowner' => $this->boolToStr($this->isVisibletoowner()),
+            'visibletocleaner' => $this->boolToStr($this->isVisibletocleaner()),
+            'visibletokeyholder' => $this->boolToStr($this->isVisibletokeyholder()),
+            'highlight' => $this->boolToStr($this->isHighlight())
         );
     }
 
@@ -207,6 +207,6 @@ class Note extends Notemeta
      */
     public function __toString()
     {
-        return implode("\n", $this->getNotetext());
+        return implode("\n", $this->getNotetexts());
     }
 }
