@@ -151,10 +151,13 @@ class Fixtures
     {
         $actor = Fixtures::getCustomer();
         
+        $noteType = Fixtures::getNotetype();
+        
         $note = new \tabs\apiclient\core\Note();
         $note->setId(1)
             ->setCreatedby($actor)
-            ->setCreated('2014-08-09 12:34:56');
+            ->setCreated('2014-08-09 12:34:56')
+            ->setNotetype($noteType);
         
         $noteText = new tabs\apiclient\core\Notetext();
         $noteText->setId(1)
@@ -175,5 +178,19 @@ class Fixtures
     {
         $language = new tabs\apiclient\core\Language();
         return $language;
+    }
+    
+    /**
+     * Return a note type
+     * 
+     * @return \tabs\apiclient\core\Notetype
+     */
+    public static function getNotetype()
+    {
+        $noteType = new tabs\apiclient\core\Notetype();
+        $noteType->setDescription('A note type')
+            ->setType('Note type');
+        
+        return $noteType;
     }
 }
