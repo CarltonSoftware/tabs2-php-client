@@ -102,7 +102,7 @@ class User extends \tabs\apiclient\core\Builder
     public static function get($id)
     {
         // Get the user object
-        return parent::get('/auth/user/' . $id);
+        return parent::_get('/auth/user/' . $id);
     }
 
     /**

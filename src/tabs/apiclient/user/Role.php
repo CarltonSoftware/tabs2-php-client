@@ -68,7 +68,7 @@ class Role extends Builder
     public static function get($id)
     {
         // Get the user object
-        return parent::get('/auth/role/' . $id);
+        return parent::_get('/auth/role/' . $id);
     }
 
     /**

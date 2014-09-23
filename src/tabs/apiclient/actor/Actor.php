@@ -192,7 +192,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
                 $routeName = 'customer';
         }
 
-        return parent::get(sprintf('/%s/%s', $routeName, $reference));
+        return parent::_get(sprintf('/%s/%s', $routeName, $reference));
     }
 
     // -------------------------- Public Functions -------------------------- //

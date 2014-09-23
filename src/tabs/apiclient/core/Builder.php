@@ -38,7 +38,7 @@ abstract class Builder extends Base implements BuilderInterface
      *
      * @return mixed
      */
-    public static function get($route)
+    public static function _get($route)
     {
         $request = \tabs\apiclient\client\Client::getClient()->get($route);
 

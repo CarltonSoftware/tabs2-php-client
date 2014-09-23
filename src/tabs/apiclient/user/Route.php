@@ -61,7 +61,7 @@ class Route extends Builder
     public static function get($id)
     {
         // Get the user object
-        return parent::get('/auth/route/' . $id);
+        return parent::_get('/auth/route/' . $id);
     }
 
     /**
