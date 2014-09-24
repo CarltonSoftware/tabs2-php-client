@@ -120,8 +120,8 @@ class TabsRole extends \tabs\apiclient\core\Builder
     public function toCreateArray()
     {
         return array(
-            'role' => $this->getRole(),
-            'description' => $this->getRole()
+            'role' => $this->getTabsrole(),
+            'description' => $this->getDescription()
         );
     }
     
@@ -145,8 +145,8 @@ class TabsRole extends \tabs\apiclient\core\Builder
         
         return array(
             'id' => $this->getId(),
-            'role' => $this->getRole(),
-            'description' => $this->getRole(),
+            'role' => $this->getTabsrole(),
+            'description' => $this->getDescription(),
             'routes' => $routes
         );
     }
