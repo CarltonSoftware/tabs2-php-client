@@ -110,6 +110,29 @@ class TabsUser extends Actor
     }
     
     /**
+     * Access route
+     * 
+     * @param string $route Route
+     * 
+     * @return boolean
+     */
+    public function hasAccess($route)
+    {
+        $access = false;
+        foreach ($this->getRoles() as $role) {
+            foreach ($role->getRoutes() as $_route) {
+                if ($route->getRoute() == $_route) {
+                    $access = true;
+                }
+            }
+        }
+        
+        return $access;
+    }
+
+    // ------------------------- Private Functions -------------------------- //
+    
+    /**
      * Add a role to the roles array
      * 
      * @param TabsRole &$role Role object
