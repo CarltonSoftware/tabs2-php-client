@@ -27,13 +27,13 @@ namespace tabs\apiclient\actor;
  * @link      http://www.carltonsoftware.co.uk
  * 
  * 
- * @method integer getId()               Return the Role id
- * @method string  getTabsrole()         Return the Role name
- * @method string  getDescription()      Return the Role description
- * @method Route[] getRoutes()           Return the Role routes
- * @method Role    setId(integer $id)           Set the Role Id
- * @method Role    setTabsrole(string $role)    Set the Role
- * @method Role    setDescription(string $desc) Set the Role
+ * @method integer  getId()               Return the Role id
+ * @method string   getTabsrole()         Return the Role name
+ * @method string   getDescription()      Return the Role description
+ * @method Route[]  getRoutes()           Return the Role routes
+ * @method TabsRole setId(integer $id)           Set the Role Id
+ * @method TabsRole setTabsrole(string $role)    Set the Role
+ * @method TabsRole setDescription(string $desc) Set the Role
  */
 class TabsRole extends \tabs\apiclient\core\Builder
 {
@@ -120,7 +120,7 @@ class TabsRole extends \tabs\apiclient\core\Builder
     public function toCreateArray()
     {
         return array(
-            'role' => $this->getTabsrole(),
+            'tabsrole' => $this->getTabsrole(),
             'description' => $this->getDescription()
         );
     }
@@ -145,7 +145,7 @@ class TabsRole extends \tabs\apiclient\core\Builder
         
         return array(
             'id' => $this->getId(),
-            'role' => $this->getTabsrole(),
+            'tabsrole' => $this->getTabsrole(),
             'description' => $this->getDescription(),
             'routes' => $routes
         );
