@@ -32,6 +32,46 @@ class Fixtures
     }
     
     /**
+     * Get a tabs user
+     * 
+     * @return \tabs\apiclient\actor\TabsUser
+     */
+    public static function getTabsUser()
+    {
+        $user = new \tabs\apiclient\actor\TabsUser();
+        $user->setId(1)
+            ->setTitle('Mr')
+            ->setSurname('Wyett')
+            ->setPassword('xyz123');
+        
+        $user->setRoles(array(Fixtures::getTabsRole()));
+        
+         return $user;
+    }
+    
+    /**
+     * Return a tabs role for a tabs user
+     * 
+     * @return \tabs\apiclient\actor\TabsRole
+     */
+    public static function getTabsRole()
+    {
+        $role = new \tabs\apiclient\actor\TabsRole();
+        $role->setId(1)
+            ->setTabsrole('Administrator')
+            ->setDescription('This is the admin role');
+        
+        $role->setRoutes(
+            array(
+                Fixtures::getRoute()
+            )
+        );
+        
+        return $role;
+    }
+
+
+    /**
      * Return the test contact preference
      * 
      * @return \tabs\apiclient\actor\ContactPreference
@@ -199,7 +239,7 @@ class Fixtures
      * 
      * @return \tabs\apiclient\actor\Route
      */
-    public function getRoute()
+    public static function getRoute()
     {
         $route = new tabs\apiclient\actor\Route();
         $route->setId(1)->setRoute('aurlpath');

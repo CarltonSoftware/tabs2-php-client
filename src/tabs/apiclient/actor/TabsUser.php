@@ -121,7 +121,7 @@ class TabsUser extends Actor
         $access = false;
         foreach ($this->getRoles() as $role) {
             foreach ($role->getRoutes() as $_route) {
-                if ($route->getRoute() == $_route) {
+                if ($_route->getRoute() == $route) {
                     $access = true;
                 }
             }
