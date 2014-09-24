@@ -179,18 +179,8 @@ abstract class Actor extends \tabs\apiclient\core\Builder
      */
     public static function get($reference)
     {
-        $className = get_called_class();
-
-        switch($className) {
-            case 'tabs\apiclient\actor\Customer':
-                $routeName = 'customer';
-                break;
-            case 'tabs\apiclient\actor\Tabsuser':
-                $routeName = 'tabsuser';
-                break;
-            default:
-                $routeName = 'customer';
-        }
+        $className = self::getClass();
+        $routeName = strtolower($className);
 
         return parent::_get(sprintf('/%s/%s', $routeName, $reference));
     }

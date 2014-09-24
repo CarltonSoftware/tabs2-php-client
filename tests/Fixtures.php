@@ -193,4 +193,17 @@ class Fixtures
         
         return $noteType;
     }
+    
+    /**
+     * Return a route
+     * 
+     * @return \tabs\apiclient\actor\Route
+     */
+    public function getRoute()
+    {
+        $route = new tabs\apiclient\actor\Route();
+        $route->setId(1)->setRoute('aurlpath');
+        
+        return $route;
+    }
 }
