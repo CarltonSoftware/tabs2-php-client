@@ -452,6 +452,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
             'firstname' => $this->getFirstname(),
             'surname' => $this->getSurname(),
             'salutation' => $this->getSalutation(),
+            'password' => $this->getPassword(),
             'tabscode' => $this->getTabscode(),
             'languagecode' => $this->getLanguage()->getCode(),
             'companyname' => $this->getCompanyname(),
