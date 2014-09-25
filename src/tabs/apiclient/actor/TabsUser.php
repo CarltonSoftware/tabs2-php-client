@@ -27,11 +27,9 @@ namespace tabs\apiclient\actor;
  * @link      http://www.carltonsoftware.co.uk
  * 
  * @method string     getUsername()     Get the username
- * @method string     getUserpassword() Get the password
  * @method TabsRole[] getRoles()        Get the array of tabs roles
  * 
- * @method TabsUser setUsername(string $username)         Set the username
- * @method TabsUser setUserpassword(string $userpassword) Set the userpassword
+ * @method TabsUser setUsername(string $username) Set the username
  */
 class TabsUser extends Actor
 {
@@ -128,6 +126,19 @@ class TabsUser extends Actor
         }
         
         return $access;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray()
+    {
+        return array_merge(
+            parent::toArray(),
+            array(
+                'username' => $this->getUsername()
+            )
+        );
     }
 
     // ------------------------- Private Functions -------------------------- //
