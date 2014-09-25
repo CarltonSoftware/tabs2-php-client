@@ -141,19 +141,6 @@ class TabsUser extends Actor
         );
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function toArray()
-    {
-        return array_merge(
-            parent::toArray(),
-            array(
-                'username' => $this->getUsername()
-            )
-        );
-    }
-
     // ------------------------- Private Functions -------------------------- //
     
     /**
