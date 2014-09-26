@@ -45,7 +45,7 @@ class ContactMethodSubtype extends \tabs\apiclient\collection\Collection
      */
     public function getRoute()
     {
-        return 'utility/contactcethodsubtype';
+        return 'utility/contactmethodsubtype';
     }
 
     /**

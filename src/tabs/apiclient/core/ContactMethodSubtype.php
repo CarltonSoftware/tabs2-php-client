@@ -29,7 +29,7 @@ namespace tabs\apiclient\core;
  * 
  * @method string getContactMethodSubtype()   Return the Contact Method Subtype
  * 
- * @method \tabs\apiclient\core\Base setAContactMethodSubtype(string $contactMethodSubtype) Set the country name
+ * @method \tabs\apiclient\core\Base setContactMethodSubtype(string $contactMethodSubtype) Set the Contact Method Subtype
  */
 class ContactMethodSubtype extends Base
 {
