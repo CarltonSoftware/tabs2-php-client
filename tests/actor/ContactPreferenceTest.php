@@ -18,8 +18,9 @@ class ContactPreferenceTest extends ApiClientClassTest
     public function testContactPreference()
     {
         $detail = Fixtures::getContactDetail();
-        $preference = array_shift($detail->getContactpreferences());
-        
+        $preferences = $detail->getContactpreferences();
+        $preference = $preferences[0];
+
         $this->assertEquals(1, $preference->getId());
         $this->assertEquals('Customer', $preference->getRolereason()->getRole());
         $this->assertEquals('Booking Confirmation', $preference->getRolereason()->getReason());
