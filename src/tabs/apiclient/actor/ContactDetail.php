@@ -83,7 +83,7 @@ class ContactDetail extends ContactEntity
     {
         return array(
             'contactmethod' => $this->getContactmethod(),
-            'subtype' => $this->getContactmethodsubtype(),
+            'contactmethodsubtype' => $this->getContactmethodsubtype(),
             'value' => $this->getValue(),
             'comment' => $this->getComment(),
         );
