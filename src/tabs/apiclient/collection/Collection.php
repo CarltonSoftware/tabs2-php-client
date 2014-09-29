@@ -75,6 +75,10 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
                 $this->setTotal(count($elements))->setLimit(count($elements));
             }
             
+            // Clear elements array first
+            $this->elements = array();
+            
+            // Populate with new elements
             foreach ($elements as $element) {
                 $ele = $class::factory($element);
                 $this->addElement($ele);

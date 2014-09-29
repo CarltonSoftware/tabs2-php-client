@@ -179,20 +179,10 @@ abstract class Actor extends \tabs\apiclient\core\Builder
      */
     public static function get($reference)
     {
-        $className = get_called_class();
+        $className = self::getClass();
+        $routeName = strtolower($className);
 
-        switch($className) {
-            case 'tabs\apiclient\actor\Customer':
-                $routeName = 'customer';
-                break;
-            case 'tabs\apiclient\actor\Tabsuser':
-                $routeName = 'tabsuser';
-                break;
-            default:
-                $routeName = 'customer';
-        }
-
-        return parent::get(sprintf('/%s/%s', $routeName, $reference));
+        return parent::_get(sprintf('/%s/%s', $routeName, $reference));
     }
 
     // -------------------------- Public Functions -------------------------- //
@@ -462,6 +452,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
             'firstname' => $this->getFirstname(),
             'surname' => $this->getSurname(),
             'salutation' => $this->getSalutation(),
+            'password' => $this->getPassword(),
             'tabscode' => $this->getTabscode(),
             'languagecode' => $this->getLanguage()->getCode(),
             'companyname' => $this->getCompanyname(),

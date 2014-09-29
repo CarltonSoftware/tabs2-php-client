@@ -13,7 +13,7 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\user;
+namespace tabs\apiclient\actor;
 
 /**
  * Tabs Rest API Route object.
@@ -33,10 +33,10 @@ namespace tabs\apiclient\user;
  * @method \tabs\apiclient\user\Route setId(integer $id)      Set the user Id
  * @method \tabs\apiclient\user\Route setRoute(string $route) Set the user route
  */
-class Route extends Builder
+class Route extends \tabs\apiclient\core\Builder
 {
     /**
-     * Role Id
+     * Route Id
      * 
      * @var integer
      */
@@ -61,37 +61,10 @@ class Route extends Builder
     public static function get($id)
     {
         // Get the user object
-        return parent::get('/auth/route/' . $id);
-    }
-
-    /**
-     * Get the routes
-     *
-     * @return \tabs\apiclient\core\Route[]
-     */
-    public static function fetch()
-    {
-        // Get the user object
-        return parent::_fetch('/auth/route');
+        return parent::_get('/route/' . $id);
     }
 
     // -------------------------- Public Functions -------------------------- //
-    
-    /**
-     * @inheritDoc
-     */
-    public function getCreateUrl()
-    {
-        return '/auth/route';
-    }
-    
-    /**
-     * @inheritDoc
-     */
-    public function getUpdateUrl()
-    {
-        return '/auth/route/' . $this->getId();
-    }
     
     /**
      * @inheritDoc

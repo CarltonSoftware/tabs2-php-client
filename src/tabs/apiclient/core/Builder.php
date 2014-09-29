@@ -38,7 +38,7 @@ abstract class Builder extends Base implements BuilderInterface
      *
      * @return mixed
      */
-    public static function get($route)
+    public static function _get($route)
     {
         $request = \tabs\apiclient\client\Client::getClient()->get($route);
 
@@ -99,7 +99,7 @@ abstract class Builder extends Base implements BuilderInterface
      * 
      * @throws \tabs\apiclient\client\Exception
      * 
-     * @return $this
+     * @return Builder
      */
     public function create()
     {
@@ -134,7 +134,7 @@ abstract class Builder extends Base implements BuilderInterface
      * 
      * @throws \tabs\apiclient\client\Exception
      * 
-     * @return $this
+     * @return Builder
      */
     public function update()
     {
@@ -157,11 +157,37 @@ abstract class Builder extends Base implements BuilderInterface
     }
     
     /**
+     * Perform a update request without any parameters
+     * 
+     * @throws \tabs\apiclient\client\Exception
+     * 
+     * @return Builder
+     */
+    public function commit()
+    {
+        // Perform put request
+        $req = \tabs\apiclient\client\Client::getClient()->put(
+            $this->getUpdateUrl()
+        );
+
+        if (!$req
+            || $req->getStatusCode() !== '204'
+        ) {
+            throw new \tabs\apiclient\client\Exception(
+                $req,
+                'Unable to commit ' . ucfirst($this->getStubClass())
+            );
+        }
+        
+        return $this;
+    }
+    
+    /**
      * Perform a create request
      * 
      * @throws \tabs\apiclient\client\Exception
      * 
-     * @return $this
+     * @return Builder
      */
     public function delete()
     {
@@ -177,6 +203,10 @@ abstract class Builder extends Base implements BuilderInterface
                 $req,
                 'Unable to delete ' . ucfirst($this->getStubClass())
             );
+        } else {
+            if ($this->getParent()) {
+                $this->parent = null;
+            }
         }
         
         return $this;

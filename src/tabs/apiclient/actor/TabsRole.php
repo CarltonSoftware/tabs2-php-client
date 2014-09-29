@@ -13,7 +13,7 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\user;
+namespace tabs\apiclient\actor;
 
 /**
  * Tabs Rest API Role object.
@@ -27,13 +27,15 @@ namespace tabs\apiclient\user;
  * @link      http://www.carltonsoftware.co.uk
  * 
  * 
- * @method integer                      getId()               Return the Role id
- * @method string                       getRole()             Return the Role name
- * @method \tabs\apiclient\user\Route[] getRoutes()           Return the Role routes
- * @method \tabs\apiclient\user\Role    setId(integer $id)    Set the Role Id
- * @method \tabs\apiclient\user\Role    setRole(string $role) Set the Role
+ * @method integer  getId()               Return the Role id
+ * @method string   getTabsrole()         Return the Role name
+ * @method string   getDescription()      Return the Role description
+ * @method Route[]  getRoutes()           Return the Role routes
+ * @method TabsRole setId(integer $id)           Set the Role Id
+ * @method TabsRole setTabsrole(string $role)    Set the Role
+ * @method TabsRole setDescription(string $desc) Set the Role
  */
-class Role extends Builder
+class TabsRole extends \tabs\apiclient\core\Builder
 {
     /**
      * Role Id
@@ -47,12 +49,19 @@ class Role extends Builder
      * 
      * @var string
      */
-    protected $role;
+    protected $tabsrole;
+    
+    /**
+     * Role Description
+     * 
+     * @var string
+     */
+    protected $description;
     
     /**
      * Applicable routes
      * 
-     * @var \tabs\apiclient\user\Route[]
+     * @var Route[]
      */
     protected $routes = array();
 
@@ -62,24 +71,13 @@ class Role extends Builder
      * Get a role from a given Id
      *
      * @param string $id Role reference
-     *
-     * @return \tabs\apiclient\core\Role
+     * 
+     * @return TabsRole
      */
     public static function get($id)
     {
         // Get the user object
-        return parent::get('/auth/role/' . $id);
-    }
-
-    /**
-     * Get the roles
-     *
-     * @return \tabs\apiclient\core\Role[]
-     */
-    public static function fetch()
-    {
-        // Get the user object
-        return parent::_fetch('/auth/role');
+        return parent::_get('/tabsrole/' . $id);
     }
 
     // -------------------------- Public Functions -------------------------- //
@@ -89,7 +87,7 @@ class Role extends Builder
      * 
      * @param array $routes Array of routes
      * 
-     * @return \tabs\apiclient\user\Role
+     * @return TabsRole
      */
     public function setRoutes($routes)
     {
@@ -102,34 +100,16 @@ class Role extends Builder
     }
     
     /**
-     * Add a route to a role
+     * Commit a route to a role.
      * 
-     * @param \tabs\apiclient\user\Route $route  Role to add
-     * @param boolean                    $commit Set to true if a create post is to be 
-     *                                           created
+     * @param Route $route Role to add
      * 
-     * @return \tabs\apiclient\user\Role
+     * @return TabsRole
      */
     public function setRoute($route)
     {
-        return $this->_addRoute($route);
-    }
-    
-    /**
-     * Remove a route from a role
-     * 
-     * @param integer $routeId Route Id
-     * 
-     * @return \tabs\apiclient\user\Role
-     */
-    public function removeRoute($routeId)
-    {
-        foreach ($this->getRoutes() as $index => $route) {
-            if ($route->getId() == $routeId) {
-                $route->remove();
-                unset($this->routes[$index]);
-            }
-        }
+        $this->_addRoute($route);
+        $route->commit();
         
         return $this;
     }
@@ -137,17 +117,20 @@ class Role extends Builder
     /**
      * @inheritDoc
      */
-    public function getCreateUrl()
+    public function toCreateArray()
     {
-        return '/auth/role';
+        return array(
+            'tabsrole' => $this->getTabsrole(),
+            'description' => $this->getDescription()
+        );
     }
     
     /**
      * @inheritDoc
      */
-    public function getUpdateUrl()
+    public function toUpdateArray()
     {
-        return '/auth/role/' . $this->getId();
+        return $this->toCreateArray();
     }
     
     /**
@@ -162,7 +145,8 @@ class Role extends Builder
         
         return array(
             'id' => $this->getId(),
-            'role' => $this->getRole(),
+            'tabsrole' => $this->getTabsrole(),
+            'description' => $this->getDescription(),
             'routes' => $routes
         );
     }
@@ -171,9 +155,9 @@ class Role extends Builder
      * Add a route to a role.  This method was added as symfony forms does
      * not like variables to be passed by reference.
      * 
-     * @param \tabs\apiclient\user\Route $route Route to add
+     * @param \tabs\apiclient\actor\Route $route Route to add
      * 
-     * @return \tabs\apiclient\user\Role
+     * @return \tabs\apiclient\actor\Role
      */
     private function _addRoute(&$route)
     {

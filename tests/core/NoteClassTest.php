@@ -40,7 +40,7 @@ class NoteClassTest extends ApiClientClassTest
         }
         
         $this->assertEquals('Mr Wyett said: This is a note.', (string) $note);
-        $this->assertEquals(8, count($note->toArray()));
+        $this->assertEquals(9, count($note->toArray()));
         $this->assertArrayHasKey('subject', $note->toArray());
         $this->assertArrayHasKey('created', $note->toArray());
         $this->assertArrayHasKey('createdbyactorid', $note->toArray());

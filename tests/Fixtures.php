@@ -32,6 +32,46 @@ class Fixtures
     }
     
     /**
+     * Get a tabs user
+     * 
+     * @return \tabs\apiclient\actor\TabsUser
+     */
+    public static function getTabsUser()
+    {
+        $user = new \tabs\apiclient\actor\TabsUser();
+        $user->setId(1)
+            ->setTitle('Mr')
+            ->setSurname('Wyett')
+            ->setPassword('xyz123');
+        
+        $user->setRoles(array(Fixtures::getTabsRole()));
+        
+         return $user;
+    }
+    
+    /**
+     * Return a tabs role for a tabs user
+     * 
+     * @return \tabs\apiclient\actor\TabsRole
+     */
+    public static function getTabsRole()
+    {
+        $role = new \tabs\apiclient\actor\TabsRole();
+        $role->setId(1)
+            ->setTabsrole('Administrator')
+            ->setDescription('This is the admin role');
+        
+        $role->setRoutes(
+            array(
+                Fixtures::getRoute()
+            )
+        );
+        
+        return $role;
+    }
+
+
+    /**
      * Return the test contact preference
      * 
      * @return \tabs\apiclient\actor\ContactPreference
@@ -151,10 +191,13 @@ class Fixtures
     {
         $actor = Fixtures::getCustomer();
         
+        $noteType = Fixtures::getNotetype();
+        
         $note = new \tabs\apiclient\core\Note();
         $note->setId(1)
             ->setCreatedby($actor)
-            ->setCreated('2014-08-09 12:34:56');
+            ->setCreated('2014-08-09 12:34:56')
+            ->setNotetype($noteType);
         
         $noteText = new tabs\apiclient\core\Notetext();
         $noteText->setId(1)
@@ -175,5 +218,32 @@ class Fixtures
     {
         $language = new tabs\apiclient\core\Language();
         return $language;
+    }
+    
+    /**
+     * Return a note type
+     * 
+     * @return \tabs\apiclient\core\Notetype
+     */
+    public static function getNotetype()
+    {
+        $noteType = new tabs\apiclient\core\Notetype();
+        $noteType->setDescription('A note type')
+            ->setType('Note type');
+        
+        return $noteType;
+    }
+    
+    /**
+     * Return a route
+     * 
+     * @return \tabs\apiclient\actor\Route
+     */
+    public static function getRoute()
+    {
+        $route = new tabs\apiclient\actor\Route();
+        $route->setId(1)->setRoute('aurlpath');
+        
+        return $route;
     }
 }

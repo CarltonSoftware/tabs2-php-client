@@ -14,7 +14,6 @@
  */
 
 namespace tabs\apiclient\core;
-use tabs\apiclient\actor\Actor;
 
 /**
  * Tabs Rest Note object.
@@ -30,6 +29,7 @@ use tabs\apiclient\actor\Actor;
  *
  * @method string     getSubject()   Returns the Note subject
  * @method NoteText[] getNotetexts() Returns the array of NoteText items
+ * @method Notetype   getNotetype()  Returns the array of Notetype
  *
  * @method Note setSubject(string $subject)          Set the note subject
  * @method Note setVisibletocustomer(boolean $bool)  Visible to customer bool
@@ -46,6 +46,13 @@ class Note extends Notemeta
      * @var string
      */
     protected $subject = '';
+    
+    /**
+     * Note Type
+     *
+     * @var Notetype
+     */
+    protected $notetype;
 
     /**
      * Visible to customer
@@ -91,6 +98,20 @@ class Note extends Notemeta
 
     // ------------------ Public Functions --------------------- //
 
+    /**
+     * Set the note type
+     * 
+     * @param type $notetype
+     * 
+     * @return Note
+     */
+    public function setNotetype($notetype)
+    {
+        $this->notetype = Notetype::factory($notetype);
+
+        return $this;
+    }
+    
     /**
      * Add an array of note text objects
      *
@@ -192,6 +213,7 @@ class Note extends Notemeta
     {
         return array(
             'subject' => $this->getSubject(),
+            'notetype' => (string) $this->getNotetype(),
             'created' => $this->getCreated()->format('Y-m-d H:i:s'),
             'createdbyactorid' => $this->getCreatedBy()->getId(),
             'visibletocustomer' => $this->boolToStr($this->isVisibletocustomer()),

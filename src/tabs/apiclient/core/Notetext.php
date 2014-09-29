@@ -49,12 +49,27 @@ class Notetext extends Notemeta
      * 
      * @return string
      */
-    public function getUpdateUrl()
+    public function getCreateUrl()
     {
+        if (!$this->getParent()) {
+            throw new \tabs\apiclient\client\Exception(
+                'Parent note not set'
+            );
+        }
+        
         return '/note/' 
             . $this->getParent()->getId() 
-            . '/notetext/' 
-            . $this->getId();
+            . '/notetext';
+    }
+    
+    /**
+     * Generate a url string for a update url
+     * 
+     * @return string
+     */
+    public function getUpdateUrl()
+    {
+        return $this->getCreateUrl() . '/' . $this->getId();
     }
     
     /**
@@ -65,8 +80,9 @@ class Notetext extends Notemeta
     public function toArray()
     {
         return array(
-            'createdby' => $this->getCreatedBy()->getId(),
-            'text' => $this->getText()
+            'createdbyactorid' => $this->getCreatedBy()->getId(),
+            'notetext' => $this->getText(),
+            'createddatetime' => $this->getCreated()->format('Y-m-d H:i:s')
         );
     }
     
