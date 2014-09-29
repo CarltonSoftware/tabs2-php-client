@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tabs Rest API ContactMethodSubtype object.
+ * Tabs Rest API ContactMethod object.
  *
  * PHP Version 5.3
  *
@@ -17,7 +17,7 @@
 namespace tabs\apiclient\core;
 
 /**
- * Tabs Rest API ContactMethodSubtype object.
+ * Tabs Rest API ContactMethod object.
  *
  * @category  Core
  * @package   Tabs
@@ -27,18 +27,18 @@ namespace tabs\apiclient\core;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method string getContactMethodSubtype()   Return the Contact Method Subtype
+ * @method string getContactMethod()   Return the Contact Method 
  * 
- * @method \tabs\apiclient\core\Base setContactMethodSubtype(string $contactmethodsubtype) Set the Contact Method Subtype
+ * @method \tabs\apiclient\core\Base setContactMethod(string $contactmethod) Set the Contact Method 
  */
-class ContactMethodSubtype extends Base
+class ContactMethod extends Base
 {
     /**
-     * Contact Method Subtype
+     * Contact Method 
      * 
      * @var string
      */
-    protected $contactmethodsubtype = '';
+    protected $contactmethod = '';
     
     // ------------------ Public Functions --------------------- //
     
@@ -49,6 +49,6 @@ class ContactMethodSubtype extends Base
      */
     public function __toString()
     {
-        return $this->getContactmethodsubtype();
+        return $this->getContactmethod();
     }
 }
