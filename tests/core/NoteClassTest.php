@@ -58,7 +58,6 @@ class NoteClassTest extends ApiClientClassTest
      */
     public function testNoteText()
     {
-        $this->markTestIncomplete('Not sure whether \'createdby\' should be in the response or not');
         $note = Fixtures::getNote();
         $notetexts = $note->getNotetexts();
 
@@ -68,9 +67,8 @@ class NoteClassTest extends ApiClientClassTest
         $this->assertEquals('Mr Wyett said: This is a note.', (string) $notetext);
 
         $this->assertEquals('/note/1/notetext/1', $notetext->getUpdateUrl());
-        $this->assertArrayHasKey('createdby', $notetext->toArray());
-        $this->assertArrayHasKey('text', $notetext->toArray());
-
-
+        $this->assertArrayHasKey('createdbyactorid', $notetext->toArray());
+        $this->assertArrayHasKey('createddatetime', $notetext->toArray());
+        $this->assertArrayHasKey('notetext', $notetext->toArray());
     }
 }
