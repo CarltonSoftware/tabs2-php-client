@@ -80,8 +80,9 @@ class Notetext extends Notemeta
     public function toArray()
     {
         return array(
-            'createdby' => $this->getCreatedBy()->getId(),
-            'text' => $this->getText()
+            'createdbyactorid' => $this->getCreatedBy()->getId(),
+            'notetext' => $this->getText(),
+            'createddatetime' => $this->getCreated()->format('Y-m-d H:i:s')
         );
     }
     
