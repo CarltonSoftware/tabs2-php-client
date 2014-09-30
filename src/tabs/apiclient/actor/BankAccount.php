@@ -113,10 +113,15 @@ class BankAccount extends \tabs\apiclient\core\Builder
      */
     public function setAddress($address)
     {
-        if (is_array($address) || get_class($address) == 'stdClass') {
-            $this->address = \tabs\apiclient\core\Address::factory($address);
+        if($address == "") {
+            // existing BankAccount has no Address
+            $this->address = new \tabs\apiclient\core\Address;
         } else {
-            $this->address = $address;
+            if (is_array($address) || get_class($address) == 'stdClass') {
+                $this->address = \tabs\apiclient\core\Address::factory($address);
+            } else {
+                $this->address = $address;
+            }
         }
         
         return $this;
@@ -146,15 +151,21 @@ class BankAccount extends \tabs\apiclient\core\Builder
      */
     public function toArray()
     {
-        return array(
+        $arr = array(
             'id' => $this->getId(),
             'accountnumber' => $this->getAccountnumber(),
             'accountname' => $this->getAccountname(),
             'bankname' => $this->getBankname(),
-            'address' => $this->getAddress()->toArray(),
             'sortcode' => $this->getSortcode(),
             'paymentreference' => $this->getPaymentreference(),
             'rollnumber' => $this->getRollnumber()
         );
+        
+        // don't return the address element unless an address exists
+        if((null !== $this->getAddress())) {
+            $arr['address'] = $this->getAddress()->toArray();
+        }
+        
+        return $arr;
     }
 }
