@@ -27,14 +27,14 @@ namespace tabs\apiclient\actor;
  * @link      http://www.carltonsoftware.co.uk
  *
  *
- * @method integer            getId()               Return the ID
- * @method string             getAccountnumber()    Return the account number
- * @method string             getAccountname()      Return the account name
- * @method string             getBankname()         Return the bank name
- * @method string             getSortcode()         Return the account sort code
- * @method string             getPaymentreference() Return the payment reference
- * @method string             getRollnumber()       Return the bank roll number    
- * @method \tabs\apiclient\core\Address getAddress()          Return the bank roll number    
+ * @method integer            getId()                Return the ID
+ * @method string             getAccountnumber()     Return the account number
+ * @method string             getAccountname()       Return the account name
+ * @method string             getBankname()          Return the bank name
+ * @method string             getSortcode()          Return the account sort code
+ * @method string             getPaymentreference()  Return the payment reference
+ * @method string             getRollnumber()        Return the bank roll number    
+ * @method \tabs\apiclient\core\Address getAddress() Return the bank roll number    
  *
  * @method \tabs\apiclient\actor\BankAccount setId(integer $id)                            Set the account number
  * @method \tabs\apiclient\actor\BankAccount setAccountnumber(string $accountnumber)       Set the account number
@@ -105,6 +105,18 @@ class BankAccount extends \tabs\apiclient\core\Builder
     // ------------------ Public Functions --------------------- //
     
     /**
+     * Constructor.
+     * 
+     * Initialise the address object
+     * 
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->address = new \tabs\apiclient\core\Address();
+    }
+    
+    /**
      * Set the address contact
      * 
      * @param array $address Array of address information
@@ -113,16 +125,7 @@ class BankAccount extends \tabs\apiclient\core\Builder
      */
     public function setAddress($address)
     {
-        if($address == "") {
-            // existing BankAccount has no Address
-            $this->address = new \tabs\apiclient\core\Address;
-        } else {
-            if (is_array($address) || get_class($address) == 'stdClass') {
-                $this->address = \tabs\apiclient\core\Address::factory($address);
-            } else {
-                $this->address = $address;
-            }
-        }
+        $this->address = \tabs\apiclient\core\Address::factory($address);
         
         return $this;
     }
@@ -151,21 +154,15 @@ class BankAccount extends \tabs\apiclient\core\Builder
      */
     public function toArray()
     {
-        $arr = array(
+        return array(
             'id' => $this->getId(),
             'accountnumber' => $this->getAccountnumber(),
             'accountname' => $this->getAccountname(),
             'bankname' => $this->getBankname(),
             'sortcode' => $this->getSortcode(),
             'paymentreference' => $this->getPaymentreference(),
-            'rollnumber' => $this->getRollnumber()
+            'rollnumber' => $this->getRollnumber(),
+            'address' => $this->getAddress()->toArray()
         );
-        
-        // don't return the address element unless an address exists
-        if((null !== $this->getAddress())) {
-            $arr['address'] = $this->getAddress()->toArray();
-        }
-        
-        return $arr;
     }
 }
