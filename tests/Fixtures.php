@@ -34,11 +34,11 @@ class Fixtures
     /**
      * Get a tabs user
      * 
-     * @return \tabs\apiclient\actor\TabsUser
+     * @return \tabs\apiclient\actor\Tabsuser
      */
     public static function getTabsUser()
     {
-        $user = new \tabs\apiclient\actor\TabsUser();
+        $user = new \tabs\apiclient\actor\Tabsuser();
         $user->setId(1)
             ->setTitle('Mr')
             ->setSurname('Wyett')

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tabs Rest API TabsUser object.
+ * Tabs Rest API Tabsuser object.
  *
  * PHP Version 5.4
  *
@@ -16,7 +16,7 @@
 namespace tabs\apiclient\actor;
 
 /**
- * Tabs Rest API TabsUser object.
+ * Tabs Rest API Tabsuser object.
  *
  * @category  Tabs_Client
  * @package   Tabs
@@ -29,9 +29,9 @@ namespace tabs\apiclient\actor;
  * @method string     getUsername()     Get the username
  * @method TabsRole[] getRoles()        Get the array of tabs roles
  * 
- * @method TabsUser setUsername(string $username) Set the username
+ * @method Tabsuser setUsername(string $username) Set the username
  */
-class TabsUser extends Actor
+class Tabsuser extends Actor
 {
     /**
      * Username
@@ -76,11 +76,11 @@ class TabsUser extends Actor
     // -------------------------- Public Functions -------------------------- //
     
     /**
-     * Set the roles for the TabsUser
+     * Set the roles for the Tabsuser
      * 
      * @param array $roles Array of role objects
      * 
-     * @return \tabs\apiclient\actor\TabsUser
+     * @return \tabs\apiclient\actor\Tabsuser
      */
     public function setRoles($roles)
     {
@@ -97,7 +97,7 @@ class TabsUser extends Actor
      * 
      * @param TabsRole &$role Role object
      * 
-     * @return \tabs\apiclient\actor\TabsUser
+     * @return \tabs\apiclient\actor\Tabsuser
      */
     public function setRole(&$role)
     {
@@ -148,7 +148,7 @@ class TabsUser extends Actor
      * 
      * @param TabsRole &$role Role object
      * 
-     * @return \tabs\apiclient\actor\TabsUser
+     * @return \tabs\apiclient\actor\Tabsuser
      */
     private function _addRole(&$role)
     {
