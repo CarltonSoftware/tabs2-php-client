@@ -26,14 +26,14 @@ namespace tabs\apiclient\collection;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  */
-class TabsUser extends \tabs\apiclient\collection\Collection
+class Tabsuser extends \tabs\apiclient\collection\Collection
 {
     /**
-     * Return an array of TabsUser objects.  This object will need to be
+     * Return an array of Tabsuser objects.  This object will need to be
      * instantiated and the method fetch will need to be called before this will
      * return any elements.
      *
-     * @return \tabs\apiclient\actor\TabsUser[]
+     * @return \tabs\apiclient\actor\Tabsuser[]
      */
     public function getElements()
     {
@@ -53,6 +53,6 @@ class TabsUser extends \tabs\apiclient\collection\Collection
      */
     public function getElementClass()
     {
-        return '\tabs\apiclient\actor\TabsUser';
+        return '\tabs\apiclient\actor\Tabsuser';
     }
 }
