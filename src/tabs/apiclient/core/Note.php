@@ -96,7 +96,27 @@ class Note extends Notemeta
      */
     protected $notetexts = array();
 
-    // ------------------ Public Functions --------------------- //
+    // ------------------------- Static Functions --------------------------- //
+    
+    /**
+     * Return a Note object
+     * 
+     * @param string $id Note Ud
+     * 
+     * @return Note
+     */
+    public static function get($id)
+    {
+        return parent::_get(
+            sprintf(
+                '/%s/%s',
+                strtolower(self::getClass()),
+                $id
+            )
+        );
+    }
+            
+    // ------------------------- Public Functions --------------------------- //
 
     /**
      * Set the note type
