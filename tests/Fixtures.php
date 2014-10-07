@@ -50,6 +50,22 @@ class Fixtures
     }
     
     /**
+     * Create a new owner
+     * 
+     * @return \tabs\apiclient\actor\Owner
+     */
+    public static function getOwner()
+    {
+        $owner = new \tabs\apiclient\actor\Owner();
+        $owner->setId(1)
+            ->setTitle('Mr')
+            ->setSurname('Wyett')
+            ->setPassword('abc123');
+        
+        return $owner;
+    }
+    
+    /**
      * Return a tabs role for a tabs user
      * 
      * @return \tabs\apiclient\actor\TabsRole
