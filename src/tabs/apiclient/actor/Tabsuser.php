@@ -111,6 +111,23 @@ class Tabsuser extends Actor
     }
     
     /**
+     * Remove all roles for a specific user
+     * 
+     * @return \tabs\apiclient\actor\Tabsuser
+     */
+    public function removeAllRoles()
+    {
+        // Call the remove all roles endpoint
+        \tabs\apiclient\client\Client::getClient()->delete(
+            '/tabsuser/' . $this->getId() . '/tabsrole'
+        );
+        
+        $this->roles = array();
+        
+        return $this;
+    }
+    
+    /**
      * Access route
      * 
      * @param string $route Route
