@@ -61,10 +61,13 @@ class Tabsuser extends Actor
     {
         // Get the user object
         $request = \tabs\apiclient\client\Client::getClient()->post(
-            '/tabsuser/authenticate',
+            sprintf(
+                '/tabsuser/%s/authenticate',
+                $username
+            ),
             array(
-                'username' => $username,
-                'password' => $password
+                'password' => $password,
+                'type' => 'username'
             )
         );
 
