@@ -262,4 +262,23 @@ class Fixtures
         
         return $route;
     }
+    
+    /**
+     * Return a property object
+     * 
+     * @return \tabs\apiclient\property\Property
+     */
+    public static function getProperty()
+    {
+        $property = new tabs\apiclient\property\Property();
+        $property->setId(1)
+            ->setTabspropref('ABC123')
+            ->setName('A Cottage')
+            ->setNamequalifier('Cottage 1')
+            ->setAddress(Fixtures::getAddress())
+            ->setSleeps(4)
+            ->setBedrooms(2);
+        
+        return $property;
+    }
 }
