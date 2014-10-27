@@ -28,8 +28,10 @@ namespace tabs\apiclient\actor;
  *
  * @method integer getId()            Return the id
  * @method RoleReason getRolereason() Return the RoleReason    
+ * @method integer getRolereason()    Return the priority    
  *
- * @method ContactPreference setId(integer $contactid) Set the contact id
+ * @method ContactPreference setId(integer $contactid)       Set the contact id
+ * @method ContactPreference setPriority(integer $contactid) Set the contact priority
  */
 class ContactPreference extends \tabs\apiclient\core\Builder
 {
@@ -48,7 +50,13 @@ class ContactPreference extends \tabs\apiclient\core\Builder
      */
     protected $rolereason;
     
-    
+    /**
+     * Priority
+     * 
+     * @var integer
+     */
+    protected $priority = 0;
+
     /**
      * Set the role reason object
      *
@@ -77,7 +85,8 @@ class ContactPreference extends \tabs\apiclient\core\Builder
             'id' => $this->getId(),
             'role' => $this->getRolereason()->getRole(),
             'reason' => $this->getRolereason()->getReason(),
-            'contactentityid' => $this->getParent()->getId()
+            'contactentityid' => $this->getParent()->getId(),
+            'priority' => $this->getPriority()
         );
     }
     
