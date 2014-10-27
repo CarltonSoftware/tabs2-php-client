@@ -130,6 +130,25 @@ abstract class Base
     {
         return $this->parent;
     }
+    
+    /**
+     * Recursive finder function.  Traverses up the tree to try to
+     * find a perent object with a matching class.
+     * 
+     * @param string $type Class type
+     * 
+     * @return Base|null
+     */
+    public function findParentByType($type)
+    {
+        if ($this->getParent() && $type == $this->getParent()->getClass()) {
+            return $this->getParent();
+        } else if ($this->getParent()) {
+            return $this->getParent()->findParentByType($type);
+        } else {
+            return;
+        }
+    }
 
     /**
      * Generic getter/setter
