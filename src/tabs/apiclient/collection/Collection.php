@@ -28,6 +28,8 @@ namespace tabs\apiclient\collection;
  * @link      http://www.carltonsoftware.co.uk
  * 
  * @method \tabs\apiclient\utility\Pagination getPagination() Return the pagination element
+ * 
+ * @method Collection                         setRoute(string $route) Set the route
  */
 abstract class Collection extends \tabs\apiclient\core\Base implements CollectionInterface
 {
@@ -45,6 +47,13 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
      */
     protected $pagination;
     
+    /**
+     * Route to fetch
+     * 
+     * @var string
+     */
+    protected $route = '';
+
     // ------------------ Public Functions --------------------- //
     
     /**
@@ -228,5 +237,15 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
         $this->getPagination()->setFilters($filters);
         
         return $this;
+    }
+    
+    /**
+     * Return the route
+     * 
+     * @return string
+     */
+    public function getRoute()
+    {
+        return $this->route;
     }
 }
