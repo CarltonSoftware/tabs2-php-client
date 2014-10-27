@@ -100,7 +100,7 @@ class Fixtures
                 'role' => 'Customer',
                 'reason' => 'Booking Confirmation'
             )
-        );
+        )->setPriority(1);
         
         return $preference;
     }
