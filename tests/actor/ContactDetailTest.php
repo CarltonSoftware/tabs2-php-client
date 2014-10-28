@@ -28,7 +28,7 @@ class ContactDetailTest extends ApiClientClassTest
         $this->assertEquals('0800 100 100', $contactDetail->getValue());
         $this->assertFalse($contactDetail->getInvalid());
         $this->assertEquals('Home Phone Number', $contactDetail->getComment());
-        $this->assertEquals(4, count($contactDetail->toArray()));
+        $this->assertEquals(5, count($contactDetail->toArray()));
         $this->assertEquals('Phone Home: 0800 100 100', (string) $contactDetail);
         
     }

@@ -24,7 +24,7 @@ class ContactAddressTest extends ApiClientClassTest
             'Developer Room, Carlton House, Market Place, Reepham, Norfolk, NR104JJ', 
             (string) $contactAddress
         );
-        $this->assertEquals(9, count($contactAddress->toArray()));
+        $this->assertEquals(11, count($contactAddress->toArray()));
     }
     
     /**
