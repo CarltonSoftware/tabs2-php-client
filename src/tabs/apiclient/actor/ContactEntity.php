@@ -116,7 +116,7 @@ abstract class ContactEntity extends \tabs\apiclient\core\Builder
     public function toArray()
     {
         return array(
-            'invalid' => $this->getInvalid(),
+            'invalid' => $this->boolToStr($this->getInvalid()),
             'contactmethod' => $this->getContactmethod()
         );
     }
