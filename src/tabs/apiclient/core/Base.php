@@ -86,8 +86,9 @@ abstract class Base
     {
         foreach ($node as $key => $val) {
             $func = 'set' . ucfirst($key);
-
-            if (!in_array($key, $exceptions) && property_exists($obj, $key)) {
+            if (!in_array($key, $exceptions) 
+                && (property_exists($obj, $key) || method_exists($obj, $func))
+            ) {
                 $obj->$func($val);
             }
         }

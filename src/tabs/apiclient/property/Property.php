@@ -151,4 +151,52 @@ class Property extends \tabs\apiclient\core\Builder
             'tabspropref' => $this->getTabspropref()
         );
     }
+    
+    /**
+     * Get all of the owners for the property
+     * 
+     * @return \tabs\apiclient\collection\propertyactor\Owner
+     */
+    public function getOwners()
+    {
+        return $this->_getActors('Owner');
+    }
+    
+    /**
+     * Get all of the cleaners for the property
+     * 
+     * @return \tabs\apiclient\collection\propertyactor\Cleaner
+     */
+    public function getCleaners()
+    {
+        return $this->_getActors('Cleaner');
+    }
+    
+    /**
+     * Get all of the keyholders for the property
+     * 
+     * @return \tabs\apiclient\collection\propertyactor\Keyholder
+     */
+    public function getKeyholders()
+    {
+        return $this->_getActors('Keyholder');
+    }
+    
+    /**
+     * Get actors
+     * 
+     * @param string $class Property actor collection class name
+     * 
+     * @return \tabs\apiclient\collection\propertyactor\PropertyActor
+     */
+    private function _getActors($class)
+    {
+        $nsClass = "\\tabs\\apiclient\\collection\\propertyactor\\" . $class;
+        $collection = new $nsClass();
+        $collection->setRoute(
+            '/property/' . $this->getId() . '/' . strtolower($class)
+        );
+        
+        return $collection->fetch()->getElements();
+    }
 }
