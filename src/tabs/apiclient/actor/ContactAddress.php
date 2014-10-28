@@ -82,7 +82,10 @@ class ContactAddress extends ContactEntity
      */
     public function toArray()
     {
-        return $this->getAddress()->toArray();
+        return array_merge(
+            $this->getAddress()->toArray(),
+            parent::toArray()
+        );
     }
     
     /**

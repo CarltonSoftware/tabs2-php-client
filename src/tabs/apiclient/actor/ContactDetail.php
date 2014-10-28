@@ -81,11 +81,13 @@ class ContactDetail extends ContactEntity
      */
     public function toArray()
     {
-        return array(
-            'contactmethod' => $this->getContactmethod(),
-            'contactmethodsubtype' => $this->getContactmethodsubtype(),
-            'value' => $this->getValue(),
-            'comment' => $this->getComment(),
+        return array_merge(
+            array(
+                'contactmethodsubtype' => $this->getContactmethodsubtype(),
+                'value' => $this->getValue(),
+                'comment' => $this->getComment()
+            ),
+            parent::toArray()
         );
     }
 }
