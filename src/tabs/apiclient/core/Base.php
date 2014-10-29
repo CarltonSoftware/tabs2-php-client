@@ -274,25 +274,20 @@ abstract class Base
             $this->$varName = floatval($float);
         }
     }
-
+    
     /**
-     * Generic timestamp setter
-     *
-     * @param integer $timestamp TimeStamp val needed to set to variable
-     * @param string  $varName   Variable name
-     *
-     * @return void
+     * Return a date time object from a given param
+     * 
+     * @param string|\DateTime $date Date object
+     * 
+     * @return \DateTime
      */
-    protected function setTimeStamp($timestamp, $varName)
+    public function getDateTime($date)
     {
-        if (is_numeric($timestamp)) {
-            $this->$varName = $timestamp;
-        } else {
-            // Try strtotime
-            $tempTime = strtotime($timestamp);
-            if ($tempTime > mktime(0, 0, 0, 1, 1, 1990)) {
-                $this->$varName = $tempTime;
-            }
+        if (!$date instanceof \DateTime) {
+            $date = new \DateTime($date);
         }
-    }
+        
+        return $date;
+    }    
 }
