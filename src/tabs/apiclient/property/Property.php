@@ -33,8 +33,7 @@ use tabs\apiclient\core\Address;
  * @method string   getTabspropref()            Returns the tabs property ref
  * @method Property setTabspropref(string $ref) Sets the tabs property ref
  * 
- * @method string   getStatus()               Returns the property status
- * @method Property setStatus(string $status) Sets the tabs property status
+ * @method Status   getStatus()               Returns the property status
  * 
  * @method string   getName()             Returns the property name
  * @method Property setName(string $name) Sets the tabs property name
@@ -68,11 +67,11 @@ class Property extends \tabs\apiclient\core\Builder
     protected $tabspropref = '';
 
     /**
-     * Property status. Live / Suspended / Withdrawn
+     * Property status
      * 
-     * @var string
+     * @var Status
      */
-    protected $status = '';
+    protected $status;
     
     /**
      * Property name
@@ -108,6 +107,13 @@ class Property extends \tabs\apiclient\core\Builder
      * @var integer
      */
     protected $bedrooms = 0;
+    
+    /**
+     * Array of branding objects
+     * 
+     * @var Brand[]
+     */
+    protected $brandings = array();
 
     // -------------------------- Static Functions -------------------------- //
 
@@ -135,21 +141,7 @@ class Property extends \tabs\apiclient\core\Builder
     public function __construct()
     {
         $this->address = new Address();
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function toArray()
-    {
-        return array(
-            'name' => $this->getName(),
-            'namequalifier' => $this->getNamequalifier(),
-            'address' => $this->getAddress()->toArray(),
-            'sleeps' => $this->getSleeps(),
-            'bedrooms' => $this->getBedrooms(),
-            'tabspropref' => $this->getTabspropref()
-        );
+        $this->status = Status::factory(array('name' => 'New'));
     }
     
     /**
@@ -180,6 +172,69 @@ class Property extends \tabs\apiclient\core\Builder
     public function getKeyholders()
     {
         return $this->_getActors('Keyholder');
+    }
+    
+    /**
+     * Set the property branding elements
+     * 
+     * @param array $brands Brands array
+     * 
+     * @return \tabs\apiclient\property\Property
+     */
+    public function setBrandings(array $brands)
+    {
+        foreach ($brands as $brnd) {
+            $brand = Brand::factory($brnd);
+            $this->_addBrand($brand);
+        }
+        
+        return $this;
+    }
+    
+    /**
+     * Set the property status
+     * 
+     * @param Status|array|stdClass $status Status
+     * 
+     * @return \tabs\apiclient\property\Property
+     */
+    public function setStatus($status)
+    {
+        $this->status = Status::factory($status);
+        
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray()
+    {
+        return array(
+            'name' => $this->getName(),
+            'namequalifier' => $this->getNamequalifier(),
+            'address' => $this->getAddress()->toArray(),
+            'sleeps' => $this->getSleeps(),
+            'bedrooms' => $this->getBedrooms(),
+            'tabspropref' => $this->getTabspropref()
+        );
+    }
+
+    // -------------------------- Public Functions -------------------------- //
+    
+    /**
+     * Add a brand into the property
+     * 
+     * @param Brand $brand Brand object
+     * 
+     * @return Property
+     */
+    private function _addBrand(Brand &$brand)
+    {
+        $brand->setParent($this);
+        $this->brandings[] = $brand;
+        
+        return $this;
     }
     
     /**
