@@ -26,7 +26,7 @@ namespace tabs\apiclient\collection\propertyactor;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  */
-class Owner extends \tabs\apiclient\collection\Collection
+class Owner extends PropertyActor
 {
     /**
      * Return an array of owner objects.  This object will need to be

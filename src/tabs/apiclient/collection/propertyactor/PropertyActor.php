@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tabs Rest API Keyholder property actor collection object.
+ * Tabs Rest API property actor object actor collection object.
  *
  * PHP Version 5.4
  *
@@ -16,7 +16,7 @@
 namespace tabs\apiclient\collection\propertyactor;
 
 /**
- * Tabs Rest API Keyholder property actor collection object.
+ * Tabs Rest API property actor object actor collection object.
  *
  * @category  Tabs_Client
  * @package   Tabs
@@ -26,25 +26,23 @@ namespace tabs\apiclient\collection\propertyactor;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  */
-class Keyholder extends PropertyActor
+abstract class PropertyActor extends \tabs\apiclient\collection\Collection
 {
     /**
-     * Return an array of Keyholder objects.  This object will need to be
-     * instantiated and the method fetch will need to be called before this will
-     * return any elements.
-     *
-     * @return \tabs\apiclient\property\propertyactor\Keyholder[]
+     * Return a property actor if one is active in this current date range
+     * 
+     * @return boolean|\tabs\apiclient\property\propertyactor\PropertyActor
      */
-    public function getElements()
+    public function getCurrent()
     {
-        return $this->elements;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getElementClass()
-    {
-        return '\tabs\apiclient\property\propertyactor\Keyholder';
+        foreach ($this->getElements() as $actor) {
+            if ($actor->getFromdate()->getTimestamp() <= time() 
+                && $actor->getTodate()->getTimestamp() >= time()
+            ) {
+                return $actor;
+            }
+        }
+        
+        return false;
     }
 }
