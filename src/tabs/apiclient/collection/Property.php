@@ -33,7 +33,7 @@ class Property extends \tabs\apiclient\collection\Collection
      * instantiated and the method fetch will need to be called before this will
      * return any elements.
      *
-     * @return \tabs\apiclient\core\Property[]
+     * @return \tabs\apiclient\property\Property[]
      */
     public function getElements()
     {

@@ -33,7 +33,7 @@ use tabs\apiclient\core\Address;
  * @method string   getTabspropref()            Returns the tabs property ref
  * @method Property setTabspropref(string $ref) Sets the tabs property ref
  * 
- * @method Status   getStatus()               Returns the property status
+ * @method Status   getStatus() Returns the property status
  * 
  * @method string   getName()             Returns the property name
  * @method Property setName(string $name) Sets the tabs property name
@@ -41,8 +41,7 @@ use tabs\apiclient\core\Address;
  * @method string   getNamequalifier()                      Returns the qualifier
  * @method Property setNamequalifier(string $namequalifier) Sets the qualifier
  * 
- * @method Address  getAddress()                 Returns the address
- * @method Property setAddress(Address $address) Sets the address
+ * @method Address  getAddress() Returns the address
  * 
  * @method integer  getSleeps()                Returns the sleeps value
  * @method Property setSleeps(integer $sleeps) Sets the sleeps value
@@ -172,6 +171,22 @@ class Property extends \tabs\apiclient\core\Builder
     public function getKeyholders()
     {
         return $this->_getActors('Keyholder');
+    }
+    
+    /**
+     * Set the address on the property
+     * 
+     * @param Address|stdClass|Array $address Address object/array
+     * 
+     * @return \tabs\apiclient\property\Property
+     */
+    public function setAddress($address)
+    {
+        $address = Address::factory($address);
+        $address->setParent($this);
+        $this->address = $address;
+        
+        return $this;
     }
     
     /**
