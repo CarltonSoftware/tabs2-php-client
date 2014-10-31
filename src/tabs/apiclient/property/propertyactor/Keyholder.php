@@ -25,25 +25,23 @@ namespace tabs\apiclient\property\propertyactor;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
- * 
- * @method integer  getId()            Returns the ID
- * @method PropertyActor setId(integer $id) Sets the ID
  */
-class Keyholder extends PropertyActor
+class Keyholder
 {
+    use PropertyActor;
+    
     /**
-     * Set the Keyholder
+     * Constructor
      * 
-     * @param string|\tabs\apiclient\actor\Actor $actor Actor object or Api 
-     * route to actor
-     * 
-     * @return Owner
+     * @return void
      */
-    public function setKeyholder($actor)
+    public function __construct()
     {
-        return $this->setActor($actor);
+        parent::__construct();
+        $this->fromdate = new \DateTime();
+        $this->todate = new \DateTime();
     }
-
+    
     /**
      * Set the fromdate
      * 
@@ -53,9 +51,7 @@ class Keyholder extends PropertyActor
      */
     public function setKeyholderfromdate($date)
     {
-        $this->fromdate = new \DateTime($date);
-        
-        return $this;
+        return $this->setFromdate($date);
     }
     
     /**
@@ -67,8 +63,6 @@ class Keyholder extends PropertyActor
      */
     public function setKeyholdertodate($date)
     {
-        $this->todate = new \DateTime($date);
-        
-        return $this;
+        return $this->setTodate($date);
     }
 }

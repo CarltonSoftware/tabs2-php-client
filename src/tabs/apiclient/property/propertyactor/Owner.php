@@ -25,34 +25,22 @@ namespace tabs\apiclient\property\propertyactor;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
- * 
- * @method integer  getId()            Returns the ID
- * @method PropertyActor setId(integer $id) Sets the ID
  */
-class Owner extends PropertyActor
+class Owner extends \tabs\apiclient\core\Builder
 {
-    /**
-     * Returns the actor namespace path
-     * 
-     * @return string
-     */
-    public function getActorClass()
-    {
-        return '\\tabs\\apiclient\\actor\\' . $this->getClass();
-    }
+    use PropertyActor;
     
     /**
-     * Set the owner
+     * Constructor
      * 
-     * @param string $route Api route to owner object
-     * 
-     * @return Owner
+     * @return void
      */
-    public function setOwner($route)
+    public function __construct()
     {
-        return $this->setActor($route);
+        $this->fromdate = new \DateTime();
+        $this->todate = new \DateTime();
     }
-
+    
     /**
      * Set the fromdate
      * 
@@ -62,9 +50,7 @@ class Owner extends PropertyActor
      */
     public function setOwnerfromdate($date)
     {
-        $this->fromdate = new \DateTime($date);
-        
-        return $this;
+        return $this->setFromdate($date);
     }
     
     /**
@@ -76,8 +62,28 @@ class Owner extends PropertyActor
      */
     public function setOwnertodate($date)
     {
-        $this->todate = new \DateTime($date);
-        
-        return $this;
+        return $this->setTodate($date);
+    }
+    
+    /**
+     * Fetches and sets the actor object from the api
+     * 
+     * @param \tabs\apiclient\actor\Actor|string $owner Owner
+     * 
+     * @return \tabs\apiclient\property\propertyactor\Owner
+     */
+    public function setOwner($owner)
+    {
+        return $this->setActor($owner);
+    }
+    
+    /**
+     * Returns the owner object
+     * 
+     * @return \tabs\apiclient\property\propertyactor\Owner
+     */
+    public function getOwner()
+    {
+        return $this->getActor();
     }
 }

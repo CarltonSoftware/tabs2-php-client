@@ -267,6 +267,6 @@ class Property extends \tabs\apiclient\core\Builder
             '/property/' . $this->getId() . '/' . strtolower($class)
         );
         
-        return $collection->fetch()->getElements();
+        return $collection->fetch();
     }
 }

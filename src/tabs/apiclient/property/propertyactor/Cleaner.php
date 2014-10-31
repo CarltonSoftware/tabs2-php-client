@@ -29,21 +29,22 @@ namespace tabs\apiclient\property\propertyactor;
  * @method integer  getId()            Returns the ID
  * @method PropertyActor setId(integer $id) Sets the ID
  */
-class Cleaner extends PropertyActor
+class Cleaner
 {
+    use PropertyActor;
+    
     /**
-     * Set the cleaner
+     * Constructor
      * 
-     * @param string|\tabs\apiclient\actor\Actor $actor Actor object or Api 
-     * route to actor
-     * 
-     * @return Owner
+     * @return void
      */
-    public function setCleaner($actor)
+    public function __construct()
     {
-        return $this->setActor($actor);
+        parent::__construct();
+        $this->fromdate = new \DateTime();
+        $this->todate = new \DateTime();
     }
-
+    
     /**
      * Set the fromdate
      * 
@@ -53,9 +54,7 @@ class Cleaner extends PropertyActor
      */
     public function setCleanerfromdate($date)
     {
-        $this->fromdate = new \DateTime($date);
-        
-        return $this;
+        return $this->setFromdate($date);
     }
     
     /**
@@ -67,8 +66,6 @@ class Cleaner extends PropertyActor
      */
     public function setCleanertodate($date)
     {
-        $this->todate = new \DateTime($date);
-        
-        return $this;
+        return $this->setTodate($date);
     }
 }

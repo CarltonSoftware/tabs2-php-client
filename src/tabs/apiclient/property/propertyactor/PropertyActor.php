@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tabs Rest API Property Actor object.
+ * Tabs Rest API Property Actor trait.
  *
  * PHP Version 5.4
  *
@@ -16,7 +16,7 @@
 namespace tabs\apiclient\property\propertyactor;
 
 /**
- * Tabs Rest API Property Actor object.
+ * Tabs Rest API Property Actor trait.
  *
  * @category  Tabs_Client
  * @package   Tabs
@@ -25,22 +25,9 @@ namespace tabs\apiclient\property\propertyactor;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
- * 
- * @method integer       getId()            Returns the ID
- * @method PropertyActor setId(integer $id) Sets the ID
- * 
- * @method \DateTime     getFromdate()      Returns the fromdate
- * @method \DateTime     getTodate()        Returns the todate
  */
-abstract class PropertyActor extends \tabs\apiclient\core\Builder
+trait PropertyActor
 {
-    /**
-     * Actor object
-     * 
-     * @var \tabs\apiclient\actor\Actor
-     */
-    protected $actor;
-    
     /**
      * Start date of relationship
      * 
@@ -56,52 +43,89 @@ abstract class PropertyActor extends \tabs\apiclient\core\Builder
     protected $todate;
     
     /**
-     * Constructor
+     * Actor object
      * 
-     * @return void
+     * @var \tabs\apiclient\actor\Actor
      */
-    public function __construct()
+    protected $actor;
+
+    /**
+     * Set the fromdate
+     * 
+     * @param string|\DateTime $date Date time object/string
+     * 
+     * @return \tabs\apiclient\property\propertyactor\PropertyActor
+     */
+    public function setFromdate($date)
     {
-        $this->fromdate = new \DateTime();
-        $this->todate = new \DateTime();
+        $this->fromdate = $this->getDateTime($date);
+        
+        return $this;
     }
     
     /**
-     * Returns the actor namespace path
+     * Set the todate
      * 
-     * @return string
+     * @param string|\DateTime $date Date time object/string
+     * 
+     * @return \tabs\apiclient\property\propertyactor\PropertyActor
      */
-    public function getActorClass()
+    public function setTodate($date)
     {
-        return '\\tabs\\apiclient\\actor\\' . $this->getClass();
+        $this->todate = $this->getDateTime($date);
+        
+        return $this;
     }
     
     /**
-     * Set the actor linked with this property
+     * Fetches and sets the actor object from the api
      * 
-     * @param string|\tabs\apiclient\actor\Actor $actor Actor object or Api 
-     * route to actor
+     * @param \tabs\apiclient\actor\Actor|string $actor Actor
      * 
-     * @return PropertyActor
+     * @return \tabs\apiclient\property\propertyactor\PropertyActor
      */
     public function setActor($actor)
     {
-        if ($actor instanceof \tabs\apiclient\actor\Actor) {
-            $this->actor = $actor;
+        if (is_string($actor) && substr($actor, 0, 1) == '/') {
+            $args = explode('/', $actor);
+            $class = "\\tabs\\apiclient\\actor\\{$this->getClass()}";
+            $ref = array_pop($args);
+            $this->actor = $class::get($ref);
         } else {
-            $routes = explode('/', $actor);
-
-            if (count($routes) >= 2) {
-                $ref = $routes[count($routes) - 1];
-                $class = $this->getActorClass();
-
-                $this->actor = $class::get($ref);
-            } else {
-                throw new \RuntimeException('Not enough parameters passed to setActor');
-            }
+            $this->actor = $actor;
         }
         
         return $this;
+    }
+    
+    /**
+     * Return the actor object
+     * 
+     * @return \tabs\apiclient\property\propertyactor\PropertyActor
+     */
+    public function getActor()
+    {
+        return $this->actor;
+    }
+    
+    /**
+     * Return the fromdate
+     * 
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+    
+    /**
+     * Return the todate
+     * 
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
     }
     
     /**
