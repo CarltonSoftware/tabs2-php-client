@@ -24,6 +24,102 @@ class PropertyTest extends ApiClientClassTest
     /**
      * Test a property object
      * 
+     * @return void
+     */
+    public function testPropertyOwner()
+    {
+        $property = Fixtures::getProperty();
+        $this->assertEquals(
+            'Mr',
+            $property->getOwners()->getCurrent()->getActor()->getTitle()
+        );
+        $this->assertEquals(
+            'Wyett',
+            $property->getOwners()->getCurrent()->getActor()->getSurname()
+        );
+        $this->assertEquals(
+            4,
+            count($property->getOwners()->getCurrent()->toArray())
+        );
+        $this->assertArrayHasKey(
+            'id',
+            $property->getOwners()->getCurrent()->toArray()
+        );
+        $this->assertArrayHasKey(
+            'ownerid',
+            $property->getOwners()->getCurrent()->toArray()
+        );
+        $this->assertArrayHasKey(
+            'ownerfromdate',
+            $property->getOwners()->getCurrent()->toArray()
+        );
+        $this->assertArrayHasKey(
+            'ownertodate',
+            $property->getOwners()->getCurrent()->toArray()
+        );
+        $this->assertEquals(
+            '/property/1/owner',
+            $property->getOwners()->getCurrent()->getCreateUrl()
+        );
+        $this->assertEquals(
+            '/property/1/owner/1',
+            $property->getOwners()->getCurrent()->getUpdateUrl()
+        );
+        $this->assertEquals(
+            '2014-01-01',
+            $property->getOwners()->getCurrent()->getFromdate()->format('Y-m-d')
+        );
+    }
+    
+    /**
+     * Test property descriptions
+     * 
+     * @return void
+     */
+    public function testPropertyDescriptions()
+    {
+        $property = Fixtures::getProperty();
+        $descriptions = $property->getDescriptions()->getElements();
+        $description = $descriptions[0];
+        
+        $this->assertEquals(
+            '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>',
+            $description->getDescription()
+        );
+        
+        $this->assertEquals(
+            'Full',
+            $description->getDescriptiontype()->getName()
+        );
+        
+        $this->assertEquals(
+            'HTML',
+            $description->getDescriptiontype()->getEncoding()
+        );
+        
+        $this->assertEquals(
+            0,
+            $description->getDescriptiontype()->getMinimumlength()
+        );
+        
+        $this->assertEquals(
+            9999,
+            $description->getDescriptiontype()->getMaximumlength()
+        );
+        
+        $this->assertEquals(
+            '/property/1/description',
+            $description->getCreateUrl()
+        );
+        $this->assertEquals(
+            '/property/1/description/1',
+            $description->getUpdateUrl()
+        );
+    }
+    
+    /**
+     * Test a property object
+     * 
      * @param \tabs\apiclient\property\Property $property Property object
      * 
      * @return void

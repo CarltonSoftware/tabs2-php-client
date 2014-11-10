@@ -56,11 +56,16 @@ class Fixtures
      */
     public static function getOwner()
     {
+        $contact = Fixtures::getContactAddress();
+        $bankAccount = Fixtures::getBankAccount();
+        
         $owner = new \tabs\apiclient\actor\Owner();
         $owner->setId(1)
             ->setTitle('Mr')
             ->setSurname('Wyett')
-            ->setPassword('abc123');
+            ->setPassword('abc123')
+            ->addContact($contact)
+            ->addBankAccount($bankAccount);
         
         return $owner;
     }
@@ -279,6 +284,57 @@ class Fixtures
             ->setSleeps(4)
             ->setBedrooms(2);
         
+        $owner = Fixtures::getPropertyOwner();
+        $property->addOwner($owner);
+        
+        $description = Fixtures::getPropertyDescription();
+        $property->addDescription($description);
+        
         return $property;
+    }
+    
+    /**
+     * Return a property owner
+     * 
+     * @return \tabs\apiclient\property\propertyactor\Owner
+     */
+    public static function getPropertyOwner()
+    {
+        $owner = new \tabs\apiclient\property\propertyactor\Owner();
+        $owner->setId(1)
+            ->setFromdate(new \DateTime('2014-01-01'))
+            ->setActor(Fixtures::getOwner());
+        
+        return $owner;
+    }
+    
+    /**
+     * Return the description type
+     * 
+     * @return \tabs\apiclient\property\description\Type
+     */
+    public static function getDescriptionType()
+    {
+        $type = new \tabs\apiclient\property\description\Type();
+        $type->setId(1)->setEncoding('HTML')->setName('Full');
+        
+        return $type;
+    }
+    
+    /**
+     * Return a property description
+     * 
+     * @return \tabs\apiclient\property\description\Description
+     */
+    public static function getPropertyDescription()
+    {
+        $description = new tabs\apiclient\property\description\Description();
+        $description->setId(1)
+            ->setDescriptiontype(Fixtures::getDescriptionType())
+            ->setDescription(
+                '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'
+            );
+        
+        return $description;
     }
 }
