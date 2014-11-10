@@ -26,7 +26,7 @@ namespace tabs\apiclient\property\propertyactor;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  */
-class Keyholder
+class Keyholder extends \tabs\apiclient\core\Builder
 {
     use PropertyActor;
     
@@ -37,7 +37,6 @@ class Keyholder
      */
     public function __construct()
     {
-        parent::__construct();
         $this->fromdate = new \DateTime();
         $this->todate = new \DateTime();
     }

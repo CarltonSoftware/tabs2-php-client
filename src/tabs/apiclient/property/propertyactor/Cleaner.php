@@ -29,7 +29,7 @@ namespace tabs\apiclient\property\propertyactor;
  * @method integer  getId()            Returns the ID
  * @method PropertyActor setId(integer $id) Sets the ID
  */
-class Cleaner
+class Cleaner extends \tabs\apiclient\core\Builder
 {
     use PropertyActor;
     
@@ -40,7 +40,6 @@ class Cleaner
      */
     public function __construct()
     {
-        parent::__construct();
         $this->fromdate = new \DateTime();
         $this->todate = new \DateTime();
     }
