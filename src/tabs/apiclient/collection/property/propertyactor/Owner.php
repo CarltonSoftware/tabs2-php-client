@@ -13,7 +13,7 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\collection\propertyactor;
+namespace tabs\apiclient\collection\property\propertyactor;
 
 /**
  * Tabs Rest API Owner property actor collection object.

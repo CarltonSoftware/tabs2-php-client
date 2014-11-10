@@ -13,7 +13,7 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\collection\propertyactor;
+namespace tabs\apiclient\collection\property\propertyactor;
 
 /**
  * Tabs Rest API property actor object actor collection object.
@@ -37,7 +37,10 @@ abstract class PropertyActor extends \tabs\apiclient\collection\Collection
     {
         foreach ($this->getElements() as $actor) {
             if ($actor->getFromdate()->getTimestamp() <= time() 
-                && $actor->getTodate()->getTimestamp() >= time()
+                && (
+                    $actor->getTodate()->getTimestamp() >= time()
+                    || $actor->getTodate() === NULL
+                )
             ) {
                 return $actor;
             }

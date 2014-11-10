@@ -13,7 +13,7 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\collection;
+namespace tabs\apiclient\collection\property;
 
 /**
  * Tabs Rest API Property collection object.
