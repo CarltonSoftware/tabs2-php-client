@@ -29,7 +29,7 @@ use tabs\apiclient\property\status\History;
  * 
  * @method Status getStatus() Returns the property status
  */
-class Brand extends \tabs\apiclient\core\Base
+abstract class Brand extends \tabs\apiclient\core\builder
 {
     /**
      * Current status
