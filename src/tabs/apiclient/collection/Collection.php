@@ -14,6 +14,7 @@
  */
 
 namespace tabs\apiclient\collection;
+use \tabs\apiclient\utility;
 
 /**
  * Tabs Rest Collection object. Handles groups of objects output from
@@ -27,9 +28,11 @@ namespace tabs\apiclient\collection;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method \tabs\apiclient\utility\Pagination getPagination() Return the pagination element
+ * @method Pagination                getPagination()    Return the pagination element
+ * @method \tabs\apiclient\core\Base getElementParent() Return the element parent
  * 
- * @method Collection                         setRoute(string $route) Set the route
+ * @method Collection setRoute(string $route) Set the route
+ * @method Collection setElementParent(\tabs\apiclient\core\Base $ele) Child class parent
  */
 abstract class Collection extends \tabs\apiclient\core\Base implements CollectionInterface
 {
@@ -40,6 +43,13 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
      */
     protected $elements = array();
     
+    /**
+     * Element parent.  Each child element will have this parent
+     * 
+     * @var \tabs\apiclient\core\Base 
+     */
+    protected $elementParent;
+
     /**
      * Pagination object
      * 
@@ -90,6 +100,9 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
             // Populate with new elements
             foreach ($elements as $element) {
                 $ele = $class::factory($element);
+                if ($this->getElementParent()) {
+                    $ele->setParent($this->getElementParent());
+                }
                 $this->addElement($ele);
             }
             
