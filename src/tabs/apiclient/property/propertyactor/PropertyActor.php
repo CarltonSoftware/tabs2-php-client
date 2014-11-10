@@ -25,9 +25,19 @@ namespace tabs\apiclient\property\propertyactor;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
+ * 
+ * @method integer                 getId()            Return the id
+ * @method Owner|Cleaner|Keyholder setId(integer $id) Set the id
  */
 trait PropertyActor
 {
+    /**
+     * Id of property actor
+     * 
+     * @var integer
+     */
+    protected $id;
+    
     /**
      * Start date of relationship
      * 
@@ -101,7 +111,7 @@ trait PropertyActor
     /**
      * Return the actor object
      * 
-     * @return \tabs\apiclient\property\propertyactor\PropertyActor
+     * @return \tabs\apiclient\actor\Actor
      */
     public function getActor()
     {
@@ -133,11 +143,12 @@ trait PropertyActor
      */
     public function toArray()
     {
+        $classslug = strtolower($this->getClass());
         return array(
             'id' => $this->getId(),
-            $this->getClass() . 'id' => $this->getActor()->getId(),
-            $this->getClass() . 'fromdate' => $this->getFromdate()->format('Y-m-d'),
-            $this->getClass() . 'todate' => $this->getTodate()->format('Y-m-d')
+            $classslug . 'id' => $this->getActor()->getId(),
+            $classslug . 'fromdate' => $this->getFromdate()->format('Y-m-d'),
+            $classslug . 'todate' => $this->getTodate()->format('Y-m-d')
         );
     }
 }
