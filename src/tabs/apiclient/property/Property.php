@@ -15,6 +15,11 @@
 
 namespace tabs\apiclient\property;
 use tabs\apiclient\core\Address;
+use tabs\apiclient\collection\property\propertyactor\Owner as OwnerCollection;
+use tabs\apiclient\collection\property\propertyactor\Cleaner as CleanerCollection;
+use tabs\apiclient\collection\property\propertyactor\Keyholder as KeyholderCollection;
+use tabs\apiclient\collection\property\description\Description as DescriptionCollection;
+use tabs\apiclient\property\description\Description as PropertyDescription;
 
 /**
  * Tabs Rest API Property object.
@@ -110,9 +115,37 @@ class Property extends \tabs\apiclient\core\Builder
     /**
      * Array of branding objects
      * 
-     * @var Brand[]
+     * @var PropertyBrand[]
      */
     protected $brandings = array();
+    
+    /**
+     * Array of owner objects
+     * 
+     * @var OwnerCollection
+     */
+    protected $owners;
+    
+    /**
+     * Array of cleaner objects
+     * 
+     * @var CleanerCollection
+     */
+    protected $cleaners;
+    
+    /**
+     * Array of keyholder objects
+     * 
+     * @var KeyholderCollection
+     */
+    protected $keyholders;
+    
+    /**
+     * The descriptions for the property
+     * 
+     * @var DescriptionCollection
+     */
+    protected $descriptions;
 
     // -------------------------- Static Functions -------------------------- //
 
@@ -141,12 +174,46 @@ class Property extends \tabs\apiclient\core\Builder
     {
         $this->address = new Address();
         $this->status = Status::factory(array('name' => 'New'));
+        $this->descriptions = $this->_createDescriptionCollection();
+    }
+    
+    /**
+     * Add a brand into the property
+     * 
+     * @param Brand $brand Brand object
+     * 
+     * @return Property
+     */
+    public function addBrand(PropertyBrand &$brand)
+    {
+        $brand->setParent($this);
+        $this->brandings[] = $brand;
+        
+        return $this;
+    }
+    
+    /**
+     * Add an owner object
+     * 
+     * @param propertyactor\Owner $owner Property owner object
+     * 
+     * @return Property
+     */
+    public function addOwner(propertyactor\Owner &$owner)
+    {
+        $owner->setParent($this);
+        if (!$this->owners) {
+            $this->owners = $this->_getActorCollection('Owner');
+        }
+        $this->owners->addElement($owner);
+        
+        return $this;
     }
     
     /**
      * Get all of the owners for the property
      * 
-     * @return \tabs\apiclient\collection\propertyactor\Owner
+     * @return OwnerCollection
      */
     public function getOwners()
     {
@@ -154,9 +221,27 @@ class Property extends \tabs\apiclient\core\Builder
     }
     
     /**
+     * Add an cleaner object
+     * 
+     * @param propertyactor\Cleaner $cleaner Property cleaner object
+     * 
+     * @return Property
+     */
+    public function addCleaner(propertyactor\Cleaner &$cleaner)
+    {
+        $cleaner->setParent($this);
+        if (!$this->cleaners) {
+            $this->cleaners = $this->_getActorCollection('Cleaner');
+        }
+        $this->cleaners->addElement($cleaner);
+        
+        return $this;
+    }
+    
+    /**
      * Get all of the cleaners for the property
      * 
-     * @return \tabs\apiclient\collection\propertyactor\Cleaner
+     * @return CleanerCollection
      */
     public function getCleaners()
     {
@@ -164,13 +249,56 @@ class Property extends \tabs\apiclient\core\Builder
     }
     
     /**
+     * Add an keyholder object
+     * 
+     * @param propertyactor\Keyholder $cleaner Property keyholder object
+     * 
+     * @return Property
+     */
+    public function addKeyholder(propertyactor\Keyholder &$keyholder)
+    {
+        $keyholder->setParent($this);
+        if (!$this->keyholders) {
+            $this->keyholders = $this->_getActorCollection('Keyholder');
+        }
+        $this->keyholders->addElement($keyholder);
+        
+        return $this;
+    }
+    
+    /**
      * Get all of the keyholders for the property
      * 
-     * @return \tabs\apiclient\collection\propertyactor\Keyholder
+     * @return KeyholderCollection
      */
     public function getKeyholders()
     {
         return $this->_getActors('Keyholder');
+    }
+    
+    /**
+     * Add a description to the property
+     * 
+     * @param PropertyDescription $description Property desccription object
+     * 
+     * @return Property
+     */
+    public function addDescription(PropertyDescription &$description)
+    {
+        $description->setParent($this);
+        $this->descriptions->addElement($description);
+        
+        return $this;
+    }
+    
+    /**
+     * Return a description collection object
+     * 
+     * @return \tabs\apiclient\collection\property\description\Description
+     */
+    public function getDescriptions()
+    {
+        return $this->descriptions;
     }
     
     /**
@@ -199,8 +327,8 @@ class Property extends \tabs\apiclient\core\Builder
     public function setBrandings(array $brands)
     {
         foreach ($brands as $brnd) {
-            $brand = Brand::factory($brnd);
-            $this->_addBrand($brand);
+            $brand = PropertyBrand::factory($brnd);
+            $this->addBrand($brand);
         }
         
         return $this;
@@ -238,18 +366,42 @@ class Property extends \tabs\apiclient\core\Builder
     // -------------------------- Public Functions -------------------------- //
     
     /**
-     * Add a brand into the property
+     * Get (and create) an actor collection
      * 
-     * @param Brand $brand Brand object
+     * @param string $class Class name
      * 
-     * @return Property
+     * @return OwnerCollection|CustomerCollection|KeyholderCollection
      */
-    private function _addBrand(Brand &$brand)
+    private function _getActorCollection($class)
     {
-        $brand->setParent($this);
-        $this->brandings[] = $brand;
+        $nsClass = "\\tabs\\apiclient\\collection\\property\\propertyactor\\" . $class;
+        $localObject = strtolower($class) . 's';
+        $collection = new $nsClass();
+        $collection->setRoute(
+            '/property/' . $this->getId() . '/' . strtolower($class)
+        );
         
-        return $this;
+        if (!$this->$localObject) {
+            $this->$localObject = $collection;
+        }
+        
+        return $this->$localObject;
+    }
+    
+    /**
+     * Get (and set if not defined) the property description collection
+     * 
+     * @return DescriptionCollection
+     */
+    private function _createDescriptionCollection()
+    {
+        $collection = new DescriptionCollection();
+        $collection->setRoute(
+            '/property/' . $this->getId() . '/description'
+        );
+        $collection->setElementParent($this);
+            
+        return $collection;
     }
     
     /**
@@ -261,12 +413,6 @@ class Property extends \tabs\apiclient\core\Builder
      */
     private function _getActors($class)
     {
-        $nsClass = "\\tabs\\apiclient\\collection\\propertyactor\\" . $class;
-        $collection = new $nsClass();
-        $collection->setRoute(
-            '/property/' . $this->getId() . '/' . strtolower($class)
-        );
-        
-        return $collection->fetch();
+        return $this->_getActorCollection($class)->setElementParent($this);
     }
 }
