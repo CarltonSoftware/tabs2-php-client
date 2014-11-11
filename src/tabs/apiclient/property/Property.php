@@ -174,7 +174,6 @@ class Property extends \tabs\apiclient\core\Builder
     {
         $this->address = new Address();
         $this->status = Status::factory(array('name' => 'New'));
-        $this->descriptions = $this->_createDescriptionCollection();
     }
     
     /**
@@ -298,6 +297,9 @@ class Property extends \tabs\apiclient\core\Builder
      */
     public function getDescriptions()
     {
+        if ($this->descriptions === null) {
+            $this->descriptions = $this->_createDescriptionCollection();
+        }
         return $this->descriptions;
     }
     
@@ -395,6 +397,12 @@ class Property extends \tabs\apiclient\core\Builder
      */
     private function _createDescriptionCollection()
     {
+        if ($this->getId() === null) {
+            throw new \tabs\apiclient\client\Exception(
+                'A valid ID field is required (currently null).'
+            );
+        }
+        
         $collection = new DescriptionCollection();
         $collection->setRoute(
             '/property/' . $this->getId() . '/description'
