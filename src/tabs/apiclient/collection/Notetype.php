@@ -45,7 +45,7 @@ class Notetype extends \tabs\apiclient\collection\Collection
      */
     public function getRoute()
     {
-        return 'utility/note/type';
+        return 'notetype';
     }
 
     /**
