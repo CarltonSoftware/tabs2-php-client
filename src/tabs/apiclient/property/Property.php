@@ -15,11 +15,13 @@
 
 namespace tabs\apiclient\property;
 use tabs\apiclient\core\Address;
+use tabs\apiclient\core\status\Status;
 use tabs\apiclient\collection\property\propertyactor\Owner as OwnerCollection;
 use tabs\apiclient\collection\property\propertyactor\Cleaner as CleanerCollection;
 use tabs\apiclient\collection\property\propertyactor\Keyholder as KeyholderCollection;
 use tabs\apiclient\collection\property\description\Description as DescriptionCollection;
 use tabs\apiclient\property\description\Description as PropertyDescription;
+use tabs\apiclient\property\brand\Branding;
 
 /**
  * Tabs Rest API Property object.
@@ -53,6 +55,8 @@ use tabs\apiclient\property\description\Description as PropertyDescription;
  * 
  * @method integer  getBedrooms()                  Returns the bedrooms value
  * @method Property setBedrooms(integer $bedrooms) Sets the bedrooms value
+ * 
+ * @method Branding[] getBrandings() Get the branding combinations
  */
 class Property extends \tabs\apiclient\core\Builder
 {
@@ -115,7 +119,7 @@ class Property extends \tabs\apiclient\core\Builder
     /**
      * Array of branding objects
      * 
-     * @var PropertyBrand[]
+     * @var Branding[]
      */
     protected $brandings = array();
     
@@ -174,19 +178,18 @@ class Property extends \tabs\apiclient\core\Builder
     {
         $this->address = new Address();
         $this->status = Status::factory(array('name' => 'New'));
-        $this->descriptions = $this->_createDescriptionCollection();
     }
     
     /**
      * Add a brand into the property
      * 
-     * @param Brand $brand Brand object
+     * @param Branding $brand Brand object
      * 
      * @return Property
      */
-    public function addBrand(PropertyBrand &$brand)
+    public function addBranding(Branding &$brand)
     {
-        $brand->setParent($this);
+        $brand->setParent($this)->updatePropertyParent();
         $this->brandings[] = $brand;
         
         return $this;
@@ -202,10 +205,7 @@ class Property extends \tabs\apiclient\core\Builder
     public function addOwner(propertyactor\Owner &$owner)
     {
         $owner->setParent($this);
-        if (!$this->owners) {
-            $this->owners = $this->_getActorCollection('Owner');
-        }
-        $this->owners->addElement($owner);
+        $this->getOwners()->addElement($owner);
         
         return $this;
     }
@@ -230,10 +230,7 @@ class Property extends \tabs\apiclient\core\Builder
     public function addCleaner(propertyactor\Cleaner &$cleaner)
     {
         $cleaner->setParent($this);
-        if (!$this->cleaners) {
-            $this->cleaners = $this->_getActorCollection('Cleaner');
-        }
-        $this->cleaners->addElement($cleaner);
+        $this->getCleaners()->addElement($cleaner);
         
         return $this;
     }
@@ -258,10 +255,7 @@ class Property extends \tabs\apiclient\core\Builder
     public function addKeyholder(propertyactor\Keyholder &$keyholder)
     {
         $keyholder->setParent($this);
-        if (!$this->keyholders) {
-            $this->keyholders = $this->_getActorCollection('Keyholder');
-        }
-        $this->keyholders->addElement($keyholder);
+        $this->getKeyholders()->addElement($keyholder);
         
         return $this;
     }
@@ -279,14 +273,14 @@ class Property extends \tabs\apiclient\core\Builder
     /**
      * Add a description to the property
      * 
-     * @param PropertyDescription $description Property desccription object
+     * @param PropertyDescription $description Property description object
      * 
      * @return Property
      */
     public function addDescription(PropertyDescription &$description)
     {
         $description->setParent($this);
-        $this->descriptions->addElement($description);
+        $this->getDescriptions()->addElement($description);
         
         return $this;
     }
@@ -298,6 +292,9 @@ class Property extends \tabs\apiclient\core\Builder
      */
     public function getDescriptions()
     {
+        if ($this->descriptions === null) {
+            $this->descriptions = $this->_createDescriptionCollection();
+        }
         return $this->descriptions;
     }
     
@@ -327,8 +324,8 @@ class Property extends \tabs\apiclient\core\Builder
     public function setBrandings(array $brands)
     {
         foreach ($brands as $brnd) {
-            $brand = PropertyBrand::factory($brnd);
-            $this->addBrand($brand);
+            $brand = Branding::factory($brnd);
+            $this->addBranding($brand);
         }
         
         return $this;
