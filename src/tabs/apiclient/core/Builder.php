@@ -29,69 +29,6 @@ namespace tabs\apiclient\core;
 abstract class Builder extends Base implements BuilderInterface
 {
 
-    // ------------------ Static Functions --------------------- //
-
-    /**
-     * Get an object from a given route
-     *
-     * @param string $route GET route
-     *
-     * @return mixed
-     */
-    public static function _get($route)
-    {
-        $request = \tabs\apiclient\client\Client::getClient()->get($route);
-
-        return self::factory($request->json(array('object' => true)));
-    }
-    
-    /**
-     * Fetch an array of elements
-     * 
-     * @param string $route Url to fetch
-     * 
-     * @return array
-     */
-    public static function _fetch($route)
-    {
-        // Get the route
-        $request = \tabs\apiclient\client\Client::getClient()->get($route);
-        $elements = array();
-
-        if ($request
-            && $request->getStatusCode() == '200'
-        ) {
-            $json = $request->json(array('object' => true));
-            foreach ($json as $element) {
-                $ele = static::factory($element);
-                array_push($elements, $ele);
-            }
-            
-            return $elements;
-        }
-        
-        throw new \tabs\apiclient\client\Exception(
-            $request,
-            'Unable to fetch element for route: ' . $route
-        );
-    }
-    
-    /**
-     * Return the ID from a content-location header
-     * 
-     * @param \GuzzleHttp\Message\Response $req Guzzle response
-     * 
-     * @return string|void
-     */
-    public static function getRequestId($req)
-    {
-        if ($req->getHeader('content-location')) {
-            $location = explode('/', $req->getHeader('content-location'));
-            
-            return $location[count($location) - 1];
-        }
-    }
-
     // -------------------------- Public Functions -------------------------- //
     
     /**
@@ -274,6 +211,17 @@ abstract class Builder extends Base implements BuilderInterface
     }
     
     /**
+     * Return the property object within the relationship between the builder
+     * objects.
+     * 
+     * @return \tabs\apiclient\property\Property
+     */
+    public function getParentProperty()
+    {
+        return $this->_getParentProperty($this);
+    }
+    
+    /**
      * Traverse through the relationship to look for an actor object
      * 
      * @param \tabs\apiclient\actor\Actor $object Actor object
@@ -291,7 +239,26 @@ abstract class Builder extends Base implements BuilderInterface
             throw new \RuntimeException('Parent actor not found');
         }
     }
-
+    
+    /**
+     * Traverse through the relationship to look for an property object
+     * 
+     * @param \tabs\apiclient\core\Base $object Object to traverse
+     * 
+     * @throws \RuntimeException
+     * 
+     * @return \tabs\apiclient\actor\Actor
+     */
+    private function _getParentProperty($object)
+    {
+        if ($object->getParent() instanceof \tabs\apiclient\property\Property) {
+            return $object->getParent();
+        } else if ($object->getParent()) {
+            return $this->_getParentProperty($object->getParent());
+        } else {
+            throw new \RuntimeException('Parent property not found');
+        }
+    }
 
     /**
      * Generate a url string for a create url
