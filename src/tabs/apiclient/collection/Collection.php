@@ -101,7 +101,8 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
             foreach ($elements as $element) {
                 $ele = $class::factory($element);
                 if ($this->getElementParent()) {
-                    $ele->setParent($this->getElementParent());
+                    $parent = $this->getElementParent();
+                    $ele->setParent($parent);
                 }
                 $this->addElement($ele);
             }

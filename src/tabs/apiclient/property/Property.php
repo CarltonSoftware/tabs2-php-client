@@ -392,6 +392,12 @@ class Property extends \tabs\apiclient\core\Builder
      */
     private function _createDescriptionCollection()
     {
+        if ($this->getId() === null) {
+            throw new \tabs\apiclient\client\Exception(
+                'A valid ID field is required (currently null).'
+            );
+        }
+        
         $collection = new DescriptionCollection();
         $collection->setRoute(
             '/property/' . $this->getId() . '/description'

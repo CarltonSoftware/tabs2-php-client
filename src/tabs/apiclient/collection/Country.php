@@ -45,7 +45,7 @@ class Country extends \tabs\apiclient\collection\Collection
      */
     public function getRoute()
     {
-        return 'utility/country';
+        return 'country';
     }
 
     /**

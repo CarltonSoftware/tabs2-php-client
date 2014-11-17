@@ -45,7 +45,7 @@ class ContactMethod extends \tabs\apiclient\collection\Collection
      */
     public function getRoute()
     {
-        return 'utility/contactmethod';
+        return 'contactmethod';
     }
 
     /**

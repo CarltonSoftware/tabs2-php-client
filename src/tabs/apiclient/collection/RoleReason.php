@@ -45,7 +45,7 @@ class RoleReason extends \tabs\apiclient\collection\Collection
      */
     public function getRoute()
     {
-        return 'utility/rolereason';
+        return 'rolereason';
     }
 
     /**
