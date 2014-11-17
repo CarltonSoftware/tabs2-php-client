@@ -14,6 +14,7 @@
  */
 
 namespace tabs\apiclient\property\description;
+use tabs\apiclient\property\brand\MarketingBrand;
 
 /**
  * Tabs Rest API Property Brand object.
@@ -33,6 +34,8 @@ namespace tabs\apiclient\property\description;
  * @method Description setDescription(string $desc) Set the description
  * 
  * @method string getDescriptiontype() Return the description type
+ * 
+ * @method Description setMarketingbrand(string|MarketingBrand $brand) Set the marketing brand
  */
 class Description extends \tabs\apiclient\core\Builder
 {
@@ -56,6 +59,13 @@ class Description extends \tabs\apiclient\core\Builder
      * @var string
      */
     protected $description = '';
+    
+    /**
+     * Description marketing brand
+     * 
+     * @var \tabs\apiclient\property\brand\MarketingBrand
+     */
+    protected $marketingbrand;
 
     // -------------------------- Public Functions -------------------------- //
     
@@ -76,13 +86,30 @@ class Description extends \tabs\apiclient\core\Builder
     }
     
     /**
+     * Get the marketing brand
+     * 
+     * @return \tabs\apiclient\property\brand\MarketingBrand
+     */
+    public function getMarketingbrand()
+    {
+        if (is_string($this->marketingbrand)) {
+            $this->marketingbrand = PropertyMarketingBrand::_get(
+                $this->marketingbrand
+            );
+            $this->marketingbrand->setParent($this->getParentProperty());
+        }
+        
+        return $this->marketingbrand;
+    }
+    
+    /**
      * @inheritDoc
      */
     public function toArray()
     {
         return array(
-            'propertymarketingbrandid' => 0,
-            'descriptiontype' => $this->getDescriptionType()->getId(),
+            'propertymarketingbrandid' => $this->getMarketingbrand()->getId(),
+            'descriptiontype' => $this->getDescriptiontype()->getId(),
             'description' => $this->getDescription()
         );
     }

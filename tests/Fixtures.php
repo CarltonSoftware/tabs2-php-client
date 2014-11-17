@@ -338,6 +338,9 @@ class Fixtures
                 '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'
             );
         
+        $branding = Fixtures::getPropertyBranding();
+        $description->setMarketingbrand($branding->getMarketingbrand());
+        
         return $description;
     }
     

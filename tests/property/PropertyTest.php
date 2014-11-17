@@ -115,6 +115,13 @@ class PropertyTest extends ApiClientClassTest
             '/property/1/description/1',
             $description->getUpdateUrl()
         );
+        
+        $this->assertArrayHasKey('description', $description->toArray());
+        $this->assertArrayHasKey('descriptiontype', $description->toArray());
+        $this->assertArrayHasKey(
+            'propertymarketingbrandid',
+            $description->toArray()
+        );
     }
     
     /**
