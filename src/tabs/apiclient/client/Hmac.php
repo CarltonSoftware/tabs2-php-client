@@ -96,7 +96,13 @@ class Hmac implements \GuzzleHttp\Event\SubscriberInterface
     public function onBefore(\GuzzleHttp\Event\BeforeEvent $event)
     {
         $request = $event->getRequest();
-        $request->setPath($this->prefix . $request->getPath());
+        
+        $path = $request->getPath();
+        if (substr($path, 0, strlen($this->getPrefix())) == $this->getPrefix()) {
+            $path = substr($path, strlen($this->getPrefix()));
+        }
+        
+        $request->setPath($this->prefix . $path);
         if ($this->getKey() && strlen($this->getKey()) > 0) {
             $request->getQuery()->set('hmacHash', $this->getHash($request));
             $request->getQuery()->set('hmacKey', $this->getKey());
