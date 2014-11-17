@@ -13,7 +13,7 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\property;
+namespace tabs\apiclient\property\brand;
 
 /**
  * Tabs Rest API Property Marketing Brand object.
@@ -26,7 +26,7 @@ namespace tabs\apiclient\property;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  */
-class MarketingBrand extends Brand
+class MarketingBrand extends BrandStatus
 {
     /**
      * @inheritDoc

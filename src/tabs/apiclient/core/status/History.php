@@ -13,8 +13,8 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\property\status;
-use tabs\apiclient\property\Status;
+namespace tabs\apiclient\core\status;
+use tabs\apiclient\core\status\Status;
 
 /**
  * Tabs Rest API Property Status object.
@@ -103,6 +103,20 @@ class History extends \tabs\apiclient\core\Base
     public function setTodate($date)
     {
         $this->todate = $this->getDateTime($date);
+        
+        return $this;
+    }
+
+    /**
+     * Set the status for this history item
+     * 
+     * @param array|stdClass|Status $status Status
+     * 
+     * @return \tabs\apiclient\core\status\History
+     */
+    public function setStatus($status)
+    {
+        $this->status = Status::factory($status);
         
         return $this;
     }

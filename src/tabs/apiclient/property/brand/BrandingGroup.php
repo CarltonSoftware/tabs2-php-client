@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tabs Rest API Property Booking Brand object.
+ * Tabs Rest API Property Branding Group (accounting brand) Brand object.
  *
  * PHP Version 5.4
  *
@@ -13,10 +13,10 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\property;
+namespace tabs\apiclient\property\brand;
 
 /**
- * Tabs Rest API Property Booking Brand object.
+ * Tabs Rest API Property Branding Group (accounting brand) Brand object.
  *
  * @category  Tabs_Client
  * @package   Tabs
@@ -26,7 +26,7 @@ namespace tabs\apiclient\property;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  */
-class PropertyBrand extends Brand
+class BrandingGroup extends BrandStatus
 {
     /**
      * @inheritDoc

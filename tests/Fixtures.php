@@ -290,6 +290,9 @@ class Fixtures
         $description = Fixtures::getPropertyDescription();
         $property->addDescription($description);
         
+        $branding = Fixtures::getPropertyBranding();
+        $property->addBranding($branding);
+        
         return $property;
     }
     
@@ -336,5 +339,118 @@ class Fixtures
             );
         
         return $description;
+    }
+    
+    /**
+     * Return a status
+     * 
+     * @return \tabs\apiclient\core\status\Status
+     */
+    public static function getStatus($name = 'Live')
+    {
+        $status = new tabs\apiclient\core\status\Status();
+        $status->setId(1)->setName($name);
+        
+        return $status;
+    }
+    
+    /**
+     * Return a status history
+     * 
+     * @return \tabs\apiclient\core\status\History
+     */
+    public static function getNewStatusHistory()
+    {
+        $history = new tabs\apiclient\core\status\History();
+        $history->setStatus(Fixtures::getStatus('New'))
+            ->setFromdate('2012-01-01')
+            ->setTodate('2012-01-31');
+        
+        return $history;
+    }
+    
+    /**
+     * Return a status history
+     * 
+     * @return \tabs\apiclient\core\status\History
+     */
+    public static function getLiveStatusHistory()
+    {
+        $history = new tabs\apiclient\core\status\History();
+        $history->setId(1)
+            ->setStatus(Fixtures::getStatus())
+            ->setFromdate('2012-01-31');
+        
+        return $history;
+    }
+    
+    /**
+     * Return a property marketing brand object
+     * 
+     * @return \tabs\apiclient\property\brand\MarketingBrand
+     */
+    public static function getPropertyMarketingBrand()
+    {
+        $marketingBrand = new \tabs\apiclient\property\brand\MarketingBrand();
+        $marketingBrand->setId(1)
+            ->setCode('NOMB')
+            ->setName('Norfolk Country Cottages')
+            ->setStatus(Fixtures::getStatus())
+            ->addStatusHistory(Fixtures::getLiveStatusHistory())
+            ->addStatusHistory(Fixtures::getNewStatusHistory());
+        
+        return $marketingBrand;
+    }
+    
+    /**
+     * Return a property booking brand object
+     * 
+     * @return \tabs\apiclient\property\brand\BookingBrand
+     */
+    public static function getPropertyBookingBrand()
+    {
+        $bookingBrand = new \tabs\apiclient\property\brand\BookingBrand();
+        $bookingBrand->setId(1)
+            ->setCode('NOBB')
+            ->setName('Norfolk Country Cottages')
+            ->setStatus(Fixtures::getStatus())
+            ->addStatusHistory(Fixtures::getLiveStatusHistory())
+            ->addStatusHistory(Fixtures::getNewStatusHistory());
+        
+        return $bookingBrand;
+    }
+    
+    /**
+     * Return a property booking brand object
+     * 
+     * @return \tabs\apiclient\property\brand\BrandingGroup
+     */
+    public static function getPropertyBrandingGroup()
+    {
+        $brandingGroup = new \tabs\apiclient\property\brand\BrandingGroup();
+        $brandingGroup->setId(1)
+            ->setStatus(Fixtures::getStatus())
+            ->addStatusHistory(Fixtures::getLiveStatusHistory())
+            ->addStatusHistory(Fixtures::getNewStatusHistory());
+        
+        return $brandingGroup;
+    }
+    
+    /**
+     * Return a property branding object
+     * 
+     * @return \tabs\apiclient\property\brand\Branding
+     */
+    public static function getPropertyBranding()
+    {
+        $branding = new \tabs\apiclient\property\brand\Branding();
+        $branding->setId(1)
+            ->setStatus(Fixtures::getStatus())
+            ->addStatusHistory(Fixtures::getLiveStatusHistory())
+            ->setBrandinggroup(Fixtures::getPropertyBrandingGroup())
+            ->setMarketingbrand(Fixtures::getPropertyMarketingBrand())
+            ->setBookingbrand(Fixtures::getPropertyBookingBrand());
+        
+        return $branding;
     }
 }

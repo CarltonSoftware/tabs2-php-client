@@ -13,8 +13,9 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\property;
-use tabs\apiclient\property\status\History;
+namespace tabs\apiclient\property\brand;
+use tabs\apiclient\core\status\Status;
+use tabs\apiclient\core\status\History;
 
 /**
  * Tabs Rest API Property Brand object.
@@ -29,7 +30,7 @@ use tabs\apiclient\property\status\History;
  * 
  * @method Status getStatus() Returns the property status
  */
-abstract class Brand extends \tabs\apiclient\core\builder
+abstract class BrandStatus extends \tabs\apiclient\brand\Brand
 {
     /**
      * Current status
@@ -73,7 +74,7 @@ abstract class Brand extends \tabs\apiclient\core\builder
         foreach ($items as $item) {
             $history = History::factory($item);
             
-            $this->_addStatushistory($history);
+            $this->addStatushistory($history);
         }
         
         return $this;
@@ -86,7 +87,7 @@ abstract class Brand extends \tabs\apiclient\core\builder
      * 
      * @return Brand
      */
-    private function _addStatushistory(History &$history)
+    public function addStatusHistory(History &$history)
     {
         $history->setParent($this);
         $this->statushistory[] = $history;

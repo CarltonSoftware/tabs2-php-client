@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tabs Rest API Property Status object.
+ * Tabs Rest API Status object.
  *
  * PHP Version 5.4
  *
@@ -13,10 +13,10 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\property;
+namespace tabs\apiclient\core\status;
 
 /**
- * Tabs Rest API Property Status object.
+ * Tabs Rest API Status object.
  *
  * @category  Tabs_Client
  * @package   Tabs
@@ -30,8 +30,8 @@ namespace tabs\apiclient\property;
  * @method integer getId()   Return the status id
  * @method string  getName() Return the status name
  * 
- * @method Status setId(integer $id)     Set the Id
- * @method Status setRoute(string $name) Set the name
+ * @method Status setId(integer $id)    Set the Id
+ * @method Status setName(string $name) Set the name
  */
 class Status extends \tabs\apiclient\core\Base
 {
