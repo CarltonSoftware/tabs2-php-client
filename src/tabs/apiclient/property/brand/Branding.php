@@ -91,7 +91,7 @@ class Branding extends BrandStatus
             $this->marketingbrand = PropertyMarketingBrand::_get(
                 $this->marketingbrand
             );
-            $this->marketingbrand->setParent($this->getParentProperty());
+            $this->updatePropertyParent();
         }
         
         return $this->marketingbrand;
@@ -108,7 +108,7 @@ class Branding extends BrandStatus
             $this->bookingbrand = PropertyBookingBrand::_get(
                 $this->bookingbrand
             );
-            $this->bookingbrand->setParent($this->getParentProperty());
+            $this->updatePropertyParent();
         }
         
         return $this->bookingbrand;
@@ -125,7 +125,7 @@ class Branding extends BrandStatus
             $this->brandinggroup = PropertyBrandingGroup::_get(
                 $this->brandinggroup
             );
-            $this->brandinggroup->setParent($this->getParentProperty());
+            $this->updatePropertyParent();
         }
         
         return $this->brandinggroup;
@@ -138,16 +138,17 @@ class Branding extends BrandStatus
      */
     public function updatePropertyParent()
     {
+        $prop = $this->getParentProperty();
         if ($this->bookingbrand) {
-            $this->bookingbrand->setParent($this->getParentProperty());
+            $this->bookingbrand->setParent($prop);
         }
         
         if ($this->marketingbrand) {
-            $this->marketingbrand->setParent($this->getParentProperty());
+            $this->marketingbrand->setParent($prop);
         }
         
         if ($this->brandinggroup) {
-            $this->brandinggroup->setParent($this->getParentProperty());
+            $this->brandinggroup->setParent($prop);
         }
         
         return $this;
