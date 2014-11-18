@@ -75,4 +75,18 @@ class Value extends \tabs\apiclient\core\Base
             );
         }
     }
+    
+    /**
+     * ToString function
+     * 
+     * @return string
+     */
+    public function toString()
+    {
+        if ($this->value) {
+            return $this->value;
+        } else {
+            return $this->boolToStr($this->boolean) . '|' . $this->number;
+        }
+    }
 }
