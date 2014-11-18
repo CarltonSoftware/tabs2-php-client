@@ -20,6 +20,7 @@ use tabs\apiclient\collection\property\propertyactor\Owner as OwnerCollection;
 use tabs\apiclient\collection\property\propertyactor\Cleaner as CleanerCollection;
 use tabs\apiclient\collection\property\propertyactor\Keyholder as KeyholderCollection;
 use tabs\apiclient\collection\property\description\Description as DescriptionCollection;
+use tabs\apiclient\collection\property\PropertyAttribute as AttributeCollection;
 use tabs\apiclient\property\description\Description as PropertyDescription;
 use tabs\apiclient\property\brand\Branding;
 
@@ -150,6 +151,13 @@ class Property extends \tabs\apiclient\core\Builder
      * @var DescriptionCollection
      */
     protected $descriptions;
+    
+    /**
+     * Attributes collection
+     * 
+     * @var AttributeCollection 
+     */
+    protected $attributes;
 
     // -------------------------- Static Functions -------------------------- //
 
@@ -300,6 +308,34 @@ class Property extends \tabs\apiclient\core\Builder
     }
     
     /**
+     * Add a property attribute to the property
+     * 
+     * @param PropertyAttribute $attribute Property attribute object
+     * 
+     * @return Property
+     */
+    public function addAttribute(PropertyAttribute &$attribute)
+    {
+        $attribute->setParent($this);
+        $this->getAttributes()->addElement($attribute);
+        
+        return $this;
+    }
+    
+    /**
+     * Return a property attribute collection object
+     * 
+     * @return \tabs\apiclient\collection\property\PropertyAttribute
+     */
+    public function getAttributes()
+    {
+        if ($this->attributes === null) {
+            $this->attributes = $this->_createAttributeCollection();
+        }
+        return $this->attributes;
+    }
+    
+    /**
      * Set the address on the property
      * 
      * @param Address|stdClass|Array $address Address object/array
@@ -402,6 +438,28 @@ class Property extends \tabs\apiclient\core\Builder
         $collection = new DescriptionCollection();
         $collection->setRoute(
             '/property/' . $this->getId() . '/description'
+        );
+        $collection->setElementParent($this);
+            
+        return $collection;
+    }
+    
+    /**
+     * Get (and set if not defined) the property attribute collection
+     * 
+     * @return AttributeCollection
+     */
+    private function _createAttributeCollection()
+    {
+        if ($this->getId() === null) {
+            throw new \tabs\apiclient\client\Exception(
+                'A valid ID field is required (currently null).'
+            );
+        }
+        
+        $collection = new AttributeCollection();
+        $collection->setRoute(
+            '/property/' . $this->getId() . '/attribute'
         );
         $collection->setElementParent($this);
             
