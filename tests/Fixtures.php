@@ -293,6 +293,12 @@ class Fixtures
         $branding = Fixtures::getPropertyBranding();
         $property->addBranding($branding);
         
+        $bool = Fixtures::getPropertyBooleanAttribute();
+        $property->addAttribute($bool);
+        
+        $hybrid = Fixtures::getPropertyHybridAttribute();
+        $property->addAttribute($hybrid);
+        
         return $property;
     }
     
@@ -471,5 +477,105 @@ class Fixtures
             ->setBookingbrand($bookingBrand);
         
         return $branding;
+    }
+    
+    /**
+     * Create a new boolean attribute
+     * 
+     * @return \tabs\apiclient\core\attribute\Attribute
+     */
+    public static function getBooleanAttribute()
+    {
+        $attr = new tabs\apiclient\core\attribute\Attribute();
+        $attr->setId(1)
+            ->setGroup(Fixtures::getAttributeGroup())
+            ->setCode('ATTR01')
+            ->setName('WiFi')
+            ->setType('Boolean')
+            ->setDescription('WiFi Enabled');
+        
+        return $attr;
+    }
+    
+    /**
+     * Return the property boolean attribute
+     * 
+     * @return \tabs\apiclient\property\PropertyAttribute
+     */
+    public static function getPropertyBooleanAttribute()
+    {
+        $pa = new \tabs\apiclient\property\PropertyAttribute();
+        $pa->setId(1);
+        $pa->setValue(true)
+            ->setAttribute(Fixtures::getBooleanAttribute());
+        
+        return $pa;
+    }
+    
+    /**
+     * Create and return a hyrid attribute
+     * 
+     * @return \tabs\apiclient\core\attribute\Attribute
+     */
+    public static function getHybridAttribute()
+    {
+        $attr = new tabs\apiclient\core\attribute\Attribute();
+        $attr->setId(2)
+            ->setGroup(Fixtures::getAttributeGroup())
+            ->setCode('ATTR02')
+            ->setName('< Pub')
+            ->setType('Hybrid')
+            ->setDescription('Near a pub?')
+            ->setOperator('<=')
+            ->setMinimumvalue(1)
+            ->setMaximumvalue(2000)
+            ->setUnit(Fixtures::getUnit());
+        
+        return $attr;
+    }
+    
+    /**
+     * Return the property hybrid attribute
+     * 
+     * @return \tabs\apiclient\property\PropertyAttribute
+     */
+    public static function getPropertyHybridAttribute()
+    {
+        $pa = new \tabs\apiclient\property\PropertyAttribute();
+        $pa->setId(2);
+        $val = new \tabs\apiclient\core\attribute\Value();
+        $val->setNumber(2)->setBoolean(true);
+        $pa->setValue($val)->setAttribute(Fixtures::getHybridAttribute());
+        
+        return $pa;
+    }
+
+    /**
+     * Create an return an attribute group
+     * 
+     * @return \tabs\apiclient\core\attribute\Group
+     */
+    public static function getAttributeGroup()
+    {
+        $group = new tabs\apiclient\core\attribute\Group();
+        $group->setId(1)->setName('Misc');
+        
+        return $group;
+    }
+
+    /**
+     * Create an return an attribute unit
+     * 
+     * @return \tabs\apiclient\core\Unit
+     */
+    public static function getUnit()
+    {
+        $unit = new tabs\apiclient\core\Unit();
+        $unit->setId(1)
+            ->setName('m')
+            ->setDescription('Metre')
+            ->setDecimalplaces(1);
+        
+        return $unit;
     }
 }
