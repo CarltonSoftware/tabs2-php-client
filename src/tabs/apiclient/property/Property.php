@@ -189,7 +189,8 @@ class Property extends \tabs\apiclient\core\Builder
      */
     public function addBranding(Branding &$brand)
     {
-        $brand->setParent($this)->updatePropertyParent();
+        $brand->setParent($this);
+        $brand->updatePropertyParent();
         $this->brandings[] = $brand;
         
         return $this;

@@ -139,15 +139,15 @@ class Branding extends BrandStatus
     public function updatePropertyParent()
     {
         $prop = $this->getParentProperty();
-        if ($this->bookingbrand) {
+        if (is_object($this->bookingbrand)) {
             $this->bookingbrand->setParent($prop);
         }
         
-        if ($this->marketingbrand) {
+        if (is_object($this->marketingbrand)) {
             $this->marketingbrand->setParent($prop);
         }
         
-        if ($this->brandinggroup) {
+        if (is_object($this->brandinggroup)) {
             $this->brandinggroup->setParent($prop);
         }
         
