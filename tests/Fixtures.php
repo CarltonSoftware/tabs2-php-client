@@ -365,7 +365,8 @@ class Fixtures
     public static function getNewStatusHistory()
     {
         $history = new tabs\apiclient\core\status\History();
-        $history->setStatus(Fixtures::getStatus('New'))
+        $status = Fixtures::getStatus('New');
+        $history->setStatus($status)
             ->setFromdate('2012-01-01')
             ->setTodate('2012-01-31');
         
@@ -380,8 +381,9 @@ class Fixtures
     public static function getLiveStatusHistory()
     {
         $history = new tabs\apiclient\core\status\History();
+        $status = Fixtures::getStatus();
         $history->setId(1)
-            ->setStatus(Fixtures::getStatus())
+            ->setStatus($status)
             ->setFromdate('2012-01-31');
         
         return $history;
@@ -395,12 +397,15 @@ class Fixtures
     public static function getPropertyMarketingBrand()
     {
         $marketingBrand = new \tabs\apiclient\property\brand\MarketingBrand();
+        $status = Fixtures::getStatus();
+        $liveStatusHistory = Fixtures::getLiveStatusHistory();
+        $newStatusHistory = Fixtures::getNewStatusHistory();
         $marketingBrand->setId(1)
             ->setCode('NOMB')
             ->setName('Norfolk Country Cottages')
-            ->setStatus(Fixtures::getStatus())
-            ->addStatusHistory(Fixtures::getLiveStatusHistory())
-            ->addStatusHistory(Fixtures::getNewStatusHistory());
+            ->setStatus($status)
+            ->addStatusHistory($liveStatusHistory)
+            ->addStatusHistory($newStatusHistory);
         
         return $marketingBrand;
     }
@@ -413,12 +418,15 @@ class Fixtures
     public static function getPropertyBookingBrand()
     {
         $bookingBrand = new \tabs\apiclient\property\brand\BookingBrand();
+        $status = Fixtures::getStatus();
+        $liveStatusHistory = Fixtures::getLiveStatusHistory();
+        $newStatusHistory = Fixtures::getNewStatusHistory();
         $bookingBrand->setId(1)
             ->setCode('NOBB')
             ->setName('Norfolk Country Cottages')
-            ->setStatus(Fixtures::getStatus())
-            ->addStatusHistory(Fixtures::getLiveStatusHistory())
-            ->addStatusHistory(Fixtures::getNewStatusHistory());
+            ->setStatus($status)
+            ->addStatusHistory($liveStatusHistory)
+            ->addStatusHistory($newStatusHistory);
         
         return $bookingBrand;
     }
@@ -430,11 +438,14 @@ class Fixtures
      */
     public static function getPropertyBrandingGroup()
     {
+        $status = Fixtures::getStatus();
+        $liveStatusHistory = Fixtures::getLiveStatusHistory();
+        $newStatusHistory = Fixtures::getNewStatusHistory();
         $brandingGroup = new \tabs\apiclient\property\brand\BrandingGroup();
         $brandingGroup->setId(1)
-            ->setStatus(Fixtures::getStatus())
-            ->addStatusHistory(Fixtures::getLiveStatusHistory())
-            ->addStatusHistory(Fixtures::getNewStatusHistory());
+            ->setStatus($status)
+            ->addStatusHistory($liveStatusHistory)
+            ->addStatusHistory($newStatusHistory);
         
         return $brandingGroup;
     }
@@ -446,13 +457,18 @@ class Fixtures
      */
     public static function getPropertyBranding()
     {
+        $status = Fixtures::getStatus();
+        $statusHistory = Fixtures::getLiveStatusHistory();
+        $brandingGroup = Fixtures::getPropertyBrandingGroup();
+        $marketingBrand = Fixtures::getPropertyMarketingBrand();
+        $bookingBrand = Fixtures::getPropertyBookingBrand();
         $branding = new \tabs\apiclient\property\brand\Branding();
         $branding->setId(1)
-            ->setStatus(Fixtures::getStatus())
-            ->addStatusHistory(Fixtures::getLiveStatusHistory())
-            ->setBrandinggroup(Fixtures::getPropertyBrandingGroup())
-            ->setMarketingbrand(Fixtures::getPropertyMarketingBrand())
-            ->setBookingbrand(Fixtures::getPropertyBookingBrand());
+            ->setStatus($status)
+            ->addStatusHistory($statusHistory)
+            ->setBrandinggroup($brandingGroup)
+            ->setMarketingbrand($marketingBrand)
+            ->setBookingbrand($bookingBrand);
         
         return $branding;
     }
