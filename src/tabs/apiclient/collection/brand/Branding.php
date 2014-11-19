@@ -13,7 +13,7 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\collection\property\brand;
+namespace tabs\apiclient\collection\brand;
 
 /**
  * Tabs Rest API Branding collection object.
@@ -33,7 +33,7 @@ class Branding extends \tabs\apiclient\collection\Collection
      * instantiated and the method fetch will need to be called before this will
      * return any elements.
      *
-     * @return \tabs\apiclient\property\brand\Branding[]
+     * @return \tabs\apiclient\brand\Branding[]
      */
     public function getElements()
     {
@@ -53,6 +53,6 @@ class Branding extends \tabs\apiclient\collection\Collection
      */
     public function getElementClass()
     {
-        return '\tabs\apiclient\property\brand\Branding';
+        return '\tabs\apiclient\brand\Branding';
     }
 }
