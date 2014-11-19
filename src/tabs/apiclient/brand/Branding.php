@@ -116,7 +116,7 @@ class Branding extends \tabs\apiclient\core\Base
     public function __toString()
     {
         
-        $brandingGroupName = $this->getBrandingGroup()->getName();
+        $brandingGroupName = $this->getBrandinggroup()->getName();
         $marketingBrandName = $this->getMarketingbrand()->getName();
         $bookingBrandName = $this->getBookingbrand()->getName();
         
