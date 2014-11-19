@@ -84,7 +84,11 @@ class Value extends \tabs\apiclient\core\Base
     public function toString()
     {
         if ($this->value) {
-            return $this->value;
+            if (is_bool($this->value)) {
+                return $this->boolToStr($this->value);
+            } else {
+                return $this->value;
+            }
         } else {
             return $this->boolToStr($this->boolean) . '|' . $this->number;
         }
