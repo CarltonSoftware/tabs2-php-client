@@ -33,7 +33,7 @@ use tabs\apiclient\property\brand\MarketingBrand;
  * @method string      getDescription()             Returns the description
  * @method Description setDescription(string $desc) Set the description
  * 
- * @method string getDescriptiontype() Return the description type
+ * @method Type getDescriptiontype() Return the description type
  * 
  * @method Description setMarketingbrand(string|MarketingBrand $brand) Set the marketing brand
  */
@@ -109,7 +109,7 @@ class Description extends \tabs\apiclient\core\Builder
     {
         return array(
             'propertymarketingbrandid' => $this->getMarketingbrand()->getId(),
-            'descriptiontype' => $this->getDescriptiontype()->getId(),
+            'descriptiontype' => $this->getDescriptiontype()->getName(),
             'description' => $this->getDescription()
         );
     }
