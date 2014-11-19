@@ -116,19 +116,19 @@ abstract class Base
     /**
      * Create a new object
      *
-     * @param array $array Array representation of the object
+     * @param array|stdClass|Base $element Representation of the object
      *
      * @return Base
      */
-    public static function factory($array)
+    public static function factory($element)
     {
         // If class is the same as object being `factory'ised`, just return it.
-        if (is_object($array) && get_class($array) == get_called_class()) {
-            return $array;
+        if (is_object($element) && get_class($element) == get_called_class()) {
+            return $element;
         }
             
         $object = new static();
-        self::setObjectProperties($object, $array);
+        self::setObjectProperties($object, $element);
 
         return $object;
     }

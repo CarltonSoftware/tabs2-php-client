@@ -125,6 +125,41 @@ class PropertyTest extends ApiClientClassTest
     }
     
     /**
+     * Test property attributes
+     * 
+     * @return void
+     */
+    public function testPropertyAttributes()
+    {
+        $property = Fixtures::getProperty();
+        $attributes = $property->getAttributes()->getElements();
+        
+        $this->assertEquals(
+            false,
+            $attributes[0]->getValue()->getBoolean()
+        );
+        
+        $this->assertEquals(
+            0,
+            $attributes[0]->getValue()->getNumber()
+        );
+        
+        $this->assertEquals(
+            true,
+            $attributes[0]->getValue()->getValue()
+        );
+        
+        $this->assertEquals(
+            '/property/1/attribute',
+            $attributes[0]->getCreateUrl()
+        );
+        $this->assertEquals(
+            '/property/1/attribute/1',
+            $attributes[0]->getUpdateUrl()
+        );
+    }
+    
+    /**
      * Test a property object
      * 
      * @param \tabs\apiclient\property\Property $property Property object
