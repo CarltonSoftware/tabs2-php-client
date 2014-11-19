@@ -35,7 +35,7 @@ namespace tabs\apiclient\brand;
  * @method string getName()             Returns the brand name
  * @method Brand  setName(string $name) Sets the brand name
  */
-abstract class Brand extends \tabs\apiclient\core\builder
+abstract class Brand extends \tabs\apiclient\core\Builder
 {
     /**
      * Brand id
