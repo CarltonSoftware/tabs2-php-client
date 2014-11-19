@@ -107,4 +107,15 @@ class Branding extends \tabs\apiclient\core\Base
         
         return $this;
     }
+    
+    /**
+     * ToString magic method
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getBrandinggroup()->getName();
+    }
+    
 }
