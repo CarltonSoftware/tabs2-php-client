@@ -14,7 +14,7 @@
  */
 
 namespace tabs\apiclient\property\description;
-use tabs\apiclient\property\brand\MarketingBrand;
+use tabs\apiclient\property\brand\MarketingBrand as PropertyMarketingBrand;
 
 /**
  * Tabs Rest API Property Brand object.
@@ -93,10 +93,11 @@ class Description extends \tabs\apiclient\core\Builder
     public function getMarketingbrand()
     {
         if (is_string($this->marketingbrand)) {
+            $prop = $this->getParentProperty();
             $this->marketingbrand = PropertyMarketingBrand::_get(
                 $this->marketingbrand
             );
-            $this->marketingbrand->setParent($this->getParentProperty());
+            $this->marketingbrand->setParent($prop);
         }
         
         return $this->marketingbrand;
