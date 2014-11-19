@@ -73,7 +73,7 @@ class Branding extends \tabs\apiclient\core\Base
     public function setBrandinggroup($grp)
     {
         $group = BrandingGroup::factory($grp);
-        $this->brandinggroup = $group;
+        $this->brandinggroup = $group->setParent($this);
         
         return $this;
     }
