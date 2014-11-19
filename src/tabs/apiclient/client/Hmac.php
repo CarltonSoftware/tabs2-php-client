@@ -102,6 +102,11 @@ class Hmac implements \GuzzleHttp\Event\SubscriberInterface
             $path = substr($path, strlen($this->getPrefix()));
         }
         
+        // Fudge at the moment
+        if (substr($path, 0, 3) == '/v2') {
+            $path = substr($path, 3);
+        }
+        
         $request->setPath($this->prefix . $path);
         if ($this->getKey() && strlen($this->getKey()) > 0) {
             $request->getQuery()->set('hmacHash', $this->getHash($request));
