@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tabs Rest API Language collection object.
+ * Tabs Rest API Owner collection object.
  *
  * PHP Version 5.4
  *
@@ -13,10 +13,10 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\collection;
+namespace tabs\apiclient\collection\actor;
 
 /**
- * Tabs Rest API Language collection object.
+ * Tabs Rest API Owner collection object.
  *
  * @category  Tabs_Client
  * @package   Tabs
@@ -26,14 +26,14 @@ namespace tabs\apiclient\collection;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  */
-class Language extends \tabs\apiclient\collection\Collection
+class Owner extends \tabs\apiclient\collection\Collection
 {
     /**
-     * Return an array of language objects.  This object will need to be
+     * Return an array of owner objects.  This object will need to be
      * instantiated and the method fetch will need to be called before this will
      * return any elements.
      *
-     * @return \tabs\apiclient\core\Language[]
+     * @return \tabs\apiclient\actor\Owner[]
      */
     public function getElements()
     {
@@ -45,7 +45,7 @@ class Language extends \tabs\apiclient\collection\Collection
      */
     public function getRoute()
     {
-        return 'language';
+        return 'owner';
     }
 
     /**
@@ -53,6 +53,6 @@ class Language extends \tabs\apiclient\collection\Collection
      */
     public function getElementClass()
     {
-        return '\tabs\apiclient\core\Language';
+        return '\tabs\apiclient\actor\Owner';
     }
 }

@@ -13,7 +13,7 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\collection;
+namespace tabs\apiclient\collection\actor;
 
 /**
  * Tabs Rest API Customer collection object.

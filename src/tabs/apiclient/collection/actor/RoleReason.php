@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tabs Rest API Country collection object.
+ * Tabs Rest API Role/Reason collection object.
  *
  * PHP Version 5.4
  *
@@ -13,10 +13,10 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\collection;
+namespace tabs\apiclient\collection\actor;
 
 /**
- * Tabs Rest API Country collection object.
+ * Tabs Rest API Role collection object.
  *
  * @category  Tabs_Client
  * @package   Tabs
@@ -26,14 +26,14 @@ namespace tabs\apiclient\collection;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  */
-class Country extends \tabs\apiclient\collection\Collection
+class RoleReason extends \tabs\apiclient\collection\Collection
 {
     /**
-     * Return an array of country objects.  This object will need to be
+     * Return an array of actor role objects.  This object will need to be
      * instantiated and the method fetch will need to be called before this will
      * return any elements.
      *
-     * @return \tabs\apiclient\core\Country[]
+     * @return \tabs\apiclient\actor\RoleReason[]
      */
     public function getElements()
     {
@@ -45,7 +45,7 @@ class Country extends \tabs\apiclient\collection\Collection
      */
     public function getRoute()
     {
-        return 'country';
+        return 'rolereason';
     }
 
     /**
@@ -53,6 +53,6 @@ class Country extends \tabs\apiclient\collection\Collection
      */
     public function getElementClass()
     {
-        return '\tabs\apiclient\core\Country';
+        return '\tabs\apiclient\actor\RoleReason';
     }
 }

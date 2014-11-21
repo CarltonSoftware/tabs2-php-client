@@ -13,7 +13,7 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\collection;
+namespace tabs\apiclient\collection\core\attribute\Attribute;
 
 /**
  * Tabs Rest API Attribute collection object.

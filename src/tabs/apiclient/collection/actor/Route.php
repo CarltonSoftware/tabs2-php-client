@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tabs Rest API ContactMethod collection object.
+ * Tabs Rest API Route collection object.
  *
  * PHP Version 5.4
  *
@@ -13,10 +13,10 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\collection;
+namespace tabs\apiclient\collection\actor;
 
 /**
- * Tabs Rest API ContactMethod collection object.
+ * Tabs Rest API Route collection object.
  *
  * @category  Tabs_Client
  * @package   Tabs
@@ -26,14 +26,14 @@ namespace tabs\apiclient\collection;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  */
-class ContactMethod extends \tabs\apiclient\collection\Collection
+class Route extends \tabs\apiclient\collection\Collection
 {
     /**
-     * Return an array of ContactMethod objects.  This object will need to be
+     * Return an array of actor route objects.  This object will need to be
      * instantiated and the method fetch will need to be called before this will
      * return any elements.
      *
-     * @return \tabs\apiclient\core\ContactMethod[]
+     * @return \tabs\apiclient\actor\Route[]
      */
     public function getElements()
     {
@@ -45,7 +45,7 @@ class ContactMethod extends \tabs\apiclient\collection\Collection
      */
     public function getRoute()
     {
-        return 'contactmethod';
+        return 'route';
     }
 
     /**
@@ -53,6 +53,6 @@ class ContactMethod extends \tabs\apiclient\collection\Collection
      */
     public function getElementClass()
     {
-        return '\tabs\apiclient\core\ContactMethod';
+        return '\tabs\apiclient\actor\Route';
     }
 }

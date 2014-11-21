@@ -64,7 +64,7 @@ class Pagination extends \tabs\apiclient\core\Base
      * 
      * @param integer $page Page number
      * 
-     * @return \tabs\apiclient\api\core\Pagination
+     * @return \tabs\apiclient\utility\Pagination
      */
     public function setPage($page)
     {
@@ -78,7 +78,7 @@ class Pagination extends \tabs\apiclient\core\Base
      * 
      * @param integer $limit Page size/limit
      * 
-     * @return \tabs\apiclient\api\core\Pagination
+     * @return \tabs\apiclient\utility\Pagination
      */
     public function setLimit($limit)
     {
@@ -92,7 +92,7 @@ class Pagination extends \tabs\apiclient\core\Base
      * 
      * @param integer $total Total
      * 
-     * @return \tabs\apiclient\api\core\Pagination
+     * @return \tabs\apiclient\utility\Pagination
      */
     public function setTotal($total)
     {
@@ -106,7 +106,7 @@ class Pagination extends \tabs\apiclient\core\Base
      * 
      * @param array $filters Request filters
      * 
-     * @return \tabs\apiclient\api\core\Pagination
+     * @return \tabs\apiclient\utility\Pagination
      */
     public function setFilters($filters)
     {
