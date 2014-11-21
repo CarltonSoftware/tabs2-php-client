@@ -395,6 +395,48 @@ class Fixtures
         return $history;
     }
     
+    public static function getBranding()
+    {
+        $branding = new tabs\apiclient\brand\Branding();
+        $branding->setId(1);
+        
+        $bg = Fixtures::getBrandingGroup();
+        $branding->setBrandingGroup($bg);
+        
+        $mb = Fixtures::getMarketingBrand();
+        $branding->setMarketingbrand($mb);
+        
+        $bb = Fixtures::getBookingBrand();
+        $branding->setBookingbrand($bb);
+        
+        return $branding;
+    }
+    
+    public static function getBrandingGroup()
+    {
+        $bg = new \tabs\apiclient\brand\BrandingGroup();
+        $bg->setCode('NOAA')->setName('Norfolk');
+        
+        return $bg;
+    }
+    
+    public static function getMarketingBrand()
+    {
+        $bg = new \tabs\apiclient\brand\MarketingBrand();
+        $bg->setCode('NOMB')->setName('Norfolk');
+        
+        return $bg;
+    }
+    
+    public static function getBookingBrand()
+    {
+        $bg = new \tabs\apiclient\brand\BookingBrand();
+        $bg->setCode('NOBB')->setName('Norfolk');
+        
+        return $bg;
+    }
+    
+    
     /**
      * Return a property marketing brand object
      * 
@@ -468,8 +510,10 @@ class Fixtures
         $brandingGroup = Fixtures::getPropertyBrandingGroup();
         $marketingBrand = Fixtures::getPropertyMarketingBrand();
         $bookingBrand = Fixtures::getPropertyBookingBrand();
+        $brd = Fixtures::getBranding();
         $branding = new \tabs\apiclient\property\brand\Branding();
         $branding->setId(1)
+            ->setBranding($brd)
             ->setStatus($status)
             ->addStatusHistory($statusHistory)
             ->setBrandinggroup($brandingGroup)
