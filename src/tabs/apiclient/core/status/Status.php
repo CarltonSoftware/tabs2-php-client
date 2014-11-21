@@ -52,6 +52,16 @@ class Status extends \tabs\apiclient\core\Base
     // -------------------------- Public Functions -------------------------- //
     
     /**
+     * ToString magic method
+     * 
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getName();
+    }
+    
+    /**
      * @inheritDoc
      */
     public function toArray()
