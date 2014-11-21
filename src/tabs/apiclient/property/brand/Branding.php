@@ -160,7 +160,7 @@ class Branding extends BrandStatus
     public function toArray()
     {
         return array(
-            'brandingid' => $this->getBrandinggroup()->getId(),
+            'brandingid' => $this->getBranding()->getId(),
             'status' => $this->getStatus()->getName()
         );
     }
