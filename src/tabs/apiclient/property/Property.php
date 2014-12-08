@@ -404,7 +404,7 @@ class Property extends \tabs\apiclient\core\Builder
      * 
      * @param string $class Class name
      * 
-     * @return OwnerCollection|CustomerCollection|KeyholderCollection
+     * @return OwnerCollection|CleanerCollection|CustomerCollection|KeyholderCollection
      */
     private function _getActorCollection($class)
     {

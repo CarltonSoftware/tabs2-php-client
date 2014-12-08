@@ -64,4 +64,26 @@ class Keyholder extends \tabs\apiclient\core\Builder
     {
         return $this->setTodate($date);
     }
+    
+    /**
+     * Fetches and sets the actor object from the api
+     * 
+     * @param \tabs\apiclient\actor\Actor|string $keyholder Keyholder
+     * 
+     * @return \tabs\apiclient\property\propertyactor\Keyholder
+     */
+    public function setKeyholder($keyholder)
+    {
+        return $this->setActor($keyholder);
+    }
+    
+    /**
+     * Returns the keyholder object
+     * 
+     * @return \tabs\apiclient\property\propertyactor\Keyholder
+     */
+    public function getKeyholder()
+    {
+        return $this->getActor();
+    }
 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tabs Rest API Keyholder Property Actor object.
+ * Tabs Rest API Cleaner Property Actor object.
  *
  * PHP Version 5.4
  *
@@ -16,7 +16,7 @@
 namespace tabs\apiclient\property\propertyactor;
 
 /**
- * Tabs Rest API property Keyholder Actor object.
+ * Tabs Rest API property Cleaner Actor object.
  *
  * @category  Tabs_Client
  * @package   Tabs
@@ -25,9 +25,6 @@ namespace tabs\apiclient\property\propertyactor;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
- * 
- * @method integer  getId()            Returns the ID
- * @method PropertyActor setId(integer $id) Sets the ID
  */
 class Cleaner extends \tabs\apiclient\core\Builder
 {
@@ -66,5 +63,27 @@ class Cleaner extends \tabs\apiclient\core\Builder
     public function setCleanertodate($date)
     {
         return $this->setTodate($date);
+    }
+    
+    /**
+     * Fetches and sets the actor object from the api
+     * 
+     * @param \tabs\apiclient\actor\Actor|string $cleaner Cleaner
+     * 
+     * @return \tabs\apiclient\property\propertyactor\Cleaner
+     */
+    public function setCleaner($cleaner)
+    {
+        return $this->setActor($cleaner);
+    }
+    
+    /**
+     * Returns the cleaner object
+     * 
+     * @return \tabs\apiclient\property\propertyactor\Cleaner
+     */
+    public function getCleaner()
+    {
+        return $this->getActor();
     }
 }
