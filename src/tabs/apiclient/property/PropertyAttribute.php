@@ -95,6 +95,10 @@ class PropertyAttribute extends \tabs\apiclient\core\Builder
         if (is_scalar($val)) {
             $value = new Value();
             $value->setValue($val);
+            if (is_bool($val)) {
+                $value->setBoolean($val);
+            }
+            
             $this->value = $value;
         } else {
             $this->value = Value::factory($val);
