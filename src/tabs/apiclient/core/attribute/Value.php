@@ -81,7 +81,7 @@ class Value extends \tabs\apiclient\core\Base
      * 
      * @return string
      */
-    public function toString()
+    public function __toString()
     {
         if ($this->value) {
             if (is_bool($this->value)) {

@@ -214,4 +214,14 @@ class Attribute extends \tabs\apiclient\core\Builder
     {
         return array();
     }
+    
+    /**
+     * ToString magic method
+     * 
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getCode();
+    }
 }

@@ -21,6 +21,7 @@ class AttributeClassTest extends ApiClientClassTest
         
         $this->assertEquals(2, $attr->getId());
         $this->assertEquals('ATTR02', $attr->getCode());
+        $this->assertEquals('ATTR02', (string) $attr);
         $this->assertEquals('< Pub', $attr->getName());
         $this->assertEquals('Hybrid', $attr->getType());
         $this->assertEquals('Near a pub?', $attr->getDescription());
