@@ -37,6 +37,18 @@ class AttributeClassTest extends ApiClientClassTest
         
         $this->assertEquals('/attribute', $attr->getCreateUrl());
         $this->assertEquals('/attribute/2', $attr->getUpdateUrl());
+        
+        $this->assertArrayHasKey('name', $attr->toArray());
+        $this->assertArrayHasKey('type', $attr->toArray());
+        $this->assertArrayHasKey('groupid', $attr->toArray());
+        $this->assertArrayHasKey('code', $attr->toArray());
+        $this->assertArrayHasKey('description', $attr->toArray());
+        $this->assertArrayHasKey('usedinavailabilitysearch', $attr->toArray());
+        $this->assertArrayHasKey('unitid', $attr->toArray());
+        $this->assertArrayHasKey('operator', $attr->toArray());
+        $this->assertArrayHasKey('maximumvalue', $attr->toArray());
+        $this->assertArrayHasKey('minimumvalue', $attr->toArray());
+        $this->assertArrayHasKey('limitvalue', $attr->toArray());
     }
     
     /**
