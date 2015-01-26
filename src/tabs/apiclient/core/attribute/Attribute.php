@@ -212,7 +212,38 @@ class Attribute extends \tabs\apiclient\core\Builder
      */
     public function toArray()
     {
-        return array();
+        $attribute = array(
+            'type' => $this->getType(),
+            'groupid' => $this->getGroup()->getId(),
+            'code' => $this->getCode(),
+            'name' => $this->getName(),
+            'description' => $this->getDescription(),
+            'usedinavailabilitysearch' => $this->isUsedinavailabilitysearch(),
+            'baseattribute' => $this->isBase()
+        );
+        
+        if (in_array($this->getType(), array('Hybrid', 'Number'))) {
+            $attribute = array_merge(
+                $attribute,
+                array(
+                    'unitid' => $this->getUnit()->getId(),
+                    'operator' => $this->getOperator(),
+                    'maximumvalue' => $this->getMaximumvalue(),
+                    'minimumvalue' => $this->getMinimumvalue()
+                )
+            );
+        }
+        
+        if (in_array($this->getType(), array('Hybrid'))) {
+            $attribute = array_merge(
+                $attribute,
+                array(
+                    'limitvalue' => $this->getLimitvalue()
+                )
+            );
+        }
+        
+        return $attribute;
     }
     
     /**
