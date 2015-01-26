@@ -135,7 +135,7 @@ class PropertyTest extends ApiClientClassTest
         $attributes = $property->getAttributes()->getElements();
         
         $this->assertEquals(
-            false,
+            true,
             $attributes[0]->getValue()->getBoolean()
         );
         
