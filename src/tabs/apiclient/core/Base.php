@@ -155,6 +155,34 @@ abstract class Base
     }
 
     // -------------------------- Public Functions -------------------------- //
+    
+    /**
+     * Check if a method exists or not.  If a magic method accessor is specified
+     * then the method will check the property string after the accessor 
+     * prefix (i.e. set or get).
+     * 
+     * @param string $method Method name
+     * 
+     * @return boolean
+     */
+    public function method_exists($method)
+    {
+        if (!is_string($method)) {
+            return false;
+        }
+        
+        if (method_exists($this, $method)) {
+            return true;
+        }
+        
+        if ((substr($method, 0, 3) == 'get' || substr($method, 0, 3) == 'set')
+            && property_exists($this, lcfirst(substr($method, 3)))
+        ) {
+            return true;
+        }
+        
+        return false;
+    }
 
     /**
      * Convert a boolean value to a string
