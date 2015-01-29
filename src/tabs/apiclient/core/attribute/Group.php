@@ -32,7 +32,7 @@ namespace tabs\apiclient\core\attribute;
  * @method string getName()             Returns the name
  * @method Group  setName(string $name) Sets the name
  */
-class Group extends \tabs\apiclient\core\Base
+class Group extends \tabs\apiclient\core\Builder
 {
     /**
      * ID
@@ -47,4 +47,22 @@ class Group extends \tabs\apiclient\core\Base
      * @var string
      */
     protected $name = '';
+    
+    /**
+     * @inheritDoc
+     */
+    public function toArray()
+    {
+        return array(
+            'name' => $this->getName()
+        );
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function getUrlStub()
+    {
+        return 'attributegroup';
+    }
 }
