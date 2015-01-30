@@ -53,6 +53,6 @@ class Unit extends \tabs\apiclient\collection\Collection
      */
     public function getElementClass()
     {
-        return '\tabs\apiclient\core\status\Unit';
+        return '\tabs\apiclient\core\Unit';
     }
 }
