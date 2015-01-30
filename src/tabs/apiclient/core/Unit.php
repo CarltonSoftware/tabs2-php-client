@@ -38,7 +38,7 @@ namespace tabs\apiclient\core;
  * @method string getDecimalplaces()                Returns the decimal places
  * @method Unit   setDecimalplaces(string $decimal) Sets the decimal places
  */
-class Unit extends \tabs\apiclient\core\Base
+class Unit extends Builder
 {
     /**
      * ID
@@ -67,4 +67,24 @@ class Unit extends \tabs\apiclient\core\Base
      * @var string
      */
     protected $decimalplaces = 0;
+    
+    /**
+     * @inheritDoc
+     */
+    public function toArray()
+    {
+        return array(
+            'name' => $this->getName(),
+            'description' => $this->getDescription(),
+            'decimalplaces' => $this->getDecimalplaces()
+        );
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function getUrlStub()
+    {
+        return 'unit';
+    }
 }
