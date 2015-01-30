@@ -114,9 +114,17 @@ class PropertyAttribute extends \tabs\apiclient\core\Builder
     {
         $attr = array(
             'type' => $this->getAttribute()->getType(),
-            'attributeid' => $this->getAttribute()->getId(),
-            'value' => $this->getValue()->getValue()
+            'attributeid' => $this->getAttribute()->getId()
         );
+        
+        if ($this->getAttribute()->getType() == 'Hybrid') {
+            $attr['value'] = array(
+                'boolean' => $this->boolToStr($this->getValue()->getBoolean()),
+                'number' => $this->getValue()->getNumber()
+            );
+        } else {
+            $attr['value'] = (string) $this->getValue();
+        }
         
         if ($this->getAttribute()->getUnit()) {
             $attr['unit'] = $this->getAttribute()->getUnit()->getName();
