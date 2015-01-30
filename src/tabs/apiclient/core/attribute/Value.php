@@ -66,7 +66,7 @@ class Value extends \tabs\apiclient\core\Base
      */
     public function getValue()
     {
-        if ($this->value) {
+        if ($this->value !== null) {
             return $this->value;
         } else {
             return array(
@@ -83,7 +83,7 @@ class Value extends \tabs\apiclient\core\Base
      */
     public function __toString()
     {
-        if ($this->value) {
+        if ($this->value !== null) {
             if (is_bool($this->value)) {
                 return $this->boolToStr($this->value);
             } else {
