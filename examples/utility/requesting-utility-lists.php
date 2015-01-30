@@ -20,7 +20,7 @@ require_once __DIR__ . '/../creating-a-new-connection.php';
 try {
     
     echo '<h4>Countries</h4>';
-    $countries = new \tabs\apiclient\collection\Country();
+    $countries = new \tabs\apiclient\collection\core\Country();
     $countries->fetch();
     
     foreach ($countries->getElements() as $country) {
@@ -28,7 +28,7 @@ try {
     }
     
     echo '<h4>Languages</h4>';
-    $languages = new \tabs\apiclient\collection\Language();
+    $languages = new \tabs\apiclient\collection\core\Language();
     $languages->fetch();
     
     foreach ($languages->getElements() as $language) {
@@ -36,11 +36,27 @@ try {
     }
     
     echo '<h4>Role/Reasons</h4>';
-    $rolereasons = new \tabs\apiclient\collection\RoleReason();
+    $rolereasons = new \tabs\apiclient\collection\actor\RoleReason();
     $rolereasons->fetch();
     
     foreach ($rolereasons->getElements() as $rolereason) {
         echo '<p>' .  (string) $rolereason . '</p>';
+    }
+    
+    echo '<h4>Encoding types</h4>';
+    $encodings = new \tabs\apiclient\collection\core\Encoding();
+    $encodings->fetch();
+    
+    foreach ($encodings->getElements() as $encoding) {
+        echo '<p>' .  (string) $encoding . '</p>';
+    }
+    
+    echo '<h4>Description types</h4>';
+    $types = new \tabs\apiclient\collection\property\description\Type();
+    $types->fetch();
+    
+    foreach ($types->getElements() as $type) {
+        echo '<p>' .  $type->getName() . '</p>';
     }
         
 } catch(Exception $e) {
