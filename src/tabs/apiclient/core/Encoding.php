@@ -26,7 +26,7 @@ namespace tabs\apiclient\core;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method integer getId()          Returns Notetype Id
+ * @method integer getId()          Returns encoding Id
  * @method string  getEncoding()    Returns the encoding type
  *
  * @method Encoding setId(integer $id)            Set the id
