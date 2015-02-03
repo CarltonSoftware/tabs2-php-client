@@ -23,6 +23,7 @@ use tabs\apiclient\collection\property\description\Description as DescriptionCol
 use tabs\apiclient\collection\property\PropertyAttribute as AttributeCollection;
 use tabs\apiclient\property\description\Description as PropertyDescription;
 use tabs\apiclient\property\brand\Branding;
+use tabs\apiclient\core\Image as PropertyImage;
 
 /**
  * Tabs Rest API Property object.
@@ -125,39 +126,11 @@ class Property extends \tabs\apiclient\core\Builder
     protected $brandings = array();
     
     /**
-     * Array of owner objects
+     * Collections array
      * 
-     * @var OwnerCollection
+     * @var \tabs\apiclient\collection\Collection[]
      */
-    protected $owners;
-    
-    /**
-     * Array of cleaner objects
-     * 
-     * @var CleanerCollection
-     */
-    protected $cleaners;
-    
-    /**
-     * Array of keyholder objects
-     * 
-     * @var KeyholderCollection
-     */
-    protected $keyholders;
-    
-    /**
-     * The descriptions for the property
-     * 
-     * @var DescriptionCollection
-     */
-    protected $descriptions;
-    
-    /**
-     * Attributes collection
-     * 
-     * @var AttributeCollection 
-     */
-    protected $attributes;
+    protected $collections = array();
 
     // -------------------------- Static Functions -------------------------- //
 
@@ -226,7 +199,7 @@ class Property extends \tabs\apiclient\core\Builder
      */
     public function getOwners()
     {
-        return $this->_getActors('Owner');
+        return $this->_getActorCollection('Owner');
     }
     
     /**
@@ -251,7 +224,7 @@ class Property extends \tabs\apiclient\core\Builder
      */
     public function getCleaners()
     {
-        return $this->_getActors('Cleaner');
+        return $this->_getActorCollection('Cleaner');
     }
     
     /**
@@ -276,7 +249,7 @@ class Property extends \tabs\apiclient\core\Builder
      */
     public function getKeyholders()
     {
-        return $this->_getActors('Keyholder');
+        return $this->_getActorCollection('Keyholder');
     }
     
     /**
@@ -301,10 +274,15 @@ class Property extends \tabs\apiclient\core\Builder
      */
     public function getDescriptions()
     {
-        if ($this->descriptions === null) {
-            $this->descriptions = $this->_createDescriptionCollection();
+        if ($this->getId() === null) {
+            throw new \tabs\apiclient\client\Exception(
+                'A valid ID field is required (currently null).'
+            );
         }
-        return $this->descriptions;
+        
+        return $this->_getCollection(
+            '\\tabs\\apiclient\\collection\\property\\description\\Description'
+        );
     }
     
     /**
@@ -329,22 +307,54 @@ class Property extends \tabs\apiclient\core\Builder
      */
     public function getAttributes()
     {
-        if ($this->attributes === null) {
-            $this->attributes = $this->_createAttributeCollection();
+        if ($this->getId() === null) {
+            throw new \tabs\apiclient\client\Exception(
+                'A valid ID field is required (currently null).'
+            );
         }
-        return $this->attributes;
+        
+        return $this->_getCollection(
+            '\\tabs\\apiclient\\collection\\property\\PropertyAttribute'
+        );
+    }
+    
+    /**
+     * Add an image to the property
+     * 
+     * @param PropertyImage $image Property image object
+     * 
+     * @return Property
+     */
+    public function addImage(PropertyImage &$image)
+    {
+        $image->setParent($this);
+        $this->getImages()->addElement($image);
+        
+        return $this;
+    }
+    
+    /**
+     * Return a property attribute collection object
+     * 
+     * @return \tabs\apiclient\collection\property\Image
+     */
+    public function getImages()
+    {
+        return $this->_getCollection(
+            '\\tabs\\apiclient\\collection\\property\\Image'
+        );
     }
     
     /**
      * Set the address on the property
      * 
-     * @param Address|stdClass|Array $address Address object/array
+     * @param Address|stdClass|Array $addr Address object/array
      * 
      * @return \tabs\apiclient\property\Property
      */
-    public function setAddress($address)
+    public function setAddress($addr)
     {
-        $address = Address::factory($address);
+        $address = Address::factory($addr);
         $address->setParent($this);
         $this->address = $address;
         
@@ -397,8 +407,25 @@ class Property extends \tabs\apiclient\core\Builder
         );
     }
 
-    // -------------------------- Public Functions -------------------------- //
+    // ------------------------- Private Functions -------------------------- //
     
+    /**
+     * Return a new collection type and instantiate if needed
+     * 
+     * @param string $class Class string
+     * 
+     * @return \tabs\apiclient\collection\Collection
+     */
+    private function _getCollection($class)
+    {
+        if (!isset($this->collections[$class])) {
+            $this->collections[$class] = new $class();
+            $this->collections[$class]->setElementParent($this);
+        }
+        
+        return $this->collections[$class];
+    }
+
     /**
      * Get (and create) an actor collection
      * 
@@ -408,73 +435,8 @@ class Property extends \tabs\apiclient\core\Builder
      */
     private function _getActorCollection($class)
     {
-        $nsClass = "\\tabs\\apiclient\\collection\\property\\propertyactor\\" . $class;
-        $localObject = strtolower($class) . 's';
-        $collection = new $nsClass();
-        $collection->setRoute(
-            '/property/' . $this->getId() . '/' . strtolower($class)
+        return $this->_getCollection(
+            "\\tabs\\apiclient\\collection\\property\\propertyactor\\" . $class
         );
-        
-        if (!$this->$localObject) {
-            $this->$localObject = $collection;
-        }
-        
-        return $this->$localObject;
-    }
-    
-    /**
-     * Get (and set if not defined) the property description collection
-     * 
-     * @return DescriptionCollection
-     */
-    private function _createDescriptionCollection()
-    {
-        if ($this->getId() === null) {
-            throw new \tabs\apiclient\client\Exception(
-                'A valid ID field is required (currently null).'
-            );
-        }
-        
-        $collection = new DescriptionCollection();
-        $collection->setRoute(
-            '/property/' . $this->getId() . '/description'
-        );
-        $collection->setElementParent($this);
-            
-        return $collection;
-    }
-    
-    /**
-     * Get (and set if not defined) the property attribute collection
-     * 
-     * @return AttributeCollection
-     */
-    private function _createAttributeCollection()
-    {
-        if ($this->getId() === null) {
-            throw new \tabs\apiclient\client\Exception(
-                'A valid ID field is required (currently null).'
-            );
-        }
-        
-        $collection = new AttributeCollection();
-        $collection->setRoute(
-            '/property/' . $this->getId() . '/attribute'
-        );
-        $collection->setElementParent($this);
-            
-        return $collection;
-    }
-    
-    /**
-     * Get actors
-     * 
-     * @param string $class Property actor collection class name
-     * 
-     * @return \tabs\apiclient\collection\propertyactor\PropertyActor
-     */
-    private function _getActors($class)
-    {
-        return $this->_getActorCollection($class)->setElementParent($this);
     }
 }
