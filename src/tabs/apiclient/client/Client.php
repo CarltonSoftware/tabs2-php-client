@@ -35,6 +35,13 @@ class Client extends \GuzzleHttp\Client
      * @var \tabs\apiclient\client\Client
      */
     static $instance;
+    
+    /**
+     * HMAC plugin
+     * 
+     * @var \tabs\apiclient\client\Hmac 
+     */
+    protected $hmac;
 
     /**
      * Create a new Api Connection for use within the tabs php client
@@ -87,6 +94,7 @@ class Client extends \GuzzleHttp\Client
     public function __construct($baseUrl, $key, $secret, $config = array())
     {
         $plugin = new \tabs\apiclient\client\Hmac($key, $secret);
+        $this->hmac = $plugin;
         
         if (isset($config['prefix'])) {
             $plugin->setPrefix($config['prefix']);
@@ -100,6 +108,16 @@ class Client extends \GuzzleHttp\Client
             )
         );
         $this->getEmitter()->attach($plugin);
+    }
+    
+    /**
+     * Return the hmac plugin
+     * 
+     * @return \tabs\apiclient\client\Hmac
+     */
+    public function getHmac()
+    {
+        return $this->hmac;
     }
     
     /**
