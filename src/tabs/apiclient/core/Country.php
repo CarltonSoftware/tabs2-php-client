@@ -54,7 +54,7 @@ class Country extends Base
     /**
      * Country name
      * 
-     * @var type 
+     * @var string 
      */
     protected $name = '';
     
