@@ -32,7 +32,6 @@ use \tabs\apiclient\utility;
  * @method \tabs\apiclient\core\Base getElementParent() Return the element parent
  * 
  * @method Collection setRoute(string $route) Set the route
- * @method Collection setElementParent(\tabs\apiclient\core\Base $ele) Child class parent
  */
 abstract class Collection extends \tabs\apiclient\core\Base implements CollectionInterface
 {
@@ -151,6 +150,20 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
     public function __construct()
     {
         $this->pagination = new \tabs\apiclient\utility\Pagination();
+    }
+    
+    /**
+     * Set the element parent
+     * 
+     * @param \tabs\apiclient\core\Base &$element Element by ref
+     * 
+     * @return \tabs\apiclient\collection\Collection
+     */
+    public function setElementParent(&$element)
+    {
+        $this->elementParent = $element;
+        
+        return $this;
     }
     
     /**
