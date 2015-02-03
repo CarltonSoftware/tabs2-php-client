@@ -57,7 +57,7 @@ class Hmac implements \GuzzleHttp\Event\SubscriberInterface
      * 
      * @var string
      */
-    protected $prefix;
+    protected $prefix = '';
     
     // ----------------------------- Constructor ---------------------------- //
     
@@ -85,7 +85,7 @@ class Hmac implements \GuzzleHttp\Event\SubscriberInterface
         return array(
             'before' => array(
                 'onBefore',
-                \GuzzleHttp\Event\RequestEvents::SIGN_REQUEST
+                \GuzzleHttp\Event\RequestEvents::EARLY
             )
         );
     }
@@ -96,7 +96,18 @@ class Hmac implements \GuzzleHttp\Event\SubscriberInterface
     public function onBefore(\GuzzleHttp\Event\BeforeEvent $event)
     {
         $request = $event->getRequest();
-        
+        $this->setHmacParams($request);
+    }
+    
+    /**
+     * Set the hmac query params and fidge the prefix url
+     * 
+     * @param \GuzzleHttp\Message\RequestInterface $request
+     * 
+     * @return \GuzzleHttp\Message\RequestInterface
+     */
+    public function setHmacParams(\GuzzleHttp\Message\RequestInterface &$request)
+    {
         $path = $request->getPath();
         if (substr($path, 0, strlen($this->getPrefix())) == $this->getPrefix()) {
             $path = substr($path, strlen($this->getPrefix()));
@@ -112,6 +123,8 @@ class Hmac implements \GuzzleHttp\Event\SubscriberInterface
             $request->getQuery()->set('hmacHash', $this->getHash($request));
             $request->getQuery()->set('hmacKey', $this->getKey());
         }
+        
+        return $request;
     }
     
     // -------------------------- Public Functions -------------------------- //
