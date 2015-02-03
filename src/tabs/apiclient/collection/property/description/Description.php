@@ -47,4 +47,12 @@ class Description extends \tabs\apiclient\collection\Collection
     {
         return '\tabs\apiclient\property\description\Description';
     }
+    
+    /**
+     * @inheritDoc
+     */
+    public function getRoute()
+    {
+        return $this->getElementParent()->getUpdateUrl() . '/description';
+    }
 }

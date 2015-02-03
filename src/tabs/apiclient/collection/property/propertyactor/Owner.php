@@ -47,4 +47,12 @@ class Owner extends PropertyActor
     {
         return '\tabs\apiclient\property\propertyactor\Owner';
     }
+    
+    /**
+     * @inheritDoc
+     */
+    public function getRoute()
+    {
+        return $this->getElementParent()->getUpdateUrl() . '/owner';
+    }
 }

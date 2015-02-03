@@ -47,4 +47,12 @@ class PropertyAttribute extends \tabs\apiclient\collection\Collection
     {
         return '\tabs\apiclient\property\PropertyAttribute';
     }
+    
+    /**
+     * @inheritDoc
+     */
+    public function getRoute()
+    {
+        return $this->getElementParent()->getUpdateUrl() . '/attribute';
+    }
 }

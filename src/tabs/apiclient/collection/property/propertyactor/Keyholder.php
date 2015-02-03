@@ -47,4 +47,12 @@ class Keyholder extends PropertyActor
     {
         return '\tabs\apiclient\property\propertyactor\Keyholder';
     }
+    
+    /**
+     * @inheritDoc
+     */
+    public function getRoute()
+    {
+        return $this->getElementParent()->getUpdateUrl() . '/keyholder';
+    }
 }

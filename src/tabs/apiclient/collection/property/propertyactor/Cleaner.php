@@ -47,4 +47,12 @@ class Cleaner extends PropertyActor
     {
         return '\tabs\apiclient\property\propertyactor\Cleaner';
     }
+    
+    /**
+     * @inheritDoc
+     */
+    public function getRoute()
+    {
+        return $this->getElementParent()->getUpdateUrl() . '/cleaner';
+    }
 }
