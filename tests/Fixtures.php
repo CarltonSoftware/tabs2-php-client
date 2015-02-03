@@ -299,6 +299,9 @@ class Fixtures
         $hybrid = Fixtures::getPropertyHybridAttribute();
         $property->addAttribute($hybrid);
         
+        $img = Fixtures::getImage();
+        $property->addImage($img);
+        
         return $property;
     }
     
@@ -395,6 +398,11 @@ class Fixtures
         return $history;
     }
     
+    /**
+     * Return a mock branding object
+     * 
+     * @return \tabs\apiclient\brand\Branding
+     */
     public static function getBranding()
     {
         $branding = new tabs\apiclient\brand\Branding();
@@ -412,6 +420,11 @@ class Fixtures
         return $branding;
     }
     
+    /**
+     * Return a branding group object
+     * 
+     * @return \tabs\apiclient\brand\BrandingGroup
+     */
     public static function getBrandingGroup()
     {
         $bg = new \tabs\apiclient\brand\BrandingGroup();
@@ -420,6 +433,11 @@ class Fixtures
         return $bg;
     }
     
+    /**
+     * Return return a marketing brand group
+     * 
+     * @return \tabs\apiclient\brand\MarketingBrand
+     */
     public static function getMarketingBrand()
     {
         $bg = new \tabs\apiclient\brand\MarketingBrand();
@@ -428,6 +446,11 @@ class Fixtures
         return $bg;
     }
     
+    /**
+     * Return a mock booking brand object
+     * 
+     * @return \tabs\apiclient\brand\BookingBrand
+     */
     public static function getBookingBrand()
     {
         $bg = new \tabs\apiclient\brand\BookingBrand();
@@ -435,7 +458,6 @@ class Fixtures
         
         return $bg;
     }
-    
     
     /**
      * Return a property marketing brand object
@@ -621,5 +643,23 @@ class Fixtures
             ->setDecimalplaces(1);
         
         return $unit;
+    }
+    
+    /**
+     * Return a mock image object
+     * 
+     * @return \tabs\apiclient\core\Image
+     */
+    public static function getImage()
+    {
+        $img = new \tabs\apiclient\core\Image();
+        $img->setId(1)
+            ->setFilename('test.jpg')
+            ->setTitle('Test')
+            ->setDescription('Testing')
+            ->setHeight(100)
+            ->setWidth(100);
+        
+        return $img;
     }
 }

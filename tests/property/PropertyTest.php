@@ -160,6 +160,18 @@ class PropertyTest extends ApiClientClassTest
     }
     
     /**
+     * Test property images
+     * 
+     * @return void
+     */
+    public function testPropertyImages()
+    {
+        $property = Fixtures::getProperty();
+        $images = $property->getImages()->getElements();
+        $this->assertEquals(1, $images[0]->getId());
+    }
+    
+    /**
      * Test a property object
      * 
      * @param \tabs\apiclient\property\Property $property Property object
