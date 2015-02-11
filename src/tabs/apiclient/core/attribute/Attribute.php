@@ -66,6 +66,13 @@ use tabs\apiclient\core\Unit;
  * 
  * @method integer    getOperator()           Return the operand
  * @method Attribute  setOperator(string $op) Set the operand
+ * 
+ * @method integer    getDefaultbooleanvalue()              Returns the default boolean value
+ * @method Attribute  setDefaultbooleanvalue(boolean $bool) Set the default boolean value
+ * 
+ * @method integer    getDefaultnumbervalue()               Returns the default number value
+ * @method Attribute  setDefaultnumbervalue(integer $value) Set the default number value
+ * 
  */
 class Attribute extends \tabs\apiclient\core\Builder
 {
@@ -166,6 +173,20 @@ class Attribute extends \tabs\apiclient\core\Builder
      * @var integer
      */
     protected $limitvalue = 0;
+    
+    /**
+     * Default boolean value of attribute (hybrid type)
+     * 
+     * @var boolean
+     */
+    protected $defaultbooleanvalue = false;
+    
+    /**
+     * Default number value of attribute (hybrid type)
+     * 
+     * @var integer
+     */
+    protected $defaultnumbervalue = 0;
 
     // -------------------------- Public functions -------------------------- //
     
@@ -230,7 +251,6 @@ class Attribute extends \tabs\apiclient\core\Builder
             'description' => $this->getDescription(),
             'usedinavailabilitysearch' => $this->isUsedinavailabilitysearch(),
             'baseattribute' => $this->isBase(),
-            'defaultvalue' => $this->getDefaultvalue(),
         );
         
         if (in_array($this->getType(), array('Hybrid', 'Number'))) {
@@ -245,11 +265,20 @@ class Attribute extends \tabs\apiclient\core\Builder
             );
         }
         
-        if (in_array($this->getType(), array('Hybrid'))) {
+        if ($this->getType() == 'Hybrid') {
             $attribute = array_merge(
                 $attribute,
                 array(
-                    'limitvalue' => $this->getLimitvalue()
+                    'limitvalue' => $this->getLimitvalue(),
+                    'defaultbooleanvalue' => $this->getDefaultbooleanvalue(),
+                    'defaultnumbervalue' => $this->getDefaultnumbervalue(),
+                )
+            );
+        } else {
+            $attribute = array_merge(
+                $attribute,
+                array(
+                    'defaultvalue' => $this->getDefaultvalue(),
                 )
             );
         }
