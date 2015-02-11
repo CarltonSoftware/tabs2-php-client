@@ -50,6 +50,9 @@ use tabs\apiclient\core\Unit;
  * @method string     getBase()              Returns the bool
  * @method Attribute  setBase(boolean $bool) Sets the type
  * 
+ * @method object     getDefaultvalue()                     Returns the default value
+ * @method Attribute  setDefaultvalue(object $defaultvalue) Set the default value
+ * 
  * @method Unit       getUnit() Return the attribute unit
  * 
  * @method integer    getMinimumvalue()             Return the min value
@@ -121,6 +124,13 @@ class Attribute extends \tabs\apiclient\core\Builder
      * @var boolean
      */
     protected $base = false;
+    
+    /**
+     * Default value of attribute
+     * 
+     * @var object
+     */
+    protected $defaultvalue;
     
     /**
      * Unit of measurement for Number/Hybrid attributes
@@ -219,7 +229,8 @@ class Attribute extends \tabs\apiclient\core\Builder
             'name' => $this->getName(),
             'description' => $this->getDescription(),
             'usedinavailabilitysearch' => $this->isUsedinavailabilitysearch(),
-            'baseattribute' => $this->isBase()
+            'baseattribute' => $this->isBase(),
+            'defaultvalue' => $this->getDefaultvalue(),
         );
         
         if (in_array($this->getType(), array('Hybrid', 'Number'))) {
