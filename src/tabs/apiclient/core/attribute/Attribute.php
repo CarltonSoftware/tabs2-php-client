@@ -253,34 +253,42 @@ class Attribute extends \tabs\apiclient\core\Builder
             'baseattribute' => $this->isBase(),
         );
         
-        if (in_array($this->getType(), array('Hybrid', 'Number'))) {
-            $attribute = array_merge(
-                $attribute,
-                array(
-                    'unitid' => $this->getUnit()->getId(),
-                    'operator' => $this->getOperator(),
-                    'maximumvalue' => $this->getMaximumvalue(),
-                    'minimumvalue' => $this->getMinimumvalue()
-                )
-            );
-        }
-        
-        if ($this->getType() == 'Hybrid') {
-            $attribute = array_merge(
-                $attribute,
-                array(
-                    'limitvalue' => $this->getLimitvalue(),
-                    'defaultbooleanvalue' => $this->getDefaultbooleanvalue(),
-                    'defaultnumbervalue' => $this->getDefaultnumbervalue(),
-                )
-            );
-        } else {
-            $attribute = array_merge(
-                $attribute,
-                array(
-                    'defaultvalue' => $this->getDefaultvalue(),
-                )
-            );
+        switch ($this->getType()) {
+            case 'Hybrid':
+                $attribute = array_merge(
+                    $attribute,
+                    array(
+                        'operator' => $this->getOperator(),
+                        'maximumvalue' => $this->getMaximumvalue(),
+                        'minimumvalue' => $this->getMinimumvalue(),
+                        'limitvalue' => $this->getLimitvalue(),
+                        'unitid' => $this->getUnit()->getId(),
+                        'defaultbooleanvalue' => $this->getDefaultbooleanvalue(),
+                        'defaultnumbervalue' => $this->getDefaultnumbervalue(),
+                    )
+                );
+                break;
+            case 'Number':
+                $attribute = array_merge(
+                    $attribute,
+                    array(
+                        'operator' => $this->getOperator(),
+                        'maximumvalue' => $this->getMaximumvalue(),
+                        'minimumvalue' => $this->getMinimumvalue(),
+                        'unitid' => $this->getUnit()->getId(),
+                        'defaultvalue' => $this->getDefaultvalue(),
+                    )
+                );
+                break;
+            case 'String':
+            case 'Boolean':
+                $attribute = array_merge(
+                    $attribute,
+                    array(
+                        'defaultvalue' => $this->getDefaultvalue(),
+                    )
+                );
+                break;
         }
         
         return $attribute;
