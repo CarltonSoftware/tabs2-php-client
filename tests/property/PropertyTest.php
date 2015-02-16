@@ -98,6 +98,11 @@ class PropertyTest extends ApiClientClassTest
         );
         
         $this->assertEquals(
+            'Fred',
+            $description->getDescriptiontype()->getShorttype()
+        );
+        
+        $this->assertEquals(
             0,
             $description->getDescriptiontype()->getMinimumlength()
         );

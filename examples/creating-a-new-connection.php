@@ -25,3 +25,6 @@ require_once __DIR__ . '/../autoload.php';
         'prefix' => 'plato/web/v2'
     )
 );
+
+$history = new \GuzzleHttp\Subscriber\History();
+tabs\apiclient\client\Client::getClient()->getEmitter()->attach($history);

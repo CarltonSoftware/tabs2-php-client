@@ -33,7 +33,7 @@ class Image extends \tabs\apiclient\collection\Collection
      * instantiated and the method fetch will need to be called before this will
      * return any elements.
      *
-     * @return \tabs\apiclient\core\Image[]
+     * @return \tabs\apiclient\property\Image[]
      */
     public function getElements()
     {
@@ -53,6 +53,6 @@ class Image extends \tabs\apiclient\collection\Collection
      */
     public function getElementClass()
     {
-        return '\tabs\apiclient\core\Image';
+        return '\tabs\apiclient\property\Image';
     }
 }

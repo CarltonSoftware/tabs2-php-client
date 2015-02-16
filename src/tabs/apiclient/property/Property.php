@@ -23,7 +23,7 @@ use tabs\apiclient\collection\property\description\Description as DescriptionCol
 use tabs\apiclient\collection\property\PropertyAttribute as AttributeCollection;
 use tabs\apiclient\property\description\Description as PropertyDescription;
 use tabs\apiclient\property\brand\Branding;
-use tabs\apiclient\core\Image as PropertyImage;
+use tabs\apiclient\property\Image as PropertyImage;
 
 /**
  * Tabs Rest API Property object.

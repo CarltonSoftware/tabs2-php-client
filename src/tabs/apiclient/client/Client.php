@@ -133,7 +133,9 @@ class Client extends \GuzzleHttp\Client
      */
     public function get($url = null, $params = [], $options = [])
     {
-        return $this->_queryRequest('get', $url, $params, $options);
+        return $this->sendRequest(
+            $this->createQueryRequest('get', $url, $params, $options)
+        );
     }
     
     /**
@@ -149,7 +151,9 @@ class Client extends \GuzzleHttp\Client
      */
     public function delete($url = null, array $params = [], array $options = [])
     {
-        return $this->_queryRequest('delete', $url, $params, $options);
+        return $this->sendRequest(
+            $this->createQueryRequest('delete', $url, $params, $options)
+        );
     }
     
     /**
@@ -165,7 +169,9 @@ class Client extends \GuzzleHttp\Client
      */
     public function options($url = null, array $params = [], array $options = [])
     {
-        return $this->_queryRequest('options', $url, $params, $options);
+        return $this->sendRequest(
+            $this->createQueryRequest('options', $url, $params, $options)
+        );
     }
     
     /**
@@ -181,7 +187,9 @@ class Client extends \GuzzleHttp\Client
      */
     public function post($url = null, array $params = [], array $options = [])
     {
-        return $this->_postRequest('post', $url, $params, $options);
+        return $this->sendRequest(
+            $this->createPostRequest('post', $url, $params, $options)
+        );
     }
     
     /**
@@ -197,46 +205,64 @@ class Client extends \GuzzleHttp\Client
      */
     public function put($url = null, array $params = [], array $options = [])
     {
-        return $this->_postRequest('put', $url, $params, $options);
+        return $this->sendRequest(
+            $this->createPostRequest('put', $url, $params, $options)
+        );
     }
     
     /**
-     * Perform a query request.  GET, OPTIONS, DELETE will use this method
-     * 
-     * @param string $method  Method name
-     * @param string $url     Url to call
-     * @param array  $params  Query Parameters
-     * @param array  $options Options array
-     * 
-     * @return \GuzzleHttp\Message\Response
+     * Create a new guzzle request and append params onto the
+     * request query.
+     *
+     * @param string     $method  HTTP method (GET, POST, PUT, etc.)
+     * @param string|Url $url     HTTP URL to connect to
+     * @param array      $params  Key/val array of parameters
+     * @param array      $options Array of options to apply to the request
+     *
+     * @return RequestInterface
      */
-    private function _queryRequest($method, $url, $params, $options)
-    {
-        try {
-            $options['query'] = $params;
-            $response = parent::$method($url, $options);
-            return $response;
-        } catch (\RuntimeException $ex) {
-            $this->_setException($ex);
-        }
+    public function createQueryRequest(
+        $method,
+        $url,
+        array $params = [],
+        array $options = []
+    ) {
+        $options['query'] = $params;
+        return $this->createRequest($method, $url, $options);
     }
     
     /**
-     * Perform a post request.  POST, PUT will use this method
+     * Create a new guzzle request and append params onto the
+     * request body.
+     *
+     * @param string     $method  HTTP method (GET, POST, PUT, etc.)
+     * @param string|Url $url     HTTP URL to connect to
+     * @param array      $params  Key/val array of parameters
+     * @param array      $options Array of options to apply to the request
+     *
+     * @return RequestInterface
+     */
+    public function createPostRequest(
+        $method,
+        $url,
+        array $params = [],
+        array $options = []
+    ) {
+        $options['body'] = $params;
+        return $this->createRequest($method, $url, $options);
+    }
+    
+    /**
+     * Perform request.
      * 
-     * @param string $method  Method name
-     * @param string $url     Url to call
-     * @param array  $params  Query Parameters
-     * @param array  $options Options array
+     * @param RequestInterface $request Guzzle request object
      * 
      * @return \GuzzleHttp\Message\Response
      */
-    private function _postRequest($method, $url, $params, $options)
+    public function sendRequest($request)
     {
         try {
-            $options['body'] = $params;
-            $response = parent::$method($url, $options);
-            return $response;
+            return $this->send($request);
         } catch (\RuntimeException $ex) {
             $this->_setException($ex);
         }

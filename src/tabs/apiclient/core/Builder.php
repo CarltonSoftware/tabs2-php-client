@@ -51,7 +51,7 @@ abstract class Builder extends Base implements BuilderInterface
         ) {
             throw new \tabs\apiclient\client\Exception(
                 $req,
-                'Unable to create ' . ucfirst($this->getStubClass())
+                'Unable to create ' . ucfirst($this->getClass())
             );
         }
         
@@ -86,7 +86,7 @@ abstract class Builder extends Base implements BuilderInterface
         ) {
             throw new \tabs\apiclient\client\Exception(
                 $req,
-                'Unable to update ' . ucfirst($this->getStubClass())
+                'Unable to update ' . ucfirst($this->getClass())
             );
         }
         
@@ -112,7 +112,7 @@ abstract class Builder extends Base implements BuilderInterface
         ) {
             throw new \tabs\apiclient\client\Exception(
                 $req,
-                'Unable to commit ' . ucfirst($this->getStubClass())
+                'Unable to commit ' . ucfirst($this->getClass())
             );
         }
         
@@ -138,7 +138,7 @@ abstract class Builder extends Base implements BuilderInterface
         ) {
             throw new \tabs\apiclient\client\Exception(
                 $req,
-                'Unable to delete ' . ucfirst($this->getStubClass())
+                'Unable to delete ' . ucfirst($this->getClass())
             );
         } else {
             if ($this->getParent()) {
@@ -225,7 +225,7 @@ abstract class Builder extends Base implements BuilderInterface
      * Traverse through the relationship to look for an actor object
      * 
      * @param \tabs\apiclient\actor\Actor $object Actor object
-     * @throws \RuntimeException
+     * @throws \tabs\apiclient\client\Exception
      * 
      * @return \tabs\apiclient\actor\Actor
      */
@@ -236,7 +236,9 @@ abstract class Builder extends Base implements BuilderInterface
         } else if ($object->getParent()) {
             return $this->_getParentActor($object->getParent());
         } else {
-            throw new \RuntimeException('Parent actor not found');
+            throw new \tabs\apiclient\client\Exception(
+                'Parent actor not found'
+            );
         }
     }
     
@@ -245,7 +247,7 @@ abstract class Builder extends Base implements BuilderInterface
      * 
      * @param \tabs\apiclient\core\Base $object Object to traverse
      * 
-     * @throws \RuntimeException
+     * @throws \tabs\apiclient\client\Exception
      * 
      * @return \tabs\apiclient\actor\Actor
      */
@@ -256,7 +258,9 @@ abstract class Builder extends Base implements BuilderInterface
         } else if ($object->getParent()) {
             return $this->_getParentProperty($object->getParent());
         } else {
-            throw new \RuntimeException('Parent property not found');
+            throw new \tabs\apiclient\client\Exception(
+                'Parent property not found'
+            );
         }
     }
 
