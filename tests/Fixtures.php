@@ -299,7 +299,7 @@ class Fixtures
         $hybrid = Fixtures::getPropertyHybridAttribute();
         $property->addAttribute($hybrid);
         
-        $img = Fixtures::getImage();
+        $img = Fixtures::getPropertyImage();
         $property->addImage($img);
         
         return $property;
@@ -661,5 +661,18 @@ class Fixtures
             ->setWidth(100);
         
         return $img;
+    }
+    
+    /**
+     * Create a new property image
+     * 
+     * @return \tabs\apiclient\property\Image
+     */
+    public static function getPropertyImage()
+    {
+        $propImage = new tabs\apiclient\property\Image();
+        $propImage->setId(1)->setImage(Fixtures::getImage());
+        
+        return $propImage;
     }
 }
