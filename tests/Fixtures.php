@@ -328,7 +328,7 @@ class Fixtures
     public static function getDescriptionType()
     {
         $type = new \tabs\apiclient\property\description\Type();
-        $type->setId(1)->setEncoding('HTML')->setName('Full');
+        $type->setId(1)->setShorttype('Fred')->setEncoding('HTML')->setName('Full');
         
         return $type;
     }
