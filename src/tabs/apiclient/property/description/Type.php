@@ -33,6 +33,9 @@ use tabs\apiclient\core\Encoding;
  * @method string   getName()                        Returns the type name
  * @method Type     setName(string $name)            Set the type name
  * 
+ * @method string   getShorttype()                   Returns the type shorttype
+ * @method Type     setShorttype($shorttype)         Set the type shorttype
+ * 
  * @method Encoding getEncoding()                    Returns the type encoding
  * 
  * @method string   getMinimumlength()               Returns the type min length
@@ -56,6 +59,13 @@ class Type extends \tabs\apiclient\core\Builder
      * @var string
      */
     protected $name = '';
+    
+    /**
+     * Shorttype
+     * 
+     * @var string 
+     */
+    protected $shorttype = '';
     
     /**
      * Encoding
@@ -107,6 +117,7 @@ class Type extends \tabs\apiclient\core\Builder
     {
         return array(
             'name' => $this->getName(),
+            'shorttype' => $this->getShorttype(),
             'encoding' => $this->getEncoding()->getEncoding(),
             'minimumlength' => $this->getMinimumlength(),
             'maximumlength' => $this->getMaximumlength(),
