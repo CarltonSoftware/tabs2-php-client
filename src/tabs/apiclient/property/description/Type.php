@@ -33,8 +33,7 @@ use tabs\apiclient\core\Encoding;
  * @method string   getName()                        Returns the type name
  * @method Type     setName(string $name)            Set the type name
  * 
- * @method string   getShorttype()                   Returns the type shorttype
- * @method Type     setShorttype($shorttype)         Set the type shorttype
+ * @method Shortcode getShortcode()                  Returns the type short code
  * 
  * @method Encoding getEncoding()                    Returns the type encoding
  * 
@@ -61,11 +60,11 @@ class Type extends \tabs\apiclient\core\Builder
     protected $name = '';
     
     /**
-     * Shorttype
+     * Short code
      * 
-     * @var string 
+     * @var Shortcode
      */
-    protected $shorttype = '';
+    protected $shortcode;
     
     /**
      * Encoding
@@ -111,13 +110,27 @@ class Type extends \tabs\apiclient\core\Builder
     }
     
     /**
+     * Set the short code
+     * 
+     * @param stdClass|Shortcode $shortcode Short code object
+     * 
+     * @return Type
+     */
+    public function setShortcode($shortcode)
+    {
+        $this->shortcode = Shortcode::factory($shortcode);
+        
+        return $this;
+    }
+    
+    /**
      * @inheritDoc
      */
     public function toArray()
     {
         return array(
             'name' => $this->getName(),
-            'shorttype' => $this->getShorttype(),
+            'shortcode' => $this->getShortcode()->getCode(),
             'encoding' => $this->getEncoding()->getEncoding(),
             'minimumlength' => $this->getMinimumlength(),
             'maximumlength' => $this->getMaximumlength(),
