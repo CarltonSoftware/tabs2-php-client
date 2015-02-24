@@ -98,8 +98,8 @@ class PropertyTest extends ApiClientClassTest
         );
         
         $this->assertEquals(
-            'Fred',
-            $description->getDescriptiontype()->getShorttype()
+            'long',
+            $description->getDescriptiontype()->getShortcode()->getCode()
         );
         
         $this->assertEquals(

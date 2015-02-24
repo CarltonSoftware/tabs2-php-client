@@ -321,6 +321,19 @@ class Fixtures
     }
     
     /**
+     * Return the description type short code
+     * 
+     * @return \tabs\apiclient\property\description\Shortcode
+     */
+    public static function getDescriptionTypeShortcode()
+    {
+        $type = new \tabs\apiclient\property\description\Shortcode();
+        $type->setId(1)->setCode('long')->setDescription('Long description');
+        
+        return $type;
+    }
+    
+    /**
      * Return the description type
      * 
      * @return \tabs\apiclient\property\description\Type
@@ -328,7 +341,10 @@ class Fixtures
     public static function getDescriptionType()
     {
         $type = new \tabs\apiclient\property\description\Type();
-        $type->setId(1)->setShorttype('Fred')->setEncoding('HTML')->setName('Full');
+        $type->setId(1)
+            ->setShortcode(Fixtures::getDescriptionTypeShortcode())
+            ->setEncoding('HTML')
+            ->setName('Full');
         
         return $type;
     }

@@ -58,6 +58,14 @@ try {
     foreach ($types->getElements() as $type) {
         echo '<p>' .  $type->getName() . '</p>';
     }
+    
+    echo '<h4>Description type shortcodes</h4>';
+    $shortcodes = new \tabs\apiclient\collection\property\description\Shortcode();
+    $shortcodes->fetch();
+    
+    foreach ($shortcodes->getElements() as $shortcode) {
+        echo '<p>' .  $shortcode->getDescription() . '</p>';
+    }
         
 } catch(Exception $e) {
     echo $e->getMessage();
