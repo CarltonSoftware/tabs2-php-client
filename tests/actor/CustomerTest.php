@@ -75,5 +75,7 @@ class CustomerTest extends ApiClientClassTest
         $customer->addNote($note);
         $this->assertEquals('/customer/1/note', $note->getCreateUrl());
         $this->assertEquals('/note/1', $note->getUpdateUrl());
+        
+        $this->assertTrue(is_array($customer->getContactPreferences()));
     }
 }
