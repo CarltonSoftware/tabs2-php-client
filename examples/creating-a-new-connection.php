@@ -19,10 +19,10 @@ require_once __DIR__ . '/../autoload.php';
 
 \tabs\apiclient\client\Client::factory(
     'http://localhost/', // Api Url
-    '', // Api Key
-    '', // Api Secret
+    '1', // Api Key
+    '1', // Api Secret
     array(
-        'prefix' => 'plato/web/v2'
+        'prefix' => 'plato/web/app_dev.php/v2'
     )
 );
 
