@@ -38,23 +38,25 @@ try {
             echo implode('<br>', $customer->getPhoneNumbers());
             echo '<br>';
         }
-        if (count($customer->getBankaccounts()) > 0) {
+        if (count($customer->getBankaccounts()->getElements()) > 0) {
             echo '<h3>Bank Accounts</h3>';
-            echo implode('<br>', $customer->getBankaccounts());
+            echo implode('<br>', $customer->getBankaccounts()->getElements());
             echo '<br>';
         }
-        if (count($customer->getNotes()) > 0) {
+        if (count($customer->getNotes()->getElements()) > 0) {
             echo '<h3>Notes</h3>';
-            echo implode('<br>', $customer->getNotes());
+            echo implode('<br>', $customer->getNotes()->getElements());
             echo '<br>';
         }
 
     } else {
-        $customerCol = new \tabs\apiclient\collection\Customer();
+        $customerCol = new \tabs\apiclient\collection\actor\Customer();
         $customerCol->setLimit(filter_input(INPUT_GET, 'limit'))
             ->setPage(filter_input(INPUT_GET, 'page'))
             ->fetch();
 
+        echo '<h2>' . $customerCol->getTotal() . ' found</h2>';
+        
         $pager = $customerCol->getPagination();
         foreach ($customerCol->getElements() as $customer) {
             echo sprintf(

@@ -15,6 +15,9 @@
 
 namespace tabs\apiclient\actor;
 use tabs\apiclient\core\Note;
+use tabs\apiclient\collection\core\Note as NoteCollection;
+use tabs\apiclient\collection\actor\ContactEntity as ContactEntityCollection;
+use tabs\apiclient\collection\actor\BankAccount as BankAccountCollection;
 
 /**
  * Tabs Rest API Actor object.
@@ -39,9 +42,9 @@ use tabs\apiclient\core\Note;
  * @method string                        getCompanyname()   Return the company name
  * @method string                        getVatnumber()     Return the vat number
  * @method string                        getCompanynumber() Return the company number
- * @method ContactEntity[]               getContacts()      Return the array of contacts
- * @method BankAccount[]                 getBankaccounts()  Return the array of bank account objects
- * @method Note[]                        getNotes           Return the notes for this actor
+ * @method ContactEntityCollection       getContacts()      Return contact entity collection
+ * @method BankAccountCollection         getBankaccounts()  Return a collection of bank accounts
+ * @method NoteCollection                getNotes           Return a note collection
  *
  * @method Actor setId(string $id) Set the Id
  * @method Actor setFirstname(string $firstname) Set the firstname
@@ -142,31 +145,25 @@ abstract class Actor extends \tabs\apiclient\core\Builder
     protected $companynumber = '';
 
     /**
-     * ContactEntities
+     * Contact Entity collection
      *
-     * Array of ContactEntity
-     *
-     * @var ContactEntity[]
+     * @var ContactEntityCollection
      */
-    protected $contacts = array();
+    protected $contacts;
 
     /**
-     * BankAccount
+     * Bank account collection
      *
-     * Array of BankAccount
-     *
-     * @var BankAccount[]
+     * @var BankAccountCollection
      */
-    protected $bankaccounts = array();
+    protected $bankaccounts;
 
     /**
-     * Array of notes
+     * Note collection
      *
-     * Array of BankAccount
-     *
-     * @var Note[]
+     * @var NoteCollection
      */
-    protected $notes = array();
+    protected $notes;
 
     // -------------------------- Static Functions -------------------------- //
 
@@ -195,6 +192,9 @@ abstract class Actor extends \tabs\apiclient\core\Builder
     public function __construct()
     {
         $this->setLanguage(array('name' => 'English'));
+        $this->notes = new NoteCollection();
+        $this->bankaccounts = new BankAccountCollection();
+        $this->contacts = new ContactEntityCollection();
     }
 
     /**
@@ -207,7 +207,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
     public function addContact(&$contact)
     {
         $contact->setParent($this);
-        $this->contacts[] = $contact;
+        $this->contacts->addElement($contact);
 
         return $this;
     }
@@ -284,7 +284,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
     public function getContactFilter($type = 'ContactDetail')
     {
         return array_filter(
-            $this->contacts,
+            $this->contacts->getElements(),
             function ($ele) use ($type) {
                 return ($ele->getClass() == $type);
             }
@@ -299,7 +299,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
     public function getContactPreferences()
     {
         $preferences = array();
-        foreach ($this->getContacts() as $contact) {
+        foreach ($this->getContacts()->getElements() as $contact) {
             foreach ($contact->getContactpreferences() as $preference) {
                 array_push($preferences, $preference);
             }
@@ -318,7 +318,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
     public function addBankAccount(&$bankAccount)
     {
         $bankAccount->setParent($this);
-        $this->bankaccounts[] = $bankAccount;
+        $this->bankaccounts->addElement($bankAccount);
 
         return $this;
     }
@@ -350,7 +350,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
     public function addNote(&$note)
     {
         $note->setParent($this);
-        $this->notes[] = $note;
+        $this->notes->addElement($note);
 
         return $this;
     }

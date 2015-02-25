@@ -28,7 +28,6 @@ namespace tabs\apiclient\actor;
  *
  * @method integer getId()            Return the id
  * @method RoleReason getRolereason() Return the RoleReason    
- * @method integer getRolereason()    Return the priority    
  *
  * @method ContactPreference setId(integer $contactid)       Set the contact id
  * @method ContactPreference setPriority(integer $contactid) Set the contact priority
