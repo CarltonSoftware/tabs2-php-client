@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Tabs Rest API CancelledBooking object.
+ * Tabs Rest API Contract object.
  *
  * PHP Version 5.4
  *
- * @category  Booking
+ * @category  Property
  * @package   Tabs
  * @author    Carlton Software <support@carltonsoftware.co.uk>
  * @copyright 2014 Carlton Software
@@ -13,12 +13,12 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\booking;
+namespace tabs\apiclient\property;
 
 /**
- * Tabs Rest API CancelledBooking object.
+ * Tabs Rest API Contract object.
  *
- * @category  Booking
+ * @category  Property
  * @package   Tabs
  * @author    Carlton Software <support@carltonsoftware.co.uk>
  * @copyright 2015 Carlton Software
@@ -26,13 +26,11 @@ namespace tabs\apiclient\booking;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method integer   getId()        Return the id
- * @method \DateTime getDatetime()  Return the datetime
+ * @method integer               getId()   Return the id
  * 
- * @method CancelledBooking setId(integer $id)               Set the id
- * @method CancelledBooking setDatetime(\DateTime $datetime) Set the datetime
+ * @method Booking setId(integer $id)      Set the id
  */
-class CancelledBooking extends \tabs\apiclient\core\Base
+class Contract extends \tabs\apiclient\core\Builder
 {
     /**
      * Id
@@ -40,14 +38,24 @@ class CancelledBooking extends \tabs\apiclient\core\Base
      * @var integer
      */
     protected $id;
-    
-    /**
-     * Datetime
-     *
-     * @var \DateTime
-     */
-    protected $datetime;
         
+    // -------------------------- Static Functions -------------------------- //
+
+    /**
+     * Create a Contract object from a given id
+     *
+     * @param string $id Contract id
+     *
+     * @return \tabs\apiclient\property\Contract
+     */
+    public static function get($id)
+    {
+        $className = self::getClass();
+        $routeName = strtolower($className);
+
+        return parent::_get(sprintf('/%s/%s', $routeName, $id));
+    }
+
     // -------------------------- Public Functions -------------------------- //
 
     /**
@@ -68,8 +76,7 @@ class CancelledBooking extends \tabs\apiclient\core\Base
     public function toArray()
     {
         return array(
-            'id' => $this->getId(),
-            'datetime' => $this->getDatetime(),
+
         );
     }
     
