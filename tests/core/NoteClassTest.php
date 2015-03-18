@@ -71,4 +71,47 @@ class NoteClassTest extends ApiClientClassTest
         $this->assertArrayHasKey('createddatetime', $notetext->toArray());
         $this->assertArrayHasKey('notetext', $notetext->toArray());
     }
+    
+    
+
+    /**
+     * Test notetext accessors
+     * 
+     * @expectedException \tabs\apiclient\client\Exception
+     *
+     * @return void
+     */
+    public function testNoteTextException()
+    {
+        $note = Fixtures::getNote();
+        $notetexts = $note->getNotetexts();
+
+        $notetext = array_shift($notetexts);
+        $parent = null;
+        $notetext->setParent($parent);
+        
+        $notetext->getCreateUrl();
+    }
+    
+    /**
+     * Test the note collection
+     * 
+     * @return void
+     */
+    public function testNoteCollection()
+    {
+        $col = new tabs\apiclient\collection\core\Note();
+        
+        $this->assertTrue(is_array($col->getElements()));
+        
+        $this->assertEquals(
+            '\tabs\apiclient\core\Note',
+            $col->getElementClass()
+        );
+        
+        $this->assertEquals(
+            'note',
+            $col->getRoute()
+        );
+    }
 }

@@ -42,8 +42,6 @@ use tabs\apiclient\property\Image as PropertyImage;
  * @method string   getTabspropref()            Returns the tabs property ref
  * @method Property setTabspropref(string $ref) Sets the tabs property ref
  * 
- * @method Status   getStatus() Returns the property status
- * 
  * @method string   getName()             Returns the property name
  * @method Property setName(string $name) Sets the tabs property name
  * 
@@ -75,13 +73,6 @@ class Property extends \tabs\apiclient\core\Builder
      * @var string
      */
     protected $tabspropref = '';
-
-    /**
-     * Property status
-     * 
-     * @var Status
-     */
-    protected $status;
     
     /**
      * Property name
@@ -274,12 +265,6 @@ class Property extends \tabs\apiclient\core\Builder
      */
     public function getDescriptions()
     {
-        if ($this->getId() === null) {
-            throw new \tabs\apiclient\client\Exception(
-                'A valid ID field is required (currently null).'
-            );
-        }
-        
         return $this->_getCollection(
             '\\tabs\\apiclient\\collection\\property\\description\\Description'
         );
@@ -307,12 +292,6 @@ class Property extends \tabs\apiclient\core\Builder
      */
     public function getAttributes()
     {
-        if ($this->getId() === null) {
-            throw new \tabs\apiclient\client\Exception(
-                'A valid ID field is required (currently null).'
-            );
-        }
-        
         return $this->_getCollection(
             '\\tabs\\apiclient\\collection\\property\\PropertyAttribute'
         );
@@ -374,20 +353,6 @@ class Property extends \tabs\apiclient\core\Builder
             $brand = Branding::factory($brnd);
             $this->addBranding($brand);
         }
-        
-        return $this;
-    }
-    
-    /**
-     * Set the property status
-     * 
-     * @param Status|array|stdClass $status Status
-     * 
-     * @return \tabs\apiclient\property\Property
-     */
-    public function setStatus($status)
-    {
-        $this->status = Status::factory($status);
         
         return $this;
     }

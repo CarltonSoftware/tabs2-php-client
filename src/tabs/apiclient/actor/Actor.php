@@ -17,6 +17,7 @@ namespace tabs\apiclient\actor;
 use tabs\apiclient\core\Note;
 use tabs\apiclient\collection\core\Note as NoteCollection;
 use tabs\apiclient\collection\actor\ContactEntity as ContactEntityCollection;
+use tabs\apiclient\collection\actor\Document as DocumentCollection;
 use tabs\apiclient\collection\actor\BankAccount as BankAccountCollection;
 
 /**
@@ -44,7 +45,8 @@ use tabs\apiclient\collection\actor\BankAccount as BankAccountCollection;
  * @method string                        getCompanynumber() Return the company number
  * @method ContactEntityCollection       getContacts()      Return contact entity collection
  * @method BankAccountCollection         getBankaccounts()  Return a collection of bank accounts
- * @method NoteCollection                getNotes           Return a note collection
+ * @method NoteCollection                getNotes()         Return a note collection
+ * @method DocumentCollection            getDocuments()     Return a document collection
  *
  * @method Actor setId(string $id) Set the Id
  * @method Actor setFirstname(string $firstname) Set the firstname
@@ -165,6 +167,13 @@ abstract class Actor extends \tabs\apiclient\core\Builder
      */
     protected $notes;
 
+    /**
+     * Document collection
+     *
+     * @var DocumentCollection
+     */
+    protected $documents;
+
     // -------------------------- Static Functions -------------------------- //
 
     /**
@@ -192,9 +201,18 @@ abstract class Actor extends \tabs\apiclient\core\Builder
     public function __construct()
     {
         $this->setLanguage(array('name' => 'English'));
+        
         $this->notes = new NoteCollection();
+        $this->notes->setElementParent($this);
+        
         $this->bankaccounts = new BankAccountCollection();
+        $this->bankaccounts->setElementParent($this);
+        
         $this->contacts = new ContactEntityCollection();
+        $this->contacts->setElementParent($this);
+        
+        $this->documents = new DocumentCollection();
+        $this->documents->setElementParent($this);
     }
 
     /**
@@ -341,9 +359,9 @@ abstract class Actor extends \tabs\apiclient\core\Builder
     }
 
     /**
-     * Add a bank account
+     * Add a note
      *
-     * @param Note $bankAccount Note object
+     * @param Note $note Note object
      *
      * @return Actor
      */
@@ -367,6 +385,38 @@ abstract class Actor extends \tabs\apiclient\core\Builder
         foreach ($notes as $note) {
             $_note = Note::factory($note);
             $this->addNote($_note);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Add a document
+     *
+     * @param Document $document Document object
+     *
+     * @return Actor
+     */
+    public function addDocument(&$document)
+    {
+        $document->setParent($this);
+        $this->documents->addElement($document);
+
+        return $this;
+    }
+
+    /**
+     * Set the documents array
+     *
+     * @param Document[] $documents Documents array
+     *
+     * @return Actor
+     */
+    public function setDocuments($documents)
+    {
+        foreach ($documents as $doc) {
+            $_document = Document::factory($doc);
+            $this->addDocument($_document);
         }
 
         return $this;

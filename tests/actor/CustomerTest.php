@@ -30,6 +30,36 @@ class CustomerTest extends ApiClientClassTest
     }
     
     /**
+     * Test creating customer collections
+     *
+     * @return void
+     */
+    public function testNewCustomerCollections()
+    {
+        $customer = Fixtures::getCustomer();
+        
+        $this->assertEquals(
+            '\tabs\apiclient\actor\ContactDetail',
+            $customer->getContacts()->getElementClass()
+        );
+        
+        $this->assertEquals(
+            '/customer/1/contactdetail',
+            $customer->getContacts()->getRoute()
+        );
+        
+        $this->assertEquals(
+            '\tabs\apiclient\actor\BankAccount',
+            $customer->getBankaccounts()->getElementClass()
+        );
+        
+        $this->assertEquals(
+            '/customer/1/bankaccount',
+            $customer->getBankaccounts()->getRoute()
+        );
+    }
+    
+    /**
      * Test the update routes created by the builder class
      * 
      * @return void
@@ -44,6 +74,7 @@ class CustomerTest extends ApiClientClassTest
         $bankAccount = new \tabs\apiclient\actor\BankAccount();
         $bankAccount->setId(1);
         $customer->addBankAccount($bankAccount);
+        $this->assertEquals(1, count($customer->getBankaccounts()->getElements()));
         $this->assertEquals('/customer/1/bankaccount', $bankAccount->getCreateUrl());
         $this->assertEquals('/customer/1/bankaccount/1', $bankAccount->getUpdateUrl());
 

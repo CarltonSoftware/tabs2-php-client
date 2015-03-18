@@ -37,10 +37,8 @@ abstract class PropertyActor extends \tabs\apiclient\collection\Collection
     {
         foreach ($this->getElements() as $actor) {
             if ($actor->getFromdate()->getTimestamp() <= time() 
-                && (
-                    $actor->getTodate()->getTimestamp() >= time()
-                    || $actor->getTodate() === NULL
-                )
+                && ($actor->getTodate()->getTimestamp() >= time()
+                    || $actor->getTodate() === NULL)
             ) {
                 return $actor;
             }

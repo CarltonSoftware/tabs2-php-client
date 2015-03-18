@@ -49,6 +49,7 @@ class PropertyBrandingTest extends ApiClientClassTest
         // Test branding object
         $this->assertEquals('Live', $mb->getStatus()->getName());
         $this->assertEquals('NOMB', $mb->getCode());
+        $this->assertTrue(is_array($mb->toArray()));
         
         // Test history
         $history = $mb->getStatushistory();
@@ -59,6 +60,8 @@ class PropertyBrandingTest extends ApiClientClassTest
         // Test crud urls
         $this->assertEquals('/property/1/marketingbrand', $mb->getCreateUrl());
         $this->assertEquals('/property/1/marketingbrand/1', $mb->getUpdateUrl());
+        
+        $this->assertArrayHasKey('status', $mb->toArray());
     }
     
     /**
@@ -76,6 +79,7 @@ class PropertyBrandingTest extends ApiClientClassTest
         // Test branding object
         $this->assertEquals('Live', $bb->getStatus()->getName());
         $this->assertEquals('NOBB', $bb->getCode());
+        $this->assertTrue(is_array($bb->toArray()));
         
         // Test history
         $history = $bb->getStatushistory();
@@ -86,6 +90,8 @@ class PropertyBrandingTest extends ApiClientClassTest
         // Test crud urls
         $this->assertEquals('/property/1/bookingbrand', $bb->getCreateUrl());
         $this->assertEquals('/property/1/bookingbrand/1', $bb->getUpdateUrl());
+        
+        $this->assertArrayHasKey('status', $bb->toArray());
     }
     
     /**
@@ -102,6 +108,7 @@ class PropertyBrandingTest extends ApiClientClassTest
         
         // Test branding object
         $this->assertEquals('Live', $bg->getStatus()->getName());
+        $this->assertTrue(is_array($bg->toArray()));
         
         // Test history
         $history = $bg->getStatushistory();
@@ -112,6 +119,8 @@ class PropertyBrandingTest extends ApiClientClassTest
         // Test crud urls
         $this->assertEquals('/property/1/brandinggroup', $bg->getCreateUrl());
         $this->assertEquals('/property/1/brandinggroup/1', $bg->getUpdateUrl());
+        
+        $this->assertArrayHasKey('status', $bg->toArray());
     }
     
     /**

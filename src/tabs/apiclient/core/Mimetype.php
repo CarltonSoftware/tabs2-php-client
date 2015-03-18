@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tabs Rest API Unit object.
+ * Tabs Rest API Mimetype object.
  *
  * PHP Version 5.4
  *
@@ -16,7 +16,7 @@
 namespace tabs\apiclient\core;
 
 /**
- * Tabs Rest API Unit object.
+ * Tabs Rest API Mimetype object.
  *
  * @category  Tabs_Client
  * @package   Tabs
@@ -26,19 +26,15 @@ namespace tabs\apiclient\core;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method integer getId()            Returns the ID
- * @method Unit    setId(integer $id) Sets the ID
+ * @method integer getId()       Returns the ID
+ * @method string getName()      Returns the mimetype
+ * @method string getShortname() Returns the short name
  * 
- * @method string getName()             Returns the name
- * @method Unit   setName(string $name) Sets the name
- * 
- * @method string getDescription()             Returns the desc
- * @method Unit   setDescription(string $desc) Sets the desc
- * 
- * @method string getDecimalplaces()                Returns the decimal places
- * @method Unit   setDecimalplaces(string $decimal) Sets the decimal places
+ * @method Mimetype setId(integer $id)         Sets the ID
+ * @method Mimetype setName(string $name)      Sets the mimetype
+ * @method Mimetype setShortname(string $name) Sets the short name
  */
-class Unit extends Builder
+class Mimetype extends Base
 {
     /**
      * ID
@@ -55,18 +51,11 @@ class Unit extends Builder
     protected $name = '';
     
     /**
-     * Description
+     * Shortname
      * 
      * @var string
      */
-    protected $description = '';
-    
-    /**
-     * Decimal places
-     * 
-     * @var string
-     */
-    protected $decimalplaces = 0;
+    protected $shortname = '';
     
     /**
      * @inheritDoc
@@ -76,8 +65,7 @@ class Unit extends Builder
         return array(
             'id' => $this->getId(),
             'name' => $this->getName(),
-            'description' => $this->getDescription(),
-            'decimalplaces' => $this->getDecimalplaces()
+            'shortname' => $this->getShortname()
         );
     }
 }

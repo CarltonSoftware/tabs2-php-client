@@ -48,6 +48,21 @@ try {
             echo implode('<br>', $customer->getNotes()->getElements());
             echo '<br>';
         }
+        
+        echo '<h3>Documents</h3>';
+        if (count($customer->getDocuments()->getElements()) > 0) {
+            foreach ($customer->getDocuments()->getElements() as $doc) {
+                echo sprintf(
+                    '<p><a href="viewing-a-document.php?id=%s">%s</a></p>',
+                    $doc->getDocument()->getId(),
+                    $doc->getDocument()->getName()
+                );
+            }
+        }
+        echo sprintf(
+            '<p><a href="add-document.php?id=%s">Add new document</a></p>',
+            $customer->getId()
+        );
 
     } else {
         $customerCol = new \tabs\apiclient\collection\actor\Customer();

@@ -20,6 +20,10 @@ class StatusClassTest extends ApiClientClassTest
         $status = Fixtures::getStatus();
         $this->assertEquals(1, $status->getId());
         $this->assertEquals('Live', $status->getName());
+        $this->assertEquals('Live', (string) $status);
+        
+        $this->assertArrayHasKey('id', $status->toArray());
+        $this->assertArrayHasKey('name', $status->toArray());
     }
     
     /**
@@ -33,5 +37,10 @@ class StatusClassTest extends ApiClientClassTest
         $this->assertEquals(1, $history->getId());
         $this->assertEquals('Live', $history->getStatus()->getName());
         $this->assertEquals('2012-01-31', $history->getFromdate()->format('Y-m-d'));
+        
+        $this->assertArrayHasKey('id', $history->toArray());
+        $this->assertArrayHasKey('status', $history->toArray());
+        $this->assertArrayHasKey('statusfromdate', $history->toArray());
+        $this->assertArrayHasKey('statustodate', $history->toArray());
     }
 }

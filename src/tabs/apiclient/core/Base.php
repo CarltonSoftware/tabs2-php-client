@@ -95,10 +95,24 @@ abstract class Base
     public static function getRequestId($req)
     {
         if ($req->getHeader('content-location')) {
-            $location = explode('/', $req->getHeader('content-location'));
-            
-            return $location[count($location) - 1];
+            return self::getIdFromString($req->getHeader('content-location'));
+        } else {
+            return;
         }
+    }
+    
+    /**
+     * Return an id from a url string
+     * 
+     * @param string $str String
+     * 
+     * @return string
+     */
+    public static function getIdFromString($str)
+    {
+        $location = explode('/', $str);
+
+        return $location[count($location) - 1];
     }
 
     /**

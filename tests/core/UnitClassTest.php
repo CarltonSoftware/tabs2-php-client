@@ -22,5 +22,11 @@ class UnitClassTest extends ApiClientClassTest
         $this->assertEquals('m', $unit->getName());
         $this->assertEquals('Metre', $unit->getDescription());
         $this->assertEquals(1, $unit->getDecimalplaces());
+        $this->assertEquals('unit', $unit->getUrlStub());
+        
+        $this->assertArrayHasKey('id', $unit->toArray());
+        $this->assertArrayHasKey('name', $unit->toArray());
+        $this->assertArrayHasKey('description', $unit->toArray());
+        $this->assertArrayHasKey('decimalplaces', $unit->toArray());
     }
 }

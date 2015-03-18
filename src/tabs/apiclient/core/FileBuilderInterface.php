@@ -28,17 +28,5 @@ namespace tabs\apiclient\core;
  */
 interface FileBuilderInterface
 {
-    /**
-     * Return the data required for the file body as a string
-     * 
-     * @return string
-     */
-    public function getFiledata();
     
-    /**
-     * Return the filename of the file supplied
-     * 
-     * @return string
-     */
-    public function getFilename();
 }

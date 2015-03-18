@@ -53,6 +53,7 @@ class Notetext extends Notemeta
     {
         if (!$this->getParent()) {
             throw new \tabs\apiclient\client\Exception(
+                null,
                 'Parent note not set'
             );
         }

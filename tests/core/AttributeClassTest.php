@@ -44,11 +44,44 @@ class AttributeClassTest extends ApiClientClassTest
         $this->assertArrayHasKey('code', $attr->toArray());
         $this->assertArrayHasKey('description', $attr->toArray());
         $this->assertArrayHasKey('usedinavailabilitysearch', $attr->toArray());
+        $this->assertArrayHasKey('baseattribute', $attr->toArray());
         $this->assertArrayHasKey('unitid', $attr->toArray());
         $this->assertArrayHasKey('operator', $attr->toArray());
         $this->assertArrayHasKey('maximumvalue', $attr->toArray());
         $this->assertArrayHasKey('minimumvalue', $attr->toArray());
         $this->assertArrayHasKey('limitvalue', $attr->toArray());
+        $this->assertArrayHasKey('defaultbooleanvalue', $attr->toArray());
+        $this->assertArrayHasKey('defaultnumbervalue', $attr->toArray());
+    }
+    
+    /**
+     * Test a number attribute
+     * 
+     * @return void
+     */
+    public function testNumberAttribute()
+    {
+        $attr = Fixtures::getNumberAttribute();
+        
+        $this->assertEquals(12, count($attr->toArray()));
+        $this->assertArrayHasKey('unitid', $attr->toArray());
+        $this->assertArrayHasKey('operator', $attr->toArray());
+        $this->assertArrayHasKey('maximumvalue', $attr->toArray());
+        $this->assertArrayHasKey('minimumvalue', $attr->toArray());
+        $this->assertArrayHasKey('defaultvalue', $attr->toArray());
+    }
+    
+    /**
+     * Test a boolean attribute
+     * 
+     * @return void
+     */
+    public function testBooleanAttribute()
+    {
+        $attr = Fixtures::getBooleanAttribute();
+        
+        $this->assertEquals(8, count($attr->toArray()));
+        $this->assertArrayHasKey('defaultvalue', $attr->toArray());
     }
     
     /**
@@ -62,5 +95,7 @@ class AttributeClassTest extends ApiClientClassTest
         
         $this->assertEquals(1, $attrGroup->getId());
         $this->assertEquals('Misc', $attrGroup->getName());
+        $this->assertArrayHasKey('name', $attrGroup->toArray());
+        $this->assertEquals('attributegroup', $attrGroup->getUrlStub());
     }
 }

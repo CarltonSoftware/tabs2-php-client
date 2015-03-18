@@ -29,6 +29,17 @@ class PropertyTest extends ApiClientClassTest
     public function testPropertyOwner()
     {
         $property = Fixtures::getProperty();
+        
+        $this->assertEquals(
+            '\tabs\apiclient\property\propertyactor\Owner',
+            $property->getOwners()->getElementClass()
+        );
+        
+        $this->assertEquals(
+            '/property/1/owner',
+            $property->getOwners()->getRoute()
+        );
+        
         $this->assertEquals(
             'Mr',
             $property->getOwners()->getCurrent()->getActor()->getTitle()
@@ -69,6 +80,10 @@ class PropertyTest extends ApiClientClassTest
             '2014-01-01',
             $property->getOwners()->getCurrent()->getFromdate()->format('Y-m-d')
         );
+        $this->assertEquals(
+            '2099-01-01',
+            $property->getOwners()->getCurrent()->getTodate()->format('Y-m-d')
+        );
     }
     
     /**
@@ -80,11 +95,28 @@ class PropertyTest extends ApiClientClassTest
     {
         $property = Fixtures::getProperty();
         $descriptions = $property->getDescriptions()->getElements();
+        
+        $this->assertEquals(
+            '\tabs\apiclient\property\description\Description',
+            $property->getDescriptions()->getElementClass()
+        );
+        
+        $this->assertEquals(
+            '/property/1/description',
+            $property->getDescriptions()->getRoute()
+        );
+        
+        
         $description = $descriptions[0];
         
         $this->assertEquals(
             '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>',
             $description->getDescription()
+        );
+        
+        $this->assertEquals(
+            'descriptiontype',
+            $description->getDescriptiontype()->getUrlStub()
         );
         
         $this->assertEquals(
@@ -127,6 +159,11 @@ class PropertyTest extends ApiClientClassTest
             'propertymarketingbrandid',
             $description->toArray()
         );
+        $this->assertArrayHasKey('name', $description->getDescriptiontype()->toArray());
+        $this->assertArrayHasKey('shortcode', $description->getDescriptiontype()->toArray());
+        $this->assertArrayHasKey('encoding', $description->getDescriptiontype()->toArray());
+        $this->assertArrayHasKey('minimumlength', $description->getDescriptiontype()->toArray());
+        $this->assertArrayHasKey('maximumlength', $description->getDescriptiontype()->toArray());
     }
     
     /**
@@ -138,6 +175,16 @@ class PropertyTest extends ApiClientClassTest
     {
         $property = Fixtures::getProperty();
         $attributes = $property->getAttributes()->getElements();
+        
+        $this->assertEquals(
+            '\tabs\apiclient\property\PropertyAttribute',
+            $property->getAttributes()->getElementClass()
+        );
+        
+        $this->assertEquals(
+            '/property/1/attribute',
+            $property->getAttributes()->getRoute()
+        );
         
         $this->assertEquals(
             true,
@@ -162,6 +209,21 @@ class PropertyTest extends ApiClientClassTest
             '/property/1/attribute/1',
             $attributes[0]->getUpdateUrl()
         );
+        
+        foreach ($attributes as $attr) {
+            $this->assertArrayHasKey('type', $attr->toArray());
+            $this->assertArrayHasKey('attributeid', $attr->toArray());
+            
+            if ($attr->getAttribute()->getType() == 'Hybrid') {
+                $this->assertArrayHasKey('value', $attr->toArray());
+                $this->assertArrayHasKey('boolean', $attr->toArray()['value']);
+                $this->assertArrayHasKey('number', $attr->toArray()['value']);
+            }
+            
+            if ($attr->getAttribute()->getUnit()) {
+                $this->assertArrayHasKey('unit', $attr->toArray());
+            }
+        }
     }
     
     /**
@@ -173,7 +235,31 @@ class PropertyTest extends ApiClientClassTest
     {
         $property = Fixtures::getProperty();
         $images = $property->getImages()->getElements();
+        
+        $this->assertEquals(
+            '\tabs\apiclient\property\Image',
+            $property->getImages()->getElementClass()
+        );
+        
+        $this->assertEquals(
+            '/property/1/image',
+            $property->getImages()->getRoute()
+        );
+        
         $this->assertEquals(1, $images[0]->getId());
+        $this->assertArrayHasKey('id', $images[0]->toArray());
+        $this->assertArrayHasKey('imageid', $images[0]->toArray());
+    }
+    
+    /**
+     * Test a new prop object.  Makes sure everything is instantiating correctly
+     * 
+     * @return void
+     */
+    public function testNewProperty()
+    {
+        $prop = new \tabs\apiclient\property\Property();
+        $this->assertFalse($prop->getOwners()->getCurrent());
     }
     
     /**
@@ -193,5 +279,11 @@ class PropertyTest extends ApiClientClassTest
         $this->assertEquals('ABC123', $property->getTabspropref());
         $this->assertEquals('/property', $property->getCreateUrl());
         $this->assertEquals('/property/1', $property->getUpdateUrl());
+        $this->assertArrayHasKey('name', $property->toArray());
+        $this->assertArrayHasKey('namequalifier', $property->toArray());
+        $this->assertArrayHasKey('address', $property->toArray());
+        $this->assertArrayHasKey('sleeps', $property->toArray());
+        $this->assertArrayHasKey('bedrooms', $property->toArray());
+        $this->assertArrayHasKey('tabspropref', $property->toArray());
     }
 }

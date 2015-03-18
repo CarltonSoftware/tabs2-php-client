@@ -14,6 +14,7 @@
  */
 
 namespace tabs\apiclient\collection;
+use tabs\apiclient\utility\Pagination;
 
 /**
  * Tabs Rest Collection object. Handles groups of objects output from
@@ -174,6 +175,8 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
      */
     public function setElements(array $elements)
     {
+        $this->setTotal(0);
+        
         foreach ($elements as $element) {
             $this->addElement($element);
         }
@@ -190,6 +193,7 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
      */
     public function addElement(&$element)
     {
+        $this->setTotal($this->getTotal() + 1);
         $this->elements[] = $element;
         
         return $this;

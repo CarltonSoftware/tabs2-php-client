@@ -28,6 +28,9 @@ class Fixtures
         $customer = new \tabs\apiclient\actor\Customer();
         $customer->setId(1)->setTitle('Mr')->setSurname('Wyett');
         
+        $doc = Fixtures::getActorDocument();
+        $customer->addDocument($doc);
+        
         return $customer;
     }
     
@@ -315,6 +318,7 @@ class Fixtures
         $owner = new \tabs\apiclient\property\propertyactor\Owner();
         $owner->setId(1)
             ->setFromdate(new \DateTime('2014-01-01'))
+            ->setTodate(new \DateTime('2099-01-01'))
             ->setActor(Fixtures::getOwner());
         
         return $owner;
@@ -617,6 +621,29 @@ class Fixtures
     }
     
     /**
+     * Create and return a number attribute
+     * 
+     * @return \tabs\apiclient\core\attribute\Attribute
+     */
+    public static function getNumberAttribute()
+    {
+        $attr = new tabs\apiclient\core\attribute\Attribute();
+        $attr->setId(2)
+            ->setGroup(Fixtures::getAttributeGroup())
+            ->setCode('ATTR03')
+            ->setName('Number of dogs')
+            ->setType('Number')
+            ->setDescription('Number of dogs allowed')
+            ->setOperator('<=')
+            ->setMinimumvalue(0)
+            ->setMaximumvalue(3)
+            ->setDefaultvalue(0)
+            ->setUnit(Fixtures::getGenericUnit());
+        
+        return $attr;
+    }
+    
+    /**
      * Return the property hybrid attribute
      * 
      * @return \tabs\apiclient\property\PropertyAttribute
@@ -625,8 +652,7 @@ class Fixtures
     {
         $pa = new \tabs\apiclient\property\PropertyAttribute();
         $pa->setId(2);
-        $val = new \tabs\apiclient\core\attribute\Value();
-        $val->setNumber(2)->setBoolean(true);
+        $val = Fixtures::getHybridValue();
         $pa->setValue($val)->setAttribute(Fixtures::getHybridAttribute());
         
         return $pa;
@@ -643,6 +669,22 @@ class Fixtures
         $group->setId(1)->setName('Misc');
         
         return $group;
+    }
+
+    /**
+     * Create an return an attribute unit
+     * 
+     * @return \tabs\apiclient\core\Unit
+     */
+    public static function getGenericUnit()
+    {
+        $unit = new tabs\apiclient\core\Unit();
+        $unit->setId(2)
+            ->setName('n')
+            ->setDescription('Number')
+            ->setDecimalplaces(0);
+        
+        return $unit;
     }
 
     /**
@@ -680,6 +722,55 @@ class Fixtures
     }
     
     /**
+     * Return a mock document object
+     * 
+     * @return \tabs\apiclient\core\Document
+     */
+    public static function getDocument()
+    {
+        $doc = new \tabs\apiclient\core\Document();
+        $doc->setId(1)
+            ->setName('somepdf')
+            ->setDescription('A pdf file')
+            ->setFilename('somepdf.pdf')
+            ->setWeight(0)
+            ->setPrivate(true)
+            ->setMimetype(Fixtures::getPdfMimetype());
+        
+        return $doc;
+    }
+    
+    /**
+     * Return an actor document collection
+     * 
+     * @return \tabs\apiclient\actor\Document
+     */
+    public static function getActorDocument()
+    {
+        $doc = Fixtures::getDocument();
+        $actorDoc = new \tabs\apiclient\actor\Document();
+        $actorDoc->setId(1)
+            ->setDocument($doc);
+        
+        return $actorDoc;
+    }
+    
+    /**
+     * Return a pdf mimetype
+     * 
+     * @return \tabs\apiclient\core\Mimetype
+     */
+    public static function getPdfMimetype()
+    {
+        $mt = new \tabs\apiclient\core\Mimetype();
+        $mt->setId(1)
+            ->setName('application/pdf')
+            ->setShortname('pdf');
+        
+        return $mt;
+    }
+    
+    /**
      * Create a new property image
      * 
      * @return \tabs\apiclient\property\Image
@@ -690,5 +781,19 @@ class Fixtures
         $propImage->setId(1)->setImage(Fixtures::getImage());
         
         return $propImage;
+    }
+    
+    /**
+     * Return a hybrid value object
+     * 
+     * @return \tabs\apiclient\core\attribute\Value
+     */
+    public static function getHybridValue()
+    {
+        $value = new \tabs\apiclient\core\attribute\Value();
+        $value->setBoolean(true)
+            ->setNumber(2);
+        
+        return $value;
     }
 }
