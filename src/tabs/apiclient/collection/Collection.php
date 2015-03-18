@@ -55,13 +55,6 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
      * @var \tabs\apiclient\utility\Pagination
      */
     protected $pagination;
-    
-    /**
-     * Route to fetch
-     * 
-     * @var string
-     */
-    protected $route = '';
 
     // ------------------ Public Functions --------------------- //
     
@@ -175,8 +168,6 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
      */
     public function setElements(array $elements)
     {
-        $this->setTotal(0);
-        
         foreach ($elements as $element) {
             $this->addElement($element);
         }
@@ -193,7 +184,6 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
      */
     public function addElement(&$element)
     {
-        $this->setTotal($this->getTotal() + 1);
         $this->elements[] = $element;
         
         return $this;
@@ -206,6 +196,15 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
      */
     public function getTotal()
     {
+        // Need to do this check for when elements are added to a new collection
+        // after 
+        if (count($this->getElements()) > 0 
+            && $this->getPagination()->getTotal() == 0
+        ) {
+            $this->setTotal(count($this->getElements()))
+                ->setLimit(count($this->getElements()));
+        }
+        
         return $this->getPagination()->getTotal();
     }
     
@@ -267,16 +266,6 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
         $this->getPagination()->setFilters($filters);
         
         return $this;
-    }
-    
-    /**
-     * Return the route
-     * 
-     * @return string
-     */
-    public function getRoute()
-    {
-        return $this->route;
     }
     
     /**

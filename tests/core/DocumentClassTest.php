@@ -64,7 +64,7 @@ class DocumentClassTest extends ApiClientClassTest
             $customer->getDocuments()->getRoute()
         );
         
-        foreach ($customer->getDocuments()->getElements() as $doc) {
+        foreach ($customer->getDocuments()->toArray() as $doc) {
             $this->assertEquals(
                 '/customer/' . $doc->getParent()->getId() . '/document/' . $doc->getId(),
                 $doc->getUpdateUrl()

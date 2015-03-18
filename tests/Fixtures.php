@@ -741,7 +741,7 @@ class Fixtures
     }
     
     /**
-     * Return an actor document collection
+     * Return an actor document
      * 
      * @return \tabs\apiclient\actor\Document
      */
