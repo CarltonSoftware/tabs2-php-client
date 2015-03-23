@@ -60,7 +60,7 @@ abstract class ActorImport extends \tabs\apiclient\core\Builder
 
         // Perform post request
         $req = \tabs\apiclient\client\Client::getClient()->post(
-            sprintf('/%s/import', $routeName),
+            str_replace('import', '/import', $routeName),
             $this->toArray()
         );
 
@@ -73,7 +73,7 @@ abstract class ActorImport extends \tabs\apiclient\core\Builder
             );
         }
 
-        return $req->json;
+        return $req;
     }
 
     // -------------------------- Public Functions -------------------------- //
