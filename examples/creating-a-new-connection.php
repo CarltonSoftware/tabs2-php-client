@@ -22,7 +22,7 @@ require_once __DIR__ . '/../autoload.php';
     '1', // Api Key
     '1', // Api Secret
     array(
-        'prefix' => 'plato/web/app_dev.php/v2'
+        'prefix' => 'plato/app_dev.php/v2'
     )
 );
 
