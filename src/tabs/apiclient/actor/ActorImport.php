@@ -73,7 +73,7 @@ abstract class ActorImport extends \tabs\apiclient\core\Builder
             );
         }
 
-        return $req->json;
+        return $req;
     }
 
     // -------------------------- Public Functions -------------------------- //
