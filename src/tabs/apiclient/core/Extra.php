@@ -32,8 +32,8 @@ namespace tabs\apiclient\core;
  * @method string   getExtracode()     Returns the extracode
  * @method Extra    setExtracode(string $extracode)     Sets the extracode
  * 
- * @method obj      getExtratype()     Returns the extratype
- * @method Extra    setExtratype(obj $extratype)    Sets the extratype 
+ * @method string   getExtratype()     Returns the extratype
+ * @method Extra    setExtratype(string $extratype)    Sets the extratype 
  * 
  * @method string   getDescription()   Returns the description
  * @method Extra    setDescription(string $desc)    Sets the description
@@ -57,7 +57,7 @@ class Extra extends Builder
     /**
      * Extratype
      * 
-     * @var obj 
+     * @var string 
      */
     protected $extratype;
     
