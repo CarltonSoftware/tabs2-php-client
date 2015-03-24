@@ -111,26 +111,40 @@ class PotentialDuplicate extends \tabs\apiclient\core\Builder
     public function toArray()
     {
         return array(
-            'id' => $this->getId()
+            'id' => $this->getId(),
+            'notduplicate' => $this->notduplicate,
+            'actorkept' => $this->actorkept,
+            'processeddatetime' => $this->processeddatetime,
+            'processedby' => $this->processedby
         );
     }
 
 
-    private function setActor1($field)
+    protected function setActor1($field)
     {
         $this->actor1 = Customer::factory($field);
     }
 
 
-    private function setActor2($field)
+    protected function setActor2($field)
     {
         $this->actor2 = Customer::factory($field);
+    }
+
+    protected function setProcessedby($field)
+    {
+        if (isset($field)) {
+            $fieldParts = explode('/', $field);
+            $this->processedby = Tabsuser::get($fieldParts[3]);
+        }
+
     }
 
 
     public function ignore()
     {
         $this->notduplicate = true;
+        $this->actorkept = null;
     }
 
     public function merge()
@@ -139,5 +153,22 @@ class PotentialDuplicate extends \tabs\apiclient\core\Builder
         $this->actorkept = 1;
     }
 
+
+    function toUpdateArray()
+    {
+        if (isset($this->actorkept)) {
+            return array(
+                'actorkept' => $this->actorkept,
+                'actor1id' => $this->actor1->id,
+                'actor2id' => $this->actor2->id,
+                'processedbytabsuserid' => 5
+            );
+        } else {
+            return array(
+                'notduplicate' => true,
+                'processedbytabsuserid' => 5
+            );
+        }
+    }
 
 }
