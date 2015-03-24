@@ -30,10 +30,10 @@ namespace tabs\apiclient\core;
  * @method Extra    setId(integer $id) Sets the ID
  * 
  * @method string   getExtracode()     Returns the extracode
- * @method Extra    setExtracode(string $extracode)     Sets the extracode
+ * @method Extra    setExtracode(string $extracode)     Sets the extracode 
  * 
  * @method string   getExtratype()     Returns the extratype
- * @method Extra    setExtratype(string $extratype)    Sets the extratype 
+ * @method Extra    setExtratype(string $extratype)     Sets the extratype
  * 
  * @method string   getDescription()   Returns the description
  * @method Extra    setDescription(string $desc)    Sets the description
@@ -48,16 +48,16 @@ class Extra extends Builder
     protected $id;
     
     /**
-     * Extracode
+     * Code of Extra
      * 
      * @var string
      */
     protected $extracode;
     
     /**
-     * Extratype
+     * Extra Type
      * 
-     * @var string 
+     * @var string
      */
     protected $extratype;
     
