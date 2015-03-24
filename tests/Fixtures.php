@@ -704,6 +704,22 @@ class Fixtures
     }
     
     /**
+     * Returns a mock Extra object
+     * 
+     * @return \tabs\apiclient\core\Extra
+     */
+    public static function getExtra()
+    {
+        $extra = new \tabs\apiclient\core\Extra();
+        $extra->setId(1)
+              ->setExtracode('BKFE')
+              ->setExtratype('BookingTypeExtra')
+              ->setDescription('Booking Fee');
+              
+        return $extra;
+    }
+    
+    /**
      * Return a mock image object
      * 
      * @return \tabs\apiclient\core\Image
