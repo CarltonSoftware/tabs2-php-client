@@ -67,6 +67,6 @@ class Sourcecategory extends Builder
      * @return string
      */
     public function __toString() {
-        return (string) $this->getId();
+        return (string) $this->getSourcecategory();
     }
 }
