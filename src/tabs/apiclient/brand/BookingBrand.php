@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tabs Rest API Booking Brand object.
+ * Tabs Rest API BookingBrand object.
  *
  * PHP Version 5.4
  *

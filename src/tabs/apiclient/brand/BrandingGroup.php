@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tabs Rest API Booking Brand object.
+ * Tabs Rest API BrandingGroup object.
  *
  * PHP Version 5.4
  *
@@ -16,7 +16,7 @@
 namespace tabs\apiclient\brand;
 
 /**
- * Tabs Rest API Booking Brand object.
+ * Tabs Rest API BrandingGroup object.
  *
  * @category  Tabs_Client
  * @package   Tabs
