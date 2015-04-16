@@ -33,7 +33,7 @@ namespace tabs\apiclient\core;
  * @method Language setCode(string $alpha2)   Set the Language code
  * @method Language setLanguage(string $name) Set the language name
  */
-class Language extends Base
+class Language extends Base implements \Comparable
 {
     /**
      * Language code
@@ -60,4 +60,14 @@ class Language extends Base
     {
         return $this->getName();
     }
+
+
+    /**
+     * Implements Comparable::compare()
+     */
+    public function compare(self $compare)
+    {
+        return $this->code == $compare->code;
+    }
+
 }
