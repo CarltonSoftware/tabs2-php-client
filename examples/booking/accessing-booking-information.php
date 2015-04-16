@@ -18,7 +18,7 @@ require_once __DIR__ . '/../creating-a-new-connection.php';
 
 try {
     
-    $booking = \tabs\apiclient\booking\Booking::get('1');
+    $booking = \tabs\apiclient\booking\Booking::get(1);
 
     echo $booking->getBookref();
             

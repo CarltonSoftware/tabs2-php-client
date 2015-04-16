@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tabs Rest API Unit object.
+ * Tabs Rest API Sourcecategory object.
  *
  * PHP Version 5.4
  *
@@ -16,7 +16,7 @@
 namespace tabs\apiclient\core;
 
 /**
- * Tabs Rest API Unit object.
+ * Tabs Rest API Sourcecategory object.
  *
  * @category  Tabs_Client
  * @package   Tabs
@@ -26,49 +26,28 @@ namespace tabs\apiclient\core;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method integer  getId()            Returns the ID
- * @method Extra    setId(integer $id) Sets the ID
+ * @method integer        getId()                                   Returns the id
+ * @method Sourcecategory setId(integer $id)                        Sets the id
  * 
- * @method string   getExtracode()     Returns the extracode
- * @method Extra    setExtracode(string $extracode)     Sets the extracode 
- * 
- * @method string   getExtratype()     Returns the extratype
- * @method Extra    setExtratype(string $extratype)     Sets the extratype
- * 
- * @method string   getDescription()   Returns the description
- * @method Extra    setDescription(string $desc)    Sets the description
+ * @method string         getSourcecategory()                       Returns the sourcecategory
+ * @method Sourcecategory setSourcecategory(string $sourcecategory) Sets the sourcecategory
  */
-class Extra extends Builder
+class Sourcecategory extends Builder
 {
     /**
-     * ID
+     * Id
      * 
      * @var integer
      */
     protected $id;
     
     /**
-     * Code of Extra
+     * Sourcecategory
      * 
      * @var string
      */
-    protected $extracode;
-    
-    /**
-     * Extra Type
-     * 
-     * @var string
-     */
-    protected $extratype;
-    
-    /**
-     * Description
-     * 
-     * @var string
-     */
-    protected $description;
-    
-    
+    protected $sourcecategory;
+        
     // ------------------ Public Functions --------------------- //
     
     /**
@@ -78,9 +57,7 @@ class Extra extends Builder
     {
         return array(
             'id' => $this->getId(),
-            'extracode' => $this->getExtracode(),
-            'extratype' => $this->getExtratype(),
-            'description' => $this->getDescription()
+            'sourcecategory' => $this->getSourcecategory(),
         );
     }
     
@@ -90,6 +67,6 @@ class Extra extends Builder
      * @return string
      */
     public function __toString() {
-        return (string)$this->getId();
+        return (string) $this->getSourcecategory();
     }
 }
