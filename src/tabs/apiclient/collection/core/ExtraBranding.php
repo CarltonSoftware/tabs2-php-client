@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tabs Rest API Branding collection object.
+ * Tabs Rest API ExtraBranding collection object.
  *
  * PHP Version 5.4
  *
@@ -13,10 +13,10 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\collection\brand;
+namespace tabs\apiclient\collection\core;
 
 /**
- * Tabs Rest API Branding collection object.
+ * Tabs Rest API ExtraBranding collection object.
  *
  * @category  Tabs_Client
  * @package   Tabs
@@ -26,14 +26,14 @@ namespace tabs\apiclient\collection\brand;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  */
-class Branding extends \tabs\apiclient\collection\Collection
+class ExtraBranding extends \tabs\apiclient\collection\Collection
 {
     /**
-     * Return an array of branding objects.  This object will need to be
+     * Return an array of ExtraBranding objects.  This object will need to be
      * instantiated and the method fetch will need to be called before this will
      * return any elements.
      *
-     * @return \tabs\apiclient\brand\Branding[]
+     * @return \tabs\apiclient\core\ExtraBranding[]
      */
     public function getElements()
     {
@@ -45,7 +45,7 @@ class Branding extends \tabs\apiclient\collection\Collection
      */
     public function getRoute()
     {
-        return 'branding';
+        return 'extrabranding';
     }
 
     /**
@@ -53,6 +53,6 @@ class Branding extends \tabs\apiclient\collection\Collection
      */
     public function getElementClass()
     {
-        return '\tabs\apiclient\brand\Branding';
+        return '\tabs\apiclient\core\ExtraBranding';
     }
 }

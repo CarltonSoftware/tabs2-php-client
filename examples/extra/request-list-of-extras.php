@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file documents how to create a Extra object from the Plato API.
+ * This file documents how to read an Extra object from the Plato API.
  *
  * PHP Version 5.5
  * 
@@ -25,7 +25,17 @@ try {
         echo '<p>ID: ' . $extra->getId() . 
              '<br>Extracode: ' . $extra->getExtracode() .
              '<br>Extratype: ' . $extra->getExtratype() .
-             '<br>Description: ' . $extra->getDescription() . '</p>';
+             '<br>Description: ' . $extra->getDescription();
+        
+        if (count($extra->getExtrabrandings()->getElements()) > 0) {
+            echo '<br>ExtraBrandings: <ul>';
+           
+            foreach ($extra->getExtrabrandings()->getElements() as $br) {
+                echo '<li>' . (string)$br . '</li>';
+            }
+            
+            echo '</ul><br>';
+        }
     }
 } catch(Exception $e) {
     echo $e->getMessage();

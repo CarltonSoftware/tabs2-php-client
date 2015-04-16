@@ -16,7 +16,7 @@
 namespace tabs\apiclient\brand;
 
 /**
- * Tabs Rest API Booking Brand object.
+ * Tabs Rest API Branding object.
  *
  * @category  Tabs_Client
  * @package   Tabs
@@ -114,8 +114,7 @@ class Branding extends \tabs\apiclient\core\Base
      * @return string
      */
     public function __toString()
-    {
-        
+    {   
         $brandingGroupName = $this->getBrandinggroup()->getName();
         $marketingBrandName = $this->getMarketingbrand()->getName();
         $bookingBrandName = $this->getBookingbrand()->getName();
@@ -125,8 +124,6 @@ class Branding extends \tabs\apiclient\core\Base
             $brandingGroupName, 
             $bookingBrandName, 
             $marketingBrandName
-        );
-        
-    }
-    
+        );  
+    }  
 }

@@ -703,6 +703,17 @@ class Fixtures
         return $unit;
     }
     
+    public static function getExtraBranding()
+    {
+        $extraBranding = new \tabs\apiclient\core\ExtraBranding();
+        $extraBranding->setId(1);
+        
+        $branding = Fixtures::getBranding();
+        $extraBranding->setBranding($branding);   
+        
+        return $extraBranding;
+    }
+    
     /**
      * Returns a mock Extra object
      * 
@@ -710,11 +721,14 @@ class Fixtures
      */
     public static function getExtra()
     {
+        $extraBranding = Fixtures::getExtraBranding();
+        
         $extra = new \tabs\apiclient\core\Extra();
         $extra->setId(1)
               ->setExtracode('BKFE')
               ->setExtratype('BookingTypeExtra')
-              ->setDescription('Booking Fee');
+              ->setDescription('Booking Fee')
+              ->addExtraBranding($extraBranding);
               
         return $extra;
     }

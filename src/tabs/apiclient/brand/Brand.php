@@ -57,4 +57,14 @@ abstract class Brand extends \tabs\apiclient\core\Builder
      * @var string
      */
     protected $name = '';
+    
+    /**
+     * ToString magic method
+     *
+     * @return string
+     */
+    public function __toString()
+    {   
+        return (string)$this->getName();
+    }  
 }

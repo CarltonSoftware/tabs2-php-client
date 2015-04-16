@@ -29,4 +29,39 @@ class ExtraClassTest extends ApiClientClassTest
         $this->assertArrayHasKey('extratype', $extra->toArray());
         $this->assertArrayHasKey('description', $extra->toArray());
     }
+    
+    /**
+     * Test creating Extra collections
+     *
+     * @return void
+     */
+    public function testNewExtraCollections()
+    {
+        $extra = Fixtures::getExtra();
+        
+        $this->assertEquals(
+            '\tabs\apiclient\core\ExtraBranding',
+            $extra->getBrandings()->getElementClass()
+        );
+    }
+    
+    /**
+     * Test the update routes created by the builder class
+     * 
+     * @return void
+     */
+    public function testCreateRoutes()
+    {
+        $extra = new \tabs\apiclient\core\Extra();
+        $extra->setId(1);
+        $this->assertEquals('/extra', $extra->getCreateUrl());
+        $this->assertEquals('/extra/1', $extra->getUpdateUrl());
+        
+        $extraBranding = new \tabs\apiclient\core\ExtraBranding();
+        $extraBranding->setId(1);
+        $extra->addExtraBranding($extraBranding);
+        $this->assertEquals(1, count($extra->getExtraBrandings()->getElements()));
+        $this->assertEquals('/extra/1/branding', $extraBranding->getCreateUrl());
+        $this->assertEquals('/extra/1/branding/1', $extraBranding->getUpdateUrl());
+    }
 }

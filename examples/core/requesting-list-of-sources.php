@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file documents how to create a Extra object from the Plato API.
+ * This file documents how to read a Source object from the Plato API.
  *
  * PHP Version 5.5
  * 
