@@ -33,7 +33,7 @@ namespace tabs\apiclient\core;
  * @method Language setCode(string $alpha2)   Set the Language code
  * @method Language setLanguage(string $name) Set the language name
  */
-class Language extends Base implements \Comparable
+class Language extends Base implements Comparable
 {
     /**
      * Language code
