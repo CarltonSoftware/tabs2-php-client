@@ -27,40 +27,40 @@ use tabs\apiclient\utility\Pagination;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
- * 
+ *
  * @method Pagination                getPagination()    Return the pagination element
  * @method \tabs\apiclient\core\Base getElementParent() Return the element parent
- * 
+ *
  * @method Collection setRoute(string $route) Set the route
  */
-abstract class Collection extends \tabs\apiclient\core\Base implements CollectionInterface
+abstract class Collection extends \tabs\apiclient\core\Base implements CollectionInterface, \Iterator
 {
     /**
      * Elements array
-     * 
+     *
      * @var array
      */
     protected $elements = array();
-    
+
     /**
      * Element parent.  Each child element will have this parent
-     * 
-     * @var \tabs\apiclient\core\Base 
+     *
+     * @var \tabs\apiclient\core\Base
      */
     protected $elementParent;
 
     /**
      * Pagination object
-     * 
+     *
      * @var \tabs\apiclient\utility\Pagination
      */
     protected $pagination;
 
     // ------------------ Public Functions --------------------- //
-    
+
     /**
      * Fetch an array of elements
-     * 
+     *
      * @return \tabs\apiclient\core\Collection
      */
     public function fetch()
@@ -77,7 +77,7 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
         ) {
             $json = $elementsIndex->json(array('object' => true));
             $elements = $json;
-            if (is_object($json) && property_exists($json, 'elements') 
+            if (is_object($json) && property_exists($json, 'elements')
                 && property_exists($json, 'total')
             ) {
                 $this->pagination->setTotal($json->total);
@@ -85,10 +85,10 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
             } else {
                 $this->setTotal(count($elements))->setLimit(count($elements));
             }
-            
+
             // Clear elements array first
             $this->elements = array();
-            
+
             // Populate with new elements
             foreach ($elements as $element) {
                 $ele = $class::factory($element);
@@ -98,19 +98,19 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
                 }
                 $this->addElement($ele);
             }
-            
+
             return $this;
         }
-        
+
         throw new \tabs\apiclient\client\Exception(
             $elementsIndex,
             'Unable to fetch GET: ' . $class
         );
     }
-    
+
     /**
      * Fetch an array of valid filters
-     * 
+     *
      * @return stdClass
      */
     public function filters()
@@ -126,44 +126,44 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
         ) {
             return $elementsIndex->json(array('object' => true));
         }
-        
+
         throw new \tabs\apiclient\client\Exception(
             $elementsIndex,
             'Unable to fetch OPTIONS: ' . $class
         );
     }
-    
+
     // ------------------ Public Functions --------------------- //
-    
+
     /**
      * Constructor
-     * 
+     *
      * @return void
      */
     public function __construct()
     {
         $this->pagination = new \tabs\apiclient\utility\Pagination();
     }
-    
+
     /**
      * Set the element parent
-     * 
+     *
      * @param \tabs\apiclient\core\Base &$element Element by ref
-     * 
+     *
      * @return \tabs\apiclient\collection\Collection
      */
     public function setElementParent(&$element)
     {
         $this->elementParent = $element;
-        
+
         return $this;
     }
-    
+
     /**
      * Set the elements
-     * 
+     *
      * @param array $elements Array of elements
-     * 
+     *
      * @return \tabs\apiclient\core\Collection
      */
     public function setElements(array $elements)
@@ -171,48 +171,48 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
         foreach ($elements as $element) {
             $this->addElement($element);
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Add an element to the collection
-     * 
+     *
      * @param mixed $element Element to add
-     * 
+     *
      * @return \tabs\apiclient\core\Collection
      */
     public function addElement(&$element)
     {
         $this->elements[] = $element;
-        
+
         return $this;
     }
-    
+
     /**
      * Return the total amount of elements found
-     * 
+     *
      * @return integer
      */
     public function getTotal()
     {
         // Need to do this check for when elements are added to a new collection
-        // after 
-        if (count($this->getElements()) > 0 
+        // after
+        if (count($this->getElements()) > 0
             && $this->getPagination()->getTotal() == 0
         ) {
             $this->setTotal(count($this->getElements()))
                 ->setLimit(count($this->getElements()));
         }
-        
+
         return $this->getPagination()->getTotal();
     }
-    
+
     /**
      * Set the page to query
-     * 
+     *
      * @param integer $page Page number
-     * 
+     *
      * @return \tabs\apiclient\core\Collection
      */
     public function setPage($page)
@@ -220,15 +220,15 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
         if (is_numeric($page)) {
             $this->getPagination()->setPage($page);
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Set the limit to query
-     * 
+     *
      * @param integer $limit Element limit (page size)
-     * 
+     *
      * @return \tabs\apiclient\core\Collection
      */
     public function setLimit($limit)
@@ -236,45 +236,96 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
         if (is_numeric($limit)) {
             $this->getPagination()->setLimit($limit);
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Set the total
-     * 
+     *
      * @param integer $total Number of elements found
-     * 
+     *
      * @return \tabs\apiclient\core\Collection
      */
     public function setTotal($total)
     {
         $this->getPagination()->setTotal($total);
-        
+
         return $this;
     }
-    
+
     /**
      * Set the pagination filters
-     * 
+     *
      * @param array $filters Filters array
-     * 
+     *
      * @return \tabs\apiclient\core\Collection
      */
     public function setFilters(array $filters = [])
     {
         $this->getPagination()->setFilters($filters);
-        
+
         return $this;
     }
-    
+
     /**
      * Return the collections elements
-     * 
+     *
      * @return array
      */
     public function toArray()
     {
         return $this->getElements();
     }
+
+
+        /***** Implement functions from the Iterator interface *****/
+
+
+    /**
+     * Rewinds the iterator to the beginning of the collection
+     */
+    public function rewind()
+    {
+        reset($this->elements);
+    }
+
+
+    /**
+     * Returns the current element
+     *
+     * @return \Object
+     */
+    public function current()
+    {
+        return current($this->elements);
+    }
+
+
+    /**
+     * Returns the current key
+     */
+    public function key()
+    {
+        return reset($this->elements);
+    }
+
+
+    /**
+     * Return the next element
+     */
+    public function next()
+    {
+        next($this->elements);
+    }
+
+
+    /**
+     * Check whether the current item is valid or not
+     */
+    public function valid()
+    {
+        return key($this->elements) !== null;
+    }
+
 }
