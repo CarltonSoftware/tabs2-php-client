@@ -138,7 +138,7 @@ class Extra extends \tabs\apiclient\core\Builder
     public function hasBrand(\tabs\apiclient\brand\Branding $brand)
     {
         foreach ($this->getBrandings() as $eb) {
-            if ($eb->getBranding() === $brand) {
+            if ($eb->getBranding()->getId() == $brand->getId()) {
                 return true;
             }
         }
