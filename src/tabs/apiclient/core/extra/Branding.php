@@ -13,8 +13,8 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\core;
-use tabs\apiclient\brand\Branding;
+namespace tabs\apiclient\core\extra;
+use tabs\apiclient\brand\Branding as CoreBranding;
 
 /**
  * Tabs Rest API ExtraBranding object.
@@ -27,12 +27,12 @@ use tabs\apiclient\brand\Branding;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method integer  getId()             Returns the extra brand id
- * @method ExtraBranding setId(integer $id) Sets the extra brand id
+ * @method integer  getId()            Returns the extra brand id
+ * @method Branding setId(integer $id) Sets the extra brand id
  * 
- * @method Branding getBranding()       Return the branding
+ * @method CoreBranding getBranding() Return the branding
  */
-class ExtraBranding extends \tabs\apiclient\core\Builder
+class Branding extends \tabs\apiclient\core\Builder
 {
     /**
      * ExtraBranding Id
@@ -57,7 +57,7 @@ class ExtraBranding extends \tabs\apiclient\core\Builder
      */
     public function setBranding($br)
     {
-        $branding = Branding::factory($br);
+        $branding = CoreBranding::factory($br);
         $this->branding = $branding->setParent($this);
         
         return $this;
@@ -70,6 +70,7 @@ class ExtraBranding extends \tabs\apiclient\core\Builder
     {
         return array(
             'id' => $this->getId(),
+            'brandingid' => $this->getBranding()->getId()
         );
     }
     

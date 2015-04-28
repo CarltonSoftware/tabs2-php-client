@@ -13,7 +13,7 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\collection\core;
+namespace tabs\apiclient\collection\core\extra;
 
 /**
  * Tabs Rest API ExtraBranding collection object.
@@ -26,14 +26,14 @@ namespace tabs\apiclient\collection\core;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  */
-class ExtraBranding extends \tabs\apiclient\collection\Collection
+class Branding extends \tabs\apiclient\collection\Collection
 {
     /**
-     * Return an array of ExtraBranding objects.  This object will need to be
+     * Return an array of Extra Branding objects.  This object will need to be
      * instantiated and the method fetch will need to be called before this will
      * return any elements.
      *
-     * @return \tabs\apiclient\core\ExtraBranding[]
+     * @return \tabs\apiclient\core\extra\Branding[]
      */
     public function getElements()
     {
@@ -53,6 +53,6 @@ class ExtraBranding extends \tabs\apiclient\collection\Collection
      */
     public function getElementClass()
     {
-        return '\tabs\apiclient\core\ExtraBranding';
+        return '\tabs\apiclient\core\extra\Branding';
     }
 }

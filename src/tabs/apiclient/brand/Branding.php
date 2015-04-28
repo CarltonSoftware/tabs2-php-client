@@ -33,7 +33,7 @@ namespace tabs\apiclient\brand;
  * @method MarketingBrand getMarketingbrand() Return the marketing brand
  * @method BookingBrand   getBookingbrand()   Return the booking brand
  */
-class Branding extends \tabs\apiclient\core\Base
+class Branding extends \tabs\apiclient\core\Builder
 {
     /**
      * Branding Id
@@ -106,6 +106,18 @@ class Branding extends \tabs\apiclient\core\Base
         $this->bookingbrand = $group->setParent($this);
         
         return $this;
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function toArray()
+    {
+        return array(
+            'brandinggroupid' => $this->getBrandinggroup()->getId(),
+            'bookingbrandid' => $this->getBookingbrand()->getId(),
+            'marketingbrandid' => $this->getMarketingbrand()->getId()
+        );
     }
     
     /**

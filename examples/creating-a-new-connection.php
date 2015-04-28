@@ -16,14 +16,13 @@
 
 // Include the autoloader
 require_once __DIR__ . '/../autoload.php';
+require_once 'config.php';
 
 \tabs\apiclient\client\Client::factory(
-    'http://localhost/', // Api Url
-    '1', // Api Key
-    '1', // Api Secret
-    array(
-        'prefix' => 'plato/app_dev.php/v2'
-    )
+    APIURL, // Api Url
+    APIKEY, // Api Key
+    APISECRET, // Api Secret
+    unserialize(APIOPTIONS)
 );
 
 $history = new \GuzzleHttp\Subscriber\History();

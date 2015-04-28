@@ -14,8 +14,8 @@
  */
 
 namespace tabs\apiclient\core;
-use tabs\apiclient\core\ExtraBranding;
-use tabs\apiclient\collection\core\ExtraBranding as ExtraBrandingCollection;
+use tabs\apiclient\core\extra\Branding as ExtraBranding;
+use tabs\apiclient\collection\core\extra\Branding as ExtraBrandingCollection;
 
 /**
  * Tabs Rest API Extra object.
@@ -28,19 +28,19 @@ use tabs\apiclient\collection\core\ExtraBranding as ExtraBrandingCollection;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method integer  getId()            Returns the ID
- * @method Extra    setId(integer $id) Sets the ID
+ * @method integer getId()            Returns the ID
+ * @method Extra   setId(integer $id) Sets the ID
  * 
- * @method string   getExtracode()     Returns the extracode
- * @method Extra    setExtracode(string $extracode)     Sets the extracode 
+ * @method string  getExtracode()                  Returns the extracode
+ * @method Extra   setExtracode(string $extracode) Sets the extracode 
  * 
- * @method string   getExtratype()     Returns the extratype
- * @method Extra    setExtratype(string $extratype)     Sets the extratype
+ * @method string  getExtratype()                  Returns the extratype
+ * @method Extra   setExtratype(string $extratype) Sets the extratype
  * 
- * @method string   getDescription()   Returns the description
- * @method Extra    setDescription(string $desc)    Sets the description
+ * @method string  getDescription()             Returns the description
+ * @method Extra   setDescription(string $desc) Sets the description
  * 
- * @method ExtraBrandingCollection     getExtrabrandings()    Returns an ExtraBranding collection
+ * @method ExtraBrandingCollection getBrandings() Returns an ExtraBranding collection
  */
 class Extra extends \tabs\apiclient\core\Builder
 {
@@ -77,7 +77,7 @@ class Extra extends \tabs\apiclient\core\Builder
      * 
      * @var ExtraBrandingCollection 
      */
-    protected $extrabrandings;
+    protected $brandings;
     
     
     // ------------------ Public Functions --------------------- //
@@ -89,21 +89,21 @@ class Extra extends \tabs\apiclient\core\Builder
      */
     public function __construct()
     {   
-        $this->extrabrandings = new ExtraBrandingCollection();
-        $this->extrabrandings->setElementParent($this);
+        $this->brandings = new ExtraBrandingCollection();
+        $this->brandings->setElementParent($this);
     }
     
     /**
      * Add an extra branding
      *
-     * @param ExtraBranding  $extraBranding  ExtraBranding object
+     * @param ExtraBranding $extraBranding ExtraBranding object
      *
      * @return Extra
      */
-    public function addExtraBranding(&$extraBranding)
+    public function addBranding(ExtraBranding &$extraBranding)
     {
         $extraBranding->setParent($this);
-        $this->extrabrandings->addElement($extraBranding);
+        $this->brandings->addElement($extraBranding);
 
         return $this;
     }
@@ -111,15 +111,15 @@ class Extra extends \tabs\apiclient\core\Builder
     /**
      * Set the extra branding objects
      *
-     * @param ExtraBranding  $extraBrandings  ExtraBranding array
+     * @param ExtraBranding $extraBrandings ExtraBranding array
      *
      * @return Extra
      */
-    public function setExtraBrandings($extraBrandings)
+    public function setBrandings($extraBrandings)
     {
         foreach ($extraBrandings as $eb) {
             $extraBranding = ExtraBranding::factory($eb);
-            $this->addExtraBranding($extraBranding);
+            $this->addBranding($extraBranding);
         }
 
         return $this;

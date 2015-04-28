@@ -40,7 +40,7 @@ class ExtraClassTest extends ApiClientClassTest
         $extra = Fixtures::getExtra();
         
         $this->assertEquals(
-            '\tabs\apiclient\core\ExtraBranding',
+            '\tabs\apiclient\core\extra\Branding',
             $extra->getBrandings()->getElementClass()
         );
     }
@@ -52,15 +52,13 @@ class ExtraClassTest extends ApiClientClassTest
      */
     public function testCreateRoutes()
     {
-        $extra = new \tabs\apiclient\core\Extra();
-        $extra->setId(1);
+        $extra = Fixtures::getExtra();
         $this->assertEquals('/extra', $extra->getCreateUrl());
         $this->assertEquals('/extra/1', $extra->getUpdateUrl());
         
-        $extraBranding = new \tabs\apiclient\core\ExtraBranding();
-        $extraBranding->setId(1);
-        $extra->addExtraBranding($extraBranding);
-        $this->assertEquals(1, count($extra->getExtraBrandings()->getElements()));
+        $extraBranding = Fixtures::getExtraBranding();
+        $extra->addBranding($extraBranding);
+        $this->assertEquals(2, count($extra->getBrandings()->getElements()));
         $this->assertEquals('/extra/1/branding', $extraBranding->getCreateUrl());
         $this->assertEquals('/extra/1/branding/1', $extraBranding->getUpdateUrl());
     }
