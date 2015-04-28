@@ -107,6 +107,44 @@ class Extra extends \tabs\apiclient\core\Builder
 
         return $this;
     }
+    
+    /**
+     * Add a branding object to the extra.  This creates a new extrabranding
+     * object.
+     * 
+     * @param \tabs\apiclient\brand\Branding $brand Existing branding object
+     *
+     * @return Extra
+     */
+    public function addNewBranding(\tabs\apiclient\brand\Branding $brand)
+    {
+        if (!$this->hasBrand($brand)) {
+            $eb = new ExtraBranding();
+            $eb->setBranding($brand);
+            $this->addBranding($eb);
+            $eb->create();
+        }
+        
+        return $this;
+    }
+    
+    /**
+     * Check if an extra has a brand applied to it already
+     * 
+     * @param \tabs\apiclient\brand\Branding $brand Branding
+     * 
+     * @return boolean
+     */
+    public function hasBrand(\tabs\apiclient\brand\Branding $brand)
+    {
+        foreach ($this->getBrandings() as $eb) {
+            if ($eb->getBranding() === $brand) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
 
     /**
      * Set the extra branding objects
@@ -123,6 +161,21 @@ class Extra extends \tabs\apiclient\core\Builder
         }
 
         return $this;
+    }
+    
+    /**
+     * Return the core branding objects for the extra
+     * 
+     * @return \tabs\apiclient\brand\Branding[]
+     */
+    public function getCoreBrandings()
+    {
+        $brandings = array();
+        foreach ($this->getBrandings() as $extraBranding) {
+            $brandings[] = $extraBranding->getBranding();
+        }
+        
+        return $brandings;
     }
     
     /**
