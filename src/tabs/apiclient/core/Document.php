@@ -109,6 +109,13 @@ class Document extends FileBuilder
      * @var string
      */
     protected $fileLocation = '';
+    
+    /**
+     * File id
+     * 
+     * @var string
+     */
+    protected $fileId;
 
     // ------------------ Static Functions --------------------- //
     
@@ -157,6 +164,8 @@ class Document extends FileBuilder
      */
     public function setFile($file)
     {
+        $this->fileId = Base::getIdFromString($file);
+        
         return $this->setFileLocation(
             $this->getUrl($file)
         );
@@ -188,6 +197,73 @@ class Document extends FileBuilder
         } else {
             return;
         }
+    }
+    
+    /**
+     * Get the path to the thumbnail url
+     * 
+     * @param string $width Width in px
+     * 
+     * @return string
+     */
+    public function getThumbnailUrl($width = 50)
+    {
+        return $this->getImageUrl('width', $width);
+    }
+    
+    /**
+     * Get the image url
+     * 
+     * @param string $type   Resize type
+     * @param string $width  Width in px
+     * @param string $height Height in px
+     * 
+     * @return string
+     */
+    public function getImageUrl($type, $width = 0, $height = 0)
+    {
+        return $this->getUrl(
+            '/file/' . implode(
+                '/',
+                array(
+                    $this->fileId,
+                    $type,
+                    $width,
+                    $height
+                )
+            )
+        );
+    }
+    
+    /**
+     * Get the path to the thumbnail as html markup
+     * 
+     * @param string $width Width in px
+     * 
+     * @return string
+     */
+    public function getThumbnailSrc($width = 50)
+    {
+        return $this->getImageSrc('width', $width);
+    }
+    
+    /**
+     * Get the image as html markup
+     * 
+     * @param string $type   Resize type
+     * @param string $width  Width in px
+     * @param string $height Height in px
+     * 
+     * @return string
+     */
+    public function getImageSrc($type, $width = 0, $height = 0)
+    {
+        return sprintf(
+            '<img src="%s" alt="%s" title="%s">',
+            $this->getImageUrl($type, $width, $height),
+            $this->getFilename(),
+            $this->getDescription()
+        );
     }
     
     /**
