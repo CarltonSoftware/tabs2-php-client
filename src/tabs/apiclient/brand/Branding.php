@@ -132,10 +132,10 @@ class Branding extends \tabs\apiclient\core\Builder
         $bookingBrandName = $this->getBookingbrand()->getName();
         
         return sprintf(
-            '%s (Booking: %s, Marketing: %s)', 
+            '%s - %s - %s', 
             $brandingGroupName, 
-            $bookingBrandName, 
-            $marketingBrandName
+            $marketingBrandName, 
+            $bookingBrandName
         );  
     }  
 }
