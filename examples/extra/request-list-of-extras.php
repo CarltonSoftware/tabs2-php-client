@@ -22,16 +22,17 @@ try {
     $extras->fetch();
     
     foreach ($extras->getElements() as $extra) {
-        echo '<p>' . (string) $extra . '</p>';
+        echo '<p>' . (string) $extra;
         if (count($extra->getBrandings()->getElements()) > 0) {
-            echo '<p>ExtraBrandings:</p><ul>';
+            echo '<br>ExtraBrandings:<ol>';
            
             foreach ($extra->getBrandings()->getElements() as $br) {
                 echo '<li>' . (string)$br . '</li>';
             }
             
-            echo '</ul>';
+            echo '</ol>';
         }
+        echo '</p><br>';
     }
 } catch(Exception $e) {
     echo $e->getMessage();
