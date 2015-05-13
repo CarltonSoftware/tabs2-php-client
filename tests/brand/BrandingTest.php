@@ -20,7 +20,7 @@ class BrandingTest extends ApiClientClassTest
         $branding = Fixtures::getBranding();
         
         $this->assertEquals(
-            'Norfolk (Booking: Norfolk, Marketing: Norfolk)',
+            'Norfolk - Norfolk - Norfolk',
             (string) $branding
         );
         

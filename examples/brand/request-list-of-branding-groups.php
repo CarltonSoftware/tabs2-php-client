@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file documents how to read a Brandings object from the Plato API.
+ * This file documents how to read a BrandingGroups object from the Plato API.
  *
  * PHP Version 5.5
  * 
@@ -17,14 +17,14 @@
 require_once __DIR__ . '/../creating-a-new-connection.php';
 
 try {
-    echo '<h4>Brandings</h4>' .
-         'The order is <em>Branding Group - Marketing Brand - Booking Brand</em>';
-    $brandings = new \tabs\apiclient\collection\brand\Branding();
-    $brandings->fetch();
+    echo '<h4>Branding Groups</h4>';
+    $bgs = new \tabs\apiclient\collection\brand\BrandingGroup();
+    $bgs->fetch();
     
-    foreach ($brandings->getElements() as $branding) {
-        echo '<p>ID: ' . $branding->getId() . '<br>'; 
-        echo (string)$branding;
+    foreach ($bgs->getElements() as $bg) {
+        echo '<p>ID: ' . $bg->getId() . '<br>'; 
+        echo 'Code: ' . $bg->getCode() . '<br>';
+        echo 'Name: ' . $bg->getName() . '</p>';
     }
 } catch(Exception $e) {
     echo $e->getMessage();
