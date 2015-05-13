@@ -28,11 +28,5 @@ namespace tabs\apiclient\brand;
  */
 class MarketingBrand extends Brand
 {
-    /**
-     * @inheritDoc
-     */
-    public function toArray()
-    {
-        return array();
-    }
+
 }

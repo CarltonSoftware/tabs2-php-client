@@ -28,11 +28,5 @@ namespace tabs\apiclient\brand;
  */
 class BookingBrand extends Brand
 {
-    /**
-     * @inheritDoc
-     */
-    public function toArray()
-    {
-        return array();
-    }
+    
 }
