@@ -34,6 +34,9 @@ namespace tabs\apiclient\brand;
  * 
  * @method string getName()             Returns the brand name
  * @method Brand  setName(string $name) Sets the brand name
+ * 
+ * @method string  getAgency()          Returns the agency ref
+ * @method Brand    setAgency(integer $id)  Sets the agency id
  */
 abstract class Brand extends \tabs\apiclient\core\Builder
 {
@@ -59,6 +62,13 @@ abstract class Brand extends \tabs\apiclient\core\Builder
     protected $name = '';
     
     /**
+     * Agency id
+     * 
+     * @var string
+     */
+    protected $agency;
+    
+    /**
      * @inheritDoc
      */
     public function toArray()
@@ -66,6 +76,7 @@ abstract class Brand extends \tabs\apiclient\core\Builder
         return array(
             'code' => $this->getCode(),
             'name' => $this->getName(),
+            'agency' => $this->getAgency(),
         );
     }
     

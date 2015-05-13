@@ -24,7 +24,8 @@ try {
     foreach ($bgs->getElements() as $bg) {
         echo '<p>ID: ' . $bg->getId() . '<br>'; 
         echo 'Code: ' . $bg->getCode() . '<br>';
-        echo 'Name: ' . $bg->getName() . '</p>';
+        echo 'Name: ' . $bg->getName() . '<br>';
+        echo 'Agency Ref: ' . $bg->getAgency() . '</p>';
     }
 } catch(Exception $e) {
     echo $e->getMessage();

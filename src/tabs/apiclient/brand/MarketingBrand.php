@@ -25,8 +25,29 @@ namespace tabs\apiclient\brand;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
+ * 
+ * @method string  getDefaultbookingbrand()    Returns the default booking brand ref
+ * @method MarketingBrand   setDefaultbookingbrand()    Sets the default booking brand id 
  */
 class MarketingBrand extends Brand
 {
-
+    /**
+     * Default Booking Brand ref
+     * 
+     * @var string
+     */
+    protected $defaultbookingbrand;
+    
+    /**
+     * @inheritDoc
+     */
+    public function toArray()
+    {
+        return array(
+            'code' => $this->getCode(),
+            'name' => $this->getName(),
+            'agency' => $this->getAgency(),
+            'defaultbookingbrand' => $this->getDefaultbookingbrand(),
+        );
+    }
 }

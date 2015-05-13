@@ -448,7 +448,9 @@ class Fixtures
     public static function getBrandingGroup()
     {
         $bg = new \tabs\apiclient\brand\BrandingGroup();
-        $bg->setCode('NOAA')->setName('Norfolk');
+        $bg->setCode('NOAA')
+           ->setName('Norfolk')
+           ->setAgency('4');
         
         return $bg;
     }
@@ -461,7 +463,10 @@ class Fixtures
     public static function getMarketingBrand()
     {
         $bg = new \tabs\apiclient\brand\MarketingBrand();
-        $bg->setCode('NOMB')->setName('Norfolk');
+        $bg->setCode('NOMB')
+           ->setName('Norfolk')
+           ->setAgency('2')
+           ->setDefaultbookingbrand('5');
         
         return $bg;
     }
@@ -474,7 +479,9 @@ class Fixtures
     public static function getBookingBrand()
     {
         $bg = new \tabs\apiclient\brand\BookingBrand();
-        $bg->setCode('NOBB')->setName('Norfolk');
+        $bg->setCode('NOBB')
+           ->setName('Norfolk')
+           ->setAgency('3');
         
         return $bg;
     }
