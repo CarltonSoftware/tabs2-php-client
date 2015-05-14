@@ -23,9 +23,7 @@ try {
     
     foreach ($bookingBrands->getElements() as $bookingBrand) {
         echo '<p>ID: ' . $bookingBrand->getId() . '<br>'; 
-        echo 'Code: ' . $bookingBrand->getCode() . '<br>';
-        echo 'Name: ' . $bookingBrand->getName() . '<br>';
-        echo 'Agency Ref: ' . $bookingBrand->getAgency() . '</p>';
+        echo (string)$bookingBrand . '</p>';
     }
 } catch(Exception $e) {
     echo $e->getMessage();

@@ -23,10 +23,7 @@ try {
     
     foreach ($marketingBrands->getElements() as $marketingBrand) {
         echo '<p>ID: ' . $marketingBrand->getId() . '<br>'; 
-        echo 'Code: ' . $marketingBrand->getCode() . '<br>';
-        echo 'Name: ' . $marketingBrand->getName() . '<br>';
-        echo 'Agency Ref: ' . $marketingBrand->getAgency() . '<br>';
-        echo 'Default Booking Brand Ref: ' . $marketingBrand->getDefaultbookingbrand() . '</p>';
+        echo (string)$marketingBrand . '</p>';
     }
 } catch(Exception $e) {
     echo $e->getMessage();

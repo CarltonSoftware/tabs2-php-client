@@ -32,22 +32,31 @@ namespace tabs\apiclient\brand;
 class MarketingBrand extends Brand
 {
     /**
-     * Default Booking Brand ref
+     * Default Booking Brand
      * 
      * @var string
      */
     protected $defaultbookingbrand;
     
+    
     /**
-     * @inheritDoc
+     * ToString magic method
+     *
+     * @return string
      */
-    public function toArray()
-    {
-        return array(
-            'code' => $this->getCode(),
-            'name' => $this->getName(),
-            'agency' => $this->getAgency(),
-            'defaultbookingbrand' => $this->getDefaultbookingbrand(),
-        );
-    }
+    public function __toString()
+    {   
+        $code = $this->getCode();
+        $name = $this->getName();
+        $agency = $this->getAgency();
+        $defaultbookingbrand = $this->getDefaultbookingbrand();
+        
+        return sprintf(
+            'Code: %s<br>Name: %s<br>Agency: %s<br>Default Booking Brand: %s', 
+            $code, 
+            $name, 
+            $agency,
+            $defaultbookingbrand
+        );  
+    } 
 }
