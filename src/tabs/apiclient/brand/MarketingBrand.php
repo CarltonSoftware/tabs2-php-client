@@ -50,28 +50,5 @@ class MarketingBrand extends Brand
         $this->defaultbookingbrand = $bookingBrand->setParent($this);
         
         return $this;
-    }
-    
-    /**
-     * ToString magic method
-     *
-     * @return string
-     */
-    public function __toString()
-    {   
-        $code = $this->getCode();
-        $name = $this->getName();
-        $agency = $this->getAgency();
-        $dbbcode = $this->getDefaultbookingbrand()->getCode();
-        $dbbname = $this->getDefaultbookingbrand()->getName();
-        
-        return sprintf(
-            'Code: %s<br>Name: %s<br>Agency: %s<br>Default Booking Brand: %s - %s', 
-            $code, 
-            $name, 
-            $agency,
-            $dbbcode,
-            $dbbname
-        );  
     } 
 }

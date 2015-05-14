@@ -104,13 +104,11 @@ abstract class Brand extends \tabs\apiclient\core\Builder
     {   
         $code = $this->getCode();
         $name = $this->getName();
-        $agency = $this->getAgency();
         
         return sprintf(
-            'Code: %s<br>Name: %s<br>Agency: %s', 
-            $code, 
+            '%s (%s)', 
             $name, 
-            $agency
+            $code
         );  
     }  
 }
