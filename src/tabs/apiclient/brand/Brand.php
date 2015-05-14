@@ -14,6 +14,7 @@
  */
 
 namespace tabs\apiclient\brand;
+use \tabs\apiclient\actor\Agency;
 
 /**
  * Tabs Rest API Brand object.
@@ -35,8 +36,7 @@ namespace tabs\apiclient\brand;
  * @method string getName()             Returns the brand name
  * @method Brand  setName(string $name) Sets the brand name
  * 
- * @method string  getAgency()          Returns the agency ref
- * @method Brand    setAgency(integer $id)  Sets the agency id
+ * @method Agency  getAgency()          Returns the agency
  */
 abstract class Brand extends \tabs\apiclient\core\Builder
 {
@@ -64,9 +64,24 @@ abstract class Brand extends \tabs\apiclient\core\Builder
     /**
      * Agency
      * 
-     * @var string
+     * @var \tabs\apiclient\actor\Agency
      */
     protected $agency;
+    
+    /**
+     * Set the Agency
+     * 
+     * @param array|stdClass|Agency     $ag     Agency
+     * 
+     * @return \tabs\apiclient\actor\Agency
+     */
+    public function setAgency($ag)
+    {
+        $agency = Agency::factory($ag);
+        $this->agency = $agency->setParent($this);
+        
+        return $this;
+    }
     
     /**
      * @inheritDoc

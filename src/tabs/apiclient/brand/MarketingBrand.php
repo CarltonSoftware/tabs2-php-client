@@ -26,18 +26,31 @@ namespace tabs\apiclient\brand;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method string  getDefaultbookingbrand()    Returns the default booking brand ref
- * @method MarketingBrand   setDefaultbookingbrand()    Sets the default booking brand id 
+ * @method BookingBrand  getDefaultbookingbrand()    Returns the default booking brand 
  */
 class MarketingBrand extends Brand
 {
     /**
      * Default Booking Brand
      * 
-     * @var string
+     * @var \tabs\apiclient\brand\BookingBrand
      */
     protected $defaultbookingbrand;
     
+    /**
+     * Set the Default booking brand
+     * 
+     * @param array|stdClass|BookingBrand   $bb     BookingBrand
+     * 
+     * @return \tabs\apiclient\brand\BookingBrand
+     */
+    public function setDefaultbookingbrand($bb)
+    {
+        $bookingBrand = BookingBrand::factory($bb);
+        $this->defaultbookingbrand = $bookingBrand->setParent($this);
+        
+        return $this;
+    }
     
     /**
      * ToString magic method
@@ -49,14 +62,16 @@ class MarketingBrand extends Brand
         $code = $this->getCode();
         $name = $this->getName();
         $agency = $this->getAgency();
-        $defaultbookingbrand = $this->getDefaultbookingbrand();
+        $dbbcode = $this->getDefaultbookingbrand()->getCode();
+        $dbbname = $this->getDefaultbookingbrand()->getName();
         
         return sprintf(
-            'Code: %s<br>Name: %s<br>Agency: %s<br>Default Booking Brand: %s', 
+            'Code: %s<br>Name: %s<br>Agency: %s<br>Default Booking Brand: %s - %s', 
             $code, 
             $name, 
             $agency,
-            $defaultbookingbrand
+            $dbbcode,
+            $dbbname
         );  
     } 
 }
