@@ -84,18 +84,6 @@ abstract class Brand extends \tabs\apiclient\core\Builder
     }
     
     /**
-     * @inheritDoc
-     */
-    public function toArray()
-    {
-        return array(
-            'code' => $this->getCode(),
-            'name' => $this->getName(),
-            'agencyid' => $this->getAgency()->getId(),
-        );
-    }
-    
-    /**
      * ToString magic method
      *
      * @return string

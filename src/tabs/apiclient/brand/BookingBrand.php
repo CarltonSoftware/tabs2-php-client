@@ -28,5 +28,15 @@ namespace tabs\apiclient\brand;
  */
 class BookingBrand extends Brand
 {
-    
+    /**
+     * @inheritDoc
+     */
+    public function toArray()
+    {
+        return array(
+            'bookingbrandcode' => $this->getCode(),
+            'bookingbrand' => $this->getName(),
+            'agencyid' => $this->getAgency()->getId(),
+        );
+    }
 }

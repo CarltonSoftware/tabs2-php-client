@@ -58,8 +58,8 @@ class MarketingBrand extends Brand
     public function toArray()
     {
         return array(
-            'code' => $this->getCode(),
-            'name' => $this->getName(),
+            'marketingbrandcode' => $this->getCode(),
+            'marketingbrand' => $this->getName(),
             'agencyid' => $this->getAgency()->getId(),
             'defaultbookingbrandid' => $this->getDefaultbookingbrand()->getId(),
         );
