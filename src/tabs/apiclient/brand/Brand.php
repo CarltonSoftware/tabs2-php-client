@@ -91,7 +91,7 @@ abstract class Brand extends \tabs\apiclient\core\Builder
         return array(
             'code' => $this->getCode(),
             'name' => $this->getName(),
-            'agency' => $this->getAgency(),
+            'agencyid' => $this->getAgency()->getId(),
         );
     }
     

@@ -51,4 +51,17 @@ class MarketingBrand extends Brand
         
         return $this;
     } 
+    
+    /**
+     * @inheritDoc
+     */
+    public function toArray()
+    {
+        return array(
+            'code' => $this->getCode(),
+            'name' => $this->getName(),
+            'agencyid' => $this->getAgency()->getId(),
+            'defaultbookingbrandid' => $this->getDefaultbookingbrand()->getId(),
+        );
+    }
 }
