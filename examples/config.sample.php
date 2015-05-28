@@ -1,6 +1,6 @@
 <?php
 
-define('APIURL', 'http://localhost');
+define('APIURL', 'http://localhost:8000');
 define('APIKEY', '1');
 define('APISECRET', '1');
-define('APIOPTIONS', serialize(array('prefix' => 'plato/app_dev.php/v2')));
+define('APIOPTIONS', serialize(array('prefix' => 'app_dev.php/v2')));
