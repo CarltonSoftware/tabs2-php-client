@@ -153,7 +153,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
      *
      * @var ContactDetailCollection
      */
-    protected $contacts;
+    protected $contactsdetails;
 
     /**
      * Bank account collection
@@ -217,8 +217,8 @@ abstract class Actor extends \tabs\apiclient\core\Builder
         $this->bankaccounts = new BankAccountCollection();
         $this->bankaccounts->setElementParent($this);
 
-        $this->contacts = new ContactDetailCollection();
-        $this->contacts->setElementParent($this);
+        $this->contactdetails = new ContactDetailCollection();
+        $this->contactdetails->setElementParent($this);
 
         $this->documents = new DocumentCollection();
         $this->documents->setElementParent($this);
@@ -234,10 +234,10 @@ abstract class Actor extends \tabs\apiclient\core\Builder
      *
      * @return Actor
      */
-    public function addContact(&$contact)
+    public function addContactdetail(&$contact)
     {
         $contact->setParent($this);
-        $this->contacts->addElement($contact);
+        $this->contactdetails->addElement($contact);
 
         return $this;
     }
@@ -249,7 +249,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
      *
      * @return Actor
      */
-    public function setContacts($contacts)
+    public function setContactdetails($contacts)
     {
         foreach ($contacts as $contact) {
             if ($contact->type == 'P') {
@@ -258,7 +258,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
                 $detail = \tabs\apiclient\actor\ContactDetailOther::factory($contact);
             }
 
-            $this->addContact($detail);
+            $this->addContactdetail($detail);
         }
 
         return $this;
@@ -314,7 +314,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
     public function getContactFilter($type = 'ContactDetailOther')
     {
         return array_filter(
-            $this->contacts->getElements(),
+            $this->contactdetails->getElements(),
             function ($ele) use ($type) {
                 return ($ele->getClass() == $type);
             }
