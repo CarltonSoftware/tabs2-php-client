@@ -151,7 +151,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
     /**
      * Contact Entity collection
      *
-     * @var ContactEntityCollection
+     * @var ContactDetailCollection
      */
     protected $contacts;
 
@@ -271,7 +271,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
      */
     public function getContactAddresses()
     {
-        return $this->getContactFilter('ContactAddress');
+        return $this->getContactFilter('ContactDetailPostal');
     }
 
     /**
@@ -311,7 +311,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
      *
      * @return array
      */
-    public function getContactFilter($type = 'ContactDetail')
+    public function getContactFilter($type = 'ContactDetailOther')
     {
         return array_filter(
             $this->contacts->getElements(),
