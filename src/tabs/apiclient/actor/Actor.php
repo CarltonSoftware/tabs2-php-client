@@ -329,7 +329,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
     public function getContactPreferences()
     {
         $preferences = array();
-        foreach ($this->getContacts()->getElements() as $contact) {
+        foreach ($this->contactdetails->getElements() as $contact) {
             foreach ($contact->getContactpreferences() as $preference) {
                 array_push($preferences, $preference);
             }
