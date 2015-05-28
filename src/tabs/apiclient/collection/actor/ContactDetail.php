@@ -26,7 +26,7 @@ namespace tabs\apiclient\collection\actor;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  */
-class ContactEntity extends \tabs\apiclient\collection\Collection
+class ContactDetail extends \tabs\apiclient\collection\Collection
 {
     /**
      * Return an array of contact entity objects.  This object will need to be
@@ -39,7 +39,7 @@ class ContactEntity extends \tabs\apiclient\collection\Collection
     {
         return $this->elements;
     }
-    
+
     /**
      * @inheritDoc
      */

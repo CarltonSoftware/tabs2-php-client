@@ -16,7 +16,7 @@
 namespace tabs\apiclient\actor;
 
 /**
- * Tabs Rest API ContactEntity object.
+ * Tabs Rest API ContactDetailPostal object.
  *
  * @category  Tabs_Client
  * @package   Tabs
@@ -28,7 +28,7 @@ namespace tabs\apiclient\actor;
  *
  * @method \tabs\apiclient\core\Address getAddress() Return the contact address
  */
-class ContactAddress extends ContactEntity
+class ContactDetailPostal extends ContactDetail
 {
     /**
      * Address
@@ -38,23 +38,23 @@ class ContactAddress extends ContactEntity
     protected $address;
 
     // ------------------ Public Functions --------------------- //
-    
+
     /**
      * Constructor
-     * 
+     *
      * @return void
      */
     public function __construct()
     {
         $this->address = new \tabs\apiclient\core\Address();
     }
-    
+
     /**
      * Set a new address
-     * 
+     *
      * @param array|tabs\apiclient\core\Address $address Address
-     * 
-     * @return \tabs\apiclient\core\ContactAddress
+     *
+     * @return \tabs\apiclient\core\ContactDetailPostal
      */
     public function setAddress($address)
     {
@@ -63,20 +63,20 @@ class ContactAddress extends ContactEntity
         } else {
             $this->address = $address;
         }
-        
+
         return $this;
     }
-    
+
     /**
      * ToString magic method
-     * 
+     *
      * @return string
      */
     public function __toString()
     {
         return (string) $this->getAddress();
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -87,7 +87,7 @@ class ContactAddress extends ContactEntity
             parent::toArray()
         );
     }
-    
+
     /**
      * @inheritDoc
      */

@@ -18,8 +18,8 @@ class ContactDetailTest extends ApiClientClassTest
     public function testContactDetail()
     {
         $contactDetail = Fixtures::getContactDetail();
-        
-        $this->assertEquals('ContactDetail', $contactDetail->getClass());
+
+        $this->assertEquals('ContactDetailOther', $contactDetail->getClass());
         $this->assertEquals('contactdetail', $contactDetail->getUrlStub());
         $this->assertEquals(1, $contactDetail->getId());
         $this->assertEquals('C', $contactDetail->getType());
@@ -30,6 +30,6 @@ class ContactDetailTest extends ApiClientClassTest
         $this->assertEquals('Home Phone Number', $contactDetail->getComment());
         $this->assertEquals(5, count($contactDetail->toArray()));
         $this->assertEquals('Phone Home: 0800 100 100', (string) $contactDetail);
-        
+
     }
 }

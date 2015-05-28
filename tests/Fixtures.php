@@ -20,23 +20,23 @@ class Fixtures
 {
     /**
      * Create a new customer
-     * 
+     *
      * @return \tabs\apiclient\actor\Customer
      */
     public static function getCustomer()
     {
         $customer = new \tabs\apiclient\actor\Customer();
         $customer->setId(1)->setTitle('Mr')->setSurname('Wyett');
-        
+
         $doc = Fixtures::getActorDocument();
         $customer->addDocument($doc);
-        
+
         return $customer;
     }
-    
+
     /**
      * Get a tabs user
-     * 
+     *
      * @return \tabs\apiclient\actor\Tabsuser
      */
     public static function getTabsUser()
@@ -46,22 +46,22 @@ class Fixtures
             ->setTitle('Mr')
             ->setSurname('Wyett')
             ->setPassword('xyz123');
-        
+
         $user->setRoles(array(Fixtures::getTabsRole()));
-        
+
          return $user;
     }
-    
+
     /**
      * Create a new owner
-     * 
+     *
      * @return \tabs\apiclient\actor\Owner
      */
     public static function getOwner()
     {
         $contact = Fixtures::getContactAddress();
         $bankAccount = Fixtures::getBankAccount();
-        
+
         $owner = new \tabs\apiclient\actor\Owner();
         $owner->setId(1)
             ->setTitle('Mr')
@@ -69,13 +69,13 @@ class Fixtures
             ->setPassword('abc123')
             ->addContact($contact)
             ->addBankAccount($bankAccount);
-        
+
         return $owner;
     }
-    
+
     /**
      * Return a tabs role for a tabs user
-     * 
+     *
      * @return \tabs\apiclient\actor\TabsRole
      */
     public static function getTabsRole()
@@ -84,20 +84,20 @@ class Fixtures
         $role->setId(1)
             ->setTabsrole('Administrator')
             ->setDescription('This is the admin role');
-        
+
         $role->setRoutes(
             array(
                 Fixtures::getRoute()
             )
         );
-        
+
         return $role;
     }
 
 
     /**
      * Return the test contact preference
-     * 
+     *
      * @return \tabs\apiclient\actor\ContactPreference
      */
     public static function getContactPreference()
@@ -109,18 +109,18 @@ class Fixtures
                 'reason' => 'Booking Confirmation'
             )
         )->setPriority(1);
-        
+
         return $preference;
     }
-    
+
     /**
      * Return the test contact detail
-     * 
+     *
      * @return \tabs\apiclient\actor\ContactDetail
      */
     public static function getContactDetail()
     {
-        $detail = new \tabs\apiclient\actor\ContactDetail();
+        $detail = new \tabs\apiclient\actor\ContactDetailOther();
         $detail->setId(1)
             ->setType('C')
             ->setContactmethod('Phone')
@@ -131,29 +131,29 @@ class Fixtures
             ->setContactpreferences(
                 array(self::getContactPreference())
             );
-        
+
         return $detail;
     }
-    
+
     /**
      * Return the test contact address
-     * 
+     *
      * @return \tabs\apiclient\actor\ContactAddress
      */
     public static function getContactAddress()
     {
-        $contactAddress = new \tabs\apiclient\actor\ContactAddress();
+        $contactAddress = new \tabs\apiclient\actor\ContactDetailPostal();
         $contactAddress->setId(1)
             ->setAddress(self::getAddress())
             ->setType('P')
             ->setInvalid(false);
-        
+
         return $contactAddress;
     }
-    
+
     /**
      * Return test address object
-     * 
+     *
      * @return \tabs\apiclient\core\Address
      */
     public static function getAddress()
@@ -169,10 +169,10 @@ class Fixtures
             )
         );
     }
-    
+
     /**
      * Return a test country object
-     * 
+     *
      * @return \tabs\apiclient\core\Country
      */
     public static function getCountry()
@@ -189,7 +189,7 @@ class Fixtures
 
     /**
      * Create a new bank account object
-     * 
+     *
      * @return \tabs\apiclient\actor\BankAccount
      */
     public static function getBankAccount()
@@ -202,40 +202,56 @@ class Fixtures
             ->setBankname('Bank Awesome')
             ->setRollnumber('123456')
             ->setSortcode('12-34-56');
-        
+
         return $bankAccount;
     }
-    
+
     /**
      * Create a new note a note text and assign a customer to each of them
-     * 
+     *
      * @return \tabs\apiclient\core\Note
      */
     public static function getNote()
     {
         $actor = Fixtures::getCustomer();
-        
+
         $noteType = Fixtures::getNotetype();
-        
+
         $note = new \tabs\apiclient\core\Note();
         $note->setId(1)
             ->setCreatedby($actor)
             ->setCreated('2014-08-09 12:34:56')
             ->setNotetype($noteType);
-        
+
         $noteText = new tabs\apiclient\core\Notetext();
         $noteText->setId(1)
             ->setText('This is a note.')
             ->setCreatedby($actor)
             ->setCreated('2014-08-09 12:34:56');
         $note->setNotetexts(array($noteText));
-        
+
         return $note;
     }
-    
+
+
+    /**
+     * Create a new contact
+     *
+     * @return \tabs\apiclient\actor\Contact
+     */
+    public static function getContact()
+    {
+        $actor = Fixtures::getCustomer();
+
+        $contact = new \tabs\apiclient\actor\Contact;
+        $contact->setId(1);
+
+        return $contact;
+    }
+
     /**
      * Return a new language object
-     * 
+     *
      * @return \tabs\apiclient\core\Language
      */
     public static function getLanguage()
@@ -243,10 +259,10 @@ class Fixtures
         $language = new tabs\apiclient\core\Language();
         return $language;
     }
-    
+
     /**
      * Return a note type
-     * 
+     *
      * @return \tabs\apiclient\core\Notetype
      */
     public static function getNotetype()
@@ -254,26 +270,26 @@ class Fixtures
         $noteType = new tabs\apiclient\core\Notetype();
         $noteType->setDescription('A note type')
             ->setType('Note type');
-        
+
         return $noteType;
     }
-    
+
     /**
      * Return a route
-     * 
+     *
      * @return \tabs\apiclient\actor\Route
      */
     public static function getRoute()
     {
         $route = new tabs\apiclient\actor\Route();
         $route->setId(1)->setRoute('aurlpath');
-        
+
         return $route;
     }
-    
+
     /**
      * Return a property object
-     * 
+     *
      * @return \tabs\apiclient\property\Property
      */
     public static function getProperty()
@@ -286,31 +302,31 @@ class Fixtures
             ->setAddress(Fixtures::getAddress())
             ->setSleeps(4)
             ->setBedrooms(2);
-        
+
         $owner = Fixtures::getPropertyOwner();
         $property->addOwner($owner);
-        
+
         $description = Fixtures::getPropertyDescription();
         $property->addDescription($description);
-        
+
         $branding = Fixtures::getPropertyBranding();
         $property->addBranding($branding);
-        
+
         $bool = Fixtures::getPropertyBooleanAttribute();
         $property->addAttribute($bool);
-        
+
         $hybrid = Fixtures::getPropertyHybridAttribute();
         $property->addAttribute($hybrid);
-        
+
         $img = Fixtures::getPropertyImage();
         $property->addImage($img);
-        
+
         return $property;
     }
-    
+
     /**
      * Return a property owner
-     * 
+     *
      * @return \tabs\apiclient\property\propertyactor\Owner
      */
     public static function getPropertyOwner()
@@ -320,26 +336,26 @@ class Fixtures
             ->setFromdate(new \DateTime('2014-01-01'))
             ->setTodate(new \DateTime('2099-01-01'))
             ->setActor(Fixtures::getOwner());
-        
+
         return $owner;
     }
-    
+
     /**
      * Return the description type short code
-     * 
+     *
      * @return \tabs\apiclient\property\description\Shortcode
      */
     public static function getDescriptionTypeShortcode()
     {
         $type = new \tabs\apiclient\property\description\Shortcode();
         $type->setId(1)->setCode('long')->setDescription('Long description');
-        
+
         return $type;
     }
-    
+
     /**
      * Return the description type
-     * 
+     *
      * @return \tabs\apiclient\property\description\Type
      */
     public static function getDescriptionType()
@@ -349,13 +365,13 @@ class Fixtures
             ->setShortcode(Fixtures::getDescriptionTypeShortcode())
             ->setEncoding('HTML')
             ->setName('Full');
-        
+
         return $type;
     }
-    
+
     /**
      * Return a property description
-     * 
+     *
      * @return \tabs\apiclient\property\description\Description
      */
     public static function getPropertyDescription()
@@ -366,29 +382,29 @@ class Fixtures
             ->setDescription(
                 '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'
             );
-        
+
         $branding = Fixtures::getPropertyBranding();
         $description->setMarketingbrand($branding->getMarketingbrand());
-        
+
         return $description;
     }
-    
+
     /**
      * Return a status
-     * 
+     *
      * @return \tabs\apiclient\core\status\Status
      */
     public static function getStatus($name = 'Live')
     {
         $status = new tabs\apiclient\core\status\Status();
         $status->setId(1)->setName($name);
-        
+
         return $status;
     }
-    
+
     /**
      * Return a status history
-     * 
+     *
      * @return \tabs\apiclient\core\status\History
      */
     public static function getNewStatusHistory()
@@ -398,13 +414,13 @@ class Fixtures
         $history->setStatus($status)
             ->setFromdate('2012-01-01')
             ->setTodate('2012-01-31');
-        
+
         return $history;
     }
-    
+
     /**
      * Return a status history
-     * 
+     *
      * @return \tabs\apiclient\core\status\History
      */
     public static function getLiveStatusHistory()
@@ -414,74 +430,74 @@ class Fixtures
         $history->setId(1)
             ->setStatus($status)
             ->setFromdate('2012-01-31');
-        
+
         return $history;
     }
-    
+
     /**
      * Return a mock branding object
-     * 
+     *
      * @return \tabs\apiclient\brand\Branding
      */
     public static function getBranding()
     {
         $branding = new tabs\apiclient\brand\Branding();
         $branding->setId(1);
-        
+
         $bg = Fixtures::getBrandingGroup();
         $branding->setBrandingGroup($bg);
-        
+
         $mb = Fixtures::getMarketingBrand();
         $branding->setMarketingbrand($mb);
-        
+
         $bb = Fixtures::getBookingBrand();
         $branding->setBookingbrand($bb);
-        
+
         return $branding;
     }
-    
+
     /**
      * Return a branding group object
-     * 
+     *
      * @return \tabs\apiclient\brand\BrandingGroup
      */
     public static function getBrandingGroup()
     {
         $bg = new \tabs\apiclient\brand\BrandingGroup();
         $bg->setCode('NOAA')->setName('Norfolk');
-        
+
         return $bg;
     }
-    
+
     /**
      * Return return a marketing brand group
-     * 
+     *
      * @return \tabs\apiclient\brand\MarketingBrand
      */
     public static function getMarketingBrand()
     {
         $bg = new \tabs\apiclient\brand\MarketingBrand();
         $bg->setCode('NOMB')->setName('Norfolk');
-        
+
         return $bg;
     }
-    
+
     /**
      * Return a mock booking brand object
-     * 
+     *
      * @return \tabs\apiclient\brand\BookingBrand
      */
     public static function getBookingBrand()
     {
         $bg = new \tabs\apiclient\brand\BookingBrand();
         $bg->setCode('NOBB')->setName('Norfolk');
-        
+
         return $bg;
     }
-    
+
     /**
      * Return a property marketing brand object
-     * 
+     *
      * @return \tabs\apiclient\property\brand\MarketingBrand
      */
     public static function getPropertyMarketingBrand()
@@ -496,13 +512,13 @@ class Fixtures
             ->setStatus($status)
             ->addStatusHistory($liveStatusHistory)
             ->addStatusHistory($newStatusHistory);
-        
+
         return $marketingBrand;
     }
-    
+
     /**
      * Return a property booking brand object
-     * 
+     *
      * @return \tabs\apiclient\property\brand\BookingBrand
      */
     public static function getPropertyBookingBrand()
@@ -517,13 +533,13 @@ class Fixtures
             ->setStatus($status)
             ->addStatusHistory($liveStatusHistory)
             ->addStatusHistory($newStatusHistory);
-        
+
         return $bookingBrand;
     }
-    
+
     /**
      * Return a property booking brand object
-     * 
+     *
      * @return \tabs\apiclient\property\brand\BrandingGroup
      */
     public static function getPropertyBrandingGroup()
@@ -536,13 +552,13 @@ class Fixtures
             ->setStatus($status)
             ->addStatusHistory($liveStatusHistory)
             ->addStatusHistory($newStatusHistory);
-        
+
         return $brandingGroup;
     }
-    
+
     /**
      * Return a property branding object
-     * 
+     *
      * @return \tabs\apiclient\property\brand\Branding
      */
     public static function getPropertyBranding()
@@ -561,13 +577,13 @@ class Fixtures
             ->setBrandinggroup($brandingGroup)
             ->setMarketingbrand($marketingBrand)
             ->setBookingbrand($bookingBrand);
-        
+
         return $branding;
     }
-    
+
     /**
      * Create a new boolean attribute
-     * 
+     *
      * @return \tabs\apiclient\core\attribute\Attribute
      */
     public static function getBooleanAttribute()
@@ -579,13 +595,13 @@ class Fixtures
             ->setName('WiFi')
             ->setType('Boolean')
             ->setDescription('WiFi Enabled');
-        
+
         return $attr;
     }
-    
+
     /**
      * Return the property boolean attribute
-     * 
+     *
      * @return \tabs\apiclient\property\PropertyAttribute
      */
     public static function getPropertyBooleanAttribute()
@@ -594,13 +610,13 @@ class Fixtures
         $pa->setId(1);
         $pa->setValue(true)
             ->setAttribute(Fixtures::getBooleanAttribute());
-        
+
         return $pa;
     }
-    
+
     /**
      * Create and return a hyrid attribute
-     * 
+     *
      * @return \tabs\apiclient\core\attribute\Attribute
      */
     public static function getHybridAttribute()
@@ -616,13 +632,13 @@ class Fixtures
             ->setMinimumvalue(1)
             ->setMaximumvalue(2000)
             ->setUnit(Fixtures::getUnit());
-        
+
         return $attr;
     }
-    
+
     /**
      * Create and return a number attribute
-     * 
+     *
      * @return \tabs\apiclient\core\attribute\Attribute
      */
     public static function getNumberAttribute()
@@ -639,13 +655,13 @@ class Fixtures
             ->setMaximumvalue(3)
             ->setDefaultvalue(0)
             ->setUnit(Fixtures::getGenericUnit());
-        
+
         return $attr;
     }
-    
+
     /**
      * Return the property hybrid attribute
-     * 
+     *
      * @return \tabs\apiclient\property\PropertyAttribute
      */
     public static function getPropertyHybridAttribute()
@@ -654,26 +670,26 @@ class Fixtures
         $pa->setId(2);
         $val = Fixtures::getHybridValue();
         $pa->setValue($val)->setAttribute(Fixtures::getHybridAttribute());
-        
+
         return $pa;
     }
 
     /**
      * Create an return an attribute group
-     * 
+     *
      * @return \tabs\apiclient\core\attribute\Group
      */
     public static function getAttributeGroup()
     {
         $group = new tabs\apiclient\core\attribute\Group();
         $group->setId(1)->setName('Misc');
-        
+
         return $group;
     }
 
     /**
      * Create an return an attribute unit
-     * 
+     *
      * @return \tabs\apiclient\core\Unit
      */
     public static function getGenericUnit()
@@ -683,13 +699,13 @@ class Fixtures
             ->setName('n')
             ->setDescription('Number')
             ->setDecimalplaces(0);
-        
+
         return $unit;
     }
 
     /**
      * Create an return an attribute unit
-     * 
+     *
      * @return \tabs\apiclient\core\Unit
      */
     public static function getUnit()
@@ -699,43 +715,43 @@ class Fixtures
             ->setName('m')
             ->setDescription('Metre')
             ->setDecimalplaces(1);
-        
+
         return $unit;
     }
-    
+
     public static function getExtraBranding()
     {
         $extraBranding = new \tabs\apiclient\core\ExtraBranding();
         $extraBranding->setId(1);
-        
+
         $branding = Fixtures::getBranding();
-        $extraBranding->setBranding($branding);   
-        
+        $extraBranding->setBranding($branding);
+
         return $extraBranding;
     }
-    
+
     /**
      * Returns a mock Extra object
-     * 
+     *
      * @return \tabs\apiclient\core\Extra
      */
     public static function getExtra()
     {
         $extraBranding = Fixtures::getExtraBranding();
-        
+
         $extra = new \tabs\apiclient\core\Extra();
         $extra->setId(1)
               ->setExtracode('BKFE')
               ->setExtratype('BookingTypeExtra')
               ->setDescription('Booking Fee')
               ->addExtraBranding($extraBranding);
-              
+
         return $extra;
     }
-    
+
     /**
      * Return a mock image object
-     * 
+     *
      * @return \tabs\apiclient\core\Image
      */
     public static function getImage()
@@ -747,13 +763,13 @@ class Fixtures
             ->setDescription('Testing')
             ->setHeight(100)
             ->setWidth(100);
-        
+
         return $img;
     }
-    
+
     /**
      * Return a mock document object
-     * 
+     *
      * @return \tabs\apiclient\core\Document
      */
     public static function getDocument()
@@ -766,13 +782,13 @@ class Fixtures
             ->setWeight(0)
             ->setPrivate(true)
             ->setMimetype(Fixtures::getPdfMimetype());
-        
+
         return $doc;
     }
-    
+
     /**
      * Return an actor document
-     * 
+     *
      * @return \tabs\apiclient\actor\Document
      */
     public static function getActorDocument()
@@ -781,13 +797,13 @@ class Fixtures
         $actorDoc = new \tabs\apiclient\actor\Document();
         $actorDoc->setId(1)
             ->setDocument($doc);
-        
+
         return $actorDoc;
     }
-    
+
     /**
      * Return a pdf mimetype
-     * 
+     *
      * @return \tabs\apiclient\core\Mimetype
      */
     public static function getPdfMimetype()
@@ -796,26 +812,26 @@ class Fixtures
         $mt->setId(1)
             ->setName('application/pdf')
             ->setShortname('pdf');
-        
+
         return $mt;
     }
-    
+
     /**
      * Create a new property image
-     * 
+     *
      * @return \tabs\apiclient\property\Image
      */
     public static function getPropertyImage()
     {
         $propImage = new tabs\apiclient\property\Image();
         $propImage->setId(1)->setImage(Fixtures::getImage());
-        
+
         return $propImage;
     }
-    
+
     /**
      * Return a hybrid value object
-     * 
+     *
      * @return \tabs\apiclient\core\attribute\Value
      */
     public static function getHybridValue()
@@ -823,7 +839,7 @@ class Fixtures
         $value = new \tabs\apiclient\core\attribute\Value();
         $value->setBoolean(true)
             ->setNumber(2);
-        
+
         return $value;
     }
 }

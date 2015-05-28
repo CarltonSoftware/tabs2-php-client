@@ -53,12 +53,12 @@ abstract class Base
 
         return self::factory($request->json(array('object' => true)));
     }
-    
+
     /**
      * Fetch an array of elements
-     * 
+     *
      * @param string $route Url to fetch
-     * 
+     *
      * @return array
      */
     public static function _fetch($route)
@@ -75,21 +75,21 @@ abstract class Base
                 $ele = static::factory($element);
                 array_push($elements, $ele);
             }
-            
+
             return $elements;
         }
-        
+
         throw new \tabs\apiclient\client\Exception(
             $request,
             'Unable to fetch element for route: ' . $route
         );
     }
-    
+
     /**
      * Return the ID from a content-location header
-     * 
+     *
      * @param \GuzzleHttp\Message\Response $req Guzzle response
-     * 
+     *
      * @return string|void
      */
     public static function getRequestId($req)
@@ -100,12 +100,12 @@ abstract class Base
             return;
         }
     }
-    
+
     /**
      * Return an id from a url string
-     * 
+     *
      * @param string $str String
-     * 
+     *
      * @return string
      */
     public static function getIdFromString($str)
@@ -140,7 +140,7 @@ abstract class Base
         if (is_object($element) && get_class($element) == get_called_class()) {
             return $element;
         }
-            
+
         $object = new static();
         self::setObjectProperties($object, $element);
 
@@ -160,7 +160,7 @@ abstract class Base
     {
         foreach ($node as $key => $val) {
             $func = 'set' . ucfirst($key);
-            if (!in_array($key, $exceptions) 
+            if (!in_array($key, $exceptions)
                 && (property_exists($obj, $key) || method_exists($obj, $func))
             ) {
                 $obj->$func($val);
@@ -169,14 +169,14 @@ abstract class Base
     }
 
     // -------------------------- Public Functions -------------------------- //
-    
+
     /**
      * Check if a method exists or not.  If a magic method accessor is specified
-     * then the method will check the property string after the accessor 
+     * then the method will check the property string after the accessor
      * prefix (i.e. set or get).
-     * 
+     *
      * @param string $method Method name
-     * 
+     *
      * @return boolean
      */
     public function method_exists($method)
@@ -184,32 +184,32 @@ abstract class Base
         if (!is_string($method)) {
             return false;
         }
-        
+
         if (method_exists($this, $method)) {
             return true;
         }
-        
+
         if ((substr($method, 0, 3) == 'get' || substr($method, 0, 3) == 'set')
             && property_exists($this, lcfirst(substr($method, 3)))
         ) {
             return true;
         }
-        
+
         return false;
     }
 
     /**
      * Convert a boolean value to a string
-     * 
+     *
      * @param boolean $boolean Boolean value
-     * 
+     *
      * @return string
      */
     public function boolToStr($boolean)
     {
         return ($boolean === true) ? 'true' : 'false';
     }
-    
+
     /**
      * Set the parent element
      *
@@ -233,13 +233,13 @@ abstract class Base
     {
         return $this->parent;
     }
-    
+
     /**
      * Recursive finder function.  Traverses up the tree to try to
      * find a perent object with a matching class.
-     * 
+     *
      * @param string $type Class type
-     * 
+     *
      * @return Base|null
      */
     public function findParentByType($type)
@@ -376,12 +376,12 @@ abstract class Base
             $this->$varName = floatval($float);
         }
     }
-    
+
     /**
      * Return a date time object from a given param
-     * 
+     *
      * @param string|\DateTime $date Date object
-     * 
+     *
      * @return \DateTime
      */
     public function getDateTime($date)
@@ -389,7 +389,7 @@ abstract class Base
         if (!$date instanceof \DateTime) {
             $date = new \DateTime($date);
         }
-        
+
         return $date;
-    }    
+    }
 }

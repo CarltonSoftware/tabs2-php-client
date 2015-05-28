@@ -16,7 +16,7 @@
 namespace tabs\apiclient\actor;
 
 /**
- * Tabs Rest API ContactEntity object.
+ * Tabs Rest API ContactDetail object.
  *
  * @category  Tabs_Client
  * @package   Tabs
@@ -26,68 +26,98 @@ namespace tabs\apiclient\actor;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getContactmethodsubtype() Return the contact sub type
- * @method string getValue()                Return the value
- * @method string getComment()              Return the contact comment
- * 
- * @method ContactDetail setContactmethodsubtype(string $contactmethodsubtype) Set the contact subtype
- * @method ContactDetail setValue(string $value)                               Set the contact value
- * @method ContactDetail setComment(string $comment)                           Set the contact comnent
+ * @method integer             getId()                 Return the id
+ * @method boolean             getInvalid()            Return the invalid flag
+ * @method string              getContactmethod()      Return the contact method
+ * @method string              getType()               Return the contact type
+ * @method ContactPreference[] getContactpreferences() Return the contact preference array
+ *
+ * @method ContactDetail setId(integer $id)                      Set the id
+ * @method ContactDetail setInvalid(boolean $invalid)            Set the invalid flag
+ * @method ContactDetail setContactmethod(string $contactmethod) Set the contact method
+ * @method ContactDetail setType(string $type)                   Set the contact type
  */
-class ContactDetail extends ContactEntity
+abstract class ContactDetail extends \tabs\apiclient\core\Builder
 {
     /**
-     * ContactMethodSubType
+     * Id
      *
-     * @var string
+     * @var integer
      */
-    protected $contactmethodsubtype;
+    protected $id;
 
     /**
-     * Value
+     * Invalid
      *
-     * @var string
+     * @var boolean
      */
-    protected $value;
+    protected $invalid;
 
     /**
-     * Comment
+     * Contactmethod
      *
      * @var string
      */
-    protected $comment;
-    
+    protected $contactmethod;
+
+    /**
+     * Type
+     *
+     * @var string
+     */
+    protected $type;
+
+    /**
+     * Contactpreferences
+     *
+     * Array of ContactPreference
+     *
+     * @var array
+     */
+    protected $contactpreferences = array();
+
     // ------------------ Public Functions --------------------- //
-    
+
     /**
-     * ToString magic method
-     * 
-     * @return string
+     * Set the contact preferences
+     *
+     * @param array $contactPreferences Array of contact preference objects
+     *
+     * @return \tabs\apiclient\actor\ContactDetail
      */
-    public function __toString()
+    public function setContactpreferences($contactPreferences)
     {
-        return sprintf(
-            '%s %s: %s',
-            ucfirst($this->getContactmethod()),
-            $this->getContactmethodsubtype(),
-            $this->getValue()
-        );
+        foreach ($contactPreferences as $preference) {
+            $contactPreference = ContactPreference::factory($preference);
+            $this->addContactPreference($contactPreference);
+        }
+
+        return $this;
     }
-    
+
     /**
-     * Contact detail array representation
-     * 
-     * @return array
+     * Add a contact preference
+     *
+     * @param \tabs\apiclient\actor\ContactPreference $contactPreference Contact Preference
+     *
+     * @return \tabs\apiclient\actor\ContactDetail
+     */
+    public function addContactpreference(&$contactPreference)
+    {
+        $contactPreference->setParent($this);
+        $this->contactpreferences[] = $contactPreference;
+
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
      */
     public function toArray()
     {
-        return array_merge(
-            array(
-                'contactmethodsubtype' => $this->getContactmethodsubtype(),
-                'value' => $this->getValue(),
-                'comment' => $this->getComment()
-            ),
-            parent::toArray()
+        return array(
+            'invalid' => $this->boolToStr($this->getInvalid()),
+            'contactmethod' => $this->getContactmethod()
         );
     }
 }

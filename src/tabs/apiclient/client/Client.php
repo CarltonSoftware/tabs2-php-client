@@ -35,11 +35,11 @@ class Client extends \GuzzleHttp\Client
      * @var \tabs\apiclient\client\Client
      */
     static $instance;
-    
+
     /**
      * HMAC plugin
-     * 
-     * @var \tabs\apiclient\client\Hmac 
+     *
+     * @var \tabs\apiclient\client\Hmac
      */
     protected $hmac;
 
@@ -78,29 +78,29 @@ class Client extends \GuzzleHttp\Client
 
         return self::$instance;
     }
-    
+
     /**
      * Contructor
-     * 
+     *
      * @param string $baseUrl Url of the api
      * @param string $key     API Key
      * @param string $secret  HMAC Secret Key
      * @param array  $config  Configuration settings
      *
      * @throws RuntimeException if cURL is not installed
-     * 
+     *
      * @return void
      */
     public function __construct($baseUrl, $key, $secret, $config = array())
     {
         $plugin = new \tabs\apiclient\client\Hmac($key, $secret);
         $this->hmac = $plugin;
-        
+
         if (isset($config['prefix'])) {
             $plugin->setPrefix($config['prefix']);
             unset($config['prefix']);
         }
-        
+
         parent::__construct(
             array_merge(
                 array('base_url' => $baseUrl),
@@ -109,26 +109,26 @@ class Client extends \GuzzleHttp\Client
         );
         $this->getEmitter()->attach($plugin);
     }
-    
+
     /**
      * Return the hmac plugin
-     * 
+     *
      * @return \tabs\apiclient\client\Hmac
      */
     public function getHmac()
     {
         return $this->hmac;
     }
-    
+
     /**
      * Overriden get request
-     * 
+     *
      * @param string $url     Api URL
      * @param array  $params  Query Parameters
      * @param array  $options Client options
-     * 
+     *
      * @throws \tabs\apiclient\client\Exception
-     * 
+     *
      * @return \GuzzleHttp\Message\Response
      */
     public function get($url = null, $params = [], $options = [])
@@ -137,16 +137,16 @@ class Client extends \GuzzleHttp\Client
             $this->createQueryRequest('get', $url, $params, $options)
         );
     }
-    
+
     /**
      * Overriden delete request
-     * 
+     *
      * @param string $url     Api URL
      * @param array  $params  Query Parameters
      * @param array  $options Client options
-     * 
+     *
      * @throws \tabs\apiclient\client\Exception
-     * 
+     *
      * @return \GuzzleHttp\Message\Response
      */
     public function delete($url = null, array $params = [], array $options = [])
@@ -155,16 +155,16 @@ class Client extends \GuzzleHttp\Client
             $this->createQueryRequest('delete', $url, $params, $options)
         );
     }
-    
+
     /**
      * Overriden options request
-     * 
+     *
      * @param string $url     Api URL
      * @param array  $params  Query Parameters
      * @param array  $options Client options
-     * 
+     *
      * @throws \tabs\apiclient\client\Exception
-     * 
+     *
      * @return \GuzzleHttp\Message\Response
      */
     public function options($url = null, array $params = [], array $options = [])
@@ -173,16 +173,16 @@ class Client extends \GuzzleHttp\Client
             $this->createQueryRequest('options', $url, $params, $options)
         );
     }
-    
+
     /**
      * Overriden post request
-     * 
+     *
      * @param string $url     Api URL
      * @param array  $params  POST Parameters
      * @param array  $options Client options
-     * 
+     *
      * @throws \tabs\apiclient\client\Exception
-     * 
+     *
      * @return \GuzzleHttp\Message\Response
      */
     public function post($url = null, array $params = [], array $options = [])
@@ -191,16 +191,16 @@ class Client extends \GuzzleHttp\Client
             $this->createPostRequest('post', $url, $params, $options)
         );
     }
-    
+
     /**
      * Overriden put request
-     * 
+     *
      * @param string $url     Api URL
      * @param array  $params  POST Parameters
      * @param array  $options Client options
-     * 
+     *
      * @throws \tabs\apiclient\client\Exception
-     * 
+     *
      * @return \GuzzleHttp\Message\Response
      */
     public function put($url = null, array $params = [], array $options = [])
@@ -209,7 +209,7 @@ class Client extends \GuzzleHttp\Client
             $this->createPostRequest('put', $url, $params, $options)
         );
     }
-    
+
     /**
      * Create a new guzzle request and append params onto the
      * request query.
@@ -230,7 +230,7 @@ class Client extends \GuzzleHttp\Client
         $options['query'] = $params;
         return $this->createRequest($method, $url, $options);
     }
-    
+
     /**
      * Create a new guzzle request and append params onto the
      * request body.
@@ -251,12 +251,12 @@ class Client extends \GuzzleHttp\Client
         $options['body'] = $params;
         return $this->createRequest($method, $url, $options);
     }
-    
+
     /**
      * Perform request.
-     * 
+     *
      * @param RequestInterface $request Guzzle request object
-     * 
+     *
      * @return \GuzzleHttp\Message\Response
      */
     public function sendRequest($request)
@@ -266,16 +266,16 @@ class Client extends \GuzzleHttp\Client
         } catch (\RuntimeException $ex) {
             $this->_setException($ex);
         }
-    }    
-    
+    }
+
     /**
      * Handle a put/post request exception
-     * 
+     *
      * @param \RuntimeException $exception Exception object
-     * 
+     *
      * @throws \tabs\apiclient\client\ValidationException
      * @throws \tabs\apiclient\client\Exception
-     * 
+     *
      * @return void
      */
     private function _setException($exception)

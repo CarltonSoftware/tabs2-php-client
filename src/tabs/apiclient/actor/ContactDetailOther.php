@@ -1,0 +1,101 @@
+<?php
+
+/**
+ * Tabs Rest API ContactEntity object.
+ *
+ * PHP Version 5.4
+ *
+ * @category  Tabs_Client
+ * @package   Tabs
+ * @author    Carlton Software <support@carltonsoftware.co.uk>
+ * @copyright 2014 Carlton Software
+ * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @link      http://www.carltonsoftware.co.uk
+ */
+
+namespace tabs\apiclient\actor;
+
+/**
+ * Tabs Rest API ContactDetailOther object.
+ *
+ * @category  Tabs_Client
+ * @package   Tabs
+ * @author    Carlton Software <support@carltonsoftware.co.uk>
+ * @copyright 2014 Carlton Software
+ * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version   Release: 1
+ * @link      http://www.carltonsoftware.co.uk
+ *
+ * @method string getContactmethodsubtype() Return the contact sub type
+ * @method string getValue()                Return the value
+ * @method string getComment()              Return the contact comment
+ *
+ * @method ContactDetailOther setContactmethodsubtype(string $contactmethodsubtype) Set the contact subtype
+ * @method ContactDetailOther setValue(string $value)                               Set the contact value
+ * @method ContactDetailOther setComment(string $comment)                           Set the contact comnent
+ */
+class ContactDetailOther extends ContactDetail
+{
+    /**
+     * ContactMethodSubType
+     *
+     * @var string
+     */
+    protected $contactmethodsubtype;
+
+    /**
+     * Value
+     *
+     * @var string
+     */
+    protected $value;
+
+    /**
+     * Comment
+     *
+     * @var string
+     */
+    protected $comment;
+
+    // ------------------ Public Functions --------------------- //
+
+    /**
+     * ToString magic method
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return sprintf(
+            '%s %s: %s',
+            ucfirst($this->getContactmethod()),
+            $this->getContactmethodsubtype(),
+            $this->getValue()
+        );
+    }
+
+    /**
+     * Contact detail array representation
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return array_merge(
+            array(
+                'contactmethodsubtype' => $this->getContactmethodsubtype(),
+                'value' => $this->getValue(),
+                'comment' => $this->getComment()
+            ),
+            parent::toArray()
+        );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    function getUrlStub()
+    {
+        return 'contactdetail';
+    }
+}

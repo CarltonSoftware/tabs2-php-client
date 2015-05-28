@@ -16,7 +16,8 @@
 namespace tabs\apiclient\actor;
 use tabs\apiclient\core\Note;
 use tabs\apiclient\collection\core\Note as NoteCollection;
-use tabs\apiclient\collection\actor\ContactEntity as ContactEntityCollection;
+use tabs\apiclient\collection\actor\Contact as ContactCollection;
+use tabs\apiclient\collection\actor\ContactDetail as ContactDetailCollection;
 use tabs\apiclient\collection\actor\Document as DocumentCollection;
 use tabs\apiclient\collection\actor\BankAccount as BankAccountCollection;
 
@@ -31,22 +32,23 @@ use tabs\apiclient\collection\actor\BankAccount as BankAccountCollection;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method integer                       getId()            Return the Id
- * @method string                        getFirstname()     Return the firstname
- * @method string                        getSurname()       Return the surname
- * @method string                        getTitle()         Return the title
- * @method string                        getSalutation()    Return the saulation
- * @method string                        getTabscode()      Return the tabs code
- * @method \tabs\apiclient\core\Language getLanguage()      Return the language
- * @method boolean                       getInactive()      Return the inactive state
- * @method string                        getPassword()      Return the password
- * @method string                        getCompanyname()   Return the company name
- * @method string                        getVatnumber()     Return the vat number
- * @method string                        getCompanynumber() Return the company number
- * @method ContactEntityCollection       getContacts()      Return contact entity collection
- * @method BankAccountCollection         getBankaccounts()  Return a collection of bank accounts
- * @method NoteCollection                getNotes()         Return a note collection
- * @method DocumentCollection            getDocuments()     Return a document collection
+ * @method integer                       getId()             Return the Id
+ * @method string                        getFirstname()      Return the firstname
+ * @method string                        getSurname()        Return the surname
+ * @method string                        getTitle()          Return the title
+ * @method string                        getSalutation()     Return the saulation
+ * @method string                        getTabscode()       Return the tabs code
+ * @method \tabs\apiclient\core\Language getLanguage()       Return the language
+ * @method boolean                       getInactive()       Return the inactive state
+ * @method string                        getPassword()       Return the password
+ * @method string                        getCompanyname()    Return the company name
+ * @method string                        getVatnumber()      Return the vat number
+ * @method string                        getCompanynumber()  Return the company number
+ * @method ContactDetailCollection       getContacts()       Return contact entity collection
+ * @method BankAccountCollection         getBankaccounts()   Return a collection of bank accounts
+ * @method NoteCollection                getNotes()          Return a note collection
+ * @method DocumentCollection            getDocuments()      Return a document collection
+ * @method ContactCollection             getContactHistory() Return a contact collection
  *
  * @method Actor setId(string $id) Set the Id
  * @method Actor setFirstname(string $firstname) Set the firstname
@@ -174,6 +176,13 @@ abstract class Actor extends \tabs\apiclient\core\Builder
      */
     protected $documents;
 
+    /**
+     * Contact history collection
+     *
+     * @var ContactCollection
+     */
+    protected $contactHistory;
+
     // -------------------------- Static Functions -------------------------- //
 
     /**
@@ -201,18 +210,21 @@ abstract class Actor extends \tabs\apiclient\core\Builder
     public function __construct()
     {
         $this->setLanguage(array('name' => 'English'));
-        
+
         $this->notes = new NoteCollection();
         $this->notes->setElementParent($this);
-        
+
         $this->bankaccounts = new BankAccountCollection();
         $this->bankaccounts->setElementParent($this);
-        
-        $this->contacts = new ContactEntityCollection();
+
+        $this->contacts = new ContactDetailCollection();
         $this->contacts->setElementParent($this);
-        
+
         $this->documents = new DocumentCollection();
         $this->documents->setElementParent($this);
+
+        $this->contactHistory = new ContactCollection();
+        $this->contactHistory->setElementParent($this);
     }
 
     /**
@@ -241,9 +253,9 @@ abstract class Actor extends \tabs\apiclient\core\Builder
     {
         foreach ($contacts as $contact) {
             if ($contact->type == 'P') {
-                $detail = \tabs\apiclient\actor\ContactAddress::factory($contact);
+                $detail = \tabs\apiclient\actor\ContactDetailPostal::factory($contact);
             } else {
-                $detail = \tabs\apiclient\actor\ContactDetail::factory($contact);
+                $detail = \tabs\apiclient\actor\ContactDetailOther::factory($contact);
             }
 
             $this->addContact($detail);
@@ -421,6 +433,50 @@ abstract class Actor extends \tabs\apiclient\core\Builder
 
         return $this;
     }
+
+
+    /**
+     * Add a Contact
+     *
+     * @param Contact $contact Contact object
+     *
+     * @return Actor
+     */
+    public function addContactHistory(&$contact)
+    {
+        $contact->setParent($this);
+        $this->contactHistory->addElement($contact);
+
+        return $this;
+    }
+
+
+    /**
+     * Sets the contactHistory array
+     *
+     * @param Contact[] $contactHistory Contact array
+     *
+     * @return Actor
+     */
+    public function setContactHistory($contactHistory)
+    {
+        foreach ($contactHistory as $contact) {
+            $_contact = Contact::factory($contact);
+            $this->addContactHistory($_contact);
+        }
+
+        return $this;
+    }
+
+
+    public function getContactHistory()
+    {
+        $contactHistory = new ContactCollection();
+        $contactHistory->setElementParent($this);
+
+        return $contactHistory;
+    }
+
 
     /**
      * Set the language object

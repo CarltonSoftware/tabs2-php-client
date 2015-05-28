@@ -21,14 +21,14 @@ class CustomerTest extends ApiClientClassTest
         $this->assertEquals(1, $customer->getId());
         $this->assertEquals('Mr', $customer->getTitle());
         $this->assertEquals('Wyett', $customer->getSurname());
-        
+
         // Check other accessors are working
         $customer->salutation = 'Alex';
         $this->assertEquals('Alex', $customer->salutation);
         $this->assertEquals($customer->toArray(), $customer->toCreateArray());
         $this->assertEquals($customer->toArray(), $customer->toUpdateArray());
     }
-    
+
     /**
      * Test creating customer collections
      *
@@ -37,31 +37,31 @@ class CustomerTest extends ApiClientClassTest
     public function testNewCustomerCollections()
     {
         $customer = Fixtures::getCustomer();
-        
+
         $this->assertEquals(
             '\tabs\apiclient\actor\ContactDetail',
             $customer->getContacts()->getElementClass()
         );
-        
+
         $this->assertEquals(
             '/customer/1/contactdetail',
             $customer->getContacts()->getRoute()
         );
-        
+
         $this->assertEquals(
             '\tabs\apiclient\actor\BankAccount',
             $customer->getBankaccounts()->getElementClass()
         );
-        
+
         $this->assertEquals(
             '/customer/1/bankaccount',
             $customer->getBankaccounts()->getRoute()
         );
     }
-    
+
     /**
      * Test the update routes created by the builder class
-     * 
+     *
      * @return void
      */
     public function testCreateRoutes()
@@ -78,35 +78,36 @@ class CustomerTest extends ApiClientClassTest
         $this->assertEquals('/customer/1/bankaccount', $bankAccount->getCreateUrl());
         $this->assertEquals('/customer/1/bankaccount/1', $bankAccount->getUpdateUrl());
 
-        $contactDetail = new tabs\apiclient\actor\ContactDetail();
+        $contactDetail = new tabs\apiclient\actor\ContactDetailOther();
         $contactDetail->setId(1);
         $customer->addContact($contactDetail);
         $this->assertEquals('/customer/1/contactdetail', $contactDetail->getCreateUrl());
         $this->assertEquals('/customer/1/contactdetail/1', $contactDetail->getUpdateUrl());
-        
+
         $preference = new tabs\apiclient\actor\ContactPreference();
         $preference->setId(1);
         $contactDetail->addContactpreference($preference);
         $this->assertEquals('/customer/1/contactpreference', $preference->getCreateUrl());
         $this->assertEquals('/customer/1/contactpreference/1', $preference->getUpdateUrl());
 
-        $contactAddress = new tabs\apiclient\actor\ContactAddress();
+        $contactAddress = new tabs\apiclient\actor\ContactDetailPostal();
         $customer->addContact($contactAddress);
         $contactAddress->setId(1);
         $this->assertEquals('/customer/1/address', $contactAddress->getCreateUrl());
         $this->assertEquals('/customer/1/address/1', $contactAddress->getUpdateUrl());
-        
+
         $preference2 = new tabs\apiclient\actor\ContactPreference();
         $preference2->setId(1);
         $contactAddress->addContactpreference($preference2);
         $this->assertEquals('/customer/1/contactpreference', $preference2->getCreateUrl());
         $this->assertEquals('/customer/1/contactpreference/1', $preference2->getUpdateUrl());
-        
+
         $note = Fixtures::getNote();
         $customer->addNote($note);
         $this->assertEquals('/customer/1/note', $note->getCreateUrl());
         $this->assertEquals('/note/1', $note->getUpdateUrl());
-        
+
         $this->assertTrue(is_array($customer->getContactPreferences()));
     }
+
 }

@@ -30,12 +30,12 @@ abstract class Builder extends Base implements BuilderInterface
 {
 
     // -------------------------- Public Functions -------------------------- //
-    
+
     /**
      * Perform a create request
-     * 
+     *
      * @throws \tabs\apiclient\client\Exception
-     * 
+     *
      * @return Builder
      */
     public function create()
@@ -54,7 +54,7 @@ abstract class Builder extends Base implements BuilderInterface
                 'Unable to create ' . ucfirst($this->getClass())
             );
         }
-        
+
         // Set the id of the element
         $id = self::getRequestId($req);
         if ($id) {
@@ -62,15 +62,15 @@ abstract class Builder extends Base implements BuilderInterface
                 (integer) $id
             );
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Perform a update request
-     * 
+     *
      * @throws \tabs\apiclient\client\Exception
-     * 
+     *
      * @return Builder
      */
     public function update()
@@ -89,15 +89,15 @@ abstract class Builder extends Base implements BuilderInterface
                 'Unable to update ' . ucfirst($this->getClass())
             );
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Perform a update request without any parameters
-     * 
+     *
      * @throws \tabs\apiclient\client\Exception
-     * 
+     *
      * @return Builder
      */
     public function commit()
@@ -115,15 +115,15 @@ abstract class Builder extends Base implements BuilderInterface
                 'Unable to commit ' . ucfirst($this->getClass())
             );
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Perform a create request
-     * 
+     *
      * @throws \tabs\apiclient\client\Exception
-     * 
+     *
      * @return Builder
      */
     public function delete()
@@ -145,30 +145,30 @@ abstract class Builder extends Base implements BuilderInterface
                 $this->parent = null;
             }
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Generate a url string for a create url
-     * 
+     *
      * @return string
      */
     public function getCreateUrl()
     {
         return $this->_createUrl();
     }
-    
+
     /**
      * Generate a url string for a update url
-     * 
+     *
      * @return string
      */
     public function getUpdateUrl()
     {
         return $this->_updateUrl();
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -176,57 +176,57 @@ abstract class Builder extends Base implements BuilderInterface
     {
         return strtolower($this->getClass());
     }
-    
+
     /**
      * Helpful accessor incase structure of create post is different to the
      * toArray map
-     * 
+     *
      * @return array
      */
     public function toCreateArray()
     {
         return $this->toArray();
     }
-    
+
     /**
      * Helpful accessor incase structure of update put is different to the
      * toArray map
-     * 
+     *
      * @return array
      */
     public function toUpdateArray()
     {
         return $this->toArray();
     }
-    
+
     /**
      * Return the actor object within the relationship between the builder
      * objects.
-     * 
+     *
      * @return \tabs\apiclient\actor\Actor
      */
     public function getParentActor()
     {
         return $this->_getParentActor($this);
     }
-    
+
     /**
      * Return the property object within the relationship between the builder
      * objects.
-     * 
+     *
      * @return \tabs\apiclient\property\Property
      */
     public function getParentProperty()
     {
         return $this->_getParentProperty($this);
     }
-    
+
     /**
      * Traverse through the relationship to look for an actor object
-     * 
+     *
      * @param \tabs\apiclient\actor\Actor $object Actor object
      * @throws \tabs\apiclient\client\Exception
-     * 
+     *
      * @return \tabs\apiclient\actor\Actor
      */
     private function _getParentActor($object)
@@ -241,14 +241,14 @@ abstract class Builder extends Base implements BuilderInterface
             );
         }
     }
-    
+
     /**
      * Traverse through the relationship to look for an property object
-     * 
+     *
      * @param \tabs\apiclient\core\Base $object Object to traverse
-     * 
+     *
      * @throws \tabs\apiclient\client\Exception
-     * 
+     *
      * @return \tabs\apiclient\actor\Actor
      */
     private function _getParentProperty($object)
@@ -266,9 +266,9 @@ abstract class Builder extends Base implements BuilderInterface
 
     /**
      * Generate a url string for a create url
-     * 
+     *
      * @param string $prefix Prefix
-     * 
+     *
      * @return string
      */
     private function _createUrl($prefix = '')
@@ -280,12 +280,12 @@ abstract class Builder extends Base implements BuilderInterface
         }
         return $prefix . '/' . $this->getUrlStub();
     }
-    
+
     /**
      * Generate a url string for a create url
-     * 
+     *
      * @param string $prefix Prefix
-     * 
+     *
      * @return string
      */
     private function _updateUrl($prefix = '')
@@ -295,7 +295,7 @@ abstract class Builder extends Base implements BuilderInterface
                 $prefix
             );
         }
-        
+
         return $prefix . '/' . $this->getUrlStub() . '/' . $this->getId();
     }
 }
