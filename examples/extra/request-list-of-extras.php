@@ -22,20 +22,17 @@ try {
     $extras->fetch();
     
     foreach ($extras->getElements() as $extra) {
-        echo '<p>ID: ' . $extra->getId() . 
-             '<br>Extracode: ' . $extra->getExtracode() .
-             '<br>Extratype: ' . $extra->getExtratype() .
-             '<br>Description: ' . $extra->getDescription();
-        
-        if (count($extra->getExtrabrandings()->getElements()) > 0) {
-            echo '<br>ExtraBrandings: <ul>';
+        echo '<p>' . (string) $extra;
+        if (count($extra->getBrandings()->getElements()) > 0) {
+            echo '<br>ExtraBrandings:<ol>';
            
-            foreach ($extra->getExtrabrandings()->getElements() as $br) {
+            foreach ($extra->getBrandings()->getElements() as $br) {
                 echo '<li>' . (string)$br . '</li>';
             }
             
-            echo '</ul><br>';
+            echo '</ol>';
         }
+        echo '</p><br>';
     }
 } catch(Exception $e) {
     echo $e->getMessage();

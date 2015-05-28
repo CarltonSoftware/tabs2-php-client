@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tabs Rest API ExtraBranding collection object.
+ * Tabs Rest API Agency collection object.
  *
  * PHP Version 5.4
  *
@@ -13,10 +13,10 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\collection\core;
+namespace tabs\apiclient\collection\actor;
 
 /**
- * Tabs Rest API ExtraBranding collection object.
+ * Tabs Rest API Agency collection object.
  *
  * @category  Tabs_Client
  * @package   Tabs
@@ -26,14 +26,14 @@ namespace tabs\apiclient\collection\core;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  */
-class ExtraBranding extends \tabs\apiclient\collection\Collection
+class Agency extends \tabs\apiclient\collection\Collection
 {
     /**
-     * Return an array of ExtraBranding objects.  This object will need to be
+     * Return an array of Agency objects.  This object will need to be
      * instantiated and the method fetch will need to be called before this will
      * return any elements.
      *
-     * @return \tabs\apiclient\core\ExtraBranding[]
+     * @return \tabs\apiclient\actor\Agency[]
      */
     public function getElements()
     {
@@ -45,7 +45,7 @@ class ExtraBranding extends \tabs\apiclient\collection\Collection
      */
     public function getRoute()
     {
-        return 'extrabranding';
+        return 'agency';
     }
 
     /**
@@ -53,6 +53,6 @@ class ExtraBranding extends \tabs\apiclient\collection\Collection
      */
     public function getElementClass()
     {
-        return '\tabs\apiclient\core\ExtraBranding';
+        return '\tabs\apiclient\actor\Agency';
     }
 }

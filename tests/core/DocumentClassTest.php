@@ -34,6 +34,12 @@ class DocumentClassTest extends ApiClientClassTest
         $this->assertArrayHasKey('weight', $document->toArray());
         $this->assertArrayHasKey('private', $document->toArray());
         
+        // Test image urls
+        $this->assertEquals(
+            'http://httpbin.org/file//width/50/0',
+            $document->getThumbnailUrl()
+        );
+        
         // Test mimetype
         $this->assertEquals(1, $document->getMimetype()->getId());
         $this->assertEquals('application/pdf', $document->getMimetype()->getName());

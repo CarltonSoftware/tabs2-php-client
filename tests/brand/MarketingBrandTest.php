@@ -8,22 +8,22 @@ $file = dirname(__FILE__)
     . DIRECTORY_SEPARATOR . 'ApiClientClassTest.php';
 require_once $file;
 
-class BrandingTest extends ApiClientClassTest
+class MarketingBrandTest extends ApiClientClassTest
 {
     /**
-     * Test creating a new branding object
+     * Test creating a new marketingBrand object
      *
      * @return void
      */
-    public function testBranding()
+    public function testMarketingBrand()
     {
-        $branding = Fixtures::getBranding();
+        $marketingBrand = Fixtures::getMarketingBrand();
         
         $this->assertEquals(
-            'Norfolk - Norfolk - Norfolk',
-            (string) $branding
+            'NOMB - Norfolk',
+            (string) $marketingBrand
         );
         
-        $this->assertEquals('branding', $branding->getUrlStub());
+        $this->assertEquals('marketingbrand', $marketingBrand->getUrlStub());
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tabs Rest API BrandingGroup object.
+ * Tabs Rest API Agency object.
  *
  * PHP Version 5.4
  *
@@ -13,10 +13,10 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\brand;
+namespace tabs\apiclient\actor;
 
 /**
- * Tabs Rest API BrandingGroup object.
+ * Tabs Rest API Agency object.
  *
  * @category  Tabs_Client
  * @package   Tabs
@@ -26,17 +26,15 @@ namespace tabs\apiclient\brand;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  */
-class BrandingGroup extends Brand
+class Agency extends Actor
 {
     /**
-     * @inheritDoc
+     * ToString magic method
+     *
+     * @return string
      */
-    public function toArray()
+    public function __toString()
     {
-        return array(
-            'brandinggroupcode' => $this->getCode(),
-            'brandinggroup' => $this->getName(),
-            'agencyid' => $this->getAgency()->getId(),
-        );
+        return $this->getCompanyname();
     }
 }

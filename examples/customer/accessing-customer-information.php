@@ -51,10 +51,11 @@ try {
         
         echo '<h3>Documents</h3>';
         if (count($customer->getDocuments()->getElements()) > 0) {
-            foreach ($customer->getDocuments()->getElements() as $doc) {
+            foreach ($customer->getDocuments()->getElements() as $doc) {                
                 echo sprintf(
-                    '<p><a href="viewing-a-document.php?id=%s">%s</a></p>',
+                    '<p><a href="viewing-a-document.php?id=%s">%s%s</a></p>',
                     $doc->getDocument()->getId(),
+                    $doc->getDocument()->getThumbnailSrc(),
                     $doc->getDocument()->getName()
                 );
             }

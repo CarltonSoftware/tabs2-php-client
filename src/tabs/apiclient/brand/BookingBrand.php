@@ -33,6 +33,10 @@ class BookingBrand extends Brand
      */
     public function toArray()
     {
-        return array();
+        return array(
+            'bookingbrandcode' => $this->getCode(),
+            'bookingbrand' => $this->getName(),
+            'agencyid' => $this->getAgency()->getId(),
+        );
     }
 }
