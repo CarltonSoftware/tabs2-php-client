@@ -223,8 +223,8 @@ abstract class Actor extends \tabs\apiclient\core\Builder
         $this->documents = new DocumentCollection();
         $this->documents->setElementParent($this);
 
-        $this->contactHistory = new ContactCollection();
-        $this->contactHistory->setElementParent($this);
+        //$this->contactHistory = new ContactCollection();
+        //$this->contactHistory->setElementParent($this);
     }
 
     /**
