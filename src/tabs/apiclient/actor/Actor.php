@@ -153,7 +153,7 @@ abstract class Actor extends \tabs\apiclient\core\Builder
      *
      * @var ContactDetailCollection
      */
-    protected $contactsdetails;
+    protected $contactdetails;
 
     /**
      * Bank account collection
