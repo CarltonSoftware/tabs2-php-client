@@ -340,7 +340,12 @@ abstract class Base
         case 'object':
         case 'null':
         case 'resource':
-            $obj->$property = $value;
+            if ($obj->$property instanceof \DateTime  && (!$value instanceof \DateTime)) {
+                //Special handling for DateTime fields
+                $obj->$property = new \DateTime($value);
+            } else {
+                $obj->$property = $value;
+            }
             break;
         case 'boolean':
             if (is_bool($value)) {
