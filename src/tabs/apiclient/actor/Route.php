@@ -36,13 +36,6 @@ namespace tabs\apiclient\actor;
 class Route extends \tabs\apiclient\core\Builder
 {
     /**
-     * Route Id
-     * 
-     * @var integer
-     */
-    protected $id;
-    
-    /**
      * Route Name
      * 
      * @var string

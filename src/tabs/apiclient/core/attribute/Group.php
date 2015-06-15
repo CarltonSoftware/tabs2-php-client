@@ -26,21 +26,11 @@ namespace tabs\apiclient\core\attribute;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method integer getId()            Returns the ID
- * @method Group   setId(integer $id) Sets the ID
- * 
  * @method string getName()             Returns the name
  * @method Group  setName(string $name) Sets the name
  */
 class Group extends \tabs\apiclient\core\Builder
 {
-    /**
-     * ID
-     * 
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * Name
      * 

@@ -26,9 +26,6 @@ namespace tabs\apiclient\core;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method integer        getId()                             Returns the id
- * @method Source         setId(integer $id)                  Sets the id
- * 
  * @method string         getSourcecode()                     Returns the sourcecode
  * @method Source         setSourcecode(string $sourcecode)   Sets the sourcecode
  * 
@@ -39,13 +36,6 @@ namespace tabs\apiclient\core;
  */
 class Source extends Builder
 {
-    /**
-     * Id
-     * 
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * Sourcecode
      * 

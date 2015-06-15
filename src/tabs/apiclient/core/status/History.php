@@ -27,23 +27,12 @@ use tabs\apiclient\core\status\Status;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * 
- * @method integer   getId()       Return the status id
  * @method Status    getStatus()   Return the status name
  * @method \DateTime getFromdate() Return the status starting date
  * @method \DateTime getTodate()   Return the status ending date
- * 
- * @method History setId(integer $id)    Set the Id
  */
 class History extends \tabs\apiclient\core\Base
 {
-    /**
-     * Id
-     * 
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * Name
      * 

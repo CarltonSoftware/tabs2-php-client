@@ -26,24 +26,15 @@ namespace tabs\apiclient\actor;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method integer getId()     Return the id
  * @method string  getRole()   Return the contact role
  * @method string  getReason() Return the contact reason
  *
- * @method RoleReason setId(integer $contactid) Set the contact id
  * @method RoleReason setRole(string $role)     Set the contact role
  * @method RoleReason setReason(string $reason) Set the contact reason
  *
  */
 class RoleReason extends \tabs\apiclient\core\Builder
 {
-    /**
-     * Id
-     *
-     * @var integer
-     */
-    protected $id;
-
     /**
      * Role
      *

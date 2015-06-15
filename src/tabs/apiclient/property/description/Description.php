@@ -27,9 +27,6 @@ use tabs\apiclient\property\brand\MarketingBrand as PropertyMarketingBrand;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method integer     getId()            Returns the description id
- * @method Description setId(integer $id) Set the description id
- * 
  * @method string      getDescription()             Returns the description
  * @method Description setDescription(string $desc) Set the description
  * 
@@ -39,13 +36,6 @@ use tabs\apiclient\property\brand\MarketingBrand as PropertyMarketingBrand;
  */
 class Description extends \tabs\apiclient\core\Builder
 {
-    /**
-     * Description id
-     * 
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * Description type
      * 

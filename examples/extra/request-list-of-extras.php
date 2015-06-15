@@ -24,10 +24,23 @@ try {
     foreach ($extras as $extra) {
         echo '<p>' . (string) $extra;
         if ($extra->getBrandings()->getTotal() > 0) {
-            echo '<br>ExtraBrandings:<ol>';
+            echo '<ol>';
            
             foreach ($extra->getBrandings() as $br) {
-                echo '<li>' . (string)$br . '</li>';
+                $br->getConfigurations()->fetch();
+                
+                $configurations = '';
+                if ($br->getConfigurations()->getTotal() > 0) {
+                    foreach ($br->getConfigurations() as $cnfg) {
+                        $configurations .= (string) $cnfg . '<br>';
+                    }
+                }
+                
+                echo sprintf(
+                    '<li>%s<br>%s</li>',
+                    (string)$br,
+                    $configurations
+                );
             }
             
             echo '</ol>';

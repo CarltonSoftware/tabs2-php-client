@@ -42,7 +42,6 @@ use tabs\apiclient\collection\core\Note as NoteCollection;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method integer                     getId()                   Return the id
  * @method string                      getBookref()              Return the bookref
  * @method string                      getGuesttype()            Return the guesttype
  * @method string                      getProperty()             Return the property
@@ -67,7 +66,6 @@ use tabs\apiclient\collection\core\Note as NoteCollection;
  * @method CancelledBooking            getCancelledbooking()     Return the cancelledbooking
  * @method NoteCollection[]            getNotes()                Return the array of notes
  * 
- * @method Booking setId(integer $id)                                       Set the id
  * @method Booking setBookref(string $bookref)                              Set the bookref
  * @method Booking setGuesttype(string $guesttype)                          Set the guesttype
  * @method Booking setFromdate(\DateTime $fromdate)                         Set the fromdate
@@ -82,13 +80,6 @@ use tabs\apiclient\collection\core\Note as NoteCollection;
  */
 class Booking extends \tabs\apiclient\core\Builder
 {
-    /**
-     * Id
-     *
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * Bookref
      *

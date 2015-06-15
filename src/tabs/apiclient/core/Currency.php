@@ -27,25 +27,16 @@ namespace tabs\apiclient\core;
  * @link      http://www.carltonsoftware.co.uk
  * 
  * 
- * @method integer getId()            Return the id
  * @method string  getCode()          Return the Address line 2
  * @method string  getName()          Return the Address line 3
  * @method integer getDecimalplaces() Return the Address town
  * 
- * @method Currency setId(integer $id)                       Set the id
  * @method Currency setCode(integer $code)                   Set the code
  * @method Currency setName(integer $name)                   Set the name
  * @method Currency setDecimalplaces(integer $decimalplaces) Set the decimalplaces
  */
 class Currency extends Base
 {
-    /**
-     * Id
-     * 
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * Code
      * 

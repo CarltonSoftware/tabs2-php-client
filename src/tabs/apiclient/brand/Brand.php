@@ -27,26 +27,16 @@ use \tabs\apiclient\actor\Agency;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method integer getId()            Returns the brand id
- * @method Brand   setId(integer $id) Sets the brand id
- * 
  * @method string getCode()             Returns the brand code
  * @method Brand  setCode(string $code) Sets the brand code
  * 
  * @method string getName()             Returns the brand name
  * @method Brand  setName(string $name) Sets the brand name
  * 
- * @method Agency  getAgency()          Returns the agency
+ * @method Agency getAgency()           Returns the agency
  */
 abstract class Brand extends \tabs\apiclient\core\Builder
 {
-    /**
-     * Brand id
-     * 
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * Brand code
      * 

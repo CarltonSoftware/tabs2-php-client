@@ -26,9 +26,6 @@ namespace tabs\apiclient\core;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method integer getId()            Returns the ID
- * @method Unit    setId(integer $id) Sets the ID
- * 
  * @method string getName()             Returns the name
  * @method Unit   setName(string $name) Sets the name
  * 
@@ -40,13 +37,6 @@ namespace tabs\apiclient\core;
  */
 class Unit extends Builder
 {
-    /**
-     * ID
-     * 
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * Name
      * 

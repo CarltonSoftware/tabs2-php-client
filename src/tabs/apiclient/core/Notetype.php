@@ -27,23 +27,14 @@ namespace tabs\apiclient\core;
  * @link      http://www.carltonsoftware.co.uk
  *
  *
- * @method string getId()          Returns Notetype Id
  * @method string getType()        Returns the type
  * @method string getDescription() Returns the description
  *
- * @method Notetype setId(integer $id)           Set the id
  * @method Notetype setType(string $type         Set the type
  * @method Notetype setDescription(string $desc) Set the description
  */
 class Notetype extends Base
 {
-    /**
-     * Note type Id
-     *
-     * @var integer
-     */
-    protected $id;
-
     /**
      * Note type
      *

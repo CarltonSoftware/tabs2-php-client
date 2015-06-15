@@ -26,9 +26,6 @@ namespace tabs\apiclient\property\description;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method integer   getId()                          Returns the id
- * @method Shortcode setId(integer $id)               Set the id
- * 
  * @method string    getCode()                        Returns the name
  * @method Shortcode setCode(string $code)            Set the name
  * 
@@ -37,13 +34,6 @@ namespace tabs\apiclient\property\description;
  */
 class Shortcode extends \tabs\apiclient\core\Base
 {
-    /**
-     * Description Shortcode id
-     * 
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * Code
      * 

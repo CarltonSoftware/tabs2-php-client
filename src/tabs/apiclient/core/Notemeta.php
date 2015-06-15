@@ -28,21 +28,10 @@ use tabs\apiclient\actor\Actor;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- *
- * @method string     getId()        Returns Note Id
  * @method \DateTime  getCreated()   Returns the created time of the note
- *
- * @method Note setId(integer $id)                   Set the note id
  */
 abstract class Notemeta extends Builder
 {
-    /**
-     * Note Id
-     *
-     * @var integer
-     */
-    protected $id;
-
     /**
      * Created
      *

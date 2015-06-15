@@ -36,9 +36,6 @@ use tabs\apiclient\property\Image as PropertyImage;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method integer  getId()            Returns the ID
- * @method Property setId(integer $id) Sets the ID
- * 
  * @method string   getTabspropref()            Returns the tabs property ref
  * @method Property setTabspropref(string $ref) Sets the tabs property ref
  * 
@@ -60,13 +57,6 @@ use tabs\apiclient\property\Image as PropertyImage;
  */
 class Property extends \tabs\apiclient\core\Builder
 {
-    /**
-     * Property ID
-     * 
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * Tabs reference
      * 

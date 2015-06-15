@@ -27,23 +27,15 @@ namespace tabs\apiclient\actor;
  * @link      http://www.carltonsoftware.co.uk
  * 
  * 
- * @method integer  getId()               Return the Role id
  * @method string   getTabsrole()         Return the Role name
  * @method string   getDescription()      Return the Role description
  * @method Route[]  getRoutes()           Return the Role routes
- * @method TabsRole setId(integer $id)           Set the Role Id
+ * 
  * @method TabsRole setTabsrole(string $role)    Set the Role
  * @method TabsRole setDescription(string $desc) Set the Role
  */
 class TabsRole extends \tabs\apiclient\core\Builder
 {
-    /**
-     * Role Id
-     * 
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * Role Name
      * 

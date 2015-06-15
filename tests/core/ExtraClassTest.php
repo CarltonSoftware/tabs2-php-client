@@ -43,6 +43,20 @@ class ExtraClassTest extends ApiClientClassTest
             '\tabs\apiclient\core\extra\Branding',
             $extra->getBrandings()->getElementClass()
         );
+        
+        $this->assertEquals(1, count($extra->getBrandings()));
+        $branding = $extra->getBrandings()->current();
+        
+        $this->assertEquals(
+            'Norfolk - Norfolk - Norfolk',
+            (string) $branding
+        );
+        
+        // Test brand configuration
+        $config = $branding->getConfigurations()->current();
+        $this->assertEquals('2014-01-01', $config->getFromdate()->format('Y-m-d'));
+        $this->assertEquals('2029-12-31', $config->getTodate()->format('Y-m-d'));
+        $this->assertTrue($config->getPayagency());
     }
     
     /**

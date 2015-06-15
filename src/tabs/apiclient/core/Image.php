@@ -27,28 +27,19 @@ namespace tabs\apiclient\core;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method integer getId()          Returns the Id
  * @method string  getTitle()       Returns the title
  * @method string  getDescription() Returns the description
  * @method integer getHeight()      Returns the height
  * @method integer getWidth()       Returns the width
  *
- * @method Image setId(integer $id)            Set the id
  * @method Image setFilename(string $filename) Set the filename
  * @method Image setTitle(string $title)       Set the title
  * @method Image setDescription(string $desc)  Set the description
- * @method Image setHeight(integer $id)        Set the height
- * @method Image setWidth(integer $id)         Set the width
+ * @method Image setHeight(integer $height)    Set the height
+ * @method Image setWidth(integer $width)      Set the width
  */
 class Image extends FileBuilder
 {
-    /**
-     * ID
-     * 
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * Image filename
      * 

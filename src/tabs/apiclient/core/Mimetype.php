@@ -26,23 +26,14 @@ namespace tabs\apiclient\core;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method integer getId()       Returns the ID
  * @method string getName()      Returns the mimetype
  * @method string getShortname() Returns the short name
  * 
- * @method Mimetype setId(integer $id)         Sets the ID
  * @method Mimetype setName(string $name)      Sets the mimetype
  * @method Mimetype setShortname(string $name) Sets the short name
  */
 class Mimetype extends Base
 {
-    /**
-     * ID
-     * 
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * Name
      * 

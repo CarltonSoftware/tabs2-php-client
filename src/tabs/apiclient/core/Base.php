@@ -28,9 +28,19 @@ namespace tabs\apiclient\core;
  * @copyright 2014 Carlton Software
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @link      http://www.carltonsoftware.co.uk
+ * 
+ * @method integer getId()            Returns the object id
+ * @method Base    setId(integer $id) Sets the object id
  */
 abstract class Base
 {
+    /**
+     * Id
+     * 
+     * @var integer
+     */
+    protected $id;
+    
     /**
      * Parent element
      *

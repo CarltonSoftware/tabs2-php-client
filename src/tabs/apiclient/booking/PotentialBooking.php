@@ -26,25 +26,16 @@ namespace tabs\apiclient\booking;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method integer   getId()      Return the id
  * @method \DateTime getCreated() Return the created
  * @method string    getType()    Return the type
  * @method \DateTime getExpiry()  Return the expiry
  * 
- * @method PotentialBooking setId(integer $id)             Set the id
  * @method PotentialBooking setCreated(\DateTime $created) Set the created
  * @method PotentialBooking setType(string $type)          Set the type
  * @method PotentialBooking setExpiry(\DateTime $expiry)   Set the expiry
  */
 class PotentialBooking extends \tabs\apiclient\core\Base
 {
-    /**
-     * Id
-     *
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * Created
      *

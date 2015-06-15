@@ -28,9 +28,6 @@ use tabs\apiclient\collection\core\extra\Branding as ExtraBrandingCollection;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method integer getId()            Returns the ID
- * @method Extra   setId(integer $id) Sets the ID
- * 
  * @method string  getExtracode()                  Returns the extracode
  * @method Extra   setExtracode(string $extracode) Sets the extracode 
  * 
@@ -44,13 +41,6 @@ use tabs\apiclient\collection\core\extra\Branding as ExtraBrandingCollection;
  */
 class Extra extends \tabs\apiclient\core\Builder
 {
-    /**
-     * ID
-     * 
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * Code of Extra
      * 

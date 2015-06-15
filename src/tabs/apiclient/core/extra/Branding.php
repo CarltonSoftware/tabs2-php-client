@@ -15,6 +15,7 @@
 
 namespace tabs\apiclient\core\extra;
 use tabs\apiclient\brand\Branding as CoreBranding;
+use tabs\apiclient\collection\core\extra\Configuration as ConfigurationCollection;
 
 /**
  * Tabs Rest API ExtraBranding object.
@@ -27,27 +28,51 @@ use tabs\apiclient\brand\Branding as CoreBranding;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method integer  getId()            Returns the extra brand id
- * @method Branding setId(integer $id) Sets the extra brand id
- * 
- * @method CoreBranding getBranding() Return the branding
+ * @method CoreBranding            getBranding() Return the branding
+ * @method ConfigurationCollection getConfigurations() Return the configuration collection
  */
 class Branding extends \tabs\apiclient\core\Builder
 {
-    /**
-     * ExtraBranding Id
-     * 
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * The branding
      * 
      * @var Branding
      */
     protected $branding;
-  
+    
+    /**
+     * Extra brands configuration collection
+     * 
+     * @var ConfigurationCollection
+     */
+    protected $configurations;
+    
+    /**
+     * Constructor
+     * 
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->configurations = new ConfigurationCollection();
+        $this->configurations->setElementParent($this);
+    }
+    
+    /**
+     * Add a new extra configuration
+     * 
+     * @param \tabs\apiclient\core\extra\Configuration $conf Extra brand config
+     * 
+     * @return \tabs\apiclient\core\extra\Branding
+     */
+    public function addConfiguration(Configuration &$conf)
+    {
+        $conf->setParent($this);
+        $this->configurations->addElement($conf);
+        
+        return $this;
+    }
+
     /**
      * Set the branding 
      * 
@@ -80,16 +105,7 @@ class Branding extends \tabs\apiclient\core\Builder
      * @return string
      */
     public function __toString()
-    {   
-        $brandingGroupName = $this->getBranding()->getBrandinggroup()->getName();
-        $marketingBrandName = $this->getBranding()->getMarketingbrand()->getName();
-        $bookingBrandName = $this->getBranding()->getBookingbrand()->getName();
-        
-        return sprintf(
-            '%s - %s - %s', 
-            $brandingGroupName, 
-            $marketingBrandName, 
-            $bookingBrandName
-        );  
+    {
+        return (string) $this->getBranding();
     }  
 }

@@ -34,7 +34,6 @@ class Contact extends \tabs\apiclient\core\Builder
      *
      * @var int
      */
-    protected $id;
     protected $contacttype;
     protected $contactdatetime;
     protected $contactmethodtype;

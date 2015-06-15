@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tabs Rest API Status object.
+ * Tabs Rest API Vatband collection object.
  *
  * PHP Version 5.4
  *
@@ -13,10 +13,10 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\core\status;
+namespace tabs\apiclient\collection\core;
 
 /**
- * Tabs Rest API Status object.
+ * Tabs Rest API Vatband collection object.
  *
  * @category  Tabs_Client
  * @package   Tabs
@@ -25,39 +25,34 @@ namespace tabs\apiclient\core\status;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
- * 
- * @method string getName()             Return the status name
- * @method Status setName(string $name) Set the name
  */
-class Status extends \tabs\apiclient\core\Base
+class Vatband extends \tabs\apiclient\collection\Collection
 {
     /**
-     * Name
-     * 
-     * @var string
+     * Return an array of Vatband objects.  This object will need to be
+     * instantiated and the method fetch will need to be called before this will
+     * return any elements.
+     *
+     * @return \tabs\apiclient\core\Vatband[]
      */
-    protected $name;
-
-    // -------------------------- Public Functions -------------------------- //
-    
-    /**
-     * ToString magic method
-     * 
-     * @return string
-     */
-    public function __toString()
+    public function getElements()
     {
-        return $this->getName();
+        return $this->elements;
     }
-    
+
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function getRoute()
     {
-        return array(
-            'id' => $this->getId(),
-            'name' => $this->getName()
-        );
+        return 'vatband';
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getElementClass()
+    {
+        return '\tabs\apiclient\core\Vatband';
     }
 }

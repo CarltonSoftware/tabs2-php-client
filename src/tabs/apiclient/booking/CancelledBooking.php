@@ -26,21 +26,12 @@ namespace tabs\apiclient\booking;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method integer   getId()        Return the id
  * @method \DateTime getDatetime()  Return the datetime
  * 
- * @method CancelledBooking setId(integer $id)               Set the id
  * @method CancelledBooking setDatetime(\DateTime $datetime) Set the datetime
  */
 class CancelledBooking extends \tabs\apiclient\core\Base
 {
-    /**
-     * Id
-     *
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * Datetime
      *

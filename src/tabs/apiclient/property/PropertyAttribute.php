@@ -28,21 +28,11 @@ use tabs\apiclient\core\attribute\Value;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method integer           getId()            Returns the ID
- * @method PropertyAttribute setId(integer $id) Sets the ID
- * 
  * @method Attribute getAttribute() Return the attribute
  * @method Value     getValue()     Return the value
  */
 class PropertyAttribute extends \tabs\apiclient\core\Builder
 {
-    /**
-     * ID
-     * 
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * Attribute value
      * 

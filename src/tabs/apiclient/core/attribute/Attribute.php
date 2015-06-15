@@ -27,9 +27,6 @@ use tabs\apiclient\core\Unit;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method integer   getId()            Returns the ID
- * @method Attribute setId(integer $id) Sets the ID
- * 
  * @method string    getCode()             Returns the code
  * @method Attribute setCode(string $code) Sets the code
  * 
@@ -76,13 +73,6 @@ use tabs\apiclient\core\Unit;
  */
 class Attribute extends \tabs\apiclient\core\Builder
 {
-    /**
-     * ID
-     * 
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * Attribute code
      * 

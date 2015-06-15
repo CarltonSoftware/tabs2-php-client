@@ -26,12 +26,10 @@ namespace tabs\apiclient\booking;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method integer   getId()         Return the id
  * @method float     getAmount()     Return the amount
  * @method \DateTime getDateduein()  Return the dateduein
  * @method \DateTime getDatedueout() Return the datedueout
  * 
- * @method BookingSecurityDeposit setId(integer $id)                   Set the id
  * @method BookingSecurityDeposit setAmount(float $amount)             Set the amount
  * @method BookingSecurityDeposit setDateduein(\DateTime $dateduein)   Set the dateduein
  * @method BookingSecurityDeposit setDatedueout(\DateTime $datedueout) Set the datedueout
@@ -39,13 +37,6 @@ namespace tabs\apiclient\booking;
 
 class BookingSecurityDeposit extends \tabs\apiclient\core\Base
 {
-    /**
-     * Id
-     *
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * Amount
      * 

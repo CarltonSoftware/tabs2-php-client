@@ -26,26 +26,17 @@ namespace tabs\apiclient\actor;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method integer             getId()                 Return the id
  * @method boolean             getInvalid()            Return the invalid flag
  * @method string              getContactmethod()      Return the contact method
  * @method string              getType()               Return the contact type
  * @method ContactPreference[] getContactpreferences() Return the contact preference array
  *
- * @method ContactDetail setId(integer $id)                      Set the id
  * @method ContactDetail setInvalid(boolean $invalid)            Set the invalid flag
  * @method ContactDetail setContactmethod(string $contactmethod) Set the contact method
  * @method ContactDetail setType(string $type)                   Set the contact type
  */
 abstract class ContactDetail extends \tabs\apiclient\core\Builder
 {
-    /**
-     * Id
-     *
-     * @var integer
-     */
-    protected $id;
-
     /**
      * Invalid
      *

@@ -26,25 +26,16 @@ namespace tabs\apiclient\booking;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method integer   getId()             Return the id
  * @method \DateTime getDatetime()       Return the datetime
  * @method string    getContract()       Return the contract
  * @method \DateTime getBalanceduedate() Return the balanceduedate
  * 
- * @method ConfirmedBooking setId(integer $id)                           Set the id
  * @method ConfirmedBooking setDatetime(\DateTime $datetime)             Set the datetime
  * @method ConfirmedBooking setContract(string $contract)                Set the contract
  * @method ConfirmedBooking setBalanceduedate(\DateTime $balanceduedate) Set the balanceduedate
  */
 class ConfirmedBooking extends \tabs\apiclient\core\Base
 {
-    /**
-     * Id
-     *
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * Datetime
      *

@@ -26,23 +26,14 @@ namespace tabs\apiclient\booking;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method integer   getId()        Return the id
  * @method \DateTime getDatetime()  Return the datetime
  * @method string    getTobooking() Return the tobooking
  * 
- * @method TransferredBooking setId(integer $id)               Set the id
  * @method TransferredBooking setDatetime(\DateTime $datetime) Set the datetime
  * @method TransferredBooking setTobooking(string $tobooking)  Set the tobooking
  */
 class TransferredBooking extends \tabs\apiclient\core\Base
 {
-    /**
-     * Id
-     *
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * Datetime
      *

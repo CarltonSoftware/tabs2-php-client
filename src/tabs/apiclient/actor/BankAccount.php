@@ -27,7 +27,6 @@ namespace tabs\apiclient\actor;
  * @link      http://www.carltonsoftware.co.uk
  *
  *
- * @method integer            getId()                Return the ID
  * @method string             getAccountnumber()     Return the account number
  * @method string             getAccountname()       Return the account name
  * @method string             getBankname()          Return the bank name
@@ -36,7 +35,6 @@ namespace tabs\apiclient\actor;
  * @method string             getRollnumber()        Return the bank roll number    
  * @method \tabs\apiclient\core\Address getAddress() Return the bank roll number    
  *
- * @method \tabs\apiclient\actor\BankAccount setId(integer $id)                            Set the account number
  * @method \tabs\apiclient\actor\BankAccount setAccountnumber(string $accountnumber)       Set the account number
  * @method \tabs\apiclient\actor\BankAccount setAccountname(string $accountname)           Set the account name
  * @method \tabs\apiclient\actor\BankAccount setBankname(string $bankname)                 Set the bank name
@@ -46,13 +44,6 @@ namespace tabs\apiclient\actor;
  */
 class BankAccount extends \tabs\apiclient\core\Builder
 {
-    /**
-     * Id
-     *
-     * @var integer
-     */
-    protected $id;
-
     /**
      * Invalid
      *

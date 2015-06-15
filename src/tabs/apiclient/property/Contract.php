@@ -25,20 +25,9 @@ namespace tabs\apiclient\property;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
- *
- * @method integer               getId()   Return the id
- * 
- * @method Booking setId(integer $id)      Set the id
  */
 class Contract extends \tabs\apiclient\core\Builder
 {
-    /**
-     * Id
-     *
-     * @var integer
-     */
-    protected $id;
-        
     // -------------------------- Static Functions -------------------------- //
 
     /**
@@ -51,9 +40,13 @@ class Contract extends \tabs\apiclient\core\Builder
     public static function get($id)
     {
         $className = self::getClass();
-        $routeName = strtolower($className);
-
-        return parent::_get(sprintf('/%s/%s', $routeName, $id));
+        return parent::_get(
+            sprintf(
+                '/%s/%s',
+                strtolower($className),
+                $id
+            )
+        );
     }
 
     // -------------------------- Public Functions -------------------------- //

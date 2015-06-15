@@ -25,19 +25,9 @@ namespace tabs\apiclient\property\propertyactor;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
- * 
- * @method integer                 getId()            Return the id
- * @method Owner|Cleaner|Keyholder setId(integer $id) Set the id
  */
 trait PropertyActor
 {
-    /**
-     * Id of property actor
-     * 
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * Start date of relationship
      * 

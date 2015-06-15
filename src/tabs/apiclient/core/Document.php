@@ -28,7 +28,6 @@ use \tabs\apiclient\core\Mimetype;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method integer   getId()           Returns the Id
  * @method string    getName()         Returns the name
  * @method string    getFilename()     Returns the filename
  * @method string    getDescription()  Returns the description
@@ -37,7 +36,6 @@ use \tabs\apiclient\core\Mimetype;
  * @method \DateTime getTimeadded()    Returns the created time
  * @method string    getFileLocation() Return the location of the file
  *
- * @method Document  setId(integer $id)            Set the id
  * @method Document  setName(string $filename)     Set the name
  * @method Document  setFilename(string $filename) Set the filename
  * @method Document  setDescription(string $desc)  Set the description
@@ -47,13 +45,6 @@ use \tabs\apiclient\core\Mimetype;
  */
 class Document extends FileBuilder
 {
-    /**
-     * ID
-     * 
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * Name
      * 

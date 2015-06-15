@@ -28,7 +28,6 @@ namespace tabs\apiclient\core;
  */
 abstract class Builder extends Base implements BuilderInterface
 {
-
     // -------------------------- Public Functions -------------------------- //
 
     /**

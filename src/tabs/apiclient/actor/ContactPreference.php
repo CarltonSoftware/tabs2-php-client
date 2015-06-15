@@ -26,7 +26,6 @@ namespace tabs\apiclient\actor;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method integer getId()            Return the id
  * @method RoleReason getRolereason() Return the RoleReason    
  *
  * @method ContactPreference setId(integer $contactid)       Set the contact id
@@ -34,14 +33,6 @@ namespace tabs\apiclient\actor;
  */
 class ContactPreference extends \tabs\apiclient\core\Builder
 {
-    /**
-     * Id
-     *
-     * @var integer
-     */
-    protected $id;
-    
-    
     /**
      * RoleReason
      * 

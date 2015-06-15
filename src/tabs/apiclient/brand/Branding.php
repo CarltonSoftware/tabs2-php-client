@@ -26,22 +26,12 @@ namespace tabs\apiclient\brand;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method integer  getId()            Returns the brand id
- * @method Branding setId(integer $id) Sets the brand id
- * 
  * @method BrandingGroup  getBrandinggroup()  Return the branding group
  * @method MarketingBrand getMarketingbrand() Return the marketing brand
  * @method BookingBrand   getBookingbrand()   Return the booking brand
  */
 class Branding extends \tabs\apiclient\core\Builder
 {
-    /**
-     * Branding Id
-     * 
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * The branding group (accounting brand)
      * 

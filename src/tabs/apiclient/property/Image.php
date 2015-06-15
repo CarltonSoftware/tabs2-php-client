@@ -27,20 +27,10 @@ use tabs\apiclient\core\Image as CoreImage;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method PropertyImage setId(integer $id) Set the id
- * 
- * @method integer       getId()            Returns the ID
  * @method CoreImage     getImage()         Returns the image
  */
 class Image extends \tabs\apiclient\core\Builder
 {
-    /**
-     * ID
-     * 
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * Image
      * 

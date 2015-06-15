@@ -27,9 +27,6 @@ use tabs\apiclient\core\Encoding;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method integer  getId()                          Returns the type id
- * @method Type     setId(integer $id)               Set the type id
- * 
  * @method string   getName()                        Returns the type name
  * @method Type     setName(string $name)            Set the type name
  * 
@@ -45,13 +42,6 @@ use tabs\apiclient\core\Encoding;
  */
 class Type extends \tabs\apiclient\core\Builder
 {
-    /**
-     * Description id
-     * 
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * Name
      * 

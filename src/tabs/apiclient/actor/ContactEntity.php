@@ -29,13 +29,6 @@ namespace tabs\apiclient\actor;
 class ContactEntity extends \tabs\apiclient\core\Builder
 {
     /**
-     * Id
-     *
-     * @var integer
-     */
-    protected $id;
-
-    /**
      * ContactEntity type
      *
      * @var string

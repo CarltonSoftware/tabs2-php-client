@@ -26,19 +26,10 @@ namespace tabs\apiclient\actor;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method integer                        getId()           Return the Id
- * @method \tabs\apiclient\actor\Document setId(string $id) Set the Id
- * @method \tabs\apiclient\core\Document  getDocument()     Return the Document
+ * @method \tabs\apiclient\core\Document  getDocument() Return the Document
  */
 class Document extends \tabs\apiclient\core\Builder
 {
-    /**
-     * Id
-     *
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * Document
      *

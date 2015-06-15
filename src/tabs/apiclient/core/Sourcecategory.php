@@ -26,21 +26,11 @@ namespace tabs\apiclient\core;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method integer        getId()                                   Returns the id
- * @method Sourcecategory setId(integer $id)                        Sets the id
- * 
  * @method string         getSourcecategory()                       Returns the sourcecategory
  * @method Sourcecategory setSourcecategory(string $sourcecategory) Sets the sourcecategory
  */
 class Sourcecategory extends Builder
 {
-    /**
-     * Id
-     * 
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * Sourcecategory
      * 

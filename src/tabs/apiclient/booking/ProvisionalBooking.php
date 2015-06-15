@@ -26,23 +26,14 @@ namespace tabs\apiclient\booking;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method integer   getId()             Return the id
  * @method float     getDepositamount()  Return the depositamount
  * @method \DateTime getDepositduedate() Return the depositduedate
  * 
- * @method ProvisionalBooking setId(integer $id)                           Set the id
  * @method ProvisionalBooking setDepositamount(float $depositamount)       Set the depositamount
  * @method ProvisionalBooking setDepositduedate(\DateTime $depositduedate) Set the depositduedate
  */
 class ProvisionalBooking extends \tabs\apiclient\core\Base
 {
-    /**
-     * Id
-     *
-     * @var integer
-     */
-    protected $id;
-    
     /**
      * Depositamount
      *
@@ -58,16 +49,6 @@ class ProvisionalBooking extends \tabs\apiclient\core\Base
     protected $depositduedate;
         
     // -------------------------- Public Functions -------------------------- //
-
-    /**
-     * Constructor
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        
-    }
     
     /**
      * Array representation of the object
@@ -82,5 +63,4 @@ class ProvisionalBooking extends \tabs\apiclient\core\Base
             'depositduedate' => $this->getDepositduedate(),
         );
     }
-    
 }

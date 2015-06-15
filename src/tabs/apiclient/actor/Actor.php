@@ -32,7 +32,6 @@ use tabs\apiclient\collection\actor\BankAccount as BankAccountCollection;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method integer                       getId()             Return the Id
  * @method string                        getFirstname()      Return the firstname
  * @method string                        getSurname()        Return the surname
  * @method string                        getTitle()          Return the title
@@ -50,7 +49,6 @@ use tabs\apiclient\collection\actor\BankAccount as BankAccountCollection;
  * @method DocumentCollection            getDocuments()      Return a document collection
  * @method ContactCollection             getContactHistory() Return a contact collection
  *
- * @method Actor setId(string $id) Set the Id
  * @method Actor setFirstname(string $firstname) Set the firstname
  * @method Actor setSurname(string $surname) Set the surname
  * @method Actor setTitle(string $title) Set the title
@@ -64,13 +62,6 @@ use tabs\apiclient\collection\actor\BankAccount as BankAccountCollection;
  */
 abstract class Actor extends \tabs\apiclient\core\Builder
 {
-    /**
-     * Id
-     *
-     * @var integer
-     */
-    protected $id;
-
     /**
      * Firstname
      *

@@ -25,23 +25,9 @@ namespace tabs\apiclient\actor;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
- *
- *
- * @method integer getId()    Return the route id
- * @method string  getRoute() Return the route name
- *
- * @method \tabs\apiclient\user\Route setId(integer $id)      Set the user Id
- * @method \tabs\apiclient\user\Route setRoute(string $route) Set the user route
  */
 class PotentialDuplicate extends \tabs\apiclient\core\Builder
 {
-    /**
-     * Route Id
-     *
-     * @var integer
-     */
-    protected $id;
-
     /**
      * Actor 1
      *

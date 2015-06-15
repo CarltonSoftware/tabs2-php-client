@@ -748,8 +748,28 @@ class Fixtures
 
         $branding = Fixtures::getBranding();
         $extraBranding->setBranding($branding);
+        
+        $conf = Fixtures::getExtraBrandingConfiguration();
+        $extraBranding->addConfiguration($conf);
 
         return $extraBranding;
+    }
+    
+    /**
+     * Return a extra brand configuration option
+     * 
+     * @return \tabs\apiclient\core\extra\Configuration
+     */
+    public static function getExtraBrandingConfiguration()
+    {
+        $config = new \tabs\apiclient\core\extra\Configuration();
+        $config->setFromdate(new \DateTime('2014-01-01'))
+            ->setTodate(new \DateTime('2029-12-31'))
+            ->setCompulsory(false)
+            ->setIncluded(false)
+            ->setPayagency(true);
+        
+        return $config;
     }
 
     /**
