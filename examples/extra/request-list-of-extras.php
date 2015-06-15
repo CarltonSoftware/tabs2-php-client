@@ -21,19 +21,20 @@ try {
     $extras = new \tabs\apiclient\collection\core\Extra();
     $extras->fetch();
     
-    foreach ($extras->getElements() as $extra) {
+    foreach ($extras as $extra) {
         echo '<p>' . (string) $extra;
-        if (count($extra->getBrandings()->getElements()) > 0) {
+        if ($extra->getBrandings()->getTotal() > 0) {
             echo '<br>ExtraBrandings:<ol>';
            
-            foreach ($extra->getBrandings()->getElements() as $br) {
+            foreach ($extra->getBrandings() as $br) {
                 echo '<li>' . (string)$br . '</li>';
             }
             
             echo '</ol>';
         }
-        echo '</p><br>';
+        echo '</p>';
     }
 } catch(Exception $e) {
     echo $e->getMessage();
+    var_dump($history);
 }

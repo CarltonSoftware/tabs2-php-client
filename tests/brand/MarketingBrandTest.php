@@ -20,7 +20,7 @@ class MarketingBrandTest extends ApiClientClassTest
         $marketingBrand = Fixtures::getMarketingBrand();
         
         $this->assertEquals(
-            'NOMB - Norfolk',
+            'Norfolk (NOMB)',
             (string) $marketingBrand
         );
         

@@ -20,7 +20,7 @@ class BrandingGroupTest extends ApiClientClassTest
         $brandingGroup = Fixtures::getBrandingGroup();
         
         $this->assertEquals(
-            'NOAA - Norfolk',
+            'Norfolk (NOAA)',
             (string) $brandingGroup
         );
         

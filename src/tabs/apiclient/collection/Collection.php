@@ -33,7 +33,7 @@ use tabs\apiclient\utility\Pagination;
  *
  * @method Collection setRoute(string $route) Set the route
  */
-abstract class Collection extends \tabs\apiclient\core\Base implements CollectionInterface, \Iterator
+abstract class Collection extends \tabs\apiclient\core\Base implements CollectionInterface, \Iterator, \Countable
 {
     /**
      * Elements array
@@ -279,15 +279,21 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
     }
 
 
-        /***** Implement functions from the Iterator interface *****/
+    /**
+     * 
+     * Implement functions from the Iterator interface
+     * 
+     */
 
 
     /**
      * Rewinds the iterator to the beginning of the collection
+     *
+     * @return \tabs\apiclient\core\Collection
      */
     public function rewind()
     {
-        reset($this->elements);
+        return reset($this->elements);
     }
 
 
@@ -304,28 +310,41 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
 
     /**
      * Returns the current key
+     * 
+     * @return mixed
      */
     public function key()
     {
-        return reset($this->elements);
+        return key($this->elements);
     }
 
 
     /**
      * Return the next element
+     * 
+     * @return mixed
      */
     public function next()
     {
-        next($this->elements);
+        return next($this->elements);
     }
 
 
     /**
      * Check whether the current item is valid or not
+     * 
+     * @return boolean
      */
     public function valid()
     {
         return key($this->elements) !== null;
     }
-
+    
+    /**
+     * @inheritDoc
+     */
+    public function count($mode = COUNT_NORMAL)
+    {
+        return count($this->elements, $mode);
+    }
 }

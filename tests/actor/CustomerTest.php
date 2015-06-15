@@ -40,12 +40,12 @@ class CustomerTest extends ApiClientClassTest
 
         $this->assertEquals(
             '\tabs\apiclient\actor\ContactDetail',
-            $customer->getContacts()->getElementClass()
+            $customer->getContactdetails()->getElementClass()
         );
 
         $this->assertEquals(
             '/customer/1/contactdetail',
-            $customer->getContacts()->getRoute()
+            $customer->getContactdetails()->getRoute()
         );
 
         $this->assertEquals(
@@ -80,7 +80,7 @@ class CustomerTest extends ApiClientClassTest
 
         $contactDetail = new tabs\apiclient\actor\ContactDetailOther();
         $contactDetail->setId(1);
-        $customer->addContact($contactDetail);
+        $customer->addContactdetail($contactDetail);
         $this->assertEquals('/customer/1/contactdetail', $contactDetail->getCreateUrl());
         $this->assertEquals('/customer/1/contactdetail/1', $contactDetail->getUpdateUrl());
 
@@ -91,7 +91,7 @@ class CustomerTest extends ApiClientClassTest
         $this->assertEquals('/customer/1/contactpreference/1', $preference->getUpdateUrl());
 
         $contactAddress = new tabs\apiclient\actor\ContactDetailPostal();
-        $customer->addContact($contactAddress);
+        $customer->addContactdetail($contactAddress);
         $contactAddress->setId(1);
         $this->assertEquals('/customer/1/address', $contactAddress->getCreateUrl());
         $this->assertEquals('/customer/1/address/1', $contactAddress->getUpdateUrl());

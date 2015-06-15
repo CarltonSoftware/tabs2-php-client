@@ -20,8 +20,13 @@ class BookingBrandTest extends ApiClientClassTest
         $bookingBrand = Fixtures::getBookingBrand();
         
         $this->assertEquals(
-            'NOBB - Norfolk',
+            'Norfolk (NOBB)',
             (string) $bookingBrand
+        );
+        
+        $this->assertInstanceOf(
+            '\tabs\apiclient\actor\Agency',
+            $bookingBrand->getAgency()
         );
         
         $this->assertEquals('bookingbrand', $bookingBrand->getUrlStub());

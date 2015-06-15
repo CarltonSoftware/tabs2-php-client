@@ -44,7 +44,7 @@ use tabs\apiclient\collection\actor\BankAccount as BankAccountCollection;
  * @method string                        getCompanyname()    Return the company name
  * @method string                        getVatnumber()      Return the vat number
  * @method string                        getCompanynumber()  Return the company number
- * @method ContactDetailCollection       getContacts()       Return contact entity collection
+ * @method ContactDetailCollection       getContactdetails() Return contact entity collection
  * @method BankAccountCollection         getBankaccounts()   Return a collection of bank accounts
  * @method NoteCollection                getNotes()          Return a note collection
  * @method DocumentCollection            getDocuments()      Return a document collection

@@ -33,6 +33,19 @@ class Fixtures
 
         return $customer;
     }
+    
+    /**
+     * Create a new agency
+     * 
+     * @return \tabs\apiclient\actor\Agency
+     */
+    public static function getAgency()
+    {
+        $agency = new \tabs\apiclient\actor\Agency();
+        $agency->setId(1)->setCompanyname('Norfolk Country Cottages');
+        
+        return $agency;
+    }
 
     /**
      * Get a tabs user
@@ -67,7 +80,7 @@ class Fixtures
             ->setTitle('Mr')
             ->setSurname('Wyett')
             ->setPassword('abc123')
-            ->addContact($contact)
+            ->addContactdetail($contact)
             ->addBankAccount($bankAccount);
 
         return $owner;
@@ -464,15 +477,9 @@ class Fixtures
     public static function getBrandingGroup()
     {
         $bg = new \tabs\apiclient\brand\BrandingGroup();
-<<<<<<< HEAD
-        $bg->setCode('NOAA')->setName('Norfolk');
-
-=======
         $bg->setCode('NOAA')
            ->setName('Norfolk')
-           ->setAgency('4');
-        
->>>>>>> 987ff32a022c81be143bd56baa9c6982087ae248
+           ->setAgency(Fixtures::getAgency());
         return $bg;
     }
 
@@ -484,16 +491,10 @@ class Fixtures
     public static function getMarketingBrand()
     {
         $bg = new \tabs\apiclient\brand\MarketingBrand();
-<<<<<<< HEAD
-        $bg->setCode('NOMB')->setName('Norfolk');
-
-=======
         $bg->setCode('NOMB')
            ->setName('Norfolk')
-           ->setAgency('2')
-           ->setDefaultbookingbrand('5');
-        
->>>>>>> 987ff32a022c81be143bd56baa9c6982087ae248
+           ->setAgency(Fixtures::getAgency())
+           ->setDefaultbookingbrand(Fixtures::getBookingBrand());
         return $bg;
     }
 
@@ -505,15 +506,9 @@ class Fixtures
     public static function getBookingBrand()
     {
         $bg = new \tabs\apiclient\brand\BookingBrand();
-<<<<<<< HEAD
-        $bg->setCode('NOBB')->setName('Norfolk');
-
-=======
         $bg->setCode('NOBB')
            ->setName('Norfolk')
-           ->setAgency('3');
-        
->>>>>>> 987ff32a022c81be143bd56baa9c6982087ae248
+           ->setAgency(Fixtures::getAgency());
         return $bg;
     }
 
@@ -740,16 +735,12 @@ class Fixtures
 
         return $unit;
     }
-<<<<<<< HEAD
-
-=======
     
     /**
      * Create extra branding object
      * 
      * @return \tabs\apiclient\core\extra\Branding
      */
->>>>>>> 987ff32a022c81be143bd56baa9c6982087ae248
     public static function getExtraBranding()
     {
         $extraBranding = new \tabs\apiclient\core\extra\Branding();
@@ -775,13 +766,7 @@ class Fixtures
               ->setExtracode('BKFE')
               ->setExtratype('BookingTypeExtra')
               ->setDescription('Booking Fee')
-<<<<<<< HEAD
-              ->addExtraBranding($extraBranding);
-
-=======
               ->addBranding($extraBranding);
-              
->>>>>>> 987ff32a022c81be143bd56baa9c6982087ae248
         return $extra;
     }
 

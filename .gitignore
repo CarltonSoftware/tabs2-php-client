@@ -9,4 +9,4 @@ index.php
 report
 tests/report
 tests/report/*
-examples/config.sample.php
+examples/config.php
