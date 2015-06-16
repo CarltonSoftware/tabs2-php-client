@@ -91,11 +91,18 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
 
             // Populate with new elements
             foreach ($elements as $element) {
-                $ele = $class::factory($element);
+                
+                // Get collection class by checking for discriminator map
+                $collectionClass = $this->_getCollectionClass($element);
+                
+                // Instatiate new element by calling factory method
+                $ele = $collectionClass::factory($element);
                 if ($this->getElementParent()) {
                     $parent = $this->getElementParent();
                     $ele->setParent($parent);
                 }
+                
+                // Add new element to collection
                 $this->addElement($ele);
             }
 
@@ -277,7 +284,63 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
     {
         return $this->getElements();
     }
-
+    
+    /**
+     * Get the collection class.
+     * 
+     * If a discriminator is present attempt to look for a mapped class to return.
+     * 
+     * @param stdClass $element Json element
+     * 
+     * @return string
+     * 
+     * @throws \tabs\apiclient\client\Exception
+     */
+    private function _getCollectionClass($element)
+    {
+        if (is_string($this->discriminator())) {
+            $discr = $this->discriminator();
+            if (property_exists($element, $discr)) {
+                $map = $this->discriminatorMap();
+                
+                if (!array_key_exists($element->$discr, $map)) {
+                    throw new \tabs\apiclient\client\Exception(
+                        null,
+                        'Discrimator type not mapped in collection element'
+                    );
+                }
+                
+                return $map[$element->$discr];
+            } else {
+                throw new \tabs\apiclient\client\Exception(
+                    null,
+                    'Discrimator not found in collection element'
+                );
+            }
+        }
+        
+        return $this->getElementClass();
+    }
+    
+    /**
+     * Discriminator
+     * 
+     * @return boolean|string
+     */
+    public function discriminator()
+    {
+        return false;
+    }
+    
+    /**
+     * Class discriminator map.
+     * 
+     * @return array
+     */
+    public function discriminatorMap()
+    {
+        return array();
+    }
 
     /**
      * 
