@@ -54,10 +54,10 @@ use tabs\apiclient\core\Vatband;
  * @method boolean       getMaximumquantity()            Returns the max quantity flag
  * @method Configuration setMaximumquantity(boolean $mq) Set the max quantity flag
  * 
- * @method Vatband       getVantband() Return the current vatband object
+ * @method Vatband       getVatband() Return the current vatband object
  * 
  */
-class Configuration extends \tabs\apiclient\core\Builder
+abstract class Configuration extends \tabs\apiclient\core\Builder
 {
     /**
      * From date of the extra
@@ -142,7 +142,7 @@ class Configuration extends \tabs\apiclient\core\Builder
     }
     
     /**
-     * Set the vatbands collection
+     * Set the vatband
      * 
      * @param array $vatband Vat band object
      * 
@@ -184,7 +184,16 @@ class Configuration extends \tabs\apiclient\core\Builder
             'visibletoowner' => $this->boolToStr($this->getVisibletoowner()),
             'customerselectable' => $this->boolToStr($this->getCustomerselectable()),
             'maximumquantity' => $this->boolToStr($this->getMaximumquantity()),
-            'vatband' => $this->getVantband()->getName()
+            'vatband' => $this->getVatband()->getVatband(),
+            'type' => $this->getClass()
         );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public final function getUrlStub()
+    {
+        return 'configuration';
     }
 }
