@@ -29,21 +29,50 @@ try {
             foreach ($extra->getBrandings() as $br) {
                 $br->getConfigurations()->fetch();
                 
+                echo sprintf(
+                    '<li>%s<a href="delete-an-extra-brand.php?eid=%s&bid=%s">Delete brand</a><br>',
+                    (string)$br,
+                    $extra->getId(),
+                    $br->getId()
+                );
+                
                 $configurations = '';
                 if ($br->getConfigurations()->getTotal() > 0) {
                     foreach ($br->getConfigurations() as $cnfg) {
-                        $configurations .= (string) $cnfg . '<br>';
+                        $configurations .= sprintf(
+                            '%s - %s <a href="remove-an-extra-brand-configuration.php?eid=%s&bid=%s&cid=%s">Delete</a><br>',    
+                            (string) $cnfg,
+                            (string) $cnfg->getVatband(),
+                            $extra->getId(),
+                            $br->getId(),
+                            $cnfg->getId()
+                        );
                     }
+                } else {
+                    $configurations .= sprintf(
+                        ' <a href="add-a-new-extra-brand-configuration.php?eid=%s&bid=%s">Add configuration</a>',
+                        $extra->getId(),
+                        $br->getId()
+                    );
                 }
                 
+                $br->getPrices()->fetch();
+                $pricings = implode('<br>', $br->getPrices()->getElements());
+                
                 echo sprintf(
-                    '<li>%s<br>%s</li>',
-                    (string)$br,
-                    $configurations
+                    '%s<br>%s</li>',
+                    $configurations,
+                    $pricings
                 );
+                
             }
             
             echo '</ol>';
+        } else {
+            echo sprintf(
+                '<a href="add-a-new-extra-brand.php?eid=%s">Add brand</a>',
+                $extra->getId()
+            );
         }
         echo '</p>';
     }
