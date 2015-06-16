@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tabs Rest API Extrabrand configuration collection object.
+ * Tabs Rest API Extrabrand pricing collection object.
  *
  * PHP Version 5.4
  *
@@ -16,7 +16,7 @@
 namespace tabs\apiclient\collection\core\extra;
 
 /**
- * Tabs Rest API Extrabrand configuration collection object.
+ * Tabs Rest API Extrabrand pricing collection object.
  *
  * @category  Tabs_Client
  * @package   Tabs
@@ -26,14 +26,14 @@ namespace tabs\apiclient\collection\core\extra;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  */
-class Configuration extends \tabs\apiclient\collection\Collection
+class Price extends \tabs\apiclient\collection\Collection
 {
     /**
      * Return an array of Extrabrand configuration objects.  This object will need to be
      * instantiated and the method fetch will need to be called before this will
      * return any elements.
      *
-     * @return \tabs\apiclient\core\extra\Configuration[]
+     * @return \tabs\apiclient\core\extra\Price[]
      */
     public function getElements()
     {
@@ -45,7 +45,7 @@ class Configuration extends \tabs\apiclient\collection\Collection
      */
     public function getRoute()
     {
-        return $this->getElementParent()->getUpdateUrl() . '/configuration';
+        return $this->getElementParent()->getUpdateUrl() . '/pricing';
     }
 
     /**
@@ -53,7 +53,7 @@ class Configuration extends \tabs\apiclient\collection\Collection
      */
     public function getElementClass()
     {
-        return '\tabs\apiclient\core\extra\Configuration';
+        return '\tabs\apiclient\core\extra\Price';
     }
     
     /**
@@ -61,7 +61,7 @@ class Configuration extends \tabs\apiclient\collection\Collection
      */
     public function discriminator()
     {
-        return 'type';
+        return 'pricetype';
     }
     
     /**
@@ -70,7 +70,12 @@ class Configuration extends \tabs\apiclient\collection\Collection
     public function discriminatorMap()
     {
         return array(
-            'BrandExtraConfiguration' => '\tabs\apiclient\core\extra\BrandExtraConfiguration'
+            'Unit' => '\tabs\apiclient\core\extra\UnitPrice',
+            'Week' => '\tabs\apiclient\core\extra\WeekPrice',
+            'Daily' => '\tabs\apiclient\core\extra\DailyPrice',
+            'Percentage' => '\tabs\apiclient\core\extra\PercentagePrice',
+            'PercentagePlus' => '\tabs\apiclient\core\extra\PercentagePlusPrice',
+            'Range' => '\tabs\apiclient\core\extra\RangePrice'
         );
     }
 }

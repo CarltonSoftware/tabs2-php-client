@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tabs Rest API Extrabrand configuration collection object.
+ * Tabs Rest API Vatrate collection object.
  *
  * PHP Version 5.4
  *
@@ -13,10 +13,10 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\collection\core\extra;
+namespace tabs\apiclient\collection\core;
 
 /**
- * Tabs Rest API Extrabrand configuration collection object.
+ * Tabs Rest API Vatrate collection object.
  *
  * @category  Tabs_Client
  * @package   Tabs
@@ -26,26 +26,26 @@ namespace tabs\apiclient\collection\core\extra;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  */
-class Configuration extends \tabs\apiclient\collection\Collection
+class Vatrate extends \tabs\apiclient\collection\Collection
 {
     /**
-     * Return an array of Extrabrand configuration objects.  This object will need to be
+     * Return an array of Vatrate objects.  This object will need to be
      * instantiated and the method fetch will need to be called before this will
      * return any elements.
      *
-     * @return \tabs\apiclient\core\extra\Configuration[]
+     * @return \tabs\apiclient\core\Vatrate[]
      */
     public function getElements()
     {
         return $this->elements;
     }
-    
+
     /**
      * @inheritDoc
      */
     public function getRoute()
     {
-        return $this->getElementParent()->getUpdateUrl() . '/configuration';
+        return 'vatrate';
     }
 
     /**
@@ -53,24 +53,6 @@ class Configuration extends \tabs\apiclient\collection\Collection
      */
     public function getElementClass()
     {
-        return '\tabs\apiclient\core\extra\Configuration';
-    }
-    
-    /**
-     * @inheritDoc
-     */
-    public function discriminator()
-    {
-        return 'type';
-    }
-    
-    /**
-     * @inheritDoc
-     */
-    public function discriminatorMap()
-    {
-        return array(
-            'BrandExtraConfiguration' => '\tabs\apiclient\core\extra\BrandExtraConfiguration'
-        );
+        return '\tabs\apiclient\core\Vatrate';
     }
 }

@@ -39,13 +39,13 @@ class Branding extends \tabs\apiclient\collection\Collection
     {
         return $this->elements;
     }
-
+    
     /**
      * @inheritDoc
      */
     public function getRoute()
     {
-        return 'extrabranding';
+        return $this->getElementParent()->getUpdateUrl() . '/branding';
     }
 
     /**
