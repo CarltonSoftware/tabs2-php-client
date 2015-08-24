@@ -57,7 +57,25 @@ try {
                 }
                 
                 $br->getPrices()->fetch();
-                $pricings = implode('<br>', $br->getPrices()->getElements());
+                
+                $pricings = '';
+                
+                if ($br->getPrices()->getTotal() == 0) {
+                    $pricings = sprintf(
+                        ' <a href="add-a-new-price-to-an-extra.php?eid=%s&bid=%s">Add Price</a>',
+                        $extra->getId(),
+                        $br->getId()
+                    );
+                } else {
+                    foreach ($br->getPrices() as $price) {
+                        $pricings .= (string) $price . sprintf(
+                            ' <a href="remove-an-extra-price.php?eid=%s&bid=%s&pid=%s">Remove</a><br>',
+                            $extra->getId(),
+                            $br->getId(),
+                            $price->getId()
+                        );
+                    }
+                }
                 
                 echo sprintf(
                     '%s<br>%s</li>',

@@ -23,7 +23,7 @@ try {
     $countries = new \tabs\apiclient\collection\core\Country();
     $countries->fetch();
     
-    foreach ($countries->getElements() as $country) {
+    foreach ($countries as $country) {
         echo '<p>' .  (string) $country . '</p>';
     }
     
