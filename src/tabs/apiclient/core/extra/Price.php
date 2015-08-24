@@ -150,10 +150,10 @@ abstract class Price extends \tabs\apiclient\core\Builder
             'fromdate' => $this->getFromdate()->format('Y-m-d'),
             'todate' => $this->getTodate()->format('Y-m-d'),
             'propertypricing' => $this->boolToStr($this->getPropertypricing()),
-            'perdault' => $this->boolToStr($this->getPeradult()),
+            'peradult' => $this->boolToStr($this->getPeradult()),
             'perchild' => $this->boolToStr($this->getPerchild()),
             'perinfant' => $this->boolToStr($this->getPerinfant()),
-            'currency' => $this->getCurrency()->getCode()
+            'currencycode' => $this->getCurrency()->getCode()
         );
     }
 
