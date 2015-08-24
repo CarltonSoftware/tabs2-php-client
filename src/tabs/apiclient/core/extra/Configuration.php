@@ -51,8 +51,8 @@ use tabs\apiclient\core\Vatband;
  * @method boolean       getCustomerselectable()            Returns the customer selectable flag
  * @method Configuration setCustomerselectable(boolean $cs) Set the customer selectable flag
  * 
- * @method boolean       getMaximumquantity()            Returns the max quantity flag
- * @method Configuration setMaximumquantity(boolean $mq) Set the max quantity flag
+ * @method integer       getMaximumquantity()            Returns the max quantity integer
+ * @method Configuration setMaximumquantity(integer $mq) Set the max quantity integer
  * 
  * @method Vatband       getVatband() Return the current vatband object
  * 
@@ -120,7 +120,7 @@ abstract class Configuration extends \tabs\apiclient\core\Builder
      * 
      * @var boolean
      */
-    protected $maximumquantity = false;
+    protected $maximumquantity = 1;
 
     /**
      * Vatband
@@ -183,7 +183,7 @@ abstract class Configuration extends \tabs\apiclient\core\Builder
             'payowner' => $this->boolToStr($this->getPayowner()),
             'visibletoowner' => $this->boolToStr($this->getVisibletoowner()),
             'customerselectable' => $this->boolToStr($this->getCustomerselectable()),
-            'maximumquantity' => $this->boolToStr($this->getMaximumquantity()),
+            'maximumquantity' => $this->getMaximumquantity(),
             'vatband' => $this->getVatband()->getVatband(),
             'type' => $this->getClass()
         );
