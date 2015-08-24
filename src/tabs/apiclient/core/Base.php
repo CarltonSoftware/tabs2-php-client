@@ -150,8 +150,16 @@ abstract class Base
         if (is_object($element) && get_class($element) == get_called_class()) {
             return $element;
         }
-
+        
         $object = new static();
+        
+        if (is_string($element)) {
+            $link = new Link();
+            $link->setLink($element);
+            $link->setObjectClass(get_class($object));
+            return $link;
+        }
+
         self::setObjectProperties($object, $element);
 
         return $object;
@@ -288,6 +296,15 @@ abstract class Base
                         return $this;
                     break;
                     case 'get':
+                        if (is_object($this->$property) 
+                            && $this->$property instanceof Link
+                        ) {
+                            $parent = $this->$property->getParent();
+                            $class = $this->$property->getObjectClass();
+                            $this->$property = $class::_get($this->$property->getLink());
+                            $this->$property->setParent($parent);
+                        }
+                        
                         return $this->$property;
                 }
             }
