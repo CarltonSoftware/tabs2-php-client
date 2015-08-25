@@ -762,7 +762,7 @@ class Fixtures
      */
     public static function getExtraBrandingConfiguration()
     {
-        $config = new \tabs\apiclient\core\extra\Configuration();
+        $config = new \tabs\apiclient\core\extra\BrandExtraConfiguration();
         $config->setFromdate(new \DateTime('2014-01-01'))
             ->setTodate(new \DateTime('2029-12-31'))
             ->setCompulsory(false)
