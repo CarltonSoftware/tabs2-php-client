@@ -908,7 +908,8 @@ class Fixtures
     public static function getVatband()
     {
         $band = new \tabs\apiclient\core\Vatband();
-        $band->addVatrate(self::getVatrate())
+        $rate = self::getVatrate();
+        $band->addVatrate($rate)
             ->setVatband('Standard band');
 
         return $band;
