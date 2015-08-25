@@ -62,6 +62,24 @@ class ImageClassTest extends ApiClientClassTest
     }
     
     /**
+     * Test scaling a new image
+     * 
+     * @depends testImageRequest
+     * 
+     * @return void
+     */
+    public function testImageScaleRequest()
+    {
+        self::$img->scale(700, 700);
+        $this->assertEquals(700, self::$img->getWidth());
+        $this->assertEquals(300, self::$img->getHeight());
+
+        self::$img->scale(700, 150);
+        $this->assertEquals(350, self::$img->getWidth());
+        $this->assertEquals(150, self::$img->getHeight());
+    }
+
+    /**
      * Test resizing a new image
      * 
      * @depends testImageRequest
@@ -84,8 +102,12 @@ class ImageClassTest extends ApiClientClassTest
      */
     public function testImageCropRequest()
     {
-        self::$img->crop(50, 50);
-        $this->assertEquals(50, self::$img->getWidth());
-        $this->assertEquals(50, self::$img->getHeight());
+        $positions = ['centre', 'left', 'right', 'top centre', 'bottom centre', 'top right', 'bottom right', 'top left', 'bottom left'];
+
+        foreach ($positions as $position) {
+            self::$img->crop(50, 50, $position);
+            $this->assertEquals(50, self::$img->getWidth());
+            $this->assertEquals(50, self::$img->getHeight());
+        }
     }
 }
