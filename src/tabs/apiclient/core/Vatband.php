@@ -112,7 +112,7 @@ class Vatband extends Builder
     {
         return array(
             'id' => $this->getId(),
-            'name' => $this->getName()
+            'band' => $this->getVatband()
         );
     }
     
