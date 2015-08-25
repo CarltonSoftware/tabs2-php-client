@@ -125,7 +125,7 @@ class Vatband extends Builder
         $vr = $this->getCurrentVatrate();
         
         if ($vr) {
-            $vrate = $vr->getPercentage() * 100 . '%';
+            $vrate = $vr->getPercentage() . '%';
         }
         
         return sprintf(

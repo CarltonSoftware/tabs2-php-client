@@ -893,7 +893,7 @@ class Fixtures
     public static function getVatrate()
     {
         $rate = new \tabs\apiclient\core\Vatrate();
-        $rate->setPercentage(.5)
+        $rate->setPercentage(50)
             ->setFromdate('1984-02-28')
             ->setTodate('3000-04-30');
 
