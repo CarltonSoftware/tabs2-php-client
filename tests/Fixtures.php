@@ -882,4 +882,35 @@ class Fixtures
 
         return $value;
     }
+
+
+    /**
+     * Return a VAT rate
+     *
+     * @return \tabs\apiclient\core\Vatrate
+     */
+    public static function getVatrate()
+    {
+        $rate = new \tabs\apiclient\core\Vatrate();
+        $rate->setPercentage(50)
+            ->setFromdate('1984-02-28')
+            ->setTodate('3000-04-30');
+
+        return $rate;
+    }
+
+    /**
+     * Return a VAT band
+     *
+     * @return \tabs\apiclient\core\Vatband
+     */
+    public static function getVatband()
+    {
+        $band = new \tabs\apiclient\core\Vatband();
+        $rate = self::getVatrate();
+        $band->addVatrate($rate)
+            ->setVatband('Standard band');
+
+        return $band;
+    }
 }

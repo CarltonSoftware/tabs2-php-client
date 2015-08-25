@@ -92,7 +92,7 @@ abstract class Notemeta extends Builder
     }
 
     /**
-     * Set the actor which created this notemeta object
+     * Get the actor which created this notemeta object
      *
      * @return Actor
      */

@@ -112,7 +112,7 @@ class Vatband extends Builder
     {
         return array(
             'id' => $this->getId(),
-            'name' => $this->getName()
+            'band' => $this->getVatband()
         );
     }
     
@@ -125,7 +125,7 @@ class Vatband extends Builder
         $vr = $this->getCurrentVatrate();
         
         if ($vr) {
-            $vrate = $vr->getPercentage() * 100 . '%';
+            $vrate = $vr->getPercentage() . '%';
         }
         
         return sprintf(
