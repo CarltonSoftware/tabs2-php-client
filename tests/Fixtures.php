@@ -354,6 +354,32 @@ class Fixtures
     }
 
     /**
+     * Return a property cleaner
+     *
+     * @return \tabs\apiclient\property\propertyactor\Cleaner
+     */
+    public static function getCleaner()
+    {
+        $cleaner = new \tabs\apiclient\property\propertyactor\Cleaner();
+        $cleaner->setActor('Bob Jones');
+
+        return $cleaner;
+    }
+
+    /**
+     * Return a property keyholder
+     *
+     * @return \tabs\apiclient\property\propertyactor\Keyholder
+     */
+    public static function getKeyholder()
+    {
+        $keyholder = new \tabs\apiclient\property\propertyactor\Keyholder();
+        $keyholder->setActor('Lionel Herring');
+
+        return $keyholder;
+    }
+
+    /**
      * Return the description type short code
      *
      * @return \tabs\apiclient\property\description\Shortcode
