@@ -98,6 +98,15 @@ class PropertyTest extends ApiClientClassTest
         $property->addCleaner($cleaner);
 
         $this->assertEquals('Bob Jones', $property->getCleaners()->getElements()[0]->getActor());
+
+        $cleaner->setCleanerFromDate('2015-08-25')
+            ->setCleanerToDate('2015-08-26')
+            ->setCleaner('Basil Watt');
+
+        $this->assertEquals('Basil Watt', $cleaner->getCleaner());
+        $this->assertEquals('Basil Watt', $cleaner->getActor());
+        $this->assertEquals('2015-08-25', $cleaner->getFromDate()->format('Y-m-d'));
+        $this->assertEquals('2015-08-26', $cleaner->getToDate()->format('Y-m-d'));
     }
 
     /**
@@ -112,6 +121,15 @@ class PropertyTest extends ApiClientClassTest
         $property->addKeyholder($keyholder);
 
         $this->assertEquals('Lionel Herring', $property->getKeyholders()->getElements()[0]->getActor());
+
+        $keyholder->setKeyholderFromDate('2010-08-25')
+            ->setKeyholderToDate('2010-08-26')
+            ->setKeyholder('Sophie Collings');
+
+        $this->assertEquals('Sophie Collings', $keyholder->getKeyholder());
+        $this->assertEquals('Sophie Collings', $keyholder->getActor());
+        $this->assertEquals('2010-08-25', $keyholder->getFromDate()->format('Y-m-d'));
+        $this->assertEquals('2010-08-26', $keyholder->getToDate()->format('Y-m-d'));
     }
 
     /**
@@ -300,7 +318,7 @@ class PropertyTest extends ApiClientClassTest
         $this->assertEquals(2, count($property->getBrandings()));
         $this->assertEquals(
             'Norfolk Country Cottages',
-            $property->getBrandings()[0]->getMarketingBrand()->getCompanyName()
+            $property->getBrandings()[0]->getMarketingBrand()->getName()
         );
     }
 

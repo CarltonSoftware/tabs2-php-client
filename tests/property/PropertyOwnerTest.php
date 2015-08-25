@@ -26,5 +26,9 @@ class PropertyOwnerTest extends ApiClientClassTest
         $this->assertEquals($owner->getTodate()->format('Y-m-d'), '1999-11-14');
         $this->assertEquals($owner->getFromdate()->format('Y-m-d'), '2007-02-07');
         $this->assertEquals($owner->getOwner()->getSurname(), 'Wyett');
+
+        $owner->setOwner('Fido Harrison');
+        $this->assertEquals($owner->getOwner(), 'Fido Harrison');
+        $this->assertEquals($owner->getActor(), 'Fido Harrison');
     }
 }
