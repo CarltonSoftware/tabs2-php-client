@@ -32,4 +32,24 @@ class ConfigurationClassTest extends ApiClientClassTest
 
         $this->assertEquals('configuration', $config->getUrlStub());
     }
+
+    /**
+     * Test the brand extra configuration collection
+     * 
+     * @return void
+     */
+    public function testConfigurationCollection()
+    {
+        $col = new tabs\apiclient\collection\core\extra\Configuration();
+
+        $this->assertTrue(is_array($col->getElements()));
+
+        $this->assertEquals(
+            '\tabs\apiclient\core\extra\Configuration',
+            $col->getElementClass()
+        );
+        $this->assertEquals('type', $col->discriminator());
+
+        $this->assertArrayHasKey('BrandExtraConfiguration', $col->discriminatorMap());
+    }
 }

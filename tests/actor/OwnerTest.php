@@ -31,7 +31,7 @@ class OwnerTest extends ApiClientClassTest
      * @expectedException        \tabs\apiclient\client\Exception
      * @expectedExceptionMessage Deleting a Owner is not permitted 
      */
-    public function testDeleteOwner()
+    public function testDeleteOwnerException()
     {
         $owner = Fixtures::getOwner();
         $owner->delete();
