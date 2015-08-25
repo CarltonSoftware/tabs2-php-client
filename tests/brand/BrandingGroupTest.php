@@ -25,5 +25,9 @@ class BrandingGroupTest extends ApiClientClassTest
         );
         
         $this->assertEquals('brandinggroup', $brandingGroup->getUrlStub());
+
+        $this->assertArrayHasKey('brandinggroupcode', $brandingGroup->toArray());
+        $this->assertArrayHasKey('brandinggroup', $brandingGroup->toArray());
+        $this->assertArrayHasKey('agencyid', $brandingGroup->toArray());
     }
 }
