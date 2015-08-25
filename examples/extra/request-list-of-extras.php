@@ -18,7 +18,7 @@ require_once __DIR__ . '/../creating-a-new-connection.php';
 
 try {
     echo '<h4>Extras</h4>';
-    $extras = new \tabs\apiclient\collection\core\Extra();
+    $extras = new \tabs\apiclient\collection\core\extra\Extra();
     $extras->fetch();
     
     foreach ($extras as $extra) {

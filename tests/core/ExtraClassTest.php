@@ -20,7 +20,7 @@ class ExtraClassTest extends ApiClientClassTest
         $extra = Fixtures::getExtra();
         $this->assertEquals(1, $extra->getId());
         $this->assertEquals('BKFE', $extra->getExtracode());
-        $this->assertEquals('BookingTypeExtra', $extra->getExtratype());
+        $this->assertEquals('Booking', $extra->getExtratype());
         $this->assertEquals('Booking Fee', $extra->getDescription());
         $this->assertEquals('extra', $extra->getUrlStub());
         

@@ -781,10 +781,9 @@ class Fixtures
     {
         $extraBranding = Fixtures::getExtraBranding();
 
-        $extra = new \tabs\apiclient\core\Extra();
+        $extra = new \tabs\apiclient\core\extra\BookingExtra();
         $extra->setId(1)
               ->setExtracode('BKFE')
-              ->setExtratype('BookingTypeExtra')
               ->setDescription('Booking Fee')
               ->addBranding($extraBranding);
         return $extra;

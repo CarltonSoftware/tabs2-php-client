@@ -16,9 +16,8 @@
 // Include the connection
 require_once __DIR__ . '/../creating-a-new-connection.php';
 
-$extra = new \tabs\apiclient\core\Extra();
+$extra = new \tabs\apiclient\core\extra\BookingExtra();
 $extra->setExtracode('XXX')
-    ->setExtratype('Booking')
     ->setDescription('Test Extra');
 
 try {

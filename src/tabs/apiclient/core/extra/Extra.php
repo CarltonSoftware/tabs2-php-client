@@ -13,7 +13,7 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\core;
+namespace tabs\apiclient\core\extra;
 use tabs\apiclient\core\extra\Branding as ExtraBranding;
 use tabs\apiclient\collection\core\extra\Branding as ExtraBrandingCollection;
 
@@ -39,7 +39,7 @@ use tabs\apiclient\collection\core\extra\Branding as ExtraBrandingCollection;
  * 
  * @method ExtraBrandingCollection getBrandings() Returns an ExtraBranding collection
  */
-class Extra extends \tabs\apiclient\core\Builder
+abstract class Extra extends \tabs\apiclient\core\Builder
 {
     /**
      * Code of Extra
@@ -193,5 +193,16 @@ class Extra extends \tabs\apiclient\core\Builder
         $description = $this->getDescription();
         
         return sprintf('%s %s: %s', $extracode, $extratype, $description);
+    }
+    
+    /**
+     * Hard coded url stub as BookingExtra and Marketing extra objects would
+     * without this return the wrong url.
+     * 
+     * @return string
+     */
+    public function getUrlStub()
+    {
+        return 'extra';
     }
 }

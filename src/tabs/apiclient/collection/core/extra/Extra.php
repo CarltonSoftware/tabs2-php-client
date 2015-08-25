@@ -13,7 +13,7 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\collection\core;
+namespace tabs\apiclient\collection\core\extra;
 
 /**
  * Tabs Rest API Unit collection object.
@@ -33,7 +33,7 @@ class Extra extends \tabs\apiclient\collection\Collection
      * instantiated and the method fetch will need to be called before this will
      * return any elements.
      *
-     * @return \tabs\apiclient\core\Extra[]
+     * @return \tabs\apiclient\core\extra\BookingExtra[]
      */
     public function getElements()
     {
@@ -53,6 +53,25 @@ class Extra extends \tabs\apiclient\collection\Collection
      */
     public function getElementClass()
     {
-        return '\tabs\apiclient\core\Extra';
+        return '\tabs\apiclient\core\extra\BookingExtra';
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function discriminator()
+    {
+        return 'extratype';
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function discriminatorMap()
+    {
+        return array(
+            'Booking' => '\tabs\apiclient\core\extra\BookingExtra',
+            'Marketing' => '\tabs\apiclient\core\extra\MarketingExtra'
+        );
     }
 }
