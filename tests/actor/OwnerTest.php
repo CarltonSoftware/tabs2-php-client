@@ -22,5 +22,18 @@ class OwnerTest extends ApiClientClassTest
         $this->assertEquals('Mr', $owner->getTitle());
         $this->assertEquals('Wyett', $owner->getSurname());
         $this->assertEquals('abc123', $owner->getPassword());
+        $this->assertTrue($owner->isActive());
+    }
+
+    /**
+     * Test that deleting an actor is not possible
+     *
+     * @expectedException        \tabs\apiclient\client\Exception
+     * @expectedExceptionMessage Deleting a Owner is not permitted 
+     */
+    public function testDeleteOwnerException()
+    {
+        $owner = Fixtures::getOwner();
+        $owner->delete();
     }
 }

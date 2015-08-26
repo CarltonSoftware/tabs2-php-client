@@ -25,6 +25,8 @@ class ContactPreferenceTest extends ApiClientClassTest
         $this->assertEquals(1, $preference->getPriority());
         $this->assertEquals('Customer', $preference->getRolereason()->getRole());
         $this->assertEquals('Booking Confirmation', $preference->getRolereason()->getReason());
+        $this->assertArrayHasKey('role', $preference->getRolereason()->toArray());
+        $this->assertArrayHasKey('reason', $preference->getRolereason()->toArray());
         $this->assertEquals(5, count($preference->toArray()));
         $this->assertEquals('contactpreference', $preference->getUrlStub());
         $this->assertEquals('Customer: Booking Confirmation', (string) $preference->getRolereason());

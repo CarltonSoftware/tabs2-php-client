@@ -85,7 +85,53 @@ class PropertyTest extends ApiClientClassTest
             $property->getOwners()->getCurrent()->getTodate()->format('Y-m-d')
         );
     }
-    
+
+    /**
+     * Test property cleaner
+     * 
+     * @return void
+     */
+    function testPropertyCleaner()
+    {
+        $property = Fixtures::getProperty();
+        $cleaner = Fixtures::getCleaner();
+        $property->addCleaner($cleaner);
+
+        $this->assertEquals('Bob Jones', $property->getCleaners()->getElements()[0]->getActor());
+
+        $cleaner->setCleanerFromDate('2015-08-25')
+            ->setCleanerToDate('2015-08-26')
+            ->setCleaner('Basil Watt');
+
+        $this->assertEquals('Basil Watt', $cleaner->getCleaner());
+        $this->assertEquals('Basil Watt', $cleaner->getActor());
+        $this->assertEquals('2015-08-25', $cleaner->getFromDate()->format('Y-m-d'));
+        $this->assertEquals('2015-08-26', $cleaner->getToDate()->format('Y-m-d'));
+    }
+
+    /**
+     * Test property cleaner
+     * 
+     * @return void
+     */
+    function testPropertyKeyholder()
+    {
+        $property = Fixtures::getProperty();
+        $keyholder = Fixtures::getKeyholder();
+        $property->addKeyholder($keyholder);
+
+        $this->assertEquals('Lionel Herring', $property->getKeyholders()->getElements()[0]->getActor());
+
+        $keyholder->setKeyholderFromDate('2010-08-25')
+            ->setKeyholderToDate('2010-08-26')
+            ->setKeyholder('Sophie Collings');
+
+        $this->assertEquals('Sophie Collings', $keyholder->getKeyholder());
+        $this->assertEquals('Sophie Collings', $keyholder->getActor());
+        $this->assertEquals('2010-08-25', $keyholder->getFromDate()->format('Y-m-d'));
+        $this->assertEquals('2010-08-26', $keyholder->getToDate()->format('Y-m-d'));
+    }
+
     /**
      * Test property descriptions
      * 
@@ -250,7 +296,32 @@ class PropertyTest extends ApiClientClassTest
         $this->assertArrayHasKey('id', $images[0]->toArray());
         $this->assertArrayHasKey('imageid', $images[0]->toArray());
     }
-    
+
+    /**
+     * Test property brandings
+     * 
+     * @return void
+     */
+    public function testPropertyBrandings()
+    {
+        $property = Fixtures::getProperty();
+
+        $this->assertEquals(1, count($property->getBrandings()));
+
+        $branding = Fixtures::getPropertyBranding();
+        $property->setBrandings(
+            array(
+                $branding
+            )
+        );
+
+        $this->assertEquals(2, count($property->getBrandings()));
+        $this->assertEquals(
+            'Norfolk Country Cottages',
+            $property->getBrandings()[0]->getMarketingBrand()->getName()
+        );
+    }
+
     /**
      * Test a new prop object.  Makes sure everything is instantiating correctly
      * 

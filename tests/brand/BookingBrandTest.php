@@ -30,5 +30,9 @@ class BookingBrandTest extends ApiClientClassTest
         );
         
         $this->assertEquals('bookingbrand', $bookingBrand->getUrlStub());
+
+        $this->assertArrayHasKey('bookingbrandcode', $bookingBrand->toArray());
+        $this->assertArrayHasKey('bookingbrand', $bookingBrand->toArray());
+        $this->assertArrayHasKey('agencyid', $bookingBrand->toArray());
     }
 }

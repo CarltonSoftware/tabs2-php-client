@@ -25,5 +25,10 @@ class MarketingBrandTest extends ApiClientClassTest
         );
         
         $this->assertEquals('marketingbrand', $marketingBrand->getUrlStub());
+
+        $this->assertArrayHasKey('marketingbrandcode', $marketingBrand->toArray());
+        $this->assertArrayHasKey('marketingbrand', $marketingBrand->toArray());
+        $this->assertArrayHasKey('agencyid', $marketingBrand->toArray());
+        $this->assertArrayHasKey('defaultbookingbrandid', $marketingBrand->toArray());
     }
 }

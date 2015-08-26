@@ -50,6 +50,8 @@ class TabsUserTest extends ApiClientClassTest
         
         $this->assertTrue($tabsUser->hasAccess('aurlpath'));
         $this->assertFalse($tabsUser->hasAccess('anotherurlpath'));
+
+        $this->assertArrayHasKey('username', $tabsUser->toArray());
         
         $roles = $tabsUser->getRoles();
         $role = array_shift($roles);
