@@ -20,7 +20,7 @@ if ($eid = filter_input(INPUT_GET, 'eid')
     && $bid = filter_input(INPUT_GET, 'bid') 
     && $pid = filter_input(INPUT_GET, 'pid')
 ) {
-    $extras = new \tabs\apiclient\collection\core\Extra();
+    $extras = new \tabs\apiclient\collection\core\extra\Extra();
     $extras->fetch();
     
     foreach ($extras as $extra) {

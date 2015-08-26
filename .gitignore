@@ -10,3 +10,4 @@ report
 tests/report
 tests/report/*
 examples/config.php
+examples/angular

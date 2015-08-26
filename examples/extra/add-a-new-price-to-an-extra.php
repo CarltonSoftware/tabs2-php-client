@@ -19,7 +19,7 @@ require_once __DIR__ . '/../creating-a-new-connection.php';
 if ($eid = filter_input(INPUT_GET, 'eid') 
     && $bid = filter_input(INPUT_GET, 'bid')
 ) {
-    $extras = new \tabs\apiclient\collection\core\Extra();
+    $extras = new \tabs\apiclient\collection\core\extra\Extra();
     $extras->fetch();
     
     foreach ($extras as $extra) {
@@ -38,7 +38,27 @@ if ($eid = filter_input(INPUT_GET, 'eid')
                         ->setUnitprice(10)
                         ->setParent($br);
                     
-                    $price->create();
+                    //$price->create();
+                    
+                    
+                    
+                    $price2 = new tabs\apiclient\core\extra\DailyPrice();
+                    $price2->setCurrency($currency)
+                        ->setFromdate(new \DateTime())
+                        ->setTodate(new \DateTime('2018-12-31'))
+                        ->setParent($br);
+        
+                    for ($i = 1; $i <= 7; $i++) {
+                        $dpu = new \tabs\apiclient\core\extra\DailyPriceUnit();
+                        $dpu->setDays($i)
+                            ->setAdditional(false)
+                            ->setPrice(10 + $i);
+                        $price2->addDailyprice($dpu);
+                    }
+                    
+                    var_dump($price2->toArray());
+                    
+                    $price2->create();
                     
                     echo 'Created!';
                 }

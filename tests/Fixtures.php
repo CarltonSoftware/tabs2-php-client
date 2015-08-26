@@ -751,6 +751,12 @@ class Fixtures
         
         $conf = Fixtures::getExtraBrandingConfiguration();
         $extraBranding->addConfiguration($conf);
+        
+        $unitPrice = Fixtures::getExtraBrandingUnitPricing();
+        $extraBranding->addPrice($unitPrice);
+        
+        $dailyPrice = Fixtures::getExtraBrandingDailyPricing();
+        $extraBranding->addPrice($dailyPrice);
 
         return $extraBranding;
     }
@@ -764,12 +770,62 @@ class Fixtures
     {
         $config = new \tabs\apiclient\core\extra\BrandExtraConfiguration();
         $config->setFromdate(new \DateTime('2014-01-01'))
+            ->setId(1)
             ->setTodate(new \DateTime('2029-12-31'))
             ->setCompulsory(false)
             ->setIncluded(false)
             ->setPayagency(true);
         
         return $config;
+    }
+    
+    /**
+     * Return a extra brand unit price
+     * 
+     * @return \tabs\apiclient\core\extra\UnitPrice
+     */
+    public static function getExtraBrandingUnitPricing()
+    {
+        $price = new tabs\apiclient\core\extra\UnitPrice();
+        $price->setFromdate(new \DateTime('2014-01-01'))
+            ->setId(1)
+            ->setTodate(new \DateTime('2029-12-31'))
+            ->setPeradult(false)
+            ->setPerchild(false)
+            ->setPerinfant(false)
+            ->setPropertypricing(false)
+            ->setUnitprice(10.00)
+            ->setCurrency(Fixtures::getCurrency());
+        
+        return $price;
+    }
+    
+    /**
+     * Return a extra brand unit price
+     * 
+     * @return \tabs\apiclient\core\extra\UnitPrice
+     */
+    public static function getExtraBrandingDailyPricing()
+    {
+        $price = new tabs\apiclient\core\extra\DailyPrice();
+        $price->setFromdate(new \DateTime('2015-01-01'))
+            ->setId(1)
+            ->setTodate(new \DateTime('2016-12-31'))
+            ->setPeradult(true)
+            ->setPerchild(false)
+            ->setPerinfant(false)
+            ->setPropertypricing(false)
+            ->setCurrency(Fixtures::getCurrency());
+        
+        for ($i = 1; $i <= 7; $i++) {
+            $dpu = new \tabs\apiclient\core\extra\DailyPriceUnit();
+            $dpu->setDays($i)
+                ->setAdditional(false)
+                ->setPrice(10 + $i);
+            $price->addDailyprice($dpu);
+        }
+        
+        return $price;
     }
 
     /**
@@ -912,5 +968,20 @@ class Fixtures
             ->setVatband('Standard band');
 
         return $band;
+    }
+
+    /**
+     * Return a Currency object
+     *
+     * @return \tabs\apiclient\core\Currency
+     */
+    public static function getCurrency()
+    {
+        $cur = new \tabs\apiclient\core\Currency();
+        $cur->setCode('GBP')
+            ->setName('Great British Pound')
+            ->setDecimalplaces(2);
+
+        return $cur;
     }
 }

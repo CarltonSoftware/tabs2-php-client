@@ -25,8 +25,41 @@ namespace tabs\apiclient\core\extra;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
+ * 
+ * @method float  getPercentage() Get the percentage
+ * @method string getBasedon()    Get the based on price indentifier
+ * 
+ * @method PercentagePrice setPercentage(integer $percentage) Set the percentage
+ * @method PercentagePrice setBasedon(string $basedon)        Set the based on string
  */
 class PercentagePrice extends Price
 {
+    /**
+     * Percentage base
+     * 
+     * @var float
+     */
+    protected $percentage = 100;
     
+    /**
+     * Percentage based on value.  Brochure or Basic
+     * 
+     * @var string
+     */
+    protected $basedon = 'Brochure';
+    
+    /**
+     * @inheritDoc
+     */
+    public function toArray()
+    {
+        return array_merge(
+            parent::toArray(),
+            array(
+                'pricetype' => 'Percentage',
+                'percentage' => $this->getPercentage(),
+                'basedon' => $this->getBasedon()
+            )
+        );
+    }
 }

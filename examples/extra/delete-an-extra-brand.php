@@ -19,7 +19,7 @@ require_once __DIR__ . '/../creating-a-new-connection.php';
 if ($eid = filter_input(INPUT_GET, 'eid') 
     && $bid = filter_input(INPUT_GET, 'bid')
 ) {
-    $extras = new \tabs\apiclient\collection\core\Extra();
+    $extras = new \tabs\apiclient\collection\core\extra\Extra();
     $extras->fetch();
     
     foreach ($extras as $extra) {

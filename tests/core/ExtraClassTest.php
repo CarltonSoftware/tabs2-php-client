@@ -57,6 +57,44 @@ class ExtraClassTest extends ApiClientClassTest
         $this->assertEquals('2014-01-01', $config->getFromdate()->format('Y-m-d'));
         $this->assertEquals('2029-12-31', $config->getTodate()->format('Y-m-d'));
         $this->assertTrue($config->getPayagency());
+        
+        // Test brand unit price
+        $price = $branding->getPrices()->current();
+        $this->assertEquals('2014-01-01', $price->getFromdate()->format('Y-m-d'));
+        $this->assertEquals('2029-12-31', $price->getTodate()->format('Y-m-d'));
+        $this->assertEquals(false, $price->getPeradult());
+        $this->assertEquals(false, $price->getPerchild());
+        $this->assertEquals(false, $price->getPerinfant());
+        $this->assertEquals('GBP', $price->getCurrency()->getCode());
+        $this->assertEquals('Great British Pound', $price->getCurrency()->getName());
+        $this->assertEquals(2, $price->getCurrency()->getDecimalplaces());
+        
+        // Test daily price
+        $price2 = $branding->getPrices()->next();
+        $this->assertEquals('2015-01-01', $price2->getFromdate()->format('Y-m-d'));
+        $this->assertEquals('2016-12-31', $price2->getTodate()->format('Y-m-d'));
+        $this->assertEquals(true, $price2->getPeradult());
+        $this->assertEquals(false, $price2->getPerchild());
+        $this->assertEquals(false, $price2->getPerinfant());
+        $this->assertEquals('GBP', $price2->getCurrency()->getCode());
+        $this->assertEquals('Great British Pound', $price2->getCurrency()->getName());
+        $this->assertEquals(2, $price2->getCurrency()->getDecimalplaces());
+        $this->assertEquals(7, count($price2->getDailyprices()));
+        
+        foreach ($price2->getDailyprices() as $dp) {
+            $this->assertEquals(false, $dp->getAdditional());
+            $this->assertGreaterThan(9, $dp->getPrice());
+        }
+        
+        // Make sure keys are ok in toArray
+        $this->assertArrayHasKey('fromdate', $price2->toArray());
+        $this->assertArrayHasKey('todate', $price2->toArray());
+        $this->assertArrayHasKey('peradult', $price2->toArray());
+        $this->assertArrayHasKey('perinfant', $price2->toArray());
+        $this->assertArrayHasKey('perchild', $price2->toArray());
+        $this->assertArrayHasKey('propertypricing', $price2->toArray());
+        $this->assertArrayHasKey('currencycode', $price2->toArray());
+        $this->assertArrayHasKey('dailyprices', $price2->toArray());
     }
     
     /**
@@ -69,6 +107,9 @@ class ExtraClassTest extends ApiClientClassTest
         $extra = Fixtures::getExtra();
         $this->assertEquals('/extra', $extra->getCreateUrl());
         $this->assertEquals('/extra/1', $extra->getUpdateUrl());
+        
+        $this->assertEquals('/extra/1/branding/1/configuration', $extra->getBrandings()->current()->getConfigurations()->current()->getCreateUrl());
+        $this->assertEquals('/extra/1/branding/1/configuration/1', $extra->getBrandings()->current()->getConfigurations()->current()->getUpdateUrl());
         
         $extraBranding = Fixtures::getExtraBranding();
         $extra->addBranding($extraBranding);
