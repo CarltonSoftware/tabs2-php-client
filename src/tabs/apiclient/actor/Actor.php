@@ -47,7 +47,6 @@ use tabs\apiclient\collection\actor\BankAccount as BankAccountCollection;
  * @method BankAccountCollection         getBankaccounts()   Return a collection of bank accounts
  * @method NoteCollection                getNotes()          Return a note collection
  * @method DocumentCollection            getDocuments()      Return a document collection
- * @method ContactCollection             getContactHistory() Return a contact collection
  *
  * @method Actor setFirstname(string $firstname) Set the firstname
  * @method Actor setSurname(string $surname) Set the surname

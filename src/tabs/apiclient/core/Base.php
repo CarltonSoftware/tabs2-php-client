@@ -237,9 +237,29 @@ abstract class Base
      */
     public function setParent(&$element)
     {
+        $className = $this->isParentInstanceType();
+        if (!$element instanceof $className) {
+            throw new \tabs\apiclient\client\Exception(
+                null,
+                get_class($element) . ' can not be set as parent of ' . get_class($this),
+                -1
+            );
+        }
+        
         $this->parent = $element;
 
         return $this;
+    }
+    
+    /**
+     * Enforce parent type.  Method should be overriden with a class name string
+     * that will be evaluated with the instanceof operand.
+     * 
+     * @return string
+     */
+    public function isParentInstanceType()
+    {
+        return '\tabs\apiclient\core\Base';
     }
 
     /**
