@@ -288,6 +288,24 @@ class Fixtures
     }
 
     /**
+     * Return a price type
+     *
+     * @return \tabs\apiclient\core\PriceType
+     */
+    public static function getPriceType()
+    {
+        $pricingPeriod = new tabs\apiclient\core\PricingPeriod('Day');
+
+        $priceType = new tabs\apiclient\core\PriceType();
+        $priceType->setPricetype('1D')
+            ->setDescription('1 Day Break')
+            ->setPricingperiod($pricingPeriod)
+            ->setPeriods(1);
+
+        return $priceType;
+    }
+
+    /**
      * Return a route
      *
      * @return \tabs\apiclient\actor\Route
