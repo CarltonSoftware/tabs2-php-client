@@ -81,7 +81,7 @@ class Branding extends BrandStatus
     }
     
     /**
-     * Return the properties marketing brand
+     * Return the property's marketing brand
      * 
      * @return PropertyMarketingBrand
      */
@@ -98,7 +98,7 @@ class Branding extends BrandStatus
     }
     
     /**
-     * Return the properties booking brand
+     * Return the property's booking brand
      * 
      * @return PropertyBookingBrand
      */
@@ -115,7 +115,7 @@ class Branding extends BrandStatus
     }
     
     /**
-     * Return the properties branding group
+     * Return the property's branding group
      * 
      * @return PropertyBrandingGroup
      */
