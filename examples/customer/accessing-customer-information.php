@@ -83,15 +83,15 @@ try {
         }
 
         echo sprintf(
-            '<p><a href="?page=%s&limit=%s">Previous</a>',
+            '<p><a href="?page=%s&limit=%s"2>&larr; Previous</a>',
             $pager->getPrevPage(),
             $pager->getLimit()
         );
         
-        echo ' | ';
+        echo ' &nbsp; | &nbsp; ';
 
         echo sprintf(
-            '<a href="?page=%s&limit=%s">Next</a></p>',
+            '<a href="?page=%s&limit=%s">Next &rarr;</a></p>',
             $pager->getNextPage(),
             $pager->getLimit()
         );

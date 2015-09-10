@@ -19,7 +19,7 @@ require_once __DIR__ . '/../creating-a-new-connection.php';
 try {
     echo '<h4>Agencies</h4>';
     $agencies = new \tabs\apiclient\collection\actor\Agency();
-    $agencies->fetch();
+    $agencies->setlimit(200)->fetch();
     
     foreach ($agencies->getElements() as $agency) {
         echo '<p>ID: ' . $agency->getId() . '<br>';

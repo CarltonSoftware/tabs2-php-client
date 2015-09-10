@@ -23,7 +23,7 @@ try {
         ->setSurname('Bloggs')
         ->setLanguage('English')
         ->create();
-    
+
     $address = new tabs\apiclient\actor\ContactAddress();
     $address->setAddress(
         \tabs\apiclient\core\Address::factory(

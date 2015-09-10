@@ -37,4 +37,6 @@ foreach ($brandings->getElements() as $branding) {
     $extraBranding->create();
 }
 
+echo '<pre>';
 var_dump($extra);
+echo '</pre>';
