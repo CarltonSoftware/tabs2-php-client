@@ -32,10 +32,10 @@ use tabs\apiclient\core\SalesChannel;
  *
  * @method SalesChannel getSaleschannel() Returns the sales channel
  *
- * @method \Dateime          getFromdate()          Returns the date the branding applies from
+ * @method \DateTime         getFromdate()          Returns the date the branding applies from
  * @method PriceTypeBranding setFromdate(\Datetime) Set the date the branding applies from
  *
- * @method \Datetime         getTodate()          Returns the date the branding applies until
+ * @method \DateTime         getTodate()          Returns the date the branding applies until
  * @method PriceTypeBranding setTodate(\Datetime) Set the date the branding applies until
  *
  * @method string            getType()       Returns the type (Fixed or Percentage)

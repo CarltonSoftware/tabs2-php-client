@@ -29,10 +29,10 @@ use tabs\apiclient\brand\Branding;
  *
  * @method Branding getBranding() Returns the branding
  *
- * @method \Dateime              getFromdate()          Returns the date the branding applies from
+ * @method \DateTime             getFromdate()          Returns the date the branding applies from
  * @method PricingMethodBranding setFromdate(\Datetime) Set the date the branding applies from
  *
- * @method \Datetime             getTodate()          Returns the date the branding applies until
+ * @method \DateTime             getTodate()          Returns the date the branding applies until
  * @method PricingMethodBranding setTodate(\Datetime) Set the date the branding applies until
  *
  */
