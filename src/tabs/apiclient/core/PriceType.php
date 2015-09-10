@@ -15,7 +15,7 @@
 
 namespace tabs\apiclient\core;
 use tabs\apiclient\brand\Branding;
-use tabs\apiclient\collection\branding\Branding as BrandingCollection;
+use tabs\apiclient\collection\core\PriceTypeBranding as PriceTypeBrandingCollection;
 
 /**
  * Tabs Rest API Price Type object
@@ -28,19 +28,20 @@ use tabs\apiclient\collection\branding\Branding as BrandingCollection;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getPricetype()                  Returns the price type code
- * @method string setPricetype(string $pricetype) Set the price type code
+ * @method string    getPricetype()                  Returns the price type code
+ * @method PriceType setPricetype(string $pricetype) Set the price type code
  *
+ * @method string    getPricingperiod()                  Returns the pricing period
+ * @method PriceType setPricingperiod(string $period) Set the pricing period
  *
+ * @method string    getDescription()                    Returns the description
+ * @method PriceType setDescription($string description) Set the description
  *
- * @method string getDescription()                    Returns the description
- * @method string setDescription($string description) Set the description
+ * @method integer   getPeriods()                 Returns the number of periods covered
+ * @method PriceType setPeriods(integer $periods) Set the number of periods covered
  *
- * @method integer getPeriods()                 Returns the number of periods covered
- * @method integer setPeriods(integer $periods) Set the number of periods covered
- *
- * @method boolean getAdditional()                  Returns the additional flag
- * @method boolean setAddional(boolean $additional) Set the additional flag
+ * @method boolean   getAdditional()                  Returns the additional flag
+ * @method PriceType setAddional(boolean $additional) Set the additional flag
  */
 class PriceType extends Builder
 {
@@ -54,7 +55,7 @@ class PriceType extends Builder
     /**
      * Pricing period
      *
-     * @var \tabs\apiclient\core\PricingPeriod
+     * @var string
      */
     protected $pricingperiod;
 
@@ -82,31 +83,14 @@ class PriceType extends Builder
     // ------------------ Public Functions --------------------- //
 
     /**
-     * Add a new branding to this price type
-     *
-     * @param Branding $branding Branding object
-     *
-     * @return Pricetype
-     */
-    public function addBranding(Branding &$branding)
-    {
-        $branding->setParent($this);
-        $this->getBrandings()->addElement($branding);
-
-        return $this;
-    }
-
-    /**
      * Get the all the brandings for the price type
      *
-     * @param array $brandings Brandings array
-     *
-     * @return BrandingCollection
+     * @return PriceTypeBrandingCollection
      */
-    public function getBrandings(array $brandings)
+    public function getBrandings()
     {
         return $this->_getCollection(
-            '\\tabs\\apiclient\\collection\\brand\\Branding'
+            '\\tabs\\apiclient\\collection\\core\\PriceTypeBranding'
         );
     }
 

@@ -15,7 +15,7 @@
 
 namespace tabs\apiclient\core;
 use tabs\apiclient\brand\Branding;
-use tabs\apiclient\collection\branding\Branding as BrandingCollection;
+use tabs\apiclient\collection\core\PricingMethodBranding as PricingMethodBrandingCollection;
 
 /**
  * Tabs Rest API Price Type object
@@ -70,14 +70,12 @@ class PricingMethod extends Builder
     /**
      * Get the all the brandings for the pricing method
      *
-     * @param array $brandings Brandings array
-     *
-     * @return BrandingCollection
+     * @return PricingMethodBrandingCollection
      */
     public function getBrandings()
     {
         return $this->_getCollection(
-            '\\tabs\\apiclient\\collection\\brand\\Branding'
+            '\\tabs\\apiclient\\collection\\core\\PricingMethodBranding'
         );
     }
 
