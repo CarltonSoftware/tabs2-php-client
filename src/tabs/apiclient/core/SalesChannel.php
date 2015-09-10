@@ -16,7 +16,7 @@
 namespace tabs\apiclient\core;
 
 /**
- * Tabs Rest API Sales Channel object
+ * A Sales Channel is a route to market, e.g. direct sale, web, affiliate, reseller
  *
  * @category  Tabs_Client
  * @package   Tabs
