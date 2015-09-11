@@ -11,3 +11,6 @@ tests/report
 tests/report/*
 examples/config.php
 examples/angular
+examples/angular/*
+examples/annotations.php
+examples/collections.php
