@@ -80,6 +80,9 @@ class ExtraClassTest extends ApiClientClassTest
         $this->assertEquals('Great British Pound', $price2->getCurrency()->getName());
         $this->assertEquals(2, $price2->getCurrency()->getDecimalplaces());
         $this->assertEquals(7, count($price2->getDailyprices()));
+
+        $this->assertEquals('Type: DailyPrice Dates: 2015-01-01 - 2016-12-31 Currency: Great British Pound', (string) $price2);
+        $this->assertEquals('pricing', $price2->getUrlStub());
         
         foreach ($price2->getDailyprices() as $dp) {
             $this->assertEquals(false, $dp->getAdditional());
@@ -96,7 +99,21 @@ class ExtraClassTest extends ApiClientClassTest
         $this->assertArrayHasKey('currencycode', $price2->toArray());
         $this->assertArrayHasKey('dailyprices', $price2->toArray());
     }
-    
+
+    /**
+     * Test Extra banding
+     *
+     * @return void
+     */
+    public function testExtraBranding()
+    {
+        $extra = Fixtures::getExtra();
+        $array = $extra->getBrandings()->current()->toArray();
+
+        $this->assertEquals(1, $array['id']);
+        $this->assertEquals(1, $array['brandingid']);
+    }
+
     /**
      * Test the update routes created by the builder class
      * 

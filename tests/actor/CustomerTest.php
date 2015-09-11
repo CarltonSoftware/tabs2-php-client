@@ -27,6 +27,36 @@ class CustomerTest extends ApiClientClassTest
         $this->assertEquals('Alex', $customer->salutation);
         $this->assertEquals($customer->toArray(), $customer->toCreateArray());
         $this->assertEquals($customer->toArray(), $customer->toUpdateArray());
+
+        // Test actor language
+        $this->assertInstanceOf('\tabs\apiclient\core\Language', $customer->getLanguage());
+        $customer->setLanguage('Deutsch');
+        $this->assertInstanceOf('\tabs\apiclient\core\Language', $customer->getLanguage());
+        $this->assertEquals('Deutsch', $customer->getLanguage()->getName());
+    }
+
+    /**
+     * Test customer contact details
+     *
+     * @return void
+     */
+    public function testCustomerDetails()
+    {
+        $customer = Fixtures::getCustomer();
+
+        $this->assertCount(0, $customer->getContactdetails());
+
+        $customer->setContactDetails(
+            array(
+                Fixtures::getContactDetail(),
+                Fixtures::getContactAddress(),
+            )
+        );
+
+        $this->assertCount(2, $customer->getContactdetails());
+        $this->assertCount(1, $customer->getContactAddresses());
+        $this->assertCount(0, $customer->getEmailAddresses());
+        $this->assertCount(1, $customer->getPhoneNumbers());
     }
 
     /**
@@ -60,6 +90,76 @@ class CustomerTest extends ApiClientClassTest
     }
 
     /**
+     * Test filling customer collections
+     *
+     * @return void
+     */
+    public function testCustomerCollections()
+    {
+        $customer = Fixtures::getCustomer();
+
+
+        $this->assertCount(0, $customer->getContactdetails());
+
+        $customer->setContactDetails(
+            array(
+                Fixtures::getContactDetail(),
+                Fixtures::getContactAddress(),
+            )
+        );
+
+        $this->assertCount(2, $customer->getContactdetails());
+        $this->assertCount(1, $customer->getContactAddresses());
+        $this->assertCount(0, $customer->getEmailAddresses());
+        $this->assertCount(1, $customer->getPhoneNumbers());
+
+
+        $this->assertCount(0, $customer->getBankaccounts());
+
+        $customer->setBankaccounts(
+            array(
+                Fixtures::getBankaccount(),
+                Fixtures::getBankaccount(),
+            )
+        );
+
+        $this->assertCount(2, $customer->getBankaccounts());
+        $this->assertEquals(
+            'Bank Awesome',
+            $customer->getBankaccounts()->current()->getBankname()
+        );
+
+
+        $this->assertCount(0, $customer->getNotes());
+
+        $customer->setNotes(
+            array(
+                Fixtures::getNote(),
+                Fixtures::getNote(),
+            )
+        );
+
+        $this->assertCount(2, $customer->getNotes());
+        $this->assertEquals(
+            'This is a note.',
+            $customer->getNotes()->current()->getNotetexts()[0]->getText()
+        );
+
+
+        $this->assertCount(1, $customer->getDocuments());
+        $this->assertEquals('somepdf', (string) $customer->getDocuments()->current());
+
+        $customer->setDocuments(
+            array(
+                Fixtures::getActorDocument(),
+                Fixtures::getActorDocument(),
+            )
+        );
+
+        $this->assertCount(3, $customer->getDocuments());
+    }
+
+    /**
      * Test the update routes created by the builder class
      *
      * @return void
@@ -74,7 +174,7 @@ class CustomerTest extends ApiClientClassTest
         $bankAccount = new \tabs\apiclient\actor\BankAccount();
         $bankAccount->setId(1);
         $customer->addBankAccount($bankAccount);
-        $this->assertEquals(1, count($customer->getBankaccounts()->getElements()));
+        $this->assertCount(1, $customer->getBankaccounts()->getElements());
         $this->assertEquals('/customer/1/bankaccount', $bankAccount->getCreateUrl());
         $this->assertEquals('/customer/1/bankaccount/1', $bankAccount->getUpdateUrl());
 

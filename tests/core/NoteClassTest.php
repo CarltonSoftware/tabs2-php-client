@@ -72,8 +72,6 @@ class NoteClassTest extends ApiClientClassTest
         $this->assertArrayHasKey('notetext', $notetext->toArray());
     }
     
-    
-
     /**
      * Test notetext exception
      * 
