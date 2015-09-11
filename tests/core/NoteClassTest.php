@@ -75,22 +75,18 @@ class NoteClassTest extends ApiClientClassTest
     
 
     /**
-     * Test notetext accessors
+     * Test notetext exception
      * 
-     * @expectedException \tabs\apiclient\client\Exception
+     * @expectedException        \tabs\apiclient\client\Exception
+     * @expectedExceptionMessage Parent note not set
      *
      * @return void
      */
     public function testNoteTextException()
     {
-        $note = Fixtures::getNote();
-        $notetexts = $note->getNotetexts();
-
-        $notetext = array_shift($notetexts);
-        $parent = null;
-        $notetext->setParent($parent);
-        
-        $notetext->getCreateUrl();
+        $noteText = new tabs\apiclient\core\Notetext();
+        $this->assertNull($noteText->getParent());
+        $noteText->getCreateUrl();
     }
     
     /**
