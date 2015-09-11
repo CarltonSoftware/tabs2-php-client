@@ -1,0 +1,91 @@
+<?php
+
+/**
+ * Tabs Rest API Pricing Period object
+ *
+ * PHP Version 5.4
+ *
+ * @category  Tabs_Client
+ * @package   Tabs
+ * @author    Carlton Software <support@carltonsoftware.co.uk>
+ * @copyright 2014 Carlton Software
+ * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @link      http://www.carltonsoftware.co.uk
+ */
+
+namespace tabs\apiclient\core;
+
+/**
+ * Tabs Rest API Pricing Period object
+ *
+ * @category  Tabs_Client
+ * @package   Tabs
+ * @author    Carlton Software <support@carltonsoftware.co.uk>
+ * @copyright 2014 Carlton Software
+ * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version   Release: 1
+ * @link      http://www.carltonsoftware.co.uk
+ * 
+ * @method string getPricingperiod()                      Returns the pricing period
+ * @method string setPricingperiod(string $pricingperiod) Set the pricing period
+ */
+class PricingPeriod extends Builder
+{
+    /**
+     * Pricing Period
+     *
+     * @var string
+     */
+    protected $pricingperiod;
+
+    /**
+     * Number of days
+     *
+     * @var integer
+     */
+    protected $days = 0;
+
+    /**
+     * Number of weeks
+     *
+     * @var integer
+     */
+    protected $weeks = 0;
+
+    /**
+     * Number of months
+     *
+     * @var integer
+     */
+    protected $months = 0;
+
+    /**
+     * Subperiod
+     *
+     * @var string
+     */
+    protected $subperiod;
+
+    // ------------------ Public Functions --------------------- //
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray()
+    {
+        return array(
+            'id' => $this->getId(),
+            'pricingperiod' => $this->getPricingperiod(),
+        );
+    }
+
+    /**
+     * String magic method
+     * 
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getPricingperiod();
+    }
+}

@@ -14,7 +14,6 @@
  */
 
 namespace tabs\apiclient\core;
-use tabs\apiclient\brand\Branding;
 use tabs\apiclient\collection\core\PriceTypeBranding as PriceTypeBrandingCollection;
 
 /**
@@ -31,7 +30,7 @@ use tabs\apiclient\collection\core\PriceTypeBranding as PriceTypeBrandingCollect
  * @method string    getPricetype()                  Returns the price type code
  * @method PriceType setPricetype(string $pricetype) Set the price type code
  *
- * @method string    getPricingperiod()                  Returns the pricing period
+ * @method string    getPricingperiod()               Returns the pricing period
  * @method PriceType setPricingperiod(string $period) Set the pricing period
  *
  * @method string    getDescription()                    Returns the description
@@ -42,6 +41,8 @@ use tabs\apiclient\collection\core\PriceTypeBranding as PriceTypeBrandingCollect
  *
  * @method boolean   getAdditional()                  Returns the additional flag
  * @method PriceType setAddional(boolean $additional) Set the additional flag
+ *
+ * @method PriceTypeBrandingCollection getBrandings() Get the price type brandings
  */
 class PriceType extends Builder
 {
@@ -80,18 +81,56 @@ class PriceType extends Builder
      */
     protected $additional = false;
 
+    /*
+     * The price type brandings
+     *
+     * @var PriceTypeBrandingCollection
+     */
+    protected $brandings;
+
     // ------------------ Public Functions --------------------- //
 
     /**
-     * Get the all the brandings for the price type
-     *
-     * @return PriceTypeBrandingCollection
+     * Constructor
+     * 
+     * @return void
      */
-    public function getBrandings()
+    public function __construct()
     {
-        return $this->_getCollection(
-            '\\tabs\\apiclient\\collection\\core\\PriceTypeBranding'
-        );
+        $this->brandings = new PriceTypeBrandingCollection();
+        $this->brandings->setElementParent($this);
+    }
+
+    /**
+     * Add a price type branding to this price type
+     *
+     * @param \tabs\apiclient\core\PriceTypeBranding $branding Price type branding object
+     *
+     * @return PriceType
+     */
+    public function addBranding(PriceTypeBranding &$branding)
+    {
+        $branding->setParent($this);
+        $this->brandings->addElement($branding);
+
+        return $this;
+    }
+
+    /**
+     * Add some price type brandings to this price type
+     *
+     * @param \tabs\apiclient\core\PriceTypeBranding[] $brandings Array of price type branding objects
+     *
+     * @return PriceType
+     */
+    public function setBrandings(array $brandings)
+    {
+        foreach ($brandings as $item) {
+            $branding = PriceTypeBranding::factory($item);
+            $this->addBranding($branding);
+        }
+
+        return $this;
     }
 
     /**
@@ -117,24 +156,5 @@ class PriceType extends Builder
     public function __toString()
     {
         return $this->getDescription();
-    }
-
-    // ------------------------- Private Functions -------------------------- //
-    
-    /**
-     * Return a new collection type and instantiate if needed
-     *
-     * @param string $class Class string
-     *
-     * @return \tabs\apiclient\collection\Collection
-     */
-    private function _getCollection($class)
-    {
-        if (!isset($this->collections[$class])) {
-            $this->collections[$class] = new $class();
-            $this->collections[$class]->setElementParent($this);
-        }
-        
-        return $this->collections[$class];
     }
 }

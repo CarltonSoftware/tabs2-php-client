@@ -294,15 +294,61 @@ class Fixtures
      */
     public static function getPriceType()
     {
-        $pricingPeriod = new tabs\apiclient\core\PricingPeriod('Day');
-
         $priceType = new tabs\apiclient\core\PriceType();
         $priceType->setPricetype('1D')
             ->setDescription('1 Day Break')
-            ->setPricingperiod($pricingPeriod)
+            ->setPricingperiod('Day')
             ->setPeriods(1);
 
         return $priceType;
+    }
+
+    /**
+     * Return a price type branding
+     *
+     * @return \tabs\apiclient\core\PriceTypeBranding
+     */
+    public static function getPriceTypeBranding()
+    {
+        $branding = Fixtures::getBranding();
+        
+        $priceTypeBranding = new tabs\apiclient\core\PriceTypeBranding();
+        $priceTypeBranding->setBranding($branding)
+            ->setFromdate(new \DateTime('2015-03-19'))
+            ->setTodate(new \DateTime('2032-07-06'));
+
+        return $priceTypeBranding;
+    }
+
+    /**
+     * Return a pricing method
+     *
+     * @return \tabs\apiclient\core\PricingMethod
+     */
+    public static function getPricingMethod()
+    {
+        $pricingMethod = new tabs\apiclient\core\PricingMethod();
+        $pricingMethod->setPricingmethod('Default')
+            ->setDescription('Tabs New Pricing');
+
+        return $pricingMethod;
+    }
+
+    /**
+     * Return a pricing method branding
+     *
+     * @return \tabs\apiclient\core\PricingMethodBranding
+     */
+    public static function getPricingMethodBranding()
+    {
+        $branding = Fixtures::getBranding();
+        
+        $pricingMethodBranding = new tabs\apiclient\core\PricingMethodBranding();
+        $pricingMethodBranding->setBranding($branding)
+            ->setFromdate(new \DateTime('1914-12-10'))
+            ->setTodate(new \DateTime('2007-05-28'));
+
+        return $pricingMethodBranding;
     }
 
     /**

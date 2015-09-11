@@ -14,7 +14,7 @@
  */
 
 namespace tabs\apiclient\core;
-use tabs\apiclient\brand\Branding;
+use tabs\apiclient\core\PricingMethodBranding;
 use tabs\apiclient\collection\core\PricingMethodBranding as PricingMethodBrandingCollection;
 
 /**
@@ -31,8 +31,10 @@ use tabs\apiclient\collection\core\PricingMethodBranding as PricingMethodBrandin
  * @method string getPricingmethod()                      Returns the short name of the pricing method
  * @method string getPricingmethod(string $pricingmethod) Set the short name of the  pricing method
  *
- * @method string getDescription()                      Returns the short name of the pricing method
- * @method string getDescription(string $pricingmethod) Set the short name of the  pricing method
+ * @method string getDescription()                      Returns the description of the pricing method
+ * @method string getDescription(string $pricingmethod) Set the description of the pricing method
+ *
+ * @method PricingMethodBrandingCollection getBrandings() Returns the brandings of the pricing method
  */
 class PricingMethod extends Builder
 {
@@ -50,16 +52,34 @@ class PricingMethod extends Builder
      */
     protected $description;
 
+    /**
+     * Brandings of the Pricing Method
+     *
+     * @var PricingMethodBrandingCollection
+     */
+    protected $brandings;
+
     // ------------------ Public Functions --------------------- //
 
     /**
-     * Add a new branding to this Pricing Method
+     * Constructor
+     * 
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->brandings = new PricingMethodBrandingCollection();
+        $this->brandings->setElementParent($this);
+    }
+
+    /**
+     * Add a new branding to this pricing method
      *
-     * @param Branding $branding Branding object
+     * @param \tabs\apiclient\core\PricingMethodBranding $branding Pricing method branding object
      *
      * @return PriceType
      */
-    public function addBranding(Branding &$branding)
+    public function addBranding(PricingMethodBranding &$branding)
     {
         $branding->setParent($this);
         $this->getBrandings()->addElement($branding);
@@ -68,15 +88,20 @@ class PricingMethod extends Builder
     }
 
     /**
-     * Get the all the brandings for the pricing method
+     * Add some pricing method brandings to this pricing method
      *
-     * @return PricingMethodBrandingCollection
+     * @param \tabs\apiclient\core\PricingMethodBranding[] $brandings Array of pricing method branding objects
+     *
+     * @return PriceType
      */
-    public function getBrandings()
+    public function setBrandings(array $brandings)
     {
-        return $this->_getCollection(
-            '\\tabs\\apiclient\\collection\\core\\PricingMethodBranding'
-        );
+        foreach ($brandings as $item) {
+            $branding = PricingMethodBranding::factory($item);
+            $this->addBranding($branding);
+        }
+
+        return $this;
     }
 
     /**
@@ -99,24 +124,5 @@ class PricingMethod extends Builder
     public function __toString()
     {
         return $this->getDescription();
-    }
-
-    // ------------------------- Private Functions -------------------------- //
-    
-    /**
-     * Return a new collection type and instantiate if needed
-     *
-     * @param string $class Class string
-     *
-     * @return \tabs\apiclient\collection\Collection
-     */
-    private function _getCollection($class)
-    {
-        if (!isset($this->collections[$class])) {
-            $this->collections[$class] = new $class();
-            $this->collections[$class]->setElementParent($this);
-        }
-        
-        return $this->collections[$class];
     }
 }
