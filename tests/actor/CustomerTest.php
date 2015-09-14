@@ -44,7 +44,7 @@ class CustomerTest extends ApiClientClassTest
     {
         $customer = Fixtures::getCustomer();
 
-        $this->assertCount(0, $customer->getContactdetails());
+        $this->assertEmpty($customer->getContactdetails());
 
         $customer->setContactDetails(
             array(
@@ -55,7 +55,7 @@ class CustomerTest extends ApiClientClassTest
 
         $this->assertCount(2, $customer->getContactdetails());
         $this->assertCount(1, $customer->getContactAddresses());
-        $this->assertCount(0, $customer->getEmailAddresses());
+        $this->assertEmpty($customer->getEmailAddresses());
         $this->assertCount(1, $customer->getPhoneNumbers());
     }
 
@@ -99,7 +99,7 @@ class CustomerTest extends ApiClientClassTest
         $customer = Fixtures::getCustomer();
 
 
-        $this->assertCount(0, $customer->getContactdetails());
+        $this->assertEmpty($customer->getContactdetails());
 
         $customer->setContactDetails(
             array(
@@ -110,11 +110,11 @@ class CustomerTest extends ApiClientClassTest
 
         $this->assertCount(2, $customer->getContactdetails());
         $this->assertCount(1, $customer->getContactAddresses());
-        $this->assertCount(0, $customer->getEmailAddresses());
+        $this->assertEmpty($customer->getEmailAddresses());
         $this->assertCount(1, $customer->getPhoneNumbers());
 
 
-        $this->assertCount(0, $customer->getBankaccounts());
+        $this->assertEmpty($customer->getBankaccounts());
 
         $customer->setBankaccounts(
             array(
@@ -130,7 +130,7 @@ class CustomerTest extends ApiClientClassTest
         );
 
 
-        $this->assertCount(0, $customer->getNotes());
+        $this->assertEmpty($customer->getNotes());
 
         $customer->setNotes(
             array(
@@ -157,6 +157,17 @@ class CustomerTest extends ApiClientClassTest
         );
 
         $this->assertCount(3, $customer->getDocuments());
+
+
+        $this->assertEmpty($customer->getContactHistory());
+
+        $customer->setContactHistory(
+            array(
+                Fixtures::getContact(),
+            )
+        );
+
+        $this->assertCount(2, $customer->getContactHistory());
     }
 
     /**

@@ -220,7 +220,7 @@ class Fixtures
     }
 
     /**
-     * Create a new note a note text and assign a customer to each of them
+     * Create a new note and a note text, and assign a customer to both
      *
      * @return \tabs\apiclient\core\Note
      */
