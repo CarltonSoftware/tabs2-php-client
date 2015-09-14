@@ -305,7 +305,8 @@ class Fixtures
     public static function getPriceType()
     {
         $priceType = new tabs\apiclient\core\PriceType();
-        $priceType->setPricetype('1D')
+        $priceType->setId(1)
+            ->setPricetype('1D')
             ->setDescription('1 Day Break')
             ->setPricingperiod('Day')
             ->setPeriods(1);
@@ -338,7 +339,8 @@ class Fixtures
     public static function getPricingMethod()
     {
         $pricingMethod = new tabs\apiclient\core\PricingMethod();
-        $pricingMethod->setPricingmethod('Default')
+        $pricingMethod->setId(1)
+            ->setPricingmethod('Default')
             ->setDescription('Tabs New Pricing');
 
         return $pricingMethod;
@@ -360,6 +362,20 @@ class Fixtures
 
         return $pricingMethodBranding;
     }
+
+    /**
+     * Return a route
+     *
+     * @return \tabs\apiclient\actor\Route
+     */
+    public static function getSourceMarketingBrand()
+    {
+        $route = new tabs\apiclient\actor\Route();
+        $route->setId(1)->setRoute('aurlpath');
+
+        return $route;
+    }
+
 
     /**
      * Return a route

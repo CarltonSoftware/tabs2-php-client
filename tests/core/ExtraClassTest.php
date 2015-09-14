@@ -68,10 +68,9 @@ class ExtraClassTest extends ApiClientClassTest
         $this->assertCount(2, $branding->getPrices()->getElements());
         $this->assertEquals('/extra/1/branding/1/pricing', $branding->getPrices()->getRoute());
         $this->assertEquals('\tabs\apiclient\core\extra\Price', $branding->getPrices()->getElementClass());
-        $this->assertEquals('pricetype', $branding->getPrices()->discriminator());
-        $this->assertEquals('pricetype', $branding->getPrices()->discriminator());
 
         // Test price collection discriminator map
+        $this->assertEquals('pricetype', $branding->getPrices()->discriminator());
         $discriminatorMap = $branding->getPrices()->discriminatorMap(); 
         $this->assertEquals('\tabs\apiclient\core\extra\UnitPrice', $discriminatorMap['Unit']);
         $this->assertEquals('\tabs\apiclient\core\extra\WeekPrice', $discriminatorMap['Week']);
@@ -123,7 +122,7 @@ class ExtraClassTest extends ApiClientClassTest
     }
 
     /**
-     * Test Extra banding
+     * Test Extra branding
      *
      * @return void
      */

@@ -184,7 +184,7 @@ class Property extends \tabs\apiclient\core\Builder
     }
     
     /**
-     * Add an cleaner object
+     * Add a cleaner object
      * 
      * @param propertyactor\Cleaner $cleaner Property cleaner object
      * 

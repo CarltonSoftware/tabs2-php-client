@@ -12,11 +12,11 @@ class ImageClassTest extends ApiClientClassTest
 {
     /**
      * Static img
-     * 
+     *
      * @var \tabs\apiclient\core\Image
      */
     static $img;
-    
+
     /**
      * Sets up the tests
      *
@@ -25,14 +25,14 @@ class ImageClassTest extends ApiClientClassTest
     public static function setUpBeforeClass()
     {
         parent::setUpBeforeClass();
-        
+
         self::$img = new \tabs\apiclient\core\Image();
         self::$img->setDataFromPath('http://placehold.it/350x150');
     }
-    
+
     /**
      * Test a image object
-     * 
+     *
      * @return void
      */
     public function testImage()
@@ -40,6 +40,7 @@ class ImageClassTest extends ApiClientClassTest
         $img = Fixtures::getImage();
         $this->assertEquals(1, $img->getId());
         $this->assertEquals('Test', $img->getTitle());
+        $this->assertEquals('Test', (string) $img);
         $this->assertEquals('Testing', $img->getDescription());
         $this->assertEquals(100, $img->getHeight());
         $this->assertEquals(100, $img->getWidth());
@@ -87,12 +88,12 @@ class ImageClassTest extends ApiClientClassTest
         $this->assertEquals(350, self::$img->getWidth());
         $this->assertEquals(150, self::$img->getHeight());
     }
-    
+
     /**
      * Test scaling a new image
-     * 
+     *
      * @depends testImageRequest
-     * 
+     *
      * @return void
      */
     public function testImageScaleRequest()
@@ -108,9 +109,9 @@ class ImageClassTest extends ApiClientClassTest
 
     /**
      * Test resizing a new image
-     * 
+     *
      * @depends testImageRequest
-     * 
+     *
      * @return void
      */
     public function testImageResizeRequest()
@@ -119,12 +120,12 @@ class ImageClassTest extends ApiClientClassTest
         $this->assertEquals(100, self::$img->getWidth());
         $this->assertEquals(100, self::$img->getHeight());
     }
-    
+
     /**
      * Test cropping a new image
-     * 
+     *
      * @depends testImageResizeRequest
-     * 
+     *
      * @return void
      */
     public function testImageCropRequest()

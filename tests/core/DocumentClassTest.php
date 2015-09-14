@@ -39,7 +39,15 @@ class DocumentClassTest extends ApiClientClassTest
             'http://httpbin.org/file//width/50/0',
             $document->getThumbnailUrl()
         );
-        
+        $this->assertEquals(
+             '<img src="http://httpbin.org/file//width/50/0" alt="somepdf.pdf" title="A pdf file">',
+             $document->getThumbnailSrc()
+        );
+        $this->assertEquals(
+             '<img src="http://httpbin.org/file//width/0/0" alt="somepdf.pdf" title="A pdf file">',
+             $document->getImageSrc('width')
+        );
+
         // Test mimetype
         $this->assertEquals(1, $document->getMimetype()->getId());
         $this->assertEquals('application/pdf', $document->getMimetype()->getName());

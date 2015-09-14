@@ -84,6 +84,13 @@ class NoteClassTest extends ApiClientClassTest
     {
         $noteText = new tabs\apiclient\core\Notetext();
         $this->assertNull($noteText->getParent());
+
+        try {
+            $noteText->getCreateUrl();
+        } catch (Exception $e) {
+            $this->assertEquals('tabs\apiclient\client\Exception: [0]: Parent note not set', (string) $e);
+        }
+
         $noteText->getCreateUrl();
     }
     

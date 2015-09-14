@@ -48,7 +48,7 @@ class PricingMethodClassTest extends ApiClientClassTest
         );
         $this->assertEquals(2, $pricingMethod->getBrandings()->getTotal());
 
-        // $this->assertEquals('/pricingmethod/1/branding', $pricingMethod->getBrandings()->getRoute());
+        $this->assertEquals('/pricingmethod/1/branding', $pricingMethod->getBrandings()->getRoute());
         $this->assertEquals('\tabs\apiclient\core\PricingMethodBranding', $pricingMethod->getBrandings()->getElementClass());
     }
 }
