@@ -36,4 +36,28 @@ class OwnerTest extends ApiClientClassTest
         $owner = Fixtures::getOwner();
         $owner->delete();
     }
+
+    /**
+     * Test that trying to get a non-existent parent Actor throws an exception
+     *
+     * @expectedException        \tabs\apiclient\client\Exception
+     * @expectedExceptionMessage Parent actor not found 
+     */
+    public function testGetParentActorException()
+    {
+        $owner = Fixtures::getOwner();
+        $owner->getParentActor();
+    }
+
+    /**
+     * Test that trying to get a non-existent parent Property throws an exception
+     *
+     * @expectedException        \tabs\apiclient\client\Exception
+     * @expectedExceptionMessage Parent property not found 
+     */
+    public function testGetParentPropertyException()
+    {
+        $owner = Fixtures::getOwner();
+        $owner->getParentProperty();
+    }
 }

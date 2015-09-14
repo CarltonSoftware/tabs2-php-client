@@ -69,6 +69,7 @@ class TransferredBooking extends \tabs\apiclient\core\Base
     {
         if ($this->getTobooking() === null) {
             throw new \tabs\apiclient\client\Exception(
+                null,
                 'A valid Tobooking URI is required (currently null).'
             );
         }

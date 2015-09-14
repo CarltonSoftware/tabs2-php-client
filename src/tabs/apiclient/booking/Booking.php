@@ -315,6 +315,7 @@ class Booking extends \tabs\apiclient\core\Builder
     {
         if ($this->getProperty() === null) {
             throw new \tabs\apiclient\client\Exception(
+                null,
                 'A valid property URL is required (currently null).'
             );
         }
@@ -333,6 +334,7 @@ class Booking extends \tabs\apiclient\core\Builder
     {
         if ($this->getBranding() === null) {
             throw new \tabs\apiclient\client\Exception(
+                null,
                 'A valid property URL is required (currently null).'
             );
         }
