@@ -332,6 +332,24 @@ class PropertyTest extends ApiClientClassTest
         $prop = new \tabs\apiclient\property\Property();
         $this->assertFalse($prop->getOwners()->getCurrent());
     }
+
+    /**
+     * Test the collections of things belonging to a property
+     * 
+     * @return void
+     */
+    public function testPropertyCollections()
+    {
+        $property = Fixtures::getProperty();
+        $cleaner = Fixtures::getCleaner();
+        $property->addCleaner($cleaner);
+
+        $this->assertEquals('\tabs\apiclient\property\propertyactor\Cleaner', $property->getCleaners()->getElementClass());
+        $this->assertEquals('/property/1/cleaner', $property->getCleaners()->getRoute());
+
+        $this->assertEquals('\tabs\apiclient\property\propertyactor\Keyholder', $property->getKeyholders()->getElementClass());
+        $this->assertEquals('/property/1/keyholder', $property->getKeyholders()->getRoute());
+    }
     
     /**
      * Test a property object

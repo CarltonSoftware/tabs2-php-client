@@ -49,5 +49,8 @@ class PriceTypeClassTest extends ApiClientClassTest
             )
         );
         $this->assertEquals(2, $priceType->getBrandings()->getTotal());
+
+        // $this->assertEquals('/pricetype/1/branding', $priceType->getBrandings()->getRoute());
+        $this->assertEquals('\tabs\apiclient\core\PriceTypeBranding', $priceType->getBrandings()->getElementClass());
     }
 }

@@ -38,26 +38,48 @@ class ExtraClassTest extends ApiClientClassTest
     public function testNewExtraCollections()
     {
         $extra = Fixtures::getExtra();
-        
+
+        $this->assertEquals(
+            '/extra/1/branding',
+            $extra->getBrandings()->getRoute()
+        );
         $this->assertEquals(
             '\tabs\apiclient\core\extra\Branding',
             $extra->getBrandings()->getElementClass()
         );
-        
+
         $this->assertEquals(1, count($extra->getBrandings()));
         $branding = $extra->getBrandings()->current();
-        
+
         $this->assertEquals(
             'Norfolk - Norfolk - Norfolk',
             (string) $branding
         );
-        
+
+        $this->assertEquals('/extra/1/branding/1/configuration', $branding->getConfigurations()->getRoute());
+
         // Test brand configuration
         $config = $branding->getConfigurations()->current();
         $this->assertEquals('2014-01-01', $config->getFromdate()->format('Y-m-d'));
         $this->assertEquals('2029-12-31', $config->getTodate()->format('Y-m-d'));
         $this->assertTrue($config->getPayagency());
         
+        // Test price collection
+        $this->assertCount(2, $branding->getPrices()->getElements());
+        $this->assertEquals('/extra/1/branding/1/pricing', $branding->getPrices()->getRoute());
+        $this->assertEquals('\tabs\apiclient\core\extra\Price', $branding->getPrices()->getElementClass());
+        $this->assertEquals('pricetype', $branding->getPrices()->discriminator());
+        $this->assertEquals('pricetype', $branding->getPrices()->discriminator());
+
+        // Test price collection discriminator map
+        $discriminatorMap = $branding->getPrices()->discriminatorMap(); 
+        $this->assertEquals('\tabs\apiclient\core\extra\UnitPrice', $discriminatorMap['Unit']);
+        $this->assertEquals('\tabs\apiclient\core\extra\WeekPrice', $discriminatorMap['Week']);
+        $this->assertEquals('\tabs\apiclient\core\extra\DailyPrice', $discriminatorMap['Daily']);
+        $this->assertEquals('\tabs\apiclient\core\extra\PercentagePrice', $discriminatorMap['Percentage']);
+        $this->assertEquals('\tabs\apiclient\core\extra\PercentagePlusPrice', $discriminatorMap['PercentagePlus']);
+        $this->assertEquals('\tabs\apiclient\core\extra\RangePrice', $discriminatorMap['Range']);
+
         // Test brand unit price
         $price = $branding->getPrices()->current();
         $this->assertEquals('2014-01-01', $price->getFromdate()->format('Y-m-d'));

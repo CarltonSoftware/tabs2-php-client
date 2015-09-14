@@ -87,6 +87,16 @@ class Fixtures
     }
 
     /**
+     * Create a new (empty) owner collection
+     *
+     * @return \tabs\apiclient\collection\actor\Owner
+     */
+    public static function getOwnerCollection()
+    {
+        return new \tabs\apiclient\collection\actor\Owner();
+    }
+
+    /**
      * Return a tabs role for a tabs user
      *
      * @return \tabs\apiclient\actor\TabsRole
