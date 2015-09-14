@@ -49,10 +49,37 @@ class ImageClassTest extends ApiClientClassTest
         );
         $this->assertEquals('/image/1', $img->getPath());
     }
-    
+
+    /**
+     * Test an image object's toArray method
+     *
+     * @return void
+     */
+    public function testImageToArray()
+    {
+        $array = Fixtures::getImage()->toArray();
+        $this->assertArrayHasKey('id', $array);
+        $this->assertArrayHasKey('filename', $array);
+        $this->assertEquals('Test', $array['title']);
+        $this->assertEquals('Testing', $array['description']);
+        $this->assertEquals('100', $array['width']);
+        $this->assertEquals('100', $array['height']);
+    }
+
+    /**
+     * Test that saving a jpeg with a .gif extension is not possible
+     *
+     * @expectedException        \tabs\apiclient\client\Exception
+     * @expectedExceptionMessage Extension mis-match. Specified extension does not match image exif data.
+     */
+    public function testExtensionMismatchException()
+    {
+        self::$img->save('file.gif');
+    }
+
     /**
      * Test adding a new image
-     * 
+     *
      * @return void
      */
     public function testImageRequest()
