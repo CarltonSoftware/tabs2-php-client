@@ -476,21 +476,21 @@ class Image extends FileBuilder
      * by the image data.  There is a bit of a fudge to check to allow jpg ==
      * jpeg when specified.
      * 
-     * @param string $ext Extension without leading dot .
+     * @param string $ext Extension without a leading dot .
      * 
      * @return boolean
      */
     private function _checkExtension($ext)
     {
-        if ($ext !== $this->_getExtension()) {
+        if ('.' . $ext !== $this->_getExtension()) {
             return ($this->_getExtension() == '.jpeg' && $ext == 'jpg');
         }
-        
-        return '.' . $ext == $this->_getExtension();
+
+        return true;
     }
 
     /**
-     * Return the extension
+     * Return the extension with a leading dot .
      * 
      * @return string
      */
