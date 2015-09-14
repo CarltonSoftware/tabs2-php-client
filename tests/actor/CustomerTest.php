@@ -157,17 +157,6 @@ class CustomerTest extends ApiClientClassTest
         );
 
         $this->assertCount(3, $customer->getDocuments());
-
-
-        $this->assertEmpty($customer->getContactHistory());
-
-        $customer->setContactHistory(
-            array(
-                Fixtures::getContact(),
-            )
-        );
-
-        $this->assertCount(2, $customer->getContactHistory());
     }
 
     /**
