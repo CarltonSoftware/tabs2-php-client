@@ -22,6 +22,7 @@ class ExtraClassTest extends ApiClientClassTest
         $this->assertEquals('BKFE', $extra->getExtracode());
         $this->assertEquals('Booking', $extra->getExtratype());
         $this->assertEquals('Booking Fee', $extra->getDescription());
+        $this->assertEquals('BKFE Booking: Booking Fee', (string) $extra);
         $this->assertEquals('extra', $extra->getUrlStub());
         
         $this->assertArrayHasKey('id', $extra->toArray());
@@ -51,6 +52,8 @@ class ExtraClassTest extends ApiClientClassTest
         $this->assertEquals(1, count($extra->getBrandings()));
         $branding = $extra->getBrandings()->current();
 
+        $this->assertTrue($extra->hasBrand(Fixtures::getBranding()));
+        $this->assertFalse($extra->hasBrand(Fixtures::getBranding()->setId(32)));
         $this->assertEquals(
             'Norfolk - Norfolk - Norfolk',
             (string) $branding
@@ -89,7 +92,17 @@ class ExtraClassTest extends ApiClientClassTest
         $this->assertEquals('GBP', $price->getCurrency()->getCode());
         $this->assertEquals('Great British Pound', $price->getCurrency()->getName());
         $this->assertEquals(2, $price->getCurrency()->getDecimalplaces());
-        
+
+        $this->assertArrayHasKey('fromdate', $price->toArray());
+        $this->assertArrayHasKey('todate', $price->toArray());
+        $this->assertArrayHasKey('peradult', $price->toArray());
+        $this->assertArrayHasKey('perinfant', $price->toArray());
+        $this->assertArrayHasKey('perchild', $price->toArray());
+        $this->assertArrayHasKey('propertypricing', $price->toArray());
+        $this->assertArrayHasKey('currencycode', $price->toArray());
+        $this->assertEquals('Unit', $price->toArray()['pricetype']);
+        $this->assertEquals(10.0, $price->toArray()['unitprice']);
+
         // Test daily price
         $price2 = $branding->getPrices()->next();
         $this->assertEquals('2015-01-01', $price2->getFromdate()->format('Y-m-d'));
@@ -133,6 +146,28 @@ class ExtraClassTest extends ApiClientClassTest
 
         $this->assertEquals(1, $array['id']);
         $this->assertEquals(1, $array['brandingid']);
+
+        // test setBrandings
+        $this->assertCount(1, $extra->getBrandings());
+        $extra->setBrandings(
+            array(
+                Fixtures::getExtraBranding()
+            )
+        );
+        $this->assertCount(2, $extra->getBrandings());
+    }
+
+    /**
+     * Test core brandings
+     *
+     * @return void
+     */
+    public function testCoreBrandings()
+    {
+        $extra = Fixtures::getExtra();
+        $coreBrandings = $extra->getCoreBrandings();
+
+        $this->assertEquals('Norfolk', $coreBrandings[0]->getBrandinggroup()->getName());
     }
 
     /**

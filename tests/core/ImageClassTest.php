@@ -68,6 +68,28 @@ class ImageClassTest extends ApiClientClassTest
     }
 
     /**
+     * Test setting an image's data to nothing is not possible
+     *
+     * @expectedException        \tabs\apiclient\client\Exception
+     * @expectedExceptionMessage Image not found
+     */
+    public function testImageSetDataException()
+    {
+        self::$img->setData('');
+    }
+
+    /**
+     * Test that saving an image to an invalid location is not possible
+     *
+     * @expectedException        \tabs\apiclient\client\Exception
+     * @expectedExceptionMessage Specified directory is not writable or doesn't exist.
+     */
+    public function testImageSaveNowhereException()
+    {
+        self::$img->save('/root/image.png');
+    }
+
+    /**
      * Test that saving a jpeg with a .gif extension is not possible
      *
      * @expectedException        \tabs\apiclient\client\Exception

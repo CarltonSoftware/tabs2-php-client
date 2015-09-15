@@ -46,9 +46,21 @@ class OwnerTest extends ApiClientClassTest
     {
         $owner = Fixtures::getOwner();
         $this->assertFalse($owner->method_exists(4));
-        $this->assertFalse($owner->method_exists('chutney'));
+        $this->assertFalse($owner->method_exists('getChutney'));
         $this->assertTrue($owner->method_exists('method_exists'));
         $this->assertTrue($owner->method_exists('getId'));
+    }
+
+    /**
+     * Test that magically getting a non-existent attribute isn't possible
+     *
+     * @expectedException        \tabs\apiclient\client\Exception
+     * @expectedExceptionMessage Unknown method called: tabs\apiclient\actor\Owner:getChutney
+     */
+    public function testMethodExistsException()
+    {
+        $owner = Fixtures::getOwner();
+        $owner->getChutney();
     }
 
     /**
