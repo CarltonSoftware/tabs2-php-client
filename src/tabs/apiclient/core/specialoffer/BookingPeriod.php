@@ -13,7 +13,7 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\core;
+namespace tabs\apiclient\core\specialoffer;
 
 /**
  * Tabs Rest API Booking period object.
@@ -26,13 +26,13 @@ namespace tabs\apiclient\core;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method \DateTime getFromdate() Returns the fromdate
- * @method tabs\apiclient\core\BookingPeriod setFromdate(\DateTime $var) Sets the fromdate
+ * @method \DateTime     getFromdate()               Returns the fromdate
+ * @method BookingPeriod setFromdate(\DateTime $var) Sets the fromdate
  * 
- * @method \DateTime getTodate() Returns the todate
- * @method tabs\apiclient\core\BookingPeriod setTodate(\DateTime $var) Sets the todate
+ * @method \DateTime     getTodate()               Returns the todate
+ * @method BookingPeriod setTodate(\DateTime $var) Sets the todate
  */
-class BookingPeriod extends Builder
+class BookingPeriod extends \tabs\apiclient\core\Builder
 {
     /**
      * Fromdate

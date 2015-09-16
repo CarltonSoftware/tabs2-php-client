@@ -32,6 +32,9 @@ use tabs\apiclient\utility\Pagination;
  * @method \tabs\apiclient\core\Base getElementParent() Return the element parent
  *
  * @method Collection setRoute(string $route) Set the route
+ * 
+ * @method Collection setFetchOnNextGet(boolean $bool) Set the fetch on next get flag
+ * @method boolean    getFetchOnNextGet()              Get the fetch on next get flag
  */
 abstract class Collection extends \tabs\apiclient\core\Base implements CollectionInterface, \Iterator, \Countable
 {
@@ -55,6 +58,14 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
      * @var \tabs\apiclient\utility\Pagination
      */
     protected $pagination;
+    
+    /**
+     * Bool flag to tell the Base class that on next 'get' call to request the
+     * instance of this object, retrieve the dataset from the api as well.
+     * 
+     * @var boolean
+     */
+    protected $fetchOnNextGet = false;
 
     // ------------------ Public Functions --------------------- //
 
@@ -191,6 +202,11 @@ abstract class Collection extends \tabs\apiclient\core\Base implements Collectio
      */
     public function addElement(&$element)
     {
+        if ($this->getElementParent()) {
+            $parent = $this->getElementParent();
+            $element->setParent($parent);
+        }
+        
         $this->elements[] = $element;
 
         return $this;

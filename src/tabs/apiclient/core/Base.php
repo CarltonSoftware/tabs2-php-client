@@ -316,13 +316,15 @@ abstract class Base
                         return $this;
                     break;
                     case 'get':
-                        if (is_object($this->$property) 
-                            && $this->$property instanceof Link
-                        ) {
+                        if ($this->$property instanceof Link) {
                             $parent = $this->$property->getParent();
                             $class = $this->$property->getObjectClass();
                             $this->$property = $class::_get($this->$property->getLink());
                             $this->$property->setParent($parent);
+                        } else if ($this->$property instanceof \tabs\apiclient\collection\Collection 
+                            && $this->$property->getFetchOnNextGet()
+                        ) {
+                            $this->$property->fetch();
                         }
                         
                         return $this->$property;
@@ -348,7 +350,8 @@ abstract class Base
     public function __get($name)
     {
         if (property_exists($this, $name)) {
-            return $this->$name;
+            $accessor = 'get' . ucfirst($name);
+            return $this->$accessor();
         }
     }
 
@@ -390,7 +393,13 @@ abstract class Base
             if ($obj->$property instanceof \DateTime  && (!$value instanceof \DateTime)) {
                 //Special handling for DateTime fields
                 $obj->$property = new \DateTime($value);
+            } else if ($obj->$property instanceof \tabs\apiclient\collection\Collection 
+                && (!$value instanceof \tabs\apiclient\collection\Collection)
+            ) {
+                // Handling on collection classes
+                $obj->$property->setFetchOnNextGet(true);
             } else {
+                // Normo property values
                 $obj->$property = $value;
             }
             break;
