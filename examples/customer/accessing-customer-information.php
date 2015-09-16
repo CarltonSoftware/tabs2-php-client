@@ -22,7 +22,7 @@ try {
         $customer = \tabs\apiclient\actor\Customer::get($id);
 
         echo '<h3>Customer</h3>';
-        echo sprintf('<p>%s</p>', (string) $customer);
+        echo sprintf('<p>%s</p>', htmlspecialchars((string) $customer));
         if (count($customer->getContactAddresses()) > 0) {
             echo '<h3>Contact Addresses</h3>';
             echo implode('<br>', $customer->getContactAddresses());
@@ -78,7 +78,7 @@ try {
             echo sprintf(
                 '<p><a href="accessing-customer-information.php?id=%s">%s</a></p>',
                 $customer->getId(),
-                (string) $customer
+                htmlspecialchars((string) $customer)
             );
         }
 
