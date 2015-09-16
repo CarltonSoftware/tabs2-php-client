@@ -38,7 +38,7 @@ class ContactDetail extends Base
      *
      * @var string
      */
-    protected $value ;
+    protected $value;
 
     // ------------------ Public Functions --------------------- //
 
