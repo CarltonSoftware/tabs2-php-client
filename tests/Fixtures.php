@@ -87,6 +87,16 @@ class Fixtures
     }
 
     /**
+     * Create a new (empty) owner collection
+     *
+     * @return \tabs\apiclient\collection\actor\Owner
+     */
+    public static function getOwnerCollection()
+    {
+        return new \tabs\apiclient\collection\actor\Owner();
+    }
+
+    /**
      * Return a tabs role for a tabs user
      *
      * @return \tabs\apiclient\actor\TabsRole
@@ -220,7 +230,7 @@ class Fixtures
     }
 
     /**
-     * Create a new note a note text and assign a customer to each of them
+     * Create a new note and a note text, and assign a customer to both
      *
      * @return \tabs\apiclient\core\Note
      */
@@ -294,16 +304,78 @@ class Fixtures
      */
     public static function getPriceType()
     {
-        $pricingPeriod = new tabs\apiclient\core\PricingPeriod('Day');
-
         $priceType = new tabs\apiclient\core\PriceType();
-        $priceType->setPricetype('1D')
+        $priceType->setId(1)
+            ->setPricetype('1D')
             ->setDescription('1 Day Break')
-            ->setPricingperiod($pricingPeriod)
+            ->setPricingperiod('Day')
             ->setPeriods(1);
 
         return $priceType;
     }
+
+    /**
+     * Return a price type branding
+     *
+     * @return \tabs\apiclient\core\PriceTypeBranding
+     */
+    public static function getPriceTypeBranding()
+    {
+        $branding = Fixtures::getBranding();
+        
+        $priceTypeBranding = new tabs\apiclient\core\PriceTypeBranding();
+        $priceTypeBranding->setBranding($branding)
+            ->setFromdate(new \DateTime('2015-03-19'))
+            ->setTodate(new \DateTime('2032-07-06'));
+
+        return $priceTypeBranding;
+    }
+
+    /**
+     * Return a pricing method
+     *
+     * @return \tabs\apiclient\core\PricingMethod
+     */
+    public static function getPricingMethod()
+    {
+        $pricingMethod = new tabs\apiclient\core\PricingMethod();
+        $pricingMethod->setId(1)
+            ->setPricingmethod('Default')
+            ->setDescription('Tabs New Pricing');
+
+        return $pricingMethod;
+    }
+
+    /**
+     * Return a pricing method branding
+     *
+     * @return \tabs\apiclient\core\PricingMethodBranding
+     */
+    public static function getPricingMethodBranding()
+    {
+        $branding = Fixtures::getBranding();
+        
+        $pricingMethodBranding = new tabs\apiclient\core\PricingMethodBranding();
+        $pricingMethodBranding->setBranding($branding)
+            ->setFromdate(new \DateTime('1914-12-10'))
+            ->setTodate(new \DateTime('2007-05-28'));
+
+        return $pricingMethodBranding;
+    }
+
+    /**
+     * Return a route
+     *
+     * @return \tabs\apiclient\actor\Route
+     */
+    public static function getSourceMarketingBrand()
+    {
+        $route = new tabs\apiclient\actor\Route();
+        $route->setId(1)->setRoute('aurlpath');
+
+        return $route;
+    }
+
 
     /**
      * Return a route

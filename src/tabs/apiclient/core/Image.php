@@ -273,7 +273,7 @@ class Image extends FileBuilder
                 );
             }
             
-            if ($this->_checkExtension($pathinfo['extension'])) {
+            if (!$this->_checkExtension($pathinfo['extension'])) {
                 throw new \tabs\apiclient\client\Exception(
                     null,
                     'Extension mis-match. Specified extension does not match'
@@ -476,21 +476,21 @@ class Image extends FileBuilder
      * by the image data.  There is a bit of a fudge to check to allow jpg ==
      * jpeg when specified.
      * 
-     * @param string $ext Extension
+     * @param string $ext Extension without a leading dot .
      * 
      * @return boolean
      */
     private function _checkExtension($ext)
     {
-        if ($ext !== $this->_getExtension()) {
-            return ($this->_getExtension() == 'jpeg' && $ext == 'jpg');
+        if ('.' . $ext !== $this->_getExtension()) {
+            return ($this->_getExtension() == '.jpeg' && $ext == 'jpg');
         }
-        
+
         return true;
     }
 
     /**
-     * Return the extension
+     * Return the extension with a leading dot .
      * 
      * @return string
      */

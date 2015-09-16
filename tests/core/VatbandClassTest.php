@@ -25,5 +25,13 @@ class VatbandClassTest extends ApiClientClassTest
 
         $this->assertArrayHasKey('id', $band->toArray());
         $this->assertArrayHasKey('band', $band->toArray());
+
+        $band->setVatrates(
+            array(
+                Fixtures::getVatrate(),
+                Fixtures::getVatrate(),
+            )
+        );
+        $this->assertCount(3, $band->getVatrates());
     }
 }

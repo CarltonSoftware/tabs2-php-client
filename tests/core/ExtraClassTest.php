@@ -22,6 +22,7 @@ class ExtraClassTest extends ApiClientClassTest
         $this->assertEquals('BKFE', $extra->getExtracode());
         $this->assertEquals('Booking', $extra->getExtratype());
         $this->assertEquals('Booking Fee', $extra->getDescription());
+        $this->assertEquals('BKFE Booking: Booking Fee', (string) $extra);
         $this->assertEquals('extra', $extra->getUrlStub());
         
         $this->assertArrayHasKey('id', $extra->toArray());
@@ -38,26 +39,49 @@ class ExtraClassTest extends ApiClientClassTest
     public function testNewExtraCollections()
     {
         $extra = Fixtures::getExtra();
-        
+
+        $this->assertEquals(
+            '/extra/1/branding',
+            $extra->getBrandings()->getRoute()
+        );
         $this->assertEquals(
             '\tabs\apiclient\core\extra\Branding',
             $extra->getBrandings()->getElementClass()
         );
-        
+
         $this->assertEquals(1, count($extra->getBrandings()));
         $branding = $extra->getBrandings()->current();
-        
+
+        $this->assertTrue($extra->hasBrand(Fixtures::getBranding()));
+        $this->assertFalse($extra->hasBrand(Fixtures::getBranding()->setId(32)));
         $this->assertEquals(
             'Norfolk - Norfolk - Norfolk',
             (string) $branding
         );
-        
+
+        $this->assertEquals('/extra/1/branding/1/configuration', $branding->getConfigurations()->getRoute());
+
         // Test brand configuration
         $config = $branding->getConfigurations()->current();
         $this->assertEquals('2014-01-01', $config->getFromdate()->format('Y-m-d'));
         $this->assertEquals('2029-12-31', $config->getTodate()->format('Y-m-d'));
         $this->assertTrue($config->getPayagency());
         
+        // Test price collection
+        $this->assertCount(2, $branding->getPrices()->getElements());
+        $this->assertEquals('/extra/1/branding/1/pricing', $branding->getPrices()->getRoute());
+        $this->assertEquals('\tabs\apiclient\core\extra\Price', $branding->getPrices()->getElementClass());
+
+        // Test price collection discriminator map
+        $this->assertEquals('pricetype', $branding->getPrices()->discriminator());
+        $discriminatorMap = $branding->getPrices()->discriminatorMap(); 
+        $this->assertEquals('\tabs\apiclient\core\extra\UnitPrice', $discriminatorMap['Unit']);
+        $this->assertEquals('\tabs\apiclient\core\extra\WeekPrice', $discriminatorMap['Week']);
+        $this->assertEquals('\tabs\apiclient\core\extra\DailyPrice', $discriminatorMap['Daily']);
+        $this->assertEquals('\tabs\apiclient\core\extra\PercentagePrice', $discriminatorMap['Percentage']);
+        $this->assertEquals('\tabs\apiclient\core\extra\PercentagePlusPrice', $discriminatorMap['PercentagePlus']);
+        $this->assertEquals('\tabs\apiclient\core\extra\RangePrice', $discriminatorMap['Range']);
+
         // Test brand unit price
         $price = $branding->getPrices()->current();
         $this->assertEquals('2014-01-01', $price->getFromdate()->format('Y-m-d'));
@@ -68,7 +92,17 @@ class ExtraClassTest extends ApiClientClassTest
         $this->assertEquals('GBP', $price->getCurrency()->getCode());
         $this->assertEquals('Great British Pound', $price->getCurrency()->getName());
         $this->assertEquals(2, $price->getCurrency()->getDecimalplaces());
-        
+
+        $this->assertArrayHasKey('fromdate', $price->toArray());
+        $this->assertArrayHasKey('todate', $price->toArray());
+        $this->assertArrayHasKey('peradult', $price->toArray());
+        $this->assertArrayHasKey('perinfant', $price->toArray());
+        $this->assertArrayHasKey('perchild', $price->toArray());
+        $this->assertArrayHasKey('propertypricing', $price->toArray());
+        $this->assertArrayHasKey('currencycode', $price->toArray());
+        $this->assertEquals('Unit', $price->toArray()['pricetype']);
+        $this->assertEquals(10.0, $price->toArray()['unitprice']);
+
         // Test daily price
         $price2 = $branding->getPrices()->next();
         $this->assertEquals('2015-01-01', $price2->getFromdate()->format('Y-m-d'));
@@ -80,6 +114,9 @@ class ExtraClassTest extends ApiClientClassTest
         $this->assertEquals('Great British Pound', $price2->getCurrency()->getName());
         $this->assertEquals(2, $price2->getCurrency()->getDecimalplaces());
         $this->assertEquals(7, count($price2->getDailyprices()));
+
+        $this->assertEquals('Type: DailyPrice Dates: 2015-01-01 - 2016-12-31 Currency: Great British Pound', (string) $price2);
+        $this->assertEquals('pricing', $price2->getUrlStub());
         
         foreach ($price2->getDailyprices() as $dp) {
             $this->assertEquals(false, $dp->getAdditional());
@@ -96,7 +133,43 @@ class ExtraClassTest extends ApiClientClassTest
         $this->assertArrayHasKey('currencycode', $price2->toArray());
         $this->assertArrayHasKey('dailyprices', $price2->toArray());
     }
-    
+
+    /**
+     * Test Extra branding
+     *
+     * @return void
+     */
+    public function testExtraBranding()
+    {
+        $extra = Fixtures::getExtra();
+        $array = $extra->getBrandings()->current()->toArray();
+
+        $this->assertEquals(1, $array['id']);
+        $this->assertEquals(1, $array['brandingid']);
+
+        // test setBrandings
+        $this->assertCount(1, $extra->getBrandings());
+        $extra->setBrandings(
+            array(
+                Fixtures::getExtraBranding()
+            )
+        );
+        $this->assertCount(2, $extra->getBrandings());
+    }
+
+    /**
+     * Test core brandings
+     *
+     * @return void
+     */
+    public function testCoreBrandings()
+    {
+        $extra = Fixtures::getExtra();
+        $coreBrandings = $extra->getCoreBrandings();
+
+        $this->assertEquals('Norfolk', $coreBrandings[0]->getBrandinggroup()->getName());
+    }
+
     /**
      * Test the update routes created by the builder class
      * 

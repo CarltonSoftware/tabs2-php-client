@@ -28,9 +28,11 @@ use tabs\apiclient\core\SalesChannel;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method Branding getBranding()         Returns the branding
+ * @method Branding          getBranding()         Returns the branding
+ * @method PriceTypeBranding setBranding(Branding) Sets the branding
  *
- * @method SalesChannel getSaleschannel() Returns the sales channel
+ * @method SalesChannel      getSaleschannel()             Returns the sales channel
+ * @method PriceTypeBranding setSaleschannel(SalesChannel) Sets the sales channel
  *
  * @method \DateTime         getFromdate()          Returns the date the branding applies from
  * @method PriceTypeBranding setFromdate(\Datetime) Set the date the branding applies from
@@ -53,7 +55,7 @@ class PriceTypeBranding extends Builder
     /**
      * The sales channel
      *
-     * @var tabs\apiclient\brand\SalesChannel
+     * @var tabs\apiclient\core\SalesChannel
      */
     protected $saleschannel;
 

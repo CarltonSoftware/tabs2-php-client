@@ -332,7 +332,7 @@ abstract class Base
 
         throw new \tabs\apiclient\client\Exception(
             null,
-            'Unknown method called:' . get_called_class() . ':' . $name
+            'Unknown method called: ' . get_called_class() . ':' . $name
         );
     }
 
