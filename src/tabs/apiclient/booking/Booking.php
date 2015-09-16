@@ -506,7 +506,8 @@ class Booking extends \tabs\apiclient\core\Builder
      */
     public function setCustomers($customers)
     {
-        foreach ($customers as $bc) {
+        foreach ($customers as $customer) {
+            $bc = BookingCustomer::factory($customer);
             $this->addCustomer($bc);
         }
         
@@ -547,7 +548,8 @@ class Booking extends \tabs\apiclient\core\Builder
      */
     public function setGuests($guests)
     {
-        foreach ($guests as $bg) {
+        foreach ($guests as $guest) {
+            $bg = BookingGuest::factory($guest);
             $this->addGuest($bg);
         }
         

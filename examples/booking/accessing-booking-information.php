@@ -20,8 +20,25 @@ try {
     
     $booking = \tabs\apiclient\booking\Booking::get(1);
 
-    echo $booking->getBookref();
-            
+    echo sprintf('<p>Booking ref: %s</p>', $booking->getBookref());
+
+    echo '<h2>Guests</h2>';
+    foreach ($booking->getGuests() as $guest) {
+        echo sprintf(
+            '<p>%s (%s)</p>',
+            $guest->getName(),
+            $guest->getType()
+        );
+    }
+
+    echo '<h2>Customers</h2>';
+    foreach ($booking->getCustomers() as $bookingCustomer) {
+        echo sprintf(
+            '<p>%s</p>',
+            $bookingCustomer->getName()
+        );
+    }
+
 } catch(Exception $e) {
     echo $e->getMessage();
 }
