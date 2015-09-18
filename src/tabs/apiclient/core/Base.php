@@ -302,19 +302,32 @@ abstract class Base
     public function __call($name, $args = array())
     {
         // This call method is only for accessors
-        if (strlen($name) > 3) {
+        if (strlen($name) > 2) {
+            
             // Get the property
             $property = substr($name, 3, strlen($name));
-
+            switch (substr($name, 0, 2)) {
+                case 'is':
+                    $property = substr($name, 2, strlen($name));
+                break;
+            }
+            
             // All properties will be camelcase, make first letter lowercase
-            $property[0] = strtolower($property[0]);
+            $property = lcfirst($property);
 
             if (property_exists($this, $property)) {
+                switch (substr($name, 0, 2)) {
+                    case 'is':
+                        if (is_bool($this->$property)) {
+                            return ($this->$property === true);
+                        }
+                    break;
+                }
+                
                 switch (substr($name, 0, 3)) {
                     case 'set':
                         $this->setObjectProperty($this, $property, $args[0]);
                         return $this;
-                    break;
                     case 'get':
                         if ($this->$property instanceof Link) {
                             $parent = $this->$property->getParent();

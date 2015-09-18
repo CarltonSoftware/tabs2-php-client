@@ -28,7 +28,9 @@ use tabs\apiclient\core\status\History;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method Status getStatus() Returns the property status
+ * @method Status      getStatus() Returns the property status
+ * @method BrandStatus setPrimarybookingbrand(boolean $bool) Set the primary booking brand flag
+ * @method boolean     getPrimarybookingbrand()              Get the primary booking brand flag
  */
 abstract class BrandStatus extends \tabs\apiclient\brand\Brand
 {
@@ -45,6 +47,13 @@ abstract class BrandStatus extends \tabs\apiclient\brand\Brand
      * @var History[]
      */
     protected $statushistory = array();
+    
+    /**
+     * Is the brand the primary brand?
+     * 
+     * @var boolean
+     */
+    protected $primarybookingbrand = false;
 
     // -------------------------- Public Functions -------------------------- //
     

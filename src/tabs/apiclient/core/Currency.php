@@ -27,9 +27,9 @@ namespace tabs\apiclient\core;
  * @link      http://www.carltonsoftware.co.uk
  * 
  * 
- * @method string  getCode()          Return the Address line 2
- * @method string  getName()          Return the Address line 3
- * @method integer getDecimalplaces() Return the Address town
+ * @method string  getCode()          Return the currency code
+ * @method string  getName()          Return the currency name
+ * @method integer getDecimalplaces() Return the number of decimal places
  * 
  * @method Currency setCode(integer $code)                   Set the code
  * @method Currency setName(integer $name)                   Set the name
@@ -59,16 +59,6 @@ class Currency extends Base
     protected $decimalplaces;
     
     // ------------------ Public Functions --------------------- //
-    
-    /**
-     * Constructor
-     * 
-     * @return void
-     */
-    public function __construct()
-    {
-
-    }
     
     /**
      * Array representation of the address.  Used for creates/updates.

@@ -46,7 +46,7 @@ class ElementBranding extends \tabs\apiclient\collection\Collection
      */
     public function getRoute()
     {
-        return 'branding';
+        return $this->getParent()->getUpdateUrl() . '/branding';
     }
 
     /**

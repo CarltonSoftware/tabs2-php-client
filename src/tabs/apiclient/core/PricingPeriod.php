@@ -36,7 +36,7 @@ class PricingPeriod extends Builder
      *
      * @var string
      */
-    protected $pricingperiod;
+    protected $pricingperiod = '';
 
     /**
      * Number of days
@@ -64,7 +64,7 @@ class PricingPeriod extends Builder
      *
      * @var string
      */
-    protected $subperiod;
+    protected $subperiod = '';
 
     // ------------------ Public Functions --------------------- //
 

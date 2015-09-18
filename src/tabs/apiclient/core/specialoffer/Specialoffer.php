@@ -71,8 +71,6 @@ use \tabs\apiclient\collection\brand\ElementBranding as BrandCollection;
  * @method boolean      getAmount()             Returns the amount
  * @method Specialoffer setAmount(boolean $var) Sets the amount
  * 
- * @method Currency     getCurrency() Returns the currency
- * 
  * @method boolean      getPerperiod()             Returns the perperiod
  * @method Specialoffer setPerperiod(boolean $var) Sets the perperiod
  * 
@@ -80,7 +78,7 @@ use \tabs\apiclient\collection\brand\ElementBranding as BrandCollection;
  * @method Specialoffer setApplytopartysizepricing(boolean $var) Sets the applytopartysizepricing
  * 
  */
-class Specialoffer extends \tabs\apiclient\core\Builder
+abstract class Specialoffer extends \tabs\apiclient\core\Builder
 {
     /**
      * Active bool
@@ -179,13 +177,6 @@ class Specialoffer extends \tabs\apiclient\core\Builder
      * @var boolean
      */
     protected $amount = 0;
-    
-    /**
-     * Applicable currency
-     * 
-     * @var Currency
-     */
-    protected $currency;
     
     /**
      * See api documention for more info!
@@ -294,20 +285,6 @@ class Specialoffer extends \tabs\apiclient\core\Builder
     public function setPricingperiod($pp)
     {
         $this->pricingperiod = PricingPeriod::factory($pp);
-        
-        return $this;
-    }
-
-    /**
-     * Set the currency
-     * 
-     * @param Currency $cur Currency
-     * 
-     * @return Specialoffer
-     */
-    public function setCurrency($cur)
-    {
-        $this->currency = \tabs\apiclient\core\Currency::factory($cur);
         
         return $this;
     }

@@ -29,11 +29,6 @@ use tabs\apiclient\property\brand\BookingBrand as PropertyBookingBrand;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
- * 
- * @method Branding setBranding(string|CoreBrandingGroup $grp) Sets the branding group object
- * @method Branding setBrandinggroup(string|PropertyBrandingGroup $grp) Sets the property branding group object
- * @method Branding setMarketingbrand(string|PropertyMarketingBrand $grp) Sets the marketing branding group object
- * @method Branding setBookingbrand(string|PropertyBookingBrand $grp) Sets the booking branding group object
  */
 class Branding extends BrandStatus
 {
@@ -67,17 +62,46 @@ class Branding extends BrandStatus
     protected $bookingbrand;
     
     /**
-     * Fetch and return the branding group
+     * Set the branding group
+     * 
+     * @param string|stdClass|CoreBrandingGroup $brd Brand object
+     * 
+     * @return \tabs\apiclient\property\brand\Branding
+     */
+    public function setBranding($brd)
+    {
+        $this->branding = CoreBrandingGroup::factory($brd);
+        
+        return $this;
+    }
+    
+    /**
+     * Return the branding group
      * 
      * @return CoreBrandingGroup
      */
     public function getBranding()
     {
-        if (is_string($this->branding)) {
-            $this->branding = CoreBrandingGroup::_get($this->branding);
-        }
+        try {
+            $parent = $this->getParentProperty();
+            $this->branding->setParent($parent);
+        } catch (\tabs\apiclient\client\Exception $ex) {}
         
         return $this->branding;
+    }
+    
+    /**
+     * Set the property's marketing brand
+     * 
+     * @param string|stdClass|PropertyMarketingBrand $brd Brand object
+     * 
+     * @return \tabs\apiclient\property\brand\Branding
+     */
+    public function setMarketingbrand($brd)
+    {
+        $this->marketingbrand = PropertyMarketingBrand::factory($brd);
+        
+        return $this;
     }
     
     /**
@@ -87,46 +111,68 @@ class Branding extends BrandStatus
      */
     public function getMarketingbrand()
     {
-        if (is_string($this->marketingbrand)) {
-            $this->marketingbrand = PropertyMarketingBrand::_get(
-                $this->marketingbrand
-            );
-            $this->updatePropertyParent();
-        }
+        try {
+            $parent = $this->getParentProperty();
+            $this->marketingbrand->setParent($parent);
+        } catch (\tabs\apiclient\client\Exception $ex) {}
         
         return $this->marketingbrand;
     }
     
     /**
+     * Set the property's booking brand
+     * 
+     * @param string|stdClass|PropertyBookingBrand $brd Brand object
+     * 
+     * @return \tabs\apiclient\property\brand\Branding
+     */
+    public function setBookingbrand($brd)
+    {
+        $this->bookingbrand = PropertyBookingBrand::factory($brd);
+        
+        return $this;
+    }
+    
+    /**
      * Return the property's booking brand
      * 
-     * @return PropertyBookingBrand
+     * @return PropertyMarketingBrand
      */
     public function getBookingbrand()
     {
-        if (is_string($this->bookingbrand)) {
-            $this->bookingbrand = PropertyBookingBrand::_get(
-                $this->bookingbrand
-            );
-            $this->updatePropertyParent();
-        }
+        try {
+            $parent = $this->getParentProperty();
+            $this->bookingbrand->setParent($parent);
+        } catch (\tabs\apiclient\client\Exception $ex) {}
         
         return $this->bookingbrand;
     }
     
     /**
+     * Set the property's branding group
+     * 
+     * @param string|stdClass|PropertyBrandingGroup $brd Brand object
+     * 
+     * @return \tabs\apiclient\property\brand\Branding
+     */
+    public function setBrandinggroup($brd)
+    {
+        $this->brandinggroup = PropertyBrandingGroup::factory($brd);
+        
+        return $this;
+    }
+    
+    /**
      * Return the property's branding group
      * 
-     * @return PropertyBrandingGroup
+     * @return PropertyMarketingBrand
      */
     public function getBrandinggroup()
     {
-        if (is_string($this->brandinggroup)) {
-            $this->brandinggroup = PropertyBrandingGroup::_get(
-                $this->brandinggroup
-            );
-            $this->updatePropertyParent();
-        }
+        try {
+            $parent = $this->getParentProperty();
+            $this->brandinggroup->setParent($parent);
+        } catch (\tabs\apiclient\client\Exception $ex) {}
         
         return $this->brandinggroup;
     }

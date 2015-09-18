@@ -55,4 +55,25 @@ class Specialoffer extends \tabs\apiclient\collection\Collection
     {
         return '\tabs\apiclient\core\specialoffer\Specialoffer';
     }
+    
+    /**
+     * @inheritDoc
+     */
+    public function discriminator()
+    {
+        return 'type';
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function discriminatorMap()
+    {
+        return array(
+            'Amount' => '\tabs\apiclient\core\specialoffer\SetDiscount',
+            'Fixed' => '\tabs\apiclient\core\specialoffer\Fixedprice',
+            'Percentage' => '\tabs\apiclient\core\specialoffer\Percentage',
+            'PriceType' => '\tabs\apiclient\core\specialoffer\PriceType'
+        );
+    }
 }
