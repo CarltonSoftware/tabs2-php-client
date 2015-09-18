@@ -76,6 +76,19 @@ try {
                         );
                     }
                 }
+                
+                $sections = $o->getWebsitesections()->fetch();
+                if ($sections->getTotal() > 0) {
+                    ?>
+<h3>Website sections</h3>
+                    <?php
+                    foreach ($sections as $s) {
+                        echo sprintf(
+                            '<p>%s %s</p>',
+                            $s->getWebsitesection()->getSection()
+                        );
+                    }
+                }
             }
         }
     } else {

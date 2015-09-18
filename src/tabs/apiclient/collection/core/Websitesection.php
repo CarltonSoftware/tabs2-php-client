@@ -1,38 +1,39 @@
 <?php
 
 /**
- * Tabs Rest API collection object.
+ * Tabs Rest API Website section collection object.
+ *
+ * PHP Version 5.4
  *
  * @category  Tabs_Client
  * @package   Tabs
  * @author    Carlton Software <support@carltonsoftware.co.uk>
- * @copyright 2015 Carlton Software
+ * @copyright 2014 Carlton Software
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
- * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\collection\core\specialoffer;
+namespace tabs\apiclient\collection\core;
 
 /**
- * Tabs Rest API collection object.
+ * Tabs Rest API Website section collection object.
  *
  * @category  Tabs_Client
  * @package   Tabs
  * @author    Carlton Software <support@carltonsoftware.co.uk>
- * @copyright 2015 Carlton Software
+ * @copyright 2014 Carlton Software
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  */
-class HolidayPeriod extends \tabs\apiclient\collection\Collection
+class Websitesection extends \tabs\apiclient\collection\Collection
 {
     /**
-     * Return an array of Holiday period objects.  This object will need to be
+     * Return an array of Website section objects.  This object will need to be
      * instantiated and the method fetch will need to be called before this will
      * return any elements.
      *
-     * @return \tabs\apiclient\core\specialoffer\HolidayPeriod[]
+     * @return \tabs\apiclient\core\Websitesection[]
      */
     public function getElements()
     {
@@ -44,7 +45,7 @@ class HolidayPeriod extends \tabs\apiclient\collection\Collection
      */
     public function getRoute()
     {
-        return $this->getParent()->getUpdateUrl() . '/holidayperiod';
+        return 'websitesection';
     }
 
     /**
@@ -52,6 +53,6 @@ class HolidayPeriod extends \tabs\apiclient\collection\Collection
      */
     public function getElementClass()
     {
-        return '\tabs\apiclient\core\specialoffer\HolidayPeriod';
+        return '\tabs\apiclient\core\Websitesection';
     }
 }

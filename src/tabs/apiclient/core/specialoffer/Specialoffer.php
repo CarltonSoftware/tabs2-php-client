@@ -19,6 +19,7 @@ use \tabs\apiclient\collection\core\specialoffer\BookingPeriod as BookingPeriodC
 use \tabs\apiclient\collection\core\specialoffer\HolidayPeriod as HolidayPeriodCollection;
 use \tabs\apiclient\collection\brand\ElementBranding as BrandCollection;
 use \tabs\apiclient\collection\core\specialoffer\SpecialofferPriceType as PriceTypeCollection;
+use \tabs\apiclient\collection\core\specialoffer\SpecialofferWebsitesection as WebsiteSectionCollection;
 
 /**
  * Tabs Rest API Special offer object.
@@ -78,6 +79,7 @@ use \tabs\apiclient\collection\core\specialoffer\SpecialofferPriceType as PriceT
  * @method boolean      getApplytopartysizepricing()             Returns the applytopartysizepricing
  * @method Specialoffer setApplytopartysizepricing(boolean $var) Sets the applytopartysizepricing
  * 
+ * @method WebsiteSectionCollection getWebsitesections() Return the applicable website sections.
  */
 abstract class Specialoffer extends \tabs\apiclient\core\Builder
 {
@@ -222,6 +224,14 @@ abstract class Specialoffer extends \tabs\apiclient\core\Builder
     protected $pricetypes;
     
     /**
+     * Website sections
+     * 
+     * @var WebsiteSectionCollection
+     */
+    protected $websitesections;
+
+
+    /**
      * Constructor
      * 
      * @return void
@@ -243,6 +253,10 @@ abstract class Specialoffer extends \tabs\apiclient\core\Builder
         $this->pricetypes = new PriceTypeCollection();
         $this->pricetypes->setParent($this);
         $this->pricetypes->setElementParent($this);
+        
+        $this->websitesections = new WebsiteSectionCollection();
+        $this->websitesections->setParent($this);
+        $this->websitesections->setElementParent($this);
     }
     
     /**
@@ -297,6 +311,20 @@ abstract class Specialoffer extends \tabs\apiclient\core\Builder
     public function addHolidayPeriod(HolidayPeriod $hp)
     {
         $this->holidayperiods->addElement($hp);
+        
+        return $this;
+    }
+    
+    /**
+     * Add a website section to the collection
+     * 
+     * @param \tabs\apiclient\core\specialoffer\SpecialofferWebsitesection $sec Special offer website section
+     * 
+     * @return Specialoffer
+     */
+    public function addWebsitesection(SpecialofferWebsitesection $sec)
+    {
+        $this->websitesections->addElement($sec);
         
         return $this;
     }

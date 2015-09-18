@@ -25,14 +25,14 @@ namespace tabs\apiclient\collection\core\specialoffer;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  */
-class HolidayPeriod extends \tabs\apiclient\collection\Collection
+class SpecialofferWebsitesection extends \tabs\apiclient\collection\Collection
 {
     /**
-     * Return an array of Holiday period objects.  This object will need to be
+     * Return an array of SpecialofferWebsitesection objects.  This object will need to be
      * instantiated and the method fetch will need to be called before this will
      * return any elements.
      *
-     * @return \tabs\apiclient\core\specialoffer\HolidayPeriod[]
+     * @return \tabs\apiclient\core\specialoffer\SpecialofferWebsitesection[]
      */
     public function getElements()
     {
@@ -44,7 +44,7 @@ class HolidayPeriod extends \tabs\apiclient\collection\Collection
      */
     public function getRoute()
     {
-        return $this->getParent()->getUpdateUrl() . '/holidayperiod';
+        return $this->getParent()->getUpdateUrl() . '/websitesection';
     }
 
     /**
@@ -52,6 +52,6 @@ class HolidayPeriod extends \tabs\apiclient\collection\Collection
      */
     public function getElementClass()
     {
-        return '\tabs\apiclient\core\specialoffer\HolidayPeriod';
+        return '\tabs\apiclient\core\specialoffer\SpecialofferWebsitesection';
     }
 }
