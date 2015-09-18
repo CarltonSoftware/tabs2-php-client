@@ -18,6 +18,7 @@ use \tabs\apiclient\core\PricingPeriod;
 use \tabs\apiclient\collection\core\specialoffer\BookingPeriod as BookingPeriodCollection;
 use \tabs\apiclient\collection\core\specialoffer\HolidayPeriod as HolidayPeriodCollection;
 use \tabs\apiclient\collection\brand\ElementBranding as BrandCollection;
+use \tabs\apiclient\collection\core\specialoffer\SpecialofferPriceType as PriceTypeCollection;
 
 /**
  * Tabs Rest API Special offer object.
@@ -214,6 +215,13 @@ abstract class Specialoffer extends \tabs\apiclient\core\Builder
     protected $holidayperiods;
     
     /**
+     * Special offer price types
+     * 
+     * @var PriceTypeCollection
+     */
+    protected $pricetypes;
+    
+    /**
      * Constructor
      * 
      * @return void
@@ -231,6 +239,10 @@ abstract class Specialoffer extends \tabs\apiclient\core\Builder
         $this->holidayperiods = new HolidayPeriodCollection();
         $this->holidayperiods->setParent($this);
         $this->holidayperiods->setElementParent($this);
+        
+        $this->pricetypes = new PriceTypeCollection();
+        $this->pricetypes->setParent($this);
+        $this->pricetypes->setElementParent($this);
     }
     
     /**
@@ -257,6 +269,20 @@ abstract class Specialoffer extends \tabs\apiclient\core\Builder
     public function addBranding(\tabs\apiclient\brand\ElementBranding $brd)
     {
         $this->brandings->addElement($brd);
+        
+        return $this;
+    }
+    
+    /**
+     * Add an applicable price type to the special offer
+     * 
+     * @param \tabs\apiclient\core\specialoffer\SpecialofferPriceType $pt Booking period
+     * 
+     * @return Specialoffer
+     */
+    public function addSpecialofferPriceType(\tabs\apiclient\core\specialoffer\SpecialofferPriceType $pt)
+    {
+        $this->pricetypes->addElement($pt);
         
         return $this;
     }
