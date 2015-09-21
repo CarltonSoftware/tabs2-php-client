@@ -26,6 +26,9 @@ namespace tabs\apiclient\booking;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
+ * @method $string      getName() Returns the name of the guest
+ * @method $string      getType() Returns the type of guest
+ * @method $string      getType() Returns the customer
  */
 
 class BookingGuest extends \tabs\apiclient\core\Base

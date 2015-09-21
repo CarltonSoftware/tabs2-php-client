@@ -605,7 +605,19 @@ class Booking extends \tabs\apiclient\core\Builder
     public function toArray()
     {
         return array(
-            //ToDo
+            'id' => $this->getId(),
+            'propertybrandingid' => $this->getBranding()->getId(),
+            'fromdate' => $this->getFromdate()->format('Y-m-d'),
+            'todate' => $this->getTodate()->format('Y-m-d'),
+            'currencycode' => $this->getCurrency->getCode(),
+            // 'actorid' =>
+            'bookeddatetime' => $this->getBookeddatetime()->format('Y-m-d H:i:s'),
+            'estimatedarrivaltime' => $this->getEstimatedarrivaltime(),
+            'adults' => $this->getAdults(),
+            'children' => $this->getChildren(),
+            'infants' => $this->getInfants(),
+            // 'saleschannel' =>
+            // 'pricingperiod' =>
         );
     }
     

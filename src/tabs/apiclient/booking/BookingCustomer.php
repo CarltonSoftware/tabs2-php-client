@@ -26,20 +26,14 @@ namespace tabs\apiclient\booking;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method Booking setName(string $name)  Set the name
- * @method $string getName()              Set the guesttype
- * @method Booking setFromdate(\DateTime $fromdate)                         Set the fromdate
- * @method Booking setTodate(\DateTime $todate)                             Set the todate
- * @method Booking setBookeddatetime(\DateTime $bookeddatetime)             Set the bookeddatetime
- * @method Booking setStatus(string $status)                                Set the status
- * @method Booking setCancelled(boolean $cancelled)                         Set the cancelled bool
- * @method Booking setEstimatedarrivaltime(\DateTime $estimatedarrivaltime) Set the estimatedarrivaltime
- * @method Booking setAdults(integer $adults)                               Set the adults
- * @method Booking setChildren(integer $children)                           Set the children
- * @method Booking setInfants(integer $infants)                             Set the infants
+ * @method BookingCustomer setName(string $name)  Sets the name
+ * @method $string         getName()              Returns the name
+ *
+ * @method BookingCustmer          setDetails(tabs\apiclient\actor\Customer) Sets the customer
+ * @method tabs\apiclient\customer getDetails()                              Returns the customer
  */
 
-class BookingCustomer extends \tabs\apiclient\core\Base
+class BookingCustomer extends \tabs\apiclient\core\Builder
 {
     /**
      * The name of the customer
@@ -54,4 +48,15 @@ class BookingCustomer extends \tabs\apiclient\core\Base
      * @var tabs\apiclient\actor\Customer
      */
     protected $details;
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray()
+    {
+        return array(
+            'id' => $this->getId(),
+            'customerid' => $details->getId()
+        );
+    }
 }
