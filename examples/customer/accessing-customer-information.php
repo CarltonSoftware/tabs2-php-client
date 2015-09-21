@@ -43,12 +43,17 @@ try {
             echo implode('<br>', $customer->getBankaccounts()->getElements());
             echo '<br>';
         }
+
+        echo '<h3>Notes</h3>';
         if (count($customer->getNotes()->getElements()) > 0) {
-            echo '<h3>Notes</h3>';
-            echo implode('<br>', $customer->getNotes()->getElements());
+            echo implode('<br />', $customer->getNotes()->getElements());
             echo '<br>';
         }
-        
+        echo sprintf(
+            '<p><a href="add-note.php?customer=%s">Add new note</a></p>',
+            $customer->getId()
+        );
+
         echo '<h3>Documents</h3>';
         if (count($customer->getDocuments()->getElements()) > 0) {
             foreach ($customer->getDocuments()->getElements() as $doc) {                
@@ -72,7 +77,7 @@ try {
             ->fetch();
 
         echo '<h2>' . $customerCol->getTotal() . ' found</h2>';
-        
+
         $pager = $customerCol->getPagination();
         foreach ($customerCol->getElements() as $customer) {
             echo sprintf(
@@ -87,7 +92,7 @@ try {
             $pager->getPrevPage(),
             $pager->getLimit()
         );
-        
+
         echo ' &nbsp; | &nbsp; ';
 
         echo sprintf(
@@ -96,7 +101,7 @@ try {
             $pager->getLimit()
         );
     }
-        
+
 } catch(Exception $e) {
     echo $e->getMessage();
 }
