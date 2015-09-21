@@ -288,6 +288,18 @@ class Property extends \tabs\apiclient\core\Builder
     }
     
     /**
+     * Return a booking collection object
+     *
+     * @return \tabs\apiclient\collection\booking\Booking
+     */
+    public function getBookings()
+    {
+        return $this->_getCollection(
+            '\\tabs\\apiclient\\collection\\booking\\Booking'
+        );
+    }
+
+    /**
      * Add an image to the property
      * 
      * @param PropertyImage $image Property image object
