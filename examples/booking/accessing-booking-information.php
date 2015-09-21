@@ -17,26 +17,31 @@
 require_once __DIR__ . '/../creating-a-new-connection.php';
 
 try {
+
+    if ($id = filter_input(INPUT_GET, 'id')) {
     
-    $booking = \tabs\apiclient\booking\Booking::get(1);
+        $booking = \tabs\apiclient\booking\Booking::get($id);
 
-    echo sprintf('<p>Booking ref: %s</p>', $booking->getBookref());
+        echo sprintf('<p>Booking ref: %s</p>', $booking->getBookref());
 
-    echo '<h2>Guests</h2>';
-    foreach ($booking->getGuests() as $guest) {
-        echo sprintf(
-            '<p>%s (%s)</p>',
-            $guest->getName(),
-            $guest->getType()
-        );
-    }
+        echo '<h2>Guests</h2>';
+        foreach ($booking->getGuests() as $guest) {
+            echo sprintf(
+                '<p>%s (%s)</p>',
+                $guest->getName(),
+                $guest->getType()
+            );
+        }
 
-    echo '<h2>Customers</h2>';
-    foreach ($booking->getCustomers() as $bookingCustomer) {
-        echo sprintf(
-            '<p>%s</p>',
-            $bookingCustomer->getName()
-        );
+        echo '<h2>Customers</h2>';
+        foreach ($booking->getCustomers() as $bookingCustomer) {
+            echo sprintf(
+                '<p>%s</p>',
+                $bookingCustomer->getName()
+            );
+        }
+    } else {
+        echo 'Please specify a booking id';
     }
 
 } catch(Exception $e) {
