@@ -39,7 +39,9 @@ class PricingMethodClassTest extends ApiClientClassTest
         $pricingMethod->addBranding($branding);
 
         $array = $pricingMethod->getBrandings()->getElements()[0]->toArray();
-        $this->assertEquals('Norfolk', $array['branding']->getBrandinggroup()->getName());
+        $this->assertArrayHasKey('brandingid', $array);
+        $this->assertArrayHasKey('fromdate', $array);
+        $this->assertArrayHasKey('todate', $array);
 
         $pricingMethod->setBrandings(
             array(
