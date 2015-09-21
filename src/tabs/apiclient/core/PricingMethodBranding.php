@@ -68,9 +68,9 @@ class PricingMethodBranding extends Builder
     {
         return array(
             'id' => $this->getId(),
-            'branding' => $this->getBranding(),
-            'fromdate' => $this->getFromdate(),
-            'todate' => $this->getTodate(),
+            'brandingid' => $this->getBranding()->getId(),
+            'fromdate' => $this->getFromdate()->format('Y-m-d'),
+            'todate' => $this->getTodate()->format('Y-m-d')
         );
     }
 }

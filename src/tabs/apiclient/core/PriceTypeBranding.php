@@ -110,11 +110,13 @@ class PriceTypeBranding extends Builder
     {
         return array(
             'id' => $this->getId(),
-            'branding' => $this->getBranding(),
-            'saleschannel' => $this->getSaleschannel(),
-            'fromdate' => $this->getFromdate(),
-            'todate' => $this->getTodate(),
+            'brandingid' => $this->getBranding()->getId(),
+            'saleschannelid' => $this->getSaleschannel()->getId(),
+            'fromdate' => $this->getFromdate()->format('Y-m-d'),
+            'todate' => $this->getTodate()->format('Y-m-d'),
             'type' => $this->getType(),
+            'percentage' => $this->getPercentage(),
+            'pricetypebrandingfixedid' => $this->getPricetypebrandingfixedid()
         );
     }
 }
