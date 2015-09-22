@@ -15,6 +15,8 @@
 
 namespace tabs\apiclient\booking;
 
+use tabs\apiclient\actor\Customer;
+
 /**
  * Tabs Rest API BookingCustomer object.
  *
@@ -29,8 +31,8 @@ namespace tabs\apiclient\booking;
  * @method BookingCustomer setName(string $name)  Sets the name
  * @method $string         getName()              Returns the name
  *
- * @method BookingCustmer          setDetails(tabs\apiclient\actor\Customer) Sets the customer
- * @method tabs\apiclient\customer getDetails()                              Returns the customer
+ * @method BookingCustomer setDetails(string $details) Sets the customer URL
+ * @method $string         getDetails()                Returns the customer URL
  */
 
 class BookingCustomer extends \tabs\apiclient\core\Builder
@@ -49,6 +51,28 @@ class BookingCustomer extends \tabs\apiclient\core\Builder
      */
     protected $details;
 
+    // -------------------------- Public Functions -------------------------- //
+
+    /**
+     * Returns the Customer object
+     *
+     * @return Customer
+     */
+    public function getCustomer()
+    {
+        if ($this->getDetails() === null) {
+            throw new \tabs\apiclient\client\Exception(
+                null,
+                'A valid customer URL is required (currently null).'
+            );
+        }
+
+        $components = explode('/', $this->getDetails());
+        $id = end($components);
+
+        return Customer::get($id);
+    }
+
     /**
      * @inheritDoc
      */
@@ -56,7 +80,7 @@ class BookingCustomer extends \tabs\apiclient\core\Builder
     {
         return array(
             'id' => $this->getId(),
-            'customerid' => $details->getId()
+            'customerid' => $this->getCustomer()->getId()
         );
     }
 }

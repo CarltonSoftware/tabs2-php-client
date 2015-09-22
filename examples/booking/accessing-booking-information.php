@@ -26,20 +26,29 @@ try {
 
         echo '<h2>Guests</h2>';
         foreach ($booking->getGuests() as $guest) {
+            $customer = $guest->getCustomer();
             echo sprintf(
-                '<p>%s (%s)</p>',
+                '<p>%s (%s) ' .
+                '<a href="../customer/accessing-customer-information.php?id=%u">(%s)</a></p>',
                 $guest->getName(),
-                $guest->getType()
+                $guest->getType(),
+                $customer->getId(),
+                $customer
             );
         }
 
         echo '<h2>Customers</h2>';
         foreach ($booking->getCustomers() as $bookingCustomer) {
+            $customer = $guest->getCustomer();
             echo sprintf(
-                '<p>%s</p>',
-                $bookingCustomer->getName()
+                '<p>%s ' .
+                '<a href="../customer/accessing-customer-information.php?id=%u">(%s)</a></p>',
+                $bookingCustomer->getName(),
+                $customer->getId(),
+                $customer
             );
         }
+
     } else {
         echo 'Please specify a booking id';
     }
