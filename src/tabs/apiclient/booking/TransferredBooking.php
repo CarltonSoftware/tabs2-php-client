@@ -74,8 +74,9 @@ class TransferredBooking extends \tabs\apiclient\core\Base
             );
         }
         
-        list($prefix, $stub, $id) = explode('/', $this->getTobooking());
-        
+        $components = explode('/', $this->getTobooking());
+        $id = end($components);
+
         return Booking::get($id);
     }
     

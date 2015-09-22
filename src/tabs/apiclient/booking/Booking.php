@@ -319,8 +319,9 @@ class Booking extends \tabs\apiclient\core\Builder
                 'A valid property URL is required (currently null).'
             );
         }
-        
-        list($prefix, $stub, $id) = explode('/', $this->getProperty());
+
+        $components = explode('/', $this->getProperty());
+        $id = end($components);
         
         return Property::get($id);
     }
@@ -335,11 +336,12 @@ class Booking extends \tabs\apiclient\core\Builder
         if ($this->getBranding() === null) {
             throw new \tabs\apiclient\client\Exception(
                 null,
-                'A valid property URL is required (currently null).'
+                'A valid branding URL is required (currently null).'
             );
         }
         
-        list($prefix, $stub, $id) = explode('/', $this->getBranding());
+        $components = explode('/', $this->getBranding());
+        $id = end($components);
         
         return Branding::get($id);
     }
