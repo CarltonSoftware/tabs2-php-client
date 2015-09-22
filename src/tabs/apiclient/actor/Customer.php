@@ -28,7 +28,7 @@ use tabs\apiclient\collection\booking\Booking as BookingCollection;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method BookingCollection getBookings()
+ * @method BookingCollection getBookings() Returns the customer's bookings
  */
 class Customer extends Actor
 {

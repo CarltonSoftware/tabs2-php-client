@@ -125,23 +125,22 @@ try {
             <tr>
                 <th>Ref</th>
                 <th>Status</th>
-                <th>Customer</th>
+                <th>Guest type</th>
                 <th>From</th>
                 <th>To</th>
-                <th>Balance</th>
             </tr>
             <?php
             $bookings = $property->getBookings()->fetch();
             foreach ($bookings as $booking) {
                 echo sprintf(
-                    '<tr><td><a href="../booking/accessing-booking-information.php?id=%u">%s</a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>',
+                    '<tr><td><a href="../booking/accessing-booking-information.php?id=%u">%s</a></td>' .
+                    '<td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>',
                     $booking->getId(),
                     $booking->getBookref(),
                     $booking->getStatus(),
-                    '',
+                    $booking->getGuesttype(),
                     $booking->getFromdate(),
-                    $booking->getTodate(),
-                    ''
+                    $booking->getTodate()
                 );
             }
             ?>
