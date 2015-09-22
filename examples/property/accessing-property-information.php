@@ -30,7 +30,7 @@ try {
     echo '<ul>';
     foreach ($properties->getElements() as $property) {
         echo sprintf(
-            '<li><a href="accessing-property-information.php?id=%s">%s</a></li>',
+            '<li><a href="?id=%s">%s</a></li>',
             $property->getId(),
             $property->getName()
         );

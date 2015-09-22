@@ -34,12 +34,12 @@ try {
             )
         )
     );
-    
+
     $customer->addContactdetail($contactDetailPostal);
     $contactDetailPostal->create();
     
-    var_dump($customer);    
-        
+    var_dump($customer);
+
 } catch(Exception $e) {
     var_dump($e);
     echo $e->getMessage();

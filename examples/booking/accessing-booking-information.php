@@ -23,6 +23,19 @@ try {
         $booking = \tabs\apiclient\booking\Booking::get($id);
 
         echo sprintf('<p>Booking ref: %s</p>', $booking->getBookref());
+        echo sprintf('<p>Guest type: %s</p>', $booking->getGuesttype());
+
+        $property = $booking->getPropertyObj();
+        echo sprintf(
+            '<p>Property: <a href="../property/accessing-property-information.php?id=%u">%s</a></p>',
+            $property->getId(),
+            $property->getName()
+        );
+
+        echo sprintf('<p>From %s to %s</p>', $booking->getFromdate(), $booking->getTodate());
+
+        $price = $booking->getPrice();
+        var_dump($price);
 
         echo '<h2>Guests</h2>';
         foreach ($booking->getGuests() as $guest) {
