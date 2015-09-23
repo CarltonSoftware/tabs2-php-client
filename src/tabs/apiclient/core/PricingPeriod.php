@@ -26,8 +26,20 @@ namespace tabs\apiclient\core;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method string getPricingperiod()                      Returns the pricing period
- * @method string setPricingperiod(string $pricingperiod) Set the pricing period
+ * @method string getPricingperiod() Returns the pricingperiod
+ * @method \tabs\apiclient\core\PricingPeriod setPricingperiod(string $var) Sets the pricingperiod
+ * 
+ * @method integer getDays() Returns the days
+ * @method \tabs\apiclient\core\PricingPeriod setDays(integer $var) Sets the days
+ * 
+ * @method integer getWeeks() Returns the weeks
+ * @method \tabs\apiclient\core\PricingPeriod setWeeks(integer $var) Sets the weeks
+ * 
+ * @method integer getMonths() Returns the months
+ * @method \tabs\apiclient\core\PricingPeriod setMonths(integer $var) Sets the months
+ * 
+ * @method string getSubperiod() Returns the subperiod
+ * @method \tabs\apiclient\core\PricingPeriod setSubperiod(string $var) Sets the subperiod
  */
 class PricingPeriod extends Builder
 {

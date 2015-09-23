@@ -72,9 +72,6 @@ use \tabs\apiclient\collection\core\specialoffer\Promotion as PromotionCollectio
  * @method boolean      getChangedaystartfinishonly()             Returns the changedaystartfinishonly
  * @method Specialoffer setChangedaystartfinishonly(boolean $var) Sets the changedaystartfinishonly
  * 
- * @method boolean      getAmount()             Returns the amount
- * @method Specialoffer setAmount(boolean $var) Sets the amount
- * 
  * @method boolean      getPerperiod()             Returns the perperiod
  * @method Specialoffer setPerperiod(boolean $var) Sets the perperiod
  * 
@@ -175,13 +172,6 @@ abstract class Specialoffer extends \tabs\apiclient\core\Builder
      * @var boolean
      */
     protected $changedaystartfinishonly = false;
-    
-    /**
-     * Numerical amount of special offer
-     * 
-     * @var boolean
-     */
-    protected $amount = 0;
     
     /**
      * See api documention for more info!
@@ -402,10 +392,21 @@ abstract class Specialoffer extends \tabs\apiclient\core\Builder
     {
         return array(
             'id' => $this->getId(),
-            'type' => 'Active',
             'active' => $this->boolToStr($this->getActive()),
             'pricingperiod' => $this->getPricingperiod()->toArray(),
-            'description' => $this->getDescription()
+            'description' => $this->getDescription(),
+            'minimumholidaylength' => $this->getMinimumholidaylength(),
+            'maximumholidaylength' => $this->getMaximumholidaylength(),
+            'minimumoccupancy' => $this->getMinimumoccupancy(),
+            'maximumoccupancy' => $this->getMaximumoccupancy(),
+            'minimumdaysbeforeholiday' => $this->getMinimumdaysbeforeholiday(),
+            'maximumdaysbeforeholiday' => $this->getMaximumdaysbeforeholiday(),
+            'daysbeforeappliestowholeholiday' => $this->getDaysbeforeappliestowholeholiday(),
+            'additional' => $this->boolToStr($this->getAdditional()),
+            'advertise' => $this->boolToStr($this->getAdvertise()),
+            'changedaystartfinishonly' => $this->boolToStr($this->getChangedaystartfinishonly()),
+            'perperiod' => $this->boolToStr($this->getPerperiod()),
+            'applytopartysizepricing' => $this->boolToStr($this->getApplytopartysizepricing())
         );
     }
     

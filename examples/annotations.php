@@ -3,7 +3,7 @@
 // Include the connection
 require_once __DIR__ . '/creating-a-new-connection.php';
 
-$class = new tabs\apiclient\core\specialoffer\Promotion();
+$class = new tabs\apiclient\core\PricingPeriod();
 $ref = new ReflectionClass($class);
 
 echo sprintf(

@@ -1131,4 +1131,59 @@ class Fixtures
 
         return $booking;
     }
+    
+    /**
+     * Create a set discount special offer
+     * 
+     * @return \tabs\apiclient\core\specialoffer\SetDiscount
+     */
+    public static function getSpecialoffer()
+    {
+        $offer = new \tabs\apiclient\core\specialoffer\SetDiscount();
+        $offer->setActive(true)
+            ->setDescription('£10 off')
+            ->setAmount(50)
+            ->setId(1);
+        
+        $pp = Fixtures::getPricingperiod();
+        $offer->setPricingperiod($pp);
+        
+        $cur = Fixtures::getCurrency();
+        $offer->setCurrency($cur);
+        
+        return $offer;
+    }
+    
+    /**
+     * Create a pricing period object
+     * 
+     * @return \tabs\apiclient\core\PricingPeriod
+     */
+    public static function getPricingperiod()
+    {
+        $pp = new \tabs\apiclient\core\PricingPeriod();
+        $pp->setPricingperiod('Week')
+            ->setDays(0)
+            ->setWeeks(1)
+            ->setMonths(0)
+            ->setSubperiod('Day')
+            ->setId(1);
+        
+        return $pp;
+    }
+    
+    /**
+     * Create a special offer booking period object
+     * 
+     * @return \tabs\apiclient\core\specialoffer\BookingPeriod
+     */
+    public static function getBookingperiod()
+    {
+        $bp = new tabs\apiclient\core\specialoffer\BookingPeriod();
+        $bp->setFromdate(new DateTime())
+            ->setTodate(new DateTime())
+            ->setId(1);
+        
+        return $bp;
+    }
 }

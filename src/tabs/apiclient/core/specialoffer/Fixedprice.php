@@ -27,9 +27,19 @@ use tabs\apiclient\collection\core\BookingPeriod as BookingPeriodCollection;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
+ * 
+ * @method float        getFixedprice()           Returns the price
+ * @method Specialoffer setFixedprice(float $var) Sets the price
  */
-class Fixedprice extends Specialoffer
+class Fixedprice extends Currency
 {
+    /**
+     * Numerical amount of special offer
+     * 
+     * @var float
+     */
+    protected $fixedprice = 0;
+    
     /**
      * @inheritDoc
      */
@@ -37,6 +47,7 @@ class Fixedprice extends Specialoffer
     {
         $array = parent::toArray();
         $array['type'] = 'Fixed';
+        $array['fixedprice'] = $this->getFixedprice();
         return $array;
     }
 }

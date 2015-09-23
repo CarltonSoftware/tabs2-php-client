@@ -27,9 +27,19 @@ use tabs\apiclient\collection\core\BookingPeriod as BookingPeriodCollection;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
+ * 
+ * @method float        getAmount()           Returns the amount
+ * @method Specialoffer setAmount(float $var) Sets the amount
  */
-class SetDiscount extends Specialoffer
+class SetDiscount extends Currency
 {
+    /**
+     * Numerical amount of special offer
+     * 
+     * @var float
+     */
+    protected $amount = 0;
+    
     /**
      * @inheritDoc
      */
@@ -37,6 +47,7 @@ class SetDiscount extends Specialoffer
     {
         $array = parent::toArray();
         $array['type'] = 'Amount';
+        $array['amount'] = $this->getAmount();
         return $array;
     }
 }
