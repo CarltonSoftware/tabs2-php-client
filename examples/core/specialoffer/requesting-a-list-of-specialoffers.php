@@ -84,9 +84,35 @@ try {
                     <?php
                     foreach ($sections as $s) {
                         echo sprintf(
+                            '<p>%s</p>',
+                            $s->getWebsitesection()->getSection()
+                        );
+                    }
+                }
+                
+                $saleschannels = $o->getSaleschannels()->fetch();
+                if ($saleschannels->getTotal() > 0) {
+                    ?>
+<h3>Sales channels</h3>
+                    <?php
+                    foreach ($saleschannels as $s) {
+                        echo sprintf(
+                            '<p>%s</p>',
+                            $s->getSaleschannel()->getSaleschannel()
+                        );
+                    }
+                }
+                
+                $promotions = $o->getPromotions()->fetch();
+                if ($promotions->getTotal() > 0) {
+                    ?>
+<h3>Promotions</h3>
+                    <?php
+                    foreach ($promotions as $p) {
+                        echo sprintf(
                             '<p>%s %s</p>',
-                            $s->getWebsitesection()->getSection(),
-                            $s->getUpdateurl()
+                            $p->getPromotioncode(),
+                            $p->getExtrabranding()->getId()
                         );
                     }
                 }

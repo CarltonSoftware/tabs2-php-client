@@ -20,6 +20,8 @@ use \tabs\apiclient\collection\core\specialoffer\HolidayPeriod as HolidayPeriodC
 use \tabs\apiclient\collection\brand\ElementBranding as BrandCollection;
 use \tabs\apiclient\collection\core\specialoffer\SpecialofferPriceType as PriceTypeCollection;
 use \tabs\apiclient\collection\core\specialoffer\Websitesection as WebsiteSectionCollection;
+use \tabs\apiclient\collection\core\specialoffer\SalesChannel as SalesChannelCollection;
+use \tabs\apiclient\collection\core\specialoffer\Promotion as PromotionCollection;
 
 /**
  * Tabs Rest API Special offer object.
@@ -229,6 +231,20 @@ abstract class Specialoffer extends \tabs\apiclient\core\Builder
      * @var WebsiteSectionCollection
      */
     protected $websitesections;
+    
+    /**
+     * Sales channels
+     * 
+     * @var SalesChannelCollection
+     */
+    protected $saleschannels;
+    
+    /**
+     * Promotions
+     * 
+     * @var PromotionCollection
+     */
+    protected $promotions;
 
 
     /**
@@ -257,6 +273,14 @@ abstract class Specialoffer extends \tabs\apiclient\core\Builder
         $this->websitesections = new WebsiteSectionCollection();
         $this->websitesections->setParent($this);
         $this->websitesections->setElementParent($this);
+        
+        $this->saleschannels = new SalesChannelCollection();
+        $this->saleschannels->setParent($this);
+        $this->saleschannels->setElementParent($this);
+        
+        $this->promotions = new PromotionCollection();
+        $this->promotions->setParent($this);
+        $this->promotions->setElementParent($this);
     }
     
     /**
@@ -318,13 +342,41 @@ abstract class Specialoffer extends \tabs\apiclient\core\Builder
     /**
      * Add a website section to the collection
      * 
-     * @param \tabs\apiclient\core\specialoffer\SpecialofferWebsitesection $sec Special offer website section
+     * @param \tabs\apiclient\core\specialoffer\Websitesection $sec Special offer website section
      * 
      * @return Specialoffer
      */
-    public function addWebsitesection(SpecialofferWebsitesection $sec)
+    public function addWebsitesection(Websitesection $sec)
     {
         $this->websitesections->addElement($sec);
+        
+        return $this;
+    }
+    
+    /**
+     * Add a sales channel to the collection
+     * 
+     * @param \tabs\apiclient\core\specialoffer\SalesChannel $sc Special offer sales channel
+     * 
+     * @return Specialoffer
+     */
+    public function addSaleschannel(SalesChannel $sc)
+    {
+        $this->saleschannels->addElement($sc);
+        
+        return $this;
+    }
+    
+    /**
+     * Add a promotion to the collection
+     * 
+     * @param \tabs\apiclient\core\specialoffer\Promotion $pr Promotion object
+     * 
+     * @return Specialoffer
+     */
+    public function addPromotion(Promotion $pr)
+    {
+        $this->promotions->addElement($pr);
         
         return $this;
     }
