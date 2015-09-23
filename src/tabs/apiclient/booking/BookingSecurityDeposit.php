@@ -35,7 +35,7 @@ namespace tabs\apiclient\booking;
  * @method BookingSecurityDeposit setDatedueout(\DateTime $datedueout) Set the datedueout
  */
 
-class BookingSecurityDeposit extends \tabs\apiclient\core\Base
+class BookingSecurityDeposit extends \tabs\apiclient\core\Builder
 {
     /**
      * Amount

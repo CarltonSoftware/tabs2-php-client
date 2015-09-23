@@ -17,11 +17,55 @@
 require_once __DIR__ . '/../creating-a-new-connection.php';
 
 try {
-    
-    $booking = \tabs\apiclient\booking\Booking::get(1);
 
-    echo $booking->getBookref();
-            
+    if ($id = filter_input(INPUT_GET, 'id')) {
+    
+        $booking = \tabs\apiclient\booking\Booking::get($id);
+
+        echo sprintf('<p>Booking ref: %s</p>', $booking->getBookref());
+        echo sprintf('<p>Guest type: %s</p>', $booking->getGuesttype());
+
+        $property = $booking->getPropertyObj();
+        echo sprintf(
+            '<p>Property: <a href="../property/accessing-property-information.php?id=%u">%s</a></p>',
+            $property->getId(),
+            $property->getName()
+        );
+
+        echo sprintf('<p>From %s to %s</p>', $booking->getFromdate(), $booking->getTodate());
+
+        $price = $booking->getPrice();
+        var_dump($price);
+
+        echo '<h2>Guests</h2>';
+        foreach ($booking->getGuests() as $guest) {
+            $customer = $guest->getCustomer();
+            echo sprintf(
+                '<p>%s (%s) ' .
+                '<a href="../customer/accessing-customer-information.php?id=%u">(%s)</a></p>',
+                $guest->getName(),
+                $guest->getType(),
+                $customer->getId(),
+                $customer
+            );
+        }
+
+        echo '<h2>Customers</h2>';
+        foreach ($booking->getCustomers() as $bookingCustomer) {
+            $customer = $guest->getCustomer();
+            echo sprintf(
+                '<p>%s ' .
+                '<a href="../customer/accessing-customer-information.php?id=%u">(%s)</a></p>',
+                $bookingCustomer->getName(),
+                $customer->getId(),
+                $customer
+            );
+        }
+
+    } else {
+        echo 'Please specify a booking id';
+    }
+
 } catch(Exception $e) {
     echo $e->getMessage();
 }

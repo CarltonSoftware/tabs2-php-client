@@ -15,6 +15,8 @@
 
 namespace tabs\apiclient\actor;
 
+use tabs\apiclient\collection\booking\Booking as BookingCollection;
+
 /**
  * Tabs Rest API Customer object.
  *
@@ -25,8 +27,30 @@ namespace tabs\apiclient\actor;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
+ *
+ * @method BookingCollection getBookings() Returns the customer's bookings
  */
 class Customer extends Actor
 {
-    
+    /**
+     * Booking collection
+     *
+     * @var BookingCollection
+     */
+    protected $bookings;
+
+    // -------------------------- Public Functions -------------------------- //
+
+    /**
+     * Constructor
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->bookings = new BookingCollection();
+        $this->bookings->setElementParent($this);
+    }
 }

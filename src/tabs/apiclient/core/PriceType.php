@@ -141,8 +141,8 @@ class PriceType extends Builder
         return array(
             'id' => $this->getId(),
             'pricetype' => $this->getPricetype(),
-            'pricingperiod' => $this->getPricingperiod(),
             'description' => $this->getDescription(),
+            'pricingperiod' => $this->getPricingperiod(),
             'periods' => $this->getPeriods(),
             'additional' => $this->getAdditional(),
         );

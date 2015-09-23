@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file documents how to read a Customer document object from the Plato API.
+ * This file documents how to add a document to a customer with the Plato API.
  *
  * PHP Version 5.5
  * 

@@ -166,7 +166,7 @@ abstract class Base
     }
 
     /**
-     * Helper function foor setting object properties
+     * Helper function for setting object properties
      *
      * @param object $obj        Generic object passed by reference
      * @param object $node       Node object to iterate through

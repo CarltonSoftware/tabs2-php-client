@@ -18,28 +18,29 @@ require_once __DIR__ . '/../creating-a-new-connection.php';
 
 try {
     $customer = new \tabs\apiclient\actor\Customer();
-    $customer->setTitle('Mr')
+    $customer->setTitle('Wing Commander')
         ->setFirstname('Joe')
         ->setSurname('Bloggs')
         ->setLanguage('English')
         ->create();
 
-    $address = new tabs\apiclient\actor\ContactAddress();
-    $address->setAddress(
-        \tabs\apiclient\core\Address::factory(
-            array(
-                'line1' => 'Buckingham Palace',
-                'town' => 'London',
-                'country' => 'United Kingdom'
+    $contactDetailPostal = new tabs\apiclient\actor\ContactDetailPostal();
+    $contactDetailPostal->setAddress(
+        array(
+            'line1' => 'Buckingham Palace',
+            'town' => 'London',
+            'country' => array(
+                'alpha2' => 'GB'
             )
         )
     );
-    
-    $customer->addContact($address);
-    $address->create();
+
+    $customer->addContactdetail($contactDetailPostal);
+    $contactDetailPostal->create();
     
     var_dump($customer);
-        
+
 } catch(Exception $e) {
+    var_dump($e);
     echo $e->getMessage();
 }

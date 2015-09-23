@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tabs Rest API BookingExtra collection object.
+ * Tabs Rest API Booking collection object.
  *
  * PHP Version 5.4
  *
@@ -16,7 +16,7 @@
 namespace tabs\apiclient\collection\booking;
 
 /**
- * Tabs Rest API BookingExtra collection object.
+ * Tabs Rest API Booking collection object.
  *
  * @category  Tabs_Client
  * @package   Tabs
@@ -26,14 +26,14 @@ namespace tabs\apiclient\collection\booking;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  */
-class BookingExtra extends \tabs\apiclient\collection\Collection
+class Booking extends \tabs\apiclient\collection\Collection
 {
     /**
-     * Return an array of BookingExtra objects.  This object will need to be
+     * Return an array of Booking objects.  This object will need to be
      * instantiated and the method fetch will need to be called before this will
      * return any elements.
      *
-     * @return \tabs\apiclient\booking\BookingExtra[]
+     * @return \tabs\apiclient\booking\Booking[]
      */
     public function getElements()
     {
@@ -45,7 +45,7 @@ class BookingExtra extends \tabs\apiclient\collection\Collection
      */
     public function getRoute()
     {
-        return 'extra';
+        return $this->getElementParent()->getUpdateUrl() . '/booking';
     }
 
     /**
@@ -53,6 +53,6 @@ class BookingExtra extends \tabs\apiclient\collection\Collection
      */
     public function getElementClass()
     {
-        return '\tabs\apiclient\extra\BookingExtra';
+        return '\tabs\apiclient\booking\Booking';
     }
 }

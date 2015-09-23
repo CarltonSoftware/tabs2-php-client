@@ -319,8 +319,9 @@ class Booking extends \tabs\apiclient\core\Builder
                 'A valid property URL is required (currently null).'
             );
         }
-        
-        list($prefix, $stub, $id) = explode('/', $this->getProperty());
+
+        $components = explode('/', $this->getProperty());
+        $id = end($components);
         
         return Property::get($id);
     }
@@ -335,11 +336,12 @@ class Booking extends \tabs\apiclient\core\Builder
         if ($this->getBranding() === null) {
             throw new \tabs\apiclient\client\Exception(
                 null,
-                'A valid property URL is required (currently null).'
+                'A valid branding URL is required (currently null).'
             );
         }
         
-        list($prefix, $stub, $id) = explode('/', $this->getBranding());
+        $components = explode('/', $this->getBranding());
+        $id = end($components);
         
         return Branding::get($id);
     }
@@ -506,7 +508,8 @@ class Booking extends \tabs\apiclient\core\Builder
      */
     public function setCustomers($customers)
     {
-        foreach ($customers as $bc) {
+        foreach ($customers as $customer) {
+            $bc = BookingCustomer::factory($customer);
             $this->addCustomer($bc);
         }
         
@@ -547,7 +550,8 @@ class Booking extends \tabs\apiclient\core\Builder
      */
     public function setGuests($guests)
     {
-        foreach ($guests as $bg) {
+        foreach ($guests as $guest) {
+            $bg = BookingGuest::factory($guest);
             $this->addGuest($bg);
         }
         
@@ -603,7 +607,19 @@ class Booking extends \tabs\apiclient\core\Builder
     public function toArray()
     {
         return array(
-            //ToDo
+            'id' => $this->getId(),
+            'propertybrandingid' => $this->getBranding()->getId(),
+            'fromdate' => $this->getFromdate()->format('Y-m-d'),
+            'todate' => $this->getTodate()->format('Y-m-d'),
+            'currencycode' => $this->getCurrency->getCode(),
+            // 'actorid' =>
+            'bookeddatetime' => $this->getBookeddatetime()->format('Y-m-d H:i:s'),
+            'estimatedarrivaltime' => $this->getEstimatedarrivaltime(),
+            'adults' => $this->getAdults(),
+            'children' => $this->getChildren(),
+            'infants' => $this->getInfants(),
+            // 'saleschannel' =>
+            // 'pricingperiod' =>
         );
     }
     

@@ -22,7 +22,7 @@ try {
         $customer = \tabs\apiclient\actor\Customer::get($id);
 
         echo '<h3>Customer</h3>';
-        echo sprintf('<p>%s</p>', (string) $customer);
+        echo sprintf('<p>%s</p>', htmlspecialchars((string) $customer));
         if (count($customer->getContactAddresses()) > 0) {
             echo '<h3>Contact Addresses</h3>';
             echo implode('<br>', $customer->getContactAddresses());
@@ -43,12 +43,17 @@ try {
             echo implode('<br>', $customer->getBankaccounts()->getElements());
             echo '<br>';
         }
+
+        echo '<h3>Notes</h3>';
         if (count($customer->getNotes()->getElements()) > 0) {
-            echo '<h3>Notes</h3>';
-            echo implode('<br>', $customer->getNotes()->getElements());
+            echo implode('<br />', $customer->getNotes()->getElements());
             echo '<br>';
         }
-        
+        echo sprintf(
+            '<p><a href="add-note.php?customer=%s">Add new note</a></p>',
+            $customer->getId()
+        );
+
         echo '<h3>Documents</h3>';
         if (count($customer->getDocuments()->getElements()) > 0) {
             foreach ($customer->getDocuments()->getElements() as $doc) {                
@@ -65,6 +70,34 @@ try {
             $customer->getId()
         );
 
+        $bookings = $customer->getBookings()->fetch();
+        if ($bookings->getTotal() > 0) {
+            ?>
+            <h3>Bookings</h3>
+            <table>
+                <tr>
+                    <th>Ref</th>
+                    <th>Status</th>
+                    <th>From</th>
+                    <th>To</th>
+                </tr>
+                <?php
+                foreach ($bookings as $booking) {
+                    echo sprintf(
+                        '<tr><td><a href="../booking/accessing-booking-information.php?id=%u">%s</a></td>' .
+                        '<td>%s</td><td>%s</td><td>%s</td></tr>',
+                        $booking->getId(),
+                        $booking->getBookref(),
+                        $booking->getStatus(),
+                        $booking->getFromdate(),
+                        $booking->getTodate()
+                    );
+                }
+            ?>
+            </table>
+            <?php
+        }
+
     } else {
         $customerCol = new \tabs\apiclient\collection\actor\Customer();
         $customerCol->setLimit(filter_input(INPUT_GET, 'limit'))
@@ -72,13 +105,13 @@ try {
             ->fetch();
 
         echo '<h2>' . $customerCol->getTotal() . ' found</h2>';
-        
+
         $pager = $customerCol->getPagination();
         foreach ($customerCol->getElements() as $customer) {
             echo sprintf(
                 '<p><a href="accessing-customer-information.php?id=%s">%s</a></p>',
                 $customer->getId(),
-                (string) $customer
+                htmlspecialchars((string) $customer)
             );
         }
 
@@ -87,7 +120,7 @@ try {
             $pager->getPrevPage(),
             $pager->getLimit()
         );
-        
+
         echo ' &nbsp; | &nbsp; ';
 
         echo sprintf(
@@ -96,7 +129,7 @@ try {
             $pager->getLimit()
         );
     }
-        
+
 } catch(Exception $e) {
     echo $e->getMessage();
 }

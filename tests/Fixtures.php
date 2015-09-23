@@ -298,6 +298,21 @@ class Fixtures
     }
 
     /**
+     * Return a sales channel
+     *
+     * @return \tabs\apiclient\core\SalesChannel
+     */
+    public static function getSalesChannel()
+    {
+        $salesChannel = new tabs\apiclient\core\SalesChannel();
+        $salesChannel->setId(2)
+            ->setSaleschannel('Group Website')
+            ->setDescription('Sales made via a group website, e.g. Original Cottages');
+
+        return $salesChannel;
+    }
+
+    /**
      * Return a price type
      *
      * @return \tabs\apiclient\core\PriceType
@@ -326,7 +341,8 @@ class Fixtures
         $priceTypeBranding = new tabs\apiclient\core\PriceTypeBranding();
         $priceTypeBranding->setBranding($branding)
             ->setFromdate(new \DateTime('2015-03-19'))
-            ->setTodate(new \DateTime('2032-07-06'));
+            ->setTodate(new \DateTime('2032-07-06'))
+            ->setSaleschannel(Fixtures::getSalesChannel());
 
         return $priceTypeBranding;
     }
@@ -1099,5 +1115,20 @@ class Fixtures
             ->setDecimalplaces(2);
 
         return $cur;
+    }
+
+    /**
+     * Return a Booking object
+     *
+     * @return \tabs\apiclient\booking\Booking
+     */
+    public static function getBooking()
+    {
+        $booking = new \tabs\apiclient\booking\Booking();
+
+        $booking->setFromdate(new \DateTime('06-10-2015'))
+            ->setTodate(new \DateTime('08-10-2015'));
+
+        return $booking;
     }
 }
