@@ -85,7 +85,8 @@ try {
                     foreach ($sections as $s) {
                         echo sprintf(
                             '<p>%s %s</p>',
-                            $s->getWebsitesection()->getSection()
+                            $s->getWebsitesection()->getSection(),
+                            $s->getUpdateurl()
                         );
                     }
                 }

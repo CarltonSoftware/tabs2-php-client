@@ -19,7 +19,7 @@ use \tabs\apiclient\collection\core\specialoffer\BookingPeriod as BookingPeriodC
 use \tabs\apiclient\collection\core\specialoffer\HolidayPeriod as HolidayPeriodCollection;
 use \tabs\apiclient\collection\brand\ElementBranding as BrandCollection;
 use \tabs\apiclient\collection\core\specialoffer\SpecialofferPriceType as PriceTypeCollection;
-use \tabs\apiclient\collection\core\specialoffer\SpecialofferWebsitesection as WebsiteSectionCollection;
+use \tabs\apiclient\collection\core\specialoffer\Websitesection as WebsiteSectionCollection;
 
 /**
  * Tabs Rest API Special offer object.

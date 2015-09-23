@@ -28,7 +28,7 @@ namespace tabs\apiclient\core\specialoffer;
  * 
  * @method \tabs\apiclient\core\Websitesection getWebsitesection() Return the website section
  */
-class SpecialofferWebsitesection extends \tabs\apiclient\core\Builder
+class Websitesection extends \tabs\apiclient\core\Builder
 {
     /**
      * Applicable website section
@@ -42,7 +42,7 @@ class SpecialofferWebsitesection extends \tabs\apiclient\core\Builder
      * 
      * @param Link|stdClass|Websitesection $ws Website section object
      * 
-     * @return \tabs\apiclient\core\specialoffer\SpecialofferWebsitesection
+     * @return \tabs\apiclient\core\specialoffer\Websitesection
      */
     public function setWebsitesection($ws)
     {

@@ -25,14 +25,14 @@ namespace tabs\apiclient\collection\core\specialoffer;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  */
-class SpecialofferWebsitesection extends \tabs\apiclient\collection\Collection
+class Websitesection extends \tabs\apiclient\collection\Collection
 {
     /**
      * Return an array of SpecialofferWebsitesection objects.  This object will need to be
      * instantiated and the method fetch will need to be called before this will
      * return any elements.
      *
-     * @return \tabs\apiclient\core\specialoffer\SpecialofferWebsitesection[]
+     * @return \tabs\apiclient\core\specialoffer\Websitesection[]
      */
     public function getElements()
     {
@@ -52,6 +52,6 @@ class SpecialofferWebsitesection extends \tabs\apiclient\collection\Collection
      */
     public function getElementClass()
     {
-        return '\tabs\apiclient\core\specialoffer\SpecialofferWebsitesection';
+        return '\tabs\apiclient\core\specialoffer\Websitesection';
     }
 }
