@@ -348,6 +348,20 @@ class Fixtures
     }
 
     /**
+     * Return a start day
+     *
+     * @return \tabs\apiclient\core\pricing\Startday
+     */
+    public static function getStartday()
+    {
+        $startday = new tabs\apiclient\core\pricing\Startday();
+        
+        $startday->setDayssincechangeday(3);
+        
+        return $startday;
+    }
+
+    /**
      * Return a pricing method
      *
      * @return \tabs\apiclient\core\pricing\PricingMethod

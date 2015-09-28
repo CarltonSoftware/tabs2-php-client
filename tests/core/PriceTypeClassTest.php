@@ -53,4 +53,33 @@ class PriceTypeClassTest extends ApiClientClassTest
         $this->assertEquals('/pricetype/1/branding', $priceType->getBrandings()->getRoute());
         $this->assertEquals('\tabs\apiclient\core\pricing\PriceTypeBranding', $priceType->getBrandings()->getElementClass());
     }
+
+    /**
+     * Test Price Type branding start days
+     *
+     * @return void
+     */
+    public function testPriceTypeBrandingStartdays()
+    {
+        $priceType = Fixtures::getPriceType();
+
+        $branding = Fixtures::getPriceTypeBranding();
+        $priceType->addBranding($branding);
+
+        $branding->setStartdays(
+            array(
+                Fixtures::getStartday(),
+                Fixtures::getStartday(),
+            )
+        );
+
+        $this->assertEquals(3, $branding->getStartdays()->current()->getDayssincechangeday());
+        $this->assertEquals('3 days since changeday', (string) $branding->getStartdays()->current());
+        $this->assertArrayHasKey('dayssincechangeday', $branding->getStartdays()->current()->toArray());
+
+        $startday = Fixtures::getStartday();
+        $branding->addStartday($startday);
+
+        $this->assertCount(3, $branding->getStartdays());
+    }
 }

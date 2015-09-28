@@ -16,6 +16,8 @@
 namespace tabs\apiclient\core\pricing;
 use tabs\apiclient\core\pricing\PricingBranding;
 use tabs\apiclient\core\SalesChannel;
+use tabs\apiclient\core\pricing\Startday;
+use tabs\apiclient\collection\core\pricing\Startday as StartdayCollection;
 
 /**
  * Tabs Rest API Price Type Branding object
@@ -33,6 +35,8 @@ use tabs\apiclient\core\SalesChannel;
  *
  * @method string            getType()       Returns the type (Fixed or Percentage)
  * @method PriceTypeBranding setType(string) Set the type (Fixed or Percentage)
+ *
+ * @method StartdayCollection getStartdays() Returns a collection of start days
  */
 class PriceTypeBranding extends PricingBranding
 {
@@ -65,13 +69,57 @@ class PriceTypeBranding extends PricingBranding
     protected $pricetypebrandingfixedid;
 
     /**
+     * Collection of start days
      *
-     *
-     *
+     * @var StartdayCollection
      */
     protected $startdays;
 
     // ------------------ Public Functions --------------------- //
+
+    /**
+     * Constructor
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->startdays = new StartdayCollection();
+        $this->startdays->setElementParent($this);
+    }
+
+    /**
+     * Add a start day
+     *
+     * @param Startday $startday Start day object
+     *
+     * @return PriceTypeBranding
+     */
+    public function addStartday(&$startday)
+    {
+        $startday->setParent($this);
+        $this->startdays->addElement($startday);
+
+        return $this;
+    }
+
+    /**
+     * Set the start days
+     *
+     * @param array $contacts Array of start day objects
+     *
+     * @return PriceTypeBranding
+     */
+    public function setStartdays($startdays)
+    {
+        foreach ($startdays as $day) {
+            $startday = Startday::factory($day);
+
+            $this->addStartday($startday);
+        }
+
+        return $this;
+    }
 
     /**
      * @inheritDoc
