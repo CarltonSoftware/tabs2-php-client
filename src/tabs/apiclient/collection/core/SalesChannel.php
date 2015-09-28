@@ -29,7 +29,7 @@ namespace tabs\apiclient\collection\core;
 class SalesChannel extends \tabs\apiclient\collection\Collection
 {
     /**
-     * Return an array of Price Type Branding objects.  This object will need to be
+     * Return an array of Sales Channel objects.  This object will need to be
      * instantiated and the method fetch will need to be called before this will
      * return any elements.
      *
