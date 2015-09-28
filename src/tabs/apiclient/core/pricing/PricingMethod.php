@@ -13,9 +13,9 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\core;
-use tabs\apiclient\core\PricingMethodBranding;
-use tabs\apiclient\collection\core\PricingMethodBranding as PricingMethodBrandingCollection;
+namespace tabs\apiclient\core\pricing;
+use tabs\apiclient\core\pricing\PricingMethodBranding;
+use tabs\apiclient\collection\core\pricing\PricingMethodBranding as PricingMethodBrandingCollection;
 
 /**
  * Tabs Rest API Price Type object
@@ -36,7 +36,7 @@ use tabs\apiclient\collection\core\PricingMethodBranding as PricingMethodBrandin
  *
  * @method PricingMethodBrandingCollection getBrandings() Returns the brandings of the pricing method
  */
-class PricingMethod extends Builder
+class PricingMethod extends \tabs\apiclient\core\Builder
 {
     /**
      * Short name of the Pricing Method
@@ -75,7 +75,7 @@ class PricingMethod extends Builder
     /**
      * Add a new branding to this pricing method
      *
-     * @param \tabs\apiclient\core\PricingMethodBranding $branding Pricing method branding object
+     * @param PricingMethodBranding $branding Pricing method branding object
      *
      * @return PriceType
      */
@@ -90,7 +90,7 @@ class PricingMethod extends Builder
     /**
      * Add some pricing method brandings to this pricing method
      *
-     * @param \tabs\apiclient\core\PricingMethodBranding[] $brandings Array of pricing method branding objects
+     * @param PricingMethodBranding[] $brandings Array of pricing method branding objects
      *
      * @return PriceType
      */

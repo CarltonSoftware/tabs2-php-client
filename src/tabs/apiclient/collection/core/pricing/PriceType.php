@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tabs Rest API Pricing Method Branding collection object
+ * Tabs Rest API Price Type collection object
  *
  * PHP Version 5.4
  *
@@ -13,10 +13,10 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\collection\core;
+namespace tabs\apiclient\collection\core\pricing;
 
 /**
- * Tabs Rest API Pricing Method Branding collection object.
+ * Tabs Rest API Price Type collection object.
  *
  * @category  Tabs_Client
  * @package   Tabs
@@ -26,14 +26,14 @@ namespace tabs\apiclient\collection\core;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  */
-class PricingMethodBranding extends \tabs\apiclient\collection\Collection
+class PriceType extends \tabs\apiclient\collection\Collection
 {
     /**
-     * Return an array of Price Type Branding objects.  This object will need to be
+     * Return an array of Price Type objects.  This object will need to be
      * instantiated and the method fetch will need to be called before this will
      * return any elements.
      *
-     * @return \tabs\apiclient\core\PricingMethodBranding[]
+     * @return \tabs\apiclient\core\pricing\PriceType[]
      */
     public function getElements()
     {
@@ -45,7 +45,7 @@ class PricingMethodBranding extends \tabs\apiclient\collection\Collection
      */
     public function getRoute()
     {
-        return $this->getElementParent()->getUpdateUrl() . '/branding';
+        return 'pricetype';
     }
 
     /**
@@ -53,6 +53,6 @@ class PricingMethodBranding extends \tabs\apiclient\collection\Collection
      */
     public function getElementClass()
     {
-        return '\tabs\apiclient\core\PricingMethodBranding';
+        return '\tabs\apiclient\core\pricing\PriceType';
     }
 }

@@ -13,8 +13,9 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\core;
-use tabs\apiclient\collection\core\PriceTypeBranding as PriceTypeBrandingCollection;
+namespace tabs\apiclient\core\pricing;
+use tabs\apiclient\core\pricing\PriceTypeBranding;
+use tabs\apiclient\collection\core\pricing\PriceTypeBranding as PriceTypeBrandingCollection;
 
 /**
  * Tabs Rest API Price Type object
@@ -44,7 +45,7 @@ use tabs\apiclient\collection\core\PriceTypeBranding as PriceTypeBrandingCollect
  *
  * @method PriceTypeBrandingCollection getBrandings() Get the price type brandings
  */
-class PriceType extends Builder
+class PriceType extends \tabs\apiclient\core\Builder
 {
     /**
      * Price Type code
@@ -104,7 +105,7 @@ class PriceType extends Builder
     /**
      * Add a price type branding to this price type
      *
-     * @param \tabs\apiclient\core\PriceTypeBranding $branding Price type branding object
+     * @param PriceTypeBranding $branding Price type branding object
      *
      * @return PriceType
      */
@@ -119,7 +120,7 @@ class PriceType extends Builder
     /**
      * Add some price type brandings to this price type
      *
-     * @param \tabs\apiclient\core\PriceTypeBranding[] $brandings Array of price type branding objects
+     * @param PriceTypeBranding[] $brandings Array of price type branding objects
      *
      * @return PriceType
      */

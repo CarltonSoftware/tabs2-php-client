@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tabs Rest API Pricing Method Branding object
+ * Tabs Rest API Pricing Branding object
  *
  * PHP Version 5.4
  *
@@ -13,11 +13,11 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\core;
+namespace tabs\apiclient\core\pricing;
 use tabs\apiclient\brand\Branding;
 
 /**
- * Tabs Rest API Pricing Method Branding object
+ * Tabs Rest API Pricing Branding object
  *
  * @category  Tabs_Client
  * @package   Tabs
@@ -27,16 +27,16 @@ use tabs\apiclient\brand\Branding;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method Branding getBranding() Returns the branding
+ * @method Branding        getBranding()         Returns the branding
+ * @method PricingBranding setBranding(Branding) Sets the branding
  *
- * @method \DateTime             getFromdate()          Returns the date the branding applies from
- * @method PricingMethodBranding setFromdate(\Datetime) Set the date the branding applies from
+ * @method \DateTime       getFromdate()          Returns the date the branding applies from
+ * @method PricingBranding setFromdate(\Datetime) Set the date the branding applies from
  *
- * @method \DateTime             getTodate()          Returns the date the branding applies until
- * @method PricingMethodBranding setTodate(\Datetime) Set the date the branding applies until
- *
+ * @method \DateTime       getTodate()          Returns the date the branding applies until
+ * @method PricingBranding setTodate(\Datetime) Set the date the branding applies until
  */
-class PricingMethodBranding extends Builder
+abstract class PricingBranding extends \tabs\apiclient\core\Builder
 {
     /**
      * The branding

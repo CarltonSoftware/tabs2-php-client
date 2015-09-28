@@ -315,11 +315,11 @@ class Fixtures
     /**
      * Return a price type
      *
-     * @return \tabs\apiclient\core\PriceType
+     * @return \tabs\apiclient\core\pricing\PriceType
      */
     public static function getPriceType()
     {
-        $priceType = new tabs\apiclient\core\PriceType();
+        $priceType = new tabs\apiclient\core\pricing\PriceType();
         $priceType->setId(1)
             ->setPricetype('1D')
             ->setDescription('1 Day Break')
@@ -332,13 +332,13 @@ class Fixtures
     /**
      * Return a price type branding
      *
-     * @return \tabs\apiclient\core\PriceTypeBranding
+     * @return \tabs\apiclient\core\pricing\PriceTypeBranding
      */
     public static function getPriceTypeBranding()
     {
         $branding = Fixtures::getBranding();
         
-        $priceTypeBranding = new tabs\apiclient\core\PriceTypeBranding();
+        $priceTypeBranding = new tabs\apiclient\core\pricing\PriceTypeBranding();
         $priceTypeBranding->setBranding($branding)
             ->setFromdate(new \DateTime('2015-03-19'))
             ->setTodate(new \DateTime('2032-07-06'))
@@ -350,11 +350,11 @@ class Fixtures
     /**
      * Return a pricing method
      *
-     * @return \tabs\apiclient\core\PricingMethod
+     * @return \tabs\apiclient\core\pricing\PricingMethod
      */
     public static function getPricingMethod()
     {
-        $pricingMethod = new tabs\apiclient\core\PricingMethod();
+        $pricingMethod = new tabs\apiclient\core\pricing\PricingMethod();
         $pricingMethod->setId(1)
             ->setPricingmethod('Default')
             ->setDescription('Tabs New Pricing');
@@ -365,13 +365,13 @@ class Fixtures
     /**
      * Return a pricing method branding
      *
-     * @return \tabs\apiclient\core\PricingMethodBranding
+     * @return \tabs\apiclient\core\pricing\PricingMethodBranding
      */
     public static function getPricingMethodBranding()
     {
         $branding = Fixtures::getBranding();
         
-        $pricingMethodBranding = new tabs\apiclient\core\PricingMethodBranding();
+        $pricingMethodBranding = new tabs\apiclient\core\pricing\PricingMethodBranding();
         $pricingMethodBranding->setBranding($branding)
             ->setFromdate(new \DateTime('1914-12-10'))
             ->setTodate(new \DateTime('2007-05-28'));

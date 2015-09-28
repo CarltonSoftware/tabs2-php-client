@@ -13,7 +13,7 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\collection\core;
+namespace tabs\apiclient\collection\core\pricing;
 
 /**
  * Tabs Rest API Price Type Branding collection object.
@@ -33,7 +33,7 @@ class PriceTypeBranding extends \tabs\apiclient\collection\Collection
      * instantiated and the method fetch will need to be called before this will
      * return any elements.
      *
-     * @return \tabs\apiclient\core\PriceTypeBranding[]
+     * @return \tabs\apiclient\core\pricing\PriceTypeBranding[]
      */
     public function getElements()
     {
@@ -53,6 +53,6 @@ class PriceTypeBranding extends \tabs\apiclient\collection\Collection
      */
     public function getElementClass()
     {
-        return '\tabs\apiclient\core\PriceTypeBranding';
+        return '\tabs\apiclient\core\pricing\PriceTypeBranding';
     }
 }

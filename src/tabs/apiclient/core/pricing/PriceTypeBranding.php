@@ -13,8 +13,8 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\core;
-use tabs\apiclient\brand\Branding;
+namespace tabs\apiclient\core\pricing;
+use tabs\apiclient\core\pricing\PricingBranding;
 use tabs\apiclient\core\SalesChannel;
 
 /**
@@ -28,30 +28,14 @@ use tabs\apiclient\core\SalesChannel;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method Branding          getBranding()         Returns the branding
- * @method PriceTypeBranding setBranding(Branding) Sets the branding
- *
  * @method SalesChannel      getSaleschannel()             Returns the sales channel
  * @method PriceTypeBranding setSaleschannel(SalesChannel) Sets the sales channel
- *
- * @method \DateTime         getFromdate()          Returns the date the branding applies from
- * @method PriceTypeBranding setFromdate(\Datetime) Set the date the branding applies from
- *
- * @method \DateTime         getTodate()          Returns the date the branding applies until
- * @method PriceTypeBranding setTodate(\Datetime) Set the date the branding applies until
  *
  * @method string            getType()       Returns the type (Fixed or Percentage)
  * @method PriceTypeBranding setType(string) Set the type (Fixed or Percentage)
  */
-class PriceTypeBranding extends Builder
+class PriceTypeBranding extends PricingBranding
 {
-    /**
-     * The branding
-     *
-     * @var tabs\apiclient\brand\Branding
-     */
-    protected $branding;
-
     /**
      * The sales channel
      *
@@ -60,23 +44,9 @@ class PriceTypeBranding extends Builder
     protected $saleschannel;
 
     /**
-     * The date the Branding applies from
-     *
-     * @var \DateTime
-     */
-    protected $fromdate;
-
-    /**
-     * The date the Branding applies until
-     *
-     * @var \DateTime
-     */
-    protected $todate;
-
-    /**
      * The type (Fixed or Percentage)
      *
-     * @var String
+     * @var string
      */
     protected $type;
 
@@ -108,15 +78,14 @@ class PriceTypeBranding extends Builder
      */
     public function toArray()
     {
-        return array(
-            'id' => $this->getId(),
-            'brandingid' => $this->getBranding()->getId(),
-            'saleschannelid' => $this->getSaleschannel()->getId(),
-            'fromdate' => $this->getFromdate()->format('Y-m-d'),
-            'todate' => $this->getTodate()->format('Y-m-d'),
-            'type' => $this->getType(),
-            'percentage' => $this->getPercentage(),
-            'pricetypebrandingfixedid' => $this->getPricetypebrandingfixedid()
+        return array_merge(
+            parent::toArray(),
+            array(
+                'saleschannelid' => $this->getSaleschannel()->getId(),
+                'type' => $this->getType(),
+                'percentage' => $this->getPercentage(),
+                'pricetypebrandingfixedid' => $this->getPricetypebrandingfixedid()
+            )
         );
     }
 }

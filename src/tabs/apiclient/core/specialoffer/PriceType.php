@@ -28,35 +28,35 @@ use tabs\apiclient\collection\core\BookingPeriod as BookingPeriodCollection;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method \tabs\apiclient\core\PriceType getPricetype()    Return the discount pricetype
- * @method \tabs\apiclient\core\PriceType getForpricetype() Return the overwritten pricetype
+ * @method \tabs\apiclient\core\pricing\PriceType getPricetype()    Return the discount pricetype
+ * @method \tabs\apiclient\core\pricing\PriceType getForpricetype() Return the overwritten pricetype
  */
 class PriceType extends Specialoffer
 {
     /**
      * Price type applied
      * 
-     * @var \tabs\apiclient\core\PriceType
+     * @var \tabs\apiclient\core\pricing\PriceType
      */
     protected $pricetype;
     
     /**
      * Price type overwritten
      * 
-     * @var \tabs\apiclient\core\PriceType
+     * @var \tabs\apiclient\core\pricing\PriceType
      */
     protected $forpricetype;
     
     /**
      * Set the price type
      * 
-     * @param \tabs\apiclient\core\PriceType $pt Price type
+     * @param \tabs\apiclient\core\pricing\PriceType $pt Price type
      * 
      * @return \tabs\apiclient\core\specialoffer\PriceType
      */
     public function setPricetype($pt)
     {
-        $this->pricetype = \tabs\apiclient\core\PriceType::factory($pt);
+        $this->pricetype = \tabs\apiclient\core\pricing\PriceType::factory($pt);
         
         return $this;
     }
@@ -64,13 +64,13 @@ class PriceType extends Specialoffer
     /**
      * Set the for price type
      * 
-     * @param \tabs\apiclient\core\PriceType $pt Price type
+     * @param \tabs\apiclient\core\pricing\PriceType $pt Price type
      * 
      * @return \tabs\apiclient\core\specialoffer\PriceType
      */
     public function setForpricetype($pt)
     {
-        $this->forpricetype = \tabs\apiclient\core\PriceType::factory($pt);
+        $this->forpricetype = \tabs\apiclient\core\pricing\PriceType::factory($pt);
         
         return $this;
     }
