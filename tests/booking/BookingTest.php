@@ -21,4 +21,34 @@ class BookingTest extends ApiClientClassTest
 
         $this->assertEquals('2015-10-06', $booking->getFromdate()->format('Y-m-d'));
     }
+
+    /**
+     * Test exception when trying to get a null property object
+     *
+     * @expectedException \tabs\apiclient\client\Exception
+     * @expectedExceptionMessage A valid property URL is required (currently null).
+     *
+     * @return void
+     */
+    public function testGetPropertyObjException()
+    {
+        $booking = Fixtures::getBooking();
+
+        $booking->getPropertyObj();
+    }
+
+    /**
+     * Test exception when trying to get a null branding object
+     *
+     * @expectedException \tabs\apiclient\client\Exception
+     * @expectedExceptionMessage A valid branding URL is required (currently null).
+     *
+     * @return void
+     */
+    public function testGetBrandingObjException()
+    {
+        $booking = Fixtures::getBooking();
+
+        $booking->getBrandingObj();
+    }
 }

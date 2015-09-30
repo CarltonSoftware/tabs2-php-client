@@ -32,15 +32,15 @@ namespace tabs\apiclient\actor;
  * @method string             getBankname()          Return the bank name
  * @method string             getSortcode()          Return the account sort code
  * @method string             getPaymentreference()  Return the payment reference
- * @method string             getRollnumber()        Return the bank roll number    
- * @method \tabs\apiclient\core\Address getAddress() Return the bank roll number    
+ * @method string             getRollnumber()        Return the bank roll number
+ * @method \tabs\apiclient\core\Address getAddress() Return the bank account address
  *
  * @method \tabs\apiclient\actor\BankAccount setAccountnumber(string $accountnumber)       Set the account number
  * @method \tabs\apiclient\actor\BankAccount setAccountname(string $accountname)           Set the account name
  * @method \tabs\apiclient\actor\BankAccount setBankname(string $bankname)                 Set the bank name
  * @method \tabs\apiclient\actor\BankAccount setSortcode(string $sortcode)                 Set the account sort code
  * @method \tabs\apiclient\actor\BankAccount setPaymentreference(string $paymentreference) Set the payment reference
- * @method \tabs\apiclient\actor\BankAccount setRollnumber(string $rollnumber)             Set the bank roll number  
+ * @method \tabs\apiclient\actor\BankAccount setRollnumber(string $rollnumber)             Set the bank roll number
  */
 class BankAccount extends \tabs\apiclient\core\Builder
 {
