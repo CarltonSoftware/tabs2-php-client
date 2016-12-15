@@ -224,7 +224,8 @@ abstract class Builder extends Base implements BuilderInterface
      * 
      * @return string
      */
-    public function __toString() {
+    public function __toString()
+    {
         return implode(
             ' ',
             $this->toArray()

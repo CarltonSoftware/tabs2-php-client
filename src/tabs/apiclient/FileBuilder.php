@@ -66,14 +66,26 @@ abstract class FileBuilder extends Builder
     public function getFiledata()
     {
         if (strlen($this->getFileUrl()) > 0) {
-            $res = \tabs\apiclient\client\Client::getClient()->get(
-                (string) $this->getUrl($this->getFileUrl())
-            );
-            
-            return (string) $res->getBody();
+            return $this->getFileFromUrl($this->getFileUrl());
         } else {
             return;
         }
+    }
+    
+    /**
+     * Perform a get on a specific url
+     * 
+     * @param string $url URL
+     * 
+     * @return string
+     */
+    public function getFileFromUrl($url)
+    {
+        $res = \tabs\apiclient\client\Client::getClient()->get(
+            (string) $this->getUrl($url)
+        );
+
+        return (string) $res->getBody();
     }
     
     /**

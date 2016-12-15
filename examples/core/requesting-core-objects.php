@@ -45,16 +45,15 @@ try {
     );
     
     foreach ($lists as $list) {
-        $col = \tabs\apiclient\Collection::factory(
-            "\\tabs\\apiclient\\{$list}"
+        $ns = "\\tabs\\apiclient\\$list";
+        $obj = new $ns;
+        $collection = \tabs\apiclient\Collection::factory(
+            $obj->getCreateUrl(),
+            $obj
         );
-        
-        echo '<h4>' . $list . '</h4>';
-        echo '<ul>';
-        foreach ($col->fetch()->getElements() as $ele) {
-            echo '<li>' .  (string) $ele . '</li>';
-        }
-        echo '</ul>';
+        $collection->fetch();
+
+        include __DIR__ . '/../collection.php';
     }   
 } catch(Exception $e) {
     echo $e->getMessage();

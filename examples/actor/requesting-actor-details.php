@@ -91,39 +91,16 @@ try {
 //        }
 
     } else {
-        $customerCol = tabs\apiclient\Collection::factory(
+        $collection = tabs\apiclient\Collection::factory(
             'customer',
             new \tabs\apiclient\actor\Customer
         );
         
-        $customerCol->setLimit(filter_input(INPUT_GET, 'limit'))
+        $collection->setLimit(filter_input(INPUT_GET, 'limit'))
             ->setPage(filter_input(INPUT_GET, 'page'))
             ->fetch();
 
-        echo '<h2>' . $customerCol->getTotal() . ' found</h2>';
-
-        $pager = $customerCol->getPagination();
-        foreach ($customerCol->getElements() as $customer) {
-            echo sprintf(
-                '<p><a href="?id=%s">%s</a></p>',
-                $customer->getId(),
-                htmlspecialchars((string) $customer)
-            );
-        }
-
-        echo sprintf(
-            '<p><a href="?page=%s&limit=%s"2>&larr; Previous</a>',
-            $pager->getPrevPage(),
-            $pager->getLimit()
-        );
-
-        echo ' &nbsp; | &nbsp; ';
-
-        echo sprintf(
-            '<a href="?page=%s&limit=%s">Next &rarr;</a></p>',
-            $pager->getNextPage(),
-            $pager->getLimit()
-        );
+        include __DIR__ . '/../collection.php';
     }
 
 } catch(Exception $e) {
