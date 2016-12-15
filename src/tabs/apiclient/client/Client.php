@@ -14,11 +14,17 @@
  */
 
 namespace tabs\apiclient\client;
+use \GuzzleHttp\HandlerStack;
+use \tabs\apiclient\client\Oauth\GrantType\RefreshToken;
+use \tabs\apiclient\client\Oauth\GrantType\PasswordCredentials;
+use \Sainsburys\Guzzle\Oauth2\Middleware\OAuthMiddleware;
+use \Psr\Http\Message\ResponseInterface;
+use \tabs\apiclient\client\Exception;
 
 /**
  * Tabs API client object.
  *
- * PHP Version 5.4
+ * PHP Version 5.5
  *
  * @category  Client
  * @package   Tabs
@@ -37,30 +43,35 @@ class Client extends \GuzzleHttp\Client
     static $instance;
 
     /**
-     * HMAC plugin
-     *
-     * @var \tabs\apiclient\client\Hmac
-     */
-    protected $hmac;
-
-    /**
      * Create a new Api Connection for use within the tabs php client
      * api.
      *
-     * @param string $baseUrl Url of the api
-     * @param string $key     API Key
-     * @param string $secret  HMAC Secret Key
-     * @param array  $config  Configuration settings
+     * @param string $base_uri     Url of the api
+     * @param string $username     API Username
+     * @param string $password     API User password
+     * @param string $clientId     Client Id
+     * @param string $clientSecret Client secret
+     * @param array  $options      Configuration options
      *
      * @return \tabs\apiclient\client\Client
      */
     public static function factory(
-        $baseUrl,
-        $key = '',
-        $secret = '',
-        $config = array()
+        $base_uri,
+        $username,
+        $password,
+        $clientId,
+        $clientSecret,
+        array $options = []
     ) {
-        self::$instance = new static($baseUrl, $key, $secret, $config);
+        self::$instance = new static(
+            $base_uri,
+            $username,
+            $password,
+            $clientId,
+            $clientSecret,
+            $options
+        );
+        
         return self::$instance;
     }
 
@@ -82,42 +93,62 @@ class Client extends \GuzzleHttp\Client
     /**
      * Contructor
      *
-     * @param string $baseUrl Url of the api
-     * @param string $key     API Key
-     * @param string $secret  HMAC Secret Key
-     * @param array  $config  Configuration settings
+     * @param string $base_uri     Url of the api
+     * @param string $username     API Username
+     * @param string $password     API User password
+     * @param string $clientId     Client Id
+     * @param string $clientSecret Client secret
+     * @param array  $options      Configuration options
      *
-     * @throws RuntimeException if cURL is not installed
+     * @throws \RuntimeException if cURL is not installed
      *
      * @return void
      */
-    public function __construct($baseUrl, $key, $secret, $config = array())
-    {
-        $plugin = new \tabs\apiclient\client\Hmac($key, $secret);
-        $this->hmac = $plugin;
-
-        if (isset($config['prefix'])) {
-            $plugin->setPrefix($config['prefix']);
-            unset($config['prefix']);
+    public function __construct(
+        $base_uri,
+        $username,
+        $password,
+        $clientId,
+        $clientSecret,
+        array $options = []
+    ) {
+        if (isset($options['HandlerStack'])) {
+            $handlerStack = $options['HandlerStack'];
+            unset($options['HandlerStack']);
+        } else {
+            $handlerStack = HandlerStack::create();
         }
-
+        
         parent::__construct(
             array_merge(
-                array('base_url' => $baseUrl),
-                $config
+                array(
+                    'handler'=> $handlerStack,
+                    'base_uri' => $base_uri,
+                    'auth' => 'oauth2'
+                ),
+                $options
             )
         );
-        $this->getEmitter()->attach($plugin);
-    }
 
-    /**
-     * Return the hmac plugin
-     *
-     * @return \tabs\apiclient\client\Hmac
-     */
-    public function getHmac()
-    {
-        return $this->hmac;
+        $config = [
+            PasswordCredentials::CONFIG_USERNAME => $username,
+            PasswordCredentials::CONFIG_PASSWORD => $password,
+            PasswordCredentials::CONFIG_CLIENT_ID => $clientId,
+            PasswordCredentials::CONFIG_CLIENT_SECRET => $clientSecret,
+            PasswordCredentials::CONFIG_TOKEN_URL => '/plato/oauth/v2/token',
+            PasswordCredentials::GRANT_TYPE => 'client_credentials'
+        ];
+
+        $token = new PasswordCredentials($this, $config);
+        $refreshToken = new RefreshToken($this, $config);
+        $middleware = new OAuthMiddleware($this, $token, $refreshToken);
+        
+        if (isset($options['AccessToken'])) {
+            $middleware->setAccessToken($options['AccessToken']);
+        }
+        
+        $handlerStack->push($middleware->onBefore());
+        $handlerStack->push($middleware->onFailure(5));
     }
 
     /**
@@ -127,15 +158,11 @@ class Client extends \GuzzleHttp\Client
      * @param array  $params  Query Parameters
      * @param array  $options Client options
      *
-     * @throws \tabs\apiclient\client\Exception
-     *
-     * @return \GuzzleHttp\Message\Response
+     * @return ResponseInterface
      */
-    public function get($url = null, $params = [], $options = [])
+    public function get($url = null, array $params = [], array $options = [])
     {
-        return $this->sendRequest(
-            $this->createQueryRequest('get', $url, $params, $options)
-        );
+        return $this->createQueryRequest('get', $url, $params, $options);
     }
 
     /**
@@ -145,15 +172,11 @@ class Client extends \GuzzleHttp\Client
      * @param array  $params  Query Parameters
      * @param array  $options Client options
      *
-     * @throws \tabs\apiclient\client\Exception
-     *
-     * @return \GuzzleHttp\Message\Response
+     * @return ResponseInterface
      */
     public function delete($url = null, array $params = [], array $options = [])
     {
-        return $this->sendRequest(
-            $this->createQueryRequest('delete', $url, $params, $options)
-        );
+        return $this->createQueryRequest('delete', $url, $params, $options);
     }
 
     /**
@@ -163,15 +186,11 @@ class Client extends \GuzzleHttp\Client
      * @param array  $params  Query Parameters
      * @param array  $options Client options
      *
-     * @throws \tabs\apiclient\client\Exception
-     *
-     * @return \GuzzleHttp\Message\Response
+     * @return ResponseInterface
      */
     public function options($url = null, array $params = [], array $options = [])
     {
-        return $this->sendRequest(
-            $this->createQueryRequest('options', $url, $params, $options)
-        );
+        return $this->createQueryRequest('options', $url, $params, $options);
     }
 
     /**
@@ -181,15 +200,11 @@ class Client extends \GuzzleHttp\Client
      * @param array  $params  POST Parameters
      * @param array  $options Client options
      *
-     * @throws \tabs\apiclient\client\Exception
-     *
-     * @return \GuzzleHttp\Message\Response
+     * @return ResponseInterface
      */
     public function post($url = null, array $params = [], array $options = [])
     {
-        return $this->sendRequest(
-            $this->createPostRequest('post', $url, $params, $options)
-        );
+        return $this->createPostRequest('post', $url, $params, $options);
     }
 
     /**
@@ -199,15 +214,11 @@ class Client extends \GuzzleHttp\Client
      * @param array  $params  POST Parameters
      * @param array  $options Client options
      *
-     * @throws \tabs\apiclient\client\Exception
-     *
-     * @return \GuzzleHttp\Message\Response
+     * @return ResponseInterface
      */
     public function put($url = null, array $params = [], array $options = [])
     {
-        return $this->sendRequest(
-            $this->createPostRequest('put', $url, $params, $options)
-        );
+        return $this->createPostRequest('put', $url, $params, $options);
     }
 
     /**
@@ -219,7 +230,7 @@ class Client extends \GuzzleHttp\Client
      * @param array      $params  Key/val array of parameters
      * @param array      $options Array of options to apply to the request
      *
-     * @return RequestInterface
+     * @return ResponseInterface
      */
     public function createQueryRequest(
         $method,
@@ -228,7 +239,7 @@ class Client extends \GuzzleHttp\Client
         array $options = []
     ) {
         $options['query'] = $params;
-        return $this->createRequest($method, $url, $options);
+        return $this->request($method, $url, $options);
     }
 
     /**
@@ -240,7 +251,7 @@ class Client extends \GuzzleHttp\Client
      * @param array      $params  Key/val array of parameters
      * @param array      $options Array of options to apply to the request
      *
-     * @return RequestInterface
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function createPostRequest(
         $method,
@@ -248,52 +259,57 @@ class Client extends \GuzzleHttp\Client
         array $params = [],
         array $options = []
     ) {
-        $options['body'] = $params;
-        return $this->createRequest($method, $url, $options);
+        $options['form_params'] = $params;
+        return $this->request($method, $url, $options);
     }
 
     /**
-     * Perform request.
+     * Create a new guzzle request and append params onto the
+     * request body.
      *
-     * @param RequestInterface $request Guzzle request object
+     * @param string|Url      $url     HTTP URL to connect to
+     * @param string|resource $data    Data
+     * @param array           $params  Key/val array of parameters
+     * @param array           $options Array of options to apply to the request
      *
-     * @return \GuzzleHttp\Message\Response
+     * @return \Psr\Http\Message\ResponseInterface
      */
-    public function sendRequest($request)
-    {
-        try {
-            return $this->send($request);
-        } catch (\RuntimeException $ex) {
-            $this->_setException($ex);
+    public function createPostFileRequest(
+        $url,
+        $data,
+        array $params = [],
+        array $options = []
+    ) {
+        $newParams = array();
+        foreach ($params as $key => $value) {
+            $newParams[] = array(
+                'name' => $key,
+                'contents' => $value
+            );
         }
+        
+        $options['multipart'] = array_merge(
+            array(
+                array(
+                    'name' => 'data',
+                    'contents' => is_string($data) ? fopen($data, 'r') : $data
+                )
+            ),
+            $newParams
+        );
+        
+        return $this->request('POST', $url, $options);
     }
-
+    
     /**
-     * Handle a put/post request exception
-     *
-     * @param \RuntimeException $exception Exception object
-     *
-     * @throws \tabs\apiclient\client\ValidationException
-     * @throws \tabs\apiclient\client\Exception
-     *
-     * @return void
+     * @inhertDoc
      */
-    private function _setException($exception)
+    public function request($method, $uri = '', array $options = array())
     {
-        $json = $exception->getResponse()->json();
-        switch ($json['errorType']) {
-            case 'ValidationException':
-                throw new \tabs\apiclient\client\ValidationException(
-                    $exception,
-                    \json_decode($json['errorDescription'], true),
-                    $json['errorCode']
-                );
-            default:
-                throw new \tabs\apiclient\client\Exception(
-                    $exception,
-                    $json['errorDescription'],
-                    $json['errorCode']
-                );
-        }
+        $response = parent::request($method, $uri, $options);
+        
+        // TODO Throw exceptions
+        
+        return $response;
     }
 }

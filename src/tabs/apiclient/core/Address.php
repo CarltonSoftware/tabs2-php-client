@@ -1,19 +1,7 @@
 <?php
 
-/**
- * Tabs Rest Address object.
- *
- * PHP Version 5.4
- *
- * @category  Core
- * @package   Tabs
- * @author    Carlton Software <support@carltonsoftware.co.uk>
- * @copyright 2014 Carlton Software
- * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
- * @link      http://www.carltonsoftware.co.uk
- */
-
 namespace tabs\apiclient\core;
+use tabs\apiclient\Base;
 
 /**
  * Tabs Rest Address object.
@@ -21,7 +9,7 @@ namespace tabs\apiclient\core;
  * @category  Core
  * @package   Tabs
  * @author    Carlton Software <support@carltonsoftware.co.uk>
- * @copyright 2014 Carlton Software
+ * @copyright 2016 Carlton Software
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
@@ -36,10 +24,7 @@ namespace tabs\apiclient\core;
  * @method float   getLongitude() Return the longitude
  * @method float   getLatitude()  Return the latitude
  * @method Country getCountry()   Return the Address postcode
- * 
- * @method \tabs\apiclient\user\Role setRoute(string $route ) Set the Role
  */
-
 class Address extends Base
 {
     /**
@@ -101,7 +86,7 @@ class Address extends Base
     /**
      * Address country
      * 
-     * @var \tabs\apiclient\core\Country
+     * @var Country
      */
     protected $country;
     
@@ -120,16 +105,12 @@ class Address extends Base
     /**
      * Set the country object
      * 
-     * @param array $array Country array
+     * @param array|stdClass|Country $array Country
      * 
      * @return \tabs\apiclient\core\Address
      */
     public function setCountry($array)
     {
-        if (is_string($array)) {
-            $array = array('name' => $array);
-        }
-        
         $this->country = Country::factory($array);
         
         return $this;

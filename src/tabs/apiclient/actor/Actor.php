@@ -1,105 +1,109 @@
 <?php
 
-/**
- * Tabs Rest API Actor object.
- *
- * PHP Version 5.4
- *
- * @category  Tabs_Client
- * @package   Tabs
- * @author    Carlton Software <support@carltonsoftware.co.uk>
- * @copyright 2014 Carlton Software
- * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
- * @link      http://www.carltonsoftware.co.uk
- */
-
 namespace tabs\apiclient\actor;
-use tabs\apiclient\core\Note;
-use tabs\apiclient\collection\core\Note as NoteCollection;
-use tabs\apiclient\collection\actor\Contact as ContactCollection;
-use tabs\apiclient\collection\actor\ContactDetail as ContactDetailCollection;
-use tabs\apiclient\collection\actor\Document as DocumentCollection;
-use tabs\apiclient\collection\actor\BankAccount as BankAccountCollection;
+
+use tabs\apiclient\Builder;
+use tabs\apiclient\accounts\BankAccount;
+use tabs\apiclient\core\Language;
+use tabs\apiclient\Collection;
+use tabs\apiclient\note\ActorNote;
 
 /**
- * Tabs Rest API Actor object.
+ * Tabs Rest API object.
  *
  * @category  Tabs_Client
  * @package   Tabs
  * @author    Carlton Software <support@carltonsoftware.co.uk>
- * @copyright 2014 Carlton Software
+ * @copyright 2016 Carlton Software
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string                        getFirstname()      Return the firstname
- * @method string                        getSurname()        Return the surname
- * @method string                        getTitle()          Return the title
- * @method string                        getSalutation()     Return the saulation
- * @method string                        getTabscode()       Return the tabs code
- * @method \tabs\apiclient\core\Language getLanguage()       Return the language
- * @method boolean                       getInactive()       Return the inactive state
- * @method string                        getPassword()       Return the password
- * @method string                        getCompanyname()    Return the company name
- * @method string                        getVatnumber()      Return the vat number
- * @method string                        getCompanynumber()  Return the company number
- * @method ContactDetailCollection       getContactdetails() Return contact entity collection
- * @method BankAccountCollection         getBankaccounts()   Return a collection of bank accounts
- * @method NoteCollection                getNotes()          Return a note collection
- * @method DocumentCollection            getDocuments()      Return a document collection
- *
- * @method Actor setFirstname(string $firstname) Set the firstname
- * @method Actor setSurname(string $surname) Set the surname
- * @method Actor setTitle(string $title) Set the title
- * @method Actor setSalutation(string $salutation) Set the salutation
- * @method Actor setTabscode(string $tabscode) Set the tabscode
- * @method Actor setInactive(boolean $inactive) Set the inactive state
- * @method Actor setPassword(string $password) Set the password
- * @method Actor setCompanyname(string $companyname) Set the company name
- * @method Actor setVatnumber(string $vatnumber) Set the vat number
- * @method Actor setCompanynumber(string $companynumber) Set the company number
+ * @method string getFirstname() Returns the firstname
+ * @method Actor setFirstname(string $var) Sets the firstname
+ * 
+ * @method string getSurname() Returns the surname
+ * @method Actor setSurname(string $var) Sets the surname
+ * 
+ * @method string getTitle() Returns the title
+ * @method Actor setTitle(string $var) Sets the title
+ * 
+ * @method string getSalutation() Returns the salutation
+ * @method Actor setSalutation(string $var) Sets the salutation
+ * 
+ * @method string getTabscode() Returns the tabscode
+ * @method Actor setTabscode(string $var) Sets the tabscode
+ * 
+ * @method Language getLanguage() Returns the language
+ * 
+ * @method boolean getInactive() Returns the inactive
+ * @method Actor setInactive(boolean $var) Sets the inactive
+ * 
+ * @method string getPassword() Returns the password
+ * @method Actor setPassword(string $var) Sets the password
+ * 
+ * @method string getCompanyname() Returns the companyname
+ * @method Actor setCompanyname(string $var) Sets the companyname
+ * 
+ * @method string getVatnumber() Returns the vatnumber
+ * @method Actor setVatnumber(string $var) Sets the vatnumber
+ * 
+ * @method string getCompanynumber() Returns the companynumber
+ * @method Actor setCompanynumber(string $var) Sets the companynumber
+ * 
+ * @method string getAccountingreference() Returns the accountingreference
+ * @method Actor  setAccountingreference(string $var) Sets the accountingreference
+ * 
+ * @method Collection getBankaccounts() Returns the bank account collection
+ * @method Actor setBankaccounts(Collection $col) Set the bank accounts
+ * 
+ * @method Collection getDocuments() Returns the actor documents
+ * @method Actor setDocuments(Collection $col) Set the documents
+ * 
+ * @method Collection getNotes() Returns the actor notes
+ * @method Actor setNotes(Collection $col) Set the notes
  */
-abstract class Actor extends \tabs\apiclient\core\Builder
+abstract class Actor extends Builder
 {
     /**
      * Firstname
      *
      * @var string
      */
-    protected $firstname = '';
+    protected $firstname;
 
     /**
      * Surname
      *
      * @var string
      */
-    protected $surname = '';
+    protected $surname;
 
     /**
      * Title
      *
      * @var string
      */
-    protected $title = '';
+    protected $title;
 
     /**
-     * Salutatino
+     * Salutation
      *
      * @var string
      */
-    protected $salutation = '';
+    protected $salutation;
 
     /**
      * Tabscode
      *
      * @var string
      */
-    protected $tabscode = '';
+    protected $tabscode;
 
     /**
      * Language
      *
-     * @var \tabs\apiclient\core\Language
+     * @var Language
      */
     protected $language;
 
@@ -108,453 +112,165 @@ abstract class Actor extends \tabs\apiclient\core\Builder
      *
      * @var boolean
      */
-    protected $inactive = false;
-
-    /**
-     * Password
-     *
-     * @var string
-     */
-    protected $password = '';
+    protected $inactive;
 
     /**
      * Companyname
      *
      * @var string
      */
-    protected $companyname = '';
+    protected $companyname;
 
     /**
-     * VatNumber
+     * Vatnumber
      *
      * @var string
      */
-    protected $vatnumber = '';
+    protected $vatnumber;
 
     /**
-     * CompanyNumber
+     * Companynumber
      *
      * @var string
      */
-    protected $companynumber = '';
+    protected $companynumber;
 
     /**
-     * Contact Entity collection
+     * Accounting reference
      *
-     * @var ContactDetailCollection
+     * @var string
      */
-    protected $contactdetails;
+    protected $accountingreference;
 
     /**
-     * Bank account collection
+     * Bacs bank account
      *
-     * @var BankAccountCollection
+     * @var BankAccount
+     */
+    protected $bacsbankaccount;
+    
+    /**
+     * Bank accounts collection
+     * 
+     * @var Collection
      */
     protected $bankaccounts;
-
+    
     /**
-     * Note collection
-     *
-     * @var NoteCollection
+     * Actor Documents
+     * 
+     * @var Collection
+     */
+    protected $documents;
+    
+    /**
+     * Actor Notes
+     * 
+     * @var Collection
      */
     protected $notes;
 
+    // -------------------- Public Functions -------------------- //
+    
     /**
-     * Document collection
-     *
-     * @var DocumentCollection
+     * @inheritDoc
      */
-    protected $documents;
-
-    /**
-     * Contact history collection
-     *
-     * @var ContactCollection
-     */
-    protected $contactHistory;
-
-    // -------------------------- Static Functions -------------------------- //
-
-    /**
-     * Create a Actor object from a given customer reference
-     *
-     * @param string $reference Actor reference
-     *
-     * @return \tabs\apiclient\actor\Actor
-     */
-    public static function get($reference)
+    public function __construct($id = null)
     {
-        $className = self::getClass();
-        $routeName = strtolower($className);
-
-        return parent::_get(sprintf('/%s/%s', $routeName, $reference));
-    }
-
-    // -------------------------- Public Functions -------------------------- //
-
-    /**
-     * Constructor
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->setLanguage(array('name' => 'English'));
-
-        $this->notes = new NoteCollection();
-        $this->notes->setElementParent($this);
-
-        $this->bankaccounts = new BankAccountCollection();
-        $this->bankaccounts->setElementParent($this);
-
-        $this->contactdetails = new ContactDetailCollection();
-        $this->contactdetails->setElementParent($this);
-
-        $this->documents = new DocumentCollection();
-        $this->documents->setElementParent($this);
-
-        //$this->contactHistory = new ContactCollection();
-        //$this->contactHistory->setElementParent($this);
-    }
-
-    /**
-     * Add a contact detail
-     *
-     * @param ContactAddress|ContactDetail $contact Contact detail object
-     *
-     * @return Actor
-     */
-    public function addContactdetail(&$contact)
-    {
-        $contact->setParent($this);
-        $this->contactdetails->addElement($contact);
-
-        return $this;
-    }
-
-    /**
-     * Set the contacts for the Actor
-     *
-     * @param array $contacts Array of contact objects
-     *
-     * @return Actor
-     */
-    public function setContactdetails($contacts)
-    {
-        foreach ($contacts as $contact) {
-            if ($contact->type == 'P') {
-                $detail = \tabs\apiclient\actor\ContactDetailPostal::factory($contact);
-            } else {
-                $detail = \tabs\apiclient\actor\ContactDetailOther::factory($contact);
-            }
-
-            $this->addContactdetail($detail);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Return all of the Contact addresses object
-     *
-     * @return ContactAddress[]
-     */
-    public function getContactAddresses()
-    {
-        return $this->getContactFilter('ContactDetailPostal');
-    }
-
-    /**
-     * Return all of the Contact Detail objects that are email addresses
-     *
-     * @return array
-     */
-    public function getEmailAddresses()
-    {
-        return array_filter(
-            $this->getContactFilter(),
-            function ($ele) {
-                return (strtolower($ele->getContactmethod()) == 'email');
-            }
+        $this->language = new Language();
+        $this->bacsbankaccount = new BankAccount();
+        $this->bankaccounts = Collection::factory(
+            'bankaccount',
+            new BankAccount,
+            $this
         );
-    }
-
-    /**
-     * Return all of the Contact Detail objects that are phone numbers
-     *
-     * @return array
-     */
-    public function getPhoneNumbers()
-    {
-        return array_filter(
-            $this->getContactFilter(),
-            function ($ele) {
-                return (strtolower($ele->getContactmethod()) == 'phone');
-            }
+        $this->documents = Collection::factory(
+            'document',
+            new ActorDocument,
+            $this
         );
-    }
-
-    /**
-     * Return a filtered contacts array
-     *
-     * @param string $type Contact entity type
-     *
-     * @return array
-     */
-    public function getContactFilter($type = 'ContactDetailOther')
-    {
-        return array_filter(
-            $this->contactdetails->getElements(),
-            function ($ele) use ($type) {
-                return ($ele->getClass() == $type);
-            }
+        $this->notes = Collection::factory(
+            'note',
+            new ActorNote,
+            $this
         );
+        
+        parent::__construct($id);
     }
 
     /**
-     * Return the contact preferences for this customer
+     * Set the language
      *
-     * @return ContactPreference[]
-     */
-    public function getContactPreferences()
-    {
-        $preferences = array();
-        foreach ($this->contactdetails->getElements() as $contact) {
-            foreach ($contact->getContactpreferences() as $preference) {
-                array_push($preferences, $preference);
-            }
-        }
-
-        return $preferences;
-    }
-
-    /**
-     * Add a bank account
-     *
-     * @param BankAccount $bankAccount Bank account object
+     * @param array|stdClass|Language $language The Language
      *
      * @return Actor
      */
-    public function addBankAccount(&$bankAccount)
+    public function setLanguage($language)
     {
-        $bankAccount->setParent($this);
-        $this->bankaccounts->addElement($bankAccount);
+        $this->language = Language::factory($language);
 
         return $this;
     }
 
     /**
-     * Set the bank account objects
+     * Set the bacs bank account
      *
-     * @param BankAccount $bankAccounts Bank accounts array
-     *
-     * @return Actor
-     */
-    public function setBankaccounts($bankAccounts)
-    {
-        foreach ($bankAccounts as $account) {
-            $bankAccount = BankAccount::factory($account);
-            $this->addBankAccount($bankAccount);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Add a note
-     *
-     * @param Note $note Note object
+     * @param array|stdClass|BankAccount $account Bank Account
      *
      * @return Actor
      */
-    public function addNote(&$note)
+    public function setBacsbankaccount($account)
     {
-        $note->setParent($this);
-        $this->notes->addElement($note);
+        $this->bacsbankaccount = BankAccount::factory($account);
+        $this->bacsbankaccount->setParent($this);
 
         return $this;
     }
-
+    
     /**
-     * Set the notes array
-     *
-     * @param Note[] $notes Notes array
-     *
-     * @return Actor
-     */
-    public function setNotes($notes)
-    {
-        foreach ($notes as $note) {
-            $_note = Note::factory($note);
-            $this->addNote($_note);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Add a document
-     *
-     * @param Document $document Document object
-     *
-     * @return Actor
-     */
-    public function addDocument(&$document)
-    {
-        $document->setParent($this);
-        $this->documents->addElement($document);
-
-        return $this;
-    }
-
-    /**
-     * Set the documents array
-     *
-     * @param Document[] $documents Documents array
-     *
-     * @return Actor
-     */
-    public function setDocuments($documents)
-    {
-        foreach ($documents as $doc) {
-            $_document = Document::factory($doc);
-            $this->addDocument($_document);
-        }
-
-        return $this;
-    }
-
-
-    /**
-     * Add a Contact
-     *
-     * @param Contact $contact Contact object
-     *
-     * @return Actor
-     */
-    public function addContactHistory(&$contact)
-    {
-        $contact->setParent($this);
-        $this->contactHistory->addElement($contact);
-
-        return $this;
-    }
-
-
-    /**
-     * Sets the contactHistory array
-     *
-     * @param Contact[] $contactHistory Contact array
-     *
-     * @return Actor
-     */
-    public function setContactHistory($contactHistory)
-    {
-        foreach ($contactHistory as $contact) {
-            $_contact = Contact::factory($contact);
-            $this->addContactHistory($_contact);
-        }
-
-        return $this;
-    }
-
-
-    public function getContactHistory()
-    {
-        $contactHistory = new ContactCollection();
-        $contactHistory->setElementParent($this);
-
-        return $contactHistory;
-    }
-
-
-    /**
-     * Set the language object
-     *
-     * @param array $array Language array
-     *
-     * @return Actor
-     */
-    public function setLanguage($array)
-    {
-        if (is_string($array)) {
-            $array = array('name' => $array);
-        }
-
-        $language = \tabs\apiclient\core\Language::factory($array);
-        $language->setParent($this);
-
-        $this->language = $language;
-
-        return $this;
-    }
-
-    /**
-     * Return if a customer is active or not
-     *
-     * @return boolean
-     */
-    public function isActive()
-    {
-        return !$this->inactive;
-    }
-
-    /**
-     * Delete function.  Not allowed!
-     *
-     * @throws \tabs\apiclient\client\Exception
-     *
-     * @return void
-     */
-    public function delete()
-    {
-        throw new \tabs\apiclient\client\Exception(
-            null,
-            sprintf(
-                'Deleting a %s is not permitted',
-                $this->getClass()
-            )
-        );
-    }
-
-    /**
-     * ToString magic method
-     *
+     * Get the fullname of the actor
+     * 
      * @return string
      */
-    public function __toString()
+    public function getFullname()
     {
         return implode(
             ' ',
-            array_filter(
-                array(
-                    $this->getTitle(),
-                    $this->getFirstname(),
-                    $this->getSurname()
-                )
+            array(
+                $this->getTitle(),
+                $this->getFirstname(),
+                $this->getSurname()
             )
         );
     }
+    
+    /**
+     * @inheritDoc
+     */
+    public function __toString()
+    {
+        return $this->getFullname();
+    }
 
     /**
-     * Array representation of the object
-     *
-     * @return array
+     * @inheritDoc
      */
     public function toArray()
     {
         return array(
-            'title' => $this->getTitle(),
             'firstname' => $this->getFirstname(),
             'surname' => $this->getSurname(),
+            'title' => $this->getTitle(),
             'salutation' => $this->getSalutation(),
-            'password' => $this->getPassword(),
             'tabscode' => $this->getTabscode(),
-            'languagecode' => $this->getLanguage()->getCode(),
+            'language' => $this->getLanguage(),
+            'inactive' => $this->getInactive(),
+            'password' => $this->getPassword(),
             'companyname' => $this->getCompanyname(),
             'vatnumber' => $this->getVatnumber(),
             'companynumber' => $this->getCompanynumber(),
-            'inactive' => $this->getInactive()
+            'languagecode' => $this->getLanguage()->getCode(),
+            'accountingreference' => $this->getAccountingreference()
         );
     }
 }

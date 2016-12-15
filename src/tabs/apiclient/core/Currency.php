@@ -1,19 +1,7 @@
 <?php
 
-/**
- * Tabs Rest Currency object.
- *
- * PHP Version 5.4
- *
- * @category  Core
- * @package   Tabs
- * @author    Carlton Software <support@carltonsoftware.co.uk>
- * @copyright 2014 Carlton Software
- * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
- * @link      http://www.carltonsoftware.co.uk
- */
-
 namespace tabs\apiclient\core;
+use tabs\apiclient\Builder;
 
 /**
  * Tabs Rest Currency object.
@@ -35,7 +23,7 @@ namespace tabs\apiclient\core;
  * @method Currency setName(integer $name)                   Set the name
  * @method Currency setDecimalplaces(integer $decimalplaces) Set the decimalplaces
  */
-class Currency extends Base
+class Currency extends Builder
 {
     /**
      * Code
@@ -68,7 +56,6 @@ class Currency extends Base
     public function toArray()
     {
         return array(
-            'id' => $this->getId(),
             'code' => $this->getCode(),
             'name' => $this->getName(),
             'decimalplaces' => $this->getDecimalplaces(),

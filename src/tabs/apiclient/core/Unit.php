@@ -1,19 +1,7 @@
 <?php
 
-/**
- * Tabs Rest API Unit object.
- *
- * PHP Version 5.4
- *
- * @category  Tabs_Client
- * @package   Tabs
- * @author    Carlton Software <support@carltonsoftware.co.uk>
- * @copyright 2014 Carlton Software
- * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
- * @link      http://www.carltonsoftware.co.uk
- */
-
 namespace tabs\apiclient\core;
+use tabs\apiclient\Builder;
 
 /**
  * Tabs Rest API Unit object.
@@ -58,13 +46,14 @@ class Unit extends Builder
      */
     protected $decimalplaces = 0;
     
+    // ------------------ Public Functions --------------------- //
+    
     /**
      * @inheritDoc
      */
     public function toArray()
     {
         return array(
-            'id' => $this->getId(),
             'name' => $this->getName(),
             'description' => $this->getDescription(),
             'decimalplaces' => $this->getDecimalplaces()

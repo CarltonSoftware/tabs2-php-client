@@ -1,20 +1,7 @@
 <?php
 
-/**
- * Tabs Rest API Language object.
- *
- * PHP Version 5.4
- *
- * @category  Core
- * @package   Tabs
- * @author    Carlton Software <support@carltonsoftware.co.uk>
- * @copyright 2014 Carlton Software
- * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
- * @version   Release: 1
- * @link      http://www.carltonsoftware.co.uk
- */
-
 namespace tabs\apiclient\core;
+use tabs\apiclient\Builder;
 
 /**
  * Tabs Rest API Language object.
@@ -33,7 +20,7 @@ namespace tabs\apiclient\core;
  * @method Language setCode(string $alpha2)   Set the Language code
  * @method Language setLanguage(string $name) Set the language name
  */
-class Language extends Base
+class Language extends Builder
 {
     /**
      * Language code
@@ -52,13 +39,13 @@ class Language extends Base
     // ------------------ Public Functions --------------------- //
 
     /**
-     * ToString magic method
-     *
-     * @return string
+     * @inheritDoc
      */
-    public function __toString()
+    public function toArray()
     {
-        return $this->getName();
+        return array(
+            'code' => $this->getCode(),
+            'name' => $this->getName()
+        );
     }
-
 }

@@ -1,20 +1,7 @@
 <?php
 
-/**
- * Tabs Rest API Country object.
- *
- * PHP Version 5.3
- *
- * @category  Core
- * @package   Tabs
- * @author    Carlton Software <support@carltonsoftware.co.uk>
- * @copyright 2014 Carlton Software
- * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
- * @version   Release: 1
- * @link      http://www.carltonsoftware.co.uk
- */
-
 namespace tabs\apiclient\core;
+use tabs\apiclient\Builder;
 
 /**
  * Tabs Rest API Country object.
@@ -27,15 +14,17 @@ namespace tabs\apiclient\core;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method string getAlpha2() Return the Alpha2 code
- * @method string getAlpha3() Return the Alpha3 code
- * @method string getName()   Return the country name
+ * @method string getAlpha2()    Return the Alpha2 code
+ * @method string getAlpha3()    Return the Alpha3 code
+ * @method string getName()      Return the country name
+ * @method string getPhonecode() Return the phone code
  * 
- * @method \tabs\apiclient\core\Base setAlpha2(string $alpha2)   Set the Alpha2 code
- * @method \tabs\apiclient\core\Base setAlpha3(string $alpha3)   Set the Alpha3 code
- * @method \tabs\apiclient\core\Base setCountry(string $country) Set the country name
+ * @method Base setAlpha2(string $alpha2)     Set the Alpha2 code
+ * @method Base setAlpha3(string $alpha3)     Set the Alpha3 code
+ * @method Base setCountry(string $country)   Set the country name
+ * @method Base setPhonecode(string $country) Set the country phone code
  */
-class Country extends Base
+class Country extends Builder
 {
     /**
      * Country code
@@ -58,6 +47,13 @@ class Country extends Base
      */
     protected $name = '';
     
+    /**
+     * Country phone code
+     * 
+     * @var string 
+     */
+    protected $phonecode = '';
+    
     // ------------------ Public Functions --------------------- //
     
     /**
@@ -68,5 +64,18 @@ class Country extends Base
     public function __toString()
     {
         return $this->getName();
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function toArray()
+    {
+        return array(
+            'alpha2' => $this->getAlpha2(),
+            'alpha3' => $this->getAlpha3(),
+            'name' => $this->getName(),
+            'phonecode' => $this->getPhonecode()
+        );
     }
 }

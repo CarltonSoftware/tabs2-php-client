@@ -1,56 +1,66 @@
 <?php
 
-/**
- * Tabs Rest API Customer object.
- *
- * PHP Version 5.4
- *
- * @category  Tabs_Client
- * @package   Tabs
- * @author    Carlton Software <support@carltonsoftware.co.uk>
- * @copyright 2014 Carlton Software
- * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
- * @link      http://www.carltonsoftware.co.uk
- */
-
 namespace tabs\apiclient\actor;
 
-use tabs\apiclient\collection\booking\Booking as BookingCollection;
-
 /**
- * Tabs Rest API Customer object.
+ * Tabs Rest Customer object.
  *
  * @category  Tabs_Client
  * @package   Tabs
  * @author    Carlton Software <support@carltonsoftware.co.uk>
- * @copyright 2014 Carlton Software
+ * @copyright 2016 Carlton Software
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
- *
- * @method BookingCollection getBookings() Returns the customer's bookings
+ * 
+ * @method \DateTime getFirstbookingbookeddate() Returns the firstbookingbookeddate
+ * @method integer getConfirmedbookings()        Returns the confirmedbookings
+ * @method integer getConfirmedbookingsvalue()   Returns the confirmedbookingsvalue
+ * @method integer getAccountbalance()           Returns the accountbalance
  */
 class Customer extends Actor
 {
     /**
-     * Booking collection
-     *
-     * @var BookingCollection
+     * First booking date
+     * 
+     * @var \DateTime
      */
-    protected $bookings;
+    protected $firstbookingbookeddate;
+    
+    /**
+     * Number of confirmed bookings
+     * 
+     * @var integer
+     */
+    protected $confirmedbookings = 0;
+    
+    /**
+     * Value of confirmed bookings
+     * 
+     * @var integer
+     */
+    protected $confirmedbookingsvalue = 0;
+    
+    /**
+     * Account balance
+     * 
+     * @var integer
+     */
+    protected $accountbalance = 0;
 
-    // -------------------------- Public Functions -------------------------- //
-
+    // -------------------- Public Functions -------------------- //
+    
     /**
      * Constructor
      *
+     * @param integer $id ID
+     * 
      * @return void
      */
-    public function __construct()
+    public function __construct($id = null)
     {
-        parent::__construct();
-
-        $this->bookings = new BookingCollection();
-        $this->bookings->setElementParent($this);
+        $this->firstbookingbookeddate = new \DateTime();
+        
+        parent::__construct($id);
     }
 }

@@ -1,19 +1,7 @@
 <?php
 
-/**
- * Tabs Rest API Mimetype object.
- *
- * PHP Version 5.4
- *
- * @category  Tabs_Client
- * @package   Tabs
- * @author    Carlton Software <support@carltonsoftware.co.uk>
- * @copyright 2014 Carlton Software
- * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
- * @link      http://www.carltonsoftware.co.uk
- */
-
 namespace tabs\apiclient\core;
+use tabs\apiclient\Builder;
 
 /**
  * Tabs Rest API Mimetype object.
@@ -32,7 +20,7 @@ namespace tabs\apiclient\core;
  * @method Mimetype setName(string $name)      Sets the mimetype
  * @method Mimetype setShortname(string $name) Sets the short name
  */
-class Mimetype extends Base
+class Mimetype extends Builder
 {
     /**
      * Name
@@ -48,13 +36,14 @@ class Mimetype extends Base
      */
     protected $shortname = '';
     
+    // ------------------ Public Functions --------------------- //
+    
     /**
      * @inheritDoc
      */
     public function toArray()
     {
         return array(
-            'id' => $this->getId(),
             'name' => $this->getName(),
             'shortname' => $this->getShortname()
         );

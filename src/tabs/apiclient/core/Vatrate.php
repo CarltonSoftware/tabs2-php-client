@@ -1,19 +1,7 @@
 <?php
 
-/**
- * Tabs Rest API Vatband object.
- *
- * PHP Version 5.4
- *
- * @category  Tabs_Client
- * @package   Tabs
- * @author    Carlton Software <support@carltonsoftware.co.uk>
- * @copyright 2014 Carlton Software
- * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
- * @link      http://www.carltonsoftware.co.uk
- */
-
 namespace tabs\apiclient\core;
+use tabs\apiclient\Builder;
 
 /**
  * Tabs Rest API Vatband object.
@@ -58,15 +46,17 @@ class Vatrate extends Builder
      */
     protected $percentage = 0;
     
+    // ------------------ Public Functions --------------------- //
+
     /**
-     * Constructor
-     * 
-     * @return void
+     * @inheritDoc
      */
-    public function __construct()
+    public function __construct($id = null)
     {
         $this->setFromdate(new \DateTime());
         $this->setTodate(new \DateTime());
+        
+        parent::__construct($id);
     }
     
     /**
@@ -75,7 +65,6 @@ class Vatrate extends Builder
     public function toArray()
     {
         return array(
-            'id' => $this->getId(),
             'fromdate' => $this->getFromdate()->format('Y-m-d'),
             'todate' => $this->getFromdate()->format('Y-m-d'),
             'percentage' => $this->getPercentage()

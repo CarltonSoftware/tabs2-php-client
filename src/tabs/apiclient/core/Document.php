@@ -1,21 +1,6 @@
 <?php
 
-/**
- * Tabs Rest API Document object.
- *
- * PHP Version 5.4
- *
- * @category  Core
- * @package   Tabs
- * @author    Carlton Software <support@carltonsoftware.co.uk>
- * @copyright 2015 Carlton Software
- * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
- * @version   Release: 1
- * @link      http://www.carltonsoftware.co.uk
- */
-
 namespace tabs\apiclient\core;
-use \tabs\apiclient\core\Mimetype;
 
 /**
  * Tabs Rest API Document object.
@@ -34,16 +19,14 @@ use \tabs\apiclient\core\Mimetype;
  * @method string    getWeight()       Returns the weight
  * @method Mimetype  getMimetype()     Returns the mimetype
  * @method \DateTime getTimeadded()    Returns the created time
- * @method string    getFileLocation() Return the location of the file
  *
  * @method Document  setName(string $filename)     Set the name
  * @method Document  setFilename(string $filename) Set the filename
  * @method Document  setDescription(string $desc)  Set the description
  * @method Document  setWeight(integer $weight)    Set the weight
  * @method Document  setPrivate(boolean $boolean)  Set the visibility flag
- * @method Document  setFileLocation(string $loc)  Set the file location
  */
-class Document extends FileBuilder
+class Document extends \tabs\apiclient\FileBuilder
 {
     /**
      * Name
@@ -93,45 +76,21 @@ class Document extends FileBuilder
      * @var Mimetype 
      */
     protected $mimetype;
-    
-    /**
-     * Location of stored file
-     * 
-     * @var string
-     */
-    protected $fileLocation = '';
-    
-    /**
-     * File id
-     * 
-     * @var string
-     */
-    protected $fileId;
-
-    // ------------------ Static Functions --------------------- //
-    
-    /**
-     * Request a document from the api
-     * 
-     * @param integer $id Document Id
-     * 
-     * @return Document
-     */
-    public static function get($id)
-    {
-        return self::_get('/document/' . $id);
-    }
 
     // -------------------------- Public Functions -------------------------- //
     
     /**
      * Constructor
      * 
+     * @param integer $id ID
+     * 
      * @return void
      */
-    public function __construct()
+    public function __construct($id = null)
     {
         $this->timeadded = new \DateTime();
+        
+        parent::__construct($id);
     }
     
     /**
@@ -145,49 +104,17 @@ class Document extends FileBuilder
     }
     
     /**
-     * This method will be called in the factory method when creating api objects.
-     * It will set the absolute location of it so the _setFileData function
-     * can file the file.
-     * 
-     * @param string $file Relative api file url
-     * 
-     * @return Document
-     */
-    public function setFile($file)
-    {
-        $this->fileId = Base::getIdFromString($file);
-        
-        return $this->setFileLocation(
-            $this->getUrl($file)
-        );
-    }
-    
-    /**
      * Set the document mimetype
      * 
      * @param array|stdClass|Mimetype $mimeType Mimetype
      * 
-     * @return \tabs\apiclient\core\Document
+     * @return Document
      */
     public function setMimetype($mimeType)
     {
         $this->mimetype = Mimetype::factory($mimeType);
         
         return $this;
-    }
-    
-    /**
-     * @inheritDoc
-     */
-    public function getFiledata()
-    {
-        if (strlen($this->getFileLocation()) > 0) {
-            return file_get_contents(
-                $this->getFileLocation()
-            );
-        } else {
-            return;
-        }
     }
     
     /**
@@ -214,7 +141,7 @@ class Document extends FileBuilder
     public function getImageUrl($type, $width = 0, $height = 0)
     {
         return $this->getUrl(
-            '/file/' . implode(
+            'file/' . implode(
                 '/',
                 array(
                     $this->fileId,
@@ -258,65 +185,15 @@ class Document extends FileBuilder
     }
     
     /**
-     * Get the absolute path to the url
-     * 
-     * @return string
-     */
-    public function getUrl($uri)
-    {
-        return $this->getRequest($uri)->getUrl();
-    }
-    
-    /**
-     * Get the relative path to the image url
-     * 
-     * @return string
-     */
-    public function getPath($uri)
-    {
-        return $this->getRequest($uri)->getPath();
-    }
-    
-    /**
-     * Return the request object
-     * 
-     * @return \GuzzleHttp\Message\RequestInterface
-     */
-    public function getRequest($uri)
-    {
-        $req = \tabs\apiclient\client\Client::getClient()->createRequest(
-            'GET',
-            $uri
-        );
-        
-        return \tabs\apiclient\client\Client::getClient()
-            ->getHmac()
-            ->setHmacParams($req);
-    }
-    
-    /**
      * @inheritDoc
      */
     public function toArray()
     {
         return array(
-            'id' => $this->getId(),
             'name' => $this->getName(),
             'weight' => $this->getWeight(),
             'description' => $this->getDescription(),
             'private' => $this->boolToStr($this->isPrivate())
         );
     }
-    
-    /**
-     * ToString magic method
-     * 
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->getName();
-    }
-
-    // ------------------------- Private Functions -------------------------- //
 }

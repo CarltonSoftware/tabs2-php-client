@@ -1,20 +1,8 @@
 <?php
 
-/**
- * Tabs Rest API Vatband object.
- *
- * PHP Version 5.4
- *
- * @category  Tabs_Client
- * @package   Tabs
- * @author    Carlton Software <support@carltonsoftware.co.uk>
- * @copyright 2014 Carlton Software
- * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
- * @link      http://www.carltonsoftware.co.uk
- */
-
 namespace tabs\apiclient\core;
-use tabs\apiclient\collection\core\Vatrate as VatrateCollection;
+use tabs\apiclient\Builder;
+use tabs\apiclient\Collection;
 
 /**
  * Tabs Rest API Vatband object.
@@ -30,7 +18,7 @@ use tabs\apiclient\collection\core\Vatrate as VatrateCollection;
  * @method string  getVatband()                Returns the Vatband
  * @method Vatband setVatband(string $vatband) Sets the Vatband
  * 
- * @method VatrateCollection getVatrates() Return the vatrates collection
+ * @method Collection getVatrates() Return the vatrates collection
  */
 class Vatband extends Builder
 {
@@ -44,19 +32,23 @@ class Vatband extends Builder
     /**
      * Vat rates
      * 
-     * @var VatrateCollection
+     * @var Collection
      */
     protected $vatrates;
-
+    
+    // ------------------ Public Functions --------------------- //
+    
     /**
-     * Constructor
-     * 
-     * @return void
+     * @inheritDoc
      */
-    public function __construct()
+    public function __construct($id = null)
     {
-        $this->vatrates = new VatrateCollection();
-        $this->vatrates->setElementParent($this);
+        $this->vatrates = \tabs\apiclient\Collection::factory(
+            'vatrate',
+            new Vatrate()
+        );
+        
+        parent::__construct($id);
     }
     
     /**
@@ -64,7 +56,7 @@ class Vatband extends Builder
      * 
      * @param array $vatrates Array of vat rates
      * 
-     * @return \tabs\apiclient\core\Vatband
+     * @return Vatband
      */
     public function setVatrates($vatrates)
     {
@@ -79,9 +71,9 @@ class Vatband extends Builder
     /**
      * Add a new vat rate
      * 
-     * @param \tabs\apiclient\core\Vatrate $vr Vat rate object
+     * @param Vatrate $vr Vat rate object
      * 
-     * @return \tabs\apiclient\core\Vatband
+     * @return Vatband
      */
     public function addVatrate(Vatrate &$vr)
     {
@@ -93,7 +85,7 @@ class Vatband extends Builder
     /**
      * Return the active vat rate
      * 
-     * @return \tabs\apiclient\core\Vatrate
+     * @return Vatrate
      */
     public function getCurrentVatrate()
     {
@@ -111,7 +103,6 @@ class Vatband extends Builder
     public function toArray()
     {
         return array(
-            'id' => $this->getId(),
             'band' => $this->getVatband()
         );
     }

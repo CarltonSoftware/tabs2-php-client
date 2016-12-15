@@ -6,23 +6,12 @@
     "type": "library",
     "minimum-stability": "dev",
     "require": {
-        "php": ">=5.4",
-        "guzzlehttp/guzzle": "4.*",
-        "ext-gd": "*"
+        "php": ">=5.5",
+        "guzzlehttp/guzzle": "6.2.2",
+        "sainsburys/guzzle-oauth2-plugin": "~3.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.8.*@dev",
-        "ext-xdebug": "*",
-        "phpunit/php-code-coverage": "2.2.*@dev",
-        "phpunit/phpunit-mock-objects": "2.3.*@dev",
-        "sebastian/version": "1.0.*",
-        "sebastian/environment": "1.3.*@dev",
-        "theseer/phpdox": "0.8.*",
-        "sebastian/phpcpd": "2.0.*",
-        "phpmd/phpmd": "2.1.*",
-        "pdepend/pdepend": "2.0.*",
-        "phploc/phploc": "2.0.*@dev",
-        "instaclick/php-code-sniffer": "1.4.2"
+        
     },
     "autoload": {
         "psr-0": {

@@ -1,19 +1,7 @@
 <?php
 
-/**
- * Tabs Rest Encoding object.
- *
- * PHP Version 5.4
- *
- * @category  Core
- * @package   Tabs
- * @author    Carlton Software <support@carltonsoftware.co.uk>
- * @copyright 2014 Carlton Software
- * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
- * @link      http://www.carltonsoftware.co.uk
- */
-
 namespace tabs\apiclient\core;
+use tabs\apiclient\Builder;
 
 /**
  * Tabs Rest Encoding object. 
@@ -29,7 +17,7 @@ namespace tabs\apiclient\core;
  * @method string   getEncoding()                 Returns the encoding type
  * @method Encoding setEncoding(string $encoding) Set the encoding
  */
-class Encoding extends Base
+class Encoding extends Builder
 {
     /**
      * Encoding
@@ -39,14 +27,14 @@ class Encoding extends Base
     protected $encoding;
 
     // ------------------ Public Functions --------------------- //
-
+    
     /**
-     * String magic method
-     * 
-     * @return string
+     * @inheritDoc
      */
-    public function __toString()
+    public function toArray()
     {
-        return $this->getEncoding();
+        return array(
+            'encoding' => $this->getEncoding()
+        );
     }
 }

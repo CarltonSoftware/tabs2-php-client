@@ -1,19 +1,7 @@
 <?php
 
-/**
- * Tabs Rest API Source object.
- *
- * PHP Version 5.4
- *
- * @category  Tabs_Client
- * @package   Tabs
- * @author    Carlton Software <support@carltonsoftware.co.uk>
- * @copyright 2015 Carlton Software
- * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
- * @link      http://www.carltonsoftware.co.uk
- */
-
 namespace tabs\apiclient\core;
+use tabs\apiclient\Builder;
 
 /**
  * Tabs Rest API Source object.
@@ -32,7 +20,7 @@ namespace tabs\apiclient\core;
  * @method string         getDescription()                    Returns the description
  * @method Source         setDescription(string $description) Sets the description
  * 
- * @method Sourcecategory getSourcecategory()                 Returns the sourcecategory
+ * @method SourceCategory getSourceCategory()                 Returns the sourcecategory
  */
 class Source extends Builder
 {
@@ -55,21 +43,39 @@ class Source extends Builder
      * 
      * @var Sourcecategory
      */
-    protected $sourcecategory;
+    protected $sourceCategory;
     
-    
+    /**
+     * SourceMarketingBrand Collection
+     * 
+     * @var Collection
+     */
+    protected $sourceMarketingBrands;
+
     // ------------------ Public Functions --------------------- //
+    
+    /**
+     * @inheritDoc
+     */
+    public function __construct($id = null)
+    {
+        $this->sourceMarketingBrands = \tabs\apiclient\Collection::factory(
+            new SourceMarketingBrand,
+            $this
+        );
+        parent::__construct($id);
+    }
     
     /**
      * Set the source sourcecategory
      * 
-     * @param array|stdClass|Sourcecategory $sourcecategory Sourcecategory
+     * @param array|stdClass|SourceCategory $sourcecategory SourceCategory
      * 
-     * @return \tabs\apiclient\core\Source
+     * @return Source
      */
     public function setSourcecategory($sourcecategory)
     {
-        $this->sourcecategory = Sourcecategory::factory($sourcecategory);
+        $this->sourceCategory = SourceCategory::factory($sourcecategory);
         
         return $this;
     }
@@ -80,19 +86,9 @@ class Source extends Builder
     public function toArray()
     {
         return array(
-            'id' => $this->getId(),
             'sourcecode' => $this->getSourcecode(),
             'description' => $this->getDescription(),
-            'sourcecategory' => $this->getSourcecategory()->toArray(),
+            'sourcecategory' => $this->getSourceCategory()->getId()
         );
-    }
-    
-    /**
-     * ToString magic method
-     * 
-     * @return string
-     */
-    public function __toString() {
-        return (string) $this->getId();
     }
 }

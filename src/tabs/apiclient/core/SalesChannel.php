@@ -1,19 +1,7 @@
 <?php
 
-/**
- * Tabs Rest API Sales Channel object
- *
- * PHP Version 5.4
- *
- * @category  Tabs_Client
- * @package   Tabs
- * @author    Carlton Software <support@carltonsoftware.co.uk>
- * @copyright 2014 Carlton Software
- * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
- * @link      http://www.carltonsoftware.co.uk
- */
-
 namespace tabs\apiclient\core;
+use tabs\apiclient\Builder;
 
 /**
  * A Sales Channel is a route to market, e.g. direct sale, web, affiliate, reseller
@@ -32,7 +20,7 @@ namespace tabs\apiclient\core;
  * @method string       getDescription()             Returns the description
  * @method SalesChannel setDescription(string $code) Sets the description
  */
-class SalesChannel extends \tabs\apiclient\core\Builder
+class SalesChannel extends Builder
 {
     /**
      * The short name of the Sales Channel
@@ -57,19 +45,8 @@ class SalesChannel extends \tabs\apiclient\core\Builder
     public function toArray()
     {
         return array(
-            'id' => $this->getId(),
             'saleschannel' => $this->getSaleschannel(),
-            'description' => $this->getDescription(),
+            'description' => $this->getDescription()
         );
-    }
-
-    /**
-     * String magic method
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->getSaleschannel();  
     }
 }

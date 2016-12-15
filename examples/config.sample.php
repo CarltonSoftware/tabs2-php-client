@@ -1,6 +1,7 @@
 <?php
 
-define('APIURL', 'http://localhost:8000');
-define('APIKEY', '1');
-define('APISECRET', '1');
-define('APIOPTIONS', serialize(array('prefix' => 'app_dev.php/v2')));
+define('TABS2APIURL', 'http://localhost');
+define('TABS2APIUSERNAME', '1');
+define('TABS2APIPASSWORD', '1');
+define('TABS2APICLIENTID', '1');
+define('TABS2APICLIENTSECRET', '1');
