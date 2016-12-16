@@ -339,7 +339,7 @@ abstract class Base
                                     $this->$property->fetch();
                                 }
                             } catch (\Exception $ex) {
-
+                                
                             }
                         }
                         
@@ -417,7 +417,9 @@ abstract class Base
                 && (!$value instanceof \tabs\apiclient\Collection)
                 && is_array($value)
             ) {
-                $obj->$property->setElements($value)->setFetched(true);
+                if (count($value) > 0) {
+                    $obj->$property->setElements($value)->setFetched(true);
+                }
             } else {
                 // Normo property values
                 $obj->$property = $value;

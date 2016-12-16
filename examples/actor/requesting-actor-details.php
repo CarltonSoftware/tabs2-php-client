@@ -21,7 +21,7 @@ require_once __DIR__ . '/../creating-a-new-connection.php';
 try {
 
     if ($id = filter_input(INPUT_GET, 'id')) {
-        $customer = new tabs\apiclient\actor\Customer(7);
+        $customer = new tabs\apiclient\Customer($id);
         $customer->get();
 
         echo '<h3>Customer</h3>';
@@ -43,7 +43,7 @@ try {
             }
         }
         echo sprintf(
-            '<p><a href="add-note.php?customer=%s">Add new note</a></p>',
+            '<p><a href="add-note.php?id=%s">Add new note</a></p>',
             $customer->getId()
         );
 
@@ -73,7 +73,7 @@ try {
                     <th>From</th>
                     <th>To</th>
                 </tr>
-                //<?php
+                <?php
 //                foreach ($bookings as $booking) {
 //                    echo sprintf(
 //                        '<tr><td><a href="../booking/accessing-booking-information.php?id=%u">%s</a></td>' .
@@ -87,13 +87,13 @@ try {
 //                }
 //            ?>
             </table>
-            //<?php
+            <?php
 //        }
 
     } else {
         $collection = tabs\apiclient\Collection::factory(
             'customer',
-            new \tabs\apiclient\actor\Customer
+            new \tabs\apiclient\Customer
         );
         
         $collection->setLimit(filter_input(INPUT_GET, 'limit'))

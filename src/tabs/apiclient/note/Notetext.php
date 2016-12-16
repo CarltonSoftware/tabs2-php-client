@@ -32,7 +32,7 @@ namespace tabs\apiclient\note;
  * @method Notetext setId(integer $id)       Set the note id
  * @method Notetext setText(string $subject) Set the note text
  */
-class Notetext extends Notemeta
+class Notetext extends \tabs\apiclient\Notemeta
 {
     /**
      * Note Text
@@ -50,11 +50,15 @@ class Notetext extends Notemeta
      */
     public function toArray()
     {
-        return array(
-            'createdbyactorid' => $this->getCreatedby()->getId(),
-            'notetext' => $this->getText(),
-            'createddatetime' => $this->getCreated()->format('Y-m-d H:i:s')
+        $arr = array(
+            'notetext' => $this->getText()
         );
+        
+        if ($this->getCreatedby()) {
+            $arr['createdbyactorid'] = $this->getCreatedby()->getId();
+        }
+        
+        return $arr;
     }
     
     /**

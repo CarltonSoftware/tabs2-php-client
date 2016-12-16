@@ -3,7 +3,8 @@
 // Include the connection
 require_once __DIR__ . '/../creating-a-new-connection.php';
 
-$class = new tabs\apiclient\property\PropertyBranding();
+$class = new tabs\apiclient\pricetype\Branding();
+
 $ref = new ReflectionClass($class);
 $properties = array();
 
@@ -73,23 +74,37 @@ foreach ($properties as $prop => $type) {
 
 echo "\t// -------------------- Public Functions -------------------- //\n\n";
 
-echo "\t/**\n\t * Constructor\n\t *\n\t * @return void\n\t */\n";
-echo "\tpublic function __construct()\n\t{\n";
+echo "\t/**\n\t * @inheritDoc\n\t */\n";
+echo "\tpublic function __construct(\$id = null)\n\t{\n";
 
 foreach ($properties as $prop => $type) {
     if (in_array($type, array('\DateTime'))) {
         echo sprintf(
-            "\t\t\$this->%s = \$this->%s;\n",
+            "\t\t\$this->%s = new \DateTime();\n",
+            $prop
+        );
+    }
+    
+    if (substr($type, 0, 10) == 'Collection') {
+        $types = explode('|', $type);
+        $type = array_pop($types);
+        echo sprintf(
+            "\t\t\$this->%s = Collection::factory('', new %s, \$this);\n",
             $prop,
-            'get' . ucfirst($prop) . '()'
+            $type
         );
     }
 }
 
+echo "\t\tparent::__construct(\$id);\n";
 echo "\t}\n\n";
 
 foreach ($properties as $prop => $type) {
-    if (!in_array($type, array('string', 'integer', 'float', 'boolean', '\DateTime'))) {
+    
+    if (!in_array($type, array('string', 'integer', 'float', 'boolean', '\DateTime')) 
+        && substr($type, 0, 10) !== 'Collection'
+        && !in_array($prop, array('id', 'parent'))
+    ) {
         echo sprintf(
             "\t/**\n\t * Set the %s\n\t *\n\t * @param stdclass|array|%s $%s The %s\n\t *\n\t * @return %s\n\t */\n",
             $prop,
@@ -122,6 +137,9 @@ echo "\tpublic function toArray()\n\t{\n";
 
 echo "\t\treturn array(\n";
 foreach ($properties as $prop => $type) {
+    if (substr($type, 0, 10) == 'Collection' || $prop == 'id' || $prop == 'parent') {
+        continue;
+    }
     echo sprintf(
         "\t\t\t'%s' => \$this->%s,\n",
         $prop,

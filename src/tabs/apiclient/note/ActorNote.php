@@ -2,8 +2,7 @@
 
 namespace tabs\apiclient\note;
 use tabs\apiclient\Builder;
-use tabs\apiclient\actor\Actor;
-use tabs\apiclient\note\Note;
+use tabs\apiclient\Note;
 
 /**
  * Tabs Rest Note Association object. 
@@ -16,7 +15,6 @@ use tabs\apiclient\note\Note;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method Actor getActor() Get the Actor
  * @method Note  getNote()  Get the Note
  */
 class ActorNote extends Builder
@@ -27,13 +25,6 @@ class ActorNote extends Builder
      * @var Note
      */
     protected $note;
-    
-    /**
-     * Actor
-     * 
-     * @var Actor
-     */
-    protected $actor;
 
     // ------------------ Public Functions --------------------- //
     
@@ -50,26 +41,6 @@ class ActorNote extends Builder
         
         return $this;
     }
-    
-    /**
-     * Set the actor
-     * 
-     * @param array|stdClass|Actor $actor Actor
-     * 
-     * @return ActorNote
-     */
-    public function setActor($actor)
-    {
-        if (is_string($actor)) {
-            $stubs = explode('/', substr($actor, 4));
-            $class = 'tabs\apiclient\actor\\' . $stubs[0];
-            $this->actor = $class::factory(implode('/', $stubs));
-        } else {
-            $this->actor = $actor;
-        }
-        
-        return $this;
-    }
 
     /**
      * @inheritDoc
@@ -78,7 +49,15 @@ class ActorNote extends Builder
     {
         return array(
             'noteid' => $this->getNote()->getId(),
-            'actorid' => $this->getActor()->getId()
+            'actorid' => $this->getParent()->getId()
         );
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function getCreateUrl()
+    {
+        return 'actornote';
     }
 }

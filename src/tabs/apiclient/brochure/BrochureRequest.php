@@ -15,9 +15,9 @@
 
 namespace tabs\apiclient\brochure;
 use tabs\apiclient\Builder;
-use tabs\apiclient\actor\Customer;
-use tabs\apiclient\actor\Tabsuser;
-use tabs\apiclient\core\SourceMarketingBrand;
+use tabs\apiclient\Customer;
+use tabs\apiclient\Tabsuser;
+use tabs\apiclient\SourceMarketingBrand;
 
 /**
  * Tabs Rest API Brochure Request object.
@@ -53,14 +53,14 @@ class BrochureRequest extends Builder
     /**
      * Brochure customer
      * 
-     * @var \tabs\apiclient\actor\Customer
+     * @var \tabs\apiclient\Customer
      */
     protected $customer;
     
     /**
      * Brochure tabs user
      * 
-     * @var \tabs\apiclient\actor\TabsUser
+     * @var \tabs\apiclient\Tabsuser
      */
     protected $tabsuser;
     
@@ -107,13 +107,13 @@ class BrochureRequest extends Builder
     /**
      * Set the brochure request customer
      * 
-     * @param stdClass|array|TabsUser $tabsuser Brochure customer
+     * @param stdClass|array|Tabsuser $tabsuser Brochure customer
      * 
      * @return BrochureRequest
      */
     public function setTabsuser($tabsuser)
     {
-        $this->tabsuser = TabsUser::factory($tabsuser);
+        $this->tabsuser = Tabsuser::factory($tabsuser);
         
         return $this;
     }
@@ -123,7 +123,7 @@ class BrochureRequest extends Builder
      * 
      * @param stdClass|array|Sourcemarketingbrand $smb Source marketing brand
      * 
-     * @return \tabs\apiclient\core\Brochure
+     * @return BrochureRequest
      */
     public function setSourcemarketingbrand($smb)
     {

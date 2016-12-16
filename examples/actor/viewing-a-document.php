@@ -20,7 +20,7 @@ try {
 
     if ($id = filter_input(INPUT_GET, 'id')) {
         
-        $document = new \tabs\apiclient\core\Document($id);
+        $document = new \tabs\apiclient\Document($id);
         
         header('Content-Type: ' . $document->get()->getMimetype()->getName());
         echo $document->getFiledata();

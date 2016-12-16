@@ -18,14 +18,14 @@ require_once __DIR__ . '/../creating-a-new-connection.php';
 
 try {
 
-    if ($customerId = filter_input(INPUT_GET, 'customer')) {
+    if ($customerId = filter_input(INPUT_GET, 'id')) {
 
-        $customer = new \tabs\apiclient\actor\Customer($customerId);
+        $customer = new \tabs\apiclient\Customer($customerId);
         $customer->get();
 
-        $note = new \tabs\apiclient\note\Note();
+        $note = new \tabs\apiclient\Note();
 
-        $noteType = new tabs\apiclient\note\Notetype();
+        $noteType = new tabs\apiclient\Notetype();
         $noteType->setDescription('A normal bog standard note.')
             ->setType('normal');
 
@@ -42,12 +42,10 @@ try {
         $note->create();
         $noteText->create();
         $actorNote = new \tabs\apiclient\note\ActorNote();
-        $actorNote->setNote($note)->setActor($customer)->create();
+        $actorNote->setNote($note)->setParent($customer)->create();
 
         header('Location: requesting-actor-details.php?id=' . $customer->getId());
 
-    } else {
-        echo 'Customer not found';
     }
 } catch(Exception $e) {
     echo $e->getMessage();

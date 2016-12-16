@@ -22,7 +22,7 @@ try {
         
         $property = new \tabs\apiclient\property\Property($id);
         
-        $propertyDoc = new \tabs\apiclient\property\PropertyDocument();
+        $propertyDoc = new \tabs\apiclient\property\Document();
         $property->getDocuments()->addElement($propertyDoc);
         $document = new \tabs\apiclient\core\Image();
         $document->setAlt('A property image')

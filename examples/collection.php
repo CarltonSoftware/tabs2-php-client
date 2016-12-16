@@ -7,10 +7,11 @@ if (!empty($collection)) {
 
     echo '<ul>';
     foreach ($collection as $element) {
+        $text = (string) $element;
         echo sprintf(
             '<li><a href="?id=%s">%s</a></li>',
             $element->getId(),
-            (string) $element
+            stristr($text, '<title>') ? htmlentities($text) : $text
         );
     }
     echo '</ul>';

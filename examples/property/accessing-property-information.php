@@ -19,7 +19,7 @@ require_once __DIR__ . '/../creating-a-new-connection.php';
 try {
     if ($id = filter_input(INPUT_GET, 'id')) {
 
-        $property = new \tabs\apiclient\property\Property($id);
+        $property = new \tabs\apiclient\Property($id);
         $property->get();
         ?>
 
@@ -29,7 +29,19 @@ try {
         <p><?php echo $property->getBedrooms(); ?> bedrooms</p>
         
         <?php
-            if ($property->getDocuments()->count()) {
+        
+            if ($property->getMarketingbrands()->count() > 0) {
+                ?>
+        <p>Marketing Brand: <?php echo $property->getMarketingbrands()->first()->getMarketingbrand()->getName(); ?></p>
+                <?php
+                
+                if ($property->getMarketingbrands()->first()->getBrochures()->count() > 0) {
+                    $collection = $property->getMarketingbrands()->first()->getBrochures();
+                    include __DIR__ . '/../collection.php';
+                }
+            }
+        
+            if ($property->getDocuments()->count() > 0) {
                 $collection = $property->getDocuments();
                 include __DIR__ . '/../collection.php';
             }
@@ -38,11 +50,19 @@ try {
             <p><a href="add-image.php?id=<?php echo $property->getId(); ?>">Add an image</a></p>
         <?php
         
+            $collection = $property->getNotes();
+            include __DIR__ . '/../collection.php';
+        ?>
+            <p><a href="add-note.php?id=<?php echo $property->getId(); ?>">Add a note</a></p>
+        <?php
+        
+            $collection = $property->getInspections();
+            include __DIR__ . '/../collection.php';
     } else {
 
         $collection = tabs\apiclient\Collection::factory(
             'property',
-            new \tabs\apiclient\property\Property
+            new \tabs\apiclient\Property
         );
         $collection->setLimit(filter_input(INPUT_GET, 'limit'))
             ->setPage(filter_input(INPUT_GET, 'page'))

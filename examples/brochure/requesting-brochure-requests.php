@@ -18,7 +18,7 @@ require_once __DIR__ . '/../creating-a-new-connection.php';
 
 try {
     
-    $brochure = new \tabs\apiclient\brochure\Brochure(1);
+    $brochure = new \tabs\apiclient\Brochure(1);
     
     echo '<ul>';
     foreach ($brochure->get()->getBrochurerequests() as $request) {

@@ -15,6 +15,7 @@
 
 namespace tabs\apiclient\note;
 use tabs\apiclient\Builder;
+use tabs\apiclient\Note;
 
 /**
  * Tabs Rest Note Association object. 
@@ -38,6 +39,7 @@ use tabs\apiclient\Builder;
  * @method boolean getRequiresconfirmation() Bool getter
  * @method boolean getShowonweb()            Bool getter
  * @method boolean getShowonavailability()   Bool getter
+ * @method Note    getNote()                 Get the Note
  */
 class PropertyNote extends Builder
 {
@@ -95,6 +97,20 @@ class PropertyNote extends Builder
         
         parent::__construct($id);
     }
+    
+    /**
+     * Set a note
+     * 
+     * @param array|stdClass|Note $note Note
+     * 
+     * @return PropertyNote
+     */
+    public function setNote($note)
+    {
+        $this->note = Note::factory($note);
+        
+        return $this;
+    }
 
     /**
      * @inheritDoc
@@ -102,6 +118,7 @@ class PropertyNote extends Builder
     public function toArray()
     {
         return array(
+            'propertyid' => $this->getParent()->getId(),
             'noteid' => $this->getNote()->getId(),
             'fromdate' => $this->getFromdate()->format('Y-m-d'),
             'todate' => $this->getFromdate()->format('Y-m-d'),
@@ -109,5 +126,13 @@ class PropertyNote extends Builder
             'showonweb' => $this->boolToStr($this->getShowonweb()),
             'showonavailability' => $this->boolToStr($this->getShowonavailability())
         );
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function getCreateUrl()
+    {
+        return 'propertynote';
     }
 }

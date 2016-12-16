@@ -20,11 +20,11 @@ try {
 
     if ($id = filter_input(INPUT_GET, 'id')) {
         
-        $customer = new \tabs\apiclient\actor\Customer($id);
+        $customer = new \tabs\apiclient\Customer($id);
         
-        $actorDoc = new \tabs\apiclient\actor\ActorDocument();
+        $actorDoc = new \tabs\apiclient\actor\Document();
         $customer->getDocuments()->addElement($actorDoc);
-        $document = new \tabs\apiclient\core\Document();
+        $document = new \tabs\apiclient\Document();
         $document->setName('A text file')
             ->setDescription('This is a simple text file upload test')
             ->setWeight(1)

@@ -167,6 +167,28 @@ class Client extends \GuzzleHttp\Client
     {
         return $this->createQueryRequest('get', $url, $params, $options);
     }
+    
+    /**
+     * Get the active user
+     * 
+     * @return \tabs\apiclient\actor\Actor
+     */
+    public function whoami()
+    {
+        $json = \tabs\apiclient\Base::getJson(
+            $this->get(
+                'whoami'
+            )
+        );
+        $class = 'tabs\apiclient\\' . $json->type;
+        $actor = new $class();
+        \tabs\apiclient\Base::setObjectProperties(
+            $actor,
+            $json
+        );
+        
+        return $actor;
+    }
 
     /**
      * Overriden delete request
