@@ -202,7 +202,7 @@ class Pagination extends Base
      */
     public function getMaxPages()
     {
-        return ceil($this->getTotal() / $this->getLimit());
+        return $this->getTotal() > 0 ? ceil($this->getTotal() / $this->getLimit()) : 0;
     }
 
     /**

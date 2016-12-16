@@ -20,11 +20,11 @@ try {
 
     if ($id = filter_input(INPUT_GET, 'id')) {
         
-        $property = new \tabs\apiclient\property\Property($id);
+        $property = new \tabs\apiclient\Property($id);
         
         $propertyDoc = new \tabs\apiclient\property\Document();
         $property->getDocuments()->addElement($propertyDoc);
-        $document = new \tabs\apiclient\core\Image();
+        $document = new \tabs\apiclient\Image();
         $document->setAlt('A property image')
             ->setDescription('This is a property image')
             ->setWeight(1)

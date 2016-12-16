@@ -20,11 +20,11 @@ try {
 
     if ($id = filter_input(INPUT_GET, 'id')) {
 
-        $property = new \tabs\apiclient\property\Property($id);
+        $property = new \tabs\apiclient\Property($id);
         $me = tabs\apiclient\client\Client::getClient()->whoami();
-        $note = new \tabs\apiclient\note\Note();
+        $note = new \tabs\apiclient\Note();
 
-        $noteType = new tabs\apiclient\note\Notetype();
+        $noteType = new tabs\apiclient\Notetype();
         $noteType->setDescription('A normal bog standard note.')
             ->setType('normal');
 
