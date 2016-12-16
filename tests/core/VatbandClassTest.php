@@ -23,7 +23,6 @@ class VatbandClassTest extends ApiClientClassTest
         $this->assertEquals(50, $band->getCurrentVatrate()->getPercentage());
         $this->assertEquals('Standard band - 50%', (string) $band);
 
-        $this->assertArrayHasKey('id', $band->toArray());
         $this->assertArrayHasKey('band', $band->toArray());
 
         $band->setVatrates(

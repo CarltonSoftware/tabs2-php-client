@@ -15,29 +15,23 @@ class ApiClientRequestsClassTest extends PHPUnit_Framework_TestCase
      * 
      * @return void
      */
-    public function testRequest($method, $status, $args = 'args', $hmac = false)
+    public function testRequest($method, $status, $args = 'args')
     {
-        if ($hmac) {
-            \tabs\apiclient\client\Client::factory('http://httpbin.org/', 'mouse', 'cottage');
-        } else {
-            \tabs\apiclient\client\Client::factory('http://httpbin.org/');
-        }
+        \tabs\apiclient\client\Client::factory(
+            'http://httpbin.org/'
+        );
         
-        $request = \tabs\apiclient\client\Client::getClient()->$method(
+        $response = \tabs\apiclient\client\Client::getClient()->$method(
             $method,
             array(
                 'foo' => 'bar'
             )
         );
         
-        $this->assertEquals($status, $request->getStatusCode());
+        $this->assertEquals($status, $response->getStatusCode());
         $this->assertEquals(
             'bar',
-            $request->json(
-                array(
-                    'object' => true
-                )
-            )->$args->foo
+            tabs\apiclient\Base::getJson($response)->$args->foo
         );
     }
     

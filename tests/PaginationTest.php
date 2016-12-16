@@ -2,7 +2,6 @@
 
 $file = dirname(__FILE__)
     . DIRECTORY_SEPARATOR . '..'
-    . DIRECTORY_SEPARATOR . '..'
     . DIRECTORY_SEPARATOR . 'tests'
     . DIRECTORY_SEPARATOR . 'client'
     . DIRECTORY_SEPARATOR . 'ApiClientClassTest.php';
@@ -12,7 +11,7 @@ class PaginationTest extends ApiClientClassTest
 {
     public function testPagination()
     {
-        $pagination = new \tabs\apiclient\utility\Pagination();
+        $pagination = new \tabs\apiclient\Pagination();
         $pagination->setTotal(150);
         
         $this->assertEquals('Pagination', $pagination->getClass());
@@ -42,7 +41,7 @@ class PaginationTest extends ApiClientClassTest
     
     public function testPaginationLimits()
     {
-        $pagination = new \tabs\apiclient\utility\Pagination();
+        $pagination = new \tabs\apiclient\Pagination();
         $pagination->setTotal(150);
         
         $pagination->setLimit(200);

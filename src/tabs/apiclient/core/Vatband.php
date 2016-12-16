@@ -58,7 +58,7 @@ class Vatband extends Builder
      * 
      * @return Vatband
      */
-    public function setVatrates($vatrates)
+    public function setVatrates(array $vatrates)
     {
         foreach ($vatrates as $vrate) {
             $vr = Vatrate::factory($vrate);

@@ -19,7 +19,7 @@ use \tabs\apiclient\client\Oauth\GrantType\RefreshToken;
 use \tabs\apiclient\client\Oauth\GrantType\PasswordCredentials;
 use \Sainsburys\Guzzle\Oauth2\Middleware\OAuthMiddleware;
 use \Psr\Http\Message\ResponseInterface;
-use \tabs\apiclient\client\Exception;
+use tabs\apiclient\exception\Exception;
 
 /**
  * Tabs API client object.
@@ -57,10 +57,10 @@ class Client extends \GuzzleHttp\Client
      */
     public static function factory(
         $base_uri,
-        $username,
-        $password,
-        $clientId,
-        $clientSecret,
+        $username = '',
+        $password = '',
+        $clientId = '',
+        $clientSecret = '',
         array $options = []
     ) {
         self::$instance = new static(
@@ -106,10 +106,10 @@ class Client extends \GuzzleHttp\Client
      */
     public function __construct(
         $base_uri,
-        $username,
-        $password,
-        $clientId,
-        $clientSecret,
+        $username = '',
+        $password = '',
+        $clientId = '',
+        $clientSecret = '',
         array $options = []
     ) {
         if (isset($options['HandlerStack'])) {
@@ -119,36 +119,39 @@ class Client extends \GuzzleHttp\Client
             $handlerStack = HandlerStack::create();
         }
         
+        if ($username != '') {
+            $options['handler'] = $handlerStack;
+            $options['auth'] = 'oauth2';
+
+            $config = [
+                PasswordCredentials::CONFIG_USERNAME => $username,
+                PasswordCredentials::CONFIG_PASSWORD => $password,
+                PasswordCredentials::CONFIG_CLIENT_ID => $clientId,
+                PasswordCredentials::CONFIG_CLIENT_SECRET => $clientSecret,
+                PasswordCredentials::CONFIG_TOKEN_URL => '/plato/oauth/v2/token',
+                PasswordCredentials::GRANT_TYPE => 'client_credentials'
+            ];
+
+            $token = new PasswordCredentials($this, $config);
+            $refreshToken = new RefreshToken($this, $config);
+            $middleware = new OAuthMiddleware($this, $token, $refreshToken);
+
+            if (isset($options['AccessToken'])) {
+                $middleware->setAccessToken($options['AccessToken']);
+            }
+
+            $handlerStack->push($middleware->onBefore());
+            $handlerStack->push($middleware->onFailure(5));
+        }
+        
         parent::__construct(
             array_merge(
                 array(
-                    'handler'=> $handlerStack,
-                    'base_uri' => $base_uri,
-                    'auth' => 'oauth2'
+                    'base_uri' => $base_uri
                 ),
                 $options
             )
         );
-
-        $config = [
-            PasswordCredentials::CONFIG_USERNAME => $username,
-            PasswordCredentials::CONFIG_PASSWORD => $password,
-            PasswordCredentials::CONFIG_CLIENT_ID => $clientId,
-            PasswordCredentials::CONFIG_CLIENT_SECRET => $clientSecret,
-            PasswordCredentials::CONFIG_TOKEN_URL => '/plato/oauth/v2/token',
-            PasswordCredentials::GRANT_TYPE => 'client_credentials'
-        ];
-
-        $token = new PasswordCredentials($this, $config);
-        $refreshToken = new RefreshToken($this, $config);
-        $middleware = new OAuthMiddleware($this, $token, $refreshToken);
-        
-        if (isset($options['AccessToken'])) {
-            $middleware->setAccessToken($options['AccessToken']);
-        }
-        
-        $handlerStack->push($middleware->onBefore());
-        $handlerStack->push($middleware->onFailure(5));
     }
 
     /**
