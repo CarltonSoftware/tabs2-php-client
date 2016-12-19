@@ -177,11 +177,11 @@ class Fixtures
     /**
      * Return test address object
      *
-     * @return \tabs\apiclient\core\Address
+     * @return \tabs\apiclient\Address
      */
     public static function getAddress()
     {
-        return \tabs\apiclient\core\Address::factory(
+        return \tabs\apiclient\Address::factory(
             array(
                 'line1' => 'Developer Room',
                 'line2' => 'Carlton House',
@@ -196,11 +196,11 @@ class Fixtures
     /**
      * Return a test country object
      *
-     * @return \tabs\apiclient\core\Country
+     * @return \tabs\apiclient\Country
      */
     public static function getCountry()
     {
-        return \tabs\apiclient\core\Country::factory(
+        return \tabs\apiclient\Country::factory(
             array(
                 'alpha2' => 'GB',
                 'alpha3' => 'GBR',
@@ -232,7 +232,7 @@ class Fixtures
     /**
      * Create a new note and a note text, and assign a customer to both
      *
-     * @return \tabs\apiclient\core\Note
+     * @return \tabs\apiclient\Note
      */
     public static function getNote()
     {
@@ -240,13 +240,13 @@ class Fixtures
 
         $noteType = Fixtures::getNotetype();
 
-        $note = new \tabs\apiclient\core\Note();
+        $note = new \tabs\apiclient\Note();
         $note->setId(1)
             ->setCreatedby($actor)
             ->setCreated('2014-08-09 12:34:56')
             ->setNotetype($noteType);
 
-        $noteText = new tabs\apiclient\core\Notetext();
+        $noteText = new tabs\apiclient\Notetext();
         $noteText->setId(1)
             ->setText('This is a note.')
             ->setCreatedby($actor)
@@ -275,22 +275,22 @@ class Fixtures
     /**
      * Return a new language object
      *
-     * @return \tabs\apiclient\core\Language
+     * @return \tabs\apiclient\Language
      */
     public static function getLanguage()
     {
-        $language = new tabs\apiclient\core\Language();
+        $language = new tabs\apiclient\Language();
         return $language;
     }
 
     /**
      * Return a note type
      *
-     * @return \tabs\apiclient\core\Notetype
+     * @return \tabs\apiclient\Notetype
      */
     public static function getNotetype()
     {
-        $noteType = new tabs\apiclient\core\Notetype();
+        $noteType = new tabs\apiclient\Notetype();
         $noteType->setDescription('A note type')
             ->setType('Note type');
 
@@ -300,11 +300,11 @@ class Fixtures
     /**
      * Return a sales channel
      *
-     * @return \tabs\apiclient\core\SalesChannel
+     * @return \tabs\apiclient\SalesChannel
      */
     public static function getSalesChannel()
     {
-        $salesChannel = new tabs\apiclient\core\SalesChannel();
+        $salesChannel = new tabs\apiclient\SalesChannel();
         $salesChannel->setId(2)
             ->setSaleschannel('Group Website')
             ->setDescription('Sales made via a group website, e.g. Original Cottages');
@@ -315,11 +315,11 @@ class Fixtures
     /**
      * Return a price type
      *
-     * @return \tabs\apiclient\core\pricing\PriceType
+     * @return \tabs\apiclient\pricing\PriceType
      */
     public static function getPriceType()
     {
-        $priceType = new tabs\apiclient\core\pricing\PriceType();
+        $priceType = new tabs\apiclient\pricing\PriceType();
         $priceType->setId(1)
             ->setPricetype('1D')
             ->setDescription('1 Day Break')
@@ -332,13 +332,13 @@ class Fixtures
     /**
      * Return a price type branding
      *
-     * @return \tabs\apiclient\core\pricing\PriceTypeBranding
+     * @return \tabs\apiclient\pricing\PriceTypeBranding
      */
     public static function getPriceTypeBranding()
     {
         $branding = Fixtures::getBranding();
         
-        $priceTypeBranding = new tabs\apiclient\core\pricing\PriceTypeBranding();
+        $priceTypeBranding = new tabs\apiclient\pricing\PriceTypeBranding();
         $priceTypeBranding->setBranding($branding)
             ->setFromdate(new \DateTime('2015-03-19'))
             ->setTodate(new \DateTime('2032-07-06'))
@@ -350,11 +350,11 @@ class Fixtures
     /**
      * Return a start day
      *
-     * @return \tabs\apiclient\core\pricing\Startday
+     * @return \tabs\apiclient\pricing\Startday
      */
     public static function getStartday()
     {
-        $startday = new tabs\apiclient\core\pricing\Startday();
+        $startday = new tabs\apiclient\pricing\Startday();
         
         $startday->setDayssincechangeday(3);
         
@@ -364,11 +364,11 @@ class Fixtures
     /**
      * Return a pricing method
      *
-     * @return \tabs\apiclient\core\pricing\PricingMethod
+     * @return \tabs\apiclient\pricing\PricingMethod
      */
     public static function getPricingMethod()
     {
-        $pricingMethod = new tabs\apiclient\core\pricing\PricingMethod();
+        $pricingMethod = new tabs\apiclient\pricing\PricingMethod();
         $pricingMethod->setId(1)
             ->setPricingmethod('Default')
             ->setDescription('Tabs New Pricing');
@@ -379,13 +379,13 @@ class Fixtures
     /**
      * Return a pricing method branding
      *
-     * @return \tabs\apiclient\core\pricing\PricingMethodBranding
+     * @return \tabs\apiclient\pricing\PricingMethodBranding
      */
     public static function getPricingMethodBranding()
     {
         $branding = Fixtures::getBranding();
         
-        $pricingMethodBranding = new tabs\apiclient\core\pricing\PricingMethodBranding();
+        $pricingMethodBranding = new tabs\apiclient\pricing\PricingMethodBranding();
         $pricingMethodBranding->setBranding($branding)
             ->setFromdate(new \DateTime('1914-12-10'))
             ->setTodate(new \DateTime('2007-05-28'));
@@ -551,11 +551,11 @@ class Fixtures
     /**
      * Return a status
      *
-     * @return \tabs\apiclient\core\status\Status
+     * @return \tabs\apiclient\status\Status
      */
     public static function getStatus($name = 'Live')
     {
-        $status = new tabs\apiclient\core\status\Status();
+        $status = new tabs\apiclient\status\Status();
         $status->setId(1)->setName($name);
 
         return $status;
@@ -564,11 +564,11 @@ class Fixtures
     /**
      * Return a status history
      *
-     * @return \tabs\apiclient\core\status\History
+     * @return \tabs\apiclient\status\History
      */
     public static function getNewStatusHistory()
     {
-        $history = new tabs\apiclient\core\status\History();
+        $history = new tabs\apiclient\status\History();
         $status = Fixtures::getStatus('New');
         $history->setStatus($status)
             ->setFromdate('2012-01-01')
@@ -580,11 +580,11 @@ class Fixtures
     /**
      * Return a status history
      *
-     * @return \tabs\apiclient\core\status\History
+     * @return \tabs\apiclient\status\History
      */
     public static function getLiveStatusHistory()
     {
-        $history = new tabs\apiclient\core\status\History();
+        $history = new tabs\apiclient\status\History();
         $status = Fixtures::getStatus();
         $history->setId(1)
             ->setStatus($status)
@@ -747,11 +747,11 @@ class Fixtures
     /**
      * Create a new boolean attribute
      *
-     * @return \tabs\apiclient\core\attribute\Attribute
+     * @return \tabs\apiclient\attribute\Attribute
      */
     public static function getBooleanAttribute()
     {
-        $attr = new tabs\apiclient\core\attribute\Attribute();
+        $attr = new tabs\apiclient\attribute\Attribute();
         $attr->setId(1)
             ->setGroup(Fixtures::getAttributeGroup())
             ->setCode('ATTR01')
@@ -780,11 +780,11 @@ class Fixtures
     /**
      * Create and return a hyrid attribute
      *
-     * @return \tabs\apiclient\core\attribute\Attribute
+     * @return \tabs\apiclient\attribute\Attribute
      */
     public static function getHybridAttribute()
     {
-        $attr = new tabs\apiclient\core\attribute\Attribute();
+        $attr = new tabs\apiclient\attribute\Attribute();
         $attr->setId(2)
             ->setGroup(Fixtures::getAttributeGroup())
             ->setCode('ATTR02')
@@ -802,11 +802,11 @@ class Fixtures
     /**
      * Create and return a number attribute
      *
-     * @return \tabs\apiclient\core\attribute\Attribute
+     * @return \tabs\apiclient\attribute\Attribute
      */
     public static function getNumberAttribute()
     {
-        $attr = new tabs\apiclient\core\attribute\Attribute();
+        $attr = new tabs\apiclient\attribute\Attribute();
         $attr->setId(2)
             ->setGroup(Fixtures::getAttributeGroup())
             ->setCode('ATTR03')
@@ -840,11 +840,11 @@ class Fixtures
     /**
      * Create an return an attribute group
      *
-     * @return \tabs\apiclient\core\attribute\Group
+     * @return \tabs\apiclient\attribute\Group
      */
     public static function getAttributeGroup()
     {
-        $group = new tabs\apiclient\core\attribute\Group();
+        $group = new tabs\apiclient\attribute\Group();
         $group->setId(1)->setName('Misc');
 
         return $group;
@@ -853,11 +853,11 @@ class Fixtures
     /**
      * Create an return an attribute unit
      *
-     * @return \tabs\apiclient\core\Unit
+     * @return \tabs\apiclient\Unit
      */
     public static function getGenericUnit()
     {
-        $unit = new tabs\apiclient\core\Unit();
+        $unit = new tabs\apiclient\Unit();
         $unit->setId(2)
             ->setName('n')
             ->setDescription('Number')
@@ -869,11 +869,11 @@ class Fixtures
     /**
      * Create an return an attribute unit
      *
-     * @return \tabs\apiclient\core\Unit
+     * @return \tabs\apiclient\Unit
      */
     public static function getUnit()
     {
-        $unit = new tabs\apiclient\core\Unit();
+        $unit = new tabs\apiclient\Unit();
         $unit->setId(1)
             ->setName('m')
             ->setDescription('Metre')
@@ -885,11 +885,11 @@ class Fixtures
     /**
      * Create extra branding object
      * 
-     * @return \tabs\apiclient\core\extra\Branding
+     * @return \tabs\apiclient\extra\Branding
      */
     public static function getExtraBranding()
     {
-        $extraBranding = new \tabs\apiclient\core\extra\Branding();
+        $extraBranding = new \tabs\apiclient\extra\Branding();
         $extraBranding->setId(1);
 
         $branding = Fixtures::getBranding();
@@ -910,11 +910,11 @@ class Fixtures
     /**
      * Return a extra brand configuration option
      * 
-     * @return \tabs\apiclient\core\extra\Configuration
+     * @return \tabs\apiclient\extra\Configuration
      */
     public static function getExtraBrandingConfiguration()
     {
-        $config = new \tabs\apiclient\core\extra\BrandExtraConfiguration();
+        $config = new \tabs\apiclient\extra\BrandExtraConfiguration();
         $config->setFromdate(new \DateTime('2014-01-01'))
             ->setId(1)
             ->setTodate(new \DateTime('2029-12-31'))
@@ -928,11 +928,11 @@ class Fixtures
     /**
      * Return a extra brand unit price
      * 
-     * @return \tabs\apiclient\core\extra\UnitPrice
+     * @return \tabs\apiclient\extra\UnitPrice
      */
     public static function getExtraBrandingUnitPricing()
     {
-        $price = new tabs\apiclient\core\extra\UnitPrice();
+        $price = new tabs\apiclient\extra\UnitPrice();
         $price->setFromdate(new \DateTime('2014-01-01'))
             ->setId(1)
             ->setTodate(new \DateTime('2029-12-31'))
@@ -949,11 +949,11 @@ class Fixtures
     /**
      * Return a extra brand unit price
      * 
-     * @return \tabs\apiclient\core\extra\UnitPrice
+     * @return \tabs\apiclient\extra\UnitPrice
      */
     public static function getExtraBrandingDailyPricing()
     {
-        $price = new tabs\apiclient\core\extra\DailyPrice();
+        $price = new tabs\apiclient\extra\DailyPrice();
         $price->setFromdate(new \DateTime('2015-01-01'))
             ->setId(1)
             ->setTodate(new \DateTime('2016-12-31'))
@@ -964,7 +964,7 @@ class Fixtures
             ->setCurrency(Fixtures::getCurrency());
         
         for ($i = 1; $i <= 7; $i++) {
-            $dpu = new \tabs\apiclient\core\extra\DailyPriceUnit();
+            $dpu = new \tabs\apiclient\extra\DailyPriceUnit();
             $dpu->setDays($i)
                 ->setAdditional(false)
                 ->setPrice(10 + $i);
@@ -977,13 +977,13 @@ class Fixtures
     /**
      * Returns a mock Extra object
      *
-     * @return \tabs\apiclient\core\Extra
+     * @return \tabs\apiclient\Extra
      */
     public static function getExtra()
     {
         $extraBranding = Fixtures::getExtraBranding();
 
-        $extra = new \tabs\apiclient\core\extra\BookingExtra();
+        $extra = new \tabs\apiclient\extra\BookingExtra();
         $extra->setId(1)
               ->setExtracode('BKFE')
               ->setDescription('Booking Fee')
@@ -994,11 +994,11 @@ class Fixtures
     /**
      * Return a mock image object
      *
-     * @return \tabs\apiclient\core\Image
+     * @return \tabs\apiclient\Image
      */
     public static function getImage()
     {
-        $img = new \tabs\apiclient\core\Image();
+        $img = new \tabs\apiclient\Image();
         $img->setId(1)
             ->setFilename('test.jpg')
             ->setTitle('Test')
@@ -1012,11 +1012,11 @@ class Fixtures
     /**
      * Return a mock document object
      *
-     * @return \tabs\apiclient\core\Document
+     * @return \tabs\apiclient\Document
      */
     public static function getDocument()
     {
-        $doc = new \tabs\apiclient\core\Document();
+        $doc = new \tabs\apiclient\Document();
         $doc->setId(1)
             ->setName('somepdf')
             ->setDescription('A pdf file')
@@ -1046,11 +1046,11 @@ class Fixtures
     /**
      * Return a pdf mimetype
      *
-     * @return \tabs\apiclient\core\Mimetype
+     * @return \tabs\apiclient\Mimetype
      */
     public static function getPdfMimetype()
     {
-        $mt = new \tabs\apiclient\core\Mimetype();
+        $mt = new \tabs\apiclient\Mimetype();
         $mt->setId(1)
             ->setName('application/pdf')
             ->setShortname('pdf');
@@ -1074,11 +1074,11 @@ class Fixtures
     /**
      * Return a hybrid value object
      *
-     * @return \tabs\apiclient\core\attribute\Value
+     * @return \tabs\apiclient\attribute\Value
      */
     public static function getHybridValue()
     {
-        $value = new \tabs\apiclient\core\attribute\Value();
+        $value = new \tabs\apiclient\attribute\Value();
         $value->setBoolean(true)
             ->setNumber(2);
 
@@ -1089,11 +1089,11 @@ class Fixtures
     /**
      * Return a VAT rate
      *
-     * @return \tabs\apiclient\core\Vatrate
+     * @return \tabs\apiclient\Vatrate
      */
     public static function getVatrate()
     {
-        $rate = new \tabs\apiclient\core\Vatrate();
+        $rate = new \tabs\apiclient\Vatrate();
         $rate->setPercentage(50)
             ->setFromdate('1984-02-28')
             ->setTodate('3000-04-30');
@@ -1104,14 +1104,13 @@ class Fixtures
     /**
      * Return a VAT band
      *
-     * @return \tabs\apiclient\core\Vatband
+     * @return \tabs\apiclient\Vatband
      */
     public static function getVatband()
     {
-        $band = new \tabs\apiclient\core\Vatband();
+        $band = new \tabs\apiclient\Vatband();
         $rate = self::getVatrate();
-        $band->addVatrate($rate)
-            ->setVatband('Standard band');
+        $band->setVatband('Standard band')->getVatrates()->addElement($rate);
 
         return $band;
     }
@@ -1119,11 +1118,11 @@ class Fixtures
     /**
      * Return a Currency object
      *
-     * @return \tabs\apiclient\core\Currency
+     * @return \tabs\apiclient\Currency
      */
     public static function getCurrency()
     {
-        $cur = new \tabs\apiclient\core\Currency();
+        $cur = new \tabs\apiclient\Currency();
         $cur->setCode('GBP')
             ->setName('Great British Pound')
             ->setDecimalplaces(2);
@@ -1149,11 +1148,11 @@ class Fixtures
     /**
      * Create a set discount special offer
      * 
-     * @return \tabs\apiclient\core\specialoffer\SetDiscount
+     * @return \tabs\apiclient\specialoffer\SetDiscount
      */
     public static function getSpecialoffer()
     {
-        $offer = new \tabs\apiclient\core\specialoffer\SetDiscount();
+        $offer = new \tabs\apiclient\specialoffer\SetDiscount();
         $offer->setActive(true)
             ->setDescription('£10 off')
             ->setAmount(50)
@@ -1171,11 +1170,11 @@ class Fixtures
     /**
      * Create a pricing period object
      * 
-     * @return \tabs\apiclient\core\PricingPeriod
+     * @return \tabs\apiclient\PricingPeriod
      */
     public static function getPricingperiod()
     {
-        $pp = new \tabs\apiclient\core\PricingPeriod();
+        $pp = new \tabs\apiclient\PricingPeriod();
         $pp->setPricingperiod('Week')
             ->setDays(0)
             ->setWeeks(1)
@@ -1189,11 +1188,11 @@ class Fixtures
     /**
      * Create a special offer booking period object
      * 
-     * @return \tabs\apiclient\core\specialoffer\BookingPeriod
+     * @return \tabs\apiclient\specialoffer\BookingPeriod
      */
     public static function getBookingperiod()
     {
-        $bp = new tabs\apiclient\core\specialoffer\BookingPeriod();
+        $bp = new tabs\apiclient\specialoffer\BookingPeriod();
         $bp->setFromdate(new DateTime())
             ->setTodate(new DateTime())
             ->setId(1);
