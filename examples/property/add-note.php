@@ -43,7 +43,7 @@ try {
         $pNote = new \tabs\apiclient\note\PropertyNote();
         $pNote->setNote($note)->setParent($property)->create();
 
-        header('Location: accessing-property-information.php?id=' . $property->getId());
+        header('Location: index.php?id=' . $property->getId());
 
     }
 } catch(Exception $e) {

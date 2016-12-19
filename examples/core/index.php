@@ -20,6 +20,8 @@ require_once __DIR__ . '/../creating-a-new-connection.php';
 try {
     
     $lists = array(
+        'AttributeGroup',
+        'Attribute',
         'Brochure',
         'Account',
         'AccountingDateDefinition',
@@ -49,12 +51,31 @@ try {
     );
     
     foreach ($lists as $list) {
-        $ns = "\\tabs\\apiclient\\$list";
-        $obj = new $ns;
-        $collection = \tabs\apiclient\Collection::factory(
-            $obj->getCreateUrl(),
-            $obj
-        );
+        
+        if ($list == 'Attribute') {
+            $collection = \tabs\apiclient\Collection::factory(
+                'attribute',
+                new \tabs\apiclient\AttributeBoolean
+            );
+            $collection->setDiscriminator('type')
+                ->setDiscriminatorMap(
+                    array(
+                        'Boolean' => new \tabs\apiclient\AttributeBoolean,
+                        'Hybrid' => new \tabs\apiclient\AttributeHybrid,
+                        'String' => new \tabs\apiclient\AttributeString,
+                        'Number' => new \tabs\apiclient\AttributeNumber
+                    )
+                );
+            
+        } else {
+            $ns = "\\tabs\\apiclient\\$list";
+            $obj = new $ns;
+            $collection = \tabs\apiclient\Collection::factory(
+                $obj->getCreateUrl(),
+                $obj
+            );
+        }
+        
         $collection->fetch();
 
         include __DIR__ . '/../collection.php';

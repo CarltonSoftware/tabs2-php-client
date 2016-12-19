@@ -36,7 +36,7 @@ try {
         $propertyDoc->setDocument($document);
         $propertyDoc->create();
         
-        header('Location: accessing-property-information.php?id=' . $property->getId());
+        header('Location: index.php?id=' . $property->getId());
         
     }
         

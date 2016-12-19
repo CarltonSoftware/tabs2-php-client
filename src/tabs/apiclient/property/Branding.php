@@ -3,9 +3,11 @@
 namespace tabs\apiclient\property;
 
 use tabs\apiclient\Builder;
+use tabs\apiclient\Collection;
 use tabs\apiclient\Status;
 use tabs\apiclient\property\BookingBrand;
 use tabs\apiclient\property\MarketingBrand;
+use tabs\apiclient\property\price\Price;
 
 /**
  * Tabs Rest API PropertyBranding object.
@@ -29,6 +31,8 @@ use tabs\apiclient\property\MarketingBrand;
  * @method Branding setPromote(boolean $var) Sets the promote
  * 
  * @method Status getStatus() Returns the status
+ * 
+ * @method Collection|Price[] getPrices() Returns the property brand prices
  */
 class Branding extends Builder
 {
@@ -80,8 +84,25 @@ class Branding extends Builder
      * @var Status
      */
     protected $status;
+    
+    /**
+     * Collection of prices
+     * 
+     * @var Collection|Price[]
+     */
+    protected $prices;
 
     // -------------------- Public Functions -------------------- //
+    
+    /**
+     * @inheritDoc
+     */
+    public function __construct($id = null)
+    {
+        $this->prices = Collection::factory('price', new Price, $this);
+        
+        parent::__construct($id);
+    }
 
     /**
      * Set the branding

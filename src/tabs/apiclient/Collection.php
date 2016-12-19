@@ -73,6 +73,13 @@ class Collection implements \Iterator, \Countable
      * @var boolean
      */
     protected $fetched = false;
+    
+    /**
+     * Discriminator
+     * 
+     * @var string|boolean
+     */
+    protected $discriminator = false;
 
     // ------------------ Static Functions --------------------- //
     
@@ -85,8 +92,11 @@ class Collection implements \Iterator, \Countable
      * 
      * @return Collection
      */
-    public static function factory($path, $element, &$parent = null)
-    {
+    public static function factory(
+        $path,
+        $element,
+        &$parent = null
+    ) {
         $collection = new static();
         $collection->setPath($path)
             ->setElementClass($element);
@@ -437,10 +447,10 @@ class Collection implements \Iterator, \Countable
      */
     private function _getCollectionClass($element)
     {
-        if (is_string($this->discriminator())) {
-            $discr = $this->discriminator();
+        if (is_string($this->getDiscriminator())) {
+            $discr = $this->getDiscriminator();
             if (property_exists($element, $discr)) {
-                $map = $this->discriminatorMap();
+                $map = $this->getDiscriminatorMap();
                 
                 if (!array_key_exists($element->$discr, $map)) {
                     throw new Exception(
@@ -453,7 +463,7 @@ class Collection implements \Iterator, \Countable
             } else {
                 throw new Exception(
                     null,
-                    'Discrimator not found in collection element'
+                    'Discrimator ' . $discr . ' not found in collection element'
                 );
             }
         }
@@ -470,9 +480,23 @@ class Collection implements \Iterator, \Countable
      * 
      * @return boolean|string
      */
-    public function discriminator()
+    public function getDiscriminator()
     {
-        return false;
+        return $this->discriminator;
+    }
+    
+    /**
+     * Set the Discriminator
+     * 
+     * @param string $dis Discriminator
+     * 
+     * @return Collection
+     */
+    public function setDiscriminator($dis)
+    {
+        $this->discriminator = $dis;
+        
+        return $this;
     }
     
     /**
@@ -480,17 +504,24 @@ class Collection implements \Iterator, \Countable
      * 
      * @return array
      */
-    public function discriminatorMap()
+    public function getDiscriminatorMap()
     {
-        return array();
+        return $this->discriminatorMap;
     }
-
+    
     /**
+     * Set the disciminator map
      * 
-     * Implement functions from the Iterator interface
+     * @param array $map Map
      * 
+     * @return Collection
      */
-
+    public function setDiscriminatorMap(array $map = array())
+    {
+        $this->discriminatorMap = $map;
+        
+        return $this;
+    }
 
     /**
      * Rewinds the iterator to the beginning of the collection

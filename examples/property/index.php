@@ -58,6 +58,12 @@ try {
         
             $collection = $property->getInspections();
             include __DIR__ . '/../collection.php';
+        
+            $collection = $property->getPrimarypropertybranding()->getPrices();
+            include __DIR__ . '/../collection.php';
+        
+            $collection = $property->getAttributes();
+            include __DIR__ . '/../collection.php';
     } else {
 
         $collection = tabs\apiclient\Collection::factory(

@@ -5,7 +5,6 @@ composer.lock
 composer.phar
 vendor
 vendor/*
-index.php
 report
 tests/report
 tests/report/*

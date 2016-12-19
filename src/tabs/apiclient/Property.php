@@ -7,6 +7,7 @@ use tabs\apiclient\property\MarketingBrand;
 use tabs\apiclient\property\BookingBrand;
 use tabs\apiclient\property\Branding;
 use tabs\apiclient\note\PropertyNote;
+use tabs\apiclient\property\Attribute;
 
 /**
  * Tabs Rest API Property object.
@@ -49,9 +50,11 @@ use tabs\apiclient\note\PropertyNote;
  * 
  * @method Collection|BookingBrand[] getBookingbrands() Get the property booking brands
  * 
- * @method PropertyBranding getPrimarypropertybranding() Get the primary property branding
+ * @method Branding getPrimarypropertybranding() Get the primary property branding
  * 
  * @method Collection|Inspection[] getInspections() Get the property inspections
+ * 
+ * @method Collection|Attribute[] getAttributes() Get the property attributes
  */
 class Property extends Builder
 {
@@ -159,6 +162,13 @@ class Property extends Builder
      * @var Collection|Inspection[]
      */
     protected $inspections;
+    
+    /**
+     * Property Attributes
+     * 
+     * @var Collection|Attribute[]
+     */
+    protected $attributes;
 
     // -------------------------- Public Functions -------------------------- //
     
@@ -207,6 +217,12 @@ class Property extends Builder
         $this->inspections = Collection::factory(
             'inspection',
             new Inspection(),
+            $this
+        );
+        
+        $this->attributes = Collection::factory(
+            'attribute',
+            new Attribute(),
             $this
         );
         
