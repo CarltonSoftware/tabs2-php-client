@@ -29,37 +29,6 @@ namespace tabs\apiclient;
 abstract class Builder extends Base implements BuilderInterface
 {
     // -------------------------- Public Functions -------------------------- //
-    
-    /**
-     * Constructor
-     * 
-     * @param integer $id ID
-     * 
-     * @return void
-     */
-    public function __construct($id = null)
-    {
-        $this->id = $id;
-    }
-    
-    /**
-     * Get the object the non static extra
-     * 
-     * @return self
-     */
-    public function get()
-    {
-        self::setObjectProperties(
-            $this,
-            self::getJson(
-                \tabs\apiclient\client\Client::getClient()->get(
-                    $this->getUpdateUrl()
-                )
-            )
-        );
-        
-        return $this;
-    }
 
     /**
      * Perform a create request
@@ -219,19 +188,6 @@ abstract class Builder extends Base implements BuilderInterface
         return $this->_getParentProperty($this);
     }
     
-    /**
-     * ToString magic method
-     * 
-     * @return string
-     */
-    public function __toString()
-    {
-        return implode(
-            ' ',
-            $this->toArray()
-        );
-    }
-    
     // ------------------------- Private Functions -------------------------- //
 
     /**
@@ -259,11 +215,11 @@ abstract class Builder extends Base implements BuilderInterface
     /**
      * Traverse through the relationship to look for an property object
      *
-     * @param \tabs\apiclient\core\Base $object Object to traverse
+     * @param Base $object Object to traverse
      *
-     * @throws \tabs\apiclient\client\Exception
+     * @throws \tabs\apiclient\exception\Exception
      *
-     * @return \tabs\apiclient\actor\Actor
+     * @return \tabs\apiclient\Actor
      */
     private function _getParentProperty($object)
     {

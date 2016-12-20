@@ -3,6 +3,8 @@
 namespace tabs\apiclient\property;
 
 use tabs\apiclient\Builder;
+use tabs\apiclient\property\bookingbrand\Instruction;
+use tabs\apiclient\Collection;
 
 /**
  * Tabs Rest API Property Booking Brand object.
@@ -34,8 +36,29 @@ class BookingBrand extends Builder
      * @var boolean
      */
     protected $primarybookingbrand;
+    
+    /**
+     * Booking brand instruction types
+     * 
+     * @var Collection|Instruction[]
+     */
+    protected $instructions;
 
     // -------------------- Public Functions -------------------- //
+    
+    /**
+     * @inheritDoc
+     */
+    public function __construct($id = null)
+    {
+        $this->instructions = Collection::factory(
+            'instruction',
+            new Instruction,
+            $this
+        );
+        
+        parent::__construct($id);
+    }
 
     /**
      * Set the bookingbrand

@@ -64,6 +64,9 @@ try {
         
             $collection = $property->getAttributes();
             include __DIR__ . '/../collection.php';
+        
+            $collection = $property->getBrandings()->first()->getAvailableDays();
+            include __DIR__ . '/../collection.php';
     } else {
 
         $collection = tabs\apiclient\Collection::factory(

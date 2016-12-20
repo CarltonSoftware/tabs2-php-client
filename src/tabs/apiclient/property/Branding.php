@@ -4,10 +4,11 @@ namespace tabs\apiclient\property;
 
 use tabs\apiclient\Builder;
 use tabs\apiclient\Collection;
-use tabs\apiclient\Status;
 use tabs\apiclient\property\BookingBrand;
 use tabs\apiclient\property\MarketingBrand;
 use tabs\apiclient\property\price\Price;
+use tabs\apiclient\property\availability\AvailableDay;
+use tabs\apiclient\property\branding\Status;
 
 /**
  * Tabs Rest API PropertyBranding object.
@@ -30,7 +31,7 @@ use tabs\apiclient\property\price\Price;
  * @method boolean getPromote() Returns the promote
  * @method Branding setPromote(boolean $var) Sets the promote
  * 
- * @method Status getStatus() Returns the status
+ * @method \tabs\apiclient\Status getStatus() Returns the status
  * 
  * @method Collection|Price[] getPrices() Returns the property brand prices
  */
@@ -81,7 +82,7 @@ class Branding extends Builder
     /**
      * Status
      *
-     * @var Status
+     * @var \tabs\apiclient\Status
      */
     protected $status;
     
@@ -91,6 +92,20 @@ class Branding extends Builder
      * @var Collection|Price[]
      */
     protected $prices;
+    
+    /**
+     * Collection of availability
+     * 
+     * @var Collection|AvailableDay[]
+     */
+    protected $availableDays;
+    
+    /**
+     * Status history
+     * 
+     * @var Collection|Status[]
+     */
+    protected $statuses;
 
     // -------------------- Public Functions -------------------- //
     
@@ -100,8 +115,48 @@ class Branding extends Builder
     public function __construct($id = null)
     {
         $this->prices = Collection::factory('price', new Price, $this);
+        $this->availableDays = Collection::factory(
+            'availability',
+            new AvailableDay(),
+            $this
+        );
+        $this->status = Collection::factory(
+            'status',
+            new Status(),
+            $this
+        );
         
         parent::__construct($id);
+    }
+    
+    /**
+     * Get some availability for the brand
+     * 
+     * @param \DateTime $fromDate          Start date of availability range
+     * @param \DateTime $toDate            End date of availability range
+     * @param boolean   $includechangedays Include change day information
+     * 
+     * @return Collection|AvailableDay[]
+     */
+    public function getAvailableDays(
+        \DateTime $fromDate = null,
+        \DateTime $toDate = null,
+        $includechangedays = true
+    ) {
+        if ($fromDate) {
+            $this->availableDays->getPagination()
+                ->addParameter('fromdate', $fromDate->format('Y-m-d'))
+                ->addParameter('todate', $toDate->format('Y-m-d'));
+        }
+        
+        if ($includechangedays) {
+            $this->availableDays->getPagination()->addParameter(
+                'includechangedays',
+                $this->boolToStr($includechangedays)
+            );
+        }
+        
+        return $this->availableDays->fetch();
     }
 
     /**

@@ -91,13 +91,13 @@ class BankAccount extends Builder
     /**
      * Set the address
      *
-     * @param stdclass|array|\tabs\apiclient\core\Address $address The Address
+     * @param stdclass|array|\tabs\apiclient\Address $address The Address
      *
      * @return BankAccount
      */
     public function setAddress($address)
     {
-        $this->address = \tabs\apiclient\core\Address::factory($address);
+        $this->address = \tabs\apiclient\Address::factory($address);
 
         return $this;
     }

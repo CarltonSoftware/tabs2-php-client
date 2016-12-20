@@ -17,7 +17,7 @@ use tabs\apiclient\Builder;
  * @method \DateTime getCreated() Returns the created
  * @method Document setCreated(\DateTime $var) Sets the created
  * 
- * @method \tabs\apiclient\core\Document getDocument() Returns the document
+ * @method \tabs\apiclient\Document getDocument() Returns the document
  */
 class Document extends Builder
 {
@@ -31,7 +31,7 @@ class Document extends Builder
     /**
      * Document
      *
-     * @var \tabs\apiclient\core\Document
+     * @var \tabs\apiclient\Document
      */
     protected $document;
 

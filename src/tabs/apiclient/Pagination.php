@@ -30,34 +30,67 @@ namespace tabs\apiclient;
 class Pagination extends Base
 {
     /**
-     * Admin page number
-     *
-     * @var integer
-     */
-    protected $page = 1;
-    
-    /**
-     * Admin page size/limit number
-     *
-     * @var integer
-     */
-    protected $limit = 10;
-
-    /**
-     * Total amount of bookings found for the query
-     *
-     * @var integer
-     */
-    protected $total = 0;
-    
-    /**
      * Current filters
      * 
      * @var array
      */
     protected $filters = array();
 
+    /**
+     * Total amount of elements found for the query
+     *
+     * @var integer
+     */
+    protected $total = 0;
+    
+    /**
+     * Request parameters
+     * 
+     * @var array
+     */
+    protected $params = array(
+        'page' => 1,
+        'limit' => 10
+    );
+
     // ------------------ Public Functions --------------------- //
+    
+    /**
+     * Set a parameter to be output at a query parameter
+     * 
+     * @param string $name Parameter name
+     * @param string $val  Value
+     * 
+     * @return Pagination
+     */
+    public function addParameter($name, $val)
+    {
+        $this->params[$name] = $val;
+        
+        return $this;
+    }
+    
+    /**
+     * Get the parameter
+     * 
+     * @param string $name Name
+     * 
+     * @return string
+     */
+    public function getParameter($name)
+    {
+        return $this->params[$name];
+    }
+    
+    /**
+     * Get the request params
+     * 
+     * @return array
+     */
+    public function getParameters()
+    {
+        return $this->params;
+    }
     
     /**
      * Page number setter
@@ -68,9 +101,7 @@ class Pagination extends Base
      */
     public function setPage($page)
     {
-        $this->page = $page;
-        
-        return $this;
+        return $this->addParameter('page', $page);
     }
     
     /**
@@ -82,7 +113,19 @@ class Pagination extends Base
      */
     public function setLimit($limit)
     {
-        $this->limit = $limit;
+        return $this->addParameter('limit', $limit);
+    }
+    
+    /**
+     * Remove a parameter
+     * 
+     * @param string $name Param name
+     * 
+     * @return Pagination
+     */
+    public function removeParameter($name)
+    {
+        unset($this->params[$name]);
         
         return $this;
     }
@@ -122,7 +165,7 @@ class Pagination extends Base
      */
     public function getPage()
     {
-        return $this->page;
+        return $this->getParameter('page');
     }
     
     /**
@@ -132,7 +175,7 @@ class Pagination extends Base
      */
     public function getLimit()
     {
-        return $this->limit;
+        return $this->getParameter('limit');
     }
     
     /**
@@ -187,10 +230,11 @@ class Pagination extends Base
     public function toArray()
     {
         return array_filter(
-            array(
-                'page' => $this->getPage(),
-                'limit' => $this->getLimit(),
-                'filter' => urldecode($this->getFiltersString())
+            array_merge(
+                array(
+                    'filter' => urldecode($this->getFiltersString())
+                ),
+                $this->getParameters()
             )
         );
     }

@@ -23,6 +23,7 @@ try {
         'AttributeGroup',
         'Attribute',
         'Brochure',
+        'Extra',
         'Account',
         'AccountingDateDefinition',
         'AccountingPeriod',

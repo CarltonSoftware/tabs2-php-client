@@ -20,7 +20,7 @@ namespace tabs\apiclient;
  *
  * Provides setter/getter methods for all child classes.
  *
- * PHP Version 5.4
+ * PHP Version 5.5
  *
  * @category  API_Client
  * @package   Tabs
@@ -44,7 +44,7 @@ abstract class Base
     /**
      * Parent element
      *
-     * @var \tabs\apiclient\core\Base
+     * @var Base
      */
     protected $parent;
 
@@ -188,6 +188,37 @@ abstract class Base
     }
 
     // -------------------------- Public Functions -------------------------- //
+    
+    /**
+     * Constructor
+     * 
+     * @param integer $id ID
+     * 
+     * @return void
+     */
+    public function __construct($id = null)
+    {
+        $this->id = $id;
+    }
+    
+    /**
+     * Get the object the non static extra
+     * 
+     * @return self
+     */
+    public function get()
+    {
+        self::setObjectProperties(
+            $this,
+            self::getJson(
+                \tabs\apiclient\client\Client::getClient()->get(
+                    $this->getUpdateUrl()
+                )
+            )
+        );
+        
+        return $this;
+    }
 
     /**
      * Check if a method exists or not.  If a magic method accessor is specified
@@ -232,9 +263,9 @@ abstract class Base
     /**
      * Set the parent element
      *
-     * @param \tabs\apiclient\core\Base $element Parent element
+     * @param Base $element Parent element
      *
-     * @return \tabs\apiclient\core\Base
+     * @return Base
      */
     public function setParent(&$element)
     {
@@ -251,13 +282,13 @@ abstract class Base
      */
     public function isParentInstanceType()
     {
-        return '\tabs\apiclient\core\Base';
+        return '\tabs\apiclient\Base';
     }
 
     /**
      * Return the builder parent element
      *
-     * @return \tabs\apiclient\core\Base
+     * @return Base
      */
     public function getParent()
     {
@@ -281,6 +312,19 @@ abstract class Base
         } else {
             return;
         }
+    }
+    
+    /**
+     * ToString magic method
+     * 
+     * @return string
+     */
+    public function __toString()
+    {
+        return implode(
+            ' ',
+            $this->toArray()
+        );
     }
 
     /**

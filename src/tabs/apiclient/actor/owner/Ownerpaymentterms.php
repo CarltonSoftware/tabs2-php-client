@@ -39,7 +39,7 @@ use tabs\apiclient\Builder;
  * @method string getOwnerpaid() Returns the ownerpaid
  * @method Ownerpaymentterms setOwnerpaid(string $var) Sets the ownerpaid
  * 
- * @method \tabs\apiclient\core\Currency getCurrency() Returns the currency
+ * @method \tabs\apiclient\Currency getCurrency() Returns the currency
  * @method Collection|Extra[] getExtras() Returns the extras
  */
 class Ownerpaymentterms extends Builder
@@ -103,7 +103,7 @@ class Ownerpaymentterms extends Builder
     /**
      * Currency
      *
-     * @var \tabs\apiclient\core\Currency
+     * @var \tabs\apiclient\Currency
      */
     protected $currency;
 
@@ -129,13 +129,13 @@ class Ownerpaymentterms extends Builder
     /**
      * Set the currency
      *
-     * @param stdclass|array|\tabs\apiclient\core\Currency $currency The Currency
+     * @param stdclass|array|\tabs\apiclient\Currency $currency The Currency
      *
      * @return Ownerpaymentterms
      */
     public function setCurrency($currency)
     {
-        $this->currency = \tabs\apiclient\core\Currency::factory($currency);
+        $this->currency = \tabs\apiclient\Currency::factory($currency);
 
         return $this;
     }

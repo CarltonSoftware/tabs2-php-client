@@ -195,7 +195,7 @@ class Collection implements \Iterator, \Countable
     /**
      * Fetch an array of elements
      *
-     * @return \tabs\apiclient\core\Collection
+     * @return Collection
      */
     public function fetch()
     {
@@ -307,7 +307,7 @@ class Collection implements \Iterator, \Countable
      *
      * @param array $elements Array of elements
      *
-     * @return \tabs\apiclient\core\Collection
+     * @return Collection
      */
     public function setElements(array $elements)
     {
@@ -323,7 +323,7 @@ class Collection implements \Iterator, \Countable
      *
      * @param mixed $element Element to add
      *
-     * @return \tabs\apiclient\core\Collection
+     * @return Collection
      */
     public function addElement(&$element)
     {     
@@ -369,7 +369,7 @@ class Collection implements \Iterator, \Countable
      *
      * @param integer $page Page number
      *
-     * @return \tabs\apiclient\core\Collection
+     * @return Collection
      */
     public function setPage($page)
     {
@@ -385,7 +385,7 @@ class Collection implements \Iterator, \Countable
      *
      * @param integer $limit Element limit (page size)
      *
-     * @return \tabs\apiclient\core\Collection
+     * @return Collection
      */
     public function setLimit($limit)
     {
@@ -401,7 +401,7 @@ class Collection implements \Iterator, \Countable
      *
      * @param integer $total Number of elements found
      *
-     * @return \tabs\apiclient\core\Collection
+     * @return Collection
      */
     public function setTotal($total)
     {
@@ -415,7 +415,7 @@ class Collection implements \Iterator, \Countable
      *
      * @param array $filters Filters array
      *
-     * @return \tabs\apiclient\core\Collection
+     * @return Collection
      */
     public function setFilters(array $filters = [])
     {
@@ -526,7 +526,7 @@ class Collection implements \Iterator, \Countable
     /**
      * Rewinds the iterator to the beginning of the collection
      *
-     * @return \tabs\apiclient\core\Collection
+     * @return Collection
      */
     public function rewind()
     {

@@ -8,6 +8,7 @@ use tabs\apiclient\property\BookingBrand;
 use tabs\apiclient\property\Branding;
 use tabs\apiclient\note\PropertyNote;
 use tabs\apiclient\property\Attribute;
+use tabs\apiclient\property\Comment;
 
 /**
  * Tabs Rest API Property object.
@@ -50,9 +51,13 @@ use tabs\apiclient\property\Attribute;
  * 
  * @method Collection|BookingBrand[] getBookingbrands() Get the property booking brands
  * 
+ * @method Collection|Branding[] getBrandings() Get the property brandings
+ * 
  * @method Branding getPrimarypropertybranding() Get the primary property branding
  * 
  * @method Collection|Inspection[] getInspections() Get the property inspections
+ * 
+ * @method Collection|Comment[] getComments() Get the property comments
  * 
  * @method Collection|Attribute[] getAttributes() Get the property attributes
  */
@@ -169,6 +174,13 @@ class Property extends Builder
      * @var Collection|Attribute[]
      */
     protected $attributes;
+    
+    /**
+     * Property Comments
+     * 
+     * @var Collection|Comment[]
+     */
+    protected $comments;
 
     // -------------------------- Public Functions -------------------------- //
     
@@ -223,6 +235,12 @@ class Property extends Builder
         $this->attributes = Collection::factory(
             'attribute',
             new Attribute(),
+            $this
+        );
+        
+        $this->comments = Collection::factory(
+            'comment',
+            new Comment(),
             $this
         );
         
