@@ -1,8 +1,9 @@
 <?php
 
-namespace tabs\apiclient\actor\owner;
+namespace tabs\apiclient;
 
 use tabs\apiclient\Builder;
+use tabs\apiclient\ownerpaymentterms\Extra;
 
 /**
  * Tabs Rest API Ownerpaymentterms object.
@@ -42,7 +43,7 @@ use tabs\apiclient\Builder;
  * @method \tabs\apiclient\Currency getCurrency() Returns the currency
  * @method Collection|Extra[] getExtras() Returns the extras
  */
-class Ownerpaymentterms extends Builder
+class OwnerPaymentTerms extends Builder
 {
     /**
      * Name

@@ -5,6 +5,8 @@ namespace tabs\apiclient\property;
 use tabs\apiclient\Builder;
 use tabs\apiclient\property\Brochure;
 use tabs\apiclient\Collection;
+use tabs\apiclient\property\marketingbrand\Description;
+use tabs\apiclient\property\marketingbrand\GroupingValue;
 
 /**
  * Tabs Rest API PropertyMarketingBrand object.
@@ -18,6 +20,9 @@ use tabs\apiclient\Collection;
  * @link      http://www.carltonsoftware.co.uk
  *
  * @method \tabs\apiclient\MarketingBrand getMarketingbrand() Returns the marketingbrand
+ * @method Collection|Brochure[] getBrochures() Returns the brochure collection
+ * @method Collection|Description[] getDescriptions() Returns the property descriptions collection
+ * @method Collection|GroupingValue[] getGroupingvalues() Returns the marketingbrand grouping values
  */
 class MarketingBrand extends Builder
 {
@@ -34,6 +39,20 @@ class MarketingBrand extends Builder
      * @var Collection|Brochure[]
      */
     protected $brochures;
+    
+    /**
+     * Property Descriptions
+     * 
+     * @var Collection|Description[]
+     */
+    protected $descriptions;
+    
+    /**
+     * Property Grouping Values
+     * 
+     * @var Collection|GroupingValue[]
+     */
+    protected $groupingvalues;
 
     // -------------------- Public Functions -------------------- //
     
@@ -45,6 +64,18 @@ class MarketingBrand extends Builder
         $this->brochures = Collection::factory(
             'brochure',
             new Brochure(),
+            $this
+        );
+        
+        $this->descriptions = Collection::factory(
+            'description',
+            new Description(),
+            $this
+        );
+        
+        $this->groupingvalues = Collection::factory(
+            'groupingvalue',
+            new GroupingValue(),
             $this
         );
         

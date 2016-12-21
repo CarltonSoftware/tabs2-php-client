@@ -28,7 +28,7 @@ class PaginationTest extends ApiClientClassTest
             array('foo' => 'bar', 'doe' => 'ray')
         );
         $this->assertEquals(
-            'page=3&limit=20&filter=foo%3Dbar%3Adoe%3Dray',
+            'filter=foo%3Dbar%3Adoe%3Dray&page=3&limit=20',
             $pagination->getRequestQuery()
         );
         $this->assertEquals(3, $pagination->getPage());

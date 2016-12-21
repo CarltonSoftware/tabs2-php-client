@@ -1,6 +1,6 @@
 <?php
 
-namespace tabs\apiclient\actor\owner;
+namespace tabs\apiclient\ownerpaymentterms;
 
 use tabs\apiclient\Builder;
 
@@ -15,7 +15,7 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\extra\Extra getExtra() Returns the extra
+ * @method \tabs\apiclient\Extra getExtra() Returns the extra
  * 
  * @method boolean getTakefromdeposit() Returns the takefromdeposit
  * @method Extra setTakefromdeposit(boolean $var) Sets the takefromdeposit
@@ -25,7 +25,7 @@ class Extra extends Builder
     /**
      * Extra
      *
-     * @var \tabs\apiclient\extra\Extra
+     * @var \tabs\apiclient\Extra
      */
     protected $extra;
 
@@ -41,13 +41,13 @@ class Extra extends Builder
     /**
      * Set the extra
      *
-     * @param stdclass|array|\tabs\apiclient\extra\Extra $extra The Extra
+     * @param stdclass|array|\tabs\apiclient\Extra $extra The Extra
      *
      * @return Extra
      */
     public function setExtra($extra)
     {
-        $this->extra = \tabs\apiclient\extra\Extra::factory($extra);
+        $this->extra = \tabs\apiclient\Extra::factory($extra);
 
         return $this;
     }
@@ -59,7 +59,7 @@ class Extra extends Builder
     {
         return array(
             'extraid' => $this->getExtra()->getId(),
-            'takefromdeposit' => $this->getTakefromdeposit(),
+            'takefromdeposit' => $this->boolToStr($this->getTakefromdeposit())
         );
     }
 }

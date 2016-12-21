@@ -9,6 +9,10 @@ use tabs\apiclient\property\Branding;
 use tabs\apiclient\note\PropertyNote;
 use tabs\apiclient\property\Attribute;
 use tabs\apiclient\property\Comment;
+use tabs\apiclient\property\Commission;
+use tabs\apiclient\property\Office;
+use tabs\apiclient\property\Owner;
+use tabs\apiclient\property\OwnerPaymentTerms;
 
 /**
  * Tabs Rest API Property object.
@@ -60,6 +64,14 @@ use tabs\apiclient\property\Comment;
  * @method Collection|Comment[] getComments() Get the property comments
  * 
  * @method Collection|Attribute[] getAttributes() Get the property attributes
+ * 
+ * @method Collection|Commission[] getCommissions() Get the property commissions
+ * 
+ * @method Collection|Office[] getOffices() Get the property offices
+ * 
+ * @method Collection|Owner[] getOwners() Get the property owners
+ * 
+ * @method Collection|OwnerPaymentTerms[] getOwnerpaymenttermss() Get the property owner payment terms
  */
 class Property extends Builder
 {
@@ -181,6 +193,34 @@ class Property extends Builder
      * @var Collection|Comment[]
      */
     protected $comments;
+    
+    /**
+     * Property Commission
+     * 
+     * @var Collection|Commission[]
+     */
+    protected $commissions;
+    
+    /**
+     * Property Offices
+     * 
+     * @var Collection|Office[]
+     */
+    protected $offices;
+    
+    /**
+     * Property Owners
+     * 
+     * @var Collection|Owner[]
+     */
+    protected $owners;
+    
+    /**
+     * Owner payment terms
+     * 
+     * @var Collection|OwnerPaymentTerms[]
+     */
+    protected $ownerpaymenttermss;
 
     // -------------------------- Public Functions -------------------------- //
     
@@ -196,53 +236,29 @@ class Property extends Builder
         $this->address = new Address();
         $this->status = Status::factory(array('name' => 'New'));
         
-        $this->documents = Collection::factory(
-            'document',
-            new Document(),
-            $this
+        $collections = array(
+            'documents' => new Document(),
+            'note' => new PropertyNote(),
+            'marketingbrand' => new MarketingBrand(),
+            'bookingbrand' => new BookingBrand(),
+            'branding' => new Branding(),
+            'inspection' => new Inspection(),
+            'attribute' => new Attribute(),
+            'comment' => new Comment(),
+            'offices' => new Office(),
+            'owner' => new Owner(),
+            'ownerpaymenterms' => new OwnerPaymentTerms()
         );
         
-        $this->notes = Collection::factory(
-            'note',
-            new PropertyNote(),
-            $this
-        );
-        
-        $this->marketingbrands = Collection::factory(
-            'marketingbrand',
-            new MarketingBrand(),
-            $this
-        );
-        
-        $this->bookingbrands = Collection::factory(
-            'bookingbrand',
-            new BookingBrand(),
-            $this
-        );
-        
-        $this->brandings = Collection::factory(
-            'branding',
-            new Branding(),
-            $this
-        );
-        
-        $this->inspections = Collection::factory(
-            'inspection',
-            new Inspection(),
-            $this
-        );
-        
-        $this->attributes = Collection::factory(
-            'attribute',
-            new Attribute(),
-            $this
-        );
-        
-        $this->comments = Collection::factory(
-            'comment',
-            new Comment(),
-            $this
-        );
+        foreach ($collections as $route => $obj) {
+            $prop = $route . 's';
+            
+            $this->$prop = Collection::factory(
+                $route,
+                $obj,
+                $this
+            );
+        }
         
         parent::__construct($id);
     }
