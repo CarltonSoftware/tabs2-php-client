@@ -3,7 +3,7 @@
 // Include the connection
 require_once __DIR__ . '/../creating-a-new-connection.php';
 
-$class = new tabs\apiclient\property\OwnerPaymentTerms();
+$class = new tabs\apiclient\property\supplier\service\Charge();
 
 $ref = new ReflectionClass($class);
 $properties = array();
@@ -74,12 +74,11 @@ foreach ($properties as $prop => $type) {
 
 echo "\t// -------------------- Public Functions -------------------- //\n\n";
 
-echo "\t/**\n\t * @inheritDoc\n\t */\n";
-echo "\tpublic function __construct(\$id = null)\n\t{\n";
+$cons = "";
 
 foreach ($properties as $prop => $type) {
     if (in_array($type, array('\DateTime'))) {
-        echo sprintf(
+        $cons .= sprintf(
             "\t\t\$this->%s = new \DateTime();\n",
             $prop
         );
@@ -88,7 +87,7 @@ foreach ($properties as $prop => $type) {
     if (substr($type, 0, 10) == 'Collection') {
         $types = explode('|', $type);
         $type = array_pop($types);
-        echo sprintf(
+        $cons .= sprintf(
             "\t\t\$this->%s = Collection::factory('', new %s, \$this);\n",
             $prop,
             $type
@@ -96,8 +95,13 @@ foreach ($properties as $prop => $type) {
     }
 }
 
+if (strlen($cons) > 0) {
+echo "\t/**\n\t * @inheritDoc\n\t */\n";
+echo "\tpublic function __construct(\$id = null)\n\t{\n";
+echo $cons;
 echo "\t\tparent::__construct(\$id);\n";
 echo "\t}\n\n";
+}
 
 foreach ($properties as $prop => $type) {
     
@@ -140,11 +144,30 @@ foreach ($properties as $prop => $type) {
     if (substr($type, 0, 10) == 'Collection' || $prop == 'id' || $prop == 'parent') {
         continue;
     }
-    echo sprintf(
-        "\t\t\t'%s' => \$this->%s,\n",
-        $prop,
-        'get' . ucfirst($prop) . '()'
-    );
+    
+    if ($type == 'boolean') {
+        echo sprintf(
+            "\t\t\t'%s' => \$this->boolToStr(\$this->%s)",
+            $prop,
+            'get' . ucfirst($prop) . '()'
+        );
+    } else {
+        echo sprintf(
+            "\t\t\t'%s' => \$this->%s",
+            $prop,
+            'get' . ucfirst($prop) . '()'
+        );
+    }
+    
+    if (stristr($type, 'apiclient')) {
+        echo '->getId()';
+    }
+    
+    if (stristr($type, '\DateTime')) {
+        echo "->format('Y-m-d')";
+    }
+    
+    echo ",\n";
 }
 echo "\t\t);\n";
 

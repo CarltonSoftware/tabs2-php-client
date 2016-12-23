@@ -38,6 +38,9 @@ try {
                 if ($property->getMarketingbrands()->first()->getBrochures()->count() > 0) {
                     $collection = $property->getMarketingbrands()->first()->getBrochures();
                     include __DIR__ . '/../collection.php';
+                    
+                    $collection = $property->getMarketingbrands()->first()->getDescriptions();
+                    include __DIR__ . '/../collection.php';
                 }
             }
         
@@ -66,6 +69,15 @@ try {
             include __DIR__ . '/../collection.php';
         
             $collection = $property->getBrandings()->first()->getAvailableDays();
+            include __DIR__ . '/../collection.php';
+        
+            $collection = $property->getSuppliers();
+            include __DIR__ . '/../collection.php';
+            
+            $collection = $property->getTargets();
+            include __DIR__ . '/../collection.php';
+            
+            $collection = $property->getRooms();
             include __DIR__ . '/../collection.php';
     } else {
 

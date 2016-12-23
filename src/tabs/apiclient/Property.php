@@ -13,6 +13,11 @@ use tabs\apiclient\property\Commission;
 use tabs\apiclient\property\Office;
 use tabs\apiclient\property\Owner;
 use tabs\apiclient\property\OwnerPaymentTerms;
+use tabs\apiclient\property\SecurityDeposit;
+use tabs\apiclient\property\SecurityFeature;
+use tabs\apiclient\property\Supplier;
+use tabs\apiclient\property\Room;
+use tabs\apiclient\property\Target;
 
 /**
  * Tabs Rest API Property object.
@@ -72,6 +77,16 @@ use tabs\apiclient\property\OwnerPaymentTerms;
  * @method Collection|Owner[] getOwners() Get the property owners
  * 
  * @method Collection|OwnerPaymentTerms[] getOwnerpaymenttermss() Get the property owner payment terms
+ * 
+ * @method Collection|SecurityDeposit[] getSecuritydeposits() Get the property security deposits
+ * 
+ * @method Collection|SecurityFeature[] getSecurityfeatures() Get the property security features
+ * 
+ * @method Collection|Supplier[] getSuppliers() Get the property suppliers
+ * 
+ * @method Collection|Room[] getRooms() Get the property rooms
+ * 
+ * @method Collection|Target[] getTargets() Get the property targets
  */
 class Property extends Builder
 {
@@ -221,6 +236,41 @@ class Property extends Builder
      * @var Collection|OwnerPaymentTerms[]
      */
     protected $ownerpaymenttermss;
+    
+    /**
+     * Security deposits
+     * 
+     * @var Collection|SecurityDeposit[]
+     */
+    protected $securitydeposits;
+    
+    /**
+     * Security features
+     * 
+     * @var Collection|SecurityFeature[]
+     */
+    protected $securityfeatures;
+    
+    /**
+     * Property Suppliers
+     * 
+     * @var Collection|Supplier[]
+     */
+    protected $suppliers;
+    
+    /**
+     * Property Rooms
+     * 
+     * @var Collection|Room[]
+     */
+    protected $rooms;
+    
+    /**
+     * Property Targets
+     * 
+     * @var Collection|Target[]
+     */
+    protected $targets;
 
     // -------------------------- Public Functions -------------------------- //
     
@@ -237,7 +287,7 @@ class Property extends Builder
         $this->status = Status::factory(array('name' => 'New'));
         
         $collections = array(
-            'documents' => new Document(),
+            'document' => new Document(),
             'note' => new PropertyNote(),
             'marketingbrand' => new MarketingBrand(),
             'bookingbrand' => new BookingBrand(),
@@ -247,7 +297,12 @@ class Property extends Builder
             'comment' => new Comment(),
             'offices' => new Office(),
             'owner' => new Owner(),
-            'ownerpaymenterms' => new OwnerPaymentTerms()
+            'ownerpaymenterms' => new OwnerPaymentTerms(),
+            'securitydeposit' => new SecurityDeposit(),
+            'securityfeature' => new SecurityFeature(),
+            'supplier' => new Supplier(),
+            'room' => new Room(),
+            'target' => new Target()
         );
         
         foreach ($collections as $route => $obj) {

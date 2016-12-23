@@ -42,6 +42,7 @@ try {
         'Currency',
         'Encoding',
         'Mimetype',
+        'ManagedActivity',
         'SalesChannel',
         'SourceCategory',
         'Source',
