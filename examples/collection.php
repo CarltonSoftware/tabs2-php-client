@@ -8,11 +8,30 @@ if (!empty($collection)) {
     echo '<ul>';
     foreach ($collection as $element) {
         $text = (string) $element;
-        echo sprintf(
-            '<li><a href="?id=%s">%s</a></li>',
-            $element->getId(),
-            stristr($text, '<title>') ? htmlentities($text) : $text
+        $classes = array(
+            str_replace('\\', '_', $element->getFullClass()) . '-' . $element->getId()
         );
+        
+        if (in_array($element->getClass(), array('Property', 'Booking'))) {
+            echo sprintf(
+                '<li><a href="/platoclient/%s/?id=%s">%s</a></li>',
+                strtolower($element->getClass()),
+                $element->getId(),
+                stristr($text, '<title>') ? htmlentities($text) : $text
+            );
+        } else if ($element instanceof tabs\apiclient\Actor) {
+            echo sprintf(
+                '<li><a href="/platoclient/actor/?id=%s">%s</a></li>',
+                $element->getId(),
+                stristr($text, '<title>') ? htmlentities($text) : $text
+            );
+        } else {
+            echo sprintf(
+                '<li><a href="/platoclient/exploreelement/%s">%s</a></li>',
+                implode('/', $classes),
+                stristr($text, '<title>') ? htmlentities($text) : $text
+            );
+        }
     }
     echo '</ul>';
     

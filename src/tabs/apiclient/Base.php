@@ -387,6 +387,10 @@ abstract class Base
                             }
                         }
                         
+                        if ($this->$property instanceof StaticCollection) {
+                            $this->$property->setAccessor($name);
+                        }
+                        
                         return $this->$property;
                 }
             } else if ($this instanceof Link) {

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tabs Rest Collection object.
+ * Tabs Rest StaticCollection object.
  *
  * PHP Version 5.4
  *
@@ -19,7 +19,7 @@ use tabs\apiclient\Base;
 use tabs\apiclient\exception\Exception;
 
 /**
- * Tabs Rest Collection object. Handles groups of objects output from
+ * Tabs Rest StaticCollection object. Handles groups of objects output from
  * a fetch command.
  *
  * @category  Core
@@ -80,6 +80,14 @@ class StaticCollection implements \Iterator, \Countable
      * @var string|boolean
      */
     protected $discriminator = false;
+    
+    /**
+     * Accessor. Stores what property the collection is mapped too in Base class
+     * objects;
+     * 
+     * @var string
+     */
+    protected $accessor;
 
     // ------------------ Static Functions --------------------- //
     
@@ -90,7 +98,7 @@ class StaticCollection implements \Iterator, \Countable
      * @param string|Base $element Object or object namespace
      * @param Base        $parent  Parent object
      * 
-     * @return Collection
+     * @return StaticCollection
      */
     public static function factory(
         $path,
@@ -135,7 +143,7 @@ class StaticCollection implements \Iterator, \Countable
      * 
      * @param boolean $fetched Fetched bool
      * 
-     * @return Collection
+     * @return StaticCollection
      */
     public function setFetched($fetched)
     {   
@@ -159,7 +167,7 @@ class StaticCollection implements \Iterator, \Countable
      * 
      * @param string $path Path
      * 
-     * @return Collection
+     * @return StaticCollection
      */
     public function setPath($path)
     {   
@@ -197,7 +205,7 @@ class StaticCollection implements \Iterator, \Countable
      * 
      * @param string|Base $class Class
      * 
-     * @return Collection
+     * @return StaticCollection
      */
     public function setElementClass($class)
     {
@@ -225,7 +233,7 @@ class StaticCollection implements \Iterator, \Countable
      *
      * @param Base &$element Element by ref
      *
-     * @return Collection
+     * @return StaticCollection
      */
     public function setElementParent(Base &$element)
     {
@@ -245,6 +253,30 @@ class StaticCollection implements \Iterator, \Countable
     }
     
     /**
+     * Set the accessor
+     * 
+     * @param string $accessor
+     * 
+     * @return StaticCollection
+     */
+    public function setAccessor($accessor)
+    {
+        $this->accessor = $accessor;
+        
+        return $this;
+    }
+    
+    /**
+     * Return the accessor
+     * 
+     * @return string
+     */
+    public function getAccessor()
+    {
+        return $this->accessor;
+    }
+    
+    /**
      * Return the collection of elements
      * 
      * @return \tabs\apiclient\Base[]
@@ -259,7 +291,7 @@ class StaticCollection implements \Iterator, \Countable
      *
      * @param array $elements Array of elements
      *
-     * @return Collection
+     * @return StaticCollection
      */
     public function setElements(array $elements)
     {
@@ -275,7 +307,7 @@ class StaticCollection implements \Iterator, \Countable
      *
      * @param mixed $element Element to add
      *
-     * @return Collection
+     * @return StaticCollection
      */
     public function addElement(&$element)
     {     
@@ -321,7 +353,7 @@ class StaticCollection implements \Iterator, \Countable
      *
      * @param integer $page Page number
      *
-     * @return Collection
+     * @return StaticCollection
      */
     public function setPage($page)
     {
@@ -337,7 +369,7 @@ class StaticCollection implements \Iterator, \Countable
      *
      * @param integer $limit Element limit (page size)
      *
-     * @return Collection
+     * @return StaticCollection
      */
     public function setLimit($limit)
     {
@@ -353,7 +385,7 @@ class StaticCollection implements \Iterator, \Countable
      *
      * @param integer $total Number of elements found
      *
-     * @return Collection
+     * @return StaticCollection
      */
     public function setTotal($total)
     {
@@ -367,7 +399,7 @@ class StaticCollection implements \Iterator, \Countable
      *
      * @param array $filters Filters array
      *
-     * @return Collection
+     * @return StaticCollection
      */
     public function setFilters(array $filters = [])
     {
@@ -442,7 +474,7 @@ class StaticCollection implements \Iterator, \Countable
      * 
      * @param string $dis Discriminator
      * 
-     * @return Collection
+     * @return StaticCollection
      */
     public function setDiscriminator($dis)
     {
@@ -466,7 +498,7 @@ class StaticCollection implements \Iterator, \Countable
      * 
      * @param array $map Map
      * 
-     * @return Collection
+     * @return StaticCollection
      */
     public function setDiscriminatorMap(array $map = array())
     {
@@ -478,7 +510,7 @@ class StaticCollection implements \Iterator, \Countable
     /**
      * Rewinds the iterator to the beginning of the collection
      *
-     * @return Collection
+     * @return StaticCollection
      */
     public function rewind()
     {

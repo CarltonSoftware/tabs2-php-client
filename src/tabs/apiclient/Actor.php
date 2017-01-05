@@ -9,9 +9,7 @@ use tabs\apiclient\note\ActorNote;
 use tabs\apiclient\StaticCollection;
 use tabs\apiclient\actor\ContactDetail;
 use tabs\apiclient\actor\ContactDetailOther;
-use tabs\apiclient\actor\Address;
 use tabs\apiclient\actor\PhoneNumber;
-use tabs\apiclient\actor\Document;
 
 /**
  * Tabs Rest API object.
@@ -62,7 +60,7 @@ use tabs\apiclient\actor\Document;
  * @method Collection|BankAccount getBankaccounts() Returns the bank account collection
  * @method Actor setBankaccounts(Collection $col) Set the bank accounts
  * 
- * @method Collection|Document[] getDocuments() Returns the actor documents
+ * @method Collection|actor\Document[] getDocuments() Returns the actor documents
  * @method Actor setDocuments(Collection $col) Set the documents
  * 
  * @method Collection|ActorNote[] getNotes() Returns the actor notes
@@ -160,14 +158,14 @@ abstract class Actor extends Builder
     /**
      * Bank accounts collection
      * 
-     * @var Collection
+     * @var Collection|BankAccount[]
      */
     protected $bankaccounts;
     
     /**
      * Actor Documents
      * 
-     * @var Collection
+     * @var Collection|Document[]
      */
     protected $documents;
     
@@ -201,7 +199,7 @@ abstract class Actor extends Builder
         );
         $this->documents = Collection::factory(
             'document',
-            new Document,
+            new actor\Document,
             $this
         );
         $this->notes = Collection::factory(
@@ -217,7 +215,7 @@ abstract class Actor extends Builder
         
         $this->contactdetails->setDiscriminator('type')
             ->setDiscriminatorMap(array(
-                'P' => new Address(),
+                'P' => new actor\Address(),
                 'C' => new ContactDetailOther(),
                 'F' => new PhoneNumber()
             ));

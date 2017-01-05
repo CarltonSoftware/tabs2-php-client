@@ -2,6 +2,8 @@
 
 namespace tabs\apiclient;
 use tabs\apiclient\Builder;
+use tabs\apiclient\unit\PerUnit;
+use tabs\apiclient\Collection;
 
 /**
  * Tabs Rest API Unit object.
@@ -22,6 +24,8 @@ use tabs\apiclient\Builder;
  * 
  * @method string getDecimalplaces()                Returns the decimal places
  * @method Unit   setDecimalplaces(string $decimal) Sets the decimal places
+ * 
+ * @method Collection|PerUnit[] getPerunits() Get the PerUnit settings
  */
 class Unit extends Builder
 {
@@ -46,7 +50,29 @@ class Unit extends Builder
      */
     protected $decimalplaces = 0;
     
+    /**
+     * Per unit collection
+     * 
+     * @var Collection|PerUnit[]
+     */
+    protected $perunits;
+
+
     // ------------------ Public Functions --------------------- //
+    
+    /**
+     * @inheritDoc
+     */
+    public function __construct($id = null)
+    {
+        $this->perunits = Collection::factory(
+            'perunit',
+            new PerUnit(),
+            $this
+        );
+        
+        parent::__construct($id);
+    }
     
     /**
      * @inheritDoc

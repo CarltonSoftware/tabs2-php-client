@@ -36,7 +36,7 @@ try {
         $actorDoc->setDocument($document);
         $actorDoc->create();
         
-        header('Location: requesting-actor-details.php?id=' . $customer->getId());
+        header('Location: index.php?id=' . $customer->getId());
         
     } else {
         

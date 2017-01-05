@@ -31,8 +31,8 @@ try {
             ->setInvalid(false);
         $customer->getContactdetails()->addElement($email);
         $email->create();
-
-        header('Location: requesting-actor-details.php?id=' . $customer->getId());
+        
+        header('Location: index.php?id=' . $customer->getId());
         
     }
         

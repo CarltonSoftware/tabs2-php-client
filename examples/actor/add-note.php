@@ -43,8 +43,8 @@ try {
         $noteText->create();
         $actorNote = new \tabs\apiclient\note\ActorNote();
         $actorNote->setNote($note)->setParent($customer)->create();
-
-        header('Location: requesting-actor-details.php?id=' . $customer->getId());
+        
+        header('Location: index.php?id=' . $customer->getId());
 
     }
 } catch(Exception $e) {

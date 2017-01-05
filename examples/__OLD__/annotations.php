@@ -3,7 +3,7 @@
 // Include the connection
 require_once __DIR__ . '/../creating-a-new-connection.php';
 
-$class = new tabs\apiclient\actor\Address();
+$class = new tabs\apiclient\unit\PerUnit();
 
 $ref = new ReflectionClass($class);
 $properties = array();

@@ -28,9 +28,9 @@ try {
         echo sprintf('<p>%s</p>', htmlspecialchars((string) $customer));
         
         if ($customer->getBankaccounts()->count() > 0) {
-            echo '<h3>Bank Accounts</h3>';
-            echo implode('<br>', $customer->getBankaccounts()->getElements());
-            echo '<br>';
+            $collection = $customer->getBankaccounts();
+            
+            include __DIR__ . '/../collection.php';
         }
 
         echo '<h3>Notes</h3>';

@@ -2,7 +2,7 @@
 
 namespace tabs\apiclient;
 
-use tabs\apiclient\Builder;
+use tabs\apiclient\Base;
 
 /**
  * Tabs Rest API BookingEvent object.
@@ -21,7 +21,7 @@ use tabs\apiclient\Builder;
  * @method string getDescription() Returns the description
  * @method BookingEvent setDescription(string $var) Sets the description
  */
-class BookingEvent extends Builder
+class BookingEvent extends Base
 {
     /**
      * Event
