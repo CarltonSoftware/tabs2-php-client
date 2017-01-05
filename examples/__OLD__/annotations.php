@@ -3,7 +3,7 @@
 // Include the connection
 require_once __DIR__ . '/../creating-a-new-connection.php';
 
-$class = new tabs\apiclient\property\supplier\service\Charge();
+$class = new tabs\apiclient\actor\Address();
 
 $ref = new ReflectionClass($class);
 $properties = array();

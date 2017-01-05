@@ -47,8 +47,8 @@ try {
             $customer->getId()
         );
 
-        echo '<h3>Documents</h3>';
         if ($customer->getDocuments()->count() > 0) {
+            echo '<h3>Documents</h3>';
             foreach ($customer->getDocuments()->getElements() as $doc) {                
                 echo sprintf(
                     '<p><a href="viewing-a-document.php?id=%s">%s</a></p>',
@@ -59,6 +59,18 @@ try {
         }
         echo sprintf(
             '<p><a href="add-document.php?id=%s">Add new document</a></p>',
+            $customer->getId()
+        );
+
+        if ($customer->getContactdetails()->count() > 0) {
+            echo '<h3>Contact Details</h3>';
+            
+            $collection = $customer->getContactdetails();
+            
+            include __DIR__ . '/../collection.php';
+        }
+        echo sprintf(
+            '<p><a href="add-email.php?id=%s">Add new email</a></p>',
             $customer->getId()
         );
 

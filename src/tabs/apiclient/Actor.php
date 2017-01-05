@@ -6,6 +6,12 @@ use tabs\apiclient\Builder;
 use tabs\apiclient\actor\BankAccount;
 use tabs\apiclient\Collection;
 use tabs\apiclient\note\ActorNote;
+use tabs\apiclient\StaticCollection;
+use tabs\apiclient\actor\ContactDetail;
+use tabs\apiclient\actor\ContactDetailOther;
+use tabs\apiclient\actor\Address;
+use tabs\apiclient\actor\PhoneNumber;
+use tabs\apiclient\actor\Document;
 
 /**
  * Tabs Rest API object.
@@ -59,8 +65,11 @@ use tabs\apiclient\note\ActorNote;
  * @method Collection|Document[] getDocuments() Returns the actor documents
  * @method Actor setDocuments(Collection $col) Set the documents
  * 
- * @method Collection|ActorNote getNotes() Returns the actor notes
+ * @method Collection|ActorNote[] getNotes() Returns the actor notes
  * @method Actor setNotes(Collection $col) Set the notes
+ * 
+ * @method StaticCollection|ContactDetail[] getContactdetails() Returns the actor contact details
+ * @method Actor setContactdetails(StaticCollection $col) Set the contact details
  */
 abstract class Actor extends Builder
 {
@@ -165,9 +174,16 @@ abstract class Actor extends Builder
     /**
      * Actor Notes
      * 
-     * @var Collection|note\ActorNote[]
+     * @var Collection|ActorNote[]
      */
     protected $notes;
+    
+    /**
+     * Actor Contact Details
+     * 
+     * @var StaticCollection|ContactDetail[]
+     */
+    protected $contactdetails;
 
     // -------------------- Public Functions -------------------- //
     
@@ -185,14 +201,26 @@ abstract class Actor extends Builder
         );
         $this->documents = Collection::factory(
             'document',
-            new actor\Document,
+            new Document,
             $this
         );
         $this->notes = Collection::factory(
             'note',
-            new note\ActorNote,
+            new ActorNote,
             $this
         );
+        $this->contactdetails = StaticCollection::factory(
+            'contactdetail',
+            new ContactDetail(),
+            $this
+        );
+        
+        $this->contactdetails->setDiscriminator('type')
+            ->setDiscriminatorMap(array(
+                'P' => new Address(),
+                'C' => new ContactDetailOther(),
+                'F' => new PhoneNumber()
+            ));
         
         parent::__construct($id);
     }
