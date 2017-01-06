@@ -12,7 +12,7 @@ if (!empty($collection)) {
             str_replace('\\', '_', $element->getFullClass()) . '-' . $element->getId()
         );
         
-        if (in_array($element->getClass(), array('Property', 'Booking'))) {
+        if (in_array($element->getClass(), array('Property'))) {
             echo sprintf(
                 '<li><a href="/platoclient/%s/?id=%s">%s</a></li>',
                 strtolower($element->getClass()),
@@ -24,6 +24,12 @@ if (!empty($collection)) {
                 '<li><a href="/platoclient/actor/?id=%s">%s</a></li>',
                 $element->getId(),
                 stristr($text, '<title>') ? htmlentities($text) : $text
+            );
+        } else if ($element instanceof tabs\apiclient\Booking) {
+            echo sprintf(
+                '<li><a href="/platoclient/booking/?id=%s">%s</a></li>',
+                $element->getId(),
+                $text
             );
         } else {
             echo sprintf(

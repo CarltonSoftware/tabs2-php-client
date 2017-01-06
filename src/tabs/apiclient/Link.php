@@ -119,4 +119,16 @@ class Link extends Base
         
         return $this;
     }
+    
+    /**
+     * Overridden string function to stop any additional calls.  Link does
+     * not have a toArray method either and would generate an error if this
+     * is not here.
+     * 
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getLink();
+    }
 }
