@@ -3,7 +3,7 @@
 // Include the connection
 require_once __DIR__ . '/../creating-a-new-connection.php';
 
-$class = new tabs\apiclient\unit\PerUnit();
+$class = new tabs\apiclient\LabelTemplate();
 
 $ref = new ReflectionClass($class);
 $properties = array();
@@ -25,6 +25,8 @@ echo sprintf(
     $ref->getShortName(),
     date('Y')
 );
+
+$defaultValues = $ref->getDefaultProperties();
 
 foreach ($ref->getProperties() as $property) {
     $refProp = new ReflectionProperty($class, $property->getName());
@@ -65,11 +67,19 @@ echo "{\n";
 
 foreach ($properties as $prop => $type) {
     echo sprintf(
-        "\t/**\n\t * %s\n\t *\n\t * @var %s\n\t */\n\tprotected $%s;\n\n",
+        "\t/**\n\t * %s\n\t *\n\t * @var %s\n\t */\n\tprotected $%s",
         ucfirst($prop),
         $type,
         $prop
     );
+    
+    if (isset($defaultValues[$prop])) {
+        echo " = " . $defaultValues[$prop];
+        if ($defaultValues[$prop] === '') {
+            echo '\'\'';
+        }
+    }
+    echo ";\n\n";
 }
 
 echo "\t// -------------------- Public Functions -------------------- //\n\n";

@@ -122,13 +122,15 @@ class Client extends \GuzzleHttp\Client
         if ($username != '') {
             $options['handler'] = $handlerStack;
             $options['auth'] = 'oauth2';
+            
+            $tokenUri = parse_url(str_replace('/v2/', '', $base_uri) . '/oauth/v2/token');
 
             $config = [
                 PasswordCredentials::CONFIG_USERNAME => $username,
                 PasswordCredentials::CONFIG_PASSWORD => $password,
                 PasswordCredentials::CONFIG_CLIENT_ID => $clientId,
                 PasswordCredentials::CONFIG_CLIENT_SECRET => $clientSecret,
-                PasswordCredentials::CONFIG_TOKEN_URL => '/plato/oauth/v2/token',
+                PasswordCredentials::CONFIG_TOKEN_URL => $tokenUri['path'],
                 PasswordCredentials::GRANT_TYPE => 'client_credentials'
             ];
 

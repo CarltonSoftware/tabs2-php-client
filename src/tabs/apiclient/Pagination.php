@@ -34,7 +34,9 @@ class Pagination extends Base
      * 
      * @var array
      */
-    protected $filters = array();
+    protected $filters = array(
+        array()
+    );
 
     /**
      * Total amount of elements found for the query
@@ -90,6 +92,27 @@ class Pagination extends Base
     public function getParameters()
     {
         return $this->params;
+    }
+    
+    /**
+     * Add a filter to the filters array
+     * 
+     * @param string   $key   Filter key
+     * @param string   $value Filter value
+     * @param integer  $group Filter group (used for OR filtering if greater 
+     *                        than zero)
+     * 
+     * @return \tabs\apiclient\Pagination
+     */
+    public function addFilter($key, $value, $group = 0)
+    {
+        if (!isset($this->filters[$group])) {
+            $this->filters[$group] = array();
+        }
+        
+        $this->filters[$group][$key] = $value;
+        
+        return $this;
     }
     
     /**
@@ -151,8 +174,18 @@ class Pagination extends Base
      * 
      * @return Pagination
      */
-    public function setFilters($filters)
+    public function setFilters(array $filters)
     {
+        if (count($filters) > 0) {
+            if (!is_array($filters[0])) {
+                $filters = array($filters);
+            }
+        } else {
+            $filters = array(
+                array()
+            );
+        }
+        
         $this->filters = $filters;
         
         return $this;
@@ -199,13 +232,18 @@ class Pagination extends Base
     }
     
     /**
-     * Get the filters string read for a request
+     * Return the filters in the correct api format
      * 
-     * @return string
+     * @return array
      */
-    public function getFiltersString()
+    public function getFiltersArray()
     {
-        return http_build_query($this->getFilters(), null, ':');
+        $filters = array();
+        foreach ($this->filters as $filter) {
+            $filters[] = http_build_query($filter, null, ':');
+        }
+        
+        return $filters;
     }
     
     /**
@@ -229,11 +267,14 @@ class Pagination extends Base
      */
     public function toArray()
     {
+        $filter = array();
+        if (count($this->getFilters()) > 0 && count($this->getFilters()[0]) > 0) {
+            $filter['filter'] = $this->getFiltersArray();
+        }
+        
         return array_filter(
             array_merge(
-                array(
-                    'filter' => urldecode($this->getFiltersString())
-                ),
+                $filter,
                 $this->getParameters()
             )
         );

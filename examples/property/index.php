@@ -90,6 +90,18 @@ try {
             ->fetch();
 
         include __DIR__ . '/../collection.php';
+        
+        // Search for properties sleeping 4 people
+        $collection = tabs\apiclient\Collection::factory(
+            'property',
+            new \tabs\apiclient\Property
+        );
+        $collection->setLimit(filter_input(INPUT_GET, 'limit'))
+            ->setPage(filter_input(INPUT_GET, 'page'));
+        $collection->getPagination()->addFilter('sleeps', 4);
+        $collection->fetch();
+
+        include __DIR__ . '/../collection.php';
     }
 
 } catch(Exception $e) {
