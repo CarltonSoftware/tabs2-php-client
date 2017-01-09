@@ -1,7 +1,9 @@
 <?php
 
 namespace tabs\apiclient;
+
 use tabs\apiclient\Builder;
+use tabs\apiclient\marketingbrand\EmailList;
 
 /**
  * Tabs Rest API object.
@@ -28,6 +30,8 @@ use tabs\apiclient\Builder;
  * 
  * @method \tabs\apiclient\Agency getAgency() Returns the agency
  * @method \tabs\apiclient\BookingBrand getDefaultbookingbrand() Returns the defaultbookingbrand
+ * 
+ * @method Collection|EmailList[] getEmaillists() Returns the emaillists
  */
 class MarketingBrand extends Builder
 {
@@ -72,8 +76,29 @@ class MarketingBrand extends Builder
      * @var \tabs\apiclient\BookingBrand
      */
     protected $defaultbookingbrand;
+    
+    /**
+     * Email lists
+     * 
+     * @var Collection|EmailList[]
+     */
+    protected $emaillists;
 
     // -------------------- Public Functions -------------------- //
+
+    /**
+     * @inheritDoc
+     */
+    public function __construct($id = null)
+    {
+        $this->emaillists = Collection::factory(
+            'emaillist',
+            new EmailList(),
+            $this
+        );
+        
+        parent::__construct($id);
+    }
 
     /**
      * Set the agency

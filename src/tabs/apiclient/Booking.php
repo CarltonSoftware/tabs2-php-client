@@ -413,4 +413,12 @@ class Booking extends Builder
         
         return $arr;
     }
+    
+    /**
+     * @inheritDoc
+     */
+    public function getUrlStub()
+    {
+        return 'booking';
+    }
 }

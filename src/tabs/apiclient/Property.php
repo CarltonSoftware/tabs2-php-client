@@ -1,11 +1,7 @@
 <?php
 
 namespace tabs\apiclient;
-use tabs\apiclient\property\Document;
 use tabs\apiclient\property\Inspection;
-use tabs\apiclient\property\MarketingBrand;
-use tabs\apiclient\property\BookingBrand;
-use tabs\apiclient\property\Branding;
 use tabs\apiclient\note\PropertyNote;
 use tabs\apiclient\property\Attribute;
 use tabs\apiclient\property\Comment;
@@ -52,17 +48,17 @@ use tabs\apiclient\property\Target;
  * 
  * @method integer  getRating() Returns the property rating
  * 
- * @method Collection|Document[] getDocuments() Get the documents
+ * @method Collection|property\Document[] getDocuments() Get the documents
  * 
  * @method Collection|PropertyNote[] getNotes() Get the Notes
  * 
- * @method Collection|MarketingBrand[] getMarketingbrands() Get the property marketing brands
+ * @method Collection|property\MarketingBrand[] getMarketingbrands() Get the property marketing brands
  * 
- * @method Collection|BookingBrand[] getBookingbrands() Get the property booking brands
+ * @method Collection|property\BookingBrand[] getBookingbrands() Get the property booking brands
  * 
- * @method Collection|Branding[] getBrandings() Get the property brandings
+ * @method Collection|property\Branding[] getBrandings() Get the property brandings
  * 
- * @method Branding getPrimarypropertybranding() Get the primary property branding
+ * @method property\Branding getPrimarypropertybranding() Get the primary property branding
  * 
  * @method Collection|Inspection[] getInspections() Get the property inspections
  * 
@@ -149,7 +145,7 @@ class Property extends Builder
     /**
      * Property documents
      * 
-     * @var Collection|Document[]
+     * @var Collection|property\Document[]
      */
     protected $documents;
     
@@ -170,21 +166,21 @@ class Property extends Builder
     /**
      * Property mb
      * 
-     * @var Collection|MarketingBrand[]
+     * @var Collection|property\MarketingBrand[]
      */
     protected $marketingbrands;
     
     /**
      * Property bb
      * 
-     * @var Collection|BookingBrand[]
+     * @var Collection|property\BookingBrand[]
      */
     protected $bookingbrands;
     
     /**
      * Property branding
      * 
-     * @var Collection|Branding[]
+     * @var Collection|property\Branding[]
      */
     protected $brandings;
     
@@ -287,11 +283,11 @@ class Property extends Builder
         $this->status = Status::factory(array('name' => 'New'));
         
         $collections = array(
-            'document' => new Document(),
+            'document' => new property\Document(),
             'note' => new PropertyNote(),
-            'marketingbrand' => new MarketingBrand(),
-            'bookingbrand' => new BookingBrand(),
-            'branding' => new Branding(),
+            'marketingbrand' => new property\MarketingBrand(),
+            'bookingbrand' => new property\BookingBrand(),
+            'branding' => new property\Branding(),
             'inspection' => new Inspection(),
             'attribute' => new Attribute(),
             'comment' => new Comment(),

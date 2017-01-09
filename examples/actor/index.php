@@ -74,9 +74,9 @@ try {
             $customer->getId()
         );
 
-//        $bookings = $customer->getBookings()->fetch();
-//        if ($bookings->getTotal() > 0) {
-//            ?>
+        $bookings = $customer->getBookings();
+        if ($bookings->getTotal() > 0) {
+            ?>
             <h3>Bookings</h3>
             <table>
                 <tr>
@@ -86,21 +86,21 @@ try {
                     <th>To</th>
                 </tr>
                 <?php
-//                foreach ($bookings as $booking) {
-//                    echo sprintf(
-//                        '<tr><td><a href="../booking/accessing-booking-information.php?id=%u">%s</a></td>' .
-//                        '<td>%s</td><td>%s</td><td>%s</td></tr>',
-//                        $booking->getId(),
-//                        $booking->getBookref(),
-//                        $booking->getStatus(),
-//                        $booking->getFromdate(),
-//                        $booking->getTodate()
-//                    );
-//                }
-//            ?>
+                    foreach ($bookings as $booking) {
+                        echo sprintf(
+                            '<tr><td><a href="../booking/index.php?id=%u">%s</a></td>' .
+                            '<td>%s</td><td>%s</td><td>%s</td></tr>',
+                            $booking->getId(),
+                            $booking->getBookref(),
+                            $booking->getStatus(),
+                            $booking->getFromdate()->format('Y-m-d'),
+                            $booking->getTodate()->format('Y-m-d')
+                        );
+                    }
+                ?>
             </table>
             <?php
-//        }
+        }
 
     } else {
         $collection = tabs\apiclient\Collection::factory(

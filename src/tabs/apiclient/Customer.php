@@ -2,6 +2,10 @@
 
 namespace tabs\apiclient;
 
+use tabs\apiclient\actor\MarketingBrand;
+use tabs\apiclient\Collection;
+use tabs\apiclient\Booking;
+
 /**
  * Tabs Rest Customer object.
  *
@@ -17,6 +21,12 @@ namespace tabs\apiclient;
  * @method integer getConfirmedbookings()        Returns the confirmedbookings
  * @method integer getConfirmedbookingsvalue()   Returns the confirmedbookingsvalue
  * @method integer getAccountbalance()           Returns the accountbalance
+ * 
+ * @method Collection|MarketingBrand[] getMarketingbrands() Returns the customer MarketingBrands
+ * @method Customer setMarketingbrands(Collection $col) Set the marketing brands
+ * 
+ * @method Collection|Booking[] getBookings() Returns the customer bookings
+ * @method Customer setBookings(Collection $col) Set the bookings
  */
 class Customer extends Actor
 {
@@ -47,6 +57,20 @@ class Customer extends Actor
      * @var integer
      */
     protected $accountbalance = 0;
+    
+    /**
+     * Marketing brands collection
+     * 
+     * @var Collection|MarketingBrand[]
+     */
+    protected $marketingbrands;
+    
+    /**
+     * Customer bookings
+     * 
+     * @var Collection|Booking[]
+     */
+    protected $bookings;
 
     // -------------------- Public Functions -------------------- //
     
@@ -60,6 +84,17 @@ class Customer extends Actor
     public function __construct($id = null)
     {
         $this->firstbookingbookeddate = new \DateTime();
+        $this->marketingbrands = Collection::factory(
+            'marketingbrand',
+            new MarketingBrand(),
+            $this
+        );
+        
+        $this->bookings = Collection::factory(
+            'booking',
+            new Booking(),
+            $this
+        );
         
         parent::__construct($id);
     }

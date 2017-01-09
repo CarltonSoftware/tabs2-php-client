@@ -10,6 +10,7 @@ use tabs\apiclient\StaticCollection;
 use tabs\apiclient\actor\ContactDetail;
 use tabs\apiclient\actor\ContactDetailOther;
 use tabs\apiclient\actor\PhoneNumber;
+use tabs\apiclient\actor\ManagedActivity;
 
 /**
  * Tabs Rest API object.
@@ -68,6 +69,9 @@ use tabs\apiclient\actor\PhoneNumber;
  * 
  * @method StaticCollection|ContactDetail[] getContactdetails() Returns the actor contact details
  * @method Actor setContactdetails(StaticCollection $col) Set the contact details
+ * 
+ * @method StaticCollection|ManagedActivity[] getManagedactivities() Returns the actor managed activities
+ * @method Actor setManagedactivities(StaticCollection $col) Set the managed activities
  */
 abstract class Actor extends Builder
 {
@@ -182,6 +186,13 @@ abstract class Actor extends Builder
      * @var StaticCollection|ContactDetail[]
      */
     protected $contactdetails;
+    
+    /**
+     * Actor Managed Activities
+     * 
+     * @var StaticCollection|ManagedActivity[]
+     */
+    protected $managedactivities;
 
     // -------------------- Public Functions -------------------- //
     
@@ -219,6 +230,12 @@ abstract class Actor extends Builder
                 'C' => new ContactDetailOther(),
                 'F' => new PhoneNumber()
             ));
+        
+        $this->managedactivities = Collection::factory(
+            'managedactivity',
+            new ManagedActivity(),
+            $this
+        );
         
         parent::__construct($id);
     }
@@ -275,6 +292,25 @@ abstract class Actor extends Builder
     public function __toString()
     {
         return $this->getFullname();
+    }
+    
+    /**
+     * Authenticate the actor
+     * 
+     * @param string $password Password
+     * 
+     * @return boolean
+     */
+    public function authenticate($password)
+    {
+        $req = client\Client::getClient()->post(
+            $this->getUpdateUrl() . '/authenticate',
+            array(
+                'password' => $password
+            )
+        );
+        
+        return $req->getStatusCode() === 204;
     }
 
     /**
