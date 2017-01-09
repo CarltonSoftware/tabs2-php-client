@@ -3,7 +3,7 @@
 // Include the connection
 require_once __DIR__ . '/../creating-a-new-connection.php';
 
-$class = new tabs\apiclient\actor\ManagedActivity();
+$class = new tabs\apiclient\booking\Payment();
 
 $ref = new ReflectionClass($class);
 $properties = array();
@@ -117,6 +117,7 @@ foreach ($properties as $prop => $type) {
     
     if (!in_array($type, array('string', 'integer', 'float', 'boolean', '\DateTime')) 
         && substr($type, 0, 10) !== 'Collection'
+        && substr($type, 0, 16) !== 'StaticCollection'
         && !in_array($prop, array('id', 'parent'))
     ) {
         echo sprintf(
@@ -151,7 +152,11 @@ echo "\tpublic function toArray()\n\t{\n";
 
 echo "\t\treturn array(\n";
 foreach ($properties as $prop => $type) {
-    if (substr($type, 0, 10) == 'Collection' || $prop == 'id' || $prop == 'parent') {
+    if (substr($type, 0, 16) == 'StaticCollection'
+        || substr($type, 0, 10) == 'Collection'
+        || $prop == 'id'
+        || $prop == 'parent'
+    ) {
         continue;
     }
     

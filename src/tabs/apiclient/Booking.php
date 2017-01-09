@@ -8,6 +8,11 @@ use tabs\apiclient\SalesChannel;
 use tabs\apiclient\Currency;
 use tabs\apiclient\PricingPeriod;
 use tabs\apiclient\Source;
+use tabs\apiclient\PotentialBooking;
+use tabs\apiclient\WebBooking;
+use tabs\apiclient\ProvisionalBooking;
+use tabs\apiclient\note\BookingNote;
+use tabs\apiclient\booking\Guest;
 
 /**
  * Tabs Rest API Booking object.
@@ -84,6 +89,20 @@ use tabs\apiclient\Source;
  * 
  * @method string getCheckouttime() Returns the checkouttime
  * @method Booking setCheckouttime(string $var) Sets the checkouttime
+ * 
+ * @method PotentialBooking getPotentialbooking() Returns the potentialbooking
+ * 
+ * @method WebBooking getWebbooking() Returns the webbooking
+ * 
+ * @method ProvisionalBooking getProvisionalbooking() Returns the provisionalbooking
+ * 
+ * @method Collection|booking\SecurityDeposit[] getSecuritydeposits() Returns the securitydeposits
+ * 
+ * @method Collection|booking\Customer[] getCustomers() Returns the customers
+ * 
+ * @method Collection|booking\Document[] getDocuments() Returns the booking documents
+ * 
+ * @method Collection|BookingNote[] getNotes() Returns the booking notes
  */
 class Booking extends Builder
 {
@@ -216,7 +235,7 @@ class Booking extends Builder
     /**
      * Source
      * 
-     * @var \tabs\apiclient\Source
+     * @var Source
      */
     protected $source;
 
@@ -247,6 +266,27 @@ class Booking extends Builder
      * @var string
      */
     protected $checkouttime = '';
+    
+    /**
+     * Potential Booking
+     * 
+     * @var PotentialBooking
+     */
+    protected $potentialbooking;
+    
+    /**
+     * Web Booking
+     * 
+     * @var WebBooking
+     */
+    protected $webbooking;
+
+    /**
+     * Provisional Booking
+     * 
+     * @var ProvisionalBooking
+     */
+    protected $provisionalbooking;
 
     /**
      * Collection of suppliers for the booking
@@ -254,6 +294,48 @@ class Booking extends Builder
      * @var StaticCollection|booking\Supplier[]|property\Supplier[]
      */
     protected $suppliers;
+    
+    /**
+     * Security Deposits
+     * 
+     * @var Collection|booking\SecurityDeposit[]
+     */
+    protected $securitydeposits;
+    
+    /**
+     * Booking Customers
+     * 
+     * @var Collection|booking\Customer[]
+     */
+    protected $customers;
+    
+    /**
+     * Booking Documents
+     * 
+     * @var Collection|booking\Documents[]
+     */
+    protected $documents;
+    
+    /**
+     * Booking notes
+     * 
+     * @var Collection|BookingNote[]
+     */
+    protected $notes;
+    
+    /**
+     * Booking guests
+     * 
+     * @var Collection|Guest[]
+     */
+    protected $guests;
+    
+    /**
+     * Payments
+     * 
+     * @var Collection|booking\Payment[]
+     */
+    protected $payments;
 
     // -------------------- Public Functions -------------------- //
     
@@ -269,6 +351,37 @@ class Booking extends Builder
             'supplier',
             new booking\Supplier()
         );
+        $this->securitydeposits = Collection::factory(
+            'securitydeposit',
+            new booking\SecurityDeposit(),
+            $this
+        );
+        $this->customers = Collection::factory(
+            'customer',
+            new booking\Customer(),
+            $this
+        );
+        $this->documents = Collection::factory(
+            'document',
+            new booking\Document(),
+            $this
+        );
+        $this->notes = Collection::factory(
+            'note',
+            new BookingNote(),
+            $this
+        );
+        $this->guests = Collection::factory(
+            'guest',
+            new Guest(),
+            $this
+        );
+        $this->payments = Collection::factory(
+            'payment',
+            new booking\Payment(),
+            $this
+        );
+        
         parent::__construct($id);
     }
     
@@ -358,6 +471,48 @@ class Booking extends Builder
     }
 
     /**
+     * Set the potentialbooking
+     *
+     * @param stdclass|array|PotentialBooking $potentialbooking The Potentialbooking
+     *
+     * @return Booking
+     */
+    public function setPotentialbooking($potentialbooking)
+    {
+        $this->potentialbooking = PotentialBooking::factory($potentialbooking);
+
+        return $this;
+    }
+
+    /**
+     * Set the webbooking
+     *
+     * @param stdclass|array|WebBooking $webbooking The Webbooking
+     *
+     * @return Booking
+     */
+    public function setWebbooking($webbooking)
+    {
+        $this->webbooking = WebBooking::factory($webbooking);
+
+        return $this;
+    }
+    
+    /**
+     * Set the provisionalbooking
+     *
+     * @param stdclass|array|ProvisionalBooking $provisionalbooking The Provisionalbooking
+     *
+     * @return Booking
+     */
+    public function setProvisionalbooking($provisionalbooking)
+    {
+        $this->provisionalbooking = ProvisionalBooking::factory($provisionalbooking);
+
+        return $this;
+    }
+
+    /**
      * Set the property
      *
      * @param stdclass|array|PropertyLink $property The Property
@@ -411,6 +566,29 @@ class Booking extends Builder
             $arr['pricingperiod'] = 'Week';
         }
         
+        if ($this->getPotentialbooking()) {
+            array_merge(
+                $arr,
+                $this->_prefixToArray('potentialbooking_', $this->getPotentialbooking())
+            );
+        }
+        
+        if ($this->getWebbooking()) {
+            array_merge(
+                $arr,
+                $this->_prefixToArray('webbooking_', $this->getWebbooking())
+            );
+        }
+        
+        if ($this->getProvisionalbooking()) {
+            array_merge(
+                $arr,
+                $this->_prefixToArray('provisionalbooking_', $this->getWebbooking())
+            );
+        }
+        
+        
+        
         return $arr;
     }
     
@@ -420,5 +598,24 @@ class Booking extends Builder
     public function getUrlStub()
     {
         return 'booking';
+    }
+    
+    /**
+     * Prefix toarray indexes
+     * 
+     * @param string $prefix Prefix String
+     * @param Base   $object Object
+     * 
+     * @return array
+     */
+    private function _prefixToArray($string, $object)
+    {
+        $arr = $object->toArray();
+        foreach ($arr as $key => $value) {
+            $arr[$string . $key] = $value;
+            unset($arr[$key]);
+        }
+        
+        return $arr;
     }
 }
