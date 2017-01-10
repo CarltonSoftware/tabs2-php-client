@@ -7,8 +7,9 @@ use tabs\apiclient\Collection;
 use tabs\apiclient\property\BookingBrand;
 use tabs\apiclient\property\MarketingBrand;
 use tabs\apiclient\property\price\Price;
-use tabs\apiclient\property\availability\AvailableDay;
+use tabs\apiclient\property\branding\AvailableDay;
 use tabs\apiclient\property\branding\Status;
+use tabs\apiclient\property\branding\Calendar;
 
 /**
  * Tabs Rest API PropertyBranding object.
@@ -143,7 +144,7 @@ class Branding extends Builder
         \DateTime $toDate = null,
         $includechangedays = true
     ) {
-        if ($fromDate) {
+        if ($fromDate && $toDate) {
             $this->availableDays->getPagination()
                 ->addParameter('fromdate', $fromDate->format('Y-m-d'))
                 ->addParameter('todate', $toDate->format('Y-m-d'));
@@ -157,6 +158,32 @@ class Branding extends Builder
         }
         
         return $this->availableDays->fetch();
+    }
+    
+    /**
+     * Get a calendar object with availability for a specific month
+     * 
+     * @param \DateTime $fromDate Fromdate
+     * 
+     * @return Calendar
+     */
+    public function getCalendar(\DateTime $fromDate = null)
+    {
+        if (!$fromDate) {
+            $fromDate = new \DateTime('first day of this month');
+        }
+        
+        $fromDate->setTime(0, 0, 0);
+        $toDate = clone $fromDate;
+        $toDate->modify('last day of this month');
+        
+        $days = $this->getAvailableDays($fromDate, $toDate);
+        
+        $cal = new Calendar();
+        $cal->setAvailableDays($days)
+            ->setTargetMonth($fromDate);
+        
+        return $cal;
     }
 
     /**

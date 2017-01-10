@@ -79,4 +79,16 @@ class Collection extends StaticCollection
             'Unable to fetch GET: ' . $class
         );
     }
+    
+    /**
+     * @inheritDoc
+     */
+    public function findBy(callable $fn)
+    {
+        if (!$this->isFetched()) {
+            $this->fetch();
+        }
+        
+        return parent::findBy($fn);
+    }
 }

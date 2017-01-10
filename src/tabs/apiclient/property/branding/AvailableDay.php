@@ -1,6 +1,6 @@
 <?php
 
-namespace tabs\apiclient\property\availability;
+namespace tabs\apiclient\property\branding;
 use tabs\apiclient\Base;
 
 /**

@@ -567,21 +567,21 @@ class Booking extends Builder
         }
         
         if ($this->getPotentialbooking()) {
-            array_merge(
+            $arr = array_merge(
                 $arr,
                 $this->_prefixToArray('potentialbooking_', $this->getPotentialbooking())
             );
         }
         
         if ($this->getWebbooking()) {
-            array_merge(
+            $arr = array_merge(
                 $arr,
                 $this->_prefixToArray('webbooking_', $this->getWebbooking())
             );
         }
         
         if ($this->getProvisionalbooking()) {
-            array_merge(
+            $arr = array_merge(
                 $arr,
                 $this->_prefixToArray('provisionalbooking_', $this->getWebbooking())
             );

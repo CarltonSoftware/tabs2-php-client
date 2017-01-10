@@ -30,6 +30,9 @@ try {
         
         <?php
         
+            echo (string) $property->getBrandings()->first()->getCalendar();
+            echo (string) $property->getBrandings()->first()->getCalendar(new \DateTime('first day of next month'));
+        
             if ($property->getMarketingbrands()->count() > 0) {
                 ?>
         <p>Marketing Brand: <?php echo $property->getMarketingbrands()->first()->getMarketingbrand()->getName(); ?></p>
@@ -79,6 +82,7 @@ try {
             
             $collection = $property->getRooms();
             include __DIR__ . '/../collection.php';
+        
     } else {
 
         $collection = tabs\apiclient\Collection::factory(

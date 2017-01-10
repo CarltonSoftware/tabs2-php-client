@@ -506,6 +506,27 @@ class StaticCollection implements \Iterator, \Countable
         
         return $this;
     }
+    
+    /**
+     * Find an element or elements using aa particular callback
+     * 
+     * @param \tabs\apiclient\callable $fn Function
+     * 
+     * @return \tabs\apiclient\StaticCollection
+     */
+    public function findBy(callable $fn)
+    {
+        $p = $this->getElementParent();
+        $col = self::factory(
+            $this->getPath(),
+            $this->getElementClass(),
+            $p
+        );
+        $col->setElements(array_filter($this->getElements(), $fn));
+        $col->setTotal(count($col->getElements()));
+        
+        return $col;
+    }
 
     /**
      * Rewinds the iterator to the beginning of the collection
