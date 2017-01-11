@@ -352,7 +352,10 @@ class Calendar
     {
         $today = new \DateTime();
         $availableDay = null;
-        $classes = array();
+        $attributes = array(
+            'id' => '',
+            'class' => array()
+        );
         
         // Start formulating cell structure
         if ($day > 0 && $day <= $this->targetMonth->format('t')) {
@@ -378,13 +381,17 @@ class Calendar
             }
             
             if ($currentDate < $today) {
-                $classes[] = 'past';
+                $attributes['class'][] = 'past';
+            }
+            
+            if ($is_today) {
+                $attributes['class'][] = 'today';
             }
         } else {
             $suffix = '';
             $is_today = false;
             $cell = $this->temp['cal_cell_start' . $suffix];
-            $classes[] = 'empty';
+            $attributes['class'][] = 'empty';
             
             // Blank cells
             $cell .= $this->temp['cal_cell_blank'];
@@ -397,32 +404,30 @@ class Calendar
         // Cells with content
         if ($availableDay) {
             // Do processing on AvailableDay class
-            $cell = str_replace(
-                '{id}',
-                $availableDay->getDate()->format(
-                    $this->id_format
-                ),
-                $cell
+            $attributes['id'] = $availableDay->getDate()->format(
+                $this->id_format
             );
             
             if ($availableDay->getDaysavailable() > 0) {
-                $classes[] = 'available';
-            
+                $attributes['class'][] = 'available';
+                
                 if ($availableDay->getIsfromdate()) {
-                    $classes[] = 'from';
+                    $attributes['class'][] = 'from';
                 }
 
                 if ($availableDay->getIstodate()) {
-                    $classes[] = 'to';
+                    $attributes['class'][] = 'to';
                 }
+                
+                $attributes['data-daysavailable'] = $availableDay->getDaysavailable();
             } else {
-                $classes[] = 'booked';
+                $attributes['class'][] = 'unavailable';
             }
         }
         
         $cell = str_replace(
-            '{class}',
-            implode(' ', $classes),
+            '{attributes}',
+            $this->_buildAttributes($attributes),
             $cell
         );
 
@@ -443,6 +448,23 @@ class Calendar
         }
         
         return $cell;
+    }
+    
+    private function _buildAttributes($attributes)
+    {
+        foreach ($attributes as $key => $val) {
+            if (is_array($val)) {
+                $attributes[$key] = '"' . implode(' ', $val) . '"';
+            } else {
+                $attributes[$key] = '"' . $val . '"';
+            }
+        }
+        
+        return urldecode(http_build_query(
+            array_filter($attributes),
+            false,
+            ' '
+        ));
     }
 
     // --------------------------------------------------------------------
@@ -647,8 +669,8 @@ class Calendar
             'week_day_cell'             => '<th>{week_day}</th>',
             'week_row_end'              => '</tr>',
             'cal_row_start'             => '<tr>',
-            'cal_cell_start'            => '<td id="{id}" class="{class}">',
-            'cal_cell_start_today'      => '<td id="{id}" class="{class} today">',
+            'cal_cell_start'            => '<td {attributes}>',
+            'cal_cell_start_today'      => '<td {attributes}>',
             'cal_cell_content'          => '{content}',
             'cal_cell_content_today'    => '<strong>{content}</strong>',
             'cal_cell_no_content'       => '{content}',
