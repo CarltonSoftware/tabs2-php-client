@@ -29,6 +29,11 @@ use tabs\apiclient\booking\Guest;
  * @method Booking setBookref(string $var) Sets the bookref
  * 
  * @method PropertyLink getProperty() Returns the property
+ * 
+ * @method \tabs\apiclient\Branding getBranding() Returns the branding
+ * 
+ * @method \tabs\apiclient\property\Branding getPropertybranding() Returns the propertybranding
+ * 
  * @method \DateTime getBookeddatetime() Returns the bookeddatetime
  * @method Booking setBookeddatetime(\DateTime $var) Sets the bookeddatetime
  * 
@@ -126,6 +131,20 @@ class Booking extends Builder
      * @var PropertyLink
      */
     protected $property;
+    
+    /**
+     * Branding
+     *
+     * @var \tabs\apiclient\Branding
+     */
+    protected $branding;
+    
+    /**
+     * Property Branding
+     *
+     * @var \tabs\apiclient\property\Branding
+     */
+    protected $propertybranding;
 
     /**
      * Bookeddatetime
@@ -527,6 +546,34 @@ class Booking extends Builder
     }
 
     /**
+     * Set the branding
+     *
+     * @param stdclass|array|\tabs\apiclient\Branding $branding The Branding
+     *
+     * @return Booking
+     */
+    public function setBranding($branding)
+    {
+        $this->branding = \tabs\apiclient\Branding::factory($branding);
+
+        return $this;
+    }
+
+    /**
+     * Set the propertybranding
+     *
+     * @param stdclass|array|\tabs\apiclient\property\Branding $propertybranding The Propertybranding
+     *
+     * @return Booking
+     */
+    public function setPropertybranding($propertybranding)
+    {
+        $this->propertybranding = \tabs\apiclient\property\Branding::factory($propertybranding);
+
+        return $this;
+    }
+
+    /**
      * @inheritDoc
      */
     public function toArray()
@@ -550,6 +597,10 @@ class Booking extends Builder
             'checkouttime' => $this->getCheckouttime(),
             'estimatedarrivaltime' => $this->getEstimatedarrivaltime()
         );
+        
+        if ($this->getPropertybranding()) {
+            $arr['propertybrandingid'] = $this->getPropertybranding()->getId();
+        }
         
         if ($this->getSaleschannel()) {
             $arr['saleschannel'] = $this->getSaleschannel()->getSaleschannel();

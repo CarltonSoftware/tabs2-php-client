@@ -3,7 +3,7 @@
 // Include the connection
 require_once __DIR__ . '/../creating-a-new-connection.php';
 
-$class = new tabs\apiclient\booking\Payment();
+$class = new tabs\apiclient\Booking();
 
 $ref = new ReflectionClass($class);
 $properties = array();
