@@ -49,6 +49,18 @@ use tabs\apiclient\property\Target;
  * @method integer getMaximumpets() Returns the maximumpets
  * @method Property setMaximumpets(integer $var) Sets the maximumpets
  * 
+ * @method string getTelephonenumber() Returns the telephonenumber
+ * @method Property setTelephonenumber(string $var) Sets the telephonenumber
+ * 
+ * @method string getCheckinearliesttime() Returns the checkinearliesttime
+ * @method Property setCheckinearliesttime(string $var) Sets the checkinearliesttime
+ * 
+ * @method string getCheckinlatesttime() Returns the checkinlatesttime
+ * @method Property setCheckinlatesttime(string $var) Sets the checkinlatesttime
+ * 
+ * @method string getCheckouttime() Returns the checkouttime
+ * @method Property setCheckouttime(string $var) Sets the checkouttime
+ * 
  * @method integer  getRating() Returns the property rating
  * 
  * @method Collection|property\Document[] getDocuments() Get the documents
@@ -276,7 +288,35 @@ class Property extends Builder
      *
      * @var integer
      */
-    protected $maximumpets;
+    protected $maximumpets = 0;
+    
+    /**
+     * Telephone number
+     *
+     * @var string
+     */
+    protected $telephonenumber = '';
+    
+    /**
+     * Check in time
+     *
+     * @var string
+     */
+    protected $checkinearliesttime = '';
+    
+    /**
+     * Check in time
+     *
+     * @var string
+     */
+    protected $checkinlatesttime = '';
+    
+    /**
+     * Check out time
+     *
+     * @var string
+     */
+    protected $checkouttime = '';
 
     // -------------------------- Public Functions -------------------------- //
     
@@ -367,7 +407,11 @@ class Property extends Builder
             'sleeps' => $this->getSleeps(),
             'bedrooms' => $this->getBedrooms(),
             'tabspropref' => $this->getTabspropref(),
-            'maximumpets' => $this->getMaximumpets()
+            'maximumpets' => $this->getMaximumpets(),
+            'telephonenumber' => $this->getTelephonenumber(),
+            'checkinearliesttime' => $this->getCheckinearliesttime(),
+            'checkinlatesttime' => $this->getCheckinlatesttime(),
+            'checkouttime' => $this->getCheckouttime()
         );
     }
 }
