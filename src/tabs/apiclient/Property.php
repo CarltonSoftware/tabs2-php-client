@@ -46,6 +46,9 @@ use tabs\apiclient\property\Target;
  * @method integer  getBedrooms()                  Returns the bedrooms value
  * @method Property setBedrooms(integer $bedrooms) Sets the bedrooms value
  * 
+ * @method integer getMaximumpets() Returns the maximumpets
+ * @method Property setMaximumpets(integer $var) Sets the maximumpets
+ * 
  * @method integer  getRating() Returns the property rating
  * 
  * @method Collection|property\Document[] getDocuments() Get the documents
@@ -267,6 +270,13 @@ class Property extends Builder
      * @var Collection|Target[]
      */
     protected $targets;
+    
+    /**
+     * Maximumpets
+     *
+     * @var integer
+     */
+    protected $maximumpets;
 
     // -------------------------- Public Functions -------------------------- //
     
@@ -356,7 +366,8 @@ class Property extends Builder
             'address' => $this->getAddress()->toArray(),
             'sleeps' => $this->getSleeps(),
             'bedrooms' => $this->getBedrooms(),
-            'tabspropref' => $this->getTabspropref()
+            'tabspropref' => $this->getTabspropref(),
+            'maximumpets' => $this->getMaximumpets()
         );
     }
 }
