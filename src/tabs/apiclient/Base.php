@@ -376,15 +376,7 @@ abstract class Base
                         } else if ($this->$property instanceof \tabs\apiclient\Collection 
                             && !$this->$property->isFetched()
                         ) {
-                            try {
-                                if (!$this->$property->getElementParent() 
-                                    || $this->$property->getElementParent()->getUpdateUrl()
-                                ) {
-                                    $this->$property->fetch();
-                                }
-                            } catch (\Exception $ex) {
-                                
-                            }
+                            self::_fetchCollection($this->$property);
                         }
                         
                         if ($this->$property instanceof StaticCollection) {
@@ -399,6 +391,15 @@ abstract class Base
                 $class = $this->getObjectClass();
                 $that = $class::_get($this->getLink());
                 call_user_func($this->getCallee(), $that);
+                
+                if ($that->$property instanceof \tabs\apiclient\Collection 
+                    && !$that->$property->isFetched()
+                ) {
+                    $that->$property->setPath(
+                        $this->getLink() . '/' . $that->$property->getPath() 
+                    );
+                    self::_fetchCollection($that->$property);
+                }
 
                 return $that->$property;
             }
@@ -408,6 +409,22 @@ abstract class Base
             null,
             'Unknown method called: ' . get_called_class() . ':' . $name
         );
+    }
+    
+    /**
+     * Test and fetch a collection
+     * 
+     * @param \tabs\apiclient\Collection &$collection Collection
+     * 
+     * @return void
+     */
+    public static function _fetchCollection(&$collection) 
+    {
+        if (!$collection->getElementParent() 
+            || $collection->getElementParent()->getUpdateUrl()
+        ) {
+            $collection->fetch();
+        }
     }
 
     /**

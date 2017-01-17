@@ -75,6 +75,13 @@ class StaticCollection implements \Iterator, \Countable
     protected $fetched = false;
     
     /**
+     * Path status
+     * 
+     * @var boolean
+     */
+    protected $pathOverridden = false;
+    
+    /**
      * Discriminator
      * 
      * @var string|boolean
@@ -107,6 +114,7 @@ class StaticCollection implements \Iterator, \Countable
     ) {
         $collection = new static();
         $collection->setPath($path)
+            ->setPathOverridden(false)
             ->setElementClass($element);
         
         if ($parent) {
@@ -163,6 +171,30 @@ class StaticCollection implements \Iterator, \Countable
     }
     
     /**
+     * Set the override path bool
+     * 
+     * @param boolean $bool Bool
+     * 
+     * @return StaticCollection
+     */
+    public function setPathOverridden($bool)
+    {   
+        $this->pathOverridden = $bool;
+        
+        return $this;
+    }
+    
+    /**
+     * Check the path override bool
+     * 
+     * @return boolean
+     */
+    public function isPathOverridden()
+    {
+        return $this->pathOverridden;
+    }
+    
+    /**
      * Set the collection path
      * 
      * @param string $path Path
@@ -172,6 +204,7 @@ class StaticCollection implements \Iterator, \Countable
     public function setPath($path)
     {   
         $this->path = $path;
+        $this->pathOverridden = true;
         
         return $this;
     }
@@ -193,7 +226,7 @@ class StaticCollection implements \Iterator, \Countable
      */
     public function getRoute()
     {
-        if ($this->getElementParent()) {
+        if ($this->getElementParent() && !$this->isPathOverridden()) {
             return $this->getElementParent()->getUpdateUrl() . '/' . $this->getPath();
         }
         
