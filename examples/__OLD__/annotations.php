@@ -3,7 +3,7 @@
 // Include the connection
 require_once __DIR__ . '/../creating-a-new-connection.php';
 
-$class = new tabs\apiclient\extra\Branding();
+$class = new tabs\apiclient\KeyTag();
 
 $ref = new ReflectionClass($class);
 $properties = array();
@@ -77,6 +77,9 @@ foreach ($properties as $prop => $type) {
         echo " = " . $defaultValues[$prop];
         if ($defaultValues[$prop] === '') {
             echo '\'\'';
+        }
+        if (is_bool($defaultValues[$prop])) {
+            echo $defaultValues[$prop] === true ? 'true' : 'false';
         }
     }
     echo ";\n\n";
@@ -167,11 +170,20 @@ foreach ($properties as $prop => $type) {
             'get' . ucfirst($prop) . '()'
         );
     } else {
-        echo sprintf(
-            "\t\t\t'%s' => \$this->%s",
-            $prop,
-            'get' . ucfirst($prop) . '()'
-        );
+    
+        if (stristr($type, 'apiclient')) {
+            echo sprintf(
+                "\t\t\t'%sid' => \$this->%s",
+                $prop,
+                'get' . ucfirst($prop) . '()'
+            );
+        } else {
+            echo sprintf(
+                "\t\t\t'%s' => \$this->%s",
+                $prop,
+                'get' . ucfirst($prop) . '()'
+            );
+        }
     }
     
     if (stristr($type, 'apiclient')) {
