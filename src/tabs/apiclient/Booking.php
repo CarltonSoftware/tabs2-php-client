@@ -108,6 +108,8 @@ use tabs\apiclient\booking\Guest;
  * @method Collection|booking\Document[] getDocuments() Returns the booking documents
  * 
  * @method Collection|BookingNote[] getNotes() Returns the booking notes
+ * 
+ * @method Collection|booking\Extra[] getExtras() Returns the booking extras
  */
 class Booking extends Builder
 {
@@ -355,6 +357,13 @@ class Booking extends Builder
      * @var Collection|booking\Payment[]
      */
     protected $payments;
+    
+    /**
+     * Extras
+     * 
+     * @var Collection|booking\Extra[]
+     */
+    protected $extras;
 
     // -------------------- Public Functions -------------------- //
     
@@ -398,6 +407,11 @@ class Booking extends Builder
         $this->payments = Collection::factory(
             'payment',
             new booking\Payment(),
+            $this
+        );
+        $this->extras = Collection::factory(
+            'extra',
+            new booking\Extra(),
             $this
         );
         

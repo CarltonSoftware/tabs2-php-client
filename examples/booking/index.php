@@ -33,6 +33,10 @@ try {
         $collection = $booking->getSuppliers();
 
         include __DIR__ . '/../collection.php';
+        
+        $collection = $booking->getExtras();
+
+        include __DIR__ . '/../collection.php';
     } else {
 
         $collection = tabs\apiclient\Collection::factory(
