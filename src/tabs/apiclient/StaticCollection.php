@@ -560,6 +560,22 @@ class StaticCollection implements \Iterator, \Countable
         
         return $col;
     }
+    
+    /**
+     * Find an element by its id
+     * 
+     * @param string $id Id
+     * 
+     * @return Base
+     */
+    public function findById($id)
+    {
+        $col = $this->findBy(function($ele) use ($id) {
+            return $ele->getId() == $id;
+        });
+        
+        return $col->first();
+    }
 
     /**
      * Rewinds the iterator to the beginning of the collection

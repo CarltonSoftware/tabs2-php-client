@@ -3,6 +3,7 @@
 namespace tabs\apiclient\extra;
 
 use tabs\apiclient\Builder;
+use tabs\apiclient\Collection;
 
 /**
  * Tabs Rest API Branding object.
@@ -35,9 +36,43 @@ class Branding extends Builder
      * @var boolean
      */
     protected $petextrabranding = false;
+    
+    /**
+     * Pricing
+     * 
+     * @var Collection|branding\Pricing[]
+     */
+    protected $pricing;
+    
+    /**
+     * Configuration
+     * 
+     * @var Collection|branding\Configuration[]
+     */
+    protected $configuration;
 
     // -------------------- Public Functions -------------------- //
 
+
+    /**
+     * @inheritDoc
+     */
+    public function __construct($id = null)
+    {
+        $this->pricing = Collection::factory(
+            'pricing',
+            new branding\Pricing(),
+            $this
+        );
+        $this->configuration = Collection::factory(
+            'configuration',
+            new branding\Configuration(),
+            $this
+        );
+
+        parent::__construct($id);
+    }
+        
     /**
      * Set the branding
      *
