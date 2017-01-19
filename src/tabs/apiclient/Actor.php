@@ -11,6 +11,7 @@ use tabs\apiclient\actor\ContactDetail;
 use tabs\apiclient\actor\ContactDetailOther;
 use tabs\apiclient\actor\PhoneNumber;
 use tabs\apiclient\actor\ManagedActivity;
+use tabs\apiclient\ActorSecurity;
 
 /**
  * Tabs Rest API object.
@@ -72,6 +73,8 @@ use tabs\apiclient\actor\ManagedActivity;
  * 
  * @method StaticCollection|ManagedActivity[] getManagedactivities() Returns the actor managed activities
  * @method Actor setManagedactivities(StaticCollection $col) Set the managed activities
+ * 
+ * @method Collection|ActorSecurity[] getSecurity() Returns the actor security
  */
 abstract class Actor extends Builder
 {
@@ -193,6 +196,13 @@ abstract class Actor extends Builder
      * @var StaticCollection|ManagedActivity[]
      */
     protected $managedactivities;
+    
+    /**
+     * Actor Security
+     * 
+     * @var Collection|ActorSecurity[]
+     */
+    protected $security;
 
     // -------------------- Public Functions -------------------- //
     
@@ -234,6 +244,12 @@ abstract class Actor extends Builder
         $this->managedactivities = Collection::factory(
             'managedactivity',
             new ManagedActivity(),
+            $this
+        );
+        
+        $this->security = Collection::factory(
+            'actorsecurity',
+            new actor\ActorSecurity(),
             $this
         );
         

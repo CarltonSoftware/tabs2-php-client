@@ -27,6 +27,8 @@ use tabs\apiclient\Booking;
  * 
  * @method Collection|Booking[] getBookings() Returns the customer bookings
  * @method Customer setBookings(Collection $col) Set the bookings
+ * 
+ * @method Collection|actor\Category[] getCategories() Returns the customer categories
  */
 class Customer extends Actor
 {
@@ -71,6 +73,13 @@ class Customer extends Actor
      * @var Collection|Booking[]
      */
     protected $bookings;
+    
+    /**
+     * Customer categories
+     * 
+     * @var Collection|actor\Category[]
+     */
+    protected $categories;
 
     // -------------------- Public Functions -------------------- //
     
@@ -93,6 +102,12 @@ class Customer extends Actor
         $this->bookings = Collection::factory(
             'booking',
             new Booking(),
+            $this
+        );
+        
+        $this->categories = Collection::factory(
+            'category',
+            new actor\Category(),
             $this
         );
         

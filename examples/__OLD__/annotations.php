@@ -3,7 +3,7 @@
 // Include the connection
 require_once __DIR__ . '/../creating-a-new-connection.php';
 
-$class = new tabs\apiclient\keysbookingbrand\UserType();
+$class = new tabs\apiclient\ContactMethodType();
 
 $ref = new ReflectionClass($class);
 $properties = array();

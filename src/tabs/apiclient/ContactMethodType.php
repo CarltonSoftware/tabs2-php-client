@@ -31,6 +31,8 @@ use tabs\apiclient\Encoding;
  * 
  * @method string getAddressvalidation() Returns the addressvalidation
  * @method ContactMethodType setAddressvalidation(string $var) Sets the addressvalidation
+ * 
+ * @method Collection|contactmethodtype\Element[] getElements() Returns the elements
  */
 class ContactMethodType extends Base
 {
@@ -75,8 +77,29 @@ class ContactMethodType extends Base
      * @var string
      */
     protected $addressvalidation;
+    
+    /**
+     * Elements
+     * 
+     * @var Collection|contactmethodtype\Element[]
+     */
+    protected $elements;
 
     // -------------------- Public Functions -------------------- //
+
+    /**
+     * @inheritDoc
+     */
+    public function __construct($id = null)
+    {
+        $this->elements = Collection::factory(
+            'element',
+            new contactmethodtype\Element(),
+            $this
+        );
+        
+        parent::__construct($id);
+    }
 
     /**
      * Set the encoding
