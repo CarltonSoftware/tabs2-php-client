@@ -29,7 +29,7 @@ class MarketingBrand extends Builder
     /**
      * Marketingbrand
      *
-     * @var \tabs\apiclient\branding\MarketingBrand
+     * @var \tabs\apiclient\MarketingBrand
      */
     protected $marketingbrand;
     

@@ -24,8 +24,6 @@ use tabs\apiclient\property\branding\Calendar;
  *
  * @method \tabs\apiclient\Branding getBranding() Returns the branding
  * @method \tabs\apiclient\BrandingGroup getBrandinggroup() Returns the brandinggroup
- * @method BookingBrand getBookingbrand() Returns the bookingbrand
- * @method MarketingBrand getMarketingbrand() Returns the marketingbrand
  * @method boolean getPrimarybookingbrand() Returns the primarybookingbrand
  * @method Branding setPrimarybookingbrand(boolean $var) Sets the primarybookingbrand
  * 
@@ -227,6 +225,23 @@ class Branding extends Builder
 
         return $this;
     }
+    
+    /**
+     * Return the booking brand
+     * 
+     * @return BookingBrand
+     */
+    public function getBookingbrand()
+    {
+        if ($property = $this->getParent() 
+            && $property instanceof \tabs\apiclient\Property
+            && $this->bookingbrand
+        ) {
+            $this->bookingbrand->setParent($property);
+        }
+        
+        return $this->bookingbrand;
+    }
 
     /**
      * Set the marketingbrand
@@ -240,6 +255,23 @@ class Branding extends Builder
         $this->marketingbrand = MarketingBrand::factory($marketingbrand);
 
         return $this;
+    }
+    
+    /**
+     * Return the booking brand
+     * 
+     * @return MarketingBrand
+     */
+    public function getMarketingbrand()
+    {
+        if ($property = $this->getParent() 
+            && $property instanceof \tabs\apiclient\Property
+            && $this->marketingbrand
+        ) {
+            $this->marketingbrand->setParent($property);
+        }
+        
+        return $this->marketingbrand;
     }
 
     /**

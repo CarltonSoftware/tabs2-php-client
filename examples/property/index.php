@@ -33,18 +33,21 @@ try {
             echo (string) $property->getBrandings()->first()->getCalendar();
             echo (string) $property->getBrandings()->first()->getCalendar(new \DateTime('first day of next month'));
         
-            if ($property->getMarketingbrands()->count() > 0) {
+            if ($property->getBrandings()->first() 
+                && $marketingBrand = $property->getBrandings()->first()->getMarketingBrand()
+            ) {
                 ?>
-        <p>Marketing Brand: <?php echo $property->getMarketingbrands()->first()->getMarketingbrand()->getName(); ?></p>
+        <p>Marketing Brand: <?php echo $marketingBrand->getMarketingbrand()->getName(); ?></p>
                 <?php
                 
-                if ($property->getMarketingbrands()->first()->getBrochures()->count() > 0) {
-                    $collection = $property->getMarketingbrands()->first()->getBrochures();
-                    include __DIR__ . '/../collection.php';
-                    
-                    $collection = $property->getMarketingbrands()->first()->getDescriptions();
-                    include __DIR__ . '/../collection.php';
-                }
+                $collection = $marketingBrand->getBrochures();
+                include __DIR__ . '/../collection.php';
+
+                $collection = $marketingBrand->getDescriptions();
+                include __DIR__ . '/../collection.php';
+
+                $collection = $marketingBrand->getGroupingvalues();
+                include __DIR__ . '/../collection.php';
             }
         
             if ($property->getDocuments()->count() > 0) {

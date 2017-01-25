@@ -20,6 +20,9 @@ use tabs\apiclient\Collection;
  * 
  * @method boolean getPetextrabranding() Returns the pet extra branding setting
  * @method Branding setPetextrabranding(boolean $bool) Set the pet extra branding setting
+ * 
+ * @method Collection|branding\Pricing[]       getPricing() Returns the extra branding pricing
+ * @method Collection|branding\Configuration[] getConfiguration() Returns the extra branding configuration
  */
 class Branding extends Builder
 {

@@ -3,7 +3,7 @@
 // Include the connection
 require_once __DIR__ . '/../creating-a-new-connection.php';
 
-$class = new tabs\apiclient\ContactMethodType();
+$class = new tabs\apiclient\BookingEnquiryDeposit();
 
 $ref = new ReflectionClass($class);
 $properties = array();
@@ -74,12 +74,23 @@ foreach ($properties as $prop => $type) {
     );
     
     if (isset($defaultValues[$prop])) {
-        echo " = " . $defaultValues[$prop];
+        echo " = ";
+        
+        if (is_scalar($defaultValues[$prop]) && !is_bool($defaultValues[$prop])) {
+            if (is_string($defaultValues[$prop])) {
+                echo '\'';
+            }
+            echo $defaultValues[$prop];
+            if (is_string($defaultValues[$prop])) {
+                echo '\'';
+            }
+        }
+        
         if ($defaultValues[$prop] === '') {
             echo '\'\'';
         }
         if (is_bool($defaultValues[$prop])) {
-            echo $defaultValues[$prop] === true ? 'true' : 'false';
+            echo ($defaultValues[$prop] === true) ? 'true' : 'false';
         }
     }
     echo ";\n\n";

@@ -389,7 +389,7 @@ class Property extends Builder
      */
     public function setPrimarypropertybranding($branding)
     {
-        $this->primarypropertybranding = Branding::factory($branding);
+        $this->primarypropertybranding = property\Branding::factory($branding);
         $this->primarypropertybranding->setParent($this);
         
         return $this;

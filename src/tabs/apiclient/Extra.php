@@ -25,7 +25,7 @@ use tabs\apiclient\extra\Branding;
  * @method string getDescription() Returns the description
  * @method Extra setDescription(string $var) Sets the description
  * 
- * @method Collection|Branding getExtrabrandings() Returns the brandings
+ * @method Collection|Branding[] getExtrabrandings() Returns the brandings
  */
 class Extra extends Builder
 {
