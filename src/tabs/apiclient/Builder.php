@@ -206,10 +206,7 @@ abstract class Builder extends Base implements BuilderInterface
         } else if ($object->getParent()) {
             return $this->_getParentActor($object->getParent());
         } else {
-            throw new \tabs\apiclient\exception\Exception(
-                null,
-                'Parent actor not found'
-            );
+            return null;
         }
     }
 
@@ -229,10 +226,7 @@ abstract class Builder extends Base implements BuilderInterface
         } else if ($object->getParent()) {
             return $this->_getParentProperty($object->getParent());
         } else {
-            throw new \tabs\apiclient\exception\Exception(
-                null,
-                'Parent property not found'
-            );
+            return null;
         }
     }
 

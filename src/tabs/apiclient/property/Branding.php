@@ -62,7 +62,7 @@ class Branding extends Builder
      *
      * @var MarketingBrand
      */
-    protected $marketingbrand;
+    public $marketingbrand;
 
     /**
      * Primarybookingbrand
@@ -233,8 +233,7 @@ class Branding extends Builder
      */
     public function getBookingbrand()
     {
-        if ($property = $this->getParent() 
-            && $property instanceof \tabs\apiclient\Property
+        if ($property = $this->getParentProperty()
             && $this->bookingbrand
         ) {
             $this->bookingbrand->setParent($property);
@@ -264,8 +263,7 @@ class Branding extends Builder
      */
     public function getMarketingbrand()
     {
-        if ($property = $this->getParent() 
-            && $property instanceof \tabs\apiclient\Property
+        if ($property = $this->getParentProperty()
             && $this->marketingbrand
         ) {
             $this->marketingbrand->setParent($property);

@@ -390,7 +390,9 @@ abstract class Base
                 //$parent = $this->$property->getParent();
                 $class = $this->getObjectClass();
                 $that = $class::_get($this->getLink());
-                call_user_func($this->getCallee(), $that);
+                if ($this->getCallee()) {
+                    call_user_func($this->getCallee(), $that);
+                }
                 
                 if ($that->$property instanceof \tabs\apiclient\Collection 
                     && !$that->$property->isFetched()
