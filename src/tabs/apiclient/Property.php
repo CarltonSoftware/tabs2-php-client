@@ -335,6 +335,7 @@ class Property extends Builder
         $collections = array(
             'document' => new property\Document(),
             'note' => new PropertyNote(),
+            'commission' => new property\Commission(),
             'marketingbrand' => new property\MarketingBrand(),
             'bookingbrand' => new property\BookingBrand(),
             'branding' => new property\Branding(),
