@@ -58,7 +58,7 @@ use tabs\apiclient\Collection;
  * @method Pricing setPerinfant(boolean $var) Sets the perinfant
  * 
  * @method Collection|pricing\PriceType[] getDailyprices() Returns the dailyprices
- * @method Collection|pricing\RangeElement[] getRanfes()   Returns the range prices
+ * @method Collection|pricing\RangeElement[] getRanges()   Returns the range prices
  */
 class Pricing extends Builder
 {
