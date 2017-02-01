@@ -342,7 +342,6 @@ class Property extends Builder
             'inspection' => new Inspection(),
             'attribute' => new Attribute(),
             'comment' => new Comment(),
-            'commission' => new property\Commission(),
             'offices' => new Office(),
             'owner' => new Owner(),
             'ownerpaymenterms' => new OwnerPaymentTerms(),
