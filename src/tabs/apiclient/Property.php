@@ -40,6 +40,8 @@ use tabs\apiclient\property\Target;
  * 
  * @method Address  getAddress() Returns the address
  * 
+ * @method Status   getStatus() Returns the status
+ * 
  * @method integer  getSleeps()                Returns the sleeps value
  * @method Property setSleeps(integer $sleeps) Sets the sleeps value
  * 
@@ -135,6 +137,13 @@ class Property extends Builder
      * @var Address
      */
     protected $address;
+    
+    /**
+     * Property status
+     * 
+     * @var Status
+     */
+    protected $status;    
     
     /**
      * Property accommodation limit
@@ -382,6 +391,22 @@ class Property extends Builder
     }
     
     /**
+     * Set the status on the property
+     * 
+     * @param Status|stdClass|Array $addr Status object/array
+     * 
+     * @return \tabs\apiclient\property\Property
+     */
+    public function setStatus($addr)
+    {
+        $status = Status::factory($addr);
+        $status->setParent($this);
+        $this->status = $status;
+        
+        return $this;
+    }    
+    
+    /**
      * Set the primary property branding
      * 
      * @param array|sdClass|PropertyBranding $branding Set the primary prop branding
@@ -405,6 +430,7 @@ class Property extends Builder
             'name' => $this->getName(),
             'namequalifier' => $this->getNamequalifier(),
             'address' => $this->getAddress()->toArray(),
+            'status' => $this->getStatus()->toArray(),
             'sleeps' => $this->getSleeps(),
             'bedrooms' => $this->getBedrooms(),
             'tabspropref' => $this->getTabspropref(),
