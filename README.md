@@ -12,10 +12,10 @@ To get started with this project you will need to install the client via compose
     {
 	    "repositories": [{
           "type": "vcs",
-          "url": "git@github.com:CarltonSoftware/tabs-api-client.git"
+          "url": "git@github.com:carltonsoftware/tabs2-php-client.git"
         }],
 	    "require": {
-          "carltonsoftware/tabs-api-client": "dev-master"	
+          "carltonsoftware/tabs2-php-client": "dev-master"	
 	    }
     }
     ```

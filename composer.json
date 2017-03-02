@@ -1,7 +1,7 @@
 {
-    "name": "carltonsoftware/PlatoClient",
+    "name": "carltonsoftware/tabs2-php-client",
     "description": "Tabs 2 PHP Client",
-    "homepage": "https://github.com/CarltonSoftware/PlatoClient",
+    "homepage": "https://github.com/CarltonSoftware/tabs2-php-client",
     "license": "proprietary",
     "type": "library",
     "minimum-stability": "dev",
