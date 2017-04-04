@@ -1,5 +1,19 @@
 <?php
 
+if (!function_exists('getParentLink')) {
+    function getParentLink($object, &$links = array())
+    {
+        if ($object->getParent()) {
+            getParentLink($object->getParent(), $links);
+        }
+        
+        $links[] = $object->getClass();
+        $links[] = $object->getId();
+
+        return $links;
+    }
+}
+
 if (!empty($collection)) {
     echo '<h4>' . $collection->getTotal() . ' ' . $collection->getElementClass()->getClass() . ' found</h4>';
 
@@ -33,8 +47,9 @@ if (!empty($collection)) {
             );
         } else {
             echo sprintf(
-                '<li><a href="/platoclient/exploreelement/%s">%s</a></li>',
+                '<li><a href="/platoclient/exploreelement/%s?map=%s">%s</a></li>',
                 implode('/', $classes),
+                implode(':', getParentLink($element)),
                 stristr($text, '<title>') ? htmlentities($text) : $text
             );
         }

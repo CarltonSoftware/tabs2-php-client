@@ -402,7 +402,7 @@ abstract class Base
                     );
                     self::_fetchCollection($that->$property);
                 }
-
+                
                 return $that->$property;
             }
         }
