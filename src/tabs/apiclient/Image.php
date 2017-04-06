@@ -83,9 +83,7 @@ class Image extends Document
     public function getImageTag($type = 'tocc', $width = 100, $height = 100)
     {
         $data = base64_encode(
-            $this->getFileFromUrl(
-                $this->getImageUrl($type, $width, $height)
-            )
+            $this->getFullImageUrl($type, $width, $height)
         );
         
         return sprintf(
@@ -95,6 +93,22 @@ class Image extends Document
             $this->getDescription(),
             $width,
             $height
+        );
+    }
+    
+    /**
+     * Get the full url function.
+     * 
+     * @param string $type   Resize type
+     * @param string $width  Width in px
+     * @param string $height Height in px
+     * 
+     * @return string
+     */
+    public function getFullImageUrl($type = 'tocc', $width = 100, $height = 100)
+    {
+        return $this->getUrl(
+            $this->getImageUrl($type, $width, $height)
         );
     }
     
