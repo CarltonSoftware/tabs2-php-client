@@ -2,7 +2,6 @@
 
 namespace tabs\apiclient;
 
-use tabs\apiclient\actor\MarketingBrand;
 use tabs\apiclient\Collection;
 use tabs\apiclient\Booking;
 
@@ -95,7 +94,7 @@ class Customer extends Actor
         $this->firstbookingbookeddate = new \DateTime();
         $this->marketingbrands = Collection::factory(
             'marketingbrand',
-            new MarketingBrand(),
+            new actor\MarketingBrand(),
             $this
         );
         
