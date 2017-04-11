@@ -167,7 +167,7 @@ class Client extends \GuzzleHttp\Client
      */
     public function get($url = null, array $params = [], array $options = [])
     {
-        echo($url . '<br>');
+        //echo($url . '<br>');
         return $this->createQueryRequest('get', $url, $params, $options);
     }
     
