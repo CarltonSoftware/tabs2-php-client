@@ -3,7 +3,6 @@
 namespace tabs\apiclient;
 
 use tabs\apiclient\Builder;
-use tabs\apiclient\extra\Branding;
 
 /**
  * Tabs Rest API Extra object.
@@ -66,7 +65,7 @@ class Extra extends Builder
     {
         $this->extrabrandings = Collection::factory(
             'branding',
-            new Branding,
+            new extra\Branding,
             $this
         );
         

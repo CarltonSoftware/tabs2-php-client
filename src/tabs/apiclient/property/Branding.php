@@ -30,6 +30,12 @@ use tabs\apiclient\property\branding\Calendar;
  * @method boolean getPromote() Returns the promote
  * @method Branding setPromote(boolean $var) Sets the promote
  * 
+ * @method \DateTime getAllowbookingonwebuntil() Returns the allowbookingonwebuntil
+ * @method Branding setAllowbookingonwebuntil(\DateTime $var) Sets the allowbookingonwebuntil
+ * 
+ * @method \DateTime getShowpricingonwebuntil() Returns the showpricingonwebuntil
+ * @method Branding setShowpricingonwebuntil(\DateTime $var) Sets the showpricingonwebuntil
+ * 
  * @method \tabs\apiclient\Status getStatus() Returns the status
  * 
  * @method Collection|Price[] getPrices() Returns the property brand prices
@@ -105,6 +111,21 @@ class Branding extends Builder
      * @var Collection|Status[]
      */
     protected $statuses;
+    
+    /**
+     * Allowbookingonwebuntil
+     *
+     * @var \DateTime
+     */
+    protected $allowbookingonwebuntil;
+    
+    /**
+     * Showpricingonwebuntil
+     *
+     * @var \DateTime
+     */
+    protected $showpricingonwebuntil;    
+    
 
     // -------------------- Public Functions -------------------- //
     
@@ -124,6 +145,9 @@ class Branding extends Builder
             new Status(),
             $this
         );
+        
+        $this->allowbookingonwebuntil = new \DateTime();
+        $this->showpricingonwebuntil = new \DateTime();
         
         parent::__construct($id);
     }
@@ -298,7 +322,9 @@ class Branding extends Builder
             'marketingbrandid' => $this->getMarketingbrand()->getId(),
             'primarybookingbrand' => $this->boolToStr($this->getPrimarybookingbrand()),
             'promote' => $this->boolToStr($this->getPromote()),
-            'statusid' => $this->getStatus()->getId()
+            'statusid' => $this->getStatus()->getId(),
+            'allowbookingonwebuntil' => $this->getAllowbookingonwebuntil()->format('Y-m-d'),
+            'showpricingonwebuntil' => $this->getShowpricingonwebuntil()->format('Y-m-d'),
         );
     }
 }

@@ -16,11 +16,11 @@ use tabs\apiclient\Builder;
  * @link      http://www.carltonsoftware.co.uk
  *
  * @method \tabs\apiclient\Owner getOwner() Returns the owner
- * @method \DateTime getFromdate() Returns the fromdate
- * @method Owner setFromdate(\DateTime $var) Sets the fromdate
+ * @method \DateTime getOwnerfromdate() Returns the fromdate
+ * @method Owner setOwnerfromdate(\DateTime $var) Sets the fromdate
  * 
- * @method \DateTime getTodate() Returns the todate
- * @method Owner setTodate(\DateTime $var) Sets the todate
+ * @method \DateTime getOwnertodate() Returns the todate
+ * @method Owner setOwnertodate(\DateTime $var) Sets the todate
  * 
  */
 class Owner extends Builder
@@ -33,18 +33,18 @@ class Owner extends Builder
     protected $owner;
 
     /**
-     * Fromdate
+     * Ownerfromdate
      *
      * @var \DateTime
      */
-    protected $fromdate;
+    protected $ownerfromdate;
 
     /**
-     * Todate
+     * Ownertodate
      *
      * @var \DateTime
      */
-    protected $todate;
+    protected $ownertodate;
 
     // -------------------- Public Functions -------------------- //
 
@@ -53,8 +53,8 @@ class Owner extends Builder
      */
     public function __construct($id = null)
     {
-        $this->fromdate = new \DateTime();
-        $this->todate = new \DateTime();
+        $this->ownerfromdate = new \DateTime();
+        $this->ownertodate = new \DateTime();
         
         parent::__construct($id);
     }
@@ -80,8 +80,8 @@ class Owner extends Builder
     {
         return array(
             'ownerid' => $this->getOwner()->getId(),
-            'fromdate' => $this->getFromdate()->format('Y-m-d'),
-            'todate' => $this->getTodate()->format('Y-m-d')
+            'ownerfromdate' => $this->getOwnerfromdate()->format('Y-m-d'),
+            'ownertodate' => $this->getOwnertodate()->format('Y-m-d')
         );
     }
 }

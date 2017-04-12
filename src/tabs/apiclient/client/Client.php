@@ -74,6 +74,12 @@ class Client extends \GuzzleHttp\Client
         
         return self::$instance;
     }
+    
+    public static function dropClient()
+    {
+        self::$instance = null;
+        //unset(self::$instance);
+    }
 
     /**
      * Get the client
@@ -167,6 +173,7 @@ class Client extends \GuzzleHttp\Client
      */
     public function get($url = null, array $params = [], array $options = [])
     {
+        //echo($url . '<br>');
         return $this->createQueryRequest('get', $url, $params, $options);
     }
     
