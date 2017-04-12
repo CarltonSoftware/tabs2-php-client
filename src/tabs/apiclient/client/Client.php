@@ -75,10 +75,14 @@ class Client extends \GuzzleHttp\Client
         return self::$instance;
     }
     
+    /**
+     * Drop the instance
+     * 
+     * @return void
+     */
     public static function dropClient()
     {
         self::$instance = null;
-        //unset(self::$instance);
     }
 
     /**
