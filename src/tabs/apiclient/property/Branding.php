@@ -146,6 +146,9 @@ class Branding extends Builder
             $this
         );
         
+        $this->allowbookingonwebuntil = new \DateTime();
+        $this->showpricingonwebuntil = new \DateTime();
+        
         parent::__construct($id);
     }
     
