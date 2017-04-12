@@ -3,7 +3,6 @@
 namespace tabs\apiclient;
 
 use tabs\apiclient\Builder;
-use tabs\apiclient\ownerpaymentterms\Extra;
 
 /**
  * Tabs Rest API Ownerpaymentterms object.
@@ -122,7 +121,7 @@ class OwnerPaymentTerms extends Builder
      */
     public function __construct($id = null)
     {
-        $this->extras = Collection::factory('extra', new Extra, $this);
+        $this->extras = Collection::factory('extra', new tabs\apiclient\ownerpaymentterms\Extra, $this);
         
         parent::__construct($id);
     }
