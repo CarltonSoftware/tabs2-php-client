@@ -64,7 +64,7 @@ use tabs\apiclient\booking\Guest;
  * @method boolean getBypasspetchecks() Returns the bypasspetchecks
  * @method Booking setBypasspetchecks(boolean $var) Sets the bypasspetchecks
  * 
- * @method string  getGuestype() Returns the guesttype
+ * @method string  getGuesttype() Returns the guesttype
  * @method Booking setGuesttype(string $var) Sets the guestype
  * 
  * @method StaticCollection|booking\Supplier[]|property\Supplier[] getSuppliers() Returns the assigned suppliers
