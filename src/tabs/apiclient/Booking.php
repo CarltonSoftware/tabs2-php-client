@@ -13,6 +13,7 @@ use tabs\apiclient\WebBooking;
 use tabs\apiclient\ProvisionalBooking;
 use tabs\apiclient\note\BookingNote;
 use tabs\apiclient\booking\Guest;
+use tabs\apiclient\booking\OwnerPaymentSummary;
 
 /**
  * Tabs Rest API Booking object.
@@ -110,6 +111,8 @@ use tabs\apiclient\booking\Guest;
  * @method Collection|BookingNote[] getNotes() Returns the booking notes
  * 
  * @method Collection|booking\Extra[] getExtras() Returns the booking extras
+ * 
+ * @method OwnerPaymentSummary getOwnerpaymentsummary() Returns the Ownerpaymentsummary
  */
 class Booking extends Builder
 {
@@ -364,6 +367,13 @@ class Booking extends Builder
      * @var Collection|booking\Extra[]
      */
     protected $extras;
+    
+    /**
+     * Owner payment summary
+     * 
+     * @var OwnerPaymentSummary
+     */
+    protected $ownerpaymentsummary;
 
     // -------------------- Public Functions -------------------- //
     
@@ -414,6 +424,7 @@ class Booking extends Builder
             new booking\Extra(),
             $this
         );
+        $this->ownerpaymentsummary = new OwnerPaymentSummary();
         
         parent::__construct($id);
     }
@@ -586,6 +597,22 @@ class Booking extends Builder
 
         return $this;
     }
+    
+    /**
+     * Set the OwnerPaymentSummary on the property
+     * 
+     * @param OwnerPaymentSummary|stdClass|Array $ops OwnerPaymentSummary object/array
+     * 
+     * @return Booking
+     */
+    public function setOwnerPaymentSummary($ops)
+    {
+        $ownerPaymentSummary = OwnerPaymentSummary::factory($ops);
+        $ownerPaymentSummary->setParent($this);
+        $this->ownerpaymentsummary = $ownerPaymentSummary;
+        
+        return $this;
+    }
 
     /**
      * @inheritDoc
@@ -609,7 +636,8 @@ class Booking extends Builder
             'checkinearliesttime' => $this->getCheckinearliesttime(),
             'checkinlatesttime' => $this->getCheckinlatesttime(),
             'checkouttime' => $this->getCheckouttime(),
-            'estimatedarrivaltime' => $this->getEstimatedarrivaltime()
+            'estimatedarrivaltime' => $this->getEstimatedarrivaltime(),
+            'ownerpaymentsummary' => $this->getOwnerpaymentsummary(),
         );
         
         if ($this->getPropertybranding()) {
