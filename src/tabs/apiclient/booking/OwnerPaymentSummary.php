@@ -36,6 +36,13 @@ class OwnerPaymentSummary extends Builder
     protected $ownerincome;    
     
     /**
+     * Ownerincometotal
+     *
+     * @var float
+     */
+    protected $ownerincometotal;        
+    
+    /**
      * Agencyincome
      *
      * @var float
@@ -43,11 +50,25 @@ class OwnerPaymentSummary extends Builder
     protected $agencyincome;    
     
     /**
+     * Agencyincometotal
+     *
+     * @var float
+     */
+    protected $agencyincometotal;      
+    
+    /**
      * Agencyvat
      *
      * @var float
      */
     protected $agencyvat;
+    
+    /**
+     * Agencyvattotal
+     *
+     * @var float
+     */
+    protected $agencyvattotal;    
 
     // -------------------- Public Functions -------------------- //
 
@@ -58,8 +79,11 @@ class OwnerPaymentSummary extends Builder
     {
         $arr = array(
             'ownerincome' => $this->getOwnerincome(),
+            'ownerincometotal' => $this->getOwnerincometotal(),
             'agencyincome' => $this->getAgencyincome(),
+            'agencyincometotal' => $this->getAgencyincometotal(),
             'agencyvat' => $this->getAgencyvat(),
+            'agencyvattotal' => $this->getAgencyvattotal(),
         );
         
         return $arr;
