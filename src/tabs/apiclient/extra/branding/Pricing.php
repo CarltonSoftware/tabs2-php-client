@@ -4,6 +4,7 @@ namespace tabs\apiclient\extra\branding;
 
 use tabs\apiclient\Builder;
 use tabs\apiclient\Collection;
+use tabs\apiclient\Extra;
 
 /**
  * Tabs Rest API Pricing object.
@@ -59,6 +60,8 @@ use tabs\apiclient\Collection;
  * 
  * @method Collection|pricing\PriceType[] getDailyprices() Returns the dailyprices
  * @method Collection|pricing\RangeElement[] getRanges()   Returns the range prices
+ * 
+ * @method Extra getExtradetails() Returns the extra details
  */
 class Pricing extends Builder
 {
@@ -180,6 +183,13 @@ class Pricing extends Builder
      * @var Collection|pricing\RangeElement[]
      */
     protected $ranges;
+    
+    /**
+     * extradetails
+     *
+     * @var Extra
+     */
+    protected $extradetails;      
 
     // -------------------- Public Functions -------------------- //
 
@@ -188,6 +198,7 @@ class Pricing extends Builder
      */
     public function __construct($id = null)
     {
+        
         $this->fromdate = new \DateTime();
         $this->todate = new \DateTime();
         $this->dailyprices = Collection::factory(
@@ -200,6 +211,7 @@ class Pricing extends Builder
             new pricing\RangeElement(),
             $this
         );
+        
         parent::__construct($id);
     }
 
@@ -230,6 +242,20 @@ class Pricing extends Builder
 
         return $this;
     }
+    
+    /**
+     * Set the extradetails
+     *
+     * @param stdclass|array|Extra $extradetails The extra details
+     *
+     * @return Pricing
+     */
+    public function setExtradetails($extradetails)
+    {
+        $this->extradetails = Extra::factory($extradetails);
+
+        return $this;
+    }    
 
     /**
      * @inheritDoc
