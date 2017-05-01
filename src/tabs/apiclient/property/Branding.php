@@ -157,13 +157,13 @@ class Branding extends Builder
         
         $this->extraprices = Collection::factory(
             'extrapricing', 
-            new Pricing, 
+            new Pricing(), 
             $this
         );
         
         $this->extraconfigurations = Collection::factory(
             'extraconfiguration', 
-            new Configuration, 
+            new Configuration(), 
             $this
         );
         
@@ -357,6 +357,8 @@ class Branding extends Builder
             'statusid' => $this->getStatus()->getId(),
             'allowbookingonwebuntil' => $this->getAllowbookingonwebuntil()->format('Y-m-d'),
             'showpricingonwebuntil' => $this->getShowpricingonwebuntil()->format('Y-m-d'),
+            'extraconfigurations' => $this->getExtraconfigurations()->toArray(),
+            'extraprices' => $this->getExtraprices()->toArray(),
         );
     }
 }
