@@ -61,7 +61,7 @@ class Exception extends \RuntimeException
         // Set overide params
         $this->setDescriptionFromResponse($response, $message);
         $this->setCodeFromResponse($response, $code);
-
+        
         parent::__construct(
             $this->getApiDescription(),
             $this->getApiCode(),
@@ -156,17 +156,25 @@ class Exception extends \RuntimeException
     private function _getErrorResponseFromObject($response, $key, $default = '')
     {
         $value = false;
-        if ($response
-            && property_exists($response, 'response')
-            && property_exists($response->response, $key)
-        ) {
-            $value = $response->response->$key;
-        }
 
-        if ($value === false) {
+        if (is_array($response)) {
             return $default;
         } else {
-            return $value;
+            
+            if ($response
+                && property_exists($response, 'response')
+                && property_exists($response->response, $key)
+            ) {
+                $value = $response->response->$key;
+            }
+
+            if ($value === false) {
+                return $default;
+            } else {
+                return $value;
+            }
+            
         }
+
     }
 }
