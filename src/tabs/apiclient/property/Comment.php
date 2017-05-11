@@ -3,6 +3,7 @@
 namespace tabs\apiclient\property;
 
 use tabs\apiclient\Builder;
+use tabs\apiclient\Booking;
 
 /**
  * Tabs Rest API Comment object.
@@ -23,6 +24,11 @@ use tabs\apiclient\Builder;
  * 
  * @method boolean getVisibleonweb() Returns the visibleonweb
  * @method Comment setVisibleonweb(boolean $var) Sets the visibleonweb
+ * 
+ * @method \DateTime getCreateddate() Returns the createddate
+ * @method Comment setCreateddate(\DateTime $var) Sets the createddate
+ * 
+ * @method Comment getBooking() Returns the booking
  */
 class Comment extends Builder
 {
@@ -46,9 +52,39 @@ class Comment extends Builder
      * @var boolean
      */
     protected $visibleonweb;
+    
+    /**
+     * Createddate
+     *
+     * @var \DateTime
+     */
+    protected $createddate;    
+    
+    /**
+     * Booking
+     *
+     * @var Booking
+     */
+    protected $booking;    
 
     // -------------------- Public Functions -------------------- //
 
+    /**
+     * Set the booking on the property
+     * 
+     * @param Booking|stdClass|Array $bkg Booking object/array
+     * 
+     * @return \tabs\apiclient\property\Comment
+     */
+    public function setBooking($bkg)
+    {
+        $booking = Booking::factory($bkg);
+        $booking->setParent($this);
+        $this->booking = $booking;
+        
+        return $this;
+    }    
+    
     /**
      * @inheritDoc
      */
@@ -57,7 +93,9 @@ class Comment extends Builder
         return array(
             'comment' => $this->getComment(),
             'visibletoowner' => $this->boolToStr($this->getVisibletoowner()),
-            'visibleonweb' => $this->boolToStr($this->getVisibleonweb())
+            'visibleonweb' => $this->boolToStr($this->getVisibleonweb()),
+            'bookingid' => $this->getBooking()->getId(),
+            'createddate' => $this->getCreateddate()->format('Y-m-d'),
         );
     }
 }
