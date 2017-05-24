@@ -355,8 +355,8 @@ class Branding extends Builder
             'primarybookingbrand' => $this->boolToStr($this->getPrimarybookingbrand()),
             'promote' => $this->boolToStr($this->getPromote()),
             'statusid' => $this->getStatus()->getId(),
-            'allowbookingonwebuntil' => $this->getAllowbookingonwebuntil()->format('Y-m-d'),
-            'showpricingonwebuntil' => $this->getShowpricingonwebuntil()->format('Y-m-d'),
+            'allowbookingonwebuntildate' => $this->getAllowbookingonwebuntil()->format('Y-m-d'),
+            'showpricingonwebuntildate' => $this->getShowpricingonwebuntil()->format('Y-m-d'),
             'extraconfigurations' => $this->getExtraconfigurations()->toArray(),
             'extraprices' => $this->getExtraprices()->toArray(),
         );
