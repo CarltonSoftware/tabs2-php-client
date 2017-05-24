@@ -354,6 +354,30 @@ class StaticCollection implements \Iterator, \Countable
     }
     
     /**
+     * Set the fetched bool
+     * 
+     * @param boolean $fetched Fetched bool
+     * 
+     * @return Collection
+     */
+    public function setFetched($fetched)
+    {   
+        $this->fetched = $fetched;
+        
+        return $this;
+    }
+    
+    /**
+     * Check the fetched bool
+     * 
+     * @return boolean
+     */
+    public function isFetched()
+    {
+        return $this->fetched;
+    }
+    
+    /**
      * Get the collection class.
      * 
      * If a discriminator is present attempt to look for a mapped class to return.

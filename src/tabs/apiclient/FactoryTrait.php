@@ -299,8 +299,8 @@ trait FactoryTrait
             if ($obj->$property instanceof \DateTime  && (!$value instanceof \DateTime)) {
                 //Special handling for DateTime fields
                 $obj->$property = new \DateTime($value);
-            } else if ($obj->$property instanceof \tabs\apiclient\Collection 
-                && (!$value instanceof \tabs\apiclient\Collection)
+            } else if ($obj->$property instanceof \tabs\apiclient\StaticCollection 
+                && (!$value instanceof \tabs\apiclient\StaticCollection)
                 && is_array($value)
             ) {
                 
