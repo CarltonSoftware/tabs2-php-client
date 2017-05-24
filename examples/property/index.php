@@ -105,7 +105,7 @@ try {
         );
         $collection->setLimit(filter_input(INPUT_GET, 'limit'))
             ->setPage(filter_input(INPUT_GET, 'page'));
-        $collection->getPagination()->addFilter('sleeps', 4);
+        $collection->addFilter('sleeps', 4);
         $collection->fetch();
 
         include __DIR__ . '/../collection.php';
