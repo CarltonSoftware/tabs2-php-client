@@ -129,6 +129,8 @@ class Attribute extends Builder
         ) {
             $arr['unit'] = $this->getAttribute()->getUnit()->getName();
             $arr['value'] = $this->getValue()->getNumber();
+        } else if ($this->getAttribute() instanceof AttributeBoolean) {
+            $arr['value'] = $arr['value'] ? 'true' : 'false';
         }
         
         return $arr;
