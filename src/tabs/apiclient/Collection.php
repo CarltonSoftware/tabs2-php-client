@@ -97,7 +97,7 @@ class Collection extends StaticCollection
      *
      * @param integer $page Page number
      *
-     * @return StaticCollection
+     * @return Collection
      */
     public function setPage($page)
     {
@@ -113,7 +113,7 @@ class Collection extends StaticCollection
      *
      * @param integer $limit Element limit (page size)
      *
-     * @return StaticCollection
+     * @return Collection
      */
     public function setLimit($limit)
     {
@@ -129,7 +129,7 @@ class Collection extends StaticCollection
      *
      * @param integer $total Number of elements found
      *
-     * @return StaticCollection
+     * @return Collection
      */
     public function setTotal($total)
     {
@@ -143,7 +143,7 @@ class Collection extends StaticCollection
      *
      * @param array $filters Filters array
      *
-     * @return StaticCollection
+     * @return Collection
      */
     public function setFilters(array $filters = [])
     {
@@ -174,7 +174,7 @@ class Collection extends StaticCollection
      * 
      * @param boolean $fetched Fetched bool
      * 
-     * @return StaticCollection
+     * @return Collection
      */
     public function setFetched($fetched)
     {   
@@ -191,55 +191,6 @@ class Collection extends StaticCollection
     public function isFetched()
     {
         return $this->fetched;
-    }
-    
-    /**
-     * Set the override path bool
-     * 
-     * @param boolean $bool Bool
-     * 
-     * @return StaticCollection
-     */
-    public function setPathOverridden($bool)
-    {   
-        $this->pathOverridden = $bool;
-        
-        return $this;
-    }
-    
-    /**
-     * Check the path override bool
-     * 
-     * @return boolean
-     */
-    public function isPathOverridden()
-    {
-        return $this->pathOverridden;
-    }
-    
-    /**
-     * Set the collection path
-     * 
-     * @param string $path Path
-     * 
-     * @return StaticCollection
-     */
-    public function setPath($path)
-    {   
-        $this->path = $path;
-        $this->pathOverridden = true;
-        
-        return $this;
-    }
-    
-    /**
-     * Get the collection path
-     * 
-     * @return string
-     */
-    public function getPath()
-    {   
-        return $this->path;
     }
     
     /**

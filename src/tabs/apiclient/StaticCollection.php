@@ -305,6 +305,55 @@ class StaticCollection implements \Iterator, \Countable
     }
     
     /**
+     * Set the override path bool
+     * 
+     * @param boolean $bool Bool
+     * 
+     * @return StaticCollection
+     */
+    public function setPathOverridden($bool)
+    {   
+        $this->pathOverridden = $bool;
+        
+        return $this;
+    }
+    
+    /**
+     * Check the path override bool
+     * 
+     * @return boolean
+     */
+    public function isPathOverridden()
+    {
+        return $this->pathOverridden;
+    }
+    
+    /**
+     * Set the collection path
+     * 
+     * @param string $path Path
+     * 
+     * @return StaticCollection
+     */
+    public function setPath($path)
+    {   
+        $this->path = $path;
+        $this->pathOverridden = true;
+        
+        return $this;
+    }
+    
+    /**
+     * Get the collection path
+     * 
+     * @return string
+     */
+    public function getPath()
+    {   
+        return $this->path;
+    }
+    
+    /**
      * Get the collection class.
      * 
      * If a discriminator is present attempt to look for a mapped class to return.
