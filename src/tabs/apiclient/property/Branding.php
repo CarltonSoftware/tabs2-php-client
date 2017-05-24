@@ -10,6 +10,8 @@ use tabs\apiclient\property\price\Price;
 use tabs\apiclient\property\branding\AvailableDay;
 use tabs\apiclient\property\branding\Status;
 use tabs\apiclient\property\branding\Calendar;
+use tabs\apiclient\extra\branding\Pricing;
+use tabs\apiclient\extra\branding\Configuration;
 
 /**
  * Tabs Rest API PropertyBranding object.
@@ -39,6 +41,9 @@ use tabs\apiclient\property\branding\Calendar;
  * @method \tabs\apiclient\Status getStatus() Returns the status
  * 
  * @method Collection|Price[] getPrices() Returns the property brand prices
+ * 
+ * @method Collection|Pricing[] getExtraprices() Returns the property extra prices
+ * @method Collection|Configuration[] getExtraconfigurations() Returns the property extra configurations
  */
 class Branding extends Builder
 {
@@ -99,6 +104,20 @@ class Branding extends Builder
     protected $prices;
     
     /**
+     * Collection of extra prices
+     * 
+     * @var Collection|Pricing[]
+     */
+    protected $extraprices;    
+    
+    /**
+     * Collection of extra configurations
+     * 
+     * @var Collection|Configuration[]
+     */
+    protected $extraconfigurations;    
+    
+    /**
      * Collection of availability
      * 
      * @var Collection|AvailableDay[]
@@ -124,7 +143,7 @@ class Branding extends Builder
      *
      * @var \DateTime
      */
-    protected $showpricingonwebuntil;    
+    protected $showpricingonwebuntil;
     
 
     // -------------------- Public Functions -------------------- //
@@ -135,6 +154,19 @@ class Branding extends Builder
     public function __construct($id = null)
     {
         $this->prices = Collection::factory('price', new Price, $this);
+        
+        $this->extraprices = Collection::factory(
+            'extrapricing', 
+            new Pricing(), 
+            $this
+        );
+        
+        $this->extraconfigurations = Collection::factory(
+            'extraconfiguration', 
+            new Configuration(), 
+            $this
+        );
+        
         $this->availableDays = Collection::factory(
             'availability',
             new AvailableDay(),
@@ -325,6 +357,8 @@ class Branding extends Builder
             'statusid' => $this->getStatus()->getId(),
             'allowbookingonwebuntil' => $this->getAllowbookingonwebuntil()->format('Y-m-d'),
             'showpricingonwebuntil' => $this->getShowpricingonwebuntil()->format('Y-m-d'),
+            'extraconfigurations' => $this->getExtraconfigurations()->toArray(),
+            'extraprices' => $this->getExtraprices()->toArray(),
         );
     }
 }

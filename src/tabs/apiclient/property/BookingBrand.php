@@ -17,6 +17,7 @@ use tabs\apiclient\Collection;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
+ * @method Collection|Instruction[] getInstructions() Get the instructions
  * @method \tabs\apiclient\BookingBrand getBookingbrand() Returns the bookingbrand
  * @method boolean getPrimarybookingbrand() Returns the primarybookingbrand
  * @method BookingBrand setPrimarybookingbrand(boolean $var) Sets the primarybookingbrand

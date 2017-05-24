@@ -303,9 +303,18 @@ trait FactoryTrait
                 && (!$value instanceof \tabs\apiclient\StaticCollection)
                 && is_array($value)
             ) {
-                if (count($value) > 0) {
+                
+                /*
+                 * 'if' statement below commented out to stop the client calling
+                 * for data that doesn't actually exist, for example if a property
+                 * has no attributes and attributes are being returned in the 
+                 * property output, then the client will make the /attributes call
+                 * because it thinks the data hasn't been fetched yet..
+                 */
+                
+                //if (count($value) > 0) {
                     $obj->$property->setElements($value)->setFetched(true);
-                }
+                //}
             } else {
                 // Normo property values
                 $obj->$property = $value;
