@@ -430,6 +430,16 @@ class Calendar
             $this->_buildAttributes($attributes),
             $cell
         );
+        
+        if ($this->processDay) {
+            $cell = call_user_func_array(
+                $this->processDay,
+                array(
+                    $cell,
+                    $availableDay
+                )
+            );
+        }
 
         // Replace day variable
         $cell = str_replace('{content}', $day, $cell);
@@ -437,19 +447,30 @@ class Calendar
         // Remove any outstanding braces from td
         $cell = preg_replace('/{([^{|}]*)}/', "", $cell);
         
-        if ($this->processDay) {
-            call_user_func_array(
-                $this->processDay,
-                array(
-                    &$cell,
-                    $availableDay
-                )
-            );
-        }
-        
         return $cell;
     }
     
+    /**
+     * Set the callable function to processs a day
+     * 
+     * @param callable $fun Callable function
+     * 
+     * @return \tabs\apiclient\property\branding\Calendar
+     */
+    public function setProcessDay(callable $fun)
+    {
+        $this->processDay = $fun;
+        
+        return $this;
+    }
+    
+    /**
+     * Build attributes
+     * 
+     * @param array $attributes Attrs
+     * 
+     * @return string
+     */
     private function _buildAttributes($attributes)
     {
         foreach ($attributes as $key => $val) {

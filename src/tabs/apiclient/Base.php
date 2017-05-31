@@ -31,6 +31,10 @@ namespace tabs\apiclient;
  * 
  * @method integer getId()            Returns the object id
  * @method Base    setId(integer $id) Sets the object id
+ * 
+ * @method Base      setResponsedata(\stdClass $data) Set the response data
+ * @method \stdClass getResponsedata()                Get the response data from
+ *                                                    the get() method
  */
 abstract class Base
 {
@@ -49,6 +53,13 @@ abstract class Base
      * @var Base
      */
     protected $parent;
+    
+    /**
+     * Data returned from the get request
+     * 
+     * @var \stdClass
+     */
+    protected $responsedata;
 
     // ------------------ Static Functions --------------------- //
 
@@ -124,16 +135,46 @@ abstract class Base
      */
     public function get()
     {
-        self::setObjectProperties(
-            $this,
-            self::getJson(
-                \tabs\apiclient\client\Client::getClient()->get(
-                    $this->getUpdateUrl()
-                )
+        $this->getdata = self::getJson(
+            \tabs\apiclient\client\Client::getClient()->get(
+                $this->getUpdateUrl()
             )
         );
         
+        self::setObjectProperties(
+            $this,
+            $this->getdata
+        );
+        
         return $this;
+    }
+
+    /**
+     * Generate a url string for a create url
+     *
+     * @return string
+     */
+    public function getCreateUrl()
+    {
+        return implode('/', $this->createUrl());
+    }
+
+    /**
+     * Generate a url string for a update url
+     *
+     * @return string
+     */
+    public function getUpdateUrl()
+    {
+        return implode('/', $this->updateUrl());
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getUrlStub()
+    {
+        return strtolower($this->getClass());
     }
 
     /**
@@ -200,6 +241,57 @@ abstract class Base
         return implode(
             ' ',
             $this->toArray()
+        );
+    }
+
+    // ------------------------- Protected Functions ------------------------ //
+
+    /**
+     * Generate the url segments for an array
+     *
+     * @param array $segments Prefix
+     *
+     * @return array
+     */
+    protected function createUrl($segments = array())
+    {
+        if ($this->getParent()) {
+            $segments = $this->getParent()->updateUrl($segments);
+        }
+        return array_merge(
+            $segments,
+            array(
+                $this->getUrlStub()
+            )
+        );
+    }
+
+    /**
+     * Generate the url segments for an array
+     *
+     * @param array $segments Prefix
+     *
+     * @return array
+     */
+    protected function updateUrl($segments = array())
+    {
+        if ($this->getParent()) {
+            $segments = $this->getParent()->updateUrl($segments);
+        }
+        
+        if (!$this->getId()) {
+            throw new exception\Exception(
+                null,
+                'Parent ' . $this->getClass() . ' not intialised.'
+            );
+        } 
+        
+        return array_merge(
+            $segments,
+            array(
+                $this->getUrlStub(),
+                $this->getId()
+            )
         );
     }
 }

@@ -29,7 +29,7 @@ namespace tabs\apiclient;
 abstract class Builder extends Base implements BuilderInterface
 {
     // -------------------------- Public Functions -------------------------- //
-
+    
     /**
      * Perform a create request
      *
@@ -117,34 +117,6 @@ abstract class Builder extends Base implements BuilderInterface
     }
 
     /**
-     * Generate a url string for a create url
-     *
-     * @return string
-     */
-    public function getCreateUrl()
-    {
-        return implode('/', $this->createUrl());
-    }
-
-    /**
-     * Generate a url string for a update url
-     *
-     * @return string
-     */
-    public function getUpdateUrl()
-    {
-        return implode('/', $this->updateUrl());
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getUrlStub()
-    {
-        return strtolower($this->getClass());
-    }
-
-    /**
      * Helpful accessor incase structure of create post is different to the
      * toArray map
      *
@@ -228,54 +200,5 @@ abstract class Builder extends Base implements BuilderInterface
         } else {
             return null;
         }
-    }
-
-    /**
-     * Generate the url segments for an array
-     *
-     * @param array $segments Prefix
-     *
-     * @return array
-     */
-    protected function createUrl($segments = array())
-    {
-        if ($this->getParent()) {
-            $segments = $this->getParent()->updateUrl($segments);
-        }
-        return array_merge(
-            $segments,
-            array(
-                $this->getUrlStub()
-            )
-        );
-    }
-
-    /**
-     * Generate the url segments for an array
-     *
-     * @param array $segments Prefix
-     *
-     * @return array
-     */
-    protected function updateUrl($segments = array())
-    {
-        if ($this->getParent()) {
-            $segments = $this->getParent()->updateUrl($segments);
-        }
-        
-        if (!$this->getId()) {
-            throw new exception\Exception(
-                null,
-                'Parent ' . $this->getClass() . ' not intialised.'
-            );
-        } 
-        
-        return array_merge(
-            $segments,
-            array(
-                $this->getUrlStub(),
-                $this->getId()
-            )
-        );
     }
 }

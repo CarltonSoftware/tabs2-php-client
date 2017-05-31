@@ -482,11 +482,71 @@ class StaticCollection implements \Iterator, \Countable
             $p
         );
         $col->setElements(array_filter($this->getElements(), $fn));
-        $col->setTotal(count($col->getElements()));
+        $col->getPagination()->setTotal(count($col->getElements()));
         
         return $col;
     }
     
+    /**
+     * Shift an element from the collection
+     * 
+     * @return \tabs\apiclient\Base
+     */
+    public function shift()
+    {
+        $ele = array_shift($this->elements);
+        $this->_updateShiftPopTotal();
+        
+        return $ele;
+    }
+    
+    /**
+     * Pop an element from the collection
+     * 
+     * @return \tabs\apiclient\Base
+     */
+    public function pop()
+    {
+        $ele = array_pop($this->elements);
+        $this->_updateShiftPopTotal();
+        return $ele;
+    }
+    
+    /**
+     * Update the pagination total after a shift/pop call
+     * 
+     * @return void
+     */
+    private function _updateShiftPopTotal()
+    {
+        $this->getPagination()->setTotal(
+            $this->getPagination()->getTotal() > 0 ? $this->getPagination()->getTotal() - 1 : 0
+        );
+    }
+    
+    /**
+     * Slice the collection
+     * 
+     * @param integer      $offset Offset
+     * @param integer|null $length Length
+     * 
+     * @return \tabs\apiclient\StaticCollection
+     */
+    public function slice($offset, $length = null)
+    {
+        $p = $this->getElementParent();
+        $col = self::factory(
+            $this->getPath(),
+            $this->getElementClass(),
+            $p
+        );
+        $col->setElements(array_slice($this->getElements(), $offset, $length));
+        $col->getPagination()->setTotal(count($col->getElements()));
+        
+        return $col;
+    }
+
+
     /**
      * Find an element by its id
      * 

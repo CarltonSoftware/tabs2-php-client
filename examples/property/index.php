@@ -31,7 +31,40 @@ try {
         <?php
         
             echo (string) $property->getBrandings()->first()->getCalendar();
-            echo (string) $property->getBrandings()->first()->getCalendar(new \DateTime('first day of next month'));
+            $today = new \DateTime(
+                filter_input(INPUT_GET, 'fromdate') ? filter_input(INPUT_GET, 'fromdate') : 'first day of next month'
+            );
+            $cal = $property->getBrandings()->first()->getCalendar(
+                $today,
+                array(
+                    'cal_cell_content' => '<a href="booking-enquiry?=fromdate={id}">{content}</a>'
+                )
+            );
+            $cal->setProcessDay(function($cell, $day) use ($property) {
+                if ($day && $day->getDaysavailable() > 0) {
+                    $cell = str_replace(
+                        '{content}',
+                        sprintf(
+                            '<a href="../booking/booking-enquiry.php?fromdate=%s&propertybrandingid=%s">%s</a>',
+                            $day->getDate()->format('Y-m-d'),
+                            $property->getBrandings()->first()->getId(),
+                            $day->getDate()->format('j')
+                        ),
+                        $cell
+                    );
+                }
+                
+                return $cell;
+            });
+            echo (string) $cal;
+            $next = new \DateTime($cal->getTargetMonth()->format('Y-m-d'));
+            $next->add(new \DateInterval('P1M'));
+            
+            echo sprintf(
+                '<p><a href="?id=%s&fromdate=%s">Next</a></p>',
+                $property->getId(),
+                $next->format('Y-m-d')
+            );
         
             if ($property->getBrandings()->first() 
                 && $marketingBrand = $property->getBrandings()->first()->getMarketingBrand()
@@ -51,7 +84,8 @@ try {
             }
         
             if ($property->getDocuments()->count() > 0) {
-                $collection = $property->getDocuments();
+                ?><p>Documents limited to 2</p><?php
+                $collection = $property->getDocuments()->slice(0, 2);
                 include __DIR__ . '/../collection.php';
             }
         ?>

@@ -18,8 +18,8 @@ use tabs\apiclient\Base;
  * @method string getGuestype() Returns the guestype
  * @method BookingEnquiry setGuestype(string $var) Sets the guestype
  * 
- * @method \tabs\apiclient\Property getProperty() Returns the property
- * @method \tabs\apiclient\Branding getBranding() Returns the branding
+ * @method \tabs\apiclient\property\Branding getPropertyBranding() Returns the property branding
+ * 
  * @method \DateTime getFromdate() Returns the fromdate
  * @method BookingEnquiry setFromdate(\DateTime $var) Sets the fromdate
  * 
@@ -89,6 +89,9 @@ use tabs\apiclient\Base;
  * 
  * @method boolean getPriceok() Returns the priceok
  * @method BookingEnquiry setPriceok(boolean $var) Sets the priceok
+ * 
+ * @method boolean getWebbookingok() Returns the webbookingok
+ * @method BookingEnquiry setWebbookingok(boolean $var) Sets the webbookingok
  */
 class BookingEnquiry extends Base
 {
@@ -100,11 +103,11 @@ class BookingEnquiry extends Base
     protected $guestype = 'Customer';
 
     /**
-     * Property
+     * Property Branding
      *
-     * @var \tabs\apiclient\Property
+     * @var \tabs\apiclient\property\Branding
      */
-    protected $property;
+    protected $propertyBranding;
 
     /**
      * Branding
@@ -161,6 +164,13 @@ class BookingEnquiry extends Base
      * @var boolean
      */
     protected $priceok = false;
+
+    /**
+     * Web Booking ok
+     *
+     * @var boolean
+     */
+    protected $webbookingok = false;
 
     /**
      * Fromdate
@@ -296,11 +306,11 @@ class BookingEnquiry extends Base
     protected $currentbooking;
     
     /**
-     * Data stored from the previous booking enquiry
+     * Booking enquiry errors
      * 
-     * @var \stdClass
+     * @var \tabs\apiclient\booking\Error[]
      */
-    protected $data;
+    protected $errors;
 
     // -------------------- Public Functions -------------------- //
 
@@ -311,19 +321,25 @@ class BookingEnquiry extends Base
     {
         $this->fromdate = new \DateTime();
         $this->todate = new \DateTime();
+        $this->errors = StaticCollection::factory(
+            '',
+            new booking\Error
+        );
         parent::__construct($id);
     }
 
     /**
      * Set the property
      *
-     * @param stdclass|array|\tabs\apiclient\Property $property The Property
+     * @param stdclass|array|\tabs\apiclient\property\Branding $propertyBranding The Property branding
      *
      * @return BookingEnquiry
      */
-    public function setProperty($property)
+    public function setPropertyBranding($propertyBranding)
     {
-        $this->property = \tabs\apiclient\Property::factory($property);
+        $this->propertyBranding = \tabs\apiclient\property\Branding::factory(
+            $propertyBranding
+        );
 
         return $this;
     }
@@ -407,7 +423,7 @@ class BookingEnquiry extends Base
     {
         $json = self::getJson(
             \tabs\apiclient\client\Client::getClient()->get(
-                $this->getUpdateUrl(),
+                'bookingenquiry',
                 $this->toArray()
             )
         );
@@ -416,16 +432,17 @@ class BookingEnquiry extends Base
             $json
         );
         
-        // Remap criteria if exists
-        if (property_exists($json, 'price')) {
-            $this->data = $json->price;
-        }
+        $this->setResponsedata($json);
         
+        // ReMap the fromdate/todate/adults etc from the price criteria
         if (property_exists($json, 'price') && property_exists($json->price, 'criteria')) {
-            self::setObjectProperties(
-                $this,
-                $json->price->criteria
-            );
+            foreach (get_object_vars($json->price->criteria) as $key => $val) {
+                $gfn = 'get' . ucfirst($key);
+                $sfn = 'get' . ucfirst($key);
+                if (method_exists($this, $gfn) && !$this->$gfn()) {
+                    $this->$sfn($val);
+                }
+            }
         }
         
         return $this;
@@ -628,13 +645,13 @@ class BookingEnquiry extends Base
     private function _getPriceObjects($callable)
     {
         $objs = array();
-        if (!$this->data->bookings 
-            || count($this->data->bookings) == 0
+        if (!$this->getResponsedata()->price->bookings 
+            || count($this->getResponsedata()->price->bookings) == 0
         ) {
             return $objs;
         }
         
-        foreach ($this->data->bookings as $booking) {
+        foreach ($this->getResponsedata()->price->bookings as $booking) {
             $objs[] = call_user_func($callable, $booking);
         }
         
@@ -660,8 +677,10 @@ class BookingEnquiry extends Base
             'basicpricedecimalplaces' => $this->getBasicpricedecimalplaces()
         );
         
-        if ($this->getPricingperiod()) {
+        if ($this->getPricingperiod() instanceof core\PricingPeriod) {
             $arr['pricingperiod'] = $this->getPricingperiod()->getPricingperiod();
+        } else {
+            $arr['pricingperiod'] = $this->getPricingperiod();
         }
         
         if ($this->getAdults()) {
@@ -680,12 +699,8 @@ class BookingEnquiry extends Base
             $arr['pets'] = $this->getPets();
         }
         
-        if ($this->getProperty()) {
-            $arr['propertyid'] = $this->getProperty()->getId();
-        }
-        
-        if ($this->getBranding()) {
-            $arr['brandingid'] = $this->getBranding()->getId();
+        if ($this->getPropertyBranding()) {
+            $arr['propertybrandingid'] = $this->getPropertyBranding()->getId();
         }
         
         if ($this->getCurrency()) {
