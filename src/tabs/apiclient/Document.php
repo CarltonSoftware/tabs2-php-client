@@ -19,6 +19,7 @@ namespace tabs\apiclient;
  * @method string    getWeight()       Returns the weight
  * @method Mimetype  getMimetype()     Returns the mimetype
  * @method \DateTime getTimeadded()    Returns the created time
+ * @method boolean   getPrivate()      Returns the visibility flag
  *
  * @method Document  setName(string $filename)     Set the name
  * @method Document  setFilename(string $filename) Set the filename

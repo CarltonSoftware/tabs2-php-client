@@ -27,7 +27,7 @@ namespace tabs\apiclient\note;
  * @link      http://www.carltonsoftware.co.uk
  * 
  * 
- * @method string     getText()      Returns the Note subject
+ * @method string   getNotetext()            Returns the NoteText text
  * 
  * @method Notetext setId(integer $id)       Set the note id
  * @method Notetext setText(string $subject) Set the note text
@@ -39,7 +39,7 @@ class Notetext extends \tabs\apiclient\Notemeta
      * 
      * @var string
      */
-    protected $text = '';
+    protected $notetext = '';
 
     // ------------------ Public Functions --------------------- //
     
@@ -66,7 +66,7 @@ class Notetext extends \tabs\apiclient\Notemeta
      */
     public function __toString()
     {
-        return (string) $this->getCreatedby() . ' said: ' . $this->getText();
+        return (string) $this->getCreatedby() . ' said: ' . $this->getNotetext();
     }
     
     /**
