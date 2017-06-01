@@ -21,28 +21,26 @@ try {
         && $pbi = filter_input(INPUT_GET, 'propertybrandingid')
     ) {
         $nights = filter_input(INPUT_GET, 'nights') ? filter_input(INPUT_GET, 'nights') : 7;
-        $be = new tabs\apiclient\BookingEnquiry();
+        $b = new tabs\apiclient\Booking();
         $from = new \DateTime(filter_input(INPUT_GET, 'fromdate'));
         $to = clone $from;
         $to->add(new \DateInterval('P' . $nights . 'D'));
-        $be->setFromdate($from)
+        $b->setFromdate($from)
             ->setTodate($to)
-            ->setPropertyBranding(array('id' => $pbi));
-        $be->get();
+            ->setPropertyBranding(array('id' => $pbi))
+            ->setAdults(1)
+            ->setPets(0);
         
-        if ($be->getBookingok() == true && $be->getWebbookingok() == true) {
-            echo '<p>Basic price:  ' . $be->getBasicPrice() . ' ' . $be->getCurrency()->getCode() . '</p>';
-            echo '<p>Included Extras price:  ' . $be->getIncludedExtrasPrice() . ' ' . $be->getCurrency()->getCode() . '</p>';
-            echo '<p>Total price:  ' . $be->getTotalPrice() . ' ' . $be->getCurrency()->getCode() . '</p>';
-            echo sprintf(
-                '<p><a href="create-booking.php?fromdate=%s&propertybrandingid=%s">Create new booking</a></p>',
-                $be->getFromdate()->format('Y-m-d'),
-                $be->getPropertyBranding()->getId()
-            );
-        } else {
-            echo (string) $be->getErrors()->first();
-        }
+        // Create a new potential booking
+        // You could also create a provisional booking too.
+        $potentialBooking = new \tabs\apiclient\PotentialBooking();
+        $potentialBooking->setType('Enquiry');
+        $b->setPotentialbooking($potentialBooking);
         
+        $b->create();
+        
+        header('Location: index.php?id=' . $b->getId());
+        exit();
     }
 
 } catch(Exception $e) {

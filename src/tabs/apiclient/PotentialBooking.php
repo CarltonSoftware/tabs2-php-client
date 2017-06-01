@@ -76,7 +76,7 @@ class PotentialBooking extends Base
             'type' => $this->getType()
         );
         if ($this->getExpiry() && $this->getExpiry() instanceof \DateTime) {
-            $arr['expirydatetime'] = $this->getExpired()->fomat('Y-m-d H:i:s');
+            $arr['expirydatetime'] = $this->getExpiry()->format('Y-m-d H:i:s');
         }
         
         return $arr;

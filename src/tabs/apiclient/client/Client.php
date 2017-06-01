@@ -177,7 +177,6 @@ class Client extends \GuzzleHttp\Client
      */
     public function get($url = null, array $params = [], array $options = [])
     {
-        //echo($url . '<br>');
         return $this->createQueryRequest('get', $url, $params, $options);
     }
     
@@ -297,6 +296,13 @@ class Client extends \GuzzleHttp\Client
         array $params = [],
         array $options = []
     ) {
+        // Remove nulls
+        foreach ($params as $key => $val) {
+            if ($val === null) {
+                unset($params[$key]);
+            }
+        }
+        
         $options['form_params'] = $params;
         return $this->request($method, $url, $options);
     }
@@ -320,10 +326,12 @@ class Client extends \GuzzleHttp\Client
     ) {
         $newParams = array();
         foreach ($params as $key => $value) {
-            $newParams[] = array(
-                'name' => $key,
-                'contents' => $value
-            );
+            if ($value !== null) {
+                $newParams[] = array(
+                    'name' => $key,
+                    'contents' => $value
+                );
+            }
         }
         
         $options['multipart'] = array_merge(

@@ -135,7 +135,7 @@ abstract class Base
      */
     public function get()
     {
-        $this->getdata = self::getJson(
+        $this->responsedata = self::getJson(
             \tabs\apiclient\client\Client::getClient()->get(
                 $this->getUpdateUrl()
             )
@@ -143,7 +143,7 @@ abstract class Base
         
         self::setObjectProperties(
             $this,
-            $this->getdata
+            $this->responsedata
         );
         
         return $this;

@@ -109,36 +109,6 @@ class Collection extends StaticCollection
     }
 
     /**
-     * Set the limit to query
-     *
-     * @param integer $limit Element limit (page size)
-     *
-     * @return Collection
-     */
-    public function setLimit($limit)
-    {
-        if (is_numeric($limit)) {
-            $this->getPagination()->setLimit($limit);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Set the total
-     *
-     * @param integer $total Number of elements found
-     *
-     * @return Collection
-     */
-    public function setTotal($total)
-    {
-        $this->getPagination()->setTotal($total);
-
-        return $this;
-    }
-
-    /**
      * Set the pagination filters
      *
      * @param array $filters Filters array

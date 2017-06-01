@@ -30,14 +30,23 @@ try {
             <p>Property: <?php echo $booking->getProperty()->getName(); ?></p>
         <?php
         
-        $collection = $booking->getSuppliers();
-
-        include __DIR__ . '/../collection.php';
+            if (!$booking->getProvisionalbooking()) {
+                ?>
+            <p><a href="provisional-booking.php?id=<?php echo $booking->getId(); ?>">Create provisional booking</a></p>
+                <?php
+            }
         
-        $collection = $booking->getExtras();
-
-        include __DIR__ . '/../collection.php';
+            if ($booking->getCustomers()->count() == 0) {
+                ?>
+            <p><a href="add-customer.php?id=<?php echo $booking->getId(); ?>">Add booking customer</a></p>
+                <?php
+            }
         
+            if ($booking->getGuests()->count() == 0) {
+                ?>
+            <p><a href="add-guests.php?id=<?php echo $booking->getId(); ?>">Add booking guest</a></p>
+                <?php
+            }
     } else {
 
         $collection = tabs\apiclient\Collection::factory(

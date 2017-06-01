@@ -295,6 +295,36 @@ class StaticCollection implements \Iterator, \Countable
     }
 
     /**
+     * Set the limit to query
+     *
+     * @param integer $limit Element limit (page size)
+     *
+     * @return Collection
+     */
+    public function setLimit($limit)
+    {
+        if (is_numeric($limit)) {
+            $this->getPagination()->setLimit($limit);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set the total
+     *
+     * @param integer $total Number of elements found
+     *
+     * @return Collection
+     */
+    public function setTotal($total)
+    {
+        $this->getPagination()->setTotal($total);
+
+        return $this;
+    }
+
+    /**
      * Return the collections elements
      *
      * @return array
@@ -482,7 +512,7 @@ class StaticCollection implements \Iterator, \Countable
             $p
         );
         $col->setElements(array_filter($this->getElements(), $fn));
-        $col->getPagination()->setTotal(count($col->getElements()));
+        $col->setTotal(count($col->getElements()));
         
         return $col;
     }
@@ -519,8 +549,8 @@ class StaticCollection implements \Iterator, \Countable
      */
     private function _updateShiftPopTotal()
     {
-        $this->getPagination()->setTotal(
-            $this->getPagination()->getTotal() > 0 ? $this->getPagination()->getTotal() - 1 : 0
+        $this->setTotal(
+            $this->getTotal() > 0 ? $this->getTotal() - 1 : 0
         );
     }
     
