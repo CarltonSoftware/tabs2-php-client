@@ -100,6 +100,8 @@ use tabs\apiclient\booking\OwnerPaymentSummary;
  * 
  * @method ProvisionalBooking getProvisionalbooking() Returns the provisionalbooking
  * 
+ * @method ConfirmedBooking getConfirmedbooking() Returns the confirmed booking
+ * 
  * @method Collection|booking\SecurityDeposit[] getSecuritydeposits() Returns the securitydeposits
  * 
  * @method Collection|booking\Customer[] getCustomers() Returns the customers
@@ -311,6 +313,13 @@ class Booking extends Builder
      * @var ProvisionalBooking
      */
     protected $provisionalbooking;
+
+    /**
+     * Confirmed Booking
+     * 
+     * @var ConfirmedBooking
+     */
+    protected $confirmedbooking;
 
     /**
      * Collection of suppliers for the booking
@@ -555,6 +564,20 @@ class Booking extends Builder
 
         return $this;
     }
+    
+    /**
+     * Set the confirmed booking
+     *
+     * @param stdclass|array|ConfirmedBooking $confirmedbooking Confirmed Booking
+     *
+     * @return Booking
+     */
+    public function setConfirmedbooking($confirmedbooking)
+    {
+        $this->confirmedbooking = ConfirmedBooking::factory($confirmedbooking);
+
+        return $this;
+    }
 
     /**
      * Set the property
@@ -707,6 +730,16 @@ class Booking extends Builder
             );
         }
         
+        if ($this->getConfirmedbooking()) {
+            $arr = array_merge(
+                $arr,
+                $this->_prefixToArray(
+                    'confirmedbooking_',
+                    $this->getConfirmedbooking()
+                )
+            );
+        }
+        
         return $arr;
     }
     
@@ -716,6 +749,30 @@ class Booking extends Builder
     public function getUrlStub()
     {
         return 'booking';
+    }
+    
+    /**
+     * Check if the booking is provisional or not
+     * 
+     * @return boolean
+     */
+    public function isProvisional()
+    {
+        return $this->getGuesttype() == 'Customer' 
+            && $this->getProvisionalbooking() 
+            && $this->getProvisionalbooking()->getId();
+    }
+    
+    /**
+     * Check if the booking is confirmed or not
+     * 
+     * @return boolean
+     */
+    public function isConfirmed()
+    {
+        return $this->getGuesttype() == 'Customer' 
+            && $this->getConfirmedbooking() 
+            && $this->getConfirmedbooking()->getId();
     }
     
     /**

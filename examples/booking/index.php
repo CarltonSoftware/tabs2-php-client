@@ -30,9 +30,15 @@ try {
             <p>Property: <?php echo $booking->getProperty()->getName(); ?></p>
         <?php
         
-            if (!$booking->getProvisionalbooking()) {
+            if (!$booking->isProvisional()) {
                 ?>
             <p><a href="provisional-booking.php?id=<?php echo $booking->getId(); ?>">Create provisional booking</a></p>
+                <?php
+            }
+        
+            if (!$booking->isConfirmed() && $booking->isProvisional()) {
+                ?>
+            <p><a href="confirm-booking.php?id=<?php echo $booking->getId(); ?>">Create confirmed booking</a></p>
                 <?php
             }
         

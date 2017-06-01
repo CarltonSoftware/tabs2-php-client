@@ -37,6 +37,9 @@ try {
         $potentialBooking->setType('Enquiry');
         $b->setPotentialbooking($potentialBooking);
         
+        $webbooking = new tabs\apiclient\WebBooking();
+        $b->setWebbooking($webbooking);
+        
         $b->create();
         
         header('Location: index.php?id=' . $b->getId());
