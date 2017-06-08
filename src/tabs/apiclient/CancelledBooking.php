@@ -29,6 +29,7 @@ namespace tabs\apiclient;
  * @method \DateTime getDatetime() Return the datetime
  * @method string    getReason()   Return the cancellation reason
  * 
+ * @method CancelledBooking setReason(string $reason) set the cancellation reason
  * @method CancelledBooking setDatetime(\DateTime $datetime) Set the datetime
  */
 class CancelledBooking extends Base

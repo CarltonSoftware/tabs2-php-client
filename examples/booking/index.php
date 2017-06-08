@@ -30,7 +30,7 @@ try {
             <p>Property: <?php echo $booking->getProperty()->getName(); ?></p>
             <p>Status: <?php echo $booking->getStatus(); ?>
         <?php
-            if (!$booking->isProvisional()) {
+            if (!$booking->isProvisional() && !$booking->isCancelled()) {
                 ?>
             <p><a href="provisional-booking.php?id=<?php echo $booking->getId(); ?>">Create provisional booking</a></p>
                 <?php
@@ -38,7 +38,13 @@ try {
         
             if (!$booking->isConfirmed() && $booking->isProvisional()) {
                 ?>
-            <p><a href="confirm-booking.php?id=<?php echo $booking->getId(); ?>">Create confirmed booking</a></p>
+            <p><a href="confirm-booking.php?id=<?php echo $booking->getId(); ?>">Confirm booking</a></p>
+                <?php
+            }
+        
+            if (!$booking->isCancelled()) {
+                ?>
+            <p><a href="cancel-booking.php?id=<?php echo $booking->getId(); ?>">Cancel booking</a></p>
                 <?php
             }
         

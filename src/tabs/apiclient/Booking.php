@@ -763,6 +763,16 @@ class Booking extends Builder
             );
         }
         
+        if ($this->getCancelledbooking()) {
+            $arr = array_merge(
+                $arr,
+                $this->_prefixToArray(
+                    'cancelledbooking_',
+                    $this->getCancelledbooking()
+                )
+            );
+        }
+        
         return $arr;
     }
     
@@ -783,7 +793,8 @@ class Booking extends Builder
     {
         return $this->getGuesttype() == 'Customer' 
             && $this->getProvisionalbooking() 
-            && $this->getProvisionalbooking()->getId();
+            && $this->getProvisionalbooking()->getId()
+            && !$this->isCancelled();
     }
     
     /**

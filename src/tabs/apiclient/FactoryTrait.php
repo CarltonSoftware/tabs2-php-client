@@ -356,20 +356,4 @@ trait FactoryTrait
             $this->$varName = floatval($float);
         }
     }
-
-    /**
-     * Return a date time object from a given param
-     *
-     * @param string|\DateTime $date Date object
-     *
-     * @return \DateTime
-     */
-    public function getDateTime($date)
-    {
-        if (!$date instanceof \DateTime) {
-            $date = new \DateTime($date);
-        }
-
-        return $date;
-    }
 }
