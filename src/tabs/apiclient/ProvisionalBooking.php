@@ -107,6 +107,17 @@ class ProvisionalBooking extends Base
     protected $ownerpaymentterms;
 
     // -------------------- Public Functions -------------------- //
+    
+    /**
+     * @inheritDoc
+     */
+    public function __construct($id = null)
+    {
+        $this->depositduedate = new \DateTime();
+        $this->balanceduedate = new \DateTime();
+        
+        parent::__construct($id);
+    }
 
     /**
      * Set the tabsuser

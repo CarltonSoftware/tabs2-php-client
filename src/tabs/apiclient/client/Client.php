@@ -287,12 +287,41 @@ class Client extends \GuzzleHttp\Client
         );
         $class = 'tabs\apiclient\\' . $json->type;
         $actor = new $class();
+        $actor->setResponsedata($json);
         \tabs\apiclient\Base::setObjectProperties(
             $actor,
             $json
         );
         
         return $actor;
+    }
+    
+    /**
+     * Map a get requests response to an object
+     * 
+     * @param \tabs\apiclient\Base $object  Object to map
+     * @param string               $url     Api URL
+     * @param array                $params  Query Parameters
+     * 
+     * @return \tabs\apiclient\Base
+     */
+    public function map(&$object, $url, $params = array())
+    {
+        $json = \tabs\apiclient\Base::getJson(
+            $this->get(
+                $url,
+                $params
+            )
+        );
+        
+        $object->setResponsedata($json);
+        
+        \tabs\apiclient\Base::setObjectProperties(
+            $object,
+            $json
+        );
+        
+        return $object;
     }
 
     /**

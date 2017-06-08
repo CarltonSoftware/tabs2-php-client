@@ -38,6 +38,7 @@ try {
         
             if (!$booking->isConfirmed() && $booking->isProvisional()) {
                 ?>
+            <p>Deposit due: <?php echo $booking->getProvisionalbooking()->getDepositduedate()->format('d F Y'); ?></p>
             <p><a href="confirm-booking.php?id=<?php echo $booking->getId(); ?>">Confirm booking</a></p>
                 <?php
             }
@@ -72,14 +73,25 @@ try {
             if ($extras->count() > 0) {
                 foreach ($extras as $extra) {
                     echo sprintf(
-                        '<p>%s: %s x £%s</p>',
+                        '<p>%s: %s x £%s <a href="remove-extra.php?id=%s&beid=%s">Remove</a></p>',
                         $extra->getExtra()->getDescription(),
                         $extra->getQuantity(),
-                        $extra->getUnitprice()
+                        $extra->getUnitprice(),
+                        $booking->getId(),
+                        $extra->getId()
                     );
                 }
             }
             echo '<p>Total: £' . $booking->getTotalPrice();
+            
+            if ($booking->getSecuritydeposits()->count() > 0) {
+                echo sprintf(
+                    '<p>Security deposit: £%s <a href="remove-sd.php?id=%s&bsid=%s">Remove</a></p>',
+                    $booking->getSecuritydeposits()->first()->getAmount(),
+                    $booking->getId(),
+                    $booking->getSecuritydeposits()->first()->getId()
+                );
+            }
             
             // Get the branding extras and output list of available
             $extras = $booking->getBranding()->getExtras();
@@ -87,10 +99,10 @@ try {
                 echo '<h5>Available extras</h5>';
                 foreach ($extras as $extra) {
                     echo sprintf(
-                        '<p>%s <a href="add-extra.php?id=%s&bookingid=%s">Add</a></p>',
+                        '<p>%s <a href="add-extra.php?id=%s&eid=%s">Add</a></p>',
                         $extra->getExtra()->getDescription(),
-                        $extra->getExtra()->getId(),
-                        $booking->getId()
+                        $booking->getId(),
+                        $extra->getExtra()->getId()
                     );
                 }
             }

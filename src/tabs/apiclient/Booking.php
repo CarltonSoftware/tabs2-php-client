@@ -942,6 +942,34 @@ class Booking extends Builder
             '/booking/' . $this->getId()
         );
     }
+    
+    /**
+     * Check if an extra can be added to the booking
+     * 
+     * @param \tabs\apiclient\Extra $extra Extra
+     * 
+     * @return booking\Extra
+     */
+    public function checkExtra(Extra $extra, $quantity = 1)
+    {
+        $be = new booking\Extra();
+        $be->setParent($this);
+        
+        client\Client::getClient()->map(
+            $be,
+            $this->getUpdateUrl() . '/enquiry',
+            array(
+                'extraid' => $extra->getId(),
+                'quantity' => $quantity
+            )
+        );
+        
+        if ($error = $be->getDataFromResponse('errors')) {
+            throw new exception\Exception(null, $error);
+        }
+        
+        return $be;
+    }
 
     // -------------------------- Private Functions ------------------------- //
     
