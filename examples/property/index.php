@@ -68,6 +68,7 @@ try {
         
             if ($property->getBrandings()->first() 
                 && $marketingBrand = $property->getBrandings()->first()->getMarketingBrand()
+                && !filter_input(INPUT_GET, 'fromdate')
             ) {
                 ?>
         <p>Marketing Brand: <?php echo $marketingBrand->getMarketingbrand()->getName(); ?></p>
@@ -85,40 +86,45 @@ try {
         
             if ($property->getDocuments()->count() > 0) {
                 ?><p>Documents limited to 2</p><?php
-                $collection = $property->getDocuments()->slice(0, 2);
+                $collection = $property->getDocuments()->findBy(function($ele) {
+                    return $ele->getDocument() instanceof tabs\apiclient\Image && !$ele->getDocument()->isPrivate();
+                })->slice(0, 2);
                 include __DIR__ . '/../collection.php';
             }
         ?>
             <p><a href="add-document.php?id=<?php echo $property->getId(); ?>">Add a document</a></p>
             <p><a href="add-image.php?id=<?php echo $property->getId(); ?>">Add an image</a></p>
         <?php
-        
-            $collection = $property->getNotes();
-            include __DIR__ . '/../collection.php';
+            if (!filter_input(INPUT_GET, 'fromdate')) {
+                $collection = $property->getNotes();
+                include __DIR__ . '/../collection.php';
+            }
         ?>
             <p><a href="add-note.php?id=<?php echo $property->getId(); ?>">Add a note</a></p>
         <?php
         
-            $collection = $property->getInspections();
-            include __DIR__ . '/../collection.php';
-        
-            $collection = $property->getPrimarypropertybranding()->getPrices();
-            include __DIR__ . '/../collection.php';
-        
-            $collection = $property->getAttributes();
-            include __DIR__ . '/../collection.php';
-        
-            $collection = $property->getBrandings()->first()->getAvailableDays();
-            include __DIR__ . '/../collection.php';
-        
-            $collection = $property->getSuppliers();
-            include __DIR__ . '/../collection.php';
-            
-            $collection = $property->getTargets();
-            include __DIR__ . '/../collection.php';
-            
-            $collection = $property->getRooms();
-            include __DIR__ . '/../collection.php';
+            if (!filter_input(INPUT_GET, 'fromdate')) {
+                $collection = $property->getInspections();
+                include __DIR__ . '/../collection.php';
+
+                $collection = $property->getPrimarypropertybranding()->getPrices();
+                include __DIR__ . '/../collection.php';
+
+                $collection = $property->getAttributes();
+                include __DIR__ . '/../collection.php';
+
+                $collection = $property->getBrandings()->first()->getAvailableDays();
+                include __DIR__ . '/../collection.php';
+
+                $collection = $property->getSuppliers();
+                include __DIR__ . '/../collection.php';
+
+                $collection = $property->getTargets();
+                include __DIR__ . '/../collection.php';
+
+                $collection = $property->getRooms();
+                include __DIR__ . '/../collection.php';
+            }
         
     } else {
 

@@ -27,18 +27,13 @@ use tabs\apiclient\MarketingBrand;
  * 
  * @method VatBand getLettingincomevatband() Returns the lettingincomevatband
  * 
- * @method string getHeadertemplateelement() Returns the headertemplateelement
- * 
- * @method Branding setHeadertemplateelement(string $var) Sets the headertemplateelement
- * 
- * @method string getFootertemplateelement() Returns the footertemplateelement
- * @method Branding setFootertemplateelement(string $var) Sets the footertemplateelement
- * 
  * @method string getBacsoutputtype() Returns the bacsoutputtype
  * @method Branding setBacsoutputtype(string $var) Sets the bacsoutputtype
  * 
  * @method string getBacssettings() Returns the bacssettings
  * @method Branding setBacssettings(string $var) Sets the bacssettings
+ * 
+ * @method Collection|branding\Extra[] getExtras() Returns the branding extras
  */
 class Branding extends Builder
 {
@@ -69,21 +64,7 @@ class Branding extends Builder
      * @var Vatband
      */
     protected $lettingincomevatband;
-
-    /**
-     * Headertemplateelement
-     *
-     * @var string
-     */
-    protected $headertemplateelement;
-
-    /**
-     * Footertemplateelement
-     *
-     * @var string
-     */
-    protected $footertemplateelement;
-
+    
     /**
      * Bacsoutputtype
      *
@@ -97,8 +78,29 @@ class Branding extends Builder
      * @var string
      */
     protected $bacssettings;
+    
+    /**
+     * Extra collection
+     * 
+     * @var Collection|branding\Extra[]
+     */
+    protected $extras;
 
     // -------------------- Public Functions -------------------- //
+
+    /**
+     * @inheritDoc
+     */
+    public function __construct($id = null)
+    {
+        $this->extras = Collection::factory(
+            'extra',
+            new branding\Extra(),
+            $this
+        );
+        
+        parent::__construct($id);
+    }
 
     /**
      * Set the brandinggroup

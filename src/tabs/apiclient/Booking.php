@@ -776,9 +776,142 @@ class Booking extends Builder
     }
     
     /**
+     * Get the total price
+     * 
+     * @return integer
+     */
+    public function getTotalPrice()
+    {
+        return $this->_getTotalPriceElement(substr(__FUNCTION__, 3));
+    }
+    
+    /**
+     * Get the standard price
+     * 
+     * @return integer
+     */
+    public function getStandardPrice()
+    {
+        return $this->_getTotalPriceElement(substr(__FUNCTION__, 3));
+    }
+    
+    /**
+     * Get the party size saving
+     * 
+     * @return integer
+     */
+    public function getPartySizeSaving()
+    {
+        return $this->_getTotalPriceElement(substr(__FUNCTION__, 3));
+    }
+    
+    /**
+     * Get the special offer saving price
+     * 
+     * @return integer
+     */
+    public function getSpecialOfferSaving()
+    {
+        return $this->_getTotalPriceElement(substr(__FUNCTION__, 3));
+    }
+    
+    /**
+     * Get the saving from promotion codes
+     * 
+     * @return integer
+     */
+    public function getPromotionCodeSaving()
+    {
+        return $this->_getTotalPriceElement(substr(__FUNCTION__, 3));
+    }
+    
+    /**
+     * Get the basic price
+     * 
+     * @return integer
+     */
+    public function getBasicPrice()
+    {
+        return $this->_getTotalPriceElement(substr(__FUNCTION__, 3));
+    }
+    
+    /**
+     * Get the included extra price
+     * 
+     * @return integer
+     */
+    public function getIncludedExtrasPrice()
+    {
+        return $this->_getTotalPriceElement(substr(__FUNCTION__, 3));
+    }
+    
+    /**
+     * Get the owner price
+     * 
+     * @return integer
+     */
+    public function getOwnerPrice()
+    {
+        return $this->_getTotalPriceElement(substr(__FUNCTION__, 3));
+    }
+    
+    /**
+     * Get the sum of the extras which change the brochure price
+     * 
+     * @return integer
+     */
+    public function getChangeBrochurePriceExtraPrice()
+    {
+        return $this->_getTotalPriceElement(substr(__FUNCTION__, 3));
+    }
+    
+    /**
+     * Get the brochure price
+     * 
+     * @return integer
+     */
+    public function getBrochurePrice()
+    {
+        return $this->_getTotalPriceElement(substr(__FUNCTION__, 3));
+    }
+    
+    /**
+     * Get the additional extras price
+     * 
+     * @return integer
+     */
+    public function getAdditionalExtrasPrice()
+    {
+        return $this->_getTotalPriceElement(substr(__FUNCTION__, 3));
+    }
+
+    // -------------------------- Private Functions ------------------------- //
+    
+    /**
+     * Return an element from the total price
+     * 
+     * @param string $property Property to get
+     * 
+     * @return integer
+     */
+    private function _getTotalPriceElement($property)
+    {
+        $price = $this->getDataFromResponse(
+            'price',
+            'total',
+            strtolower($property)
+        );
+        if ($price && is_numeric($price)) {
+            return $price;
+        } else {
+            return 0;
+        }
+    }
+    
+    /**
      * Prefix toarray indexes
      * 
-     * @param string $prefix Prefix String
+     * @param string $string Prefix String
      * @param Base   $object Object
      * 
      * @return array

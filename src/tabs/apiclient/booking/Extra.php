@@ -23,6 +23,8 @@ use tabs\apiclient\extra\branding\Configuration;
  * @method float getUnitprice() Returns the unitprice
  * @method Extra setUnitprice(float $var) Sets the unitprice
  * 
+ * @method float getPrice()           Returns the Price
+ * 
  * @method float getQuantity() Returns the quantity
  * @method Extra setQuantity(float $var) Sets the quantity
  * 
@@ -66,6 +68,13 @@ class Extra extends Builder
      * @var float
      */
     protected $unitprice;
+
+    /**
+     * Price
+     *
+     * @var float
+     */
+    protected $price;
 
     /**
      * Quantity
@@ -173,6 +182,21 @@ class Extra extends Builder
     {
         $this->configuration = Configuration::factory($configuration);
 
+        return $this;
+    }
+    
+    /**
+     * Set the price (and the overridden flag)
+     * 
+     * @param float $price Price
+     * 
+     * @return \tabs\apiclient\booking\Extra
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+        $this->setPriceoverridden(true);
+        
         return $this;
     }
 

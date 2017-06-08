@@ -53,6 +53,37 @@ try {
             <p><a href="add-guests.php?id=<?php echo $booking->getId(); ?>">Add booking guest</a></p>
                 <?php
             }
+            
+            echo '<h5>Price</h5>';
+            echo '<p>Brochure: £' . $booking->getBrochurePrice();
+            $extras = $booking->getExtras()->findBy(function($ele) {
+                return !$ele->getConfiguration()->isIncluded();
+            });
+            if ($extras->count() > 0) {
+                foreach ($extras as $extra) {
+                    echo sprintf(
+                        '<p>%s: %s x £%s</p>',
+                        $extra->getExtra()->getDescription(),
+                        $extra->getQuantity(),
+                        $extra->getUnitprice()
+                    );
+                }
+            }
+            echo '<p>Total: £' . $booking->getTotalPrice();
+            
+            // Get the branding extras and output list of available
+            $extras = $booking->getBranding()->getExtras();
+            if ($extras->count() > 0) {
+                echo '<h5>Available extras</h5>';
+                foreach ($extras as $extra) {
+                    echo sprintf(
+                        '<p>%s <a href="add-extra.php?id=%s&bookingid=%s">Add</a></p>',
+                        $extra->getExtra()->getDescription(),
+                        $extra->getExtra()->getId(),
+                        $booking->getId()
+                    );
+                }
+            }
     } else {
 
         $collection = tabs\apiclient\Collection::factory(

@@ -78,6 +78,56 @@ abstract class Base
             )
         );
     }
+    
+    /**
+     * Get data from the response data object
+     * 
+     * Uses func_get_args to get the steps to navigate the json. I.e:
+     * 
+     * $this->getDataFromResponse('price', 'total', 'brochureprice')
+     * 
+     * Would return the brochure price on a booking object if found.
+     * 
+-     * @return null|mixed
+     */
+    public function getDataFromResponse()
+    {
+        return $this->_getDataFromObject(
+            func_get_args(),
+            $this->responsedata
+        );
+    }
+    
+    /**
+     * One way recursive function to navigate through the responsedata from
+     * a get request
+     * 
+     * @param array     $steps  Steps to nagivate through
+     * @param \stdClass $object Object to look at
+     * 
+     * @return null|mixed
+     */
+    private function _getDataFromObject($steps, $object)
+    {
+        if (count($steps) > 0) {
+            $step = array_shift($steps);
+            if ($object instanceof \stdClass 
+                && property_exists($object, $step)
+                && count($steps) == 0
+            ) {
+                return $object->$step;
+            }
+            
+            if ($object instanceof \stdClass 
+                && property_exists($object, $step)
+                && count($steps) > 0
+            ) {
+                return $this->_getDataFromObject($steps, $object->$step);
+            }
+        }
+        
+        return;
+    }
 
     /**
      * Return the ID from a content-location header
