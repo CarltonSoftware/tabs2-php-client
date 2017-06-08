@@ -37,6 +37,11 @@ try {
         
         $bc->create();
         
+        if ($b->getPotentialbooking()) {
+            $b->getPotentialbooking()->setType('BookingInProgress');
+            $b->update();
+        }
+        
         header('Location: index.php?id=' . $b->getId());
         exit();
     }

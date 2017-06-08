@@ -23,13 +23,13 @@ try {
         $booking->get();
         
         ?>
-            <h2>Booking: <?php echo $booking->getId(); ?></h2>
+            <h2>Booking: <?php echo $booking->getId(); ?> <a href="<?php echo $booking->getTabs2Url(); ?>" target="_blank">view</a></h2>
             <p>From: <?php echo $booking->getFromdate()->format('Y-m-d'); ?></p>
             <p>To: <?php echo $booking->getTodate()->format('Y-m-d'); ?></p>
             <p>Booked: <?php echo $booking->getBookeddatetime()->format('Y-m-d H:i:s'); ?></p>
             <p>Property: <?php echo $booking->getProperty()->getName(); ?></p>
+            <p>Status: <?php echo $booking->getStatus(); ?>
         <?php
-        
             if (!$booking->isProvisional()) {
                 ?>
             <p><a href="provisional-booking.php?id=<?php echo $booking->getId(); ?>">Create provisional booking</a></p>
@@ -45,6 +45,10 @@ try {
             if ($booking->getCustomers()->count() == 0) {
                 ?>
             <p><a href="add-customer.php?id=<?php echo $booking->getId(); ?>">Add booking customer</a></p>
+                <?php
+            } else {
+                ?>
+            <p>Customer: <?php echo $booking->getCustomers()->first()->getCustomer()->getFullname(); ?>
                 <?php
             }
         

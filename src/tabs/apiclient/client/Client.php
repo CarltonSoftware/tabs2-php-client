@@ -165,6 +165,99 @@ class Client extends \GuzzleHttp\Client
             )
         );
     }
+    
+    /**
+     * Get the base uri
+     * 
+     * @return \GuzzleHttp\Psr7\Uri
+     */
+    public function getBaseUri()
+    {
+        return \tabs\apiclient\client\Client::getClient()->getConfig(
+            'base_uri'
+        );
+    }
+    
+    /**
+     * Get the host
+     * 
+     * @return string
+     */
+    public function getHost()
+    {
+        return strtolower($this->getBaseUri()->getHost());
+    }
+    
+    /**
+     * Get the scheme
+     * 
+     * @return string
+     */
+    public function getScheme()
+    {
+        return strtolower($this->getBaseUri()->getScheme());
+    }
+    
+    /**
+     * Get the segments of the host path
+     * 
+     * @return array
+     */
+    public function getHostParts()
+    {
+        return explode('.', $this->getHost());
+    }
+    
+    /**
+     * Get the tabs2 front end url
+     * 
+     * @return string
+     */
+    public function getTabs2Uri($suffix = '')
+    {
+        return implode(
+            '',
+            array(
+                $this->getScheme() . '://',
+                $this->getAgencyAndMode(),
+                '.tabs2.co.uk'
+            )
+        ) . $suffix;
+    }
+    
+    /**
+     * Get the agency code
+     * 
+     * @return string
+     */
+    public function getAgency()
+    {
+        return $this->getHostParts()[0];
+    }
+    
+    /**
+     * Get the agency code
+     * 
+     * @return string
+     */
+    public function getAgencyAndMode()
+    {
+        if ($this->isTest()) {
+            return $this->getAgency() . '.test';
+        } else {
+            return $this->getAgency();
+        }
+    }
+    
+    /**
+     * Test the mode of the api
+     * 
+     * @return boolean
+     */
+    public function isTest()
+    {
+        return $this->getHostParts()[1] == 'test';
+    }
 
     /**
      * Overriden get request

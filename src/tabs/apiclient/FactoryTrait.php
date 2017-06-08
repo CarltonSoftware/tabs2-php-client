@@ -222,7 +222,7 @@ trait FactoryTrait
                     self::_fetchCollection($that->$property);
                 }
                 
-                return $that->$property;
+                return $that->$name();
             }
         }
 

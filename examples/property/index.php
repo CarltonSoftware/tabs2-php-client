@@ -67,9 +67,9 @@ try {
             );
         
             if ($property->getBrandings()->first() 
-                && $marketingBrand = $property->getBrandings()->first()->getMarketingBrand()
                 && !filter_input(INPUT_GET, 'fromdate')
             ) {
+                $marketingBrand = $property->getBrandings()->first()->getMarketingBrand();
                 ?>
         <p>Marketing Brand: <?php echo $marketingBrand->getMarketingbrand()->getName(); ?></p>
                 <?php
@@ -84,25 +84,24 @@ try {
                 include __DIR__ . '/../collection.php';
             }
         
-            if ($property->getDocuments()->count() > 0) {
+            if (!filter_input(INPUT_GET, 'fromdate') && $property->getDocuments()->count() > 0) {
                 ?><p>Documents limited to 2</p><?php
                 $collection = $property->getDocuments()->findBy(function($ele) {
                     return $ele->getDocument() instanceof tabs\apiclient\Image && !$ele->getDocument()->isPrivate();
                 })->slice(0, 2);
                 include __DIR__ . '/../collection.php';
             }
-        ?>
-            <p><a href="add-document.php?id=<?php echo $property->getId(); ?>">Add a document</a></p>
-            <p><a href="add-image.php?id=<?php echo $property->getId(); ?>">Add an image</a></p>
-        <?php
             if (!filter_input(INPUT_GET, 'fromdate')) {
+                ?>
+                    <p><a href="add-document.php?id=<?php echo $property->getId(); ?>">Add a document</a></p>
+                    <p><a href="add-image.php?id=<?php echo $property->getId(); ?>">Add an image</a></p>
+                <?php
                 $collection = $property->getNotes();
                 include __DIR__ . '/../collection.php';
+                ?>
+                    <p><a href="add-note.php?id=<?php echo $property->getId(); ?>">Add a note</a></p>
+                <?php
             }
-        ?>
-            <p><a href="add-note.php?id=<?php echo $property->getId(); ?>">Add a note</a></p>
-        <?php
-        
             if (!filter_input(INPUT_GET, 'fromdate')) {
                 $collection = $property->getInspections();
                 include __DIR__ . '/../collection.php';

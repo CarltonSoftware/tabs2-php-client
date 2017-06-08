@@ -15,9 +15,9 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\Customer getDetails() Returns the details
- * @method string getName() Returns the name
- * @method Customer setName(string $var) Sets the name
+ * @method \tabs\apiclient\Customer getCustomer()        Returns the customer
+ * @method string                   getName()            Returns the name
+ * @method Customer                 setName(string $var) Sets the name
  * 
  */
 class Customer extends Builder
@@ -27,7 +27,7 @@ class Customer extends Builder
      *
      * @var \tabs\apiclient\Customer
      */
-    protected $details;
+    protected $customer;
 
     /**
      * Name
@@ -47,7 +47,7 @@ class Customer extends Builder
      */
     public function setDetails($details)
     {
-        $this->details = \tabs\apiclient\Customer::factory($details);
+        $this->customer = \tabs\apiclient\Customer::factory($details);
 
         return $this;
     }
@@ -62,16 +62,6 @@ class Customer extends Builder
     public function setCustomer($customer)
     {
         return $this->setDetails($customer);
-    }
-    
-    /**
-     * Get the customer object
-     * 
-     * @return \tabs\apiclient\Customer
-     */
-    public function getCustomer()
-    {
-        return $this->getDetails();
     }
 
     /**

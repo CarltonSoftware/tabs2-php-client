@@ -102,6 +102,8 @@ use tabs\apiclient\booking\OwnerPaymentSummary;
  * 
  * @method ConfirmedBooking getConfirmedbooking() Returns the confirmed booking
  * 
+ * @method CancelledBooking getCancelledbooking() Returns the cancelled booking
+ * 
  * @method Collection|booking\SecurityDeposit[] getSecuritydeposits() Returns the securitydeposits
  * 
  * @method Collection|booking\Customer[] getCustomers() Returns the customers
@@ -320,6 +322,13 @@ class Booking extends Builder
      * @var ConfirmedBooking
      */
     protected $confirmedbooking;
+
+    /**
+     * Cancelled Booking
+     * 
+     * @var CancelledBooking
+     */
+    protected $cancelledbooking;
 
     /**
      * Collection of suppliers for the booking
@@ -578,6 +587,20 @@ class Booking extends Builder
 
         return $this;
     }
+    
+    /**
+     * Set the cancelled booking
+     *
+     * @param stdclass|array|CancelledBooking $cancelledbooking Cancelled Booking
+     *
+     * @return Booking
+     */
+    public function setCancelledbooking($cancelledbooking)
+    {
+        $this->cancelledbooking = CancelledBooking::factory($cancelledbooking);
+
+        return $this;
+    }
 
     /**
      * Set the property
@@ -772,7 +795,19 @@ class Booking extends Builder
     {
         return $this->getGuesttype() == 'Customer' 
             && $this->getConfirmedbooking() 
-            && $this->getConfirmedbooking()->getId();
+            && $this->getConfirmedbooking()->getId()
+            && !$this->isCancelled();
+    }
+    
+    /**
+     * Return true/false if the booking is cancelled or not
+     * 
+     * @return boolean
+     */
+    public function isCancelled()
+    {
+        return $this->getCancelledbooking() 
+            && $this->getCancelledbooking()->getId();
     }
     
     /**
@@ -883,6 +918,18 @@ class Booking extends Builder
     public function getAdditionalExtrasPrice()
     {
         return $this->_getTotalPriceElement(substr(__FUNCTION__, 3));
+    }
+    
+    /**
+     * Get the tabs2 url for this booking
+     * 
+     * @return string
+     */
+    public function getTabs2Url()
+    {
+        return \tabs\apiclient\client\Client::getClient()->getTabs2Uri(
+            '/booking/' . $this->getId()
+        );
     }
 
     // -------------------------- Private Functions ------------------------- //
