@@ -383,9 +383,7 @@ class Property extends Builder
      */
     public function setAddress($addr)
     {
-        $address = Address::factory($addr);
-        $address->setParent($this);
-        $this->address = $address;
+        $this->address = Address::factory($addr, $this);
         
         return $this;
     }
@@ -399,9 +397,7 @@ class Property extends Builder
      */
     public function setStatus($addr)
     {
-        $status = Status::factory($addr);
-        $status->setParent($this);
-        $this->status = $status;
+        $this->status = Status::factory($addr, $this);
         
         return $this;
     }    

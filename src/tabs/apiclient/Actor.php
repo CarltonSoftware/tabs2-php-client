@@ -279,8 +279,7 @@ abstract class Actor extends Builder
      */
     public function setBacsbankaccount($account)
     {
-        $this->bacsbankaccount = BankAccount::factory($account);
-        $this->bacsbankaccount->setParent($this);
+        $this->bacsbankaccount = BankAccount::factory($account, $this);
 
         return $this;
     }

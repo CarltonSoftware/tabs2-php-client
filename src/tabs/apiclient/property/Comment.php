@@ -78,9 +78,7 @@ class Comment extends Builder
      */
     public function setBooking($bkg)
     {
-        $booking = Booking::factory($bkg);
-        $booking->setParent($this);
-        $this->booking = $booking;
+        $this->booking = Booking::factory($bkg, $this);
         
         return $this;
     }    

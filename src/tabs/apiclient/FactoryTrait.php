@@ -58,17 +58,24 @@ trait FactoryTrait
      * Create a new object
      *
      * @param array|stdClass|Base $element Representation of the object
+     * @param Base                $parent  Parent object
      *
      * @return Base
      */
-    public static function factory($element)
+    public static function factory($element, $parent = null)
     {
         // If class is the same as object being `factory'ised`, just return it.
-        if ((is_object($element) 
-            && get_class($element) == get_called_class())
+        if ((is_object($element) && get_class($element) == get_called_class())
             || is_null($element)
         ) {
             return $element;
+        }
+        
+        // Do not set object if its a stdClass and is empty
+        if ($element instanceof \stdClass 
+            && count(get_object_vars($element)) == 0
+        ) {
+            return null;
         }
         
         $object = new static();
@@ -81,6 +88,10 @@ trait FactoryTrait
         }
 
         self::setObjectProperties($object, $element);
+        
+        if ($parent && $object instanceof Base) {
+            $object->setParent($parent);
+        }
 
         return $object;
     }

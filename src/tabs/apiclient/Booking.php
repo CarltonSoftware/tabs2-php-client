@@ -459,8 +459,7 @@ class Booking extends Builder
         foreach ($suppliers as $supplier) {
             if (is_object($supplier) && property_exists($supplier, 'type')) {
                 if ($supplier->type == 'BookingOveride') {
-                    $bs = booking\Supplier::factory($supplier->route);
-                    $bs->setParent($this);
+                    $bs = booking\Supplier::factory($supplier->route, $this);
                     $this->suppliers->addElement($bs);
                 } else if ($supplier->type == 'PropertyDefault') {
                     $ps = property\Supplier::factory($supplier->route);
