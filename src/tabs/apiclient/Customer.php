@@ -28,6 +28,8 @@ use tabs\apiclient\Booking;
  * @method Customer setBookings(Collection $col) Set the bookings
  * 
  * @method Collection|actor\Category[] getCategories() Returns the customer categories
+ * 
+ * @method Collection|actor\Payment[] getPayments() Returns the customer categories
  */
 class Customer extends Actor
 {
@@ -79,6 +81,13 @@ class Customer extends Actor
      * @var Collection|actor\Category[]
      */
     protected $categories;
+    
+    /**
+     * Customer payments
+     * 
+     * @var Collection|actor\Payment[]
+     */
+    protected $payments;
 
     // -------------------- Public Functions -------------------- //
     
@@ -107,6 +116,12 @@ class Customer extends Actor
         $this->categories = Collection::factory(
             'category',
             new actor\Category(),
+            $this
+        );
+        
+        $this->payments = Collection::factory(
+            'payment',
+            new actor\Payment(),
             $this
         );
         

@@ -33,11 +33,11 @@ use tabs\apiclient\OwnerChargeCode;
  * @method SecurityDeposit setAmount(integer $var) Sets the amount
  * 
  * @method Currency getCurrency() Returns the currency
- * @method integer getDaysindue() Returns the daysindue
- * @method SecurityDeposit setDaysindue(integer $var) Sets the daysindue
+ * @method integer getDaysduein() Returns the daysindue
+ * @method SecurityDeposit setDaysduein(integer $var) Sets the daysindue
  * 
- * @method integer getDaysoutdue() Returns the daysoutdue
- * @method SecurityDeposit setDaysoutdue(integer $var) Sets the daysoutdue
+ * @method integer getDaysdueout() Returns the daysoutdue
+ * @method SecurityDeposit setDaysdueout(integer $var) Sets the daysoutdue
  * 
  * @method boolean getRefundable() Returns the refundable
  * @method SecurityDeposit setRefundable(boolean $var) Sets the refundable
@@ -115,18 +115,18 @@ class SecurityDeposit extends Builder
     protected $currency;
 
     /**
-     * Daysindue
+     * Days in due
      *
      * @var integer
      */
-    protected $daysindue;
+    protected $daysduein;
 
     /**
-     * Daysoutdue
+     * Days out due
      *
      * @var integer
      */
-    protected $daysoutdue;
+    protected $daysdueout;
 
     /**
      * Refundable
@@ -259,8 +259,8 @@ class SecurityDeposit extends Builder
             'holidaytodate' => $this->getHolidaytodate()->format('Y-m-d'),
             'amount' => $this->getAmount(),
             'currencycode' => $this->getCurrency()->getCode(),
-            'daysindue' => $this->getDaysindue(),
-            'daysoutdue' => $this->getDaysoutdue(),
+            'daysduein' => $this->getDaysduein(),
+            'daysdueout' => $this->getDaysdueout(),
             'refundable' => $this->getRefundable(),
             'peradult' => $this->boolToStr($this->getPeradult()),
             'perchild' => $this->boolToStr($this->getPerchild()),

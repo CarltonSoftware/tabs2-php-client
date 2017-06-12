@@ -35,7 +35,7 @@ class Collection extends StaticCollection
     /**
      * Fetch an array of elements
      *
-     * @return Collection
+     * @return \tabs\apiclient\Collection
      */
     public function fetch()
     {

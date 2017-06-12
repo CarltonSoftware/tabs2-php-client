@@ -74,6 +74,18 @@ try {
             $customer->getId()
         );
 
+        if ($customer->getPayments()->count() > 0) {
+            echo '<h3>Payments</h3>';
+            
+            $collection = $customer->getPayments();
+            
+            include __DIR__ . '/../collection.php';
+        }
+        echo sprintf(
+            '<p><a href="add-payment.php?id=%s">Add payment</a></p>',
+            $customer->getId()
+        );
+
         $bookings = $customer->getBookings();
         if ($bookings->getTotal() > 0) {
             ?>

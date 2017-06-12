@@ -214,8 +214,7 @@ class SecurityDeposit extends Builder
     public function toArray()
     {
         $arr = array(
-            'amount' => $this->getAmount(),
-            'ownerchargecode' => $this->getOwnerchargecode()->getId()
+            'amount' => $this->getAmount()
         );
         
         if ($this->getDueindate()) {

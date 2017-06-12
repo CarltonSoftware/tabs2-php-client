@@ -124,6 +124,8 @@ abstract class Builder extends Base implements BuilderInterface
      */
     public function toCreateArray()
     {
+        var_dump(func_get_args());
+        die();
         return $this->toArray();
     }
 

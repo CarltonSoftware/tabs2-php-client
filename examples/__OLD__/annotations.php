@@ -3,7 +3,7 @@
 // Include the connection
 require_once __DIR__ . '/../creating-a-new-connection.php';
 
-$class = new tabs\apiclient\branding\Extra();
+$class = new tabs\apiclient\actor\Payment();
 
 $ref = new ReflectionClass($class);
 $properties = array();
@@ -113,6 +113,16 @@ foreach ($properties as $prop => $type) {
         $type = array_pop($types);
         $cons .= sprintf(
             "\t\t\$this->%s = Collection::factory('', new %s, \$this);\n",
+            $prop,
+            $type
+        );
+    }
+    
+    if (substr($type, 0, 16) == 'StaticCollection') {
+        $types = explode('|', $type);
+        $type = array_pop($types);
+        $cons .= sprintf(
+            "\t\t\$this->%s = StaticCollection::factory('', new %s, \$this);\n",
             $prop,
             $type
         );

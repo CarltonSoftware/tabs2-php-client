@@ -86,10 +86,16 @@ try {
             
             if ($booking->getSecuritydeposits()->count() > 0) {
                 echo sprintf(
-                    '<p>Security deposit: £%s <a href="remove-sd.php?id=%s&bsid=%s">Remove</a></p>',
+                    '<p>Security deposit: £%s <a href="remove-sd.php?id=%s&bsid=%s">Remove</a> <a href="toggle-waiver.php?id=%s">Toggle Waiver</a></p>',
                     $booking->getSecuritydeposits()->first()->getAmount(),
                     $booking->getId(),
-                    $booking->getSecuritydeposits()->first()->getId()
+                    $booking->getSecuritydeposits()->first()->getId(),
+                    $booking->getId()
+                );
+            } else if ($booking->getProperty()->getSecuritydeposits()->count() > 0) {
+                echo sprintf(
+                    '<p><a href="toggle-waiver.php?id=%s">Toggle Waiver</a></p>',
+                    $booking->getId()
                 );
             }
             
