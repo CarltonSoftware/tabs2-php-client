@@ -932,6 +932,26 @@ class Booking extends Builder
     }
     
     /**
+     * Get the total outstanding on the booking
+     * 
+     * @return float
+     */
+    public function getTotalOutstanding()
+    {
+        return $this->_getPaymentSummaryElement('total', substr(__FUNCTION__, 8));
+    }
+    
+    /**
+     * Get the total paid on the booking
+     * 
+     * @return float
+     */
+    public function getTotalPaid()
+    {
+        return $this->_getPaymentSummaryElement('total', substr(__FUNCTION__, 8));
+    }
+    
+    /**
      * Get the tabs2 url for this booking
      * 
      * @return string
@@ -987,6 +1007,29 @@ class Booking extends Builder
             'total',
             strtolower($property)
         );
+        if ($price && is_numeric($price)) {
+            return $price;
+        } else {
+            return 0;
+        }
+    }
+    
+    /**
+     * Return an element from the total price
+     * 
+     * @param string $stub     Sub object name
+     * @param string $property Property to get
+     * 
+     * @return integer
+     */
+    private function _getPaymentSummaryElement($stub, $property)
+    {
+        $price = $this->getDataFromResponse(
+            'paymentsummary',
+            $stub,
+            strtolower($property)
+        );
+        
         if ($price && is_numeric($price)) {
             return $price;
         } else {

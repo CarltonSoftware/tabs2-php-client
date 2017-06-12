@@ -65,6 +65,15 @@ try {
                 <?php
             }
             
+            ?>
+            <p>Total paid: £<?php echo $booking->getTotalPaid(); ?></p>
+            <?php
+            if ($booking->getTotalOutstanding() > 0) {
+                ?>
+            <p><a href="create-sagepayment.php?id=<?php echo $booking->getId(); ?>">Add Payment</a></p>
+                <?php
+            }
+            
             echo '<h5>Price</h5>';
             echo '<p>Brochure: £' . $booking->getBrochurePrice();
             $extras = $booking->getExtras()->findBy(function($ele) {
