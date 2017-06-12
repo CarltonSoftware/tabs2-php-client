@@ -70,7 +70,7 @@ class Customer extends Builder
     public function toArray()
     {
         $arr = array();
-        if ($this->getDetails()) {
+        if ($this->getCustomer()) {
             $arr['customerid'] = $this->getCustomer()->getId();
         }
         
