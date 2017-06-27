@@ -169,24 +169,26 @@ class ProvisionalBooking extends Base
         $arr = array();
         if ($this->getTabsuser()) {
             $arr['tabsuserid'] = $this->getTabsuser()->getId();
-        }
 
-        if ($this->getDepositamount()) {
-            $arr['depositamountid'] = $this->getDepositamount()->getId();
-        }
-        
-        if ($this->getDepositduedate() && $this->getDepositduedate() instanceof \DateTime) {
-            $arr['depositduedate'] = $this->getDepositduedate()->format('Y-m-d');
-        }
-        
-        if ($this->getBalanceduedate() && $this->getBalanceduedate() instanceof \DateTime) {
-            $arr['balanceduedate'] = $this->getDepositduedate()->format('Y-m-d');
-        }
-        
-        $arr['commissionpercentage'] = $this->getCommissionpercentage();
-        
-        if ($this->getOwnerpaymentterms()) {
-            $arr['ownerpaymenttermsid'] = $this->getOwnerpaymentterms()->getId();
+            if ($this->getDepositamount()) {
+                $arr['depositamountid'] = $this->getDepositamount()->getId();
+            }
+
+            if ($this->getDepositduedate() && $this->getDepositduedate() instanceof \DateTime) {
+                $arr['depositduedate'] = $this->getDepositduedate()->format('Y-m-d');
+            }
+
+            if ($this->getBalanceduedate() && $this->getBalanceduedate() instanceof \DateTime) {
+                $arr['balanceduedate'] = $this->getDepositduedate()->format('Y-m-d');
+            }
+
+            if ($this->getCommissionpercentage()) {
+                $arr['commissionpercentage'] = $this->getCommissionpercentage();
+            }
+
+            if ($this->getOwnerpaymentterms()) {
+                $arr['ownerpaymenttermsid'] = $this->getOwnerpaymentterms()->getId();
+            }
         }
         
         return $arr;
