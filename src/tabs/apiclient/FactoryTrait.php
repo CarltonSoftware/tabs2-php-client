@@ -92,6 +92,8 @@ trait FactoryTrait
         if ($parent && $object instanceof Base) {
             $object->setParent($parent);
         }
+        
+        $object->setEdited(false);
 
         return $object;
     }
@@ -301,6 +303,7 @@ trait FactoryTrait
      */
     protected function setObjectProperty($obj, $property, $value)
     {
+        $state = TABS2_APICLIENT_STATE_DORMANT;
         switch (strtolower(gettype($obj->$property))) {
         case 'array':
         case 'integer':
@@ -310,40 +313,39 @@ trait FactoryTrait
             if ($obj->$property instanceof \DateTime  && (!$value instanceof \DateTime)) {
                 //Special handling for DateTime fields
                 $obj->$property = new \DateTime($value);
+                $state = TABS2_APICLIENT_STATE_EDITED;
             } else if ($obj->$property instanceof \tabs\apiclient\StaticCollection 
                 && (!$value instanceof \tabs\apiclient\StaticCollection)
                 && is_array($value)
             ) {
-                
-                /*
-                 * 'if' statement below commented out to stop the client calling
-                 * for data that doesn't actually exist, for example if a property
-                 * has no attributes and attributes are being returned in the 
-                 * property output, then the client will make the /attributes call
-                 * because it thinks the data hasn't been fetched yet..
-                 */
-                
-                //if (count($value) > 0) {
-                    $obj->$property->setElements($value)->setFetched(true);
-                //}
+                $obj->$property->setElements($value)->setFetched(true);
             } else {
                 // Normo property values
                 $obj->$property = $value;
+                $state = TABS2_APICLIENT_STATE_EDITED;
             }
             break;
         case 'boolean':
             if (is_bool($value)) {
                 $obj->$property = $value;
+                $state = TABS2_APICLIENT_STATE_EDITED;
             }
             break;
         case 'string':
             if (is_string($value)) {
                 $obj->$property = trim($value);
+                $state = TABS2_APICLIENT_STATE_EDITED;
             }
             break;
         case 'float':
             $obj->setFloatVal($value, $property);
+            $state = TABS2_APICLIENT_STATE_EDITED;
             break;
+        }
+        
+        // Set the edited flag if needed
+        if ($obj instanceof Base) {
+            $obj->setState($state);
         }
     }
 

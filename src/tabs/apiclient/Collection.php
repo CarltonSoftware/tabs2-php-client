@@ -31,7 +31,7 @@ use tabs\apiclient\exception\Exception;
  * @link      http://www.carltonsoftware.co.uk
  */
 class Collection extends StaticCollection
-{
+{   
     /**
      * Fetch an array of elements
      *

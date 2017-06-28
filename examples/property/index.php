@@ -30,7 +30,6 @@ try {
         
         <?php
         
-            echo (string) $property->getBrandings()->first()->getCalendar();
             $today = new \DateTime(
                 filter_input(INPUT_GET, 'fromdate') ? filter_input(INPUT_GET, 'fromdate') : 'first day of next month'
             );
@@ -126,25 +125,21 @@ try {
             }
         
     } else {
-
-        $collection = tabs\apiclient\Collection::factory(
-            'property',
-            new \tabs\apiclient\Property
+        $brandings = \tabs\apiclient\Collection::factory(
+            'branding',
+            new tabs\apiclient\Branding()
         );
-        $collection->setLimit(filter_input(INPUT_GET, 'limit'))
-            ->setPage(filter_input(INPUT_GET, 'page'))
-            ->fetch();
-
-        include __DIR__ . '/../collection.php';
+        $brandings->fetch();
         
-        // Search for properties sleeping 4 people
+        // Search for all live properties on the first branding found
         $collection = tabs\apiclient\Collection::factory(
             'property',
             new \tabs\apiclient\Property
         );
         $collection->setLimit(filter_input(INPUT_GET, 'limit'))
             ->setPage(filter_input(INPUT_GET, 'page'));
-        $collection->addFilter('sleeps', 4);
+        $collection->addFilter('brandingid', $brandings->first()->getId());
+        $collection->addFilter('brandingstatusid', 1);
         $collection->fetch();
 
         include __DIR__ . '/../collection.php';

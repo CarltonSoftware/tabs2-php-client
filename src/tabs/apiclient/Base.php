@@ -38,6 +38,7 @@ namespace tabs\apiclient;
  */
 abstract class Base
 {
+    use StateTrait;
     use FactoryTrait;
     
     /**
@@ -53,7 +54,7 @@ abstract class Base
      * @var Base
      */
     protected $parent;
-    
+
     /**
      * Data returned from the get request
      * 

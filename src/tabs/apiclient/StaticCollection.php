@@ -32,6 +32,8 @@ use tabs\apiclient\exception\Exception;
  */
 class StaticCollection implements \Iterator, \Countable
 {
+    use StateTrait;
+    
     /**
      * Element class
      * 
@@ -66,20 +68,6 @@ class StaticCollection implements \Iterator, \Countable
      * @var Pagination
      */
     protected $pagination;
-    
-    /**
-     * Fetched boolean
-     * 
-     * @var boolean
-     */
-    protected $fetched = false;
-    
-    /**
-     * Path status
-     * 
-     * @var boolean
-     */
-    protected $pathOverridden = false;
     
     /**
      * Discriminator
@@ -335,30 +323,6 @@ class StaticCollection implements \Iterator, \Countable
     }
     
     /**
-     * Set the override path bool
-     * 
-     * @param boolean $bool Bool
-     * 
-     * @return StaticCollection
-     */
-    public function setPathOverridden($bool)
-    {   
-        $this->pathOverridden = $bool;
-        
-        return $this;
-    }
-    
-    /**
-     * Check the path override bool
-     * 
-     * @return boolean
-     */
-    public function isPathOverridden()
-    {
-        return $this->pathOverridden;
-    }
-    
-    /**
      * Set the collection path
      * 
      * @param string $path Path
@@ -368,7 +332,7 @@ class StaticCollection implements \Iterator, \Countable
     public function setPath($path)
     {   
         $this->path = $path;
-        $this->pathOverridden = true;
+        $this->setPathOverridden(true);
         
         return $this;
     }
@@ -381,30 +345,6 @@ class StaticCollection implements \Iterator, \Countable
     public function getPath()
     {   
         return $this->path;
-    }
-    
-    /**
-     * Set the fetched bool
-     * 
-     * @param boolean $fetched Fetched bool
-     * 
-     * @return Collection
-     */
-    public function setFetched($fetched)
-    {   
-        $this->fetched = $fetched;
-        
-        return $this;
-    }
-    
-    /**
-     * Check the fetched bool
-     * 
-     * @return boolean
-     */
-    public function isFetched()
-    {
-        return $this->fetched;
     }
     
     /**
