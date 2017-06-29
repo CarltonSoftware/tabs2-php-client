@@ -125,13 +125,6 @@ try {
             ->fetch();
 
         include __DIR__ . '/../collection.php';
-
-        $tabsuser = new \tabs\apiclient\Tabsuser(2);
-        $tabsuser->get();
-
-        $collection = $tabsuser->getSecurity();
-
-        include __DIR__ . '/../collection.php';
     }
 
 } catch(Exception $e) {

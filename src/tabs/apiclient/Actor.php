@@ -44,9 +44,6 @@ use tabs\apiclient\ActorSecurity;
  * @method boolean getInactive() Returns the inactive
  * @method Actor setInactive(boolean $var) Sets the inactive
  * 
- * @method string getPassword() Returns the password
- * @method Actor setPassword(string $var) Sets the password
- * 
  * @method string getCompanyname() Returns the companyname
  * @method Actor setCompanyname(string $var) Sets the companyname
  * 
@@ -341,7 +338,6 @@ abstract class Actor extends Builder
             'tabscode' => $this->getTabscode(),
             'language' => $this->getLanguage(),
             'inactive' => $this->getInactive(),
-            'password' => $this->getPassword(),
             'companyname' => $this->getCompanyname(),
             'vatnumber' => $this->getVatnumber(),
             'companynumber' => $this->getCompanynumber(),
