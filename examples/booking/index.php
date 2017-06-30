@@ -63,7 +63,7 @@ try {
                 ?>
             <p><a href="add-guests.php?id=<?php echo $booking->getId(); ?>">Add booking guest</a></p>
                 <?php
-            } else {
+            } else {                
                 $collection = $booking->getGuests();
                 include __DIR__ . '/../collection.php';
             }

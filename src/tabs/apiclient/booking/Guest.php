@@ -130,7 +130,7 @@ class Guest extends Builder
         }
         
         if ($this->getAgerange()) {
-            $arr['guestagerangeid'] = $this->getAgerange();
+            $arr['guestagerangeid'] = $this->getAgerange()->getId();
         }
         
         return $arr;
