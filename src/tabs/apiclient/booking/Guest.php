@@ -19,8 +19,8 @@ use tabs\apiclient\GuestAgeRange;
  * @method string getName() Returns the name
  * @method Guest setName(string $var) Sets the name
  * 
- * @method string getGuesttype() Returns the guesttype
- * @method Guest setGuesttype(string $var) Sets the guesttype
+ * @method string getType() Returns the guesttype
+ * @method Guest setType(string $var) Sets the guesttype
  * 
  * @method GuestAgeRange getAgerange() Returns the agerange
  * @method integer getAge() Returns the age
@@ -50,7 +50,7 @@ class Guest extends Builder
      *
      * @var string
      */
-    protected $guesttype;
+    protected $type;
 
     /**
      * Agerange
@@ -110,7 +110,7 @@ class Guest extends Builder
     {
         $arr = array(
             'name' => $this->getName(),
-            'guesttype' => $this->getGuesttype()
+            'guesttype' => $this->getType()
         );
         
         if ($this->getAge()) {
