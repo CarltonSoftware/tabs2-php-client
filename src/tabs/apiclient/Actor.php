@@ -339,6 +339,66 @@ abstract class Actor extends Builder
         
         return $req->getStatusCode() === 204;
     }
+    
+    /**
+     * Set an email address on an actor
+     * 
+     * @param string $email   Email address
+     * @param string $subtype Email subtype
+     * 
+     * @return \tabs\apiclient\Actor
+     */
+    public function setEmail($email, $subtype = 'Main')
+    {
+        $contact = new \tabs\apiclient\actor\ContactDetailOther();
+        $contact->setContactmethodsubtype($subtype)
+            ->setContactmethodtype('Email')
+            ->setValue($email)
+            ->setInvalid(false);
+        $this->getContactdetails()->addElement($contact);
+        $contact->create();
+        
+        return $this;
+    }
+    
+    /**
+     * Set a phone number address on an actor
+     * 
+     * @param string $number  Number
+     * @param string $type    Number type
+     * @param string $subtype Number subtype
+     * 
+     * @return \tabs\apiclient\Actor
+     */
+    public function setPhonenumber($number, $type = 'Phone', $subtype = 'Main')
+    {
+        $contact = new \tabs\apiclient\actor\PhoneNumber();
+        $code = '44';
+        if (substr($number, 0, 1) == '+' && strlen($number) > 3) {
+            $code = substr($code, 1, 2);
+            $number = substr($number, 3);
+        }
+        
+        $number = preg_replace("/[^0-9]/", '', $number);
+
+        // TABS2-1613
+        if ((substr($number, 0, 2) == '07' 
+            || substr($number, 0, 1) == '7')
+            && $type != 'Mobile'
+        ) {
+            $type = 'Mobile';
+        }
+        
+        $contact->setCountrycode($code)
+            ->setSubscribernumber($number)
+            ->setContactmethodsubtype($subtype)
+            ->setContactmethodtype($type)
+            ->setInvalid(false);
+        $this->getContactdetails()->addElement($contact);
+        $contact->create();
+        
+        return $this;
+    }
 
     /**
      * @inheritDoc
