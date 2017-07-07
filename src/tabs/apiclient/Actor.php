@@ -391,7 +391,7 @@ abstract class Actor extends Builder
         }
         
         $contact = new \tabs\apiclient\actor\PhoneNumber();
-        $code = false;
+        $code = '44';
         if (substr($number, 0, 1) == '+' && strlen($number) > 3) {
             $code = substr($number, 1, 2);
             $number = substr($number, 3);
@@ -410,11 +410,9 @@ abstract class Actor extends Builder
         $contact->setSubscribernumber($number)
             ->setContactmethodsubtype($subtype)
             ->setContactmethodtype($type)
-            ->setInvalid(false);
+            ->setInvalid(false)
+            ->setCountrycode($code);
         
-        if ($code) {
-            $contact->setCountrycode($code);
-        }
         $this->getContactdetails()->addElement($contact);
         $contact->create();
         
