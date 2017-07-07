@@ -72,6 +72,8 @@ use tabs\apiclient\ActorSecurity;
  * @method Actor setManagedactivities(StaticCollection $col) Set the managed activities
  * 
  * @method Collection|ActorSecurity[] getSecurity() Returns the actor security
+ * 
+ * @method Collection|actor\Enquiry[] getEnquiries() Returns the customer enquiries
  */
 abstract class Actor extends Builder
 {
@@ -200,6 +202,13 @@ abstract class Actor extends Builder
      * @var Collection|ActorSecurity[]
      */
     protected $security;
+    
+    /**
+     * Customer enquiries
+     * 
+     * @var Collection|actor\Enquiry[]
+     */
+    protected $enquiries;
 
     // -------------------- Public Functions -------------------- //
     
@@ -247,6 +256,12 @@ abstract class Actor extends Builder
         $this->security = Collection::factory(
             'actorsecurity',
             new actor\ActorSecurity(),
+            $this
+        );
+        
+        $this->enquiries = Collection::factory(
+            'enquiry',
+            new actor\Enquiry(),
             $this
         );
         

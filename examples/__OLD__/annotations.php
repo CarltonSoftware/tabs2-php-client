@@ -3,7 +3,7 @@
 // Include the connection
 require_once __DIR__ . '/../creating-a-new-connection.php';
 
-$class = new tabs\apiclient\SagePayPayment();
+$class = new tabs\apiclient\actor\enquiry\Property();
 
 $ref = new ReflectionClass($class);
 $properties = array();
@@ -41,10 +41,11 @@ foreach ($ref->getProperties() as $property) {
 
 foreach ($properties as $prop => $type) {
     echo sprintf(
-        " * @method %s get%s() Returns the %s\n",
+        " * @method %s get%s() Returns the %s %s\n",
         $type,
         ucfirst($prop),
-        $prop
+        $prop,
+        $type
     );
     if (in_array($type, array('string', 'integer', 'float', 'boolean', '\DateTime'))) {
         echo sprintf(

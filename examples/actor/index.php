@@ -85,6 +85,11 @@ try {
             '<p><a href="add-payment.php?id=%s">Add payment</a></p>',
             $customer->getId()
         );
+        
+        echo sprintf(
+            '<p><a href="add-enquiry.php?id=%s">Add enquiry</a></p>',
+            $customer->getId()
+        );
 
         $bookings = $customer->getBookings();
         if ($bookings->getTotal() > 0) {
@@ -122,6 +127,8 @@ try {
         
         $collection->setLimit(filter_input(INPUT_GET, 'limit'))
             ->setPage(filter_input(INPUT_GET, 'page'))
+            ->addFilter('inactive', false)
+            ->addFilter('surname', 'Wyett')
             ->fetch();
 
         include __DIR__ . '/../collection.php';
