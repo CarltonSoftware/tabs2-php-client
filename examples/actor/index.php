@@ -73,6 +73,10 @@ try {
             '<p><a href="add-email.php?id=%s">Add new email</a></p>',
             $customer->getId()
         );
+        echo sprintf(
+            '<p><a href="add-phonenumber.php?id=%s">Add new phone number</a></p>',
+            $customer->getId()
+        );
 
         if ($customer->getPayments()->count() > 0) {
             echo '<h3>Payments</h3>';

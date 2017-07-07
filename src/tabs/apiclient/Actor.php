@@ -350,6 +350,15 @@ abstract class Actor extends Builder
      */
     public function setEmail($email, $subtype = 'Main')
     {
+        foreach ($this->getContactdetails() as $cd) {
+            if ($cd instanceof ContactDetailOther 
+                && $cd->getValue() == $email
+                && $cd->getContactmethodsubtype() == $subtype
+            ) {
+                // Dont add the email if it already exists
+                return $this;
+            }
+        }
         $contact = new \tabs\apiclient\actor\ContactDetailOther();
         $contact->setContactmethodsubtype($subtype)
             ->setContactmethodtype('Email')
@@ -372,10 +381,19 @@ abstract class Actor extends Builder
      */
     public function setPhonenumber($number, $type = 'Phone', $subtype = 'Main')
     {
+        foreach ($this->getContactdetails() as $cd) {
+            if ($cd instanceof PhoneNumber 
+                && $cd->getSubscribernumber() == 'number'
+            ) {
+                // Dont add a number if it already exists
+                return $this;
+            }
+        }
+        
         $contact = new \tabs\apiclient\actor\PhoneNumber();
-        $code = '44';
+        $code = false;
         if (substr($number, 0, 1) == '+' && strlen($number) > 3) {
-            $code = substr($code, 1, 2);
+            $code = substr($number, 1, 2);
             $number = substr($number, 3);
         }
         
@@ -389,11 +407,14 @@ abstract class Actor extends Builder
             $type = 'Mobile';
         }
         
-        $contact->setCountrycode($code)
-            ->setSubscribernumber($number)
+        $contact->setSubscribernumber($number)
             ->setContactmethodsubtype($subtype)
             ->setContactmethodtype($type)
             ->setInvalid(false);
+        
+        if ($code) {
+            $contact->setCountrycode($code);
+        }
         $this->getContactdetails()->addElement($contact);
         $contact->create();
         
