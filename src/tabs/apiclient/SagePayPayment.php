@@ -231,6 +231,21 @@ class SagePayPayment extends Base
         
         return $arr;
     }
+    
+    /**
+     * Release the payment
+     * 
+     * @return \tabs\apiclient\SagePayPayment
+     */
+    public function releasePayment()
+    {
+        \tabs\apiclient\client\Client::getClient()->put(
+            $this->getUpdateUrl() . '/release'
+        );
+        
+        return $this;
+    }
+    
     /**
      * Perform a create request
      *
