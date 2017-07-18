@@ -233,6 +233,20 @@ class SagePayPayment extends Base
     }
     
     /**
+     * Return the payment details from the sagepay api
+     * 
+     * @return stdClass
+     */
+    public function getDetails()
+    {
+        return self::getJson(
+            \tabs\apiclient\client\Client::getClient()->get(
+                $this->getUpdateUrl() . '/detail'
+            )
+        );
+    }
+    
+    /**
      * Release the payment
      * 
      * @return \tabs\apiclient\SagePayPayment
