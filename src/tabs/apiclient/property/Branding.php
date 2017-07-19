@@ -40,8 +40,6 @@ use tabs\apiclient\extra\branding\Configuration;
  * 
  * @method \tabs\apiclient\Status getStatus() Returns the status
  * 
- * @method Collection|Price[] getPrices() Returns the property brand prices
- * 
  * @method Collection|Pricing[] getExtraprices() Returns the property extra prices
  * @method Collection|Configuration[] getExtraconfigurations() Returns the property extra configurations
  */
@@ -185,6 +183,30 @@ class Branding extends Builder
     }
     
     /**
+     * Get some prices for the property brand
+     * 
+     * @param \DateTime $fromDate Start date of price range
+     * @param \DateTime $toDate   End date of price range
+     * 
+     * @return Collection|Price[]
+     */
+    public function getPrices(
+        \DateTime $fromDate = null,
+        \DateTime $toDate = null
+    ) {
+        if ($fromDate && $toDate) {
+            $this->prices->getPagination()
+                ->addParameter('fromdate', $fromDate->format('Y-m-d'))
+                ->addParameter('todate', $toDate->format('Y-m-d'));
+        } else {
+            $this->prices->getPagination()->removeParameter('fromdate')
+                ->removeParameter('todate');
+        }
+        
+        return $this->prices->fetch();
+    }
+    
+    /**
      * Get some availability for the brand
      * 
      * @param \DateTime $fromDate          Start date of availability range
@@ -202,14 +224,15 @@ class Branding extends Builder
             $this->availableDays->getPagination()
                 ->addParameter('fromdate', $fromDate->format('Y-m-d'))
                 ->addParameter('todate', $toDate->format('Y-m-d'));
+        } else {
+            $this->availableDays->getPagination()->removeParameter('fromdate')
+                ->removeParameter('todate');
         }
         
-        if ($includechangedays) {
-            $this->availableDays->getPagination()->addParameter(
-                'includechangedays',
-                $this->boolToStr($includechangedays)
-            );
-        }
+        $this->availableDays->getPagination()->addParameter(
+            'includechangedays',
+            $this->boolToStr($includechangedays)
+        );
         
         return $this->availableDays->fetch();
     }
