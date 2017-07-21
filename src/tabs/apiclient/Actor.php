@@ -74,6 +74,9 @@ use tabs\apiclient\ActorSecurity;
  * @method Collection|ActorSecurity[] getSecurity() Returns the actor security
  * 
  * @method Collection|actor\Enquiry[] getEnquiries() Returns the customer enquiries
+ * 
+ * @method string getAddress() Returns the address (only available when using 'fields' filter)
+ * @method string getEmailaddress() Returns the email address (only available when using 'fields' filter)
  */
 abstract class Actor extends Builder
 {
@@ -209,6 +212,20 @@ abstract class Actor extends Builder
      * @var Collection|actor\Enquiry[]
      */
     protected $enquiries;
+    
+    /**
+     * Address
+     *
+     * @var string
+     */
+    protected $address;    
+    
+    /**
+     * Email address
+     *
+     * @var string
+     */
+    protected $emailaddress;     
 
     // -------------------- Public Functions -------------------- //
     

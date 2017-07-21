@@ -23,7 +23,16 @@ use tabs\apiclient\Builder;
  * @method string  getPostcode()  Return the Address postcode
  * @method float   getLongitude() Return the longitude
  * @method float   getLatitude()  Return the latitude
- * @method Country getCountry()   Return the Address postcode
+ * @method Country getCountry()   Return the Address country
+ * 
+ * @method Address setLine1(string $line1)        Set the Address line 1
+ * @method Address setLine2(string $line2)        Set the Address line 2
+ * @method Address setLine3(string $line3)        Set the Address line 3
+ * @method Address setTown(string $town)          Set the Address town
+ * @method Address setCounty(string $county)      Set the Address county
+ * @method Address setPostcode(string $postcode)  Set the Address postcode
+ * @method Address setLongitude(float $longitude) Set the Address longitude
+ * @method Address setLatitude(float $latitude)   Set the Address latitude
  */
 class Address extends Builder
 {
@@ -105,13 +114,13 @@ class Address extends Builder
     /**
      * Set the country object
      * 
-     * @param array|stdClass|Country $array Country
+     * @param array|stdClass|Country $country Country
      * 
      * @return \tabs\apiclient\Address
      */
-    public function setCountry($array)
+    public function setCountry($country)
     {
-        $this->country = Country::factory($array);
+        $this->country = Country::factory($country);
         
         return $this;
     }
@@ -148,7 +157,7 @@ class Address extends Builder
             'town' => $this->getTown(),
             'county' => $this->getCounty(),
             'postcode' => $this->getPostcode(),
-            'countrycode' => $this->getCountry()->getAlpha2(),
+            'countryalpha2code' => $this->getCountry()->getAlpha2(),
             'longitude' => (float) $this->getLongitude(),
             'latitude' => (float) $this->getLatitude()
         );

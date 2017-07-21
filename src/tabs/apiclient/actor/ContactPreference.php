@@ -56,6 +56,16 @@ class ContactPreference extends Builder
     // -------------------- Public Functions -------------------- //
 
     /**
+     * Constructor
+     * 
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->branding = new \tabs\apiclient\Branding();
+    }    
+    
+    /**
      * Set the branding
      *
      * @param stdclass|array|\tabs\apiclient\Branding $branding The Branding
