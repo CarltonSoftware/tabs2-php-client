@@ -1,7 +1,8 @@
 <?php
 
 /**
- * This file documents how to add extras onto a a Booking.
+ * This file documents how to toggle a security deposit on a booking. It will
+ * be useful if your trying to simulate security deposit waivers.
  *
  * PHP Version 5.5
  * 

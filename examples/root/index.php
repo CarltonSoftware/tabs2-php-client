@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file documents how to read a Property object from the Plato API.
+ * This file documents how to read the root endpoint.
  *
  * PHP Version 5.5
  * 

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file documents how to read a Booking objects from the Plato API.
+ * This file documents how to do a booking enquiry
  *
  * PHP Version 5.5
  * 

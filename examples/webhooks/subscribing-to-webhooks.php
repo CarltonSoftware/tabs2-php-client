@@ -16,7 +16,11 @@
 // Include the connection
 require_once __DIR__ . '/../creating-a-new-connection.php';
 
-$public_endpoint_url = 'https://6f73d1ab.ngrok.io/platoclient/webhooks/example-webhook-endpoint.php';
+$public_endpoint_url = 'https://1aa46a4b.ngrok.io/platoclient/webhooks/example-webhook-endpoint.php';
 
-// Subscribe to all notifications about bookings.
-\tabs\apiclient\WebHook::subscribe($public_endpoint_url, 'property');
+try {
+    // Subscribe to all notifications about bookings.
+    \tabs\apiclient\WebHook::subscribe($public_endpoint_url, 'actor');
+} catch (Exception $ex) {
+    echo $ex->getMessage();
+}

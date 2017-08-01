@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file documents how add a note to a customer using the Plato API.
+ * This file documents how add a note to a property using the Plato API.
  *
  * PHP Version 5.5
  * 

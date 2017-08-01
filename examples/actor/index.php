@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file documents how to request a lists of brochure requests;
+ * This file documents how to request a list of customers;
  *
  * PHP Version 5.5
  * 

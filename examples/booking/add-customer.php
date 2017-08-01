@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file documents how to read a Booking objects from the Plato API.
+ * This file documents how to add a customer to a Booking object
  *
  * PHP Version 5.5
  * 

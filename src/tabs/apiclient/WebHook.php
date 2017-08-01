@@ -32,15 +32,19 @@ class WebHook extends Base
      */
     public static function subscribe($url, $type = 'property')
     {
-        $req = \tabs\apiclient\client\Client::getClient()->get(
-            'webhook/subscribe/' . strtolower($type),
-            array(
-                'url' => $url
-            )
-        );
-        
-        if ($req->getStatusCode() != 200) {
-            throw new Exception($req->getBody());
+        try {
+            $req = \tabs\apiclient\client\Client::getClient()->get(
+                'webhook/subscribe/' . strtolower($type),
+                array(
+                    'url' => $url
+                )
+            );
+
+            if ($req->getStatusCode() != 200) {
+                throw new Exception($req->getBody());
+            }
+        } catch (\GuzzleHttp\Exception\RequestException $ex) {
+            throw new Exception(null, $ex->getMessage());
         }
     }
     

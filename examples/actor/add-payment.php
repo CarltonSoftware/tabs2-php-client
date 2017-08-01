@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file documents how to add a new email address to a customer with the Plato API.
+ * This file documents how to add an actor payment with the Plato API.
  *
  * PHP Version 5.5
  * 

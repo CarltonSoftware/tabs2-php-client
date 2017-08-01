@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file documents how to add extras onto a a Booking.
+ * This file documents how to remove an extra from a booking
  *
  * PHP Version 5.5
  * 

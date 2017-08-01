@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file documents how to read a Property object from the Plato API.
+ * This file documents how to read the web hook responses from tabs2
  *
  * PHP Version 5.5
  * 
@@ -23,5 +23,5 @@ if ($snsFullMessage && isset($snsFullMessage['SubscribeURL'])) {
     die();
 } else if (is_array($snsFullMessage)) {
     // Do something with the response
-    error_log(print_r($snsFullMessage, true));
+    error_log(print_r(json_decode($snsFullMessage['Message']), true));
 }
