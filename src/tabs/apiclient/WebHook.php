@@ -41,7 +41,7 @@ class WebHook extends Base
             );
 
             if ($req->getStatusCode() != 200) {
-                throw new Exception($req->getBody());
+                throw new Exception($req, (string) $req->getBody());
             }
         } catch (\GuzzleHttp\Exception\RequestException $ex) {
             throw new Exception(null, $ex->getMessage());
