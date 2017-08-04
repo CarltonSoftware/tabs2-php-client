@@ -13,3 +13,7 @@ examples/angular
 examples/angular/*
 examples/annotations.php
 examples/collections.php
+node_modules
+node_modules/
+node_modules/*
+package-lock.json

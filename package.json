@@ -1,0 +1,17 @@
+{
+  "name": "tabs2-api-client",
+  "version": "0.0.1",
+  "description": "Documentation and examples generator for the tabs2-api-client",
+  "repository": "https://github.com/CarltonSoftware/tabs2-api-client",
+  "dependencies": {
+    "basename": "^0.1.2",
+    "filehound": "^1.16.2",
+    "fs": "0.0.1-security",
+    "gulp": "^3.9",
+    "gulp-filenames": "^4.0.1",
+    "gulp-util": "^3.0.8",
+    "marked": "^0.3.6",
+    "node-notifier": "^5.1.2"
+  },
+  "author": "Alex Wyett"
+}

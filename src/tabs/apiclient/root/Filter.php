@@ -25,6 +25,7 @@ namespace tabs\apiclient\root;
  */
 class Filter
 {
+    use \tabs\apiclient\StateTrait;
     use \tabs\apiclient\FactoryTrait;
     
     /**
