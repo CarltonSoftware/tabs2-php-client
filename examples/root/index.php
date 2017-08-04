@@ -5,7 +5,6 @@
  * 
  * This file documents how to read the root endpoint.
  */
-
 require_once __DIR__ . '/../creating-a-new-connection.php';
 
 try {

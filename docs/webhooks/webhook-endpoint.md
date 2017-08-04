@@ -1,7 +1,7 @@
 # Example of receiving a webhook notification
 This file documents how to read the web hook responses from tabs2.
 
-    ```php
+    ```
     $snsFullMessage = \tabs\apiclient\WebHook::detectRequestBody();
     if ($snsFullMessage && isset($snsFullMessage['SubscribeURL'])) {
         // Send the response back to the web hook request to say its been accepted.

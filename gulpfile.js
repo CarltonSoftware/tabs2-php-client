@@ -93,7 +93,7 @@ gulp.task('buildexamples', function() {
                             && token.type
                             && token.type === 'code'
                         ) {
-                            code = code.concat(token.text.replace('```php', '').replace('```', '').split('\n'));
+                            code = code.concat(token.text.replace('```', '').replace('```', '').split('\n'));
                         }
                     });
 
@@ -107,12 +107,9 @@ gulp.task('buildexamples', function() {
                             lines.push(' * ' + l);
                         });
                         lines.push(' */');
+                        lines.push('require_once __DIR__ . \'/' + '../'.repeat(dir.length) + 'creating-a-new-connection.php\';');
                         code.forEach(function(c) {
-                            if (c.indexOf('creating-a-new-connection') >= 0) {
-                                lines.push('require_once __DIR__ . \'/' + '../'.repeat(dir.length) + 'creating-a-new-connection.php\';');
-                            } else {
-                                lines.push(c);
-                            }
+                            lines.push(c);
                         });
                         lines.push('');
                         lines.push('require_once __DIR__ . \'/' + '../'.repeat(dir.length) + 'finally.php\';');

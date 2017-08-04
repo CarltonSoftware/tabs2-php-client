@@ -93,7 +93,6 @@ trait FactoryTrait
             $object->setParent($parent);
         }
         
-        var_dump($object);
         $object->setEdited(false);
 
         return $object;

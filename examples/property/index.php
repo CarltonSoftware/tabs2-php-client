@@ -1,19 +1,14 @@
 <?php
 
 /**
- * This file documents how to read a Property objects from the Plato API.
- *
- * PHP Version 5.5
+ * @name Requesting property information
  * 
- * @category  API_Client
- * @package   Tabs
- * @author    Carlton Software <support@carltonsoftware.co.uk>
- * @copyright 2013 Carlton Software
- * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
- * @link      http://www.carltonsoftware.co.uk
+ * This file demonstrates how to request property information.  
+ * 
+ * Without the id query parameter, the example outputs a list of live properties for the first brand on the target api.
+ * 
+ * With the id, the example demonstrates how to request standard property information.
  */
-
-// Include the connection
 require_once __DIR__ . '/../creating-a-new-connection.php';
 
 try {
@@ -27,9 +22,9 @@ try {
         <p><?php echo $property->getAddress(); ?></p>
         <p>Sleeps <?php echo $property->getSleeps(); ?></p>
         <p><?php echo $property->getBedrooms(); ?> bedrooms</p>
-        
+
         <?php
-        
+
             $today = new \DateTime(
                 filter_input(INPUT_GET, 'fromdate') ? filter_input(INPUT_GET, 'fromdate') : 'first day of next month'
             );
@@ -52,19 +47,19 @@ try {
                         $cell
                     );
                 }
-                
+
                 return $cell;
             });
             echo (string) $cal;
             $next = new \DateTime($cal->getTargetMonth()->format('Y-m-d'));
             $next->add(new \DateInterval('P1M'));
-            
+
             echo sprintf(
                 '<p><a href="?id=%s&fromdate=%s">Next</a></p>',
                 $property->getId(),
                 $next->format('Y-m-d')
             );
-        
+
             if ($property->getBrandings()->first() 
                 && !filter_input(INPUT_GET, 'fromdate')
             ) {
@@ -72,7 +67,7 @@ try {
                 ?>
         <p>Marketing Brand: <?php echo $marketingBrand->getMarketingbrand()->getName(); ?></p>
                 <?php
-                
+
                 $collection = $marketingBrand->getBrochures();
                 include __DIR__ . '/../collection.php';
 
@@ -82,7 +77,7 @@ try {
                 $collection = $marketingBrand->getGroupingvalues();
                 include __DIR__ . '/../collection.php';
             }
-        
+
             if (!filter_input(INPUT_GET, 'fromdate') && $property->getDocuments()->count() > 0) {
                 ?><p>Documents limited to 2</p><?php
                 $collection = $property->getDocuments()->findBy(function($ele) {
@@ -123,14 +118,14 @@ try {
                 $collection = $property->getRooms();
                 include __DIR__ . '/../collection.php';
             }
-        
+
     } else {
         $brandings = \tabs\apiclient\Collection::factory(
             'branding',
             new tabs\apiclient\Branding()
         );
         $brandings->fetch();
-        
+
         // Search for all live properties on the first branding found
         $collection = tabs\apiclient\Collection::factory(
             'property',
@@ -149,4 +144,7 @@ try {
     echo $e->getMessage();
 }
 
+
 require_once __DIR__ . '/../finally.php';
+
+echo '<a href="../root/index.php">Next example ></a>';

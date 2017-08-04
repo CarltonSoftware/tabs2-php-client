@@ -5,6 +5,7 @@
  * 
  * This file documents how to read the web hook responses from tabs2.
  */
+require_once __DIR__ . '/../creating-a-new-connection.php';
 
 $snsFullMessage = \tabs\apiclient\WebHook::detectRequestBody();
 if ($snsFullMessage && isset($snsFullMessage['SubscribeURL'])) {
