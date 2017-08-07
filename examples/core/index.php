@@ -1,24 +1,15 @@
 <?php
 
 /**
- * This file documents how to request a lists of information from the utility
- * endpoint in the Plato API.
- *
- * PHP Version 5.5
+ * @name Accessing core data
  * 
- * @category  API_Client
- * @package   Tabs
- * @author    Carlton Software <support@carltonsoftware.co.uk>
- * @copyright 2016 Carlton Software
- * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
- * @link      http://www.carltonsoftware.co.uk
+ * Much of the data in tabs2 has dependencies on common data such as Branding, Booking Brand or Mimetype for example.
+ * 
+ * Below is a list of some of the common data types in tabs2.  It is a good idea to cache these to reduce your api calls.
  */
-
-// Include the connection
 require_once __DIR__ . '/../creating-a-new-connection.php';
-
 try {
-    
+
     $lists = array(
         'AttributeGroup',
         'Attribute',
@@ -35,6 +26,7 @@ try {
         'Branding',
         'Country',
         'DescriptionType',
+        'DocumentTag',
         'Grouping',
         'InstructionType',
         'Language',
@@ -51,9 +43,9 @@ try {
         'Vatband',
         'WebsiteSection'
     );
-    
+
     foreach ($lists as $list) {
-        
+
         if ($list == 'Attribute') {
             $collection = \tabs\apiclient\Collection::factory(
                 'attribute',
@@ -68,7 +60,7 @@ try {
                         'Number' => new \tabs\apiclient\AttributeNumber
                     )
                 );
-            
+
         } else {
             $ns = "\\tabs\\apiclient\\$list";
             $obj = new $ns;
@@ -77,7 +69,7 @@ try {
                 $obj
             );
         }
-        
+
         $collection->fetch();
 
         include __DIR__ . '/../collection.php';

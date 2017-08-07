@@ -26,6 +26,8 @@ namespace tabs\apiclient;
  * @method Document  setDescription(string $desc)  Set the description
  * @method Document  setWeight(integer $weight)    Set the weight
  * @method Document  setPrivate(boolean $boolean)  Set the visibility flag
+ * 
+ * @method StaticCollection getTags() Returns the document tags
  */
 class Document extends \tabs\apiclient\FileBuilder
 {
@@ -77,6 +79,13 @@ class Document extends \tabs\apiclient\FileBuilder
      * @var Mimetype 
      */
     protected $mimetype;
+    
+    /**
+     * Document tags
+     * 
+     * @var StaticCollection
+     */
+    protected $tags;
 
     // -------------------------- Public Functions -------------------------- //
     
@@ -90,6 +99,10 @@ class Document extends \tabs\apiclient\FileBuilder
     public function __construct($id = null)
     {
         $this->timeadded = new \DateTime();
+        $this->tags = StaticCollection::factory(
+            '',
+            new DocumentTag()
+        );
         
         parent::__construct($id);
     }

@@ -3,7 +3,7 @@
 // Include the connection
 require_once __DIR__ . '/../creating-a-new-connection.php';
 
-$class = new tabs\apiclient\actor\enquiry\Property();
+$class = new tabs\apiclient\DocumentTag();
 
 $ref = new ReflectionClass($class);
 $properties = array();

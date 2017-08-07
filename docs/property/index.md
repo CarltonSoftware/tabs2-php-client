@@ -139,3 +139,8 @@ With the id, the example demonstrates how to request standard property informati
         echo $e->getMessage();
     }
     ```
+
+* [Add a document to a property](add-document.html)
+* [Add an image to a property](add-image.html)
+* [Add a note to a property](add-note.html)
+* [Filtering properties](filtering.html)

@@ -170,8 +170,6 @@ class Branding extends Builder
             'marketingbrand' => $this->getMarketingbrand()->getId(),
             'bookingbrand' => $this->getBookingbrand()->getId(),
             'lettingincomevatband' => $this->getLettingincomevatband()->getId(),
-            'headertemplateelement' => $this->getHeadertemplateelement(),
-            'footertemplateelement' => $this->getFootertemplateelement(),
             'bacsoutputtype' => $this->getBacsoutputtype(),
             'bacssettings' => $this->getBacssettings(),
         );

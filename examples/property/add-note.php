@@ -6,7 +6,6 @@
  * In this example we're going to add a note to a property.
  */
 require_once __DIR__ . '/../creating-a-new-connection.php';
-
 try {
 
     if ($id = filter_input(INPUT_GET, 'id')) {
@@ -49,7 +48,4 @@ try {
     echo $e->getMessage();
 }
 
-
 require_once __DIR__ . '/../finally.php';
-
-echo '<a href="../property/index.php">Next example ></a>';

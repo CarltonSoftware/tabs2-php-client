@@ -54,7 +54,6 @@ gulp.task('buildexamples', function() {
                     var afterfirstheader = false;
                     var header = [];
                     var code = [];
-                    var filename = basename(file);
                     var dir = file.split('/');
                     dir.shift();
                     dir.pop();
@@ -76,11 +75,11 @@ gulp.task('buildexamples', function() {
                             }
                             
                             var check = function(index) {
-                                return (tokens[k] && tokens[index].type === 'paragraph');
+                                return (tokens[index] && tokens[index].type === 'paragraph');
                             };
                             
                             if (check(k)) {
-                                while (tokens[k].type === 'paragraph') {
+                                while (check(k)) {
                                     header.push(tokens[k].text);
                                     k++;
                                     if (check(k)) {
@@ -93,7 +92,13 @@ gulp.task('buildexamples', function() {
                             && token.type
                             && token.type === 'code'
                         ) {
-                            code = code.concat(token.text.replace('```', '').replace('```', '').split('\n'));
+                            var c = token.text.split('\n');
+                            for (var i = c.length-1; i >= 0; i--) {
+                                if (c[i] === '```') {
+                                    c.splice(i, 1);
+                                }
+                            }
+                            code = code.concat(c);
                         }
                     });
 
@@ -114,11 +119,11 @@ gulp.task('buildexamples', function() {
                         lines.push('');
                         lines.push('require_once __DIR__ . \'/' + '../'.repeat(dir.length) + 'finally.php\';');
                         
-                        if (files[index + 1]) {
-                            var next = '../'.repeat(dir.length) + getPhpFileName(files[index + 1]).replace('examples/', '');
-                            lines.push('');
-                            lines.push('echo \'<a href="' + next + '">Next example ></a>\';');
-                        }
+//                        if (files[index + 1]) {
+//                            var next = '../'.repeat(dir.length) + getPhpFileName(files[index + 1]).replace('examples/', '');
+//                            lines.push('');
+//                            lines.push('echo \'<a href="' + next + '">Next example ></a>\';');
+//                        }
                         
                         fs.writeFileSync(phpfile, lines.join("\n"));
                         writeFile(files, index + 1);

@@ -154,6 +154,26 @@ class Pagination extends Base
     }
     
     /**
+     * Remove a group
+     * 
+     * @param integer $group Group
+     * 
+     * @return \tabs\apiclient\Pagination
+     * 
+     * @throws \RuntimeException
+     */
+    public function removeGroup($group)
+    {
+        if (isset($this->filters[$group])) {
+            unset($this->filters[$group]);
+        } else {
+            throw new \RuntimeException('Group does not exist');
+        }
+        
+        return $this;
+    }
+    
+    /**
      * Total setter
      * 
      * @param integer $total Total

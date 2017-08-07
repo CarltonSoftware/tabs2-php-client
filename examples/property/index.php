@@ -10,7 +10,6 @@
  * With the id, the example demonstrates how to request standard property information.
  */
 require_once __DIR__ . '/../creating-a-new-connection.php';
-
 try {
     if ($id = filter_input(INPUT_GET, 'id')) {
 
@@ -144,7 +143,4 @@ try {
     echo $e->getMessage();
 }
 
-
 require_once __DIR__ . '/../finally.php';
-
-echo '<a href="../root/index.php">Next example ></a>';

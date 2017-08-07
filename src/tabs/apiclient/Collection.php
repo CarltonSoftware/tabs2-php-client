@@ -130,7 +130,7 @@ class Collection extends StaticCollection
      * @param integer  $group Filter group (used for OR filtering if greater 
      *                        than zero)
      * 
-     * @return \tabs\apiclient\FilterCollection
+     * @return Collection
      */
     public function addFilter($key, $value, $group = 0)
     {
