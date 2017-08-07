@@ -1,46 +1,48 @@
 # Adding a note to a property
 In this example we're going to add a note to a property.
 
-    ```
-    try {
+```php
 
-        if ($id = filter_input(INPUT_GET, 'id')) {
+try {
 
-            $property = new \tabs\apiclient\Property($id);
+    if ($id = filter_input(INPUT_GET, 'id')) {
 
-            // Get the clients tabs user
-            $me = tabs\apiclient\client\Client::getClient()->whoami();
-            $note = new \tabs\apiclient\Note();
+        $property = new \tabs\apiclient\Property($id);
 
-            // Create a note type
-            $noteType = new tabs\apiclient\Notetype();
-            $noteType->setDescription('A normal bog standard note.')
-                ->setType('normal');
+        // Get the clients tabs user
+        $me = tabs\apiclient\client\Client::getClient()->whoami();
+        $note = new \tabs\apiclient\Note();
 
-            // And a note text
-            $noteText = new \tabs\apiclient\note\Notetext();
+        // Create a note type
+        $noteType = new tabs\apiclient\Notetype();
+        $noteType->setDescription('A normal bog standard note.')
+            ->setType('normal');
 
-            $noteText->setText('Lorem ipsum dolor sit amet')
-                ->setCreatedby($me);
+        // And a note text
+        $noteText = new \tabs\apiclient\note\Notetext();
 
-            // Populate the note
-            $note->setSubject('Adipiscing rhubarb')
-                ->setCreatedby($me)
-                ->setNotetype($noteType)
-                ->getNotetexts()->addElement($noteText);
+        $noteText->setText('Lorem ipsum dolor sit amet')
+            ->setCreatedby($me);
 
-            $note->create();
-            $noteText->create();
+        // Populate the note
+        $note->setSubject('Adipiscing rhubarb')
+            ->setCreatedby($me)
+            ->setNotetype($noteType)
+            ->getNotetexts()->addElement($noteText);
 
-            // Create the property note
-            $pNote = new \tabs\apiclient\note\PropertyNote();
-            $pNote->setNote($note)->setParent($property)->create();
+        $note->create();
+        $noteText->create();
 
-            // Redirect back to the property page
-            header('Location: index.php?id=' . $property->getId());
+        // Create the property note
+        $pNote = new \tabs\apiclient\note\PropertyNote();
+        $pNote->setNote($note)->setParent($property)->create();
 
-        }
-    } catch(Exception $e) {
-        echo $e->getMessage();
+        // Redirect back to the property page
+        header('Location: index.php?id=' . $property->getId());
+
     }
-    ```
+} catch(Exception $e) {
+    echo $e->getMessage();
+}
+
+```

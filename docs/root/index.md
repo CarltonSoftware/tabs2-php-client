@@ -1,13 +1,15 @@
 # Getting the root endpoint
 This file documents how to read the root endpoint.
 
-    ```
-    try {
-        $root = tabs\apiclient\Root::fetch();
+```php
 
-        var_dump($root);
+try {
+    $root = tabs\apiclient\Root::fetch();
 
-    } catch(Exception $e) {
-        echo $e->getMessage();
-    }
-    ```
+    var_dump($root);
+
+} catch(Exception $e) {
+    echo $e->getMessage();
+}
+
+```

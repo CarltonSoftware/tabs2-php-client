@@ -46,12 +46,15 @@ gulp.task('buildexamples', function() {
             return dest.join('/');
         };
         
+        console.log(files);
+        
         function writeFile(files, index) {
             if (files[index]) {
                 var file = files[index];
                 fs.readFile(file, "utf-8", function(err, _data) {
                     var tokens = marked.lexer(_data, {});
                     var afterfirstheader = false;
+                    var codemode = false;
                     var header = [];
                     var code = [];
                     var dir = file.split('/');
@@ -75,7 +78,10 @@ gulp.task('buildexamples', function() {
                             }
                             
                             var check = function(index) {
-                                return (tokens[index] && tokens[index].type === 'paragraph');
+                                return (tokens[index] 
+                                    && tokens[index].type === 'paragraph'
+                                    && tokens[index].text.substring(0, 3) !== '```'
+                                );
                             };
                             
                             if (check(k)) {
@@ -88,13 +94,25 @@ gulp.task('buildexamples', function() {
                                 }
                             }
                         }
+                        
                         if (token 
-                            && token.type
-                            && token.type === 'code'
+                            && token.text
+                            && token.text.substring(0, 3) === '```'
                         ) {
+                            if (!codemode) {
+                                codemode = true;
+                            } else {
+                                codemode = false;
+                            }
+                        }
+                        
+                        if (codemode && token.text) {
                             var c = token.text.split('\n');
                             for (var i = c.length-1; i >= 0; i--) {
                                 if (c[i] === '```') {
+                                    c.splice(i, 1);
+                                }
+                                if (c[i] === '```php') {
                                     c.splice(i, 1);
                                 }
                             }
@@ -112,7 +130,9 @@ gulp.task('buildexamples', function() {
                             lines.push(' * ' + l);
                         });
                         lines.push(' */');
+                        lines.push('');
                         lines.push('require_once __DIR__ . \'/' + '../'.repeat(dir.length) + 'creating-a-new-connection.php\';');
+                        lines.push('');
                         code.forEach(function(c) {
                             lines.push(c);
                         });
@@ -126,8 +146,8 @@ gulp.task('buildexamples', function() {
 //                        }
                         
                         fs.writeFileSync(phpfile, lines.join("\n"));
-                        writeFile(files, index + 1);
                     }
+                    writeFile(files, index + 1);
                 });
             }
         }

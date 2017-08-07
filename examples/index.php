@@ -9,10 +9,11 @@
  * 
  * Once installed you should be able to load tabs2 api data using the following snippet.
  */
+
 require_once __DIR__ . '/creating-a-new-connection.php';
+
 $prop = new \tabs\apiclient\Property(1);
 $prop->get();
-
 echo $prop->getName();
 
 require_once __DIR__ . '/finally.php';

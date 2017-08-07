@@ -5,12 +5,14 @@ See the [README.md](https://github.com/CarltonSoftware/tabs2-php-client/blob/dev
 
 Once installed you should be able to load tabs2 api data using the following snippet.
 
-    ```
-    $prop = new \tabs\apiclient\Property(1);
-    $prop->get();
+```php
 
-    echo $prop->getName();
-    ```
+$prop = new \tabs\apiclient\Property(1);
+$prop->get();
+
+echo $prop->getName();
+
+```
 
 * [Read/Write Property data](property)
 * [Read/Write Actor data](actor)

@@ -3,70 +3,80 @@ In this example we're going to filter properties by using tabs2's filter syntax.
 
 You will find all of the filter keywords in the [root](../root) endpoint.
 
-    ```
-    try {
+```php
 
-        // First example, fetch a list of live properties
+try {
 
-        // Get a list of brandings and statuses
-        $brandings = \tabs\apiclient\Collection::factory(
-            'branding',
-            new tabs\apiclient\Branding()
-        );
-        $brandings->fetch();
-        $statuses = \tabs\apiclient\Collection::factory(
-            'status',
-            new tabs\apiclient\Status()
-        );
-        $statuses->fetch();
+    // First example, fetch a list of live properties
 
-        // Search for all live properties on the first branding found
-        $collection = tabs\apiclient\Collection::factory(
-            'property',
-            new \tabs\apiclient\Property
-        );
-        $collection->addFilter('brandingid', $brandings->first()->getId())
-            ->addFilter('brandingstatusid', 1);
-        $collection->fetch();
+    // Get a list of brandings and statuses
+    $brandings = \tabs\apiclient\Collection::factory(
+        'branding',
+        new tabs\apiclient\Branding()
+    );
+    $brandings->fetch();
+    $statuses = \tabs\apiclient\Collection::factory(
+        'status',
+        new tabs\apiclient\Status()
+    );
+    $statuses->fetch();
 
-    } catch(Exception $e) {
-        echo $e->getMessage();
-    }
-    ```
+    // Search for all live properties on the first branding found
+    $collection = tabs\apiclient\Collection::factory(
+        'property',
+        new \tabs\apiclient\Property
+    );
+    $collection->addFilter('brandingid', $brandings->first()->getId())
+        ->addFilter('brandingstatusid', 1);
+    $collection->fetch();
 
-    ```
-    try {
+} catch(Exception $e) {
+    echo $e->getMessage();
+}
 
-        // Second example, we'll filter the collection again but search for
-        // properties that sleep 2 or more and which accept pets
+```
 
-        $collection->addFilter('sleeps', '>2')
-            ->addFilter('maximumpets', '>1');
-        $collection->fetch();
 
-    } catch(Exception $e) {
-        echo $e->getMessage();
-    }
-    ```
 
-    ```
-    try {
+```php
 
-        // Third example, we'll filter the collection again but search for
-        // either the first boolean attribute is ticked or the second is ticked.
-        // This demonstrates the OR based search functionality.
+try {
 
-        $collection->addFilter('sleeps', '>2')
-            ->addFilter('maximumpets', '>1')
-            ->addFilter('attribute1', 'true')
-            ->addFilter('brandingid', $brandings->first()->getId(), 1)
-            ->addFilter('brandingstatusid', 1, 1)
-            ->addFilter('sleeps', '>2', 1)
-            ->addFilter('maximumpets', '>1', 1)
-            ->addFilter('attribute2', 'true', 1);
-        $collection->fetch();
+    // Second example, we'll filter the collection again but search for
+    // properties that sleep 2 or more and which accept pets
 
-    } catch(Exception $e) {
-        echo $e->getMessage();
-    }
-    ```
+    $collection->addFilter('sleeps', '>2')
+        ->addFilter('maximumpets', '>1');
+    $collection->fetch();
+
+} catch(Exception $e) {
+    echo $e->getMessage();
+}
+
+```
+
+
+
+```php
+
+try {
+
+    // Third example, we'll filter the collection again but search for
+    // either the first boolean attribute is ticked or the second is ticked.
+    // This demonstrates the OR based search functionality.
+
+    $collection->addFilter('sleeps', '>2')
+        ->addFilter('maximumpets', '>1')
+        ->addFilter('attribute1', 'true')
+        ->addFilter('brandingid', $brandings->first()->getId(), 1)
+        ->addFilter('brandingstatusid', 1, 1)
+        ->addFilter('sleeps', '>2', 1)
+        ->addFilter('maximumpets', '>1', 1)
+        ->addFilter('attribute2', 'true', 1);
+    $collection->fetch();
+
+} catch(Exception $e) {
+    echo $e->getMessage();
+}
+
+```
