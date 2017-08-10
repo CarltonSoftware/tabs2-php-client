@@ -132,13 +132,10 @@ try {
 
 ```
 
-* [Creating a new booking](creating-a-booking.html)
 * [Adding a customer](add-customer.html)
-* [Adding a extra](add-extra.html)
-* [Removing an extra](remove-extra.html)
-* [Adding guests to a booking](add-guests.html)
-* [Adding a sagepay payment](create-sagepaypayment.html)
-* [Converting to a provisional booking](provisional-booking.html)
-* [Removing a security deposit](remove-sd.html)
-* [Performing a booking enquiry](booking-enquiry.html)
-* [Cancelling a booking](cancel-booking.html)
+* [Adding a phone number](add-phonenumber.html)
+* [Adding a email address](add-email.html)
+* [Adding a document](add-document.html)
+* [Recording a enquiry](add-enquiry.html)
+* [Adding a note](add-note.html)
+* [Adding a payment](add-payment.html)
