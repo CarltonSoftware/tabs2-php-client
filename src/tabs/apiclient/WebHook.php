@@ -33,15 +33,15 @@ class WebHook extends Base
     public static function subscribe($url, $type = 'property')
     {
         try {
-            $req = \tabs\apiclient\client\Client::getClient()->get(
+            $res = \tabs\apiclient\client\Client::getClient()->get(
                 'webhook/subscribe/' . strtolower($type),
                 array(
                     'url' => $url
                 )
             );
 
-            if ($req->getStatusCode() != 200) {
-                throw new Exception($req, (string) $req->getBody());
+            if ($res->getStatusCode() != 200) {
+                throw new Exception($req, (string) $res->getBody());
             }
         } catch (\GuzzleHttp\Exception\RequestException $ex) {
             throw new Exception(null, $ex->getMessage());
@@ -59,7 +59,7 @@ class WebHook extends Base
     {
         $data = json_decode(file_get_contents('php://input'), true);
         if (JSON_ERROR_NONE !== json_last_error() || !is_array($data)) {
-            throw new Exception('Invalid POST data.');
+            throw new Exception(null, 'Invalid POST data.');
         }
 
         return $data;
