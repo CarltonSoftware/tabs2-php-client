@@ -1,19 +1,13 @@
 <?php
 
 /**
- * This file documents how to do a booking enquiry
- *
- * PHP Version 5.5
+ * @name Performing a booking enquiry
  * 
- * @category  API_Client
- * @package   Tabs
- * @author    Carlton Software <support@carltonsoftware.co.uk>
- * @copyright 2013 Carlton Software
- * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
- * @link      http://www.carltonsoftware.co.uk
+ * This file documents how to do a booking enquiry.  
+ * 
+ * You can also add adults, children, infants and pets to the enquiry (using the respective setter methods) to get a more specific price.
  */
 
-// Include the connection
 require_once __DIR__ . '/../creating-a-new-connection.php';
 
 try {
@@ -29,22 +23,20 @@ try {
             ->setTodate($to)
             ->setPropertyBranding(array('id' => $pbi));
         $be->get();
-        
-        if ($be->getBookingok() == true && $be->getWebbookingok() == true) {
-            echo '<p>Basic price:  ' . $be->getBasicPrice() . ' ' . $be->getCurrency()->getCode() . '</p>';
-            echo '<p>Included Extras price:  ' . $be->getIncludedExtrasPrice() . ' ' . $be->getCurrency()->getCode() . '</p>';
-            echo '<p>Total price:  ' . $be->getTotalPrice() . ' ' . $be->getCurrency()->getCode() . '</p>';
-            echo sprintf(
-                '<p><a href="create-booking.php?fromdate=%s&propertybrandingid=%s">Create new booking</a></p>',
-                $be->getFromdate()->format('Y-m-d'),
-                $be->getPropertyBranding()->getId()
-            );
-        } else {
-            echo (string) $be->getErrors()->first();
-        }
-        
+    if ($be->getBookingok() == true && $be->getWebbookingok() == true) {
+        echo '<p>Basic price:  ' . $be->getBasicPrice() . ' ' . $be->getCurrency()->getCode() . '</p>';
+        echo '<p>Included Extras price:  ' . $be->getIncludedExtrasPrice() . ' ' . $be->getCurrency()->getCode() . '</p>';
+        echo '<p>Total price:  ' . $be->getTotalPrice() . ' ' . $be->getCurrency()->getCode() . '</p>';
+        echo sprintf(
+            '<p><a href="create-booking.php?fromdate=%s&propertybrandingid=%s">Create new booking</a></p>',
+            $be->getFromdate()->format('Y-m-d'),
+            $be->getPropertyBranding()->getId()
+        );
+    } else {
+        echo (string) $be->getErrors()->first();
     }
 
+}
 } catch(Exception $e) {
     echo $e->getMessage();
 }

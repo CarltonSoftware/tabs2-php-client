@@ -1,12 +1,8 @@
-<?php
+# Removing an extra
 
-/**
- * @name Removing an extra
- * 
- * This file documents how to remove an extra from a booking.
- */
+This file documents how to remove an extra from a booking.
 
-require_once __DIR__ . '/../creating-a-new-connection.php';
+```php
 
 try {
     if (filter_input(INPUT_GET, 'id')
@@ -18,11 +14,14 @@ try {
         $extra->get();
         $extra->setQuantity(0);
         $extra->update();
-    header('Location: index.php?id=' . $b->getId());
-    exit();
-}
+        
+        header('Location: index.php?id=' . $b->getId());
+        exit();
+    }
+
 } catch(Exception $e) {
     echo $e->getMessage();
 }
+    
 
-require_once __DIR__ . '/../finally.php';
+```

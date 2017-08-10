@@ -1,19 +1,11 @@
 <?php
 
 /**
- * This file documents how to remove a security deposit from a booking
- *
- * PHP Version 5.5
+ * @name Removing a security deposit
  * 
- * @category  API_Client
- * @package   Tabs
- * @author    Carlton Software <support@carltonsoftware.co.uk>
- * @copyright 2017 Carlton Software
- * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
- * @link      http://www.carltonsoftware.co.uk
+ * This file documents how to remove a security deposit from a booking.
  */
 
-// Include the connection
 require_once __DIR__ . '/../creating-a-new-connection.php';
 
 try {
@@ -21,18 +13,16 @@ try {
         && filter_input(INPUT_GET, 'bsid')
     ) {
         $b = new tabs\apiclient\Booking(filter_input(INPUT_GET, 'id'));
-        
-        $bs = new \tabs\apiclient\booking\SecurityDeposit(filter_input(INPUT_GET, 'bsid'));
-        $bs->setParent($b);
-        
-        $bs->get();
-        
-        $bs->delete();
-        
-        header('Location: index.php?id=' . $b->getId());
-        exit();
-    }
+    $bs = new \tabs\apiclient\booking\SecurityDeposit(filter_input(INPUT_GET, 'bsid'));
+    $bs->setParent($b);
 
+    $bs->get();
+
+    $bs->delete();
+
+    header('Location: index.php?id=' . $b->getId());
+    exit();
+}
 } catch(Exception $e) {
     echo $e->getMessage();
 }

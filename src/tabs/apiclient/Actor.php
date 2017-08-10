@@ -400,7 +400,7 @@ abstract class Actor extends Builder
     {
         foreach ($this->getContactdetails() as $cd) {
             if ($cd instanceof PhoneNumber 
-                && $cd->getSubscribernumber() == 'number'
+                && $cd->getSubscribernumber() == $number
             ) {
                 // Dont add a number if it already exists
                 return $this;

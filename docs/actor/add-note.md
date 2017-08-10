@@ -1,0 +1,42 @@
+# Adding a note to an actor
+
+This file documents how add a note to a customer using the Plato API.
+
+```php
+
+try {
+
+    if ($customerId = filter_input(INPUT_GET, 'id')) {
+
+        $customer = new \tabs\apiclient\Customer($customerId);
+        $customer->get();
+
+        $note = new \tabs\apiclient\Note();
+
+        $noteType = new tabs\apiclient\Notetype();
+        $noteType->setDescription('A normal bog standard note.')
+            ->setType('normal');
+
+        $noteText = new \tabs\apiclient\note\Notetext();
+
+        $noteText->setText('Lorem ipsum dolor sit amet')
+            ->setCreatedby($customer);
+
+        $note->setSubject('Adipiscing rhubarb')
+            ->setCreatedby($customer)
+            ->setNotetype($noteType)
+            ->getNotetexts()->addElement($noteText);
+        
+        $note->create();
+        $noteText->create();
+        $actorNote = new \tabs\apiclient\note\ActorNote();
+        $actorNote->setNote($note)->setParent($customer)->create();
+        
+        header('Location: index.php?id=' . $customer->getId());
+
+    }
+} catch(Exception $e) {
+    echo $e->getMessage();
+}
+
+```

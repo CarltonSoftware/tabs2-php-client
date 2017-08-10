@@ -1,132 +1,132 @@
 <?php
 
 /**
- * @name Accessing booking data
+ * @name Accessing customer data
  * 
- * This example details some of the basic properties on a booking.
- * 
- * The example lists links to perform some common tasks you might want to do such as creating a provisional booking, cancelling it and adding a customer.
+ * This file documents how to request customer data.
  */
 
 require_once __DIR__ . '/../creating-a-new-connection.php';
 
 try {
-    if ($id = filter_input(INPUT_GET, 'id')) {
-    $booking = new \tabs\apiclient\Booking($id);
-    $booking->get();
+if ($id = filter_input(INPUT_GET, 'id')) {
+    $customer = new tabs\apiclient\Customer($id);
+    $customer->get();
 
-    ?>
-        <h2>Booking: <?php echo $booking->getId(); ?> <a href="<?php echo $booking->getTabs2Url(); ?>" target="_blank">view</a></h2>
-        <p>From: <?php echo $booking->getFromdate()->format('Y-m-d'); ?></p>
-        <p>To: <?php echo $booking->getTodate()->format('Y-m-d'); ?></p>
-        <p>Booked: <?php echo $booking->getBookeddatetime()->format('Y-m-d H:i:s'); ?></p>
-        <p>Property: <?php echo $booking->getProperty()->getName(); ?></p>
-        <p>Status: <?php echo $booking->getStatus(); ?>
-    <?php
-        if (!$booking->isProvisional() && !$booking->isCancelled()) {
-            ?>
-        <p><a href="provisional-booking.php?id=<?php echo $booking->getId(); ?>">Create provisional booking</a></p>
-            <?php
-        }
+    echo '<h3>Customer</h3>';
+    echo sprintf('<p>%s</p>', htmlspecialchars((string) $customer));
 
-        if (!$booking->isConfirmed() && $booking->isProvisional()) {
-            ?>
-        <p>Deposit due: <?php echo $booking->getProvisionalbooking()->getDepositduedate()->format('d F Y'); ?></p>
-        <p><a href="confirm-booking.php?id=<?php echo $booking->getId(); ?>">Confirm booking</a></p>
-            <?php
-        }
+    if ($customer->getBankaccounts()->count() > 0) {
+        $collection = $customer->getBankaccounts();
 
-        if (!$booking->isCancelled()) {
-            ?>
-        <p><a href="cancel-booking.php?id=<?php echo $booking->getId(); ?>">Cancel booking</a></p>
-            <?php
-        }
+        include __DIR__ . '/../collection.php';
+    }
 
-        if ($booking->getCustomers()->count() == 0) {
-            ?>
-        <p><a href="add-customer.php?id=<?php echo $booking->getId(); ?>">Add booking customer</a></p>
-            <?php
-        } else {
-            ?>
-        <p>Customer: <?php echo $booking->getCustomers()->first()->getCustomer()->getFullname(); ?>
-            <?php
-        }
-
-        if ($booking->getGuests()->count() == 0) {
-            ?>
-        <p><a href="add-guests.php?id=<?php echo $booking->getId(); ?>">Add booking guest</a></p>
-            <?php
-        } else {                
-            $collection = $booking->getGuests();
-            include __DIR__ . '/../collection.php';
-        }
-
-        ?>
-        <p>Total paid: £<?php echo $booking->getTotalPaid(); ?></p>
-        <?php
-        if ($booking->getTotalOutstanding() > 0) {
-            ?>
-        <p><a href="create-sagepayment.php?id=<?php echo $booking->getId(); ?>">Add Payment</a></p>
-            <?php
-        }
-
-        echo '<h5>Price</h5>';
-        echo '<p>Brochure: £' . $booking->getBrochurePrice();
-        $extras = $booking->getExtras()->findBy(function($ele) {
-            return !$ele->getConfiguration()->isIncluded();
-        });
-        if ($extras->count() > 0) {
-            foreach ($extras as $extra) {
-                echo sprintf(
-                    '<p>%s: %s x £%s <a href="remove-extra.php?id=%s&beid=%s">Remove</a></p>',
-                    $extra->getExtra()->getDescription(),
-                    $extra->getQuantity(),
-                    $extra->getUnitprice(),
-                    $booking->getId(),
-                    $extra->getId()
-                );
-            }
-        }
-        echo '<p>Total: £' . $booking->getTotalPrice();
-
-        if ($booking->getSecuritydeposits()->count() > 0) {
+    echo '<h3>Notes</h3>';
+    if ($customer->getNotes()->count() > 0) {
+        foreach ($customer->getNotes() as $note) {                
             echo sprintf(
-                '<p>Security deposit: £%s <a href="remove-sd.php?id=%s&bsid=%s">Remove</a> <a href="toggle-waiver.php?id=%s">Toggle Waiver</a></p>',
-                $booking->getSecuritydeposits()->first()->getAmount(),
-                $booking->getId(),
-                $booking->getSecuritydeposits()->first()->getId(),
-                $booking->getId()
-            );
-        } else if ($booking->getProperty()->getSecuritydeposits()->count() > 0) {
-            echo sprintf(
-                '<p><a href="toggle-waiver.php?id=%s">Toggle Waiver</a></p>',
-                $booking->getId()
+                '<p>%s</p>',
+                $note->getNote()
             );
         }
-
-        // Get the branding extras and output list of available
-        $extras = $booking->getBranding()->getExtras();
-        if ($extras->count() > 0) {
-            echo '<h5>Available extras</h5>';
-            foreach ($extras as $extra) {
-                echo sprintf(
-                    '<p>%s <a href="add-extra.php?id=%s&eid=%s">Add</a></p>',
-                    $extra->getExtra()->getDescription(),
-                    $booking->getId(),
-                    $extra->getExtra()->getId()
-                );
-            }
-        }
-} else {
-
-    $collection = tabs\apiclient\Collection::factory(
-        'booking',
-        new \tabs\apiclient\Booking
+    }
+    echo sprintf(
+        '<p><a href="add-note.php?id=%s">Add new note</a></p>',
+        $customer->getId()
     );
+
+    if ($customer->getDocuments()->count() > 0) {
+        echo '<h3>Documents</h3>';
+        foreach ($customer->getDocuments()->getElements() as $doc) {                
+            echo sprintf(
+                '<p><a href="../document/viewing-a-document.php?id=%s">%s</a></p>',
+                $doc->getDocument()->getId(),
+                $doc->getDocument()->getName()
+            );
+        }
+    }
+    echo sprintf(
+        '<p><a href="add-document.php?id=%s">Add new document</a></p>',
+        $customer->getId()
+    );
+
+    if ($customer->getContactdetails()->count() > 0) {
+        echo '<h3>Contact Details</h3>';
+
+        $collection = $customer->getContactdetails();
+
+        include __DIR__ . '/../collection.php';
+    }
+    echo sprintf(
+        '<p><a href="add-email.php?id=%s">Add new email</a></p>',
+        $customer->getId()
+    );
+    echo sprintf(
+        '<p><a href="add-phonenumber.php?id=%s">Add new phone number</a></p>',
+        $customer->getId()
+    );
+
+    if ($customer->getPayments()->count() > 0) {
+        echo '<h3>Payments</h3>';
+
+        $collection = $customer->getPayments();
+
+        include __DIR__ . '/../collection.php';
+    }
+    echo sprintf(
+        '<p><a href="add-payment.php?id=%s">Add payment</a></p>',
+        $customer->getId()
+    );
+
+    echo sprintf(
+        '<p><a href="add-enquiry.php?id=%s">Add enquiry</a></p>',
+        $customer->getId()
+    );
+
+    $bookings = $customer->getBookings();
+    if ($bookings->getTotal() > 0) {
+        ?>
+        <h3>Bookings</h3>
+        <table>
+            <tr>
+                <th>Ref</th>
+                <th>Status</th>
+                <th>From</th>
+                <th>To</th>
+            </tr>
+            <?php
+                foreach ($bookings as $booking) {
+                    echo sprintf(
+                        '<tr><td><a href="../booking/index.php?id=%u">%s</a></td>' .
+                        '<td>%s</td><td>%s</td><td>%s</td></tr>',
+                        $booking->getId(),
+                        $booking->getBookref(),
+                        $booking->getStatus(),
+                        $booking->getFromdate()->format('Y-m-d'),
+                        $booking->getTodate()->format('Y-m-d')
+                    );
+                }
+            ?>
+        </table>
+        <?php
+    }
+
+} else {
+    // Create a customer collection
+    $collection = tabs\apiclient\Collection::factory(
+        'customer',
+        new \tabs\apiclient\Customer
+    );
+
+    // Filter for customers with the name of 'Smith'
     $collection->setLimit(filter_input(INPUT_GET, 'limit'))
         ->setPage(filter_input(INPUT_GET, 'page'))
+        ->addFilter('inactive', false)
+        ->addFilter('surname', 'Smith')
         ->fetch();
 
+    // Output
     include __DIR__ . '/../collection.php';
 }
 } catch(Exception $e) {
