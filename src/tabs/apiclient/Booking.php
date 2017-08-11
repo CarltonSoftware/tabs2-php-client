@@ -989,6 +989,23 @@ class Booking extends Builder
         
         return $be;
     }
+    
+    /**
+     * Import a sagepay payment into this booking.  Note, you will need to
+     * recall the booking object to see these changes.
+     * 
+     * @param \tabs\apiclient\SagePayPayment $payment
+     * 
+     * @return \tabs\apiclient\Booking
+     */
+    public function importSagePayPayment(SagePayPayment $payment)
+    {        
+        \tabs\apiclient\client\Client::getClient()->put(
+            'sagepaypayment/' . $payment->getId() . '/booking/' . $this->getId()
+        );
+
+        return $this;
+    }
 
     // -------------------------- Private Functions ------------------------- //
     
