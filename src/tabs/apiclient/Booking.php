@@ -1001,7 +1001,7 @@ class Booking extends Builder
     public function importSagePayPayment(SagePayPayment $payment)
     {        
         \tabs\apiclient\client\Client::getClient()->put(
-            'sagepaypayment/' . $payment->getId() . '/booking/' . $this->getId()
+            'sagepaypayment/' . $payment->getId() . '/import/' . $this->getId()
         );
 
         return $this;
