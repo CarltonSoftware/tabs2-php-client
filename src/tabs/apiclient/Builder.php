@@ -40,10 +40,23 @@ abstract class Builder extends Base implements BuilderInterface
     public function create()
     {
         // Perform post request
-        $req = \tabs\apiclient\client\Client::getClient()->post(
-            $this->getCreateUrl(),
-            $this->toCreateArray()
-        );
+        try {
+            $req = \tabs\apiclient\client\Client::getClient()->post(
+                $this->getCreateUrl(),
+                $this->toCreateArray()
+            );
+        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+            if ($ex->getResponse()->getStatusCode() === 400) {
+                throw new exception\Exception(
+                    $ex->getResponse(),
+                    '',
+                    $ex->getResponse()->getStatusCode(),
+                    $ex
+                );
+            } else {
+                throw $ex;
+            }
+        }
 
         // Set the id of the element
         $id = self::getRequestId($req);
@@ -66,10 +79,23 @@ abstract class Builder extends Base implements BuilderInterface
     public function update()
     {
         // Perform put request
-        \tabs\apiclient\client\Client::getClient()->put(
-            $this->getUpdateUrl(),
-            $this->toUpdateArray()
-        );
+        try {
+            \tabs\apiclient\client\Client::getClient()->put(
+                $this->getUpdateUrl(),
+                $this->toUpdateArray()
+            );
+        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+            if ($ex->getResponse()->getStatusCode() === 400) {
+                throw new exception\Exception(
+                    $ex->getResponse(),
+                    '',
+                    $ex->getResponse()->getStatusCode(),
+                    $ex
+                );
+            } else {
+                throw $ex;
+            }
+        }
         
         return $this;
     }

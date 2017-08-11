@@ -135,7 +135,7 @@ class ConfirmedBooking extends Base
     public function toArray()
     {
         $arr = array();
-        if ($this->getConfirmedbytabsuser()) {
+        if ($this->getConfirmedbytabsuser() instanceof Tabsuser) {
             $arr['tabsuserid'] = $this->getConfirmedbytabsuser()->getId();
         }
         

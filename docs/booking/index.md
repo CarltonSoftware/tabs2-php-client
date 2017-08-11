@@ -57,6 +57,12 @@ try {
                 include __DIR__ . '/../collection.php';
             }
             
+            if ($booking->getProperty()->getMaximumpets() >= 2) {
+                ?>
+            <p><a href="adding-pets.php?id=<?php echo $booking->getId(); ?>">Add 2 pets to this booking</a></p>
+                <?php
+            }
+
             ?>
             <p>Total paid: £<?php echo $booking->getTotalPaid(); ?></p>
             <?php

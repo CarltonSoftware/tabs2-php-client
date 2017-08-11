@@ -84,6 +84,9 @@ if ($id = filter_input(INPUT_GET, 'id')) {
         $customer->getId()
     );
 
+    $collection = $customer->getEnquiries();
+    include __DIR__ . '/../collection.php';
+
     $bookings = $customer->getBookings();
     if ($bookings->getTotal() > 0) {
         ?>

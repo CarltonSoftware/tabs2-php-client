@@ -54,7 +54,7 @@ class Exception extends \RuntimeException
      */
     public function __construct(
         $response,
-        $message,
+        $message = '',
         $code = 0, 
         \Exception $previous = null
     ) {
@@ -94,11 +94,19 @@ class Exception extends \RuntimeException
      */
     public function setDescriptionFromResponse($response, $message)
     {
-        $this->apiExceptionDescription = $this->_getErrorResponseFromObject(
+        $error = $this->_getErrorResponseFromObject(
             $response,
             'errorDescription',
             $message
         );
+        
+        if (is_string($error)) {
+            $this->apiExceptionDescription = $error;
+        } else if (is_array($message)) {
+            $this->apiExceptionDescription = implode(', ', $error);
+        } else {
+            $this->apiExceptionDescription = $message;
+        }
 
         return $this;
     }
@@ -155,26 +163,25 @@ class Exception extends \RuntimeException
      */
     private function _getErrorResponseFromObject($response, $key, $default = '')
     {
-        $value = false;
-
         if (is_array($response)) {
-            return $default;
-        } else {
-            
-            if ($response
-                && property_exists($response, 'response')
-                && property_exists($response->response, $key)
+            // Do nothing
+        } else if ($response instanceof \GuzzleHttp\Psr7\Response) {
+            $body = (string) $response->getBody();
+
+            $data = json_decode($body, true);
+            if (JSON_ERROR_NONE === json_last_error() 
+                && is_array($data)
+                && isset($data[$key])
             ) {
-                $value = $response->response->$key;
+                return $data[$key];
             }
-
-            if ($value === false) {
-                return $default;
-            } else {
-                return $value;
-            }
-            
+        } else if ($response instanceof \stdClass 
+            && property_exists($response, 'response')
+            && property_exists($response->response, $key)
+        ) {
+            return $response->response->$key;
         }
-
+        
+        return $default;
     }
 }

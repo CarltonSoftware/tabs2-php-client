@@ -10,7 +10,7 @@ try {
         
         $customer = new tabs\apiclient\Customer($id);
         $customer->get();
-        $customer->setPhonenumber('447795500123');
+        $customer->setPhonenumber('+447795500123');
         
         header('Location: index.php?id=' . $customer->getId());
         exit();
