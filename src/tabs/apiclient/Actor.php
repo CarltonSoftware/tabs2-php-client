@@ -465,7 +465,7 @@ abstract class Actor extends Builder
     public function getTabs2Url()
     {
         return \tabs\apiclient\client\Client::getClient()->getTabs2Uri(
-            '/' . $this->getClass() . '/' . $this->getId()
+            '/' . strtolower($this->getClass()) . '/' . $this->getId()
         );
     }
 }
