@@ -456,4 +456,16 @@ abstract class Actor extends Builder
             'accountingreference' => $this->getAccountingreference()
         );
     }
+    
+    /**
+     * Get the tabs2 url for this booking
+     * 
+     * @return string
+     */
+    public function getTabs2Url()
+    {
+        return \tabs\apiclient\client\Client::getClient()->getTabs2Uri(
+            '/' . $this->getClass() . '/' . $this->getId()
+        );
+    }
 }

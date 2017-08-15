@@ -12,8 +12,6 @@ try {
     if ($id = filter_input(INPUT_GET, 'id')) {
         $b = new tabs\apiclient\Booking($id);
         $b->get();
-        $b->setPets(2);
-        $b->update();
     header('Location: index.php?id=' . $b->getId());
     exit();
 }
