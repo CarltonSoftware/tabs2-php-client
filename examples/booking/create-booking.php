@@ -35,6 +35,30 @@ try {
     $webbooking = new tabs\apiclient\WebBooking();
     $b->setWebbooking($webbooking);
 
+    // You can also create a single note when creating the booking
+    $note = new \tabs\apiclient\Note();
+
+    // Create a note type
+    $noteType = new tabs\apiclient\Notetype();
+    $noteType->setDescription('A normal bog standard note.')
+        ->setType('normal');
+
+    // Get an actor who created the note
+    $me = tabs\apiclient\client\Client::getClient()->whoami();
+
+    // Alternatively, the tabsuser with id 1 will be system that you can use by
+    // using $system = new Tabsuser(1);
+    // This would negate the need to call this endpoint saving you an
+    // api request
+
+    // Populate the note
+    $note->setSubject('Adipiscing rhubarb')
+        ->setCreatedby($me)
+        ->setNotetype($noteType)
+        ->addNotetext('Lorem ipsum dolor sit amet');
+
+    $b->addNote($note);
+
     $b->create();
 
     header('Location: index.php?id=' . $b->getId());

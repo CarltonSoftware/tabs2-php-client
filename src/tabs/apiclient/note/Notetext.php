@@ -30,7 +30,7 @@ namespace tabs\apiclient\note;
  * @method string   getNotetext()            Returns the NoteText text
  * 
  * @method Notetext setId(integer $id)       Set the note id
- * @method Notetext setText(string $subject) Set the note text
+ * @method Notetext setNotetext(string $subject) Set the note text
  */
 class Notetext extends \tabs\apiclient\Notemeta
 {
@@ -51,7 +51,7 @@ class Notetext extends \tabs\apiclient\Notemeta
     public function toArray()
     {
         $arr = array(
-            'notetext' => $this->getText()
+            'notetext' => $this->getNotetext()
         );
         
         if ($this->getCreatedby()) {
@@ -66,7 +66,11 @@ class Notetext extends \tabs\apiclient\Notemeta
      */
     public function __toString()
     {
-        return (string) $this->getCreatedby() . ' said: ' . $this->getNotetext();
+        if ($this->getCreatedby()) {
+            return (string) $this->getCreatedby() . ' said: ' . $this->getNotetext();
+        } else {
+            return $this->getNotetext();
+        }
     }
     
     /**

@@ -25,7 +25,7 @@ if ($id = filter_input(INPUT_GET, 'id')) {
     // And a note text
     $noteText = new \tabs\apiclient\note\Notetext();
 
-    $noteText->setText('Lorem ipsum dolor sit amet')
+    $noteText->setNotetext('Lorem ipsum dolor sit amet')
         ->setCreatedby($me);
 
     // Populate the note
