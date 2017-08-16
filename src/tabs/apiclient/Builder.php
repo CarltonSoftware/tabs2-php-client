@@ -150,7 +150,11 @@ abstract class Builder extends Base implements BuilderInterface
      */
     public function toCreateArray()
     {
-        return $this->toArray();
+        if (method_exists($this, 'toArray')) {
+            return $this->toArray();
+        } else {
+            return $this->__toArray();
+        }
     }
 
     /**
@@ -161,7 +165,11 @@ abstract class Builder extends Base implements BuilderInterface
      */
     public function toUpdateArray()
     {
-        return $this->toArray();
+        if (method_exists($this, 'toArray')) {
+            return $this->toArray();
+        } else {
+            return $this->__toArray();
+        }
     }
 
     /**
