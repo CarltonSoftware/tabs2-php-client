@@ -24,6 +24,8 @@ use tabs\apiclient\Builder;
  * @method string getDescription() Returns the description
  * @method Extra setDescription(string $var) Sets the description
  * 
+ * @method ExtraGroup getExtragroup() Returns the extra group
+ * 
  * @method Collection|Branding[] getExtrabrandings() Returns the brandings
  */
 class Extra extends Builder
@@ -71,16 +73,36 @@ class Extra extends Builder
         
         parent::__construct($id);
     }
+    
+    /**
+     * Set the extra group object
+     * 
+     * @param array|stdClass|ExtraGroup $grp Extra group
+     * 
+     * @return \tabs\apiclient\Extra
+     */
+    public function setExtragroup($grp)
+    {
+        $this->extragroup = ExtraGroup::factory($grp);
+        
+        return $this;
+    }
 
     /**
      * @inheritDoc
      */
     public function toArray()
     {
-        return array(
+        $arr = array(
             'extracode' => $this->getExtracode(),
             'extratype' => $this->getExtratype(),
             'description' => $this->getDescription()
         );
+        
+        if ($this->getExtragroup()) {
+            $arr['extragroupid'] = $this->getExtragroup()->getId();
+        }
+        
+        return $arr;
     }
 }
