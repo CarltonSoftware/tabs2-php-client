@@ -28,7 +28,6 @@ use tabs\apiclient\note\Notetext;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- *
  * @method string                   getSubject()   Returns the Note subject
  * @method Collection|Notetext[]    getNotetexts() Returns the array of NoteText items
  * @method Notetype                 getNotetype()  Returns the array of Notetype
@@ -177,6 +176,34 @@ class Note extends Notemeta
     {
         return $this->highlight;
     }
+    
+    /**
+     * Short cut text for notetext
+     * 
+     * @param Notetext|string $nt Note text
+     * 
+     * @return \tabs\apiclient\Note
+     */
+    public function addNotetext($nt)
+    {
+        if (is_string($nt)) {
+            $text = $nt;
+            $nt = new Notetext();
+            $nt->setNotetext($text);
+            
+            if ($this->getCreatedby()) {
+                $nt->setCreatedby($this->getCreatedby());
+            }
+        }
+        
+        $this->notetexts->addElement($nt);
+        
+        if ($this->getId()) {
+            $nt->create();
+        }
+        
+        return $this;
+    }
 
     /**
      * Array representation of the address.  Used for creates/updates.
@@ -195,6 +222,16 @@ class Note extends Notemeta
             'visibletokeyholder' => $this->boolToStr($this->isVisibletokeyholder()),
             'highlight' => $this->boolToStr($this->isHighlight())
         );
+        
+        if (!$this->getId() && $this->notetexts->count() > 0) {
+            $arr = array_merge(
+                $arr,
+                $this->prefixToArray(
+                    'notetext_',
+                    $this->notetexts->first()
+                )
+            );
+        }
         
         if ($this->getCreatedby()) {
             $arr['createdbyactorid'] = $this->getCreatedby()->getId();

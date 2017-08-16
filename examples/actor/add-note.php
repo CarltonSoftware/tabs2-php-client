@@ -22,7 +22,7 @@ if ($customerId = filter_input(INPUT_GET, 'id')) {
 
     $noteText = new \tabs\apiclient\note\Notetext();
 
-    $noteText->setText('Lorem ipsum dolor sit amet')
+    $noteText->setNotetext('Lorem ipsum dolor sit amet')
         ->setCreatedby($customer);
 
     $note->setSubject('Adipiscing rhubarb')

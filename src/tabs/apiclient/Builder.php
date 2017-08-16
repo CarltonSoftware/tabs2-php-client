@@ -227,4 +227,23 @@ abstract class Builder extends Base implements BuilderInterface
             return null;
         }
     }
+    
+    /**
+     * Prefix toarray indexes
+     * 
+     * @param string $string Prefix String
+     * @param Base   $object Object
+     * 
+     * @return array
+     */
+    public function prefixToArray($string, $object)
+    {
+        $arr = $object->toArray();
+        foreach ($arr as $key => $value) {
+            $arr[$string . $key] = $value;
+            unset($arr[$key]);
+        }
+        
+        return $arr;
+    }
 }

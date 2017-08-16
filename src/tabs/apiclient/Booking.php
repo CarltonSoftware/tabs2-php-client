@@ -117,6 +117,8 @@ use tabs\apiclient\booking\OwnerPaymentSummary;
  * @method Collection|booking\Guest[] getGuests() Returns the booking guests
  * 
  * @method OwnerPaymentSummary getOwnerpaymentsummary() Returns the Ownerpaymentsummary
+ * 
+ * @method AgencyBookingType getAgencybookingtype() Returns the booking type for agency bookings
  */
 class Booking extends Builder
 {
@@ -392,6 +394,13 @@ class Booking extends Builder
      * @var OwnerPaymentSummary
      */
     protected $ownerpaymentsummary;
+    
+    /**
+     * Agency booking type
+     * 
+     * @var AgencyBookingType
+     */
+    protected $agencybookingtype;
 
     // -------------------- Public Functions -------------------- //
     
@@ -662,7 +671,7 @@ class Booking extends Builder
     }
     
     /**
-     * Set the OwnerPaymentSummary on the property
+     * Set the OwnerPaymentSummary on the booking
      * 
      * @param OwnerPaymentSummary|stdClass|Array $ops OwnerPaymentSummary object/array
      * 
@@ -671,6 +680,40 @@ class Booking extends Builder
     public function setOwnerPaymentSummary($ops)
     {
         $this->ownerpaymentsummary = OwnerPaymentSummary::factory($ops);
+        
+        return $this;
+    }
+    
+    /**
+     * Set the AgencyBookingType on the property
+     * 
+     * @param AgencyBookingType|stdClass|Array $abt AgencyBookingType
+     * 
+     * @return Booking
+     */
+    public function setAgencybookingtype($abt)
+    {
+        $this->agencybookingtype = AgencyBookingType::factor($abt);
+        
+        return $this;
+    }
+    
+    /**
+     * Shortcut function for adding a note
+     * 
+     * @param \tabs\apiclient\Note $note Note
+     * 
+     * @return \tabs\apiclient\Booking
+     */
+    public function addNote(Note $note)
+    {
+        $bn = new BookingNote();
+        $bn->setNote($note);
+        $this->notes->addElement($bn);
+        
+        if ($this->getId()) {
+            $bn->create();
+        }
         
         return $this;
     }
@@ -700,10 +743,27 @@ class Booking extends Builder
             $arr['ignorechangedayrules'] = $this->boolToStr($this->getIgnorechangedayrules());
             $arr['bypasschecks'] = $this->boolToStr($this->getBypasschecks());
             $arr['bypasspetchecks'] = $this->boolToStr($this->getBypasspetchecks());
-        } 
+            
+            if ($this->notes->count() > 0) {
+                $bookingnote = $this->notes->first();
+                if ($bookingnote->getNote()) {
+                    $arr = array_merge(
+                        $arr,
+                        $this->prefixToArray(
+                            'note_',
+                            $bookingnote->getNote()
+                        )
+                    );
+                }
+            }
+        }
         
         if ($this->getProperty()) {
             $arr['propertyid'] = $this->getProperty()->getId();
+        }
+        
+        if ($this->getAgencybookingtype()) {
+            $arr['agencybookingtypeid'] = $this->getAgencybookingtype()->getId();
         }
         
         if ($this->getPropertybranding()) {
@@ -728,7 +788,7 @@ class Booking extends Builder
         if ($this->getPotentialbooking()) {
             $arr = array_merge(
                 $arr,
-                $this->_prefixToArray(
+                $this->prefixToArray(
                     'potentialbooking_',
                     $this->getPotentialbooking()
                 )
@@ -738,14 +798,14 @@ class Booking extends Builder
         if ($this->getWebbooking()) {
             $arr = array_merge(
                 $arr,
-                $this->_prefixToArray('webbooking_', $this->getWebbooking())
+                $this->prefixToArray('webbooking_', $this->getWebbooking())
             );
         }
         
         if ($this->getProvisionalbooking()) {
             $arr = array_merge(
                 $arr,
-                $this->_prefixToArray(
+                $this->prefixToArray(
                     'provisionalbooking_',
                     $this->getProvisionalbooking()
                 )
@@ -755,7 +815,7 @@ class Booking extends Builder
         if ($this->getConfirmedbooking()) {
             $arr = array_merge(
                 $arr,
-                $this->_prefixToArray(
+                $this->prefixToArray(
                     'confirmedbooking_',
                     $this->getConfirmedbooking()
                 )
@@ -765,7 +825,7 @@ class Booking extends Builder
         if ($this->getCancelledbooking()) {
             $arr = array_merge(
                 $arr,
-                $this->_prefixToArray(
+                $this->prefixToArray(
                     'cancelledbooking_',
                     $this->getCancelledbooking()
                 )
@@ -1051,24 +1111,5 @@ class Booking extends Builder
         } else {
             return 0;
         }
-    }
-    
-    /**
-     * Prefix toarray indexes
-     * 
-     * @param string $string Prefix String
-     * @param Base   $object Object
-     * 
-     * @return array
-     */
-    private function _prefixToArray($string, $object)
-    {
-        $arr = $object->toArray();
-        foreach ($arr as $key => $value) {
-            $arr[$string . $key] = $value;
-            unset($arr[$key]);
-        }
-        
-        return $arr;
     }
 }

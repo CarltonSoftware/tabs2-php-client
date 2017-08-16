@@ -22,7 +22,7 @@ try {
         'customer',
         new \tabs\apiclient\Customer()
     );
-    $customers->getPagination()->addFilter('surname', 'smith')->setLimit(1);
+    $customers->getPagination()->addFilter('surname', 'Dobson')->setLimit(1);
     $customers->fetch();
     if ($customers->getTotal() > 0) {
         $customer = $customers->first();
