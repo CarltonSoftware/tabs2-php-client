@@ -150,3 +150,4 @@ try {
 * [Toggling a security deposit waiver](toggle-waiver.html)
 * [Performing a booking enquiry](booking-enquiry.html)
 * [Cancelling a booking](cancel-booking.html)
+* [Make an owner booking](make-an-owner-booking.html)
