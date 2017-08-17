@@ -16,8 +16,7 @@ try {
         $b->setFromdate($from)
             ->setTodate($to)
             ->setProperty(array('id' => $pi))
-            ->setGuesttype('Owner')
-            ->setPets(0);
+            ->setGuesttype('Owner');
         
         // Optionally you can state its a web booking
         $webbooking = new tabs\apiclient\WebBooking();
