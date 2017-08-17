@@ -409,9 +409,11 @@ class Booking extends Builder
      */
     public function __construct($id = null)
     {
-        $this->bookeddatetime = new \DateTime();
-        $this->fromdate = new \DateTime();
-        $this->todate = new \DateTime();
+        $this->setGuesttype('Customer');
+        $this->setBookeddatetime(new \DateTime());
+        $this->setFromdate(new \DateTime());
+        $this->setTodate(new \DateTime());
+        
         $this->suppliers = StaticCollection::factory(
             'supplier',
             new booking\Supplier()
@@ -723,18 +725,8 @@ class Booking extends Builder
      */
     public function toArray()
     {
-        $arr = array(
-            'bookref' => $this->getBookref(),
-            'adults' => $this->getAdults(),
-            'children' => $this->getChildren(),
-            'infants' => $this->getInfants(),
-            'pets' => $this->getPets(),
-            'checkinearliesttime' => $this->getCheckinearliesttime(),
-            'checkinlatesttime' => $this->getCheckinlatesttime(),
-            'checkouttime' => $this->getCheckouttime(),
-            'estimatedarrivaltime' => $this->getEstimatedarrivaltime()
-        );
-        
+        $arr = $this->__toArray();
+       
         if (!$this->getId()) {
             $arr['guesttype'] = $this->getGuesttype();
             $arr['fromdate'] = $this->getFromdate()->format('Y-m-d');

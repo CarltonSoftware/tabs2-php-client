@@ -21,6 +21,23 @@ trait FactoryTrait
     // ------------------------- Public Functions ------------------------ //
     
     /**
+     * Array of changes
+     * 
+     * @var array
+     */
+    protected $changes = array();
+    
+    /**
+     * Return the changes made to this object
+     * 
+     * @return array
+     */
+    public function getChanges()
+    {
+        return $this->changes;
+    }
+
+    /**
      * Get the json
      * 
      * @param \Psr\Http\Message\ResponseInterface $response Response
@@ -194,6 +211,7 @@ trait FactoryTrait
                 
                 switch (substr($name, 0, 3)) {
                     case 'set':
+                        $this->changes[$property] = $args[0];
                         $this->setObjectProperty($this, $property, $args[0]);
                         return $this;
                     case 'get':
@@ -368,5 +386,24 @@ trait FactoryTrait
         if (is_numeric(floatval($float))) {
             $this->$varName = floatval($float);
         }
+    }
+    
+    /**
+     * Return the changed array
+     * 
+     * @return array
+     */
+    public function __toArray()
+    {
+        $arr = array();
+        foreach ($this->changes as $key => $val) {
+            if ($val instanceof \DateTime) {
+                $arr[$key] = $val->format('Y-m-d H:i:s');
+            } else {
+                $arr[$key] = $val;
+            }
+        }
+        
+        return $arr;
     }
 }
