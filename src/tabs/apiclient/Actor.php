@@ -76,7 +76,6 @@ use tabs\apiclient\ActorSecurity;
  * @method Collection|actor\Enquiry[] getEnquiries() Returns the customer enquiries
  * 
  * @method string getAddress() Returns the address (only available when using 'fields' filter)
- * @method string getEmailaddress() Returns the email address (only available when using 'fields' filter)
  */
 abstract class Actor extends Builder
 {
@@ -234,8 +233,7 @@ abstract class Actor extends Builder
      */
     public function __construct($id = null)
     {
-        $this->language = new Language();
-        $this->bacsbankaccount = new BankAccount();
+        $this->setLanguage(array('code' => 'EN'));
         $this->bankaccounts = Collection::factory(
             'bankaccount',
             new BankAccount,
@@ -435,26 +433,41 @@ abstract class Actor extends Builder
         
         return $this;
     }
+    
+    /**
+     * Get an email address for the Actor
+     * 
+     * @return ContactDetailOther|null
+     */
+    public function getEmailaddress()
+    {
+        if ($this->emailaddress) {
+            return $this->emailaddress;
+        } else if ($this->getId()) {
+            $emails = $this->getContactdetails()->findBy(function($ele) {
+                return $ele instanceof ContactDetailOther 
+                    && $ele->getContactmethodtype() == 'Email'
+                    && $ele->getInvalid() === false;
+            });
+            
+            if ($emails->count() > 0) {
+                return $emails->first();
+            }
+        }
+    }
 
     /**
      * @inheritDoc
      */
     public function toArray()
     {
-        return array(
-            'firstname' => $this->getFirstname(),
-            'surname' => $this->getSurname(),
-            'title' => $this->getTitle(),
-            'salutation' => $this->getSalutation(),
-            'tabscode' => $this->getTabscode(),
-            'language' => $this->getLanguage(),
-            'inactive' => $this->getInactive(),
-            'companyname' => $this->getCompanyname(),
-            'vatnumber' => $this->getVatnumber(),
-            'companynumber' => $this->getCompanynumber(),
-            'languagecode' => $this->getLanguage()->getCode(),
-            'accountingreference' => $this->getAccountingreference()
-        );
+        $arr = $this->__toArray();
+        
+        if (isset($arr['language'])) {
+            $arr['languagecode'] = $this->getLanguage()->getCode();
+        }
+        
+        return $arr;
     }
     
     /**
