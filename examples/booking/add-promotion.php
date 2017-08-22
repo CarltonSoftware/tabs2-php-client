@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @name Adding a guest to a booking
+ * @name Adding a promotion
  * 
- * This file documents how to add guests to a Booking object
+ * This file documents how to add a promotional code onto a booking.
  */
 
 require_once __DIR__ . '/../creating-a-new-connection.php';
@@ -11,14 +11,8 @@ require_once __DIR__ . '/../creating-a-new-connection.php';
 try {
     if ($id = filter_input(INPUT_GET, 'id')) {
         $b = new tabs\apiclient\Booking($id);
-        $b->get();
-    $bg = new tabs\apiclient\booking\Guest();
-    $bg->setName('Joe Bloggs')
-        ->setAge(30)
-        ->setType('Adult');
-    $bg->setParent($b);
-
-    $bg->create();
+        $b->setPromotioncode('FLASH20');
+    $b->update();
 
     header('Location: index.php?id=' . $b->getId());
     exit();

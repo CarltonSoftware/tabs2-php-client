@@ -23,6 +23,7 @@ use tabs\apiclient\Builder;
  * @method string  getPostcode()  Return the Address postcode
  * @method float   getLongitude() Return the longitude
  * @method float   getLatitude()  Return the latitude
+ * @method string  getGeohash()   Return the geohash
  * @method Country getCountry()   Return the Address country
  * 
  * @method Address setLine1(string $line1)        Set the Address line 1
@@ -99,6 +100,13 @@ class Address extends Builder
      */
     protected $country;
     
+    /**
+     * Geohash
+     * 
+     * @var string
+     */
+    protected $geohash = '';
+
     // ------------------ Public Functions --------------------- //
     
     /**

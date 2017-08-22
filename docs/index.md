@@ -16,5 +16,7 @@ echo $prop->getName();
 
 * [Read/Write Property data](property)
 * [Read/Write Actor data](actor)
+* [Read/Write Booking data](booking)
 * [Accessing common data](core)
 * [Accessing data from the root endpoint](root)
+* [Site Map](sitemap.xml)
