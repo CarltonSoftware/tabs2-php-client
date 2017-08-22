@@ -94,6 +94,9 @@ use tabs\apiclient\booking\OwnerPaymentSummary;
  * @method string getCheckouttime() Returns the checkouttime
  * @method Booking setCheckouttime(string $var) Sets the checkouttime
  * 
+ * @method string getPromotioncode() Returns the promotion code
+ * @method Booking setPromotioncode(string $var) Sets the promotion code
+ * 
  * @method PotentialBooking getPotentialbooking() Returns the potentialbooking
  * 
  * @method WebBooking getWebbooking() Returns the webbooking
@@ -296,6 +299,13 @@ class Booking extends Builder
      * @var string
      */
     protected $checkouttime = '';
+
+    /**
+     * Promotion code
+     *
+     * @var string
+     */
+    protected $promotioncode = '';
     
     /**
      * Potential Booking

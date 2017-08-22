@@ -68,6 +68,10 @@ try {
         }
 
         ?>
+            <p><a href="add-promotion.php?id=<?php echo $booking->getId(); ?>">Add a promotional code</a></p>
+        <?php
+
+        ?>
         <p>Total paid: £<?php echo $booking->getTotalPaid(); ?></p>
         <?php
         if ($booking->getTotalOutstanding() > 0) {

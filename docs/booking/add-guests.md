@@ -12,7 +12,7 @@ try {
         $bg = new tabs\apiclient\booking\Guest();
         $bg->setName('Joe Bloggs')
             ->setAge(30)
-            ->setGuesttype('Adult');
+            ->setType('Adult');
         $bg->setParent($b);
         
         $bg->create();

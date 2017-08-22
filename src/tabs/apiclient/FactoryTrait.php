@@ -211,7 +211,13 @@ trait FactoryTrait
                 
                 switch (substr($name, 0, 3)) {
                     case 'set':
-                        $this->changes[$property] = $args[0];
+                        // Set the changes list
+                        if (!$this->isEdited() 
+                            && (is_scalar($args[0]) || $args[0] instanceof \DateTime)
+                        ) {
+                            $this->changes[$property] = $args[0];
+                        }
+                        
                         $this->setObjectProperty($this, $property, $args[0]);
                         return $this;
                     case 'get':
