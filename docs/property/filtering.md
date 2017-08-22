@@ -30,6 +30,9 @@ try {
         ->addFilter('brandingstatusid', 1);
     $collection->fetch();
 
+    echo '<p>Live properties filter</p>';
+    echo '<p>' . $collection->getTotal() . ' found</p>';
+
 } catch(Exception $e) {
     echo $e->getMessage();
 }
@@ -49,6 +52,9 @@ try {
         ->addFilter('maximumpets', '>1');
     $collection->fetch();
 
+    echo '<p>...sleeping 2 or more with a pet</p>';
+    echo '<p>' . $collection->getTotal() . ' found</p>';
+
 } catch(Exception $e) {
     echo $e->getMessage();
 }
@@ -65,15 +71,16 @@ try {
     // either the first boolean attribute is ticked or the second is ticked.
     // This demonstrates the OR based search functionality.
 
-    $collection->addFilter('sleeps', '>2')
-        ->addFilter('maximumpets', '>1')
-        ->addFilter('attribute1', 'true')
+    $collection->addFilter('attribute1', 'true')
         ->addFilter('brandingid', $brandings->first()->getId(), 1)
         ->addFilter('brandingstatusid', 1, 1)
         ->addFilter('sleeps', '>2', 1)
         ->addFilter('maximumpets', '>1', 1)
         ->addFilter('attribute2', 'true', 1);
     $collection->fetch();
+
+    echo '<p>...with attribute 1 or 2 ticked</p>';
+    echo '<p>' . $collection->getTotal() . ' found</p>';
 
 } catch(Exception $e) {
     echo $e->getMessage();
