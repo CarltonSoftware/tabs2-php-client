@@ -81,7 +81,7 @@ trait StateTrait
      */
     public function isEdited()
     {
-        return $this->states[TABS2_STATE_EDITED] == true;
+        return $this->states[TABS2_APICLIENT_STATE_EDITED] == true;
     }
     
     /**
