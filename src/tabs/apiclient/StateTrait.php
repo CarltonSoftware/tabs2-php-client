@@ -81,7 +81,7 @@ trait StateTrait
      */
     public function isEdited()
     {
-        return $this->states[TABS2_STATE_EDITED] == true;
+        return $this->states[TABS2_APICLIENT_STATE_EDITED] == true;
     }
     
     /**
@@ -89,11 +89,35 @@ trait StateTrait
      * 
      * @param boolean $bool Edited Boolean
      * 
-     * @return \tabs\apiclient\Collection
+     * @return \tabs\apiclient\Base
      */
     public function setEdited($bool)
     {
         $this->states[TABS2_APICLIENT_STATE_EDITED] = $bool;
+        
+        return $this;
+    }
+
+    /**
+     * Check if the object is dormant
+     * 
+     * @return boolean
+     */
+    public function isDormant()
+    {
+        return $this->states[TABS2_APICLIENT_STATE_DORMANT] == true;
+    }
+    
+    /**
+     * Set the dormant bool
+     * 
+     * @param boolean $bool Dormant boolean
+     * 
+     * @return \tabs\apiclient\Base
+     */
+    public function setDormant($bool)
+    {
+        $this->states[TABS2_APICLIENT_STATE_DORMANT] = $bool;
         
         return $this;
     }
@@ -113,7 +137,7 @@ trait StateTrait
      * 
      * @param boolean $bool State Boolean
      * 
-     * @return \tabs\apiclient\Collection
+     * @return \tabs\apiclient\Base
      */
     public function setFetched($bool)
     {
@@ -127,7 +151,7 @@ trait StateTrait
      * 
      * @param boolean $bool State Boolean
      * 
-     * @return \tabs\apiclient\Collection
+     * @return \tabs\apiclient\Base
      */
     public function setPathOverridden($bool)
     {

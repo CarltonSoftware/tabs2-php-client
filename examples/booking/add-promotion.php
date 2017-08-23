@@ -11,7 +11,8 @@ require_once __DIR__ . '/../creating-a-new-connection.php';
 try {
     if ($id = filter_input(INPUT_GET, 'id')) {
         $b = new tabs\apiclient\Booking($id);
-        $b->setPromotioncode('FLASH20');
+        $b->get()
+            ->setPromotioncode('FLASH20');
     $b->update();
 
     header('Location: index.php?id=' . $b->getId());

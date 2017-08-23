@@ -7,7 +7,8 @@ This file documents how to add a promotional code onto a booking.
 try {
     if ($id = filter_input(INPUT_GET, 'id')) {
         $b = new tabs\apiclient\Booking($id);
-        $b->setPromotioncode('FLASH20');
+        $b->get()
+            ->setPromotioncode('FLASH20');
 
         $b->update();
         

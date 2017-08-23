@@ -25,6 +25,8 @@ use tabs\apiclient\MarketingBrand;
  * @method string getDescription() Returns the description
  * @method GroupingValue setDescription(string $var) Sets the description
  * 
+ * @method string getGeohash() Return the geohash
+ * 
  * @method float getLatitude() Returns the latitude
  * @method GroupingValue setLatitude(float $var) Sets the latitude
  * 
@@ -66,6 +68,13 @@ class GroupingValue extends Builder
      * @var string
      */
     protected $description = '';
+
+    /**
+     * Geohash
+     *
+     * @var string
+     */
+    protected $geohash = '';
 
     /**
      * Latitude
