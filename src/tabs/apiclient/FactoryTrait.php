@@ -96,6 +96,7 @@ trait FactoryTrait
         }
         
         $object = new static();
+        $object->setDormant(false);
         
         if (is_string($element)) {
             $link = new Link();
@@ -110,7 +111,7 @@ trait FactoryTrait
             $object->setParent($parent);
         }
         
-        $object->setEdited(false);
+        $object->setDormant(true);
 
         return $object;
     }
@@ -212,7 +213,7 @@ trait FactoryTrait
                 switch (substr($name, 0, 3)) {
                     case 'set':
                         // Set the changes list
-                        if (!$this->isEdited() 
+                        if ($this->isDormant() 
                             && (is_scalar($args[0]) || $args[0] instanceof \DateTime)
                         ) {
                             $this->changes[$property] = $args[0];
