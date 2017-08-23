@@ -96,7 +96,10 @@ trait FactoryTrait
         }
         
         $object = new static();
-        $object->setDormant(false);
+        
+        if (method_exists($object, 'setDormant')) {
+            $object->setDormant(false);
+        }
         
         if (is_string($element)) {
             $link = new Link();
@@ -111,7 +114,9 @@ trait FactoryTrait
             $object->setParent($parent);
         }
         
-        $object->setDormant(true);
+        if (method_exists($object, 'setDormant')) {
+            $object->setDormant(true);
+        }
 
         return $object;
     }
@@ -213,7 +218,7 @@ trait FactoryTrait
                 switch (substr($name, 0, 3)) {
                     case 'set':
                         // Set the changes list
-                        if ($this->isDormant() 
+                        if ($this->_isDormant() 
                             && (is_scalar($args[0]) || $args[0] instanceof \DateTime)
                         ) {
                             $this->changes[$property] = $args[0];
@@ -315,6 +320,25 @@ trait FactoryTrait
         }
     }
     
+    /**
+     * Return the changed array
+     * 
+     * @return array
+     */
+    public function __toArray()
+    {
+        $arr = array();
+        foreach ($this->changes as $key => $val) {
+            if ($val instanceof \DateTime) {
+                $arr[$key] = $val->format('Y-m-d H:i:s');
+            } else {
+                $arr[$key] = $val;
+            }
+        }
+        
+        return $arr;
+    }
+    
     // ------------------------- Protected Functions ------------------------ //
 
     /**
@@ -369,7 +393,7 @@ trait FactoryTrait
         }
         
         // Set the edited flag if needed
-        if ($obj instanceof Base) {
+        if ($obj instanceof Base && method_exists($this, 'setState')) {
             $obj->setState($state);
         }
     }
@@ -396,21 +420,16 @@ trait FactoryTrait
     }
     
     /**
-     * Return the changed array
+     * Dependancy checker for dormant state
      * 
-     * @return array
+     * @return boolean
      */
-    public function __toArray()
+    private function _isDormant()
     {
-        $arr = array();
-        foreach ($this->changes as $key => $val) {
-            if ($val instanceof \DateTime) {
-                $arr[$key] = $val->format('Y-m-d H:i:s');
-            } else {
-                $arr[$key] = $val;
-            }
+        if (method_exists($this, 'isDormant')) {
+            return $this->isDormant();
+        } else {
+            return true;
         }
-        
-        return $arr;
     }
 }

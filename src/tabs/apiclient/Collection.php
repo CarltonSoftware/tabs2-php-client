@@ -123,6 +123,16 @@ class Collection extends StaticCollection
     }
     
     /**
+     * Return the filters set on the collection
+     * 
+     * @return array
+     */
+    public function getFilters()
+    {
+        return $this->getPagination()->getFilters();
+    }
+    
+    /**
      * Shortcut function for the Pagination::addFilter method
      * 
      * @param string   $key   Filter key
