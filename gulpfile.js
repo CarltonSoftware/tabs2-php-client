@@ -169,11 +169,11 @@ gulp.task('buildexamples', function() {
                         console.log(last, sitemap[i].directory);
                         p.push('');
                         p.push('');
-                        p.push('## ' + sitemap[i].directory + ' examples');
+                        p.push('## ' + sitemap[i].directory.charAt(0).toUpperCase() + sitemap[i].directory.slice(1) + ' examples');
                     }
                     last = sitemap[i].directory;
                     
-                    p.push(' * [' + sitemap[i].directory + '/' + sitemap[i].filename.split('.').shift() + '.html] ' + sitemap[i].title);
+                    p.push(' * [' + sitemap[i].title + '](' + sitemap[i].directory + '/' + sitemap[i].filename.split('.').shift() + '.html)');
                 }
                 fs.writeFileSync(dirs.input + '/sitemap.md', p.join('\n'));
             }
