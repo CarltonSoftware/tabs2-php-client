@@ -7,7 +7,7 @@ memory footprint of objects in your local instance.
 To do this you need to use the setFields method on any collection class and supported
 routes will limit the output according to what you specify.
 
-All field keys can be found from the [../root](root) endpoint.
+All field keys can be found from the [root](../root) endpoint.
 
 ```php
 
