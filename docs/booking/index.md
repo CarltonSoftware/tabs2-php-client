@@ -146,7 +146,7 @@ try {
 
 ```
 
-* [Creating a new booking](creating-a-booking.html)
+* [Creating a new booking](create-booking.html)
 * [Adding a customer](add-customer.html)
 * [Adding a extra](add-extra.html)
 * [Removing an extra](remove-extra.html)

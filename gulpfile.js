@@ -24,6 +24,11 @@ gulp.task('default', ['buildexamples'], function() {
 });
 
 gulp.task('buildexamples', function() {
+    
+    if (fs.existsSync(dirs.input + '/sitemap.md')) {
+        fs.unlink(dirs.input + '/sitemap.md');
+    }
+    
     Filehound.create().ext(
         'md'
     ).paths(
@@ -46,6 +51,8 @@ gulp.task('buildexamples', function() {
             return dest.join('/');
         };
         
+        var sitemap = [];
+        
         console.log(files);
         
         function writeFile(files, index) {
@@ -59,7 +66,7 @@ gulp.task('buildexamples', function() {
                     var code = [];
                     var dir = file.split('/');
                     dir.shift();
-                    dir.pop();
+                    var filename = dir.pop();
                     tokens.forEach(function(token, i) {
                         // Find the subsequent paragraphs in the first heading
                         if (token 
@@ -71,6 +78,13 @@ gulp.task('buildexamples', function() {
                             if (!afterfirstheader) {
                                 header.push('@name ' + token.text);
                                 header.push('');
+                                if (dir.length > 0) {
+                                    sitemap.push({
+                                        title: token.text,
+                                        directory: dir.join('/'),
+                                        filename: filename
+                                    });
+                                }
                             } else {
                                 header.push(token.text);
                                 header.push('');
@@ -137,18 +151,31 @@ gulp.task('buildexamples', function() {
                             lines.push(c);
                         });
                         lines.push('');
-                        lines.push('require_once __DIR__ . \'/' + '../'.repeat(dir.length) + 'finally.php\';');
-                        
-//                        if (files[index + 1]) {
-//                            var next = '../'.repeat(dir.length) + getPhpFileName(files[index + 1]).replace('examples/', '');
-//                            lines.push('');
-//                            lines.push('echo \'<a href="' + next + '">Next example ></a>\';');
-//                        }
-                        
+                        lines.push('require_once __DIR__ . \'/' + '../'.repeat(dir.length) + 'finally.php\';');                        
                         fs.writeFileSync(phpfile, lines.join("\n"));
                     }
                     writeFile(files, index + 1);
                 });
+            } else {
+                // Create a sitemap markdown file
+                var p = ['# Sitemap'];
+                p.push('');
+                p.push('');
+                p.push('## Getting started');
+                p.push(' * [index.html] Introduction - READ ME first!');
+                var last = '';
+                for (var i in sitemap) {
+                    if (last != sitemap[i].directory) {
+                        console.log(last, sitemap[i].directory);
+                        p.push('');
+                        p.push('');
+                        p.push('## ' + sitemap[i].directory + ' examples');
+                    }
+                    last = sitemap[i].directory;
+                    
+                    p.push(' * [' + sitemap[i].directory + '/' + sitemap[i].filename.split('.').shift() + '.html] ' + sitemap[i].title);
+                }
+                fs.writeFileSync(dirs.input + '/sitemap.md', p.join('\n'));
             }
         }
         
