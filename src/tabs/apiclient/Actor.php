@@ -59,6 +59,8 @@ use tabs\apiclient\ActorSecurity;
  * @method Collection|BankAccount getBankaccounts() Returns the bank account collection
  * @method Actor setBankaccounts(Collection $col) Set the bank accounts
  * 
+ * @method BankAccount getBacsbankaccount() Returns the bacs bank account
+ * 
  * @method Collection|actor\Document[] getDocuments() Returns the actor documents
  * @method Actor setDocuments(Collection $col) Set the documents
  * 
@@ -465,6 +467,10 @@ abstract class Actor extends Builder
         
         if (isset($arr['language'])) {
             $arr['languagecode'] = $this->getLanguage()->getCode();
+        }
+        
+        if ($this->getBacsbankaccount()) {
+            $arr['bacsbankaccountid'] = $this->getBacsbankaccount()->getId();
         }
         
         return $arr;
