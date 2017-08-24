@@ -5,6 +5,8 @@ See the [README.md](https://github.com/CarltonSoftware/tabs2-php-client/blob/dev
 
 Once installed you should be able to load tabs2 api data using the following snippet.
 
+For more examples, please see the [site map](sitemap.html).
+
 ```php
 
 $prop = new \tabs\apiclient\Property(1);
@@ -19,4 +21,4 @@ echo $prop->getName();
 * [Read/Write Booking data](booking)
 * [Accessing common data](core)
 * [Accessing data from the root endpoint](root)
-* [Site Map](sitemap.xml)
+* [Site Map](sitemap.html)
