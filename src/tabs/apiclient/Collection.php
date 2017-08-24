@@ -133,6 +133,73 @@ class Collection extends StaticCollection
     }
     
     /**
+     * Get the fields string
+     * 
+     * @return array
+     */
+    public function getFields()
+    {
+        return $this->getPagination()->getParameter(
+            'fields'
+        ) ? explode(
+            ':',
+            $this->getPagination()->getParameter(
+                'fields'
+            )
+        ) : array();
+    }
+    
+    /**
+     * Add a field to the collection request
+     * 
+     * @param string $field Field
+     * 
+     * @return \tabs\apiclient\Collection
+     */
+    public function addField($field)
+    {
+        $fields = $this->getFields();
+        $fields[] = $field;
+        
+        return $this->setFields($fields);
+    }
+    
+    /**
+     * Add a field to the collection request
+     * 
+     * @param string $field Field
+     * 
+     * @return \tabs\apiclient\Collection
+     */
+    public function removeField($field)
+    {
+        $fields = array_flip($this->getFields());
+        unset($fields[$field]);
+        
+        return $this->setFields(array_flip($fields));
+    }
+    
+    /**
+     * Set the fields in bulk
+     * 
+     * @param string|array $fields Fields
+     * 
+     * @return \tabs\apiclient\Collection
+     */
+    public function setFields($fields)
+    {
+        if (is_string($fields)) {
+            $this->getPagination()->addParameter('fields', $fields);
+        } else if (is_array($fields)) {
+            $this->getPagination()->addParameter('fields', implode(':', $fields));
+        } else {
+            $this->getPagination()->removeParameter('fields');
+        }
+        
+        return $this;
+    }
+    
+    /**
      * Shortcut function for the Pagination::addFilter method
      * 
      * @param string   $key   Filter key
