@@ -1,4 +1,5 @@
 # Requesting property information
+
 This file demonstrates how to request property information.  
 
 Without the id query parameter, the example outputs a list of live properties for the first brand on the target api.
@@ -146,3 +147,4 @@ try {
 * [Add an image to a property](add-image.html)
 * [Add a note to a property](add-note.html)
 * [Filtering properties](filtering.html)
+* [Using/requesting fields in collections](requesting-fields-in-collections.html)

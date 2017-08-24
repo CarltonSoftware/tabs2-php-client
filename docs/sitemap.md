@@ -12,6 +12,7 @@
  * [Adding a note to an actor](actor/add-note.html)
  * [Adding a payment to a customer](actor/add-payment.html)
  * [Adding a phonenumber to an actor](actor/add-phonenumber.html)
+ * [Authenticating actors](actor/authenticating-an-actor.html)
  * [Creating a new customer](actor/creating-a-customer.html)
  * [Accessing customer data](actor/index.html)
  * [Requesting a brochure](actor/requesting-a-brochure.html)
@@ -27,7 +28,7 @@
  * [Cancelling a booking](booking/cancel-booking.html)
  * [Confirming a booking](booking/confirm-booking.html)
  * [Creating a booking](booking/create-booking.html)
- * [Creating a sagepay payment.](booking/create-sagepayment.html)
+ * [Creating a sagepay payment](booking/create-sagepayment.html)
  * [Accessing booking data](booking/index.html)
  * [Making an owner booking](booking/make-an-owner-booking.html)
  * [Creating a provisional booking.](booking/provisional-booking.html)
@@ -49,6 +50,7 @@
  * [Adding a note to a property](property/add-note.html)
  * [Filtering properties](property/filtering.html)
  * [Requesting property information](property/index.html)
+ * [Requesting specific fields in property collections](property/requesting-fields-in-collections.html)
 
 
 ## Root examples

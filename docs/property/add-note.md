@@ -28,10 +28,9 @@ try {
         $note->setSubject('Adipiscing rhubarb')
             ->setCreatedby($me)
             ->setNotetype($noteType)
-            ->getNotetexts()->addElement($noteText);
+            ->addNotetext($noteText);
 
         $note->create();
-        $noteText->create();
 
         // Create the property note
         $pNote = new \tabs\apiclient\note\PropertyNote();

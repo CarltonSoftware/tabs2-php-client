@@ -16,7 +16,7 @@ try {
             <p>From: <?php echo $booking->getFromdate()->format('Y-m-d'); ?></p>
             <p>To: <?php echo $booking->getTodate()->format('Y-m-d'); ?></p>
             <p>Booked: <?php echo $booking->getBookeddatetime()->format('Y-m-d H:i:s'); ?></p>
-            <p>Property: <?php echo $booking->getProperty()->getName(); ?></p>
+            <p>Property: <a href='../property?id=<?php echo $booking->getProperty()->getId(); ?>'><?php echo $booking->getProperty()->getName(); ?></a></p>
             <p>Status: <?php echo $booking->getStatus(); ?>
         <?php
             if (!$booking->isProvisional() && !$booking->isCancelled()) {
@@ -44,7 +44,9 @@ try {
                 <?php
             } else {
                 ?>
-            <p>Customer: <?php echo $booking->getCustomers()->first()->getCustomer()->getFullname(); ?>
+            <p>Customer: <a href='../actor?id=<?php echo $booking->getCustomers()->first()->getCustomer()->getId(); ?>'>
+                <?php echo $booking->getCustomers()->first()->getCustomer()->getFullname(); ?></a>
+            </p>
                 <?php
             }
         

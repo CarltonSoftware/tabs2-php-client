@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @name Creating a sagepay payment.
+ * @name Creating a sagepay payment
  * 
  * This file documents how to create a sagepay payment and add it to a booking.
  * 
