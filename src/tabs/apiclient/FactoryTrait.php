@@ -97,10 +97,6 @@ trait FactoryTrait
         
         $object = new static();
         
-        if (method_exists($object, 'setDormant')) {
-            $object->setDormant(false);
-        }
-        
         if (is_string($element)) {
             $link = new Link();
             $link->setLink($element);
@@ -112,10 +108,6 @@ trait FactoryTrait
         
         if ($parent && $object instanceof Base) {
             $object->setParent($parent);
-        }
-        
-        if (method_exists($object, 'setDormant')) {
-            $object->setDormant(true);
         }
 
         return $object;
@@ -132,6 +124,10 @@ trait FactoryTrait
      */
     public static function setObjectProperties(&$obj, $node, $exceptions = array())
     {
+        if (method_exists($obj, 'setDormant')) {
+            $obj->setDormant(false);
+        }
+        
         foreach ($node as $key => $val) {
             $func = 'set' . ucfirst($key);
             if (!in_array($key, $exceptions)
@@ -139,6 +135,10 @@ trait FactoryTrait
             ) {
                 $obj->$func($val);
             }
+        }
+        
+        if (method_exists($obj, 'setDormant')) {
+            $obj->setDormant(true);
         }
     }
 
@@ -352,7 +352,6 @@ trait FactoryTrait
      */
     protected function setObjectProperty($obj, $property, $value)
     {
-        $state = TABS2_APICLIENT_STATE_DORMANT;
         switch (strtolower(gettype($obj->$property))) {
         case 'array':
         case 'integer':
@@ -362,7 +361,6 @@ trait FactoryTrait
             if ($obj->$property instanceof \DateTime  && (!$value instanceof \DateTime)) {
                 //Special handling for DateTime fields
                 $obj->$property = new \DateTime($value);
-                $state = TABS2_APICLIENT_STATE_EDITED;
             } else if ($obj->$property instanceof \tabs\apiclient\StaticCollection 
                 && (!$value instanceof \tabs\apiclient\StaticCollection)
                 && is_array($value)
@@ -371,30 +369,21 @@ trait FactoryTrait
             } else {
                 // Normo property values
                 $obj->$property = $value;
-                $state = TABS2_APICLIENT_STATE_EDITED;
             }
             break;
         case 'boolean':
             if (is_bool($value)) {
                 $obj->$property = $value;
-                $state = TABS2_APICLIENT_STATE_EDITED;
             }
             break;
         case 'string':
             if (is_string($value)) {
                 $obj->$property = trim($value);
-                $state = TABS2_APICLIENT_STATE_EDITED;
             }
             break;
         case 'float':
             $obj->setFloatVal($value, $property);
-            $state = TABS2_APICLIENT_STATE_EDITED;
             break;
-        }
-        
-        // Set the edited flag if needed
-        if ($obj instanceof Base && method_exists($this, 'setState')) {
-            $obj->setState($state);
         }
     }
 

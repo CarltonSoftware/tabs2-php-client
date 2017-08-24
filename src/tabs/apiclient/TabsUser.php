@@ -12,8 +12,15 @@ namespace tabs\apiclient;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
+ * 
+ * @method integer getTabsusername()        Returns the tabsusername 
  */
 class TabsUser extends Actor
 {
-    
+    /**
+     * tabsusername
+     *
+     * @var string
+     */
+    protected $tabsusername;    
 }

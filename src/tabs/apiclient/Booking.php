@@ -419,11 +419,9 @@ class Booking extends Builder
      */
     public function __construct($id = null)
     {
-        $this->setGuesttype('Customer');
-        $this->setBookeddatetime(new \DateTime());
-        $this->setFromdate(new \DateTime());
-        $this->setTodate(new \DateTime());
-        
+        $this->bookeddatetime = new \DateTime();
+        $this->fromdate = new \DateTime();
+        $this->todate = new \DateTime();   
         $this->suppliers = StaticCollection::factory(
             'supplier',
             new booking\Supplier()
@@ -739,9 +737,6 @@ class Booking extends Builder
        
         if (!$this->getId()) {
             $arr['guesttype'] = $this->getGuesttype();
-            $arr['fromdate'] = $this->getFromdate()->format('Y-m-d');
-            $arr['todate'] = $this->getTodate()->format('Y-m-d');
-            $arr['bookeddatetime'] = $this->getBookeddatetime()->format('Y-m-d H:i:s');
             $arr['ignorechangedayrules'] = $this->boolToStr($this->getIgnorechangedayrules());
             $arr['bypasschecks'] = $this->boolToStr($this->getBypasschecks());
             $arr['bypasspetchecks'] = $this->boolToStr($this->getBypasspetchecks());

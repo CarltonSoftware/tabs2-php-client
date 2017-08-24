@@ -81,7 +81,11 @@ try {
         }
 
         echo '<h5>Price</h5>';
-        echo '<p>Brochure: £' . $booking->getBrochurePrice();
+        echo '<p>Brochure: £' . $booking->getBrochurePrice() . '</p>';
+        echo '<p>Party saving: £' . $booking->getPartySizeSaving() . '</p>';
+        echo '<p>Promotional code saving: £' . $booking->getPromotionCodeSaving() . '</p>';
+        echo '<p>Special offer saving: £' . $booking->getSpecialOfferSaving() . '</p>';
+
         $extras = $booking->getExtras()->findBy(function($ele) {
             return !$ele->getConfiguration()->isIncluded();
         });
@@ -97,7 +101,7 @@ try {
                 );
             }
         }
-        echo '<p>Total: £' . $booking->getTotalPrice();
+        echo '<p>Total: £' . $booking->getTotalPrice() . '</p>';
 
         if ($booking->getSecuritydeposits()->count() > 0) {
             echo sprintf(

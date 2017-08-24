@@ -77,7 +77,11 @@ try {
             }
             
             echo '<h5>Price</h5>';
-            echo '<p>Brochure: £' . $booking->getBrochurePrice();
+            echo '<p>Brochure: £' . $booking->getBrochurePrice() . '</p>';
+            echo '<p>Party saving: £' . $booking->getPartySizeSaving() . '</p>';
+            echo '<p>Promotional code saving: £' . $booking->getPromotionCodeSaving() . '</p>';
+            echo '<p>Special offer saving: £' . $booking->getSpecialOfferSaving() . '</p>';
+
             $extras = $booking->getExtras()->findBy(function($ele) {
                 return !$ele->getConfiguration()->isIncluded();
             });
@@ -93,7 +97,7 @@ try {
                     );
                 }
             }
-            echo '<p>Total: £' . $booking->getTotalPrice();
+            echo '<p>Total: £' . $booking->getTotalPrice() . '</p>';
             
             if ($booking->getSecuritydeposits()->count() > 0) {
                 echo sprintf(
@@ -142,12 +146,13 @@ try {
 
 ```
 
-* [Creating a new booking](creating-a-booking.html)
+* [Creating a new booking](create-booking.html)
 * [Adding a customer](add-customer.html)
 * [Adding a extra](add-extra.html)
 * [Removing an extra](remove-extra.html)
 * [Adding pets](adding-pets.html)
 * [Adding guests to a booking](add-guests.html)
+* [Adding a promotion to a booking](add-promotion.html)
 * [Adding a sagepay payment](create-sagepayment.html)
 * [Converting to a provisional booking](provisional-booking.html)
 * [Removing a security deposit](remove-sd.html)
