@@ -25,10 +25,9 @@ try {
         $note->setSubject('Adipiscing rhubarb')
             ->setCreatedby($customer)
             ->setNotetype($noteType)
-            ->getNotetexts()->addElement($noteText);
+            ->addNotetext($noteText);
         
         $note->create();
-        $noteText->create();
         $actorNote = new \tabs\apiclient\note\ActorNote();
         $actorNote->setNote($note)->setParent($customer)->create();
         

@@ -27,9 +27,16 @@ class Root
     /**
      * Valid fields
      * 
-     * @var StaticCollection
+     * @var array
      */
     protected $validfields = array();
+    
+    /**
+     * Valid scalar fields (useful for exporting data)
+     * 
+     * @var array
+     */
+    protected $scalarfields = array();
 
     /**
      * Get the root object
@@ -56,6 +63,11 @@ class Root
         foreach (get_object_vars($json->fields) as $entity => $fields) {
             foreach ($fields as $field) {
                 $root->addValidfield($entity, $field);
+            }
+        }
+        foreach (get_object_vars($json->scalar_fields) as $entity => $fields) {
+            foreach ($fields as $field) {
+                $root->addScalarfield($entity, $field);
             }
         }
         
@@ -96,6 +108,16 @@ class Root
     }
     
     /**
+     * Get the scalar fields
+     * 
+     * @return array
+     */
+    public function getScalarfields()
+    {
+        return $this->scalarfields;
+    }
+    
+    /**
      * Add a valid field
      * 
      * @param string $entity Entity type
@@ -109,6 +131,24 @@ class Root
             $this->validfields[$entity] = array();
         }
         $this->validfields[$entity][] = $field;
+        
+        return $this;
+    }
+    
+    /**
+     * Add a valid scalar field
+     * 
+     * @param string $entity Entity type
+     * @param string $field  Field
+     * 
+     * @return \tabs\apiclient\Root
+     */
+    public function addScalarfield($entity, $field)
+    {
+        if (!isset($this->scalarfields[$entity])) {
+            $this->scalarfields[$entity] = array();
+        }
+        $this->scalarfields[$entity][] = $field;
         
         return $this;
     }

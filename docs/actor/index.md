@@ -141,4 +141,5 @@ try {
 * [Adding documents to actors](add-document.html)
 * [Adding an email address](add-email.html)
 * [Adding a phone number](add-phonenumber.html)
-* [Requesting a brochure](requesting-a-brochure.html)
+* [Requesting a Brochure](requesting-a-brochure.html)
+* [Authenticating an Actor](authenticating-an-actor.html)

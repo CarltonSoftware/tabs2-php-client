@@ -205,14 +205,8 @@ class Extra extends Builder
      */
     public function toArray()
     {
-        $arr = array(
-            'extraid' => $this->getExtra()->getId(),
-            'quantity' => $this->getQuantity()
-        );
-        
-        if ($this->getUnitprice()) {
-            $arr['unitprice'] = $this->getUnitprice();
-        }
+        $arr = $this->__toArray();
+        $arr['extraid'] = $this->getExtra()->getId();
         
         return $arr;
     }

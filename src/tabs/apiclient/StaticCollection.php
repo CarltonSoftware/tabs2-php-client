@@ -249,8 +249,16 @@ class StaticCollection implements \Iterator, \Countable
             // Get collection class by checking for discriminator map
             $collectionClass = $this->_getCollectionClass($element);
             
+            if ($element instanceof \stdClass) {
+                $data = $element;
+            }
+            
             // Instatiate new element by calling factory method
             $element = $collectionClass::factory($element);
+            
+            if (!empty($data) && $element instanceof Base) {
+                $element->setResponsedata($data);
+            }
         }
         
         if ($this->getElementParent()) {

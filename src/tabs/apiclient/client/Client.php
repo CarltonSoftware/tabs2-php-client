@@ -474,9 +474,20 @@ class Client extends \GuzzleHttp\Client
      */
     public function request($method, $uri = '', array $options = array())
     {
-        $response = parent::request($method, $uri, $options);
-        
-        // TODO Throw exceptions
+        try {
+            $response = parent::request($method, $uri, $options);
+        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+            if ($ex->getResponse()->getStatusCode() === 400) {
+                throw new \tabs\apiclient\exception\Exception(
+                    $ex->getResponse(),
+                    '',
+                    $ex->getResponse()->getStatusCode(),
+                    $ex
+                );
+            } else {
+                throw $ex;
+            }
+        }
         
         return $response;
     }
