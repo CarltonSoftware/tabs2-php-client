@@ -162,7 +162,7 @@ gulp.task('buildexamples', function() {
                 p.push('');
                 p.push('');
                 p.push('## Getting started');
-                p.push(' * [index.html] Introduction - READ ME first!');
+                p.push(' * [Introduction - READ ME first!](index.html)');
                 var last = '';
                 for (var i in sitemap) {
                     if (last != sitemap[i].directory) {

@@ -2,7 +2,7 @@
 
 
 ## Getting started
- * [index.html] Introduction - READ ME first!
+ * [Introduction - READ ME first!](index.html)
 
 
 ## Actor examples
