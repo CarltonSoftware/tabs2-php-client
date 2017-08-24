@@ -81,7 +81,7 @@ trait StateTrait
      */
     public function isEdited()
     {
-        return $this->states[TABS2_APICLIENT_STATE_EDITED] == true;
+        return $this->states[TABS2_APICLIENT_STATE_EDITED] === true;
     }
     
     /**
@@ -105,7 +105,7 @@ trait StateTrait
      */
     public function isDormant()
     {
-        return $this->states[TABS2_APICLIENT_STATE_DORMANT] == true;
+        return $this->states[TABS2_APICLIENT_STATE_DORMANT] === true;
     }
     
     /**
@@ -129,7 +129,7 @@ trait StateTrait
      */
     public function isFetched()
     {
-        return $this->states[TABS2_APICLIENT_STATE_FETCHED] == true;
+        return $this->states[TABS2_APICLIENT_STATE_FETCHED] === true;
     }
     
     /**
