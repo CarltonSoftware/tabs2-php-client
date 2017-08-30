@@ -366,7 +366,7 @@ class StaticCollection implements \Iterator, \Countable
     {
         $elements = $this->getElements();
         uasort($elements, $cmp);
-        $this->setElements($elements);
+        $this->elements = $elements;
         
         return $this;
     }
@@ -461,7 +461,7 @@ class StaticCollection implements \Iterator, \Countable
     }
     
     /**
-     * Find an element or elements using aa particular callback
+     * Find an element or elements using a particular callback
      * 
      * @param \tabs\apiclient\callable $fn Function
      * 
