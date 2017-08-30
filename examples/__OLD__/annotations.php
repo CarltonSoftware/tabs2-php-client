@@ -3,7 +3,7 @@
 // Include the connection
 require_once __DIR__ . '/../creating-a-new-connection.php';
 
-$class = new tabs\apiclient\Facet();
+$class = new tabs\apiclient\TriggerEvent();
 
 $ref = new ReflectionClass($class);
 $properties = array();
@@ -40,13 +40,22 @@ foreach ($ref->getProperties() as $property) {
 }
 
 foreach ($properties as $prop => $type) {
-    echo sprintf(
-        " * @method %s get%s() Returns the %s %s\n",
-        $type,
-        ucfirst($prop),
-        $prop,
-        $type
-    );
+    if (in_array($type, array('string', 'integer', 'float', 'boolean', '\DateTime'))) {
+        echo sprintf(
+            " * @method %s get%s() Returns the %s %s\n",
+            $type,
+            ucfirst($prop),
+            $prop,
+            $type
+        );
+    } else {
+        echo sprintf(
+            " * @method %s get%s() Returns the %s object\n",
+            $type,
+            ucfirst($prop),
+            $prop
+        );
+    }
     if (in_array($type, array('string', 'integer', 'float', 'boolean', '\DateTime'))) {
         echo sprintf(
             " * @method %s set%s(%s %svar) Sets the %s\n * \n",
@@ -175,7 +184,7 @@ foreach ($properties as $prop => $type) {
 echo "\t/**\n\t * @inheritDoc\n\t */\n";
 echo "\tpublic function toArray()\n\t{\n";
 
-echo "\t\treturn array(\n";
+echo "\t\t\$arr = \$this->__toArray();\n\n";
 foreach ($properties as $prop => $type) {
     if (substr($type, 0, 16) == 'StaticCollection'
         || substr($type, 0, 10) == 'Collection'
@@ -185,40 +194,23 @@ foreach ($properties as $prop => $type) {
         continue;
     }
     
-    if ($type == 'boolean') {
-        echo sprintf(
-            "\t\t\t'%s' => \$this->boolToStr(\$this->%s)",
-            $prop,
-            'get' . ucfirst($prop) . '()'
-        );
-    } else {
-    
-        if (stristr($type, 'apiclient')) {
-            echo sprintf(
-                "\t\t\t'%sid' => \$this->%s",
-                $prop,
-                'get' . ucfirst($prop) . '()'
-            );
-        } else {
-            echo sprintf(
-                "\t\t\t'%s' => \$this->%s",
-                $prop,
-                'get' . ucfirst($prop) . '()'
-            );
-        }
-    }
     
     if (stristr($type, 'apiclient')) {
-        echo '->getId()';
+        echo sprintf(
+            "\t\tif (\$this->%s) {\n",
+            'get' . ucfirst($prop) . '()'
+        );
+        echo sprintf(
+            "\t\t\t\$arr['%sid'] = \$this->%s;\n",
+            $prop,
+            'get' . ucfirst($prop) . '()->getId()'
+        );
+        echo sprintf(
+            "\t\t}\n\n"
+        );
     }
-    
-    if (stristr($type, '\DateTime')) {
-        echo "->format('Y-m-d')";
-    }
-    
-    echo ",\n";
 }
-echo "\t\t);\n";
+echo "\t\treturn \$arr;\n";
 
 echo "\t}";
 

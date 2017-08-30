@@ -57,6 +57,11 @@
  * [Getting the root endpoint](root/index.html)
 
 
+## Template examples
+ * [Using templates](template/contactmethod.html)
+ * [Tabs2 templates](template/index.html)
+
+
 ## Webhooks examples
  * [Subscribing to a webhook](webhooks/subscribing-to-webhooks.html)
  * [Example of receiving a webhook notification](webhooks/webhook-endpoint.html)

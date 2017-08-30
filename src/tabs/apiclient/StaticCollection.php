@@ -356,6 +356,22 @@ class StaticCollection implements \Iterator, \Countable
     }
     
     /**
+     * Sort the local collection using uasort
+     * 
+     * @param callable $cmp Compare function
+     * 
+     * @return \tabs\apiclient\StaticCollection
+     */
+    public function sort($cmp)
+    {
+        $elements = $this->getElements();
+        uasort($elements, $cmp);
+        $this->setElements($elements);
+        
+        return $this;
+    }
+    
+    /**
      * Get the collection class.
      * 
      * If a discriminator is present attempt to look for a mapped class to return.

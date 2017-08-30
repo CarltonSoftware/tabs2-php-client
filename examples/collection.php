@@ -26,7 +26,7 @@ if (!empty($collection)) {
             str_replace('\\', '_', $element->getFullClass()) . '-' . $element->getId()
         );
         
-        if (in_array($element->getClass(), array('Property'))) {
+        if (in_array($element->getClass(), array('Property', 'Template'))) {
             echo sprintf(
                 '<li><a href="/platoclient/%s/?id=%s">%s</a></li>',
                 strtolower($element->getClass()),
