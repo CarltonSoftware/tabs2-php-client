@@ -4,6 +4,7 @@ namespace tabs\apiclient\property;
 
 use tabs\apiclient\Builder;
 use tabs\apiclient\Inspector;
+use tabs\apiclient\InspectionType;
 
 /**
  * Tabs Rest API Inspection object.
@@ -35,6 +36,8 @@ use tabs\apiclient\Inspector;
  * @method Inspection setNotes(string $var) Sets the notes
  * 
  * @method Inspector getInspector() Returns the inspector
+ * 
+ * @method InspectionType getInspectiontype() Returns the inspectiontype
  */
 class Inspection extends Builder
 {
@@ -86,6 +89,13 @@ class Inspection extends Builder
      * @var \tabs\apiclient\Inspector
      */
     protected $inspector;
+    
+    /**
+     * Inspectiontype
+     *
+     * @var \tabs\apiclient\Inspectiontype
+     */
+    protected $inspectiontype;
 
     // -------------------- Public Functions -------------------- //
 
@@ -112,6 +122,20 @@ class Inspection extends Builder
 
         return $this;
     }
+    
+    /**
+     * Set the inspectiontype
+     *
+     * @param stdclass|array|InspectionType $inspectiontype The inspectiontype
+     *
+     * @return Inspection
+     */
+    public function setInspectiontype($inspectiontype)
+    {
+        $this->inspectiontype = InspectionType::factory($inspectiontype);
+
+        return $this;
+    }    
 
     /**
      * @inheritDoc
@@ -124,7 +148,8 @@ class Inspection extends Builder
             'gradingunit' => $this->getGradingunit(),
             'inspectorname' => $this->getInspectorname(),
             'notes' => $this->getNotes(),
-            'inspector' => $this->getInspector()->getId()
+            'inspector' => $this->getInspector()->getId(),
+            'inspectiontype' => $this->getInspectiontype()->getId(),
         );
         
         if ($this->getReinspectiondate()) {
