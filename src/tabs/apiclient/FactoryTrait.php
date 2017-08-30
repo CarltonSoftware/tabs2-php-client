@@ -41,12 +41,16 @@ trait FactoryTrait
      * Get the json
      * 
      * @param \Psr\Http\Message\ResponseInterface $response Response
+     * @param boolean                             $assoc    Array or not
      * 
-     * @return \stdClass
+     * @return \stdClass|array
      */
-    public static function getJson($response)
+    public static function getJson($response, $assoc = false)
     {
-        return \GuzzleHttp\json_decode((string) $response->getBody());
+        return \GuzzleHttp\json_decode(
+            (string) $response->getBody(),
+            $assoc
+        );
     }
 
     /**
@@ -307,9 +311,10 @@ trait FactoryTrait
     }
 
     /**
-     * Get magic method.  Added for symfony forms.
+     * Set magic method.  Added for symfony forms.
      *
-     * @param string $name Name of property
+     * @param string $name  Name of property
+     * @param string $value Value
      *
      * @return mixed
      */
@@ -318,6 +323,21 @@ trait FactoryTrait
         if (property_exists($this, $name)) {
             $this->setObjectProperty($this, $name, $value);
         }
+    }
+
+    /**
+     * Generic setter to allow for setting public properties.
+     *
+     * @param string $name  Name of property
+     * @param string $value Value
+     *
+     * @return mixed
+     */
+    public function set($name, $value)
+    {
+        $this->$name = $value;
+        
+        return $this;
     }
     
     /**
@@ -331,6 +351,8 @@ trait FactoryTrait
         foreach ($this->changes as $key => $val) {
             if ($val instanceof \DateTime) {
                 $arr[$key] = $val->format('Y-m-d H:i:s');
+            } else if (is_bool($val)) {
+                $arr[$key] = $this->boolToStr($val);
             } else {
                 $arr[$key] = $val;
             }
