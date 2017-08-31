@@ -81,6 +81,7 @@ use tabs\apiclient\booking\OwnerPaymentSummary;
  * @method PricingPeriod getPricingperiod() Returns the pricingperiod
  * 
  * @method Source getSource() Returns the source
+ * @method SourceMarketingBrand getSourcemarketingbrand() Returns the source marketing brand
  * 
  * @method string getEstimatedarrivaltime() Returns the estimatedarrivaltime
  * @method Booking setEstimatedarrivaltime(string $var) Sets the estimatedarrivaltime
@@ -271,6 +272,13 @@ class Booking extends Builder
      * @var Source
      */
     protected $source;
+    
+    /**
+     * Source marketing brand
+     * 
+     * @var SourceMarketingBrand
+     */
+    protected $sourcemarketingbrand;
 
     /**
      * Estimatedarrivaltime
@@ -551,6 +559,20 @@ class Booking extends Builder
     }
 
     /**
+     * Set the source marketing brand
+     *
+     * @param stdclass|array|SourceMarketingBrand $smb The Source
+     *
+     * @return Booking
+     */
+    public function setSourcemarketingbrand($smb)
+    {
+        $this->sourcemarketingbrand = SourceMarketingBrand::factory($smb);
+
+        return $this;
+    }
+
+    /**
      * Set the potentialbooking
      *
      * @param stdclass|array|PotentialBooking $potentialbooking The Potentialbooking
@@ -757,6 +779,14 @@ class Booking extends Builder
         
         if ($this->getProperty()) {
             $arr['propertyid'] = $this->getProperty()->getId();
+        }
+        
+        if ($this->getSource()) {
+            $arr['sourceid'] = $this->getSource()->getId();
+        }
+        
+        if ($this->getSourcemarketingbrand()) {
+            $arr['sourcemarketingbrandid'] = $this->getSourcemarketingbrand()->getId();
         }
         
         if ($this->getAgencybookingtype()) {
