@@ -789,41 +789,39 @@ class Booking extends Builder
                     );
                 }
             }
+        
+            if ($this->getCurrency()) {
+                $arr['currencycode'] = $this->getCurrency()->getCode();
+            }
+        
+            if ($this->getSaleschannel()) {
+                $arr['saleschannel'] = $this->getSaleschannel()->getSaleschannel();
+            }
+        
+            if ($this->getPricingperiod()) {
+                $arr['pricingperiod'] = $this->getPricingperiod()->getPricingperiod();
+            } else {
+                // Set to week as default.  This shouldn't be used very much.
+                $arr['pricingperiod'] = 'Week';
+            }
         }
         
-        if ($this->getProperty()) {
+        if ($this->getGuesttype() !== 'Customer' && $this->getProperty()) {
             $arr['propertyid'] = $this->getProperty()->getId();
-        }
-        
-        if ($this->getSource()) {
-            $arr['sourceid'] = $this->getSource()->getId();
         }
         
         if ($this->getSourcemarketingbrand()) {
             $arr['sourcemarketingbrandid'] = $this->getSourcemarketingbrand()->getId();
+        } else if ($this->getSource()) {
+            $arr['sourceid'] = $this->getSource()->getId();
         }
         
-        if ($this->getAgencybookingtype()) {
+        if ($this->getGuesttype() === 'Agency' && $this->getAgencybookingtype()) {
             $arr['agencybookingtypeid'] = $this->getAgencybookingtype()->getId();
         }
         
-        if ($this->getPropertybranding()) {
+        if ($this->getGuesttype() === 'Customer' && $this->getPropertybranding()) {
             $arr['propertybrandingid'] = $this->getPropertybranding()->getId();
-        }
-        
-        if ($this->getSaleschannel()) {
-            $arr['saleschannel'] = $this->getSaleschannel()->getSaleschannel();
-        }
-        
-        if ($this->getCurrency()) {
-            $arr['currencycode'] = $this->getCurrency()->getCode();
-        }
-        
-        if ($this->getPricingperiod()) {
-            $arr['pricingperiod'] = $this->getPricingperiod()->getPricingperiod();
-        } else {
-            // Set to week as default.  This shouldn't be used very much.
-            $arr['pricingperiod'] = 'Week';
         }
         
         if ($this->getPotentialbooking()) {
