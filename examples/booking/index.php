@@ -31,6 +31,7 @@ try {
 
         if (!$booking->isConfirmed() && $booking->isProvisional()) {
             ?>
+        <p>Deposit amount: <?php echo $booking->getProvisionalbooking()->getDepositamount(); ?></p>
         <p>Deposit due: <?php echo $booking->getProvisionalbooking()->getDepositduedate()->format('d F Y'); ?></p>
         <p><a href="confirm-booking.php?id=<?php echo $booking->getId(); ?>">Confirm booking</a></p>
             <?php

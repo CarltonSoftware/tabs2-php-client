@@ -703,7 +703,7 @@ class Booking extends Builder
      */
     public function setAgencybookingtype($abt)
     {
-        $this->agencybookingtype = AgencyBookingType::factor($abt);
+        $this->agencybookingtype = AgencyBookingType::factory($abt);
         
         return $this;
     }
