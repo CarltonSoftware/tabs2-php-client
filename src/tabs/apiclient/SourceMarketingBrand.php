@@ -90,7 +90,7 @@ class SourceMarketingBrand extends Builder
      */
     public function setSource($s)
     {
-        $this->source = Source::factory($mb);
+        $this->source = Source::factory($s);
         
         return $this;
     }
