@@ -8,6 +8,7 @@ use tabs\apiclient\SalesChannel;
 use tabs\apiclient\Currency;
 use tabs\apiclient\PricingPeriod;
 use tabs\apiclient\Source;
+use tabs\apiclient\SourceMarketingBrand;
 use tabs\apiclient\PotentialBooking;
 use tabs\apiclient\WebBooking;
 use tabs\apiclient\ProvisionalBooking;
@@ -80,7 +81,6 @@ use tabs\apiclient\booking\OwnerPaymentSummary;
  * 
  * @method PricingPeriod getPricingperiod() Returns the pricingperiod
  * 
- * @method Source getSource() Returns the source
  * @method SourceMarketingBrand getSourcemarketingbrand() Returns the source marketing brand
  * 
  * @method string getEstimatedarrivaltime() Returns the estimatedarrivaltime
@@ -748,6 +748,20 @@ class Booking extends Builder
         }
         
         return $this;
+    }
+    
+    /**
+     * Get the source
+     * 
+     * @return Source
+     */
+    public function getSource()
+    {
+        if ($this->getSourcemarketingbrand()) {
+            return $this->getSourcemarketingbrand()->getSource();
+        } else if ($this->source) {
+            return $this->source;
+        }
     }
 
     /**
