@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @name Adding a phonenumber to an actor
+ * @name Adding a phone number to an actor
  * 
  * This file documents how to add a new phone number to a customer with the Plato API.
  */

@@ -322,6 +322,8 @@ trait FactoryTrait
     {
         if (property_exists($this, $name)) {
             $this->setObjectProperty($this, $name, $value);
+        } else {
+            $this->$name = $value;
         }
     }
 

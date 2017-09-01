@@ -15,13 +15,14 @@ use tabs\apiclient\MarketingBrand;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method \DateTime getFromdate()              Returns the fromdate
- * @method Vatrate   setFromdate(\DateTime $dt) Set the fromdate
+ * @method \DateTime            getFromdate()              Returns the fromdate
+ * @method SourceMarketingBrand setFromdate(\DateTime $dt) Set the fromdate
  * 
- * @method \DateTime getTodate()              Returns the todate
- * @method Vatrate   setTodate(\DateTime $dt) Set the todate
+ * @method \DateTime getTodate() Returns the todate
+ * @method SourceMarketingBrand  setTodate(\DateTime $dt) Set the todate
  * 
- * @method MarketingBrand getMarketingbrand() Returns the brochure marketing brand
+ * @method MarketingBrand getMarketingbrand() Returns the marketing brand
+ * @method Source getSource() Returns the source
  */
 class SourceMarketingBrand extends Builder
 {
@@ -45,6 +46,13 @@ class SourceMarketingBrand extends Builder
      * @var \tabs\apiclient\MarketingBrand
      */
     protected $marketingbrand;
+    
+    /**
+     * Source
+     * 
+     * @var \tabs\apiclient\Source
+     */
+    protected $source;
 
     // -------------------- Public Functions -------------------- //
 
@@ -74,6 +82,20 @@ class SourceMarketingBrand extends Builder
     }
     
     /**
+     * Set the source
+     * 
+     * @param stdClass|array|string|Source $s Source
+     * 
+     * @return SourceMarketingBrand
+     */
+    public function setSource($s)
+    {
+        $this->source = Source::factory($s);
+        
+        return $this;
+    }
+    
+    /**
      * @inheritDoc
      */
     public function toArray()
@@ -81,7 +103,8 @@ class SourceMarketingBrand extends Builder
         return array(
             'id' => $this->getId(),
             'fromdate' => $this->getFromdate()->format('Y-m-d'),
-            'todate' => $this->getFromdate()->format('Y-m-d')
+            'todate' => $this->getFromdate()->format('Y-m-d'),
+            'sourceid' => $this->getSource()->getId()
         );
     }
     
