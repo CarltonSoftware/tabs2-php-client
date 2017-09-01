@@ -241,11 +241,14 @@ class Branding extends Builder
      * Get a calendar object with availability for a specific month
      * 
      * @param \DateTime $fromDate Fromdate
+     * @param array     $options  Calendar options
      * 
      * @return Calendar
      */
-    public function getCalendar(\DateTime $fromDate = null)
-    {
+    public function getCalendar(
+        \DateTime $fromDate = null,
+        $options = array()
+    ) {
         if (!$fromDate) {
             $fromDate = new \DateTime('first day of this month');
         }
@@ -256,7 +259,7 @@ class Branding extends Builder
         
         $days = $this->getAvailableDays($fromDate, $toDate);
         
-        $cal = new Calendar();
+        $cal = new Calendar($options);
         $cal->setAvailableDays($days)
             ->setTargetMonth($fromDate);
         

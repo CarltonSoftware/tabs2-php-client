@@ -26,10 +26,7 @@ try {
                 filter_input(INPUT_GET, 'fromdate') ? filter_input(INPUT_GET, 'fromdate') : 'first day of next month'
             );
             $cal = $property->getBrandings()->first()->getCalendar(
-                $today,
-                array(
-                    'cal_cell_content' => '<a href="booking-enquiry?=fromdate={id}">{content}</a>'
-                )
+                $today
             );
             $cal->setProcessDay(function($cell, $day) use ($property) {
                 if ($day && $day->getDaysavailable() > 0) {
