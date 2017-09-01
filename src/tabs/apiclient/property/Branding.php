@@ -241,11 +241,14 @@ class Branding extends Builder
      * Get a calendar object with availability for a specific month
      * 
      * @param \DateTime $fromDate Fromdate
+     * @param array     $options  Calendar options
      * 
      * @return Calendar
      */
-    public function getCalendar(\DateTime $fromDate = null)
-    {
+    public function getCalendar(
+        \DateTime $fromDate = null,
+        $options = array()
+    ) {
         if (!$fromDate) {
             $fromDate = new \DateTime('first day of this month');
         }
@@ -256,7 +259,7 @@ class Branding extends Builder
         
         $days = $this->getAvailableDays($fromDate, $toDate);
         
-        $cal = new Calendar();
+        $cal = new Calendar($options);
         $cal->setAvailableDays($days)
             ->setTargetMonth($fromDate);
         
@@ -301,24 +304,13 @@ class Branding extends Builder
     public function setBookingbrand($bookingbrand)
     {
         $this->bookingbrand = BookingBrand::factory($bookingbrand);
+        
+        // Fix for the non hateoas urls in the api
+        if ($this->getParentProperty()) {
+            $this->bookingbrand->setParent($this->getParentProperty());
+        }
 
         return $this;
-    }
-    
-    /**
-     * Return the booking brand
-     * 
-     * @return BookingBrand
-     */
-    public function getBookingbrand()
-    {
-        if ($property = $this->getParentProperty()
-            && $this->bookingbrand
-        ) {
-            $this->bookingbrand->setParent($property);
-        }
-        
-        return $this->bookingbrand;
     }
 
     /**
@@ -331,24 +323,13 @@ class Branding extends Builder
     public function setMarketingbrand($marketingbrand)
     {
         $this->marketingbrand = MarketingBrand::factory($marketingbrand);
+        
+        // Fix for the non hateoas urls in the api
+        if ($this->getParentProperty()) {
+            $this->marketingbrand->setParent($this->getParentProperty());
+        }
 
         return $this;
-    }
-    
-    /**
-     * Return the booking brand
-     * 
-     * @return MarketingBrand
-     */
-    public function getMarketingbrand()
-    {
-        if ($property = $this->getParentProperty()
-            && $this->marketingbrand
-        ) {
-            $this->marketingbrand->setParent($property);
-        }
-        
-        return $this->marketingbrand;
     }
 
     /**
