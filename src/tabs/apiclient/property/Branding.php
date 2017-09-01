@@ -304,24 +304,13 @@ class Branding extends Builder
     public function setBookingbrand($bookingbrand)
     {
         $this->bookingbrand = BookingBrand::factory($bookingbrand);
+        
+        // Fix for the non hateoas urls in the api
+        if ($this->getParentProperty()) {
+            $this->bookingbrand->setParent($this->getParentProperty());
+        }
 
         return $this;
-    }
-    
-    /**
-     * Return the booking brand
-     * 
-     * @return BookingBrand
-     */
-    public function getBookingbrand()
-    {
-        if ($property = $this->getParentProperty()
-            && $this->bookingbrand
-        ) {
-            $this->bookingbrand->setParent($property);
-        }
-        
-        return $this->bookingbrand;
     }
 
     /**
@@ -334,24 +323,13 @@ class Branding extends Builder
     public function setMarketingbrand($marketingbrand)
     {
         $this->marketingbrand = MarketingBrand::factory($marketingbrand);
+        
+        // Fix for the non hateoas urls in the api
+        if ($this->getParentProperty()) {
+            $this->marketingbrand->setParent($this->getParentProperty());
+        }
 
         return $this;
-    }
-    
-    /**
-     * Return the booking brand
-     * 
-     * @return MarketingBrand
-     */
-    public function getMarketingbrand()
-    {
-        if ($property = $this->getParentProperty()
-            && $this->marketingbrand
-        ) {
-            $this->marketingbrand->setParent($property);
-        }
-        
-        return $this->marketingbrand;
     }
 
     /**

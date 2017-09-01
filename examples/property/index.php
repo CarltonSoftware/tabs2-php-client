@@ -60,18 +60,18 @@ try {
         if ($property->getBrandings()->first() 
             && !filter_input(INPUT_GET, 'fromdate')
         ) {
-            $marketingBrand = $property->getBrandings()->first()->getMarketingBrand();
+            $branding = $property->getBrandings()->first();
             ?>
-    <p>Marketing Brand: <?php echo $marketingBrand->getMarketingbrand()->getName(); ?></p>
+                <p>Marketing Brand: <?php echo $branding->getMarketingbrand()->getMarketingbrand()->getName(); ?></p>
             <?php
 
-            $collection = $marketingBrand->getBrochures();
+            $collection = $branding->getMarketingbrand()->getBrochures();
             include __DIR__ . '/../collection.php';
 
-            $collection = $marketingBrand->getDescriptions();
+            $collection = $branding->getMarketingbrand()->getDescriptions();
             include __DIR__ . '/../collection.php';
 
-            $collection = $marketingBrand->getGroupingvalues();
+            $collection = $branding->getMarketingbrand()->getGroupingvalues();
             include __DIR__ . '/../collection.php';
         }
 
