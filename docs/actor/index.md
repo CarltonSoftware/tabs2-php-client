@@ -75,6 +75,28 @@ try {
             '<p><a href="add-payment.php?id=%s">Add payment</a></p>',
             $customer->getId()
         );
+    
+        echo sprintf(
+            '<p><a href="adding-a-customer-to-a-mailing-list.php?id=%s">Subscribe to a mailing list</a></p>',
+            $customer->getId()
+        );
+
+        if ($customer->getMarketingbrands()->count() > 0) {
+            echo '<h3>Marketing brands</h3>';
+            echo '<ul>';
+            foreach ($customer->getMarketingbrands() as $cmb) {
+                echo '<li>' . $cmb->getMarketingbrand()->getName() . ' ' . ($cmb->getNocontact() ? ' - No contact' : ' - Contact allowed');
+                if ($cmb->getEmaillists()->count() > 0) {
+                    echo '<ul>';
+                    foreach ($cmb->getEmaillists() as $cmbeml) {
+                        echo '<li>' . $cmbeml->getMarketingbrandemaillist()->getListname() . ' ' . ($cmbeml->getUnsubscribed() ? ' - Unsubscribed' : ' - Subscribed') . '</li>';
+                    }
+                    echo '</ul>';
+                }
+                echo '</li>';
+            }
+            echo '</ul>';
+        }
         
         echo sprintf(
             '<p><a href="add-enquiry.php?id=%s">Add enquiry</a></p>',
@@ -143,3 +165,4 @@ try {
 * [Adding a phone number](add-phonenumber.html)
 * [Requesting a Brochure](requesting-a-brochure.html)
 * [Authenticating an Actor](authenticating-an-actor.html)
+* [Subscribing to a mailing list](adding-a-customer-to-a-mailing-list.html)

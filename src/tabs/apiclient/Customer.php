@@ -4,6 +4,7 @@ namespace tabs\apiclient;
 
 use tabs\apiclient\Collection;
 use tabs\apiclient\Booking;
+use tabs\apiclient\marketingbrand\EmailList;
 
 /**
  * Tabs Rest Customer object.
@@ -126,5 +127,61 @@ class Customer extends Actor
         );
         
         parent::__construct($id);
+    }
+    
+    /**
+     * Subscribe or unsubscribe to a mailing list
+     * 
+     * @param EmailList $eml          Mailing list to subscribe to
+     * @param boolean   $nocontact    The customer marketing brand optin flag
+     * @param boolean   $unsubscribed The mailing list optin preference
+     * 
+     * @return Customer
+     */
+    public function subscribeToMailingList(
+        \tabs\apiclient\marketingbrand\EmailList $eml,
+        $nocontact = false,
+        $unsubscribed = false
+    ) {
+        $cmbs = $this->getMarketingbrands()->findBy(function($ele) use ($eml) {
+            return $ele->getMarketingbrand()->getId() === $eml->getParent()->getId();
+        });
+        
+        if ($cmbs->count() === 0) {
+            $cmb = new \tabs\apiclient\actor\MarketingBrand();
+            $cmb->setMarketingbrand($eml->getParent());
+            $cmb->setNocontact(false);
+            $this->getMarketingbrands()->addElement($cmb);
+            $cmb->create();
+        } else {
+            $cmb = $cmbs->first();
+        }
+        
+        // Check if the no contact boolean is the same and if not, update.
+        if ($cmb->getNocontact() != $nocontact) {
+            $cmb->setNocontact($nocontact)->update();
+        }
+        
+        $sub = $cmb->getEmaillists()->findBy(function($ele) use ($eml) {
+            return $ele->getMarketingbrandemaillist()->getId() === $eml->getId();
+        });
+
+        // Get a mailing list for that marketing brand
+        if ($sub->count() === 0) {
+            // Create a mailing list as there isnt one
+            $ceml = new \tabs\apiclient\actor\marketingbrand\EmailList();
+            $ceml->setMarketingbrandemaillist($eml)
+                ->setUnsubscribed($unsubscribed);
+            $cmb->getEmaillists()->addElement($ceml);
+            $ceml->create();
+        } else {
+            // As there is one, set the unsubscribed flag to false if 
+            // its different
+            if ($sub->first()->getUnsubscribed() != $unsubscribed) {
+                $sub->first()->setUnsubscribed($unsubscribed)->update();
+            }
+        }
+        
+        return $this;
     }
 }
