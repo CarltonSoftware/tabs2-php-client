@@ -123,6 +123,10 @@ use tabs\apiclient\booking\OwnerPaymentSummary;
  * @method OwnerPaymentSummary getOwnerpaymentsummary() Returns the Ownerpaymentsummary
  * 
  * @method AgencyBookingType getAgencybookingtype() Returns the booking type for agency bookings
+ * 
+ * @method TransferredBooking getTransferredtobooking() Returns the transferred booking
+ * 
+ * @method TransferredBooking getTransferredfrombooking() Returns the transferred booking
  */
 class Booking extends Builder
 {
@@ -419,7 +423,21 @@ class Booking extends Builder
      * @var AgencyBookingType
      */
     protected $agencybookingtype;
+    
+    /**
+     * Transferred booking
+     * 
+     * @var TransferredBooking
+     */
+    protected $transferredtobooking;
 
+    /**
+     * Transferred booking
+     * 
+     * @var TransferredBooking
+     */
+    protected $transferredfrombooking;
+    
     // -------------------- Public Functions -------------------- //
     
     /**
@@ -871,6 +889,18 @@ class Booking extends Builder
             );
         }
         
+        if ($this->getTransferredfrombooking()
+            && !$this->getTransferredfrombooking()->getId()
+        ) {
+            $arr = array_merge(
+                $arr,
+                $this->prefixToArray(
+                    'transferredbooking',
+                    $this->getTransferredfrombooking()
+                )
+            );
+        }
+        
         return $arr;
     }
     
@@ -917,6 +947,45 @@ class Booking extends Builder
     {
         return $this->getCancelledbooking() 
             && $this->getCancelledbooking()->getId();
+    }
+    
+    /**
+     * Transferred To Booking
+     * 
+     * @param Booking|string|array|\stdClass $booking Booking
+     * 
+     * @return \tabs\apiclient\TransferredBooking
+     */
+    public function setTransferredtobooking($booking)
+    {
+        $this->transferredtobooking = TransferredBooking::factory($booking);
+        
+        return $this;
+    }
+    
+    /**
+     * Transferred From Booking
+     * 
+     * @param Booking|string|array|\stdClass $booking Booking
+     * 
+     * @return \tabs\apiclient\TransferredBooking
+     */
+    public function setTransferredfrombooking($booking)
+    {
+        $this->transferredtobooking = TransferredBooking::factory($booking);
+        
+        return $this;
+    }
+    
+    /**
+     * Return true/false if the booking is transferred or not
+     * 
+     * @return boolean
+     */
+    public function isTransferred()
+    {
+        return $this->getTransferredtobooking() 
+            && $this->getTransferredtobooking()->getId();
     }
     
     /**

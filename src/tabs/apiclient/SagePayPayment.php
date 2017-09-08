@@ -27,12 +27,14 @@ use tabs\apiclient\Base;
  * @method string         getCallbackurl()           Returns the callback url
  * @method string         getFailureurl()            Returns the failure url
  * @method string         getPaymenttype()           Returns the payment type
+ * @method boolean        getRepeatpayment()         Returns the repeat payment bool
  * 
  * @method SagePayPayment setBookingamount(float $var)         Sets the bookingamount
  * @method SagePayPayment setSecuritydepositamount(float $var) Sets the securitydepositamount
  * @method SagePayPayment setCallbackurl(string $var)          Set callback url 
  * @method SagePayPayment setFailureurl(string $var)           Set failure url 
  * @method SagePayPayment setPaymenttype(string $var)          Set payment type
+ * @method SagePayPayment setRepeatpayment(boolean $var)       Set the repeat payment flag
  */
 class SagePayPayment extends Base
 {
@@ -105,6 +107,13 @@ class SagePayPayment extends Base
      * @var string
      */
     protected $failureurl = '';
+    
+    /**
+     * Continuous authority bool
+     * 
+     * @var boolean
+     */
+    protected $repeatpayment = false;
     
     /**
      * Payment type.  Can be either PAYMENT OR DEFERRED.
@@ -194,7 +203,8 @@ class SagePayPayment extends Base
             'amount' => $this->getAmount(),
             'callbackurl' => $this->getCallbackurl(),
             'failureurl' => $this->getFailureurl(),
-            'paymenttype' => $this->getPaymenttype()
+            'paymenttype' => $this->getPaymenttype(),
+            'repeatpayment' => $this->getRepeatpayment()
         );
         
         if ($this->getPaymentmethod()) {
