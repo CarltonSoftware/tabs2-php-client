@@ -365,4 +365,22 @@ class Branding extends Builder
             'extraprices' => $this->getExtraprices()->toArray(),
         );
     }
+    
+    /**
+     * For serialisation
+     * 
+     * @return array
+     */
+    public function __sleep()
+    {
+        return array(
+            'id',
+            'marketingbrand',
+            'bookingbrand',
+            'promote',
+            'status',
+            'allowbookingonwebuntil',
+            'showpricingonwebuntil'
+        );
+    }
 }
