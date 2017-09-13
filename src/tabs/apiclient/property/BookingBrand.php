@@ -85,4 +85,17 @@ class BookingBrand extends Builder
             'primarybookingbrand' => $this->boolToStr($this->getPrimarybookingbrand())
         );
     }
+    
+    /**
+     * For serialisation
+     * 
+     * @return array
+     */
+    public function __sleep()
+    {
+        return array(
+            'id',
+            'bookingbrand'
+        );
+    }
 }

@@ -307,7 +307,8 @@ class Branding extends Builder
         
         // Fix for the non hateoas urls in the api
         if ($this->getParentProperty()) {
-            $this->bookingbrand->setParent($this->getParentProperty());
+            $prop = $this->getParentProperty();
+            $this->bookingbrand->setParent($prop);
         }
 
         return $this;
@@ -326,7 +327,8 @@ class Branding extends Builder
         
         // Fix for the non hateoas urls in the api
         if ($this->getParentProperty()) {
-            $this->marketingbrand->setParent($this->getParentProperty());
+            $prop = $this->getParentProperty();
+            $this->marketingbrand->setParent($prop);
         }
 
         return $this;
@@ -363,6 +365,24 @@ class Branding extends Builder
             'showpricingonwebuntildate' => $this->getShowpricingonwebuntil()->format('Y-m-d'),
             'extraconfigurations' => $this->getExtraconfigurations()->toArray(),
             'extraprices' => $this->getExtraprices()->toArray(),
+        );
+    }
+    
+    /**
+     * For serialisation
+     * 
+     * @return array
+     */
+    public function __sleep()
+    {
+        return array(
+            'id',
+            'marketingbrand',
+            'bookingbrand',
+            'promote',
+            'status',
+            'allowbookingonwebuntil',
+            'showpricingonwebuntil'
         );
     }
 }

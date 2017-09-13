@@ -37,6 +37,12 @@ use tabs\apiclient\Base;
  * 
  * @method boolean getShowonavailability() Returns the showonavailability
  * @method AvailableDay setShowonavailability(boolean $var) Sets the showonavailability
+ * 
+ * @method boolean getPriceanchor() Returns the priceanchor
+ * @method AvailableDay setPriceanchor(boolean $var) Sets the priceanchor
+ * 
+ * @method boolean getDayssincepriceanchor() Returns the days since priceanchor
+ * @method AvailableDay setDayssincepriceanchor(boolean $var) Sets the days since priceanchor
  */
 class AvailableDay extends Base
 {
@@ -96,6 +102,20 @@ class AvailableDay extends Base
      */
     protected $showonavailability;
 
+    /**
+     * priceanchor
+     *
+     * @var boolean
+     */
+    protected $priceanchor;
+
+    /**
+     * dayssincepriceanchor
+     *
+     * @var integer
+     */
+    protected $dayssincepriceanchor = 0;
+
     // -------------------- Public Functions -------------------- //
 
     /**
@@ -122,7 +142,9 @@ class AvailableDay extends Base
             'earliestbookingdate' => $this->getEarliestbookingdate()->format('Y-m-d'),
             'minimumholiday' => $this->getMinimumholiday(),
             'unlessholidayatleast' => $this->getUnlessholidayatleast(),
-            'showonavailability' => $this->boolToStr($this->getShowonavailability())
+            'showonavailability' => $this->boolToStr($this->getShowonavailability()),
+            'priceanchor' => $this->boolToStr($this->getPriceanchor()),
+            'dayssincepriceanchor' => $this->getDayssincepriceanchor()
         );
     }
 }

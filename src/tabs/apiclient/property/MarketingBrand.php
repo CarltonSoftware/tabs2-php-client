@@ -107,4 +107,17 @@ class MarketingBrand extends Builder
             'marketingbrandid' => $this->getMarketingbrand()->getId()
         );
     }
+    
+    /**
+     * For serialisation
+     * 
+     * @return array
+     */
+    public function __sleep()
+    {
+        return array(
+            'id',
+            'marketingbrand'
+        );
+    }
 }
