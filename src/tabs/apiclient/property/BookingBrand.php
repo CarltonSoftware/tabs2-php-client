@@ -95,7 +95,8 @@ class BookingBrand extends Builder
     {
         return array(
             'id',
-            'bookingbrand'
+            'bookingbrand',
+            'instuctions'
         );
     }
 }
