@@ -650,13 +650,25 @@ class StaticCollection implements \Iterator, \Countable
      */
     public function __sleep()
     {
-        return array(
-            'elementClass',
-            'path',
-            'elementParent',
-            'pagination',
-            'discriminator',
-            'accessor'
-        );
+        if ($this->getElementParent()) {
+            return array(
+                'elementClass',
+                'path',
+                'elementParent',
+                'pagination',
+                'discriminator',
+                'accessor'
+            );
+        } else {
+            // Allow simple collections to be serialised
+            return array(
+                'elementClass',
+                'path',
+                'elements',
+                'pagination',
+                'discriminator',
+                'accessor'
+            );
+        }
     }
 }
