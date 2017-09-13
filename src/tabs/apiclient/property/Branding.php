@@ -382,7 +382,12 @@ class Branding extends Builder
             'promote',
             'status',
             'allowbookingonwebuntil',
-            'showpricingonwebuntil'
+            'showpricingonwebuntil',
+            'availableDays',
+            'prices',
+            'extraprices',
+            'extraconfigurations',
+            'parent'
         );
     }
 }

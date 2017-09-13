@@ -642,4 +642,21 @@ class StaticCollection implements \Iterator, \Countable
             return $this->elements[count($this->elements) - 1];
         }
     }
+    
+    /**
+     * For serialisation
+     * 
+     * @return array
+     */
+    public function __sleep()
+    {
+        return array(
+            'elementClass',
+            'path',
+            'elementParent',
+            'pagination',
+            'discriminator',
+            'accessor'
+        );
+    }
 }
