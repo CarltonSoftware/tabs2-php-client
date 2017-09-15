@@ -663,7 +663,7 @@ class StaticCollection implements \Iterator, \Countable
             'elementParent',
             'pagination',
             'discriminator',
-            //'discriminatorMap',
+            'discriminatorMap',
             'accessor',
             'states'
         );
