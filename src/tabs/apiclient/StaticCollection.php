@@ -83,6 +83,13 @@ class StaticCollection implements \Iterator, \Countable
      * @var string
      */
     protected $accessor;
+    
+    /**
+     * Discriminator map
+     * 
+     * @var array
+     */
+    protected $discriminatorMap = array();
 
     // ------------------ Static Functions --------------------- //
     
@@ -650,25 +657,22 @@ class StaticCollection implements \Iterator, \Countable
      */
     public function __sleep()
     {
-        if ($this->getElementParent()) {
-            return array(
-                'elementClass',
-                'path',
-                'elementParent',
-                'pagination',
-                'discriminator',
-                'accessor'
-            );
-        } else {
+        $properties = array(
+            'elementClass',
+            'path',
+            'elementParent',
+            'pagination',
+            'discriminator',
+            //'discriminatorMap',
+            'accessor',
+            'states'
+        );
+        
+        if (!$this->getElementParent()) {
             // Allow simple collections to be serialised
-            return array(
-                'elementClass',
-                'path',
-                'elements',
-                'pagination',
-                'discriminator',
-                'accessor'
-            );
+            $properties[] = 'elements';
         }
+        
+        return $properties;
     }
 }
