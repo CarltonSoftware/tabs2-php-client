@@ -664,13 +664,13 @@ class StaticCollection implements \Iterator, \Countable
             'pagination',
             'discriminator',
             'discriminatorMap',
-            'accessor',
-            'states'
+            'accessor'
         );
         
         if (!$this->getElementParent()) {
             // Allow simple collections to be serialised
             $properties[] = 'elements';
+            $properties[] = 'states';
         }
         
         return $properties;
