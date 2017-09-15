@@ -651,6 +651,18 @@ class StaticCollection implements \Iterator, \Countable
     }
     
     /**
+     * Remove the element parent
+     * 
+     * @return \tabs\apiclient\StaticCollection
+     */
+    public function removeElementParent()
+    {
+        $this->elementParent = null;
+        
+        return $this;
+    }
+    
+    /**
      * For serialisation
      * 
      * @return array
@@ -664,14 +676,10 @@ class StaticCollection implements \Iterator, \Countable
             'pagination',
             'discriminator',
             'discriminatorMap',
-            'accessor'
+            'accessor',
+            'states',
+            'elements'
         );
-        
-        if (!$this->getElementParent()) {
-            // Allow simple collections to be serialised
-            $properties[] = 'elements';
-            $properties[] = 'states';
-        }
         
         return $properties;
     }

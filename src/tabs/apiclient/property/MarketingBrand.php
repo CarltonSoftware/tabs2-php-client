@@ -120,7 +120,8 @@ class MarketingBrand extends Builder
             'marketingbrand',
             'brochures',
             'descriptions',
-            'groupingvalues'
+            'groupingvalues',
+            'parent'
         );
     }
 }

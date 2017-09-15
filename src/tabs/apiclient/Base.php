@@ -243,6 +243,18 @@ abstract class Base
     }
     
     /**
+     * Remove the parent
+     * 
+     * @return \tabs\apiclient\Base
+     */
+    public function removeParent()
+    {
+        $this->parent = null;
+
+        return $this;
+    }
+    
+    /**
      * Enforce parent type.  Method should be overriden with a class name string
      * that will be evaluated with the instanceof operand.
      * 
