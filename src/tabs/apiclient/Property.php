@@ -414,6 +414,14 @@ class Property extends Builder
         $this->primarypropertybranding = property\Branding::factory($branding);
         $this->primarypropertybranding->setParent($this);
         
+        if ($this->primarypropertybranding->getBookingbrand()) {
+            $this->primarypropertybranding->getBookingbrand()->setParent($this);
+        }
+        
+        if ($this->primarypropertybranding->getMarketingbrand()) {
+            $this->primarypropertybranding->getMarketingbrand()->setParent($this);
+        }
+        
         return $this;
     }
 
