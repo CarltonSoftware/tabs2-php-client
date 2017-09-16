@@ -663,6 +663,20 @@ class StaticCollection implements \Iterator, \Countable
     }
     
     /**
+     * Reset the collection to its unfetched state
+     * 
+     * @return \tabs\apiclient\StaticCollection
+     */
+    public function reset()
+    {
+        $this->elements = array();
+        $this->setTotal(0);
+        $this->setFetched(false);
+        
+        return $this;
+    }
+    
+    /**
      * For serialisation
      * 
      * @return array
