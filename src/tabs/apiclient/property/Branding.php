@@ -151,7 +151,11 @@ class Branding extends Builder
      */
     public function __construct($id = null)
     {
-        $this->prices = Collection::factory('price', new Price, $this);
+        $this->prices = Collection::factory(
+            'price',
+            new Price,
+            $this
+        );
         
         $this->extraprices = Collection::factory(
             'extrapricing', 
@@ -204,6 +208,16 @@ class Branding extends Builder
         }
         
         return $this->prices->fetch();
+    }
+    
+    /**
+     * Return the prices collection
+     * 
+     * @return Collection|Price[]
+     */
+    public function getPricesCollection()
+    {
+        return $this->prices;
     }
     
     /**
