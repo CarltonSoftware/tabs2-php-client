@@ -285,7 +285,7 @@ class Branding extends Builder
      *
      * @param stdclass|array|\tabs\apiclient\Branding $branding The Branding
      *
-     * @return PropertyBranding
+     * @return Branding
      */
     public function setBranding($branding)
     {
@@ -299,7 +299,7 @@ class Branding extends Builder
      *
      * @param stdclass|array|\tabs\apiclient\BrandingGroup $brandinggroup The Brandinggroup
      *
-     * @return PropertyBranding
+     * @return Branding
      */
     public function setBrandinggroup($brandinggroup)
     {
@@ -313,7 +313,7 @@ class Branding extends Builder
      *
      * @param stdclass|array|BookingBrand $bookingbrand The Bookingbrand
      *
-     * @return PropertyBranding
+     * @return Branding
      */
     public function setBookingbrand($bookingbrand)
     {
@@ -333,7 +333,7 @@ class Branding extends Builder
      *
      * @param stdclass|array|MarketingBrand $marketingbrand The Marketingbrand
      *
-     * @return PropertyBranding
+     * @return Branding
      */
     public function setMarketingbrand($marketingbrand)
     {
@@ -359,6 +359,29 @@ class Branding extends Builder
     {
         $this->status = Status::factory($status);
 
+        return $this;
+    }
+    
+    /**
+     * Override the set parent method to handle the non hateoas urls
+     * 
+     * @param \tabs\apiclient\Property $element  Element
+     * 
+     * @return Branding
+     */
+    public function setParent(&$element)
+    {
+        $this->parent = $element;
+        
+        if ($element instanceof \tabs\apiclient\Property) {
+            if ($this->marketingbrand) {
+                $this->marketingbrand->setParent($element);
+            }
+            if ($this->bookingbrand) {
+                $this->bookingbrand->setParent($element);
+            }
+        }
+        
         return $this;
     }
 
