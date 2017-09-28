@@ -204,7 +204,9 @@ class SagePayPayment extends Base
             'callbackurl' => $this->getCallbackurl(),
             'failureurl' => $this->getFailureurl(),
             'paymenttype' => $this->getPaymenttype(),
-            'repeatpayment' => $this->getRepeatpayment()
+            'repeatpayment' => $this->boolToStr(
+                $this->getRepeatpayment()
+            )
         );
         
         if ($this->getPaymentmethod()) {
