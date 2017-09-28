@@ -80,7 +80,7 @@ class ContactMethod extends Builder
         )->setDiscriminatorMap(
             array(
                 'TemplateElementTextItem' => new \tabs\apiclient\template\TextItemElement,
-                'TemplateElementText' => new \tabs\apiclient\template\TextItemElement
+                'TemplateElementText' => new \tabs\apiclient\template\TextElement
             )
         );
         
