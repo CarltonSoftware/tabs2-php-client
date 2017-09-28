@@ -651,6 +651,22 @@ class StaticCollection implements \Iterator, \Countable
     }
     
     /**
+     * Return a specific element
+     * 
+     * @param type $index
+     * 
+     * @return Base|null
+     */
+    public function get($index)
+    {
+        if (isset($this->elements[$index])) {
+            return $this->elements[$index];
+        }
+        
+        return null;
+    }
+    
+    /**
      * Remove the element parent
      * 
      * @return \tabs\apiclient\StaticCollection
