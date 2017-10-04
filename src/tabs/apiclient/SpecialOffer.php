@@ -94,8 +94,15 @@ use tabs\apiclient\Builder;
  * @method PricingPeriod getPricingperiod() Returns the pricingperiod object
  * @method TabsUser getArchivedby() Returns the archivedby object
  * 
- * @method Collection|specialoffer\BookingPeriod[] getBookingperiods() Returns the booking periods collection
- * @method Collection|specialoffer\HolidayPeriod[] getHolidayperiods() Returns the holiday periods collection
+ * @method Collection|specialoffer\BookingPeriod[]          getBookingperiods()          Returns the booking periods collection
+ * @method Collection|specialoffer\HolidayPeriod[]          getHolidayperiods()          Returns the holiday periods collection
+ * @method Collection|specialoffer\Branding[]               getBrandings()               Returns the offer brandings
+ * @method Collection|specialoffer\Attribute[]              getAttributes()              Returns the offers attributes
+ * @method Collection|specialoffer\PropertyBranding[]       getPropertybrandings()       Returns the offers property brandings
+ * @method Collection|specialoffer\ConfirmedBookingPeriod[] getConfirmedbookingperiods() Returns the confirmed booking periods
+ * @method Collection|specialoffer\Promotion[]              getPromotions()              Returns the promotions
+ * @method Collection|specialoffer\SalesChannel[]           getSaleschannels()           Returns the sales channels
+ * @method Collection|specialoffer\WebsiteSection[]         getWebsitesections()         Returns the website sections
  */
 class SpecialOffer extends Builder
 {
@@ -315,6 +322,48 @@ class SpecialOffer extends Builder
      * @var Collection|specialoffer\HolidayPeriod[]
      */
     protected $holidayperiods;
+    
+    /**
+     * Special offer brandings
+     * 
+     * @var Collection|specialoffer\Branding[]
+     */
+    protected $brandings;
+    
+    /**
+     * Special offer property brandings
+     * 
+     * @var Collection|specialoffer\PropertyBranding[]
+     */
+    protected $propertybrandings;
+    
+    /**
+     * Special offer confirmed booking periods
+     * 
+     * @var Collection|specialoffer\ConfirmedBookingPeriod[]
+     */
+    protected $confirmedbookingperiods;
+    
+    /**
+     * Special offer promotions
+     * 
+     * @var Collection|specialoffer\Promotion[]
+     */
+    protected $promotions;
+    
+    /**
+     * Special offer sales channels
+     * 
+     * @var Collection|specialoffer\SalesChannel[]
+     */
+    protected $saleschannels;
+    
+    /**
+     * Special offer website sections
+     * 
+     * @var Collection|specialoffer\WebsiteSection[]
+     */
+    protected $websitesections;
 
     // -------------------- Public Functions -------------------- //
 
@@ -338,6 +387,42 @@ class SpecialOffer extends Builder
         $this->holidayperiods = Collection::factory(
             'holidayperiod',
             new specialoffer\HolidayPeriod(),
+            $this
+        );
+        
+        $this->brandings = Collection::factory(
+            'branding',
+            new specialoffer\Branding(),
+            $this
+        );
+        
+        $this->propertybrandings = Collection::factory(
+            'propertybranding',
+            new specialoffer\PropertyBranding(),
+            $this
+        );
+        
+        $this->confirmedbookingperiods = Collection::factory(
+            'confirmedbookingperiod',
+            new specialoffer\ConfirmedBookingPeriod(),
+            $this
+        );
+        
+        $this->promotions = Collection::factory(
+            'promotion',
+            new specialoffer\Promotion(),
+            $this
+        );
+        
+        $this->saleschannels = Collection::factory(
+            'saleschannel',
+            new specialoffer\SalesChannel(),
+            $this
+        );
+        
+        $this->websitesections = Collection::factory(
+            'websitesection',
+            new specialoffer\WebsiteSection(),
             $this
         );
         
