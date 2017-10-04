@@ -3,7 +3,7 @@
 // Include the connection
 require_once __DIR__ . '/../creating-a-new-connection.php';
 
-$class = new tabs\apiclient\TriggerEvent();
+$class = new tabs\apiclient\specialoffer\Branding();
 
 $ref = new ReflectionClass($class);
 $properties = array();
@@ -86,7 +86,10 @@ foreach ($properties as $prop => $type) {
     if (isset($defaultValues[$prop])) {
         echo " = ";
         
-        if (is_scalar($defaultValues[$prop]) && !is_bool($defaultValues[$prop])) {
+        if (is_scalar($defaultValues[$prop]) 
+            && !is_bool($defaultValues[$prop])
+            && $defaultValues[$prop] !== ''
+        ) {
             if (is_string($defaultValues[$prop])) {
                 echo '\'';
             }

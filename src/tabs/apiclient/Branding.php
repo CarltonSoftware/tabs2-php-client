@@ -159,6 +159,25 @@ class Branding extends Builder
 
         return $this;
     }
+    
+    /**
+     * Output a friendly name for the branding
+     * 
+     * @param string $sep Separator
+     * 
+     * @return string
+     */
+    public function getName($sep = ' / ')
+    {
+        return implode(
+            $sep,
+            array(
+                $this->getBrandinggroup()->getName(),
+                $this->getBookingbrand()->getName(),
+                $this->getMarketingbrand()->getName()
+            )
+        );
+    }
 
     /**
      * @inheritDoc

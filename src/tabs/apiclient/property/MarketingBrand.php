@@ -117,7 +117,11 @@ class MarketingBrand extends Builder
     {
         return array(
             'id',
-            'marketingbrand'
+            'marketingbrand',
+            'brochures',
+            'descriptions',
+            'groupingvalues',
+            'parent'
         );
     }
 }

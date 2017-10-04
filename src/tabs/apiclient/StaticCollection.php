@@ -83,6 +83,13 @@ class StaticCollection implements \Iterator, \Countable
      * @var string
      */
     protected $accessor;
+    
+    /**
+     * Discriminator map
+     * 
+     * @var array
+     */
+    protected $discriminatorMap = array();
 
     // ------------------ Static Functions --------------------- //
     
@@ -641,5 +648,69 @@ class StaticCollection implements \Iterator, \Countable
         if (count($this->elements) > 0) {
             return $this->elements[count($this->elements) - 1];
         }
+    }
+    
+    /**
+     * Return a specific element
+     * 
+     * @param type $index
+     * 
+     * @return Base|null
+     */
+    public function get($index)
+    {
+        if (isset($this->elements[$index])) {
+            return $this->elements[$index];
+        }
+        
+        return null;
+    }
+    
+    /**
+     * Remove the element parent
+     * 
+     * @return \tabs\apiclient\StaticCollection
+     */
+    public function removeElementParent()
+    {
+        $this->elementParent = null;
+        
+        return $this;
+    }
+    
+    /**
+     * Reset the collection to its unfetched state
+     * 
+     * @return \tabs\apiclient\StaticCollection
+     */
+    public function reset()
+    {
+        $this->elements = array();
+        $this->setTotal(0);
+        $this->setFetched(false);
+        
+        return $this;
+    }
+    
+    /**
+     * For serialisation
+     * 
+     * @return array
+     */
+    public function __sleep()
+    {
+        $properties = array(
+            'elementClass',
+            'path',
+            'elementParent',
+            'pagination',
+            'discriminator',
+            'discriminatorMap',
+            'accessor',
+            'states',
+            'elements'
+        );
+        
+        return $properties;
     }
 }

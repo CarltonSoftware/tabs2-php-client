@@ -21,4 +21,5 @@ echo $prop->getName();
 * [Read/Write Booking data](booking)
 * [Accessing common data](core)
 * [Accessing data from the root endpoint](root)
+* [Accessing special offer data](specialoffer)
 * [Site Map](sitemap.html)

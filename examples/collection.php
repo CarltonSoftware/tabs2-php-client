@@ -39,6 +39,12 @@ if (!empty($collection)) {
                 $element->getId(),
                 stristr($text, '<title>') ? htmlentities($text) : $text
             );
+        } else if ($element instanceof tabs\apiclient\SpecialOffer) {
+            echo sprintf(
+                '<li><a href="/platoclient/specialoffer/viewing-special-offer-data.php?id=%s">%s</a></li>',
+                $element->getId(),
+                $element->getDescription()
+            );
         } else if ($element instanceof tabs\apiclient\Booking) {
             echo sprintf(
                 '<li><a href="/platoclient/booking/?id=%s">%s</a></li>',

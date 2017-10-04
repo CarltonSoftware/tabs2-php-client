@@ -17,3 +17,7 @@ node_modules
 node_modules/
 node_modules/*
 package-lock.json
+examples/template/copycontactmethodlanguages.php
+examples/template/copytemplate.php
+examples/template/copytemplatetargetsources.php
+examples/template/copytextitems.php

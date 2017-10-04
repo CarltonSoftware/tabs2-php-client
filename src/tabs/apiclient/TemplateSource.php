@@ -34,6 +34,8 @@ class TemplateSource extends Builder
      */
     public function toArray()
     {
-        return $this->__toArray();
+        $arr = $this->__toArray();
+        $arr['sourcesql'] = 'SELECT * FROM ' . $this->getTemplatesource();
+        return $arr;
     }
 }

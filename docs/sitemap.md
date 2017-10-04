@@ -58,6 +58,11 @@
  * [Getting the root endpoint](root/index.html)
 
 
+## Specialoffer examples
+ * [Getting special offer data](specialoffer/index.html)
+ * [Getting specific data about a special offer](specialoffer/viewing-special-offer-data.html)
+
+
 ## Template examples
  * [Using templates](template/contactmethod.html)
  * [Tabs2 templates](template/index.html)
