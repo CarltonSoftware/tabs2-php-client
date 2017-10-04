@@ -4,7 +4,7 @@ This file documents how to create a new booking.
 
 Its useful for customer bookings to have a potential booking type associated with them.  In this example the type is Enquiry.
 
-You can get a list of potential booking types from the [common data in the api](/core).
+You can get a list of potential booking types from the [common data in the api](../core).
 
 ```php
 
