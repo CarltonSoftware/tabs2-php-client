@@ -119,9 +119,22 @@ try {
 } else {
     $brandings = \tabs\apiclient\Collection::factory(
         'branding',
-        tabs\apiclient\Branding::class
+        new tabs\apiclient\Branding()
     );
     $brandings->fetch();
+
+    // Search for all live properties on the first branding found
+    $collection = tabs\apiclient\Collection::factory(
+        'property',
+        new \tabs\apiclient\Property
+    );
+    $collection->setLimit(filter_input(INPUT_GET, 'limit'))
+        ->setPage(filter_input(INPUT_GET, 'page'));
+    $collection->addFilter('brandingid', $brandings->first()->getId());
+    $collection->addFilter('brandingstatusid', 1);
+    $collection->fetch();
+
+    include __DIR__ . '/../collection.php';
 }
 } catch(Exception $e) {
     echo $e->getMessage();
