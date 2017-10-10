@@ -80,27 +80,29 @@ class Attribute extends Builder
     {
         if ($attribute instanceof \tabs\apiclient\Attribute) {
             $this->attribute = $attribute;
-        } else if (is_object($attribute)) {
+        } elseif (is_object($attribute)) {
+            
             $attribute = (array) $attribute;
-        }
-        
-        if (!$attribute['type']) {
-            $attribute = 'String';
-        }
-        
-        switch ($attribute['type']) {
-        case 'Boolean':
-            $this->attribute = AttributeBoolean::factory($attribute);
-            break;
-        case 'String':
-            $this->attribute = AttributeString::factory($attribute);
-            break;
-        case 'Number':
-            $this->attribute = AttributeNumber::factory($attribute);
-            break;
-        case 'Hybrid':
-            $this->attribute = AttributeHybrid::factory($attribute);
-            break;
+            
+            if (!$attribute['type']) {
+                $attribute = 'String';
+            }
+
+            switch ($attribute['type']) {
+            case 'Boolean':
+                $this->attribute = AttributeBoolean::factory($attribute);
+                break;
+            case 'String':
+                $this->attribute = AttributeString::factory($attribute);
+                break;
+            case 'Number':
+                $this->attribute = AttributeNumber::factory($attribute);
+                break;
+            case 'Hybrid':
+                $this->attribute = AttributeHybrid::factory($attribute);
+                break;
+            }
+            
         }
 
         return $this;
