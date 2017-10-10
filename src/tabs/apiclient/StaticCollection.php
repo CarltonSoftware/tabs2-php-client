@@ -132,6 +132,14 @@ class StaticCollection implements \Iterator, \Countable
                 $path = $first;
                 $element = $last;
                 
+            // Handle 2 args (path, Object as string)
+            } else if (is_string($first) 
+                && is_string($last)
+                && count($args) == 0
+            ) {
+                $path = $first;
+                $element = $last;
+                
             // Handle 3 args (path, Object, Parent)
             } else if (is_string($first) 
                 && $last instanceof Base 
@@ -141,6 +149,10 @@ class StaticCollection implements \Iterator, \Countable
                 $parent = $last;
                 $element = func_get_arg(1);
             }
+        }
+        
+        if (is_string($element)) {
+            $element = new $element;
         }
         
         $collection = new static();
