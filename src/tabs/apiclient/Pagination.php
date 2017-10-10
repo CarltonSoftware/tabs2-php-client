@@ -197,7 +197,9 @@ class Pagination extends Base
     public function setFilters(array $filters)
     {
         if (count($filters) > 0) {
-            if (!is_array($filters[0])) {
+            $tmp = $filters;
+            $f = array_shift($tmp);
+            if (!is_array($f)) {
                 $filters = array($filters);
             }
         } else {
@@ -281,6 +283,23 @@ class Pagination extends Base
     }
     
     /**
+     * Get the first filter array
+     * 
+     * @return array
+     */
+    public function getFirstFilter()
+    {
+        $filters = $this->filters;
+        $filter = array_shift($filters);
+        
+        if (is_array($filter)) {
+            return $filter;
+        }
+        
+        return array();
+    }
+    
+    /**
      * ToArray function
      * 
      * @return array
@@ -288,8 +307,13 @@ class Pagination extends Base
     public function toArray()
     {
         $filter = array();
-        if (count($this->getFilters()) > 0 && count($this->getFilters()[0]) > 0) {
+        if (count($this->getFilters()) > 0 && count($this->getFirstFilter()) > 0) {
             $filter['filter'] = $this->getFiltersArray();
+            
+            if (count($filter['filter']) == 1) {
+                $f = array_shift($filter['filter']);
+                $filter['filter'] = $f;
+            }
         }
         
         return array_filter(

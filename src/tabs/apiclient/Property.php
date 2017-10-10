@@ -445,4 +445,29 @@ class Property extends Builder
             'checkouttime' => $this->getCheckouttime()
         );
     }
+    
+    /**
+     * For serialisation
+     * 
+     * @return array
+     */
+    public function __sleep()
+    {
+        return array(
+            'id',
+            'responsedata'
+        );
+    }
+    
+    /**
+     * For serialisation
+     * 
+     * @return void
+     */
+    public function __wakeup()
+    {
+        // Remap collections
+        $this->__construct($this->getId());
+        $this->setObjectProperties($this, $this->getResponsedata());
+    }
 }
