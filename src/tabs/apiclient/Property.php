@@ -365,7 +365,6 @@ class Property extends Builder
             $prop = $route . 's';
             
             $this->$prop = Collection::factory(
-                $route,
                 $obj,
                 $this
             );
@@ -444,5 +443,42 @@ class Property extends Builder
             'checkinlatesttime' => $this->getCheckinlatesttime(),
             'checkouttime' => $this->getCheckouttime()
         );
+    }
+    
+    /**
+     * For serialisation
+     * 
+     * @return array
+     */
+    public function __sleep()
+    {
+        return array(
+            'id',
+            'responsedata'
+        );
+    }
+    
+    /**
+     * For serialisation
+     * 
+     * @return void
+     */
+    public function __wakeup()
+    {
+        if ($this->getResponsedata()) {
+            // Remap collections
+            $this->__construct($this->getId());
+            $this->setObjectProperties($this, $this->getResponsedata());
+        }
+    }
+    
+    /**
+     * ToString magic method
+     * 
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getName();
     }
 }

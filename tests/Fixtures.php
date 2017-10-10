@@ -1110,7 +1110,7 @@ class Fixtures
     {
         $band = new \tabs\apiclient\Vatband();
         $rate = self::getVatrate();
-        $band->setVatband('Standard band')->getVatrates()->addElement($rate);
+        $band->setVatband('Standard band')->addVatrate($rate);
 
         return $band;
     }
@@ -1133,11 +1133,11 @@ class Fixtures
     /**
      * Return a Booking object
      *
-     * @return \tabs\apiclient\booking\Booking
+     * @return \tabs\apiclient\Booking
      */
     public static function getBooking()
     {
-        $booking = new \tabs\apiclient\booking\Booking();
+        $booking = new \tabs\apiclient\Booking();
 
         $booking->setFromdate(new \DateTime('06-10-2015'))
             ->setTodate(new \DateTime('08-10-2015'));
@@ -1148,11 +1148,11 @@ class Fixtures
     /**
      * Create a set discount special offer
      * 
-     * @return \tabs\apiclient\specialoffer\SetDiscount
+     * @return \tabs\apiclient\SpecialOffer
      */
     public static function getSpecialoffer()
     {
-        $offer = new \tabs\apiclient\specialoffer\SetDiscount();
+        $offer = new \tabs\apiclient\SpecialOffer();
         $offer->setActive(true)
             ->setDescription('£10 off')
             ->setAmount(50)

@@ -96,17 +96,65 @@ class StaticCollection implements \Iterator, \Countable
     /**
      * Factory method for the collection
      * 
-     * @param string      $path    Path
-     * @param string|Base $element Object or object namespace
-     * @param Base        $parent  Parent object
-     * 
      * @return StaticCollection
      */
-    public static function factory(
-        $path,
-        $element,
-        &$parent = null
-    ) {
+    public static function factory()
+    {
+        $parent = null;
+        $args = func_get_args();
+        $path = '';
+        $element = null;
+        
+        if (count($args) == 1) {
+            $element = func_get_arg(0);
+            
+            if ($element instanceof Base) {
+                $path = $element->getCreateUrl();
+            }
+        } else if (count($args) > 1) {
+            $first = array_shift($args);
+            $last = array_pop($args);
+            
+            // Handle 2 args (Object, Parent)
+            if ($first instanceof Base 
+                && $last instanceof Base
+                && count($args) == 0
+            ) {
+                $parent = $last;
+                $path = $first->getCreateUrl();
+                $element = $first;
+                
+            // Handle 2 args (path, Object)
+            } else if (is_string($first) 
+                && $last instanceof Base 
+                && count($args) == 0
+            ) {
+                $path = $first;
+                $element = $last;
+                
+            // Handle 2 args (path, Object as string)
+            } else if (is_string($first) 
+                && is_string($last)
+                && count($args) == 0
+            ) {
+                $path = $first;
+                $element = $last;
+                
+            // Handle 3 args (path, Object, Parent)
+            } else if (is_string($first) 
+                && $last instanceof Base 
+                && count($args) == 1
+            ) {
+                $path = $first;
+                $parent = $last;
+                $element = func_get_arg(1);
+            }
+        }
+        
+        if (is_string($element)) {
+            $element = new $element;
+        }
+        
         $collection = new static();
         $collection->setPath($path)
             ->setPathOverridden(false)

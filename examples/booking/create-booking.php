@@ -7,7 +7,7 @@
  * 
  * Its useful for customer bookings to have a potential booking type associated with them.  In this example the type is Enquiry.
  * 
- * You can get a list of potential booking types from the [common data in the api](/core).
+ * You can get a list of potential booking types from the [common data in the api](../core).
  */
 
 require_once __DIR__ . '/../creating-a-new-connection.php';

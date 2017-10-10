@@ -52,13 +52,27 @@ class Vatband extends Builder
     }
     
     /**
+     * Add a vatrate to the band
+     * 
+     * @param \tabs\apiclient\Vatrate $vt VT
+     * 
+     * @return \tabs\apiclient\Vatband
+     */
+    public function addVatrate(Vatrate $vt)
+    {
+        $this->vatrates->addElement($vt);
+        
+        return $this;
+    }
+    
+    /**
      * Return the active vat rate
      * 
      * @return Vatrate
      */
     public function getCurrentVatrate()
     {
-        $vrates = array_filter($this->getVatrates()->getElements(), function($element) {
+        $vrates = array_filter($this->vatrates->getElements(), function($element) {
             $dt = new \DateTime();
             return ($dt >= $element->getFromdate()) && ($dt <= $element->getTodate());
         });

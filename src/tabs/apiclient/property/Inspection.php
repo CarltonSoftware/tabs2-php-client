@@ -93,7 +93,7 @@ class Inspection extends Builder
     /**
      * Inspectiontype
      *
-     * @var \tabs\apiclient\Inspectiontype
+     * @var \tabs\apiclient\InspectionType
      */
     protected $inspectiontype;
 
@@ -128,7 +128,7 @@ class Inspection extends Builder
      *
      * @param stdclass|array|InspectionType $inspectiontype The inspectiontype
      *
-     * @return Inspection
+     * @return InspectionType
      */
     public function setInspectiontype($inspectiontype)
     {
@@ -148,8 +148,8 @@ class Inspection extends Builder
             'gradingunit' => $this->getGradingunit(),
             'inspectorname' => $this->getInspectorname(),
             'notes' => $this->getNotes(),
-            'inspector' => $this->getInspector()->getId(),
-            'inspectiontype' => $this->getInspectiontype()->getId(),
+            'inspectorid' => $this->getInspector()->getId(),
+            'inspectiontypeid' => $this->getInspectiontype()->getId(),
         );
         
         if ($this->getReinspectiondate()) {

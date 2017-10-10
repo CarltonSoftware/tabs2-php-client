@@ -23,5 +23,12 @@ abstract class ApiClientClassTest extends PHPUnit_Framework_TestCase
     public static function setUpBeforeClass()
     {
         // Create your api connection here.
+        \tabs\apiclient\client\Client::factory(
+            'https://dummy.test.api.tabs-software.co.uk/v2/', // Api Url
+            'phpclient', // Api Key
+            'phpclient', // Api Secret
+            '5_1ocqemslaf0g8w4c8kggckss4kgccgkokw4gs88ocko8kwoww0',
+            '2cs2fx1nfjtwgc8w0wowg80wckkk4swc0ggswggwkkoos8kg8g'
+        );
     }
 }
