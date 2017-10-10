@@ -465,8 +465,20 @@ class Property extends Builder
      */
     public function __wakeup()
     {
-        // Remap collections
-        $this->__construct($this->getId());
-        $this->setObjectProperties($this, $this->getResponsedata());
+        if ($this->getResponsedata()) {
+            // Remap collections
+            $this->__construct($this->getId());
+            $this->setObjectProperties($this, $this->getResponsedata());
+        }
+    }
+    
+    /**
+     * ToString magic method
+     * 
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getName();
     }
 }
