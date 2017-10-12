@@ -365,6 +365,7 @@ class Property extends Builder
             $prop = $route . 's';
             
             $this->$prop = Collection::factory(
+                $route,
                 $obj,
                 $this
             );
