@@ -110,6 +110,8 @@ use tabs\apiclient\booking\OwnerPaymentSummary;
  * 
  * @method Collection|booking\SecurityDeposit[] getSecuritydeposits() Returns the securitydeposits
  * 
+ * @method booking\SecurityDeposit[] getSecuritydeposit() Returns booking securitydeposit
+ * 
  * @method Collection|booking\Customer[] getCustomers() Returns the customers
  * 
  * @method Collection|booking\Document[] getDocuments() Returns the booking documents
@@ -369,6 +371,13 @@ class Booking extends Builder
     protected $securitydeposits;
     
     /**
+     * Security Deposit
+     * 
+     * @var booking\SecurityDeposit[]
+     */
+    protected $securitydeposit;
+    
+    /**
      * Booking Customers
      * 
      * @var Collection|booking\Customer[]
@@ -544,6 +553,24 @@ class Booking extends Builder
     public function setCurrency($currency)
     {
         $this->currency = Currency::factory($currency);
+
+        return $this;
+    }
+
+    /**
+     * Set the security deposit
+     *
+     * @param stdclass|array|booking\SecurityDeposit $sd Security deposit
+     *
+     * @return Booking
+     */
+    public function setSecuritydeposit($sd)
+    {
+        $this->securitydeposit = booking\SecurityDeposit::factory($sd);
+        
+        if ($this->getId() && $this->securitydeposit) {
+            $this->securitydeposit->setParent($this);
+        }
 
         return $this;
     }
@@ -840,6 +867,16 @@ class Booking extends Builder
         
         if ($this->getGuesttype() === 'Customer' && $this->getPropertybranding()) {
             $arr['propertybrandingid'] = $this->getPropertybranding()->getId();
+        }
+        
+        if ($this->getSecuritydeposit()) {
+            $arr = array_merge(
+                $arr,
+                $this->prefixToArray(
+                    'securitydeposit_',
+                    $this->getSecuritydeposit()
+                )
+            );
         }
         
         if ($this->getPotentialbooking()) {

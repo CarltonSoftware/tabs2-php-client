@@ -24,6 +24,7 @@
  * [Adding an extra to a booking](booking/add-extra.html)
  * [Adding a guest to a booking](booking/add-guests.html)
  * [Adding a promotion](booking/add-promotion.html)
+ * [Add a security deposit](booking/add-sd.html)
  * [Adding pets to a booking](booking/adding-pets.html)
  * [Performing a booking enquiry](booking/booking-enquiry.html)
  * [Cancelling a booking](booking/cancel-booking.html)

@@ -63,6 +63,8 @@ use tabs\apiclient\OwnerChargeCode;
  * @method SecurityDeposit setOwnercharge(string $var) Sets the ownercharge
  * 
  * @method Collection|Hold[] getHolds() Returns the holds
+ * 
+ * @method \tabs\apiclient\property\SecurityDeposit getPropertysecuritydeposit() Get the property SD
  */
 class SecurityDeposit extends Builder
 {
@@ -71,7 +73,7 @@ class SecurityDeposit extends Builder
      *
      * @var integer
      */
-    protected $amount = 0;
+    protected $amount;
 
     /**
      * Paid
@@ -158,6 +160,13 @@ class SecurityDeposit extends Builder
     protected $ownerchargecode;
 
     /**
+     * Property security deposit
+     *
+     * @var \tabs\apiclient\property\SecurityDeposit
+     */
+    protected $propertysecuritydeposit;
+
+    /**
      * Ownerchargeamount
      *
      * @var integer
@@ -209,28 +218,32 @@ class SecurityDeposit extends Builder
     }
 
     /**
+     * Set the property security deposit
+     *
+     * @param stdclass|array|\tabs\apiclient\property\SecurityDeposit $sd Property sd
+     *
+     * @return SecurityDeposit
+     */
+    public function setPropertysecuritydeposit($sd)
+    {
+        $this->propertysecuritydeposit = \tabs\apiclient\property\SecurityDeposit::factory($sd);
+
+        return $this;
+    }
+
+    /**
      * @inheritDoc
      */
     public function toArray()
     {
-        $arr = array(
-            'amount' => $this->getAmount()
-        );
-        
-        if ($this->getDueindate()) {
-            $arr['dueindate'] = $this->getDueindate()->format('Y-m-d');
-        }
-        
-        if ($this->getDueoutdate()) {
-            $arr['dueoutdate'] = $this->getDueoutdate()->format('Y-m-d');
-        }
+        $arr = $this->__toArray();
         
         if ($this->getOwnerchargecode()) {
             $arr['ownerchargecodeid'] = $this->getOwnerchargecode()->getId();
         }
         
-        if ($this->getOwnerchargeamount() > 0) {
-            $arr['ownerchargeamount'] = $this->getOwnerchargeamount();
+        if ($this->getPropertysecuritydeposit()) {
+            $arr['propertysecuritydepositid'] = $this->getPropertysecuritydeposit()->getId();
         }
         
         return $arr;

@@ -106,19 +106,23 @@ try {
         }
         echo '<p>Total: £' . $booking->getTotalPrice() . '</p>';
 
-        if ($booking->getSecuritydeposits()->count() > 0) {
+        if ($booking->getSecuritydeposit()) {
             echo sprintf(
-                '<p>Security deposit: £%s <a href="remove-sd.php?id=%s&bsid=%s">Remove</a> <a href="toggle-waiver.php?id=%s">Toggle Waiver</a></p>',
-                $booking->getSecuritydeposits()->first()->getAmount(),
+                '<p>Security deposit: £%s <a href="remove-sd.php?id=%s&bsid=%s">Remove</a></p>',
+                $booking->getSecuritydeposit()->getAmount(),
                 $booking->getId(),
-                $booking->getSecuritydeposits()->first()->getId(),
+                $booking->getSecuritydeposit()->getId(),
                 $booking->getId()
             );
         } else if ($booking->getProperty()->getSecuritydeposits()->count() > 0) {
-            echo sprintf(
-                '<p><a href="toggle-waiver.php?id=%s">Toggle Waiver</a></p>',
-                $booking->getId()
-            );
+            foreach ($booking->getProperty()->getSecuritydeposits() as $psd) {
+                echo sprintf(
+                    '<p><a href="add-sd.php?id=%s&psdid=%s">Add %s security deposit</a></p>',
+                    $booking->getId(),
+                    $psd->getId(),
+                    $psd->getDescription()
+                );
+            }
         }
 
         // Get the branding extras and output list of available
