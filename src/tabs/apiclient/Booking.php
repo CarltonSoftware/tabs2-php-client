@@ -1205,9 +1205,13 @@ class Booking extends Builder
      */
     public function importSagePayPayment(SagePayPayment $payment)
     {
-        \tabs\apiclient\client\Client::getClient()->put(
-            'sagepaypayment/' . $payment->getId() . '/import/' . $this->getId()
-        );
+        $url = 'sagepaypayment/' . $payment->getId() . '/import/' . $this->getId();
+        
+        if ($payment->getDonotconfirmbooking() === true) {
+            $url .= '/true'; 
+        }
+        
+        \tabs\apiclient\client\Client::getClient()->put($url);
 
         return $this;
     }
