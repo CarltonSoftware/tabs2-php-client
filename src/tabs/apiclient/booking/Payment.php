@@ -30,6 +30,9 @@ use tabs\apiclient\Builder;
  * @method float getSecuritydepositamount() Returns the securitydepositamount
  * @method Payment setSecuritydepositamount(float $var) Sets the securitydepositamount
  * 
+ * @method boolean getDonotconfirmbooking() Returns the donotconfirmbooking
+ * @method Payment setDonotconfirmbooking(boolean $var) Sets the donotconfirmbooking
+ * 
  * @method \tabs\apiclient\Booking getTransferbooking() Returns the transferbooking
  */
 class Payment extends Builder
@@ -75,6 +78,13 @@ class Payment extends Builder
      * @var \tabs\apiclient\Booking
      */
     protected $transferbooking;
+    
+    /**
+     * Donotconfirmbooking
+     *
+     * @var boolean
+     */
+    protected $donotconfirmbooking = false;    
 
     // -------------------- Public Functions -------------------- //
 
@@ -119,6 +129,10 @@ class Payment extends Builder
         if ($this->getType() == 'BookingAndSecurityDeposit') {
             $arr['bookingamount'] = $this->getBookingamount();
             $arr['securitydepositamount'] = $this->getSecuritydepositamount();
+        }
+        
+        if ($this->getDonotconfirmbooking() === true) {
+            $arr['donotconfirmbooking'] = true;
         }
         
         return $arr;

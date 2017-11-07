@@ -113,8 +113,8 @@ class ProvisionalBooking extends Base
      */
     public function __construct($id = null)
     {
-        $this->depositduedate = new \DateTime();
-        $this->balanceduedate = new \DateTime();
+//        $this->depositduedate = new \DateTime();
+//        $this->balanceduedate = new \DateTime();
         
         parent::__construct($id);
     }

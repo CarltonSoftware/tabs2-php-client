@@ -35,6 +35,9 @@ use tabs\apiclient\Base;
  * @method SagePayPayment setFailureurl(string $var)           Set failure url 
  * @method SagePayPayment setPaymenttype(string $var)          Set payment type
  * @method SagePayPayment setRepeatpayment(boolean $var)       Set the repeat payment flag
+ * 
+ * @method boolean getDonotconfirmbooking() Returns the donotconfirmbooking
+ * @method Payment setDonotconfirmbooking(boolean $var) Sets the donotconfirmbooking
  */
 class SagePayPayment extends Base
 {
@@ -121,6 +124,13 @@ class SagePayPayment extends Base
      * @var string
      */
     protected $paymenttype = 'PAYMENT';
+    
+    /**
+     * Donotconfirmbooking
+     *
+     * @var boolean
+     */
+    protected $donotconfirmbooking = false;       
 
     // -------------------- Public Functions -------------------- //
 

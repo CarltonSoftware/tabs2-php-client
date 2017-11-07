@@ -69,6 +69,9 @@ use tabs\apiclient\OwnerChargeCode;
  * @method OwnerChargeCode getOwnerchargecode() Returns the ownerchargecode
  * @method integer getOwnerchargeamount() Returns the ownerchargeamount
  * @method SecurityDeposit setOwnerchargeamount(integer $var) Sets the ownerchargeamount
+ * 
+ * @method SecurityDeposit setDescription(string $var) Set the description
+ * @method string          getDescription()            Get the description
  */
 class SecurityDeposit extends Builder
 {
@@ -204,6 +207,13 @@ class SecurityDeposit extends Builder
      * @var integer
      */
     protected $ownerchargeamount;
+    
+    /**
+     * Description
+     * 
+     * @var string
+     */
+    protected $description;
 
     // -------------------- Public Functions -------------------- //
 
@@ -270,7 +280,8 @@ class SecurityDeposit extends Builder
             'minimumdays' => $this->getMinimumdays(),
             'maximumdays' => $this->getMaximumdays(),
             'comments' => $this->getComments(),
-            'ownerchargeamount' => $this->getOwnerchargeamount()
+            'ownerchargeamount' => $this->getOwnerchargeamount(),
+            'description' => $this->getDescription()
         );
         
         if ($this->getOwnerchargecode()) {

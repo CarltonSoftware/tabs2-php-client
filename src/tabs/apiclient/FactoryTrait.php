@@ -389,7 +389,7 @@ trait FactoryTrait
                 && (!$value instanceof \tabs\apiclient\StaticCollection)
                 && is_array($value)
             ) {
-                $obj->$property->setElements($value)->setFetched(true);
+                $obj->$property->reset()->setElements($value)->setFetched(true);
             } else {
                 // Normo property values
                 $obj->$property = $value;

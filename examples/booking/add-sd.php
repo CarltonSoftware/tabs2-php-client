@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @name Removing a security deposit
+ * @name Add a security deposit
  * 
  * This file documents how to remove a security deposit from a booking.
  */
@@ -9,12 +9,15 @@
 require_once __DIR__ . '/../creating-a-new-connection.php';
 
 try {
-    if (filter_input(INPUT_GET, 'id')) {
+    if (filter_input(INPUT_GET, 'id')
+        && filter_input(INPUT_GET, 'psdid')
+    ) {
         $b = new tabs\apiclient\Booking(filter_input(INPUT_GET, 'id'));
-        $b->get();
-    if ($b->getSecuritydeposit()) {
-        $b->getSecuritydeposit()->delete();
-    }
+    $bs = new \tabs\apiclient\booking\SecurityDeposit();
+    $bs->setParent($b);
+    $bs->setPropertysecuritydeposit(new \tabs\apiclient\property\SecurityDeposit(filter_input(INPUT_GET, 'psdid')));
+
+    $bs->create();
 
     header('Location: index.php?id=' . $b->getId());
     exit();
