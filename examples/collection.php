@@ -51,6 +51,24 @@ if (!empty($collection)) {
                 $element->getId(),
                 $text
             );
+        } else if ($element instanceof tabs\apiclient\actor\Document 
+            || ($element instanceof tabs\apiclient\property\Document && !$element->getDocument() instanceof \tabs\apiclient\Image)
+            || $element instanceof tabs\apiclient\booking\Document
+        ) {
+            echo sprintf(
+                '<li><a href="../document/viewing-a-document.php?id=%s">%s</a><a href="../document/tagging-a-document.php?id=%s">Tag this document</a></li>',
+                $element->getDocument()->getId(),
+                $element->getDocument()->getName(),
+                $element->getDocument()->getId() 
+            );
+        }else if ($element instanceof tabs\apiclient\property\Document 
+            && $element->getDocument() instanceof \tabs\apiclient\Image
+        ) {
+            echo sprintf(
+                '<li><a href="../document/viewing-a-document.php?id=%s">%s</a></li>',
+                $element->getDocument()->getId(),
+                (string) $element->getDocument()
+            );
         } else {
             echo sprintf(
                 '<li><a href="/platoclient/exploreelement/%s?map=%s">%s</a></li>',

@@ -83,7 +83,7 @@ class Document extends \tabs\apiclient\FileBuilder
     /**
      * Document tags
      * 
-     * @var StaticCollection
+     * @var Collection|\tabs\apiclient\document\Tag[]
      */
     protected $tags;
 
@@ -99,9 +99,9 @@ class Document extends \tabs\apiclient\FileBuilder
     public function __construct($id = null)
     {
         $this->timeadded = new \DateTime();
-        $this->tags = StaticCollection::factory(
-            '',
-            new DocumentTag()
+        $this->tags = Collection::factory(
+            new document\Tag(),
+            $this
         );
         
         parent::__construct($id);

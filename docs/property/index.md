@@ -78,6 +78,11 @@ try {
                     return $ele->getDocument() instanceof tabs\apiclient\Image && !$ele->getDocument()->isPrivate();
                 })->slice(0, 2);
                 include __DIR__ . '/../collection.php';
+
+                $collection = $property->getDocuments()->findBy(function($ele) {
+                    return !$ele->getDocument() instanceof tabs\apiclient\Image;
+                });
+                include __DIR__ . '/../collection.php';
             }
             if (!filter_input(INPUT_GET, 'fromdate')) {
                 ?>

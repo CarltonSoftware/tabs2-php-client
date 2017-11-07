@@ -43,6 +43,7 @@
 
 
 ## Document examples
+ * [Tagging a document](document/tagging-a-document.html)
  * [Viewing a document](document/viewing-a-document.html)
 
 
