@@ -9,17 +9,12 @@ try {
 
     // First example, fetch a list of live properties
 
-    // Get a list of brandings and statuses
+    // Get a list of brandings
     $brandings = \tabs\apiclient\Collection::factory(
         'branding',
         new tabs\apiclient\Branding()
     );
     $brandings->fetch();
-    $statuses = \tabs\apiclient\Collection::factory(
-        'status',
-        new tabs\apiclient\Status()
-    );
-    $statuses->fetch();
 
     // Search for all live properties on the first branding found
     $collection = tabs\apiclient\Collection::factory(
