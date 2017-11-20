@@ -14,6 +14,7 @@ use tabs\apiclient\property\SecurityFeature;
 use tabs\apiclient\property\Supplier;
 use tabs\apiclient\property\Room;
 use tabs\apiclient\property\Target;
+use tabs\apiclient\property\AvailableBreak;
 
 /**
  * Tabs Rest API Property object.
@@ -100,6 +101,8 @@ use tabs\apiclient\property\Target;
  * @method Collection|Room[] getRooms() Get the property rooms
  * 
  * @method Collection|Target[] getTargets() Get the property targets
+ * 
+ * @method Collection|AvailableBreak[] getAvailablebreaks() Get the available breaks for a property
  */
 class Property extends Builder
 {
@@ -293,6 +296,13 @@ class Property extends Builder
     protected $targets;
     
     /**
+     * Property AvailableBreaks
+     * 
+     * @var Collection|AvailableBreaks[]
+     */
+    protected $availablebreaks;
+    
+    /**
      * Maximumpets
      *
      * @var integer
@@ -358,7 +368,8 @@ class Property extends Builder
             'securityfeature' => new SecurityFeature(),
             'supplier' => new Supplier(),
             'room' => new Room(),
-            'target' => new Target()
+            'target' => new Target(),
+            'availablebreak' => new AvailableBreak()
         );
         
         foreach ($collections as $route => $obj) {
@@ -457,6 +468,113 @@ class Property extends Builder
             'id',
             'responsedata'
         );
+    }
+    
+    /**
+     * Get the price from the available breaks endpoint.  Returns zero if no 
+     * price is found.
+     * 
+     * Note: This function only works for periods less than 14 days long.
+     * 
+     * @param \DateTime $fromDate From date
+     * @param integer   $days     Days
+     * 
+     * @return integer
+     */
+    public function getAvailableBreaksPrice(
+        \DateTime $fromDate,
+        $days = 7
+    ) {
+        static $availablebreaksprices;
+        if (!$availablebreaksprices) {
+            $availablebreaksprices = $this->availablebreaks;
+        }
+        
+        
+        $availablebreaksprices->getPagination()->addParameter(
+            'fromdate',
+            $fromDate->format('Y-m-d')
+        );
+        
+        $prices = $availablebreaksprices->findBy(
+            function($ele) use ($fromDate) {
+                return $ele->getFromdate() == $fromDate;
+            }
+        )->setFetched(true);
+        
+        if ($availablebreaksprices->getTotal() === 0) {
+            $prices = $availablebreaksprices->fetch()->findBy(
+                function($ele) use ($fromDate) {
+                    return $ele->getFromdate() == $fromDate;
+                }
+            );
+        }
+        
+        if ($prices->getTotal() > 0) {
+            $price = $prices->findBy(
+                function($ele) use ($days) {
+                    return $ele->getDays() == $days;
+                }
+            );
+            
+            if ($days <= 7) {
+                if ($price->getTotal() === 1) {
+                    return $price->pop()->getPrice();
+                }
+            }
+            
+            if ($days > 7 && $days <= 13) {
+                $sevenDays = $prices->findBy(
+                    function($ele) {
+                        return $ele->getDays() == 7;
+                    }
+                );
+
+                if ($sevenDays->getTotal() === 1) {
+                    return $sevenDays->pop()->getPrice() + $price->pop()->getPrice();
+                }
+            }
+            
+            if ($days > 13) {
+                $getPrice = function(&$prices, $availablebreakprices, $fromDate, $days = 7) {
+                    $price = $availablebreakprices->findBy(
+                        function($ele) use ($fromDate, $days) {
+                            return $ele->getDays() == $days 
+                                && $ele->getFromdate()->format('Y-m-d') == $fromDate->format('Y-m-d');
+                        }
+                    );
+                    
+                    if ($price->getTotal() === 1) {
+                        $prices[$price->first()->getFromdate()->format('Y-m-d')] = $price->first()->getPrice();
+                    } else {
+                        throw new \RuntimeException('Price not found');
+                    }
+                };
+                
+                $prices = array();
+                $add = $days % 7;
+                $weeks = ($days - $add) / 7;
+
+                try {
+                    for ($i = 0; $i < $weeks; $i++) {
+                        $to = clone $fromDate;
+                        $to->add(new \DateInterval('P' . ($i * 7) . 'D'));
+                        $getPrice($prices, $availablebreaksprices, $to, 7);
+                    }
+
+                    if ($to && $add > 0) {
+                        $to->add(new \DateInterval('P' . $add . 'D'));
+                        $price = $getPrice($prices, $availablebreaksprices, $to, $add);
+                    }
+                    
+                    return array_sum($prices);
+                } catch (Exception $ex) {
+                    return 0;
+                }
+            }
+        }
+        
+        return 0;
     }
     
     /**
