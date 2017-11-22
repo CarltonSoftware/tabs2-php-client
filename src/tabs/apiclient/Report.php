@@ -62,7 +62,7 @@ class Report extends Builder
     /**
      * Reportparameters
      *
-     * @var StaticCollection|\tabs\apiclient\ReportParameters[]
+     * @var StaticCollection|\tabs\apiclient\ReportParameter[]
      */
     protected $reportparameters;    
 
