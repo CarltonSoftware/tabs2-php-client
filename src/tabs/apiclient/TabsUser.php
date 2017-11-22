@@ -13,7 +13,8 @@ namespace tabs\apiclient;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method integer getTabsusername()        Returns the tabsusername 
+ * @method integer                  getTabsusername()    Returns the tabsusername 
+ * @method \tabs\apiclient\Branding getDefaultbranding() Returns the default branding
  */
 class TabsUser extends Actor
 {
@@ -22,5 +23,42 @@ class TabsUser extends Actor
      *
      * @var string
      */
-    protected $tabsusername;    
+    protected $tabsusername;
+    
+    /**
+     * Default branding
+     * 
+     * @var \tabs\apiclient\Branding
+     */
+    protected $defaultbranding;
+    
+    // ------------------ Public Functions --------------------- //
+    
+    /**
+     * Set the default branding
+     * 
+     * @param array|\stdClass|\tabs\apiclient\Branding $branding Branding
+     * 
+     * @return \tabs\apiclient\TabsUser
+     */
+    public function setDefaultbranding($branding)
+    {
+        $this->defaultbranding = Branding::factory($branding);
+        
+        return $this;
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function toArray()
+    {
+        $arr = parent::toArray();
+        
+        if ($this->getDefaultbranding()) {
+            $arr['defaultbrandingid'] = $this->getDefaultbranding()->getId();
+        }
+        
+        return $arr;
+    }
 }
