@@ -41,6 +41,13 @@ class Client extends \GuzzleHttp\Client
      * @var \tabs\apiclient\client\Client
      */
     static $instance;
+    
+    /**
+     * Middleware
+     * 
+     * @var OAuthMiddleware 
+     */
+    protected $middleware;
 
     /**
      * Create a new Api Connection for use within the tabs php client
@@ -146,14 +153,14 @@ class Client extends \GuzzleHttp\Client
 
             $token = new PasswordCredentials($this, $config);
             $refreshToken = new RefreshToken($this, $config);
-            $middleware = new OAuthMiddleware($this, $token, $refreshToken);
+            $this->middleware = new OAuthMiddleware($this, $token, $refreshToken);
 
             if (isset($options['AccessToken'])) {
-                $middleware->setAccessToken($options['AccessToken']);
+                $this->middleware->setAccessToken($options['AccessToken']);
             }
 
-            $handlerStack->push($middleware->onBefore());
-            $handlerStack->push($middleware->onFailure(5));
+            $handlerStack->push($this->middleware->onBefore());
+            $handlerStack->push($this->middleware->onFailure(5));
         }
         
         parent::__construct(
@@ -378,6 +385,16 @@ class Client extends \GuzzleHttp\Client
     public function put($url = null, array $params = [], array $options = [])
     {
         return $this->createPostRequest('put', $url, $params, $options);
+    }
+    
+    /**
+     * Get the middleware
+     * 
+     * @return OAuthMiddleware
+     */
+    public function getMiddleware()
+    {
+        return $this->middleware;
     }
 
     /**
