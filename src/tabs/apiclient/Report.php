@@ -27,7 +27,7 @@ use tabs\apiclient\ReportParameter;
  * @method string         getCategory()                        Returns the category
  * @method Report         setCategory(string $category)        Sets the category
  * 
- * @method Collection|ReportParameter[] getReportparameters() Returns the reportparameters
+ * @method Collection|ReportParameter[] getParameters() Returns the parameters
  */
 class Report extends Builder
 {
@@ -60,11 +60,11 @@ class Report extends Builder
     protected $category;    
     
     /**
-     * Reportparameters
+     * Parameters
      *
      * @var StaticCollection|\tabs\apiclient\ReportParameter[]
      */
-    protected $reportparameters;    
+    protected $parameters;    
 
     // ------------------ Public Functions --------------------- //
     
@@ -73,8 +73,8 @@ class Report extends Builder
      */
     public function __construct($id = null)
     {
-        $this->reportparameters = Collection::factory(
-            'reportparameter',
+        $this->parameters = StaticCollection::factory(
+            'parameter',
             new ReportParameter(),
             $this
         );
