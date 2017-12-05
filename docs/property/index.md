@@ -102,6 +102,9 @@ try {
                 $collection = $property->getPrimarypropertybranding()->getPrices();
                 include __DIR__ . '/../collection.php';
 
+                $collection = $property->getPrimarypropertybranding()->getSpecialoffers();
+                include __DIR__ . '/../collection.php';
+
                 $collection = $property->getAttributes();
                 include __DIR__ . '/../collection.php';
 

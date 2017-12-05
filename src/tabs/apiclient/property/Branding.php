@@ -130,6 +130,13 @@ class Branding extends Builder
     protected $statuses;
     
     /**
+     * Special offers
+     * 
+     * @var Collection|\tabs\apiclient\SpecialOffer[]
+     */
+    protected $specialoffers;
+    
+    /**
      * Allowbookingonwebuntil
      *
      * @var \DateTime
@@ -156,19 +163,16 @@ class Branding extends Builder
             new Price,
             $this
         );
-        
         $this->extraprices = Collection::factory(
             'extrapricing', 
             new Pricing(), 
             $this
         );
-        
         $this->extraconfigurations = Collection::factory(
             'extraconfiguration', 
             new Configuration(), 
             $this
         );
-        
         $this->availableDays = Collection::factory(
             'availability',
             new AvailableDay(),
@@ -177,6 +181,11 @@ class Branding extends Builder
         $this->status = Collection::factory(
             'status',
             new Status(),
+            $this
+        );
+        $this->specialoffers = Collection::factory(
+            'specialoffer',
+            new \tabs\apiclient\SpecialOffer(),
             $this
         );
         
@@ -360,6 +369,30 @@ class Branding extends Builder
         $this->status = Status::factory($status);
 
         return $this;
+    }
+    
+    /**
+     * Get the applicable offers for the property brand
+     * 
+     * @param \DateTime $fromDate Start date of offer holiday period range
+     * @param \DateTime $toDate   End date of offer holiday period range
+     * 
+     * @return Collection|\tabs\apiclient\SpecialOffer[]
+     */
+    public function getSpecialoffers(
+        \DateTime $fromDate = null,
+        \DateTime $toDate = null
+    ) {
+        if ($fromDate && $toDate) {
+            $this->specialoffers->getPagination()
+                ->addParameter('fromdate', $fromDate->format('Y-m-d'))
+                ->addParameter('todate', $toDate->format('Y-m-d'));
+        } else {
+            $this->specialoffers->getPagination()->removeParameter('fromdate')
+                ->removeParameter('todate');
+        }
+        
+        return $this->specialoffers->fetch();
     }
     
     /**
