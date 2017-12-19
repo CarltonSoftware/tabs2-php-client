@@ -113,8 +113,8 @@ class ProvisionalBooking extends Base
      */
     public function __construct($id = null)
     {
-//        $this->depositduedate = new \DateTime();
-//        $this->balanceduedate = new \DateTime();
+        $this->depositduedate = new \DateTime();
+        $this->balanceduedate = new \DateTime();
         
         parent::__construct($id);
     }
@@ -166,20 +166,12 @@ class ProvisionalBooking extends Base
      */
     public function toArray()
     {
-        $arr = array();
+        $arr = $this->__toArray();
         if ($this->getTabsuser()) {
             $arr['tabsuserid'] = $this->getTabsuser()->getId();
 
             if ($this->getDepositamount()) {
                 $arr['depositamountid'] = $this->getDepositamount()->getId();
-            }
-
-            if ($this->getDepositduedate() && $this->getDepositduedate() instanceof \DateTime) {
-                $arr['depositduedate'] = $this->getDepositduedate()->format('Y-m-d');
-            }
-
-            if ($this->getBalanceduedate() && $this->getBalanceduedate() instanceof \DateTime) {
-                $arr['balanceduedate'] = $this->getDepositduedate()->format('Y-m-d');
             }
 
             if ($this->getCommissionpercentage()) {
