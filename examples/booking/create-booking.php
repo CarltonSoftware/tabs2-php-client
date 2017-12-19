@@ -26,6 +26,15 @@ try {
             ->setPropertyBranding(array('id' => $pbi))
             ->setAdults(1)
             ->setPets(0);
+    if (filter_input(INPUT_GET, 'saleschannelid')) {
+        $sc = new \tabs\apiclient\SalesChannel(
+            filter_input(INPUT_GET, 'saleschannelid')
+        );
+        $b->setSaleschannel(
+            $sc->get()
+        );
+    }
+
     // Create a new potential booking
     // You could also create a provisional booking too.
     $potentialBooking = new \tabs\apiclient\PotentialBooking();
