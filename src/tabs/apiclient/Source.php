@@ -21,6 +21,8 @@ use tabs\apiclient\Builder;
  * @method Source         setDescription(string $description) Sets the description
  * 
  * @method SourceCategory getSourceCategory()                 Returns the sourcecategory
+ * 
+ * @method StaticCollection|SourceMarketingBrand[] getSourcemarketingbrands() Returns the sourcemarketingbrands
  */
 class Source extends Builder
 {
@@ -50,7 +52,7 @@ class Source extends Builder
      * 
      * @var Collection
      */
-    protected $sourceMarketingBrands;
+    protected $sourcemarketingbrands;
 
     // ------------------ Public Functions --------------------- //
     
@@ -59,7 +61,7 @@ class Source extends Builder
      */
     public function __construct($id = null)
     {
-        $this->sourceMarketingBrands = \tabs\apiclient\Collection::factory(
+        $this->sourcemarketingbrands = \tabs\apiclient\Collection::factory(
             new SourceMarketingBrand,
             $this
         );
