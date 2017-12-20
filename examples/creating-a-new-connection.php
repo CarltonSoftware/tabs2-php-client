@@ -28,13 +28,15 @@ $config = array(
 
 session_start();
 if (isset($_SESSION['AccessToken']) 
-    && $_SESSION['AccessToken'] instanceof Sainsburys\Guzzle\Oauth2\AccessToken
+    && is_array($_SESSION['AccessToken'])
+    && isset($_SESSION['AccessToken'][TABS2APIURL])
+    && $_SESSION['AccessToken'][TABS2APIURL] instanceof Sainsburys\Guzzle\Oauth2\AccessToken
 ) {
     $now = new \DateTime();
-    if ($_SESSION['AccessToken']->getExpires() > $now) {
-        $config['AccessToken'] = $_SESSION['AccessToken']->getToken();
+    if ($_SESSION['AccessToken'][TABS2APIURL]->getExpires() > $now) {
+        $config['AccessToken'] = $_SESSION['AccessToken'][TABS2APIURL]->getToken();
     } else {
-        unset($_SESSION['AccessToken']);
+        unset($_SESSION['AccessToken'][TABS2APIURL]);
     }
 }
 
