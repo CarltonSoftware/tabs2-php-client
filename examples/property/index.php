@@ -57,6 +57,31 @@ try {
             $next->format('Y-m-d')
         );
 
+        // Get available breaks prices for 'changeover' days
+        if ($property->getBrandings()->first() 
+            && filter_input(INPUT_GET, 'fromdate')
+        ) {
+            // As we are getting multiple prices its a good idea to get all
+            // prices to prime the cache
+            $property->getAvailablebreaks();
+
+            // Get the available days.  We can use the local store as we've already
+            // fetched it by using the getCalendar method
+            $days = $property->getBrandings()->first()->getAvailableDaysCollection();
+
+            foreach ($days as $day) {
+                if ($day->getPriceanchor() && $day->getDaysavailable() > 0) {
+                    echo sprintf(
+                        '<p><a href="getting-an-available-breaks-price.php?id=%s&fromdate=%s">Price on %s £%s</a></p>',
+                        $property->getId(),
+                        $day->getDate()->format('Y-m-d'),
+                        $day->getDate()->format('Y-m-d'),
+                        $property->getAvailableBreaksPrice($day->getDate())
+                    );
+                }
+            }
+        }
+
         if ($property->getBrandings()->first() 
             && !filter_input(INPUT_GET, 'fromdate')
         ) {

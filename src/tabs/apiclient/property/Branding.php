@@ -230,6 +230,16 @@ class Branding extends Builder
     }
     
     /**
+     * Return the available days collection
+     * 
+     * @return Collection|AvailableDay[]
+     */
+    public function getAvailableDaysCollection()
+    {
+        return $this->availableDays;
+    }
+    
+    /**
      * Get some availability for the brand
      * 
      * @param \DateTime $fromDate          Start date of availability range
