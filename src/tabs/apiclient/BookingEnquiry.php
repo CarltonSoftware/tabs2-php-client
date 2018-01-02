@@ -712,7 +712,7 @@ class BookingEnquiry extends Base
         }
         
         if ($this->getSaleschannel()) {
-            $arr['saleschannelid'] = $this->getSaleschannel()->getId();
+            $arr['saleschannel'] = $this->getSaleschannel()->getSaleschannel();
         }
         
         if ($this->getCurrentbooking()) {

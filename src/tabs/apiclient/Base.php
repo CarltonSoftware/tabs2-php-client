@@ -31,15 +31,12 @@ namespace tabs\apiclient;
  * 
  * @method integer getId()            Returns the object id
  * @method Base    setId(integer $id) Sets the object id
- * 
- * @method Base      setResponsedata(\stdClass $data) Set the response data
- * @method \stdClass getResponsedata()                Get the response data from
- *                                                    the get() method
  */
 abstract class Base
 {
     use StateTrait;
     use FactoryTrait;
+    use DataTrait;
     
     /**
      * Id
@@ -54,13 +51,6 @@ abstract class Base
      * @var Base
      */
     protected $parent;
-
-    /**
-     * Data returned from the get request
-     * 
-     * @var \stdClass
-     */
-    protected $responsedata;
 
     // ------------------ Static Functions --------------------- //
 
@@ -78,56 +68,6 @@ abstract class Base
                 \tabs\apiclient\client\Client::getClient()->get($route)
             )
         );
-    }
-    
-    /**
-     * Get data from the response data object
-     * 
-     * Uses func_get_args to get the steps to navigate the json. I.e:
-     * 
-     * $this->getDataFromResponse('price', 'total', 'brochureprice')
-     * 
-     * Would return the brochure price on a booking object if found.
-     * 
--     * @return null|mixed
-     */
-    public function getDataFromResponse()
-    {
-        return $this->_getDataFromObject(
-            func_get_args(),
-            $this->responsedata
-        );
-    }
-    
-    /**
-     * One way recursive function to navigate through the responsedata from
-     * a get request
-     * 
-     * @param array     $steps  Steps to nagivate through
-     * @param \stdClass $object Object to look at
-     * 
-     * @return null|mixed
-     */
-    private function _getDataFromObject($steps, $object)
-    {
-        if (count($steps) > 0) {
-            $step = array_shift($steps);
-            if ($object instanceof \stdClass 
-                && property_exists($object, $step)
-                && count($steps) == 0
-            ) {
-                return $object->$step;
-            }
-            
-            if ($object instanceof \stdClass 
-                && property_exists($object, $step)
-                && count($steps) > 0
-            ) {
-                return $this->_getDataFromObject($steps, $object->$step);
-            }
-        }
-        
-        return;
     }
 
     /**

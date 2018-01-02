@@ -16,6 +16,7 @@ namespace tabs\apiclient;
 class Root
 {
     use FactoryTrait;
+    use DataTrait;
     
     /**
      * Valid filters
@@ -37,6 +38,13 @@ class Root
      * @var array
      */
     protected $scalarfields = array();
+    
+    /**
+     * Static objects
+     * 
+     * @var array
+     */
+    protected $static = array();
 
     /**
      * Get the root object
@@ -53,6 +61,7 @@ class Root
         );
         
         $root = new static;
+        $root->setResponsedata($json);
         foreach (get_object_vars($json->validfilters) as $endpoint => $filters) {
             foreach (get_object_vars($filters) as $filter) {
                 $f = root\Filter::factory($filter);
@@ -69,6 +78,9 @@ class Root
             foreach ($fields as $field) {
                 $root->addScalarfield($entity, $field);
             }
+        }
+        foreach (get_object_vars($json->static) as $entity => $elements) {
+            $root->addStaticEntity($entity, $elements);
         }
         
         return $root;
@@ -118,6 +130,16 @@ class Root
     }
     
     /**
+     * Return the static entities
+     * 
+     * @return array
+     */
+    public function getStaticentities()
+    {
+        return $this->static;
+    }
+    
+    /**
      * Add a valid field
      * 
      * @param string $entity Entity type
@@ -149,6 +171,35 @@ class Root
             $this->scalarfields[$entity] = array();
         }
         $this->scalarfields[$entity][] = $field;
+        
+        return $this;
+    }
+    
+    /**
+     * Add a valid scalar field
+     * 
+     * @param string $entity   Entity type
+     * @param array  $elements Elements
+     * 
+     * @return \tabs\apiclient\Root
+     */
+    public function addStaticEntity($entity, $elements)
+    {
+        if ($entity === 'ContactElementSubtype') {
+            $entity = 'ContactElementSubType';
+        }
+        
+        $class = '\\tabs\\apiclient\\' . $entity;
+        
+        if (!class_exists($class)) {
+            return $this;
+        }
+        
+        $col = new StaticCollection();
+        $col->setElementClass($class);
+        $col->setElements($elements);
+        
+        $this->static[$entity] = $col;
         
         return $this;
     }

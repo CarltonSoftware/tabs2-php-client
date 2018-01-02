@@ -22,6 +22,23 @@ $container = array();
 $history = GuzzleHttp\Middleware::history($container);
 $handlerStack = GuzzleHttp\HandlerStack::create();
 $handlerStack->push($history);
+$config = array(
+    'HandlerStack' => $handlerStack
+);
+
+session_start();
+if (isset($_SESSION['AccessToken']) 
+    && is_array($_SESSION['AccessToken'])
+    && isset($_SESSION['AccessToken'][TABS2APIURL])
+    && $_SESSION['AccessToken'][TABS2APIURL] instanceof Sainsburys\Guzzle\Oauth2\AccessToken
+) {
+    $now = new \DateTime();
+    if ($_SESSION['AccessToken'][TABS2APIURL]->getExpires() > $now) {
+        $config['AccessToken'] = $_SESSION['AccessToken'][TABS2APIURL]->getToken();
+    } else {
+        unset($_SESSION['AccessToken'][TABS2APIURL]);
+    }
+}
 
 \tabs\apiclient\client\Client::factory(
     TABS2APIURL, // Api Url
@@ -29,7 +46,5 @@ $handlerStack->push($history);
     TABS2APIPASSWORD, // Api Secret
     TABS2APICLIENTID,
     TABS2APICLIENTSECRET,
-    array(
-        'HandlerStack' => $handlerStack
-    )
+    $config
 );
