@@ -502,7 +502,7 @@ class Property extends Builder
             }
         )->setFetched(true);
         
-        if ($availablebreaksprices->getTotal() === 0) {
+        if ($prices->getTotal() === 0) {
             $prices = $availablebreaksprices->fetch()->findBy(
                 function($ele) use ($fromDate) {
                     return $ele->getFromdate() == $fromDate;
