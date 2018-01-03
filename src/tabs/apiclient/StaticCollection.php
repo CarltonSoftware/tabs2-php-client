@@ -594,6 +594,18 @@ class StaticCollection implements \Iterator, \Countable
         
         return $col;
     }
+    
+    /**
+     * Return the local entity ids
+     * 
+     * @return array
+     */
+    public function getEntityIds()
+    {
+        return array_map(function($ele) {
+            return $ele->getId();
+        }, $this->getElements());
+    }
 
 
     /**
