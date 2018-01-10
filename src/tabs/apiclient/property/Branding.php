@@ -244,14 +244,16 @@ class Branding extends Builder
      * 
      * @param \DateTime $fromDate          Start date of availability range
      * @param \DateTime $toDate            End date of availability range
-     * @param boolean   $includechangedays Include change day information
+     * @param boolean   $includechangedays Whether to include change day information
+     * @param int       $affiliateid       Optional affiliate id
      * 
      * @return Collection|AvailableDay[]
      */
     public function getAvailableDays(
         \DateTime $fromDate = null,
         \DateTime $toDate = null,
-        $includechangedays = true
+        $includechangedays = true,
+        $affiliateid = null
     ) {
         if ($fromDate && $toDate) {
             $this->availableDays->getPagination()
@@ -266,7 +268,14 @@ class Branding extends Builder
             'includechangedays',
             $this->boolToStr($includechangedays)
         );
-        
+
+        if ($affiliateid) {
+            $this->availableDays->getPagination()->addParameter(
+                'affiliateid',
+                $affiliateid
+            );
+        }
+
         return $this->availableDays->fetch();
     }
     
