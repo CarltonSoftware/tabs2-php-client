@@ -63,9 +63,10 @@ class Root
         $root = new static;
         $root->setResponsedata($json);
         foreach (get_object_vars($json->validfilters) as $endpoint => $filters) {
-            foreach (get_object_vars($filters) as $filter) {
-                $f = root\Filter::factory($filter);
+            foreach (get_object_vars($filters) as $filter => $data) {
+                $f = root\Filter::factory($data);
                 $f->setEndpoint($endpoint);
+                $f->setFilter($filter);
                 $root->validfilters->addElement($f);
             }
         }
