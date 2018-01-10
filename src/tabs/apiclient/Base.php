@@ -32,7 +32,7 @@ namespace tabs\apiclient;
  * @method integer getId()            Returns the object id
  * @method Base    setId(integer $id) Sets the object id
  */
-abstract class Base
+abstract class Base implements Collectionable
 {
     use StateTrait;
     use FactoryTrait;

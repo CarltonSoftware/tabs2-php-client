@@ -10,7 +10,6 @@ require_once __DIR__ . '/../creating-a-new-connection.php';
 
 try {
     $root = tabs\apiclient\Root::fetch();
-var_dump($root->getValidfilters()->first());
 } catch(Exception $e) {
     echo $e->getMessage();
 }

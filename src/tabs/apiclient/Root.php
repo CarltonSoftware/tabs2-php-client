@@ -97,6 +97,7 @@ class Root
     public function __construct()
     {
         $this->validfilters = new StaticCollection();
+        $this->validfilters->setPath('');
         $this->validfilters->setElementClass(new root\Filter);
     }
     
