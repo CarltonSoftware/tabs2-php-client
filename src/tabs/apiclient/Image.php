@@ -55,7 +55,7 @@ class Image extends Document
      * 
      * @return string
      */
-    public function getImageUrl($type, $width = 0, $height = 0)
+    public function getImageUrl($type, $width = 150, $height = 100)
     {
         return implode(
             '/',
@@ -65,6 +65,48 @@ class Image extends Document
                 $width,
                 $height
             )
+        );
+    }
+    
+    /**
+     * Get the public url
+     * 
+     * @param string $type   Resize type. Types can be resize, width, 
+     *                       height, smart, original and normal.
+     * @param string $width  Width in px
+     * @param string $height Height in px
+     * 
+     * @return string
+     */
+    public function getPublicImageUrl($type = 'smart', $width = 100, $height = 100)
+    {
+        return implode(
+            '/',
+            array(
+                'image',
+                $this->fileId,
+                'resize',
+                $type,
+                $width,
+                $height,
+                $this->getFilename()
+            )
+        );
+    }
+    
+    /**
+     * Get the full public url function.
+     * 
+     * @param string $type   Resize type
+     * @param string $width  Width in px
+     * @param string $height Height in px
+     * 
+     * @return string
+     */
+    public function getFullPublicImageUrl($type = 'smart', $width = 100, $height = 100)
+    {
+        return $this->getUrl(
+            $this->getPublicImageUrl($type, $width, $height)
         );
     }
     
