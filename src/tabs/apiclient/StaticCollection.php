@@ -750,7 +750,11 @@ class StaticCollection implements \Iterator, \Countable
     {
         $assoc = [];
         foreach ($this->elements as $element) {
-            $assoc[$element->$key] = $element->$value;
+            if ($element->method_exists($value)) {
+                $assoc[$element->$key] = $element->$value();
+            } else {
+                $assoc[$element->$key] = $element->$value;
+            }
         }
         
         return $assoc;
