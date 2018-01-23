@@ -739,6 +739,24 @@ class StaticCollection implements \Iterator, \Countable
     }
     
     /**
+     * Return an assoc array
+     * 
+     * @param string $key   Key
+     * @param string $value Value
+     * 
+     * @return array
+     */
+    public function toAssocArray($key, $value)
+    {
+        $assoc = [];
+        foreach ($this->elements as $element) {
+            $assoc[$element->$key] = $element->$value;
+        }
+        
+        return $assoc;
+    }
+    
+    /**
      * Reset the collection to its unfetched state
      * 
      * @return \tabs\apiclient\StaticCollection
