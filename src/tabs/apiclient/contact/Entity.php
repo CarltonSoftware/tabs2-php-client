@@ -3,6 +3,7 @@
 namespace tabs\apiclient\contact;
 
 use tabs\apiclient\Builder;
+use tabs\apiclient\Collection;
 
 /**
  * Tabs Rest API Entity object.
@@ -149,6 +150,7 @@ class Entity extends Builder
             'reference' => $this->getReference(),
             'contactdetailid' => $this->getContactdetail()->getId(),
             'contactdetailvalue' => $this->getContactdetailvalue(),
+            'perform_send' => $this->boolToStr($this->getPerformsend()),
         );
     }
 }

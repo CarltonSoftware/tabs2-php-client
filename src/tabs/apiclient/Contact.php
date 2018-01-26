@@ -31,6 +31,9 @@ use tabs\apiclient\Collection;
  * @method boolean getDeleted()             Returns the delete
  * @method Contact setDeleted(boolean $var) Sets the delete
  * 
+ * @method string getStatus_status()            Returns the status_status
+ * @method string setStatus_status(string $var) Sets the status_status
+ * 
  * @method \tabs\apiclient\SourceMarketingBrand getSourcemarketingbrand() Returns the sourcemarketingbrand
  * 
  * @method Collection|contact\Entity[] getContactentities() Returns the contactentities
@@ -103,6 +106,13 @@ class Contact extends Builder
      * @var boolean
      */
     protected $deleted = false;
+    
+    /**
+     * Status_status
+     *
+     * @var string
+     */
+    protected $status_status;
     
     /**
      * Contact documents
@@ -199,8 +209,9 @@ class Contact extends Builder
             'contactmethodtype' => $this->getContactmethodtype()->getMethod(),
             'content' => $this->getContent(),
             'subject' => $this->getSubject(),
-            'deleted' => $this->boolToStr($this->getDelete()),
-            'sendercontactdetailid' => $this->getSender()->getId()
+            'deleted' => $this->boolToStr($this->getDeleted()),
+            'sendercontactdetailid' => $this->getSender()->getId(),
+            'status_status' => $this->getStatus_status(),
         );
         
         if ($this->getSourcemarketingbrand()) {
