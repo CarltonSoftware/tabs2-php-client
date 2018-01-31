@@ -996,7 +996,7 @@ class Booking extends Builder
     public function setTransferredtobooking($booking)
     {
         $this->transferredtobooking = TransferredBooking::factory($booking);
-
+        
         return $this;
     }
 
@@ -1009,7 +1009,7 @@ class Booking extends Builder
      */
     public function setTransferredfrombooking($booking)
     {
-        $this->transferredtobooking = TransferredBooking::factory($booking);
+        $this->transferredfrombooking = TransferredBooking::factory($booking);
 
         return $this;
     }
