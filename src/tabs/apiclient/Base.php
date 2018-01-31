@@ -246,6 +246,20 @@ abstract class Base implements Collectionable
             $this->toArray()
         );
     }
+    
+    /**
+     * Collection getter
+     * 
+     * @param string $collection Collection name
+     * 
+     * @return \tabs\apiclient\Collection|null
+     */
+    public function getCollection($collection)
+    {
+        if ($this->$collection instanceof Collection) {
+            return $this->$collection;
+        }
+    }
 
     // ------------------------- Protected Functions ------------------------ //
 
