@@ -248,7 +248,7 @@ class SagePayPayment extends Base
         }
         
         if ($this->getSecuritydepositamount() > 0) {
-            $arr['securitydepositamount'] = $this->getBookingamount();
+            $arr['securitydepositamount'] = $this->getSecuritydepositamount();
         }
         
         return $arr;
