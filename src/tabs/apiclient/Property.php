@@ -103,6 +103,8 @@ use tabs\apiclient\property\AvailableBreak;
  * @method Collection|Target[] getTargets() Get the property targets
  * 
  * @method Collection|AvailableBreak[] getAvailablebreaks() Get the available breaks for a property
+ * 
+ * @method string getPrimarybookingbrand() Get the primary booking brand (name)
  */
 class Property extends Builder
 {
@@ -336,6 +338,14 @@ class Property extends Builder
      * @var string
      */
     protected $checkouttime = '';
+    
+    /*
+     * Primary booking brand (name)
+     * 
+     * @var string
+     */
+    protected $primarybookingbrand;
+    
 
     // -------------------------- Public Functions -------------------------- //
     
