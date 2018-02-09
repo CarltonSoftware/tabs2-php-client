@@ -138,6 +138,19 @@ class Pagination extends Base
     {
         return $this->addParameter('limit', $limit);
     }
+
+    /**
+     * Search id setter
+     *
+     * @param integer $searchId
+     *
+     * @return Pagination
+     */
+    public function setSearchId($searchId)
+    {
+        return $this->setParameter('searchId', $searchId);
+    }
+
     
     /**
      * Remove a parameter
@@ -231,6 +244,16 @@ class Pagination extends Base
     public function getLimit()
     {
         return $this->getParameter('limit');
+    }
+
+    /**
+     * Return the current search id
+     *
+     * @return integer
+     */
+    public function getSearchId()
+    {
+        return $this->getParameter('searchId');
     }
     
     /**

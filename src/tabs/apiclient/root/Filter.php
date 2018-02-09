@@ -2,6 +2,8 @@
 
 namespace tabs\apiclient\root;
 
+use tabs\apiclient\Collectionable;
+
 /**
  * Tabs Rest API Root filter utility object.
  *
@@ -16,14 +18,16 @@ namespace tabs\apiclient\root;
  * @method string getDescription() Return the description
  * @method array  getOperators()   Return the operators
  * @method string getType()        Return the type
+ * @method string getFilter()        Return the filter key
  * @method string getEndpoint()    Return the applicable endpoint
  * 
  * @method Filter setDescription(string $str) Set the description
  * @method Filter setOperators(array $op)     Set the operators
  * @method Filter setType(string $str)        Set the type
+ * @method Filter setFilter(string $str)      Set the filter
  * @method Filter setEndpoint(string $str)    Set the endpoint
  */
-class Filter
+class Filter implements Collectionable
 {
     use \tabs\apiclient\StateTrait;
     use \tabs\apiclient\FactoryTrait;
@@ -50,6 +54,13 @@ class Filter
     protected $type = '';
     
     /**
+     * Filter
+     * 
+     * @var string
+     */
+    protected $filter = '';
+    
+    /**
      * Endpoint
      * 
      * @var string
@@ -62,4 +73,12 @@ class Filter
      * @var string
      */
     protected $select;
+    
+    /**
+     * @inheritDoc
+     */
+    public function getCreateUrl()
+    {
+        return '';
+    }
 }

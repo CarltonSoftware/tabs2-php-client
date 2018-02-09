@@ -144,7 +144,7 @@ class Customer extends Actor
         $unsubscribed = false
     ) {
         $cmbs = $this->getMarketingbrands()->findBy(function($ele) use ($eml) {
-            return $ele->getMarketingbrand()->getId() === $eml->getParent()->getId();
+            return intval($ele->getMarketingbrand()->getId()) === intval($eml->getParent()->getId());
         });
         
         if ($cmbs->count() === 0) {
@@ -163,7 +163,7 @@ class Customer extends Actor
         }
         
         $sub = $cmb->getEmaillists()->findBy(function($ele) use ($eml) {
-            return $ele->getMarketingbrandemaillist()->getId() === $eml->getId();
+            return intval($ele->getMarketingbrandemaillist()->getId()) === intval($eml->getId());
         });
 
         // Get a mailing list for that marketing brand

@@ -65,7 +65,7 @@ if (!empty($collection)) {
             && $element->getDocument() instanceof \tabs\apiclient\Image
         ) {
             echo sprintf(
-                '<li><a href="../document/viewing-a-document.php?id=%s">%s</a></li>',
+                '<li><a href="../document/viewing-an-image.php?id=%s">%s</a></li>',
                 $element->getDocument()->getId(),
                 (string) $element->getDocument()
             );

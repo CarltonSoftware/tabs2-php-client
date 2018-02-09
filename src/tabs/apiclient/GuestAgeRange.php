@@ -42,6 +42,22 @@ class GuestAgeRange extends Builder
     /**
      * @inheritDoc
      */
+    public function __toString()
+    {
+        $args = [];
+        if ($this->agefrom) {
+            $args[] = $this->agefrom;
+        }
+        if ($this->ageto) {
+            $args[] = $this->ageto;
+        }
+        
+        return implode(' - ', $args);
+    }
+    
+    /**
+     * @inheritDoc
+     */
     public function toArray()
     {
         return array(

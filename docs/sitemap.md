@@ -45,6 +45,7 @@
 ## Document examples
  * [Tagging a document](document/tagging-a-document.html)
  * [Viewing a document](document/viewing-a-document.html)
+ * [Viewing a image](document/viewing-an-image.html)
 
 
 ## Property examples

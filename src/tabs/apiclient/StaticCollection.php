@@ -108,7 +108,7 @@ class StaticCollection implements \Iterator, \Countable
         if (count($args) == 1) {
             $element = func_get_arg(0);
             
-            if ($element instanceof Base) {
+            if ($element instanceof Collectionable) {
                 $path = $element->getCreateUrl();
             }
         } else if (count($args) > 1) {
@@ -116,8 +116,8 @@ class StaticCollection implements \Iterator, \Countable
             $last = array_pop($args);
             
             // Handle 2 args (Object, Parent)
-            if ($first instanceof Base 
-                && $last instanceof Base
+            if ($first instanceof Collectionable 
+                && $last instanceof Collectionable
                 && count($args) == 0
             ) {
                 $parent = $last;
@@ -126,7 +126,7 @@ class StaticCollection implements \Iterator, \Countable
                 
             // Handle 2 args (path, Object)
             } else if (is_string($first) 
-                && $last instanceof Base 
+                && $last instanceof Collectionable 
                 && count($args) == 0
             ) {
                 $path = $first;
@@ -142,7 +142,7 @@ class StaticCollection implements \Iterator, \Countable
                 
             // Handle 3 args (path, Object, Parent)
             } else if (is_string($first) 
-                && $last instanceof Base 
+                && $last instanceof Collectionable 
                 && count($args) == 1
             ) {
                 $path = $first;
@@ -300,7 +300,7 @@ class StaticCollection implements \Iterator, \Countable
      */
     public function addElement(&$element)
     {     
-        if (!$element instanceof Base) {
+        if (!$element instanceof Collectionable) {
             // Get collection class by checking for discriminator map
             $collectionClass = $this->_getCollectionClass($element);
             
@@ -736,6 +736,28 @@ class StaticCollection implements \Iterator, \Countable
         $this->elementParent = null;
         
         return $this;
+    }
+    
+    /**
+     * Return an assoc array
+     * 
+     * @param string $key   Key
+     * @param string $value Value
+     * 
+     * @return array
+     */
+    public function toAssocArray($key, $value)
+    {
+        $assoc = [];
+        foreach ($this->elements as $element) {
+            if ($element->method_exists($value)) {
+                $assoc[$element->$key] = $element->$value();
+            } else {
+                $assoc[$element->$key] = $element->$value;
+            }
+        }
+        
+        return $assoc;
     }
     
     /**
