@@ -148,7 +148,7 @@ class Pagination extends Base
      */
     public function setSearchId($searchId)
     {
-        return $this->setParameter('searchId', $searchId);
+        return $this->addParameter('searchId', $searchId);
     }
 
     
