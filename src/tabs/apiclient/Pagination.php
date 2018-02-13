@@ -37,6 +37,13 @@ class Pagination extends Base
     protected $filters = array(
         array()
     );
+    
+    /**
+     * Current order
+     * 
+     * @var array
+     */
+    protected $order = array();
 
     /**
      * Total amount of elements found for the query
@@ -227,6 +234,35 @@ class Pagination extends Base
     }
     
     /**
+     * Add an order string
+     * 
+     * @param string $order Order
+     * @param string $dir   Direction
+     * 
+     * @return Pagination
+     */
+    public function addOrder($order, $dir = 'asc')
+    {
+        if (!stristr($order, '_')) {
+            $order .= '_' . $dir;
+        }
+        
+        $this->order[] = strtolower($order);
+        
+        return $this;
+    }
+    
+    /**
+     * Get the order array
+     * 
+     * @return array
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+    
+    /**
      * Return the current page
      * 
      * @return integer
@@ -339,10 +375,16 @@ class Pagination extends Base
             }
         }
         
+        $params = $this->getParameters();
+        
+        if (count($this->getOrder()) > 0) {
+            $params['orderBy'] = implode(':', $this->getOrder());
+        }
+        
         return array_filter(
             array_merge(
                 $filter,
-                $this->getParameters()
+                $params
             )
         );
     }
