@@ -1,7 +1,7 @@
-## Where is filtering available?
+# Where is filtering available?
 Filtering is available on any endpoint which has the 'filter' property on the initial json node.
 
-### Filtering format
+## Filtering format
 Within the GET request to the endpoints specified above you may pass the `filter` query parameter.  This may either be as a string or an array of strings.  Filters are passed within this parameter as a key/value store with the equals `=` character separating the key and value. Multiple filters must be separated with a colon character `:`.  If multiple filters are applied, the search effect will be multiplicative (i.e. this equals that AND this equals that).  
 
 When an array of filters is applied, the search effect will be additive (i.e. this equals that AND this equals that OR this equals that).
@@ -15,7 +15,7 @@ For example:
 |http://apiroot/v2/property?filter=param1=1:param2=2|Filters with parameter1 with the value of 1 **AND** parameter2 with the value of 2|
 |http://apiroot/v2/property?filter[]=param1=1:param2=2&filter[]=value3=1|Same as above **OR** with parameter3 with the value of 1|
 
-#### Operands
+### Operands
 With each filter, certain operands are available which will change your filters behavior.  The following operands are supported:
 
 |Operands|Filter format|Behavior|
@@ -28,12 +28,12 @@ With each filter, certain operands are available which will change your filters 
 |&#124;|filter=param3=1&#124;2&#124;3 |OR operator.  You may search for fields which equal the any of the parameters that you specify between the pipe character &#124;.|
 |*|filter=param3=*abc|Starts with operator.  You may search for fields which start with the specified characters.|
 
-#### How do I filter with the php client?
+### How do I filter with the php client?
 You can find an example of how to [filter properties here](filtering.html).
 
-### What filtering is available?
+## What filtering is available?
 
-#### Actor
+### Actor
 |Filter|Recommended operators|Filter effect|
 |------------------|------------------|------------------|
 |`abroad`|`=`|Filter owners by the abroad status flag|
@@ -94,7 +94,7 @@ You can find an example of how to [filter properties here](filtering.html).
 |`town`|`=` `|` `~` `*`|Filter actors by their address Town.|
 |`type`|`=`|Filter actors by type.  Can be Customer, Supplier, Owner, TabsUser, TabsUserGroup or Agency.|
 
-#### Property
+### Property
 |Filter|Recommended operators|Filter effect|
 |------------------|------------------|------------------|
 |`activeofficeid`|`=` `|`|Active office id|
@@ -716,7 +716,7 @@ You can find an example of how to [filter properties here](filtering.html).
 |`attribute70`|`=`|ATTR209 - z2015 - but not BookOnWeb - Property has renewed for 2015 but 'Allow Bookings On Web' field is not ticked|
 |`attribute48`|`=`|ATTR150 - zSBs-but not template - Property offers short breaks, but is not on one of the brand's 'short breaks allowed' templates|
 
-#### Booking
+### Booking
 |Filter|Recommended operators|Filter effect|
 |------------------|------------------|------------------|
 |`actorid`|`=` `|`|Filter bookings by the owner/supplier or Customer id.|
@@ -915,7 +915,7 @@ You can find an example of how to [filter properties here](filtering.html).
 |`webbookingprocesseddatetime`|`=` `>` `<` `/`|Filter by Web Booking processed date time|
 |`workorder`|`=`|Find bookings with an active workorder.|
 
-#### Note
+### Note
 |Filter|Recommended operators|Filter effect|
 |------------------|------------------|------------------|
 |`actor`|`=` `|`|Filter notes by the actor id|
@@ -950,7 +950,7 @@ You can find an example of how to [filter properties here](filtering.html).
 |`visibletokeyholder`|`=`|visibletokeyholder|
 |`visibletoowner`|`=`|visibletoowner|
 
-#### Ticket
+### Ticket
 |Filter|Recommended operators|Filter effect|
 |------------------|------------------|------------------|
 |`brandcode`|`=` `|` `~`|Brandcode|
@@ -962,7 +962,7 @@ You can find an example of how to [filter properties here](filtering.html).
 |`tabsuser`|`=` `~` `|`|Tabs User|
 |`ticketuser`|`=` `|`|Ticket user assignment|
 
-#### Actorpayment
+### Actorpayment
 |Filter|Recommended operators|Filter effect|
 |------------------|------------------|------------------|
 |`actorid`|`=`|Actor id|
@@ -970,7 +970,7 @@ You can find an example of how to [filter properties here](filtering.html).
 |`paymentdatetime`|`=` `|` `>` `<` `/`|Payment date and time|
 |`paymentmethod`|`=` `|`|Payment Method|
 
-#### Transaction
+### Transaction
 |Filter|Recommended operators|Filter effect|
 |------------------|------------------|------------------|
 |`accountid`|`=` `|`|Filter by Account id.|
@@ -991,7 +991,7 @@ You can find an example of how to [filter properties here](filtering.html).
 |`transactiondatetime`|`=` `|` `>` `<` `/`|Transaction date and time|
 |`transactiondefinitionid`|`=` `|`|Filter by the Transaction Definition id.|
 
-#### Entry
+### Entry
 |Filter|Recommended operators|Filter effect|
 |------------------|------------------|------------------|
 |`accountid`|`=` `|`|Account id|
@@ -1010,7 +1010,7 @@ You can find an example of how to [filter properties here](filtering.html).
 |`ownerid`|`=`|Owner id|
 |`propertyid`|`=`|Property id|
 
-#### Bookingsupplier
+### Bookingsupplier
 |Filter|Recommended operators|Filter effect|
 |------------------|------------------|------------------|
 |`autoadded`|`=`|Filter booking suppliers by the auto added flag.|
@@ -1029,7 +1029,7 @@ You can find an example of how to [filter properties here](filtering.html).
 |`service`|`=` `|` `~`|Filter booking suppliers by the service id.|
 |`supplier`|`=` `|` `~`|Filter booking suppliers by the supplier id.|
 
-#### Workordersupplier
+### Workordersupplier
 |Filter|Recommended operators|Filter effect|
 |------------------|------------------|------------------|
 |`calloutcharge`|`=` `>` `<` `|` `/`|Filter by the workorder supplier calloutcharge.|
@@ -1096,7 +1096,7 @@ You can find an example of how to [filter properties here](filtering.html).
 |`supplier_town`|`=` `|` `~` `*`|Filter by Supplier filter: Filter actors by their address Town.|
 |`supplier_type`|`=`|Filter by Supplier filter: Filter actors by type.  Can be Customer, Supplier, Owner, TabsUser, TabsUserGroup or Agency.|
 
-#### Workorder
+### Workorder
 |Filter|Recommended operators|Filter effect|
 |------------------|------------------|------------------|
 |`accesscontact`|`=` `|`|Filter by the workorder accesscontact.|
@@ -1451,7 +1451,7 @@ You can find an example of how to [filter properties here](filtering.html).
 |`workordersupplier_supplier_town`|`=` `|` `~` `*`|Filter by WorkOrderSupplier filter: Filter by Supplier filter: Filter actors by their address Town.|
 |`workordersupplier_supplier_type`|`=`|Filter by WorkOrderSupplier filter: Filter by Supplier filter: Filter actors by type.  Can be Customer, Supplier, Owner, TabsUser, TabsUserGroup or Agency.|
 
-#### Specialoffer
+### Specialoffer
 |Filter|Recommended operators|Filter effect|
 |------------------|------------------|------------------|
 |`active`|`=`|Find special offers by their active state|
@@ -1462,7 +1462,7 @@ You can find an example of how to [filter properties here](filtering.html).
 |`officedescription`|`=` `~`|Find special offers by their office description|
 |`promotion`|`=`|Filter special offers by if they are a promotion or not.|
 
-#### Sagepaypayment
+### Sagepaypayment
 |Filter|Recommended operators|Filter effect|
 |------------------|------------------|------------------|
 |`actorid`|`=`|Filter sagepay payments by the actorid.|

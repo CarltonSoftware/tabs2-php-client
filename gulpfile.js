@@ -163,6 +163,10 @@ gulp.task('buildexamples', function() {
                 p.push('');
                 p.push('## Getting started');
                 p.push(' * [Introduction - READ ME first!](index.html)');
+                p.push('');
+                p.push('');
+                p.push('## General');
+                p.push(' * [Filtering - What filtering is available?](filtering-information.html)');
                 var last = '';
                 for (var i in sitemap) {
                     if (last != sitemap[i].directory) {
