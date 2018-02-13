@@ -5,6 +5,10 @@
  * [Introduction - READ ME first!](index.html)
 
 
+## General
+ * [Filtering - What filtering is available?](filtering-information.html)
+
+
 ## Actor examples
  * [Adding a document to an Actor](actor/add-document.html)
  * [Adding an email](actor/add-email.html)
@@ -52,24 +56,6 @@
  * [Adding a document to a property](property/add-document.html)
  * [Adding an image to a property](property/add-image.html)
  * [Adding a note to a property](property/add-note.html)
- * [Where is filtering available?](property/filtering-information.html)
- * [Filtering format](property/filtering-information.html)
- * [Operands](property/filtering-information.html)
- * [How do I filter with the php client?](property/filtering-information.html)
- * [What filtering is available?](property/filtering-information.html)
- * [Actor](property/filtering-information.html)
- * [Property](property/filtering-information.html)
- * [Booking](property/filtering-information.html)
- * [Note](property/filtering-information.html)
- * [Ticket](property/filtering-information.html)
- * [Actorpayment](property/filtering-information.html)
- * [Transaction](property/filtering-information.html)
- * [Entry](property/filtering-information.html)
- * [Bookingsupplier](property/filtering-information.html)
- * [Workordersupplier](property/filtering-information.html)
- * [Workorder](property/filtering-information.html)
- * [Specialoffer](property/filtering-information.html)
- * [Sagepaypayment](property/filtering-information.html)
  * [Filtering properties](property/filtering.html)
  * [Retrieving an available breaks price](property/getting-an-available-breaks-price.html)
  * [Requesting property information](property/index.html)
