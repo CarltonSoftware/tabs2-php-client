@@ -73,6 +73,7 @@
  * [Filtering properties](property/filtering.html)
  * [Retrieving an available breaks price](property/getting-an-available-breaks-price.html)
  * [Requesting property information](property/index.html)
+ * [Ordering results](property/ordering-results.html)
  * [Requesting specific fields in property collections](property/requesting-fields-in-collections.html)
 
 

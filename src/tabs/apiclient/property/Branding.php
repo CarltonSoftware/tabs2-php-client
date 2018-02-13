@@ -38,7 +38,7 @@ use tabs\apiclient\extra\branding\Configuration;
  * @method \DateTime getShowpricingonwebuntil() Returns the showpricingonwebuntil
  * @method Branding setShowpricingonwebuntil(\DateTime $var) Sets the showpricingonwebuntil
  * 
- * @method \tabs\apiclient\Status getStatus() Returns the status
+ * @method \tabs\apiclient\property\branding\Status getStatus() Returns the status
  * 
  * @method Collection|Pricing[] getExtraprices() Returns the property extra prices
  * @method Collection|Configuration[] getExtraconfigurations() Returns the property extra configurations
