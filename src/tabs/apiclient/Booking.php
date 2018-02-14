@@ -15,6 +15,8 @@ use tabs\apiclient\ProvisionalBooking;
 use tabs\apiclient\note\BookingNote;
 use tabs\apiclient\booking\Guest;
 use tabs\apiclient\booking\OwnerPaymentSummary;
+use tabs\apiclient\AgencyBookingType;
+use tabs\apiclient\OwnerBookingType;
 
 /**
  * Tabs Rest API Booking object.
@@ -125,6 +127,8 @@ use tabs\apiclient\booking\OwnerPaymentSummary;
  * @method OwnerPaymentSummary getOwnerpaymentsummary() Returns the Ownerpaymentsummary
  *
  * @method AgencyBookingType getAgencybookingtype() Returns the booking type for agency bookings
+ * 
+ * @method OwnerBookingType getOwnerBookingtype() Returns the booking type for owner bookings
  *
  * @method TransferredBooking getTransferredtobooking() Returns the transferred booking
  *
@@ -432,6 +436,13 @@ class Booking extends Builder
      * @var AgencyBookingType
      */
     protected $agencybookingtype;
+    
+    /**
+     * Owner booking type
+     *
+     * @var OwnerBookingType
+     */
+    protected $ownerbookingtype;    
 
     /**
      * Transferred booking
@@ -762,7 +773,7 @@ class Booking extends Builder
     }
 
     /**
-     * Set the AgencyBookingType on the property
+     * Set the AgencyBookingType on the booking
      *
      * @param AgencyBookingType|stdClass|Array $abt AgencyBookingType
      *
@@ -774,6 +785,20 @@ class Booking extends Builder
 
         return $this;
     }
+    
+    /**
+     * Set the OwnerBookingType on the booking
+     *
+     * @param OwnerBookingType|stdClass|Array $obt OwnerBookingType
+     *
+     * @return Booking
+     */
+    public function setOwnerbookingtype($obt)
+    {
+        $this->ownerbookingtype = OwnerBookingType::factory($obt);
+
+        return $this;
+    }    
 
     /**
      * Shortcut function for adding a note
@@ -873,6 +898,10 @@ class Booking extends Builder
 
         if ($this->getGuesttype() === 'Agency' && $this->getAgencybookingtype()) {
             $arr['agencybookingtypeid'] = $this->getAgencybookingtype()->getId();
+        }
+        
+        if ($this->getGuesttype() === 'Owner' && $this->getOwnerbookingtype()) {
+            $arr['ownerbookingtypeid'] = $this->getOwnerbookingtype()->getId();
         }
 
         if ($this->getGuesttype() === 'Customer' && $this->getPropertybranding()) {
@@ -996,7 +1025,7 @@ class Booking extends Builder
     public function setTransferredtobooking($booking)
     {
         $this->transferredtobooking = TransferredBooking::factory($booking);
-        
+
         return $this;
     }
 
@@ -1009,7 +1038,7 @@ class Booking extends Builder
      */
     public function setTransferredfrombooking($booking)
     {
-        $this->transferredfrombooking = TransferredBooking::factory($booking);
+        $this->transferredtobooking = TransferredBooking::factory($booking);
 
         return $this;
     }
