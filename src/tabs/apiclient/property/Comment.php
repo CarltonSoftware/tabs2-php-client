@@ -19,6 +19,9 @@ use tabs\apiclient\Booking;
  * @method string getComment() Returns the comment
  * @method Comment setComment(string $var) Sets the comment
  * 
+ * @method string getCommenter() Returns the commenter
+ * @method Comment setCommenter(string $var) Sets the commenter
+ * 
  * @method boolean getVisibletoowner() Returns the visibletoowner
  * @method Comment setVisibletoowner(boolean $var) Sets the visibletoowner
  * 
@@ -28,7 +31,7 @@ use tabs\apiclient\Booking;
  * @method \DateTime getCreateddate() Returns the createddate
  * @method Comment setCreateddate(\DateTime $var) Sets the createddate
  * 
- * @method Comment getBooking() Returns the booking
+ * @method \tabs\apiclient\Booking getBooking() Returns the booking
  */
 class Comment extends Builder
 {
@@ -38,6 +41,13 @@ class Comment extends Builder
      * @var string
      */
     protected $comment;
+    
+    /**
+     * Commenter
+     *
+     * @var string
+     */
+    protected $commenter;
 
     /**
      * Visibletoowner
@@ -78,22 +88,36 @@ class Comment extends Builder
      */
     public function setBooking($bkg)
     {
-        $this->booking = Booking::factory($bkg, $this);
+        $this->booking = Booking::factory($bkg);
         
         return $this;
-    }    
+    }
+    
+    /**
+     * Get the customer name from the associated booking
+     * 
+     * @return string
+     */
+    public function getBookingCommenter()
+    {
+        if ($this->getBooking()
+            && $this->getBooking()->getCustomers()->first()
+        ) {
+            return $this->getBooking()->getCustomers()->first()->getName();
+        }
+    }
     
     /**
      * @inheritDoc
      */
     public function toArray()
     {
-        return array(
-            'comment' => $this->getComment(),
-            'visibletoowner' => $this->boolToStr($this->getVisibletoowner()),
-            'visibleonweb' => $this->boolToStr($this->getVisibleonweb()),
-            'bookingid' => $this->getBooking()->getId(),
-            'createddate' => $this->getCreateddate()->format('Y-m-d'),
-        );
+        $arr = $this->__toArray();
+        
+        if ($this->getBooking()) {
+            $arr['bookingid'] = $this->getBooking()->getId();
+        }
+        
+        return $arr;
     }
 }
