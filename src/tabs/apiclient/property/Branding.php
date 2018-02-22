@@ -10,6 +10,7 @@ use tabs\apiclient\property\price\Price;
 use tabs\apiclient\property\branding\AvailableDay;
 use tabs\apiclient\property\branding\Status;
 use tabs\apiclient\property\branding\Calendar;
+use tabs\apiclient\property\branding\ChangeDayTemplate;
 use tabs\apiclient\extra\branding\Pricing;
 use tabs\apiclient\extra\branding\Configuration;
 
@@ -40,6 +41,7 @@ use tabs\apiclient\extra\branding\Configuration;
  * 
  * @method \tabs\apiclient\property\branding\Status getStatus() Returns the status
  * 
+ * @method Collection|ChangeDayTemplate[] getChangedaytemplates Returns the change day templates
  * @method Collection|Pricing[] getExtraprices() Returns the property extra prices
  * @method Collection|Configuration[] getExtraconfigurations() Returns the property extra configurations
  */
@@ -116,6 +118,13 @@ class Branding extends Builder
     protected $extraconfigurations;    
     
     /**
+     * Collection of change day templates
+     * 
+     * @var Collection|ChangeDayTemplate[]
+     */
+    protected $changedaytemplates;       
+    
+    /**
      * Collection of availability
      * 
      * @var Collection|AvailableDay[]
@@ -173,6 +182,11 @@ class Branding extends Builder
             new Configuration(), 
             $this
         );
+        $this->changedaytemplates = Collection::factory(
+            'changedaytemplate', 
+            new \tabs\apiclient\property\branding\ChangeDayTemplate(), 
+            $this
+        );        
         $this->availableDays = Collection::factory(
             'availability',
             new AvailableDay(),
@@ -454,6 +468,7 @@ class Branding extends Builder
             'showpricingonwebuntildate' => $this->getShowpricingonwebuntil()->format('Y-m-d'),
             'extraconfigurations' => $this->getExtraconfigurations()->toArray(),
             'extraprices' => $this->getExtraprices()->toArray(),
+            'changedaytemplates' => $this->getChangedaytemplates()->toArray(),
         );
     }
     
@@ -476,6 +491,7 @@ class Branding extends Builder
             'prices',
             'extraprices',
             'extraconfigurations',
+            'changedaytemplates',
             'parent'
         );
     }
