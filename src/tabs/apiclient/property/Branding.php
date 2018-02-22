@@ -27,7 +27,8 @@ use tabs\apiclient\extra\branding\Configuration;
  *
  * @method \tabs\apiclient\Branding getBranding() Returns the branding
  * @method \tabs\apiclient\BrandingGroup getBrandinggroup() Returns the brandinggroup
- * @method boolean getPrimarybookingbrand() Returns the primarybookingbrand
+ * @method boolean getPrimarybookingbrand() Returns the primary booking brand
+ * @method boolean getPrimarybranding() Returns the primary branding boolean
  * @method Branding setPrimarybookingbrand(boolean $var) Sets the primarybookingbrand
  * 
  * @method boolean getPromote() Returns the promote
@@ -81,6 +82,13 @@ class Branding extends Builder
      * @var boolean
      */
     protected $primarybookingbrand;
+
+    /**
+     * Primary branding
+     *
+     * @var boolean
+     */
+    protected $primarybranding;
 
     /**
      * Promote

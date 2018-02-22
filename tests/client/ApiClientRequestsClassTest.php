@@ -6,7 +6,7 @@ $file = dirname(__FILE__)
     . DIRECTORY_SEPARATOR . 'autoload.php';
 require_once $file;
 
-class ApiClientRequestsClassTest extends PHPUnit_Framework_TestCase
+class ApiClientRequestsClassTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Test the get request
