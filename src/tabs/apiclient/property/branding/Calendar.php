@@ -356,21 +356,54 @@ class Calendar
             'id' => '',
             'class' => array()
         );
+        $suffix = '';
+        
+        $currentDate = new \DateTime();
+        $currentDate->setTime(0, 0, 0);
+        $currentDate->setDate(
+            $this->targetMonth->format('Y'),
+            $this->targetMonth->format('m'),
+            0
+        );
+        if ($day > 0) {
+            $currentDate->add(new \DateInterval('P' . $day . 'D'));
+        } else {
+            $currentDate->sub(new \DateInterval('P' . abs($day) . 'D'));
+        }
+            
+        if ($currentDate < $today) {
+            $attributes['class'][] = 'past';
+        }
         
         // Start formulating cell structure
         if ($day > 0 && $day <= $this->targetMonth->format('t')) {
-            $currentDate = new \DateTime();
-            $currentDate->setTime(0, 0, 0);
-            $currentDate->setDate(
-                $this->targetMonth->format('Y'),
-                $this->targetMonth->format('m'),
-                $day
-            );
+            // This is the current month
             $is_today = ($currentDate->format('Y-m-d') == $today->format('Y-m-d'));
             $suffix = ($is_today) ? '_today' : '';
             
             // Start formulating cell structure
             $cell = $this->temp['cal_cell_start' . $suffix];
+            
+            if ($is_today) {
+                $attributes['class'][] = 'today';
+            }
+        } else if ($currentDate > $today) {
+            if ($day < 0) {
+                $attributes['class'][] = 'previous_month';
+            } else if ($this) {
+                $attributes['class'][] = 'next_month';
+            }
+            $day = $currentDate->format('d');
+            $cell = $this->temp['cal_cell_start' . $suffix];
+        } else {
+            $attributes['class'][] = 'empty';
+            
+            // Blank cells
+            $cell = $this->temp['cal_cell_start' . $suffix];
+            $cell .= $this->temp['cal_cell_blank'];
+        }
+        
+        if (!in_array('empty', $attributes['class'])) {
             $availableDay = $this->getAvailableDay($currentDate);
             if ($availableDay) {
                 // Cells with content
@@ -379,26 +412,10 @@ class Calendar
                 // Cells with no content
                 $cell .= $this->temp['cal_cell_no_content' . $suffix];
             }
-            
-            if ($currentDate < $today) {
-                $attributes['class'][] = 'past';
-            }
-            
-            if ($is_today) {
-                $attributes['class'][] = 'today';
-            }
-        } else {
-            $suffix = '';
-            $is_today = false;
-            $cell = $this->temp['cal_cell_start' . $suffix];
-            $attributes['class'][] = 'empty';
-            
-            // Blank cells
-            $cell .= $this->temp['cal_cell_blank'];
-        }
 
-        // End formulating cell structure
-        $cell .= $this->temp['cal_cell_end' . $suffix];
+            // End formulating cell structure
+            $cell .= $this->temp['cal_cell_end' . $suffix];
+        }
         
         // replace content
         // Cells with content

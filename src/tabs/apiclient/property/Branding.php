@@ -305,7 +305,10 @@ class Branding extends Builder
         
         $fromDate->setTime(0, 0, 0);
         $toDate = clone $fromDate;
+        $availStart = clone $fromDate;
+        $availStart->sub(new \DateInterval('P7D'));
         $toDate->modify('last day of this month');
+        $toDate->add(new \DateInterval('P7D'));
         
         $days = $this->getAvailableDays($fromDate, $toDate);
         
