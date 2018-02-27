@@ -232,6 +232,18 @@ class StaticCollection implements \Iterator, \Countable
     }
     
     /**
+     * Remove the element parent
+     * 
+     * @return $this
+     */
+    public function removeElementParent()
+    {
+        $this->elementParent = null;
+
+        return $this;
+    }
+    
+    /**
      * Get the element parent
      * 
      * @return Builder
