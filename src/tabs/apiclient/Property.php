@@ -555,7 +555,7 @@ class Property extends Builder
                 
                 if ($days < 14) {
                     $add = $days;
-                } else {
+                } else if ($add > 0) {
                     $add = $add + 7;
                 }
                 
