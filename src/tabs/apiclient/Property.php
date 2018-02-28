@@ -545,7 +545,7 @@ class Property extends Builder
                     if ($price->getTotal() === 1) {
                         $prices[] = $price->first()->getPrice();
                     } else {
-                        //throw new \RuntimeException('Price not found');
+                        throw new \RuntimeException('Price not found');
                     }
                 };
                 
