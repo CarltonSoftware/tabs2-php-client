@@ -663,40 +663,23 @@ class BookingEnquiry extends Base
      */
     public function toArray()
     {
-        $arr = array(
-            'guestype' => $this->getGuestype(),
-            'fromdate' => $this->getFromdate()->format('Y-m-d'),
-            'todate' => $this->getTodate()->format('Y-m-d'),
-            'calculatebrochureprice' => $this->boolToStr($this->getCalculatebrochureprice()),
-            'calculateadditionalextras' => $this->boolToStr($this->getCalculateadditionalextras()),
-            'calculateincludedextras' => $this->boolToStr($this->getCalculateincludedextras()),
-            'includedpartysizepricing' => $this->boolToStr($this->getIncludedpartysizepricing()),
-            'includespecialoffers' => $this->boolToStr($this->getIncludespecialoffers()),
-            'calculatedeposit' => $this->boolToStr($this->getCalculatedeposit()),
-            'brochurepricedecimalplaces' => $this->getBrochurepricedecimalplaces(),
-            'basicpricedecimalplaces' => $this->getBasicpricedecimalplaces()
-        );
+        $arr = $this->__toArray();
+        $arr['guestype'] = $this->getGuestype();
+        $arr['fromdate'] = $this->getFromdate()->format('Y-m-d');
+        $arr['todate'] = $this->getTodate()->format('Y-m-d');
+        $arr['calculatebrochureprice'] = $this->boolToStr($this->getCalculatebrochureprice());
+        $arr['calculateadditionalextras'] = $this->boolToStr($this->getCalculateadditionalextras());
+        $arr['calculateincludedextras'] = $this->boolToStr($this->getCalculateincludedextras());
+        $arr['includedpartysizepricing'] = $this->boolToStr($this->getIncludedpartysizepricing());
+        $arr['includespecialoffers'] = $this->boolToStr($this->getIncludespecialoffers());
+        $arr['calculatedeposit'] = $this->boolToStr($this->getCalculatedeposit());
+        $arr['brochurepricedecimalplaces'] = $this->getBrochurepricedecimalplaces();
+        $arr['basicpricedecimalplaces'] = $this->getBasicpricedecimalplaces();
         
         if ($this->getPricingperiod() instanceof core\PricingPeriod) {
             $arr['pricingperiod'] = $this->getPricingperiod()->getPricingperiod();
         } else {
             $arr['pricingperiod'] = $this->getPricingperiod();
-        }
-        
-        if ($this->getAdults()) {
-            $arr['adults'] = $this->getAdults();
-        }
-        
-        if ($this->getChildren()) {
-            $arr['children'] = $this->getChildren();
-        }
-        
-        if ($this->getInfants()) {
-            $arr['infants'] = $this->getInfants();
-        }
-        
-        if ($this->getPets()) {
-            $arr['pets'] = $this->getPets();
         }
         
         if ($this->getPropertyBranding()) {
@@ -705,10 +688,6 @@ class BookingEnquiry extends Base
         
         if ($this->getCurrency()) {
             $arr['currencycode'] = $this->getCurrency()->getCode();
-        }
-        
-        if (strlen($this->getPromotionalcode()) > 0) {
-            $arr['promotionalcode'] = $this->getPromotionalcode();
         }
         
         if ($this->getSaleschannel()) {
