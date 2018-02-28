@@ -222,11 +222,7 @@ trait FactoryTrait
                 switch (substr($name, 0, 3)) {
                     case 'set':
                         // Set the changes list
-                        if ($this->_isDormant() 
-                            && (is_scalar($args[0]) || $args[0] instanceof \DateTime)
-                        ) {
-                            $this->changes[$property] = $args[0];
-                        }
+                        $this->_addChange($property, $args[0]);
                         
                         $this->setObjectProperty($this, $property, $args[0]);
                         return $this;
@@ -337,6 +333,7 @@ trait FactoryTrait
      */
     public function set($name, $value)
     {
+        $this->_addChange($name, $value);
         $this->$name = $value;
         
         return $this;
@@ -443,6 +440,24 @@ trait FactoryTrait
             return $this->isDormant();
         } else {
             return true;
+        }
+    }
+    
+    /**
+     * Add a change to the log for a domant entity
+     * 
+     * @param string $property Property name
+     * @param mixed  $value    Value
+     * 
+     * @return void
+     */
+    private function _addChange($property, $value)
+    {
+        if (property_exists($this, $property)
+            && $this->_isDormant() 
+            && (is_scalar($value) || $value instanceof \DateTime)
+        ) {
+            $this->changes[$property] = $value;
         }
     }
 }
