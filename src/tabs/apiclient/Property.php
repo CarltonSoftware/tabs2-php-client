@@ -570,8 +570,6 @@ class Property extends Builder
                         $getPrice($prices, $availablebreaksprices, $to, $add);
                     }
                     
-                    var_dump($prices);
-                    
                     return array_sum($prices);
                 } catch (Exception $ex) {
                     return 0;
