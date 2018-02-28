@@ -88,11 +88,25 @@ trait DataTrait
                 return $object->$step;
             }
             
+            if (is_array($object)
+                && isset($object[$step])
+                && count($steps) == 0
+            ) {
+                return $object[$step];
+            }
+            
             if ($object instanceof \stdClass 
                 && property_exists($object, $step)
                 && count($steps) > 0
             ) {
                 return $this->_getDataFromObject($steps, $object->$step);
+            }
+            
+            if (is_array($object)
+                && isset($object[$step])
+                && count($steps) > 0
+            ) {
+                return $this->_getDataFromObject($steps, $object[$step]);
             }
         }
         

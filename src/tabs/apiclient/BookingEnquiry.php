@@ -445,6 +445,13 @@ class BookingEnquiry extends Base
             }
         }
         
+        $errors = $this->getDataFromResponse('price', 'bookings', 0, 'errors');
+        if (is_array($errors)) {
+            foreach ($errors as $error) {
+                $this->errors->addElement($error);
+            }
+        }
+        
         return $this;
     }
     
