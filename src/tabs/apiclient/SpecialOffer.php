@@ -470,6 +470,20 @@ class SpecialOffer extends Builder
 
         return $this;
     }
+    
+    /**
+     * Find if a date lies within the special offer holiday periods
+     * 
+     * @param \DateTime $date Date to test
+     * 
+     * @return boolean
+     */
+    public function isHolidayPeriod(\DateTime $date)
+    {
+        return $this->getHolidayperiods()->findBy(function($hp) use ($date) {
+            return $date >= $hp->getFromdate() && $hp->getTodate() >= $date;
+        })->count() > 0;
+    }
 
     /**
      * @inheritDoc
