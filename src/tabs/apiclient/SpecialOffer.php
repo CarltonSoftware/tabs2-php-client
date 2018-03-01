@@ -484,6 +484,20 @@ class SpecialOffer extends Builder
             return $date >= $hp->getFromdate() && $hp->getTodate() >= $date;
         })->count() > 0;
     }
+    
+    /**
+     * Find if a date lies within the special offer booking periods
+     * 
+     * @param \DateTime $date Date to test
+     * 
+     * @return boolean
+     */
+    public function isBookingPeriod(\DateTime $date)
+    {
+        return $this->getBookingperiods()->findBy(function($bp) use ($date) {
+            return $date >= $bp->getFromdate() && $bp->getTodate() >= $date;
+        })->count() > 0;
+    }
 
     /**
      * @inheritDoc
