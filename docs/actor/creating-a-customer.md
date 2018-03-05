@@ -1,6 +1,6 @@
 # Creating a new customer
 
-This example simply demonstrates how to create a new customer.
+This example demonstrates how to create a new customer.
 
 ```php
 
