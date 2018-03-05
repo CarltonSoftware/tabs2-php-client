@@ -3,7 +3,7 @@
 namespace tabs\apiclient;
 
 use tabs\apiclient\Base;
-use tabs\apiclient\Tabsuser;
+use tabs\apiclient\TabsUser;
 use tabs\apiclient\DepositAmount;
 
 /**

@@ -16,7 +16,7 @@
 namespace tabs\apiclient\brochure;
 use tabs\apiclient\Builder;
 use tabs\apiclient\Customer;
-use tabs\apiclient\Tabsuser;
+use tabs\apiclient\TabsUser;
 use tabs\apiclient\SourceMarketingBrand;
 
 /**
@@ -60,7 +60,7 @@ class BrochureRequest extends Builder
     /**
      * Brochure tabs user
      * 
-     * @var \tabs\apiclient\Tabsuser
+     * @var \tabs\apiclient\TabsUser
      */
     protected $tabsuser;
     

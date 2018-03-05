@@ -39,13 +39,13 @@ class ActorSecurity extends Base
     /**
      * Set the actor
      *
-     * @param stdclass|array|\tabs\apiclient\Tabsuser $actor The Actor
+     * @param stdclass|array|\tabs\apiclient\TabsUser $actor The Actor
      *
      * @return ActorSecurity
      */
     public function setActor($actor)
     {
-        $this->actor = \tabs\apiclient\Tabsuser::factory($actor);
+        $this->actor = \tabs\apiclient\TabsUser::factory($actor);
 
         return $this;
     }
