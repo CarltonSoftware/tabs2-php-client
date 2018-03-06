@@ -14,8 +14,12 @@
 
 require_once __DIR__ . '/creating-a-new-connection.php';
 
-$prop = new \tabs\apiclient\Property(1);
-$prop->get();
-echo $prop->getName();
+try {
+    $prop = new \tabs\apiclient\Property(1);
+    $prop->get();
+    echo $prop->getName();
+} catch (\RuntimeException $ex) {
+    echo $ex->getMessage();
+}
 
 require_once __DIR__ . '/finally.php';

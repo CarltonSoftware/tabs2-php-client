@@ -57,6 +57,7 @@
  * [Adding an image to a property](property/add-image.html)
  * [Adding a note to a property](property/add-note.html)
  * [Filtering properties](property/filtering.html)
+ * [Find applicable property special offers](property/get-applicable-special-offers.html)
  * [Retrieving an available breaks price](property/getting-an-available-breaks-price.html)
  * [Requesting property information](property/index.html)
  * [Ordering results](property/ordering-results.html)

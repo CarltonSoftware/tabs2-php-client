@@ -13,7 +13,7 @@ $file = dirname(__FILE__)
     . DIRECTORY_SEPARATOR . 'Fixtures.php';
 require_once $file;
 
-abstract class ApiClientClassTest extends PHPUnit_Framework_TestCase
+abstract class ApiClientClassTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Sets up the tests

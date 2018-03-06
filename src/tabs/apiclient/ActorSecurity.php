@@ -15,7 +15,7 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\Tabsuser      getActor()         Returns the actor
+ * @method \tabs\apiclient\TabsUser      getActor()         Returns the actor
  * @method \tabs\apiclient\SecurityRole  getSecurityrole()  Returns the securityrole
  * @method \tabs\apiclient\SecurityGroup getSecuritygroup() Returns the securitygroup
  */
@@ -24,7 +24,7 @@ class ActorSecurity extends Builder
     /**
      * Actor
      *
-     * @var \tabs\apiclient\Tabsuser
+     * @var \tabs\apiclient\TabsUser
      */
     protected $actor;
 
@@ -47,13 +47,13 @@ class ActorSecurity extends Builder
     /**
      * Set the actor
      *
-     * @param stdclass|array|\tabs\apiclient\Tabsuser $actor The Actor
+     * @param stdclass|array|\tabs\apiclient\TabsUser $actor The Actor
      *
      * @return ActorSecurity
      */
     public function setActor($actor)
     {
-        $this->actor = \tabs\apiclient\Tabsuser::factory($actor);
+        $this->actor = \tabs\apiclient\TabsUser::factory($actor);
 
         return $this;
     }

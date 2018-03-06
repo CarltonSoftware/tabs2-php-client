@@ -24,7 +24,7 @@ use tabs\apiclient\Builder;
  * @method string getReason() Returns the reason
  * @method Hold setReason(string $var) Sets the reason
  * 
- * @method \tabs\apiclient\Tabsuser getTabsuser() Returns the tabsuser
+ * @method \tabs\apiclient\TabsUser getTabsuser() Returns the tabsuser
  */
 class Hold extends Builder
 {
@@ -52,7 +52,7 @@ class Hold extends Builder
     /**
      * Tabsuser
      *
-     * @var \tabs\apiclient\Tabsuser
+     * @var \tabs\apiclient\TabsUser
      */
     protected $tabsuser;
 
@@ -61,13 +61,13 @@ class Hold extends Builder
     /**
      * Set the tabsuser
      *
-     * @param stdclass|array|\tabs\apiclient\Tabsuser $tabsuser The Tabsuser
+     * @param stdclass|array|\tabs\apiclient\TabsUser $tabsuser The Tabsuser
      *
      * @return Hold
      */
     public function setTabsuser($tabsuser)
     {
-        $this->tabsuser = \tabs\apiclient\Tabsuser::factory($tabsuser);
+        $this->tabsuser = \tabs\apiclient\TabsUser::factory($tabsuser);
 
         return $this;
     }

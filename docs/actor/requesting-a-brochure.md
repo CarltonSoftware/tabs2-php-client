@@ -1,6 +1,6 @@
 # Requesting a brochure
 
-This example simply demonstrates how to request a new brochure.
+This example demonstrates how to request a new brochure.
 
 
 ```php

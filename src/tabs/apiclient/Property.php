@@ -533,19 +533,7 @@ class Property extends Builder
                 }
             }
             
-            if ($days > 7 && $days <= 13) {
-                $sevenDays = $prices->findBy(
-                    function($ele) {
-                        return $ele->getDays() == 7;
-                    }
-                );
-
-                if ($sevenDays->getTotal() === 1) {
-                    return $sevenDays->pop()->getPrice() + $price->pop()->getPrice();
-                }
-            }
-            
-            if ($days > 13) {
+            if ($days > 7) {
                 $getPrice = function(&$prices, $availablebreakprices, $fromDate, $days = 7) {
                     $price = $availablebreakprices->findBy(
                         function($ele) use ($fromDate, $days) {
@@ -555,7 +543,7 @@ class Property extends Builder
                     );
                     
                     if ($price->getTotal() === 1) {
-                        $prices[$price->first()->getFromdate()->format('Y-m-d')] = $price->first()->getPrice();
+                        $prices[] = $price->first()->getPrice();
                     } else {
                         throw new \RuntimeException('Price not found');
                     }
@@ -564,17 +552,22 @@ class Property extends Builder
                 $prices = array();
                 $add = $days % 7;
                 $weeks = ($days - $add) / 7;
-
+                
+                if ($days < 14) {
+                    $add = $days;
+                } else if ($add > 0) {
+                    $add = $add + 7;
+                }
+                
                 try {
+                    $to = clone $fromDate;
                     for ($i = 0; $i < $weeks; $i++) {
-                        $to = clone $fromDate;
                         $to->add(new \DateInterval('P' . ($i * 7) . 'D'));
                         $getPrice($prices, $availablebreaksprices, $to, 7);
                     }
 
                     if ($to && $add > 0) {
-                        $to->add(new \DateInterval('P' . $add . 'D'));
-                        $price = $getPrice($prices, $availablebreaksprices, $to, $add);
+                        $getPrice($prices, $availablebreaksprices, $to, $add);
                     }
                     
                     return array_sum($prices);

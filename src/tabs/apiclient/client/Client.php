@@ -497,7 +497,7 @@ class Client extends \GuzzleHttp\Client
             if ($ex->getResponse()->getStatusCode() === 400) {
                 throw new \tabs\apiclient\exception\Exception(
                     $ex->getResponse(),
-                    '',
+                    $ex->getResponse()->getReasonPhrase(),
                     $ex->getResponse()->getStatusCode(),
                     $ex
                 );

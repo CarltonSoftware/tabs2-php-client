@@ -28,26 +28,25 @@ if (!empty($collection)) {
         
         if (in_array($element->getClass(), array('Property', 'Template'))) {
             echo sprintf(
-                '<li><a href="/platoclient/%s/?id=%s">%s</a></li>',
-                strtolower($element->getClass()),
+                '<li><a href="?id=%s">%s</a></li>',
                 $element->getId(),
                 stristr($text, '<title>') ? htmlentities($text) : $text
             );
         } else if ($element instanceof tabs\apiclient\Actor) {
             echo sprintf(
-                '<li><a href="/platoclient/actor/?id=%s">%s</a></li>',
+                '<li><a href="?id=%s">%s</a></li>',
                 $element->getId(),
                 stristr($text, '<title>') ? htmlentities($text) : $text
             );
         } else if ($element instanceof tabs\apiclient\SpecialOffer) {
             echo sprintf(
-                '<li><a href="/platoclient/specialoffer/viewing-special-offer-data.php?id=%s">%s</a></li>',
+                '<li><a href="specialoffer/viewing-special-offer-data.php?id=%s">%s</a></li>',
                 $element->getId(),
                 $element->getDescription()
             );
         } else if ($element instanceof tabs\apiclient\Booking) {
             echo sprintf(
-                '<li><a href="/platoclient/booking/?id=%s">%s</a></li>',
+                '<li><a href="?id=%s">%s</a></li>',
                 $element->getId(),
                 $text
             );
@@ -71,7 +70,7 @@ if (!empty($collection)) {
             );
         } else {
             echo sprintf(
-                '<li><a href="/platoclient/exploreelement/%s?map=%s">%s</a></li>',
+                '<li><a href="exploreelement/%s?map=%s">%s</a></li>',
                 implode('/', $classes),
                 implode(':', getParentLink($element)),
                 stristr($text, '<title>') ? htmlentities($text) : $text

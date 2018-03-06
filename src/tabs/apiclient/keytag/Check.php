@@ -25,7 +25,7 @@ use tabs\apiclient\Builder;
  * @method Check setNotes(string $var) Sets the notes
  * 
  * @method \tabs\apiclient\KeyCheckReason getKeycheckreason() Returns the keycheckreason object
- * @method \tabs\apiclient\Tabsuser getTabsuser() Returns the tabsuser object
+ * @method \tabs\apiclient\TabsUser getTabsuser() Returns the tabsuser object
  * @method \DateTime getExpectedbackdatetime() Returns the expectedbackdatetime \DateTime
  * @method Check setExpectedbackdatetime(\DateTime $var) Sets the expectedbackdatetime
  */
@@ -62,7 +62,7 @@ class Check extends Builder
     /**
      * Tabsuser
      *
-     * @var \tabs\apiclient\Tabsuser
+     * @var \tabs\apiclient\TabsUser
      */
     protected $tabsuser;
 
@@ -102,13 +102,13 @@ class Check extends Builder
     /**
      * Set the tabsuser
      *
-     * @param stdclass|array|\tabs\apiclient\Tabsuser $tabsuser The Tabsuser
+     * @param stdclass|array|\tabs\apiclient\TabsUser $tabsuser The Tabsuser
      *
      * @return Check
      */
     public function setTabsuser($tabsuser)
     {
-        $this->tabsuser = \tabs\apiclient\Tabsuser::factory($tabsuser);
+        $this->tabsuser = \tabs\apiclient\TabsUser::factory($tabsuser);
 
         return $this;
     }

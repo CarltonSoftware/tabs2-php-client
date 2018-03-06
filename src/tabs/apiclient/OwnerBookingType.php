@@ -20,6 +20,9 @@ use tabs\apiclient\Builder;
  * 
  * @method string           getDescription()            Returns the description
  * @method OwnerBookingType setDescription(string $var) Sets the description
+ *
+ * @method boolean          getInactive()             Returns whether the owner type is inactive
+ * @method OwnerBookingType setInactive(boolean $var) Sets whether the owner booking type is inactive
  */
 class OwnerBookingType extends Builder
 {
@@ -38,6 +41,13 @@ class OwnerBookingType extends Builder
     protected $description;
 
     /**
+     * Inactive
+     *
+     * @var boolean
+     */
+    protected $inactive;
+
+    /**
      * @inheritDoc
      */
     public function toArray()
@@ -45,6 +55,7 @@ class OwnerBookingType extends Builder
         return array(
             'name' => $this->getName(),
             'description' => $this->getDescription(),
+            'inactive' => $this->getInactive(),
         );
     }
 }

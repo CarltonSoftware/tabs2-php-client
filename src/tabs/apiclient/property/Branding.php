@@ -10,6 +10,7 @@ use tabs\apiclient\property\price\Price;
 use tabs\apiclient\property\branding\AvailableDay;
 use tabs\apiclient\property\branding\Status;
 use tabs\apiclient\property\branding\Calendar;
+use tabs\apiclient\property\branding\ChangeDayTemplate;
 use tabs\apiclient\extra\branding\Pricing;
 use tabs\apiclient\extra\branding\Configuration;
 
@@ -26,7 +27,8 @@ use tabs\apiclient\extra\branding\Configuration;
  *
  * @method \tabs\apiclient\Branding getBranding() Returns the branding
  * @method \tabs\apiclient\BrandingGroup getBrandinggroup() Returns the brandinggroup
- * @method boolean getPrimarybookingbrand() Returns the primarybookingbrand
+ * @method boolean getPrimarybookingbrand() Returns the primary booking brand
+ * @method boolean getPrimarybranding() Returns the primary branding boolean
  * @method Branding setPrimarybookingbrand(boolean $var) Sets the primarybookingbrand
  * 
  * @method boolean getPromote() Returns the promote
@@ -40,6 +42,7 @@ use tabs\apiclient\extra\branding\Configuration;
  * 
  * @method \tabs\apiclient\property\branding\Status getStatus() Returns the status
  * 
+ * @method Collection|ChangeDayTemplate[] getChangedaytemplates Returns the change day templates
  * @method Collection|Pricing[] getExtraprices() Returns the property extra prices
  * @method Collection|Configuration[] getExtraconfigurations() Returns the property extra configurations
  */
@@ -81,6 +84,13 @@ class Branding extends Builder
     protected $primarybookingbrand;
 
     /**
+     * Primary branding
+     *
+     * @var boolean
+     */
+    protected $primarybranding;
+
+    /**
      * Promote
      *
      * @var boolean
@@ -114,6 +124,13 @@ class Branding extends Builder
      * @var Collection|Configuration[]
      */
     protected $extraconfigurations;    
+    
+    /**
+     * Collection of change day templates
+     * 
+     * @var Collection|ChangeDayTemplate[]
+     */
+    protected $changedaytemplates;       
     
     /**
      * Collection of availability
@@ -173,6 +190,11 @@ class Branding extends Builder
             new Configuration(), 
             $this
         );
+        $this->changedaytemplates = Collection::factory(
+            'changedaytemplate', 
+            new \tabs\apiclient\property\branding\ChangeDayTemplate(), 
+            $this
+        );        
         $this->availableDays = Collection::factory(
             'availability',
             new AvailableDay(),
@@ -297,7 +319,10 @@ class Branding extends Builder
         
         $fromDate->setTime(0, 0, 0);
         $toDate = clone $fromDate;
+        $availStart = clone $fromDate;
+        $availStart->sub(new \DateInterval('P7D'));
         $toDate->modify('last day of this month');
+        $toDate->add(new \DateInterval('P7D'));
         
         $days = $this->getAvailableDays($fromDate, $toDate);
         
@@ -454,6 +479,7 @@ class Branding extends Builder
             'showpricingonwebuntildate' => $this->getShowpricingonwebuntil()->format('Y-m-d'),
             'extraconfigurations' => $this->getExtraconfigurations()->toArray(),
             'extraprices' => $this->getExtraprices()->toArray(),
+            'changedaytemplates' => $this->getChangedaytemplates()->toArray(),
         );
     }
     
@@ -476,6 +502,7 @@ class Branding extends Builder
             'prices',
             'extraprices',
             'extraconfigurations',
+            'changedaytemplates',
             'parent'
         );
     }

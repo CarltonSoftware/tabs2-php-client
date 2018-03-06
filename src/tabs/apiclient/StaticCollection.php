@@ -596,6 +596,18 @@ class StaticCollection implements \Iterator, \Countable
     }
     
     /**
+     * Mapping function
+     * 
+     * @param \tabs\apiclient\callable $fn Callable map
+     * 
+     * @return array
+     */
+    public function map(callable $fn)
+    {
+        return array_map($fn, $this->getElements());
+    }
+    
+    /**
      * Return the local entity ids
      * 
      * @return array

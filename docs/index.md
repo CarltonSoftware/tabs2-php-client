@@ -9,10 +9,13 @@ For more examples, please see the [site map](sitemap.html).
 
 ```php
 
-$prop = new \tabs\apiclient\Property(1);
-$prop->get();
-
-echo $prop->getName();
+try {
+    $prop = new \tabs\apiclient\Property(1);
+    $prop->get();
+    echo $prop->getName();
+} catch (\RuntimeException $ex) {
+    echo $ex->getMessage();
+}
 
 ```
 
