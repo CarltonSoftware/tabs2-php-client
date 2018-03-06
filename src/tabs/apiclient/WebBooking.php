@@ -18,7 +18,7 @@ use tabs\apiclient\Base;
  * @method \DateTime getCreated() Returns the created
  * @method WebBooking setCreated(\DateTime $var) Sets the created
  * 
- * @method \tabs\apiclient\Tabsuser getReviewer() Returns the reviewer
+ * @method \tabs\apiclient\TabsUser getReviewer() Returns the reviewer
  * @method \DateTime getProccessed() Returns the proccessed
  * @method WebBooking setProccessed(\DateTime $var) Sets the proccessed
  */
@@ -34,7 +34,7 @@ class WebBooking extends Base
     /**
      * Reviewer
      *
-     * @var \tabs\apiclient\Tabsuser
+     * @var \tabs\apiclient\TabsUser
      */
     protected $reviewer;
 
@@ -60,13 +60,13 @@ class WebBooking extends Base
     /**
      * Set the reviewer
      *
-     * @param stdclass|array|\tabs\apiclient\Tabsuser $reviewer The Reviewer
+     * @param stdclass|array|\tabs\apiclient\TabsUser $reviewer The Reviewer
      *
      * @return WebBooking
      */
     public function setReviewer($reviewer)
     {
-        $this->reviewer = \tabs\apiclient\Tabsuser::factory($reviewer);
+        $this->reviewer = \tabs\apiclient\TabsUser::factory($reviewer);
 
         return $this;
     }

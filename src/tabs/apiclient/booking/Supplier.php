@@ -20,11 +20,11 @@ use tabs\apiclient\Builder;
  * @method boolean getAutoadded() Returns the autoadded
  * @method Supplier setAutoadded(boolean $var) Sets the autoadded
  * 
- * @method \tabs\apiclient\Tabsuser getMarkcompletedbyactor() Returns the markcompletedbyactor
+ * @method \tabs\apiclient\TabsUser getMarkcompletedbyactor() Returns the markcompletedbyactor
  * @method \DateTime getCompleteddatetime() Returns the completeddatetime
  * @method Supplier setCompleteddatetime(\DateTime $var) Sets the completeddatetime
  * 
- * @method \tabs\apiclient\Tabsuser getCancelledbybyactor() Returns the cancelledbybyactor
+ * @method \tabs\apiclient\TabsUser getCancelledbybyactor() Returns the cancelledbybyactor
  * @method \DateTime getCancelleddatetime() Returns the cancelleddatetime
  * @method Supplier setCancelleddatetime(\DateTime $var) Sets the cancelleddatetime
  * 
@@ -55,7 +55,7 @@ class Supplier extends Builder
     /**
      * Markcompletedbyactor
      *
-     * @var \tabs\apiclient\Tabsuser
+     * @var \tabs\apiclient\TabsUser
      */
     protected $markcompletedbyactor;
 
@@ -69,7 +69,7 @@ class Supplier extends Builder
     /**
      * Cancelledbybyactor
      *
-     * @var \tabs\apiclient\Tabsuser
+     * @var \tabs\apiclient\TabsUser
      */
     protected $cancelledbybyactor;
 
@@ -123,13 +123,13 @@ class Supplier extends Builder
     /**
      * Set the markcompletedbyactor
      *
-     * @param stdclass|array|\tabs\apiclient\Tabsuser $markcompletedbyactor The Markcompletedbyactor
+     * @param stdclass|array|\tabs\apiclient\TabsUser $markcompletedbyactor The Markcompletedbyactor
      *
      * @return Supplier
      */
     public function setMarkcompletedbyactor($markcompletedbyactor)
     {
-        $this->markcompletedbyactor = \tabs\apiclient\Tabsuser::factory($markcompletedbyactor);
+        $this->markcompletedbyactor = \tabs\apiclient\TabsUser::factory($markcompletedbyactor);
 
         return $this;
     }
@@ -137,13 +137,13 @@ class Supplier extends Builder
     /**
      * Set the cancelledbybyactor
      *
-     * @param stdclass|array|\tabs\apiclient\Tabsuser $cancelledbybyactor The Cancelledbybyactor
+     * @param stdclass|array|\tabs\apiclient\TabsUser $cancelledbybyactor The Cancelledbybyactor
      *
      * @return Supplier
      */
     public function setCancelledbybyactor($cancelledbybyactor)
     {
-        $this->cancelledbybyactor = \tabs\apiclient\Tabsuser::factory($cancelledbybyactor);
+        $this->cancelledbybyactor = \tabs\apiclient\TabsUser::factory($cancelledbybyactor);
 
         return $this;
     }
