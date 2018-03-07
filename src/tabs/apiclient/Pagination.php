@@ -84,11 +84,11 @@ class Pagination extends Base
      * 
      * @param string $name Name
      * 
-     * @return string
+     * @return string|null
      */
     public function getParameter($name)
     {
-        return $this->params[$name];
+        return isset($this->params[$name]) ? $this->params[$name] : null;
     }
     
     /**
