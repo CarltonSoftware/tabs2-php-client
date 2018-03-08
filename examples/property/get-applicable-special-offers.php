@@ -13,9 +13,9 @@ try {
     if ($id = filter_input(INPUT_GET, 'id')) {
         $property = new \tabs\apiclient\Property($id);
         $property->get();
-        echo implode("\n", $property->getPrimarypropertybranding()->getSpecialoffers()->map(function($sp) {
-            return $sp->getDescription();
-        }));
+    echo implode("\n", $property->getPrimarypropertybranding()->getSpecialoffers()->map(function($sp) {
+        return $sp->getDescription();
+    }));
 }
 } catch(Exception $e) {
     echo $e->getMessage();
