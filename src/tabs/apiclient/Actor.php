@@ -358,6 +358,20 @@ abstract class Actor extends Builder
     }
     
     /**
+     * Send a reset password email to an actor
+     * 
+     * @return boolean
+     */
+    public function resetPassword()
+    {
+        $req = client\Client::getClient()->put(
+            $this->getUpdateUrl() . '/resetpassword'
+        );
+        
+        return $req->getStatusCode() === 204;
+    }
+    
+    /**
      * Set an email address on an actor
      * 
      * @param string $email   Email address
