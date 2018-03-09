@@ -635,6 +635,24 @@ class StaticCollection implements \Iterator, \Countable
         
         return $col->first();
     }
+    
+    /**
+     * Update a specific element in the collection
+     * 
+     * @param Base $element Element
+     * 
+     * @return $this
+     */
+    public function updateElement(Base $element)
+    {
+        foreach ($this->elements as $index => $e) {
+            if ($e->getId() == $element->getId()) {
+                $this->elements[$index] = $element;
+            }
+        }
+        
+        return $this;
+    }
 
     /**
      * Rewinds the iterator to the beginning of the collection
