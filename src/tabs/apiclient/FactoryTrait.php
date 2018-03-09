@@ -36,6 +36,18 @@ trait FactoryTrait
     {
         return $this->changes;
     }
+    
+    /**
+     * Reset changes
+     * 
+     * @return $this
+     */
+    public function resetChanges()
+    {
+        $this->changes = array();
+        
+        return $this;
+    }
 
     /**
      * Get the json

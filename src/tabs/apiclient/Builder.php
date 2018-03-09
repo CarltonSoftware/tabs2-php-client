@@ -52,6 +52,8 @@ abstract class Builder extends Base implements BuilderInterface
                 (integer) $id
             );
         }
+        
+        $this->resetChanges();
 
         return $this;
     }
@@ -71,6 +73,8 @@ abstract class Builder extends Base implements BuilderInterface
             $this->toUpdateArray()
         );
         
+        $this->resetChanges();
+        
         return $this;
     }
 
@@ -87,6 +91,8 @@ abstract class Builder extends Base implements BuilderInterface
         \tabs\apiclient\client\Client::getClient()->put(
             $this->getUpdateUrl()
         );
+        
+        $this->resetChanges();
 
         return $this;
     }
