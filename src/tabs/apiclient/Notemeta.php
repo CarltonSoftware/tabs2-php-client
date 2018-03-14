@@ -61,6 +61,9 @@ abstract class Notemeta extends Builder
         } else if ($actor instanceof \stdClass && property_exists($actor, 'actor')) {
             $parts = explode('/', $actor->actor);
             $type = ucfirst($parts[count($parts) - 2]);
+            if ($type === 'Tabsuser') {
+                $type = 'TabsUser';
+            }
             $class = 'tabs\apiclient\\' . $type;
             $this->createdby = $class::factory($actor->actor);
         }
