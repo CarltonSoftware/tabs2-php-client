@@ -113,7 +113,7 @@ trait FactoryTrait
         
         $object = new static();
         
-        if (is_string($element)) {
+        if (is_string($element) && strlen($element) > 0) {
             $link = new Link();
             $link->setLink($element);
             $link->setObjectClass(get_class($object));
