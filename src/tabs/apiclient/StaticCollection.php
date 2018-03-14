@@ -608,6 +608,24 @@ class StaticCollection implements \Iterator, \Countable
     }
     
     /**
+     * Map to a collection
+     * 
+     * @param \tabs\apiclient\callable $fn Map function
+     * 
+     * @return \tabs\apiclient\StaticCollection
+     */
+    public function mapToCollection(callable $fn)
+    {
+        $elements = $this->map($fn);
+        $col = new \tabs\apiclient\StaticCollection();
+        foreach ($elements as $element) {
+            $col->addElement($element);
+        }
+        $col->setTotal(count($elements));
+        return $col;
+    }
+    
+    /**
      * Return the local entity ids
      * 
      * @return array
