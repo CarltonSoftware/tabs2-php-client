@@ -113,11 +113,15 @@ trait FactoryTrait
         
         $object = new static();
         
-        if (is_string($element) && strlen($element) > 0) {
-            $link = new Link();
-            $link->setLink($element);
-            $link->setObjectClass(get_class($object));
-            return $link;
+        if (is_string($element)) {
+            if (strlen($element) > 0) {
+                $link = new Link();
+                $link->setLink($element);
+                $link->setObjectClass(get_class($object));
+                return $link;
+            } else {
+                $element = array();
+            }
         }
 
         self::setObjectProperties($object, $element);
