@@ -403,6 +403,8 @@ trait FactoryTrait
                 && is_array($value)
             ) {
                 $obj->$property->reset()->setElements($value)->setFetched(true);
+            } else if ($obj->$property instanceof Base) {
+                $obj->$property = $obj->$property::factory($value);
             } else {
                 // Normo property values
                 $obj->$property = $value;
