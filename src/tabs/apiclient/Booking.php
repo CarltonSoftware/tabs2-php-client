@@ -1290,4 +1290,31 @@ class Booking extends Builder
             return 0;
         }
     }
+    
+    /**
+     * For serialisation
+     * 
+     * @return void
+     */
+    public function __wakeup()
+    {
+        if ($this->getResponsedata()) {
+            // Remap collections
+            $this->__construct($this->getId());
+            $this->setObjectProperties($this, $this->getResponsedata());
+        }
+    }
+    
+    /**
+     * For serialisation
+     * 
+     * @return void
+     */
+    public function __sleep()
+    {
+        return array(
+            'id',
+            'responsedata'
+        );
+    }
 }
