@@ -48,6 +48,16 @@ trait FactoryTrait
         
         return $this;
     }
+    
+    /**
+     * Returns true if the object has been altered
+     * 
+     * @return boolean
+     */
+    public function hasChanged()
+    {
+        return count($this->getChanges()) > 0;
+    }
 
     /**
      * Get the json
