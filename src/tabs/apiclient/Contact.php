@@ -205,7 +205,7 @@ class Contact extends Builder
     {
         $arr = array(
             'contacttype' => $this->getContacttype()->getType(),
-            'contactdatetime' => $this->getContactdatetime()->format('Y-m-d'),
+            'contactdatetime' => $this->getContactdatetime()->format('Y-m-d H:i:s'),
             'contactmethodtype' => $this->getContactmethodtype()->getMethod(),
             'content' => $this->getContent(),
             'subject' => $this->getSubject(),
