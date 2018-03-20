@@ -36,6 +36,28 @@ trait FactoryTrait
     {
         return $this->changes;
     }
+    
+    /**
+     * Reset changes
+     * 
+     * @return $this
+     */
+    public function resetChanges()
+    {
+        $this->changes = array();
+        
+        return $this;
+    }
+    
+    /**
+     * Returns true if the object has been altered
+     * 
+     * @return boolean
+     */
+    public function hasChanged()
+    {
+        return count($this->getChanges()) > 0;
+    }
 
     /**
      * Get the json
@@ -102,10 +124,14 @@ trait FactoryTrait
         $object = new static();
         
         if (is_string($element)) {
-            $link = new Link();
-            $link->setLink($element);
-            $link->setObjectClass(get_class($object));
-            return $link;
+            if (strlen($element) > 0) {
+                $link = new Link();
+                $link->setLink($element);
+                $link->setObjectClass(get_class($object));
+                return $link;
+            } else {
+                $element = array();
+            }
         }
 
         self::setObjectProperties($object, $element);
@@ -352,6 +378,8 @@ trait FactoryTrait
                 $arr[$key] = $val->format('Y-m-d H:i:s');
             } else if (is_bool($val)) {
                 $arr[$key] = $this->boolToStr($val);
+            } else if ($val instanceof Base) {
+                $arr[$key . 'id'] = $val->getId();
             } else {
                 $arr[$key] = $val;
             }
@@ -387,6 +415,9 @@ trait FactoryTrait
                 && is_array($value)
             ) {
                 $obj->$property->reset()->setElements($value)->setFetched(true);
+            } else if ($obj->$property instanceof Base) {
+                $class = $obj->$property->getFullClass();
+                $obj->$property = $class::factory($value);
             } else {
                 // Normo property values
                 $obj->$property = $value;

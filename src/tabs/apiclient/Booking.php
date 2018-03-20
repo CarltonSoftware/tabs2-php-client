@@ -99,6 +99,9 @@ use tabs\apiclient\OwnerBookingType;
  *
  * @method string getPromotioncode() Returns the promotion code
  * @method Booking setPromotioncode(string $var) Sets the promotion code
+ * 
+ * @method string getSourcecode() Returns the source code
+ * @method Booking setSourcecode(string $var) Sets the source code
  *
  * @method PotentialBooking getPotentialbooking() Returns the potentialbooking
  *
@@ -324,6 +327,13 @@ class Booking extends Builder
      * @var string
      */
     protected $promotioncode = '';
+    
+    /**
+     * Source code
+     *
+     * @var string
+     */
+    protected $sourcecode = '';    
 
     /**
      * Potential Booking
@@ -1289,5 +1299,32 @@ class Booking extends Builder
         } else {
             return 0;
         }
+    }
+    
+    /**
+     * For serialisation
+     * 
+     * @return void
+     */
+    public function __wakeup()
+    {
+        if ($this->getResponsedata()) {
+            // Remap collections
+            $this->__construct($this->getId());
+            $this->setObjectProperties($this, $this->getResponsedata());
+        }
+    }
+    
+    /**
+     * For serialisation
+     * 
+     * @return void
+     */
+    public function __sleep()
+    {
+        return array(
+            'id',
+            'responsedata'
+        );
     }
 }

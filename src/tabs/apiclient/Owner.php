@@ -90,11 +90,11 @@ class Owner extends Actor
     {
         $arr = parent::toArray();
         
-        if ($this->getBranding()) {
+        if ($this->getBranding() && $this->getBranding()->getId()) {
             $arr['brandingid'] = $this->getBranding()->getId();
         }
         
-        if ($this->getSource()) {
+        if ($this->getSource() && $this->getSource()->getId()) {
             $arr['sourceid'] = $this->getSource()->getId();
         }
         

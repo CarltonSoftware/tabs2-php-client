@@ -18,8 +18,10 @@ use tabs\apiclient\DepositAmount;
  * @link      http://www.carltonsoftware.co.uk
  *
  * @method Tabsuser getTabsuser() Returns the tabsuser
+ * @method ProvisionalBooking setTabsuser(Tabsuser $tu) Set a tabsuser
  * 
  * @method DepositAmount getDepositamount() Returns the depositamount
+ * @method ProvisionalBooking setDepositamount(DepositAmount $da) Set the depositamount
  * 
  * @method integer getDeposit() Returns the deposit
  * @method ProvisionalBooking setDeposit(integer $var) Sets the deposit
@@ -40,6 +42,7 @@ use tabs\apiclient\DepositAmount;
  * @method ProvisionalBooking setCommissionpercentagesetby(string $var) Sets the commissionpercentagesetby
  * 
  * @method OwnerPaymentTerms getOwnerpaymentterms() Returns the ownerpaymentterms
+ * @method ProvisionalBooking setOwnerpaymentterms(OwnerPaymentTerms $var) Set the ownerpaymentterms
  */
 class ProvisionalBooking extends Base
 {
@@ -65,42 +68,42 @@ class ProvisionalBooking extends Base
     protected $deposit;
 
     /**
-     * Depositoverridden
+     * Deposit overridden
      *
      * @var boolean
      */
     protected $depositoverridden = false;
 
     /**
-     * Depositduedate
+     * Deposit duedate
      *
      * @var \DateTime
      */
     protected $depositduedate;
 
     /**
-     * Balanceduedate
+     * Balance duedate
      *
      * @var \DateTime
      */
     protected $balanceduedate;
 
     /**
-     * Commissionpercentage
+     * Commission percentage
      *
      * @var string
      */
     protected $commissionpercentage;
 
     /**
-     * Commissionpercentagesetby
+     * Commission percentage set by
      *
      * @var string
      */
     protected $commissionpercentagesetby;
 
     /**
-     * Ownerpaymentterms
+     * Owner payment terms
      *
      * @var OwnerPaymentTerms
      */
@@ -115,50 +118,11 @@ class ProvisionalBooking extends Base
     {
         $this->depositduedate = new \DateTime();
         $this->balanceduedate = new \DateTime();
+        $this->tabsuser = new TabsUser();
+        $this->depositamount = new DepositAmount();
+        $this->ownerpaymentterms = new OwnerPaymentTerms();
         
         parent::__construct($id);
-    }
-
-    /**
-     * Set the tabsuser
-     *
-     * @param stdclass|array|Tabsuser $tabsuser The Tabsuser
-     *
-     * @return ProvisionalBooking
-     */
-    public function setTabsuser($tabsuser)
-    {
-        $this->tabsuser = Tabsuser::factory($tabsuser);
-
-        return $this;
-    }
-
-    /**
-     * Set the depositamount
-     *
-     * @param stdclass|array|DepositAmount $depositamount The Depositamount
-     *
-     * @return ProvisionalBooking
-     */
-    public function setDepositamount($depositamount)
-    {
-        $this->depositamount = DepositAmount::factory($depositamount);
-
-        return $this;
-    }
-
-    /**
-     * Set the ownerpaymentterms
-     *
-     * @param stdclass|array|OwnerPaymentTerms $ownerpaymentterms The Ownerpaymentterms
-     *
-     * @return ProvisionalBooking
-     */
-    public function setOwnerpaymentterms($ownerpaymentterms)
-    {
-        $this->ownerpaymentterms = OwnerPaymentTerms::factory($ownerpaymentterms);
-
-        return $this;
     }
 
     /**
@@ -166,23 +130,6 @@ class ProvisionalBooking extends Base
      */
     public function toArray()
     {
-        $arr = $this->__toArray();
-        if ($this->getTabsuser()) {
-            $arr['tabsuserid'] = $this->getTabsuser()->getId();
-
-            if ($this->getDepositamount()) {
-                $arr['depositamountid'] = $this->getDepositamount()->getId();
-            }
-
-            if ($this->getCommissionpercentage()) {
-                $arr['commissionpercentage'] = $this->getCommissionpercentage();
-            }
-
-            if ($this->getOwnerpaymentterms()) {
-                $arr['ownerpaymenttermsid'] = $this->getOwnerpaymentterms()->getId();
-            }
-        }
-        
-        return $arr;
+        return $this->__toArray();
     }
 }

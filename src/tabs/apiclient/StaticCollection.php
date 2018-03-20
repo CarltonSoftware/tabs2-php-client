@@ -608,6 +608,24 @@ class StaticCollection implements \Iterator, \Countable
     }
     
     /**
+     * Map to a collection
+     * 
+     * @param \tabs\apiclient\callable $fn Map function
+     * 
+     * @return \tabs\apiclient\StaticCollection
+     */
+    public function mapToCollection(callable $fn)
+    {
+        $elements = $this->map($fn);
+        $col = new \tabs\apiclient\StaticCollection();
+        foreach ($elements as $element) {
+            $col->addElement($element);
+        }
+        $col->setTotal(count($elements));
+        return $col;
+    }
+    
+    /**
      * Return the local entity ids
      * 
      * @return array
@@ -634,6 +652,24 @@ class StaticCollection implements \Iterator, \Countable
         });
         
         return $col->first();
+    }
+    
+    /**
+     * Update a specific element in the collection
+     * 
+     * @param Base $element Element
+     * 
+     * @return $this
+     */
+    public function updateElement(Base $element)
+    {
+        foreach ($this->elements as $index => $e) {
+            if ($e->getId() == $element->getId()) {
+                $this->elements[$index] = $element;
+            }
+        }
+        
+        return $this;
     }
 
     /**
