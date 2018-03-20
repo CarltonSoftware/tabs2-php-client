@@ -378,6 +378,8 @@ trait FactoryTrait
                 $arr[$key] = $val->format('Y-m-d H:i:s');
             } else if (is_bool($val)) {
                 $arr[$key] = $this->boolToStr($val);
+            } else if ($val instanceof Base) {
+                $arr[$key . 'id'] = $val->getId();
             } else {
                 $arr[$key] = $val;
             }
@@ -414,7 +416,8 @@ trait FactoryTrait
             ) {
                 $obj->$property->reset()->setElements($value)->setFetched(true);
             } else if ($obj->$property instanceof Base) {
-                $obj->$property = $obj->$property::factory($value);
+                $class = $obj->$property->getObjectClass();
+                $obj->$property = $class::factory($value);
             } else {
                 // Normo property values
                 $obj->$property = $value;
