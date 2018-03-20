@@ -416,7 +416,7 @@ trait FactoryTrait
             ) {
                 $obj->$property->reset()->setElements($value)->setFetched(true);
             } else if ($obj->$property instanceof Base) {
-                $class = $obj->$property->getObjectClass();
+                $class = $obj->$property->getFullClass();
                 $obj->$property = $class::factory($value);
             } else {
                 // Normo property values
