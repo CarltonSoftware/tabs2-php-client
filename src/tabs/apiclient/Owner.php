@@ -56,6 +56,15 @@ class Owner extends Actor
     // ------------------ Public Functions --------------------- //
     
     /**
+     * {@inheritDoc}
+     */
+    public function __construct($id = null)
+    {
+        $this->setAbroad(false);
+        parent::__construct($id);
+    }
+    
+    /**
      * Set the branding
      * 
      * @param array|\stdClass|\tabs\apiclient\Branding $branding Branding
