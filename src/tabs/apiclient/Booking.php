@@ -131,7 +131,7 @@ use tabs\apiclient\OwnerBookingType;
  *
  * @method AgencyBookingType getAgencybookingtype() Returns the booking type for agency bookings
  * 
- * @method OwnerBookingType getOwnerBookingtype() Returns the booking type for owner bookings
+ * @method OwnerBookingType getOwnerbookingtype() Returns the booking type for owner bookings
  *
  * @method TransferredBooking getTransferredtobooking() Returns the transferred booking
  *
