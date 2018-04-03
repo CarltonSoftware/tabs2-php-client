@@ -26,6 +26,15 @@ $config = array(
     'HandlerStack' => $handlerStack
 );
 
+/**
+ * Roughly guess the base url for external endpoint examples.
+ * 
+ * @return string
+ */
+function getBaseUrl() {
+    return $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . str_replace(basename($_SERVER['REQUEST_URI']), '', $_SERVER['SCRIPT_NAME']);
+}
+
 session_start();
 if (isset($_SESSION['AccessToken']) 
     && is_array($_SESSION['AccessToken'])

@@ -28,11 +28,11 @@ use tabs\apiclient\Builder;
  * @link      http://www.carltonsoftware.co.uk
  *
  *
- * @method string getType()        Returns the type
+ * @method string getNotetype()    Returns the type
  * @method string getDescription() Returns the description
  * @method string getDonotdelete() Returns the do not delete
  *
- * @method Notetype setType(string $type          Set the type
+ * @method Notetype setNotetype(string $type          Set the type
  * @method Notetype setDescription(string $desc)  Set the description
  * @method Notetype setDonotdelete(boolean $bool) Set the do not delete
  */
@@ -43,7 +43,7 @@ class Notetype extends Builder
      *
      * @var string
      */
-    protected $type;
+    protected $notetype;
 
     /**
      * Note type description
@@ -60,16 +60,28 @@ class Notetype extends Builder
     protected $donotdelete;
 
     // ------------------ Public Functions --------------------- //
+    
+    /**
+     * @legacy
+     */
+    public function setType($type)
+    {
+        return $this->setNotetype($type);
+    }
+    
+    /**
+     * @legacy
+     */
+    public function getType()
+    {
+        return $this->getNotetype();
+    }
 
     /**
      * @inheritDoc
      */
     public function toArray()
     {
-        return array(
-            'notetype' => $this->getType(),
-            'description' => $this->getDescription(),
-            'donotdelete' => $this->boolToStr($this->getDonotdelete())
-        );
+        return $this->__toArray();
     }
 }

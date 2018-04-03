@@ -39,6 +39,8 @@ use tabs\apiclient\Collection;
  * @method Entity setPerformsend(boolean $var) Sets the performsend
  * 
  * @method Collection|entity\Status[] getStatus() Returns the status
+ * 
+ * @method \tabs\apiclient\TabsUser getCreatedbyactor() Returns the createdbyactor
  */
 class Entity extends Builder
 {
@@ -104,6 +106,13 @@ class Entity extends Builder
      * @var Collection|entity\Status[]
      */
     protected $status;
+    
+    /**
+     * Createdbyactor
+     *
+     * @var \tabs\apiclient\TabsUser
+     */
+    protected $createdbyactor;    
 
     // -------------------- Public Functions -------------------- //
 
@@ -136,13 +145,27 @@ class Entity extends Builder
 
         return $this;
     }
+    
+    /**
+     * Set the createdbyactor
+     *
+     * @param stdclass|array|\tabs\apiclient\TabsUser $createdbyactor The Createdbyactor
+     *
+     * @return Supplier
+     */
+    public function setCreatedbyactor($createdbyactor)
+    {
+        $this->createdbyactor = \tabs\apiclient\TabsUser::factory($createdbyactor);
+
+        return $this;
+    }    
 
     /**
      * @inheritDoc
      */
     public function toArray()
     {
-        return array(
+        $arr = array(
             'contactentitytype' => $this->getContactentitytype(),
             'entityid' => $this->getEntity(),
             'function' => $this->getFunction(),
@@ -152,5 +175,11 @@ class Entity extends Builder
             'contactdetailvalue' => $this->getContactdetailvalue(),
             'perform_send' => $this->boolToStr($this->getPerformsend()),
         );
+        
+        if ($this->createdbyactor) {
+            $arr['createdbyactorid'] = $this->getCreatedbyactor()->getId();
+        }
+        
+        return $arr;
     }
 }

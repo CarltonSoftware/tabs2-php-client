@@ -50,7 +50,7 @@ try {
         return $ele instanceof \tabs\apiclient\actor\Address;
     });
 
-    $base = 'http://' . $_SERVER['HTTP_HOST'] . str_replace(basename(__FILE__), '', $_SERVER['SCRIPT_NAME']);
+    $base = getBaseUrl();
 
     $sp->setAddress($addresses->first())
         ->setCurrency($gbp)
