@@ -22,6 +22,9 @@ use tabs\apiclient\Builder;
  *
  * @method Value getValue() Returns the value
  * @method AttributeBoolean|AttributeHybrid|AttributeNumber|AttributeString getAttribute() Returns the attribute
+ * 
+ * @method string    getComments() Returns any comments for the attribute
+ * @method Attribute setComments(string $comments) Set a attribute comment
  */
 class Attribute extends Builder
 {
@@ -38,6 +41,13 @@ class Attribute extends Builder
      * @var AttributeBoolean|AttributeHybrid|AttributeNumber|AttributeString
      */
     protected $attribute;
+    
+    /**
+     * Comments
+     *
+     * @var string
+     */
+    protected $comments;
 
     // -------------------- Public Functions -------------------- //
     
@@ -115,6 +125,7 @@ class Attribute extends Builder
     {
         $arr = array(
             'value' => $this->getValue()->getValue(),
+            'comments' => $this->getComments(),
             'attributeid' => $this->getAttribute()->getId()
         );
         
