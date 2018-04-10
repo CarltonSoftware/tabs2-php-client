@@ -63,6 +63,9 @@ use tabs\apiclient\OwnerChargeCode;
  * @method integer getMaximumdays() Returns the maximumdays
  * @method SecurityDeposit setMaximumdays(integer $var) Sets the maximumdays
  * 
+ * @method integer getMaximumdaysbeforeholiday() Returns the maximumdays beforeholiday
+ * @method SecurityDeposit setMaximumdaysbeforeholiday(integer $var) Sets the maximumdays beforeholiday
+ * 
  * @method string getComments() Returns the comments
  * @method SecurityDeposit setComments(string $var) Sets the comments
  * 
@@ -188,6 +191,13 @@ class SecurityDeposit extends Builder
     protected $maximumdays;
 
     /**
+     * Maximumdaysbeforeholiday
+     *
+     * @var integer
+     */
+    protected $maximumdaysbeforeholiday;
+
+    /**
      * Comments
      *
      * @var string
@@ -262,32 +272,6 @@ class SecurityDeposit extends Builder
      */
     public function toArray()
     {
-        $arr = array(
-            'bookedfromdate' => $this->getBookedfromdate()->format('Y-m-d'),
-            'bookedtodate' => $this->getBookedtodate()->format('Y-m-d'),
-            'holidayfromdate' => $this->getHolidayfromdate()->format('Y-m-d'),
-            'holidaytodate' => $this->getHolidaytodate()->format('Y-m-d'),
-            'amount' => $this->getAmount(),
-            'currencycode' => $this->getCurrency()->getCode(),
-            'daysduein' => $this->getDaysduein(),
-            'daysdueout' => $this->getDaysdueout(),
-            'refundable' => $this->getRefundable(),
-            'peradult' => $this->boolToStr($this->getPeradult()),
-            'perchild' => $this->boolToStr($this->getPerchild()),
-            'perinfant' => $this->boolToStr($this->getPerinfant()),
-            'perperiod' => $this->boolToStr($this->getPerperiod()),
-            'pricingperiod' => $this->getPricingperiod(),
-            'minimumdays' => $this->getMinimumdays(),
-            'maximumdays' => $this->getMaximumdays(),
-            'comments' => $this->getComments(),
-            'ownerchargeamount' => $this->getOwnerchargeamount(),
-            'description' => $this->getDescription()
-        );
-        
-        if ($this->getOwnerchargecode()) {
-            $arr['ownerchargecodeid'] = $this->getOwnerchargecode()->getId();
-        }
-        
-        return $arr;
+        return $this->__toArray();
     }
 }
