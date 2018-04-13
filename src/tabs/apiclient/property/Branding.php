@@ -40,6 +40,9 @@ use tabs\apiclient\extra\branding\Configuration;
  * @method \DateTime getShowpricingonwebuntil() Returns the showpricingonwebuntil
  * @method Branding setShowpricingonwebuntil(\DateTime $var) Sets the showpricingonwebuntil
  * 
+ * @method boolean getConvertpotentialstoprovisionals() Returns the convertpotentialstoprovisionals
+ * @method Branding setConvertpotentialstoprovisionals(boolean $var) Sets the convertpotentialstoprovisionals
+ * 
  * @method \tabs\apiclient\property\branding\Status getStatus() Returns the status
  * 
  * @method Collection|ChangeDayTemplate[] getChangedaytemplates Returns the change day templates
@@ -166,6 +169,13 @@ class Branding extends Builder
      * @var \DateTime
      */
     protected $showpricingonwebuntil;
+    
+    /**
+     * Convertpotentialstoprovisionals
+     * 
+     * @var boolean
+     */
+    protected $convertpotentialstoprovisionals;
     
 
     // -------------------- Public Functions -------------------- //
@@ -467,7 +477,7 @@ class Branding extends Builder
      */
     public function toArray()
     {
-        return array(
+        $arr = array(
             'brandingid' => $this->getBranding()->getId(),
             'brandinggroupid' => $this->getBrandinggroup()->getId(),
             'bookingbrandid' => $this->getBookingbrand()->getId(),
@@ -481,6 +491,12 @@ class Branding extends Builder
             'extraprices' => $this->getExtraprices()->toArray(),
             'changedaytemplates' => $this->getChangedaytemplates()->toArray(),
         );
+        
+        if ($this->getConvertpotentialstoprovisionals()) {
+            $arr['convertpotentialstoprovisionals'] = true;
+        }
+
+        return $arr;
     }
     
     /**
