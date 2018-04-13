@@ -59,7 +59,7 @@ $collection = tabs\apiclient\Collection::factory(
 
 $collection->addFilter('brandingid', $brandings->first()->getId())
     ->addFilter('brandingstatusid', 1)
-    ->addFilter('globalsearchterm', '~' . $name);
+    ->addFilter('globalsearchterm', $name);
 
 $collection->fetch();
 
