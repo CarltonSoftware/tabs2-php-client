@@ -51,9 +51,9 @@ if (isset($_SESSION['AccessToken'])
 
 \tabs\apiclient\client\Client::factory(
     TABS2APIURL, // Api Url
-    TABS2APIUSERNAME, // Api Key
-    TABS2APIPASSWORD, // Api Secret
-    TABS2APICLIENTID,
-    TABS2APICLIENTSECRET,
+    TABS2APIUSERNAME, // Your tabs username
+    TABS2APIPASSWORD, // Your tabs password
+    TABS2APICLIENTID, // Your provided client id
+    TABS2APICLIENTSECRET, // Your provided client secret
     $config
 );
