@@ -145,7 +145,9 @@ gulp.task('buildexamples', function() {
                         });
                         lines.push(' */');
                         lines.push('');
-                        lines.push('require_once __DIR__ . \'/' + '../'.repeat(dir.length) + 'creating-a-new-connection.php\';');
+                        if (phpfile !== 'examples/getting-started.php') {
+                            lines.push('require_once __DIR__ . \'/' + '../'.repeat(dir.length) + 'creating-a-new-connection.php\';');
+                        }
                         lines.push('');
                         code.forEach(function(c) {
                             lines.push(c);
