@@ -373,7 +373,7 @@ class Property extends Builder
             'comment' => new Comment(),
             'offices' => new Office(),
             'owner' => new Owner(),
-            'ownerpaymenterms' => new OwnerPaymentTerms(),
+            'ownerpaymentterms' => new OwnerPaymentTerms(),
             'securitydeposit' => new SecurityDeposit(),
             'securityfeature' => new SecurityFeature(),
             'supplier' => new Supplier(),
