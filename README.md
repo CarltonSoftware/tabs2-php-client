@@ -35,7 +35,8 @@ To get started with this project you will need to install the client via compose
     require_once __DIR__ . '/vendor/autoload.php';
 
     \tabs\apiclient\client\Client::factory(
-        'https://apiurl', // Api Url: this will be provided to you
+        'https://apiurl/v2/', // Api Url: this will be provided to you.
+			     // NOTE: This url should end in '/v2/'
         'abc', // Api username: this will be provided to you
         'def', // Api password: this will be provided to you
         'hij', // Api client id: this will be provided to you
