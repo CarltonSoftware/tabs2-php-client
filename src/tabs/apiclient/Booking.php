@@ -906,7 +906,7 @@ class Booking extends Builder
             $arr['sourceid'] = $this->getSource()->getId();
         }
 
-        if ($this->getGuesttype() === 'Agency' && $this->getAgencybookingtype()) {
+        if (($this->getGuesttype() === 'Agency' || $this->getGuesttype() === 'None') && $this->getAgencybookingtype()) {
             $arr['agencybookingtypeid'] = $this->getAgencybookingtype()->getId();
         }
         

@@ -64,6 +64,12 @@ use tabs\apiclient\property\AvailableBreak;
  * @method string getCheckouttime() Returns the checkouttime
  * @method Property setCheckouttime(string $var) Sets the checkouttime
  * 
+ * @method string getCheckintext() Returns the checkintext
+ * @method Property setCheckintext(string $var) Sets the checkintext
+ * 
+ * @method string getCheckouttext() Returns the checkouttext
+ * @method Property setCheckouttext(string $var) Sets the checkouttext
+ * 
  * @method integer  getRating() Returns the property rating
  * 
  * @method Collection|property\Document[] getDocuments() Get the documents
@@ -463,7 +469,9 @@ class Property extends Builder
             'telephonenumber' => $this->getTelephonenumber(),
             'checkinearliesttime' => $this->getCheckinearliesttime(),
             'checkinlatesttime' => $this->getCheckinlatesttime(),
-            'checkouttime' => $this->getCheckouttime()
+            'checkouttime' => $this->getCheckouttime(),
+            'checkintext' => $this->getCheckintext(),
+            'checkouttext' => $this->getCheckouttext()
         );
     }
     

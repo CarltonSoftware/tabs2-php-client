@@ -93,7 +93,7 @@ class Note extends Notemeta
     /**
      * Collection of note text objects
      *
-     * @var Collection
+     * @var Collection|note\Notetext[]
      */
     protected $notetexts;
             
