@@ -486,7 +486,7 @@ trait FactoryTrait
     {
         if (property_exists($this, $property)
             && $this->_isDormant() 
-            && (is_scalar($value) || $value instanceof \DateTime)
+            && (is_scalar($value) || $value instanceof \DateTime || $value instanceof Base)
         ) {
             $this->changes[$property] = $value;
         }
