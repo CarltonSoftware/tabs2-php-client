@@ -120,6 +120,21 @@ try {
                     );
                 }
             }
+        
+            // Get the booking notes
+            $notes = $booking->getNotes();
+            if ($notes->count() > 0) {
+                echo '<h5>Notes</h5>';
+                echo implode('', $notes->map(function($bn) use ($booking) {
+                    return '<p>' . $bn->getNote()->getSubject() . '</p><ul>'
+                        . implode('', $bn->getNote()->getNotetexts()->map(function($nt) {
+                            return '<li>' . (string) $nt . '</li>';
+                        })) . '</ul>'
+                        . '<p><a href="add-a-booking-note-text.php?bid=' . $booking->getId() . '&bnid=' . $bn->getId() . '">Add reply</a></p>'
+                    ;
+                }));
+                echo '<p><a href="add-booking-note.php?id=' . $booking->getId() . '">Add a booking note</a></p>';
+            }
             
             // Get the branding extras and output list of available
             $extras = $booking->getBranding()->getExtras();

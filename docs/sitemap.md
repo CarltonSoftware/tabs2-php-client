@@ -24,6 +24,8 @@
 
 
 ## Booking examples
+ * [Adding a booking note text](booking/add-a-booking-note-text.html)
+ * [Adding a booking note](booking/add-a-booking-note.html)
  * [Adding a customer to a booking](booking/add-customer.html)
  * [Adding an extra to a booking](booking/add-extra.html)
  * [Adding a guest to a booking](booking/add-guests.html)
