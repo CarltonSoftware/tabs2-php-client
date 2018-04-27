@@ -56,7 +56,7 @@ abstract class Notemeta extends Builder
      */
     public function setCreatedby($actor)
     {
-        if ($actor instanceof Actor) {
+        if ($actor instanceof Actor || $actor instanceof Link) {
             $this->createdby = $actor;
         } else if ($actor instanceof \stdClass && property_exists($actor, 'actor')) {
             $parts = explode('/', $actor->actor);
