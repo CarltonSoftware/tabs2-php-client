@@ -39,7 +39,11 @@ if ($id = filter_input(INPUT_GET, 'id')) {
         $list = $mailinglists->first();
     }
 
-    $customer->subscribeToMailingList($list);
+    $customer->subscribeToMailingList(
+        $list,
+        false, // 'No contact' set to false as we want to allow contact from the marketing brand
+        false  // 'Unsubscribed' set to false as we want to subscribe
+    );
 
     header('Location: index.php?id=' . $customer->getId());
     exit();
