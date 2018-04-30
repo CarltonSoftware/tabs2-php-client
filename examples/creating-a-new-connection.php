@@ -32,7 +32,7 @@ $config = array(
  * @return string
  */
 function getBaseUrl() {
-    return $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . str_replace(basename($_SERVER['REQUEST_URI']), '', $_SERVER['SCRIPT_NAME']);
+    return $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . str_replace(parse_url(basename($_SERVER['REQUEST_URI']), PHP_URL_PATH), '', $_SERVER['SCRIPT_NAME']);
 }
 
 session_start();

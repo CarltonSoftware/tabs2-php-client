@@ -13,9 +13,11 @@ try {
 
         $note = new \tabs\apiclient\Note();
 
-        $noteType = new tabs\apiclient\Notetype();
-        $noteType->setDescription('A normal bog standard note.')
-            ->setType('normal');
+        $noteTypes = tabs\apiclient\Collection::factory(
+            'notetype',
+            new \tabs\apiclient\Notetype()
+        );
+        $noteTypes->fetch();
 
         $noteText = new \tabs\apiclient\note\Notetext();
 
@@ -24,7 +26,7 @@ try {
 
         $note->setSubject('Adipiscing rhubarb')
             ->setCreatedby($customer)
-            ->setNotetype($noteType)
+            ->setNotetype($noteTypes->first())
             ->addNotetext($noteText);
         
         $note->create();
