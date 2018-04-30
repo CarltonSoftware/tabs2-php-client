@@ -137,7 +137,7 @@ try {
                     . '<p><a href="add-a-booking-note-text.php?bid=' . $booking->getId() . '&bnid=' . $bn->getId() . '">Add reply</a></p>'
                 ;
             }));
-            echo '<p><a href="add-booking-note.php?id=' . $booking->getId() . '">Add a booking note</a></p>';
+            echo '<p><a href="add-a-booking-note.php?id=' . $booking->getId() . '">Add a booking note</a></p>';
         }
 
         // Get the branding extras and output list of available

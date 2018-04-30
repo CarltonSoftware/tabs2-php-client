@@ -16,9 +16,11 @@ if ($customerId = filter_input(INPUT_GET, 'id')) {
 
     $note = new \tabs\apiclient\Note();
 
-    $noteType = new tabs\apiclient\Notetype();
-    $noteType->setDescription('A normal bog standard note.')
-        ->setType('normal');
+    $noteTypes = tabs\apiclient\Collection::factory(
+        'notetype',
+        new \tabs\apiclient\Notetype()
+    );
+    $noteTypes->fetch();
 
     $noteText = new \tabs\apiclient\note\Notetext();
 
@@ -27,7 +29,7 @@ if ($customerId = filter_input(INPUT_GET, 'id')) {
 
     $note->setSubject('Adipiscing rhubarb')
         ->setCreatedby($customer)
-        ->setNotetype($noteType)
+        ->setNotetype($noteTypes->first())
         ->addNotetext($noteText);
 
     $note->create();

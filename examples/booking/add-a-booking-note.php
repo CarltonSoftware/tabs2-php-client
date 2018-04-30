@@ -15,15 +15,17 @@ try {
     $me = tabs\apiclient\client\Client::getClient()->whoami();
     $note = new \tabs\apiclient\Note();
 
-    // Create a note type
-    $noteType = new tabs\apiclient\Notetype();
-    $noteType->setDescription('A normal bog standard note.')
-        ->setType('normal');
+    // Get a note type
+    $noteTypes = tabs\apiclient\Collection::factory(
+        'notetype',
+        new \tabs\apiclient\Notetype()
+    );
+    $noteTypes->fetch();
 
     // Populate the note
     $note->setSubject('Adipiscing rhubarb')
         ->setCreatedby($me)
-        ->setNotetype($noteType)
+        ->setNotetype($noteTypes->first())
         ->addNotetext('Lorem ipsum dolor sit amet');
 
     $note->create();
