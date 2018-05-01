@@ -137,6 +137,21 @@ if ($id = filter_input(INPUT_GET, 'id')) {
         <?php
     }
 
+    // Get the customer contacts
+    $collection = tabs\apiclient\Collection::factory(
+        new \tabs\apiclient\Contact
+    );
+    $collection->addFilter('recipientid', $customer->getId())
+        ->addFilter('contactentitytype', 'Customer')
+        ->fetch();
+    include __DIR__ . '/../collection.php';
+
+    // Link to log contact example
+    echo sprintf(
+        '<p><a href="log-contact.php?id=%s">Log contact</a></p>',
+        $customer->getId()
+    );
+
 } else {
     // Create a customer collection
     $collection = tabs\apiclient\Collection::factory(

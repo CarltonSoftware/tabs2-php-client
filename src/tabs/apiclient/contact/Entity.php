@@ -117,20 +117,6 @@ class Entity extends Builder
     // -------------------- Public Functions -------------------- //
 
     /**
-     * @inheritDoc
-     */
-    public function __construct($id = null)
-    {
-        $this->status = Collection::factory(
-            'status',
-            new entity\Status(),
-            $this
-        );
-        
-        parent::__construct($id);
-    }
-
-    /**
      * Set the contactdetail
      *
      * @param stdclass|array|\tabs\apiclient\actor\ContactDetail $contactdetail The Contactdetail
@@ -143,6 +129,21 @@ class Entity extends Builder
             $contactdetail
         );
 
+        return $this;
+    }
+    
+    /**
+     * Set the status
+     * 
+     * @param stdclass|array|\tabs\apiclient\contact\entity\Status $status Status
+     * 
+     * @return $this
+     */
+    public function setStatus($status)
+    {
+        $this->status = entity\Status::factory($status);
+        $this->status->setParent($this);
+        
         return $this;
     }
     
@@ -173,11 +174,21 @@ class Entity extends Builder
             'reference' => $this->getReference(),
             'contactdetailid' => $this->getContactdetail()->getId(),
             'contactdetailvalue' => $this->getContactdetailvalue(),
-            'perform_send' => $this->boolToStr($this->getPerformsend()),
+            'perform_send' => $this->getPerformsend() === true ? 1 : 0
         );
         
-        if ($this->createdbyactor) {
+        if ($this->getCreatedbyactor()) {
             $arr['createdbyactorid'] = $this->getCreatedbyactor()->getId();
+        }
+        
+        if ($this->getStatus()) {
+            $arr = array_merge(
+                $arr,
+                $this->prefixToArray(
+                    'status_',
+                    $this->getStatus()
+                )
+            );
         }
         
         return $arr;

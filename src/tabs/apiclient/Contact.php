@@ -36,6 +36,11 @@ use tabs\apiclient\Collection;
  * 
  * @method \tabs\apiclient\SourceMarketingBrand getSourcemarketingbrand() Returns the sourcemarketingbrand
  * 
+ * @method \tabs\apiclient\Template getTemplate() Returns the template
+ * 
+ * @method string  getTemplateentityid()            Returns the template entity id
+ * @method Contact setTemplateentityid(string $var) Set the template entity id
+ * 
  * @method Collection|contact\Entity[] getContactentities() Returns the contactentities
  * 
  * @method Collection|contact\Document[] getDocuments() Returns the contact documents
@@ -45,21 +50,21 @@ use tabs\apiclient\Collection;
 class Contact extends Builder
 {
     /**
-     * Contacttype
+     * Contact type
      *
      * @var \tabs\apiclient\ContactType
      */
     protected $contacttype;
 
     /**
-     * Contactdatetime
+     * Contact datetime
      *
      * @var \DateTime
      */
     protected $contactdatetime;
 
     /**
-     * Contactmethodtype
+     * Contact method type
      *
      * @var \tabs\apiclient\ContactMethodType
      */
@@ -85,6 +90,20 @@ class Contact extends Builder
      * @var \tabs\apiclient\SourceMarketingBrand
      */
     protected $sourcemarketingbrand;
+
+    /**
+     * Template
+     *
+     * @var \tabs\apiclient\Template
+     */
+    protected $template;
+
+    /**
+     * Template entity id
+     *
+     * @var string
+     */
+    protected $templateentityid;
 
     /**
      * Contactentities
@@ -139,6 +158,8 @@ class Contact extends Builder
             new contact\Document(),
             $this
         );
+        $this->setDeleted(false);
+        $this->setStatus_status('Manual Entry');
         parent::__construct($id);
     }
 
@@ -152,6 +173,20 @@ class Contact extends Builder
     public function setContacttype($contacttype)
     {
         $this->contacttype = \tabs\apiclient\ContactType::factory($contacttype);
+
+        return $this;
+    }
+
+    /**
+     * Set the template
+     *
+     * @param stdclass|array|\tabs\apiclient\Template $tmpl The template
+     *
+     * @return Contact
+     */
+    public function setTemplate($tmpl)
+    {
+        $this->template = \tabs\apiclient\Template::factory($tmpl);
 
         return $this;
     }
@@ -203,16 +238,23 @@ class Contact extends Builder
      */
     public function toArray()
     {
-        $arr = array(
-            'contacttype' => $this->getContacttype()->getType(),
-            'contactdatetime' => $this->getContactdatetime()->format('Y-m-d H:i:s'),
-            'contactmethodtype' => $this->getContactmethodtype()->getMethod(),
-            'content' => $this->getContent(),
-            'subject' => $this->getSubject(),
-            'deleted' => $this->boolToStr($this->getDeleted()),
-            'sendercontactdetailid' => $this->getSender()->getId(),
-            'status_status' => $this->getStatus_status(),
-        );
+        $arr = $this->__toArray();
+        
+        if ($this->getContacttype()) {
+            $arr['contacttype'] = $this->getContacttype()->getType();
+        }
+        
+        if ($this->getContactmethodtype()) {
+            $arr['contactmethodtype'] = $this->getContactmethodtype()->getMethod();
+        }
+        
+        if ($this->getSender()) {
+            $arr['sendercontactdetailid'] = $this->getSender()->getId();
+        }
+        
+        if ($this->getTemplate()) {
+            $arr['templateid'] = $this->getTemplate()->getId();
+        }
         
         if ($this->getSourcemarketingbrand()) {
             $arr['sourcemarketingbrandid'] = $this->getSourcemarketingbrand()->getId();

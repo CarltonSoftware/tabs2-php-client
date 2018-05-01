@@ -5,9 +5,9 @@ require_once __DIR__ . '/../creating-a-new-connection.php';
 $q = filter_input(INPUT_GET, 'q');
 
 if ($q) {
-    $classes = explode('/', $q);
+    $classes = explode(':', $q);
     
-    $c = explode('-', array_pop($classes));
+    $c = explode('-', array_shift($classes));
     $id = $c[1];
     $class = str_replace('_', '\\', $c[0]);
     
