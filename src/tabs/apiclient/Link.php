@@ -121,6 +121,21 @@ class Link extends Base
     }
     
     /**
+     * Get the base link object
+     * 
+     * @return Base
+     */
+    public function get()
+    {
+        $that = $this->objectClass::_get($this->getLink());
+        if ($this->getCallee()) {
+            call_user_func($this->getCallee(), $that);
+        }
+        
+        return $that;
+    }
+    
+    /**
      * Overridden string function to stop any additional calls.  Link does
      * not have a toArray method either and would generate an error if this
      * is not here.
