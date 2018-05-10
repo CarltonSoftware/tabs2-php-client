@@ -127,12 +127,17 @@ class Link extends Base
      */
     public function get()
     {
-        $that = $this->objectClass::_get($this->getLink());
-        if ($this->getCallee()) {
-            call_user_func($this->getCallee(), $that);
+        $cls = $this->objectClass;
+        if (class_exists($cls)) {
+            $that = $cls::_get($this->getLink());
+            if ($this->getCallee()) {
+                call_user_func($this->getCallee(), $that);
+            }
+
+            return $that;
         }
         
-        return $that;
+        throw new \RuntimeException($cls . ' not found');
     }
     
     /**
