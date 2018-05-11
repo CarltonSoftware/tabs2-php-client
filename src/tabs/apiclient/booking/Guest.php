@@ -22,7 +22,9 @@ use tabs\apiclient\GuestAgeRange;
  * @method string getType() Returns the guesttype
  * @method Guest setType(string $var) Sets the guesttype
  * 
- * @method GuestAgeRange getAgerange() Returns the agerange
+ * @method GuestAgeRange getGuestagerange()           Returns the agerange
+ * @method Guest         setGuestagerange(mixed $var) Set the agerange
+ * 
  * @method integer getAge() Returns the age
  * @method Guest setAge(integer $var) Sets the age
  * 
@@ -105,6 +107,16 @@ class Guest extends Builder
     public function setAgerange($agerange)
     {
         return $this->setGuestagerange($agerange);
+    }
+
+    /**
+     * Get the age range
+     *
+     * @return GuestAgeRange
+     */
+    public function getAgerange()
+    {
+        return $this->getGuestagerange();
     }
 
     /**
