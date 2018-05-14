@@ -516,24 +516,23 @@ class StaticCollection implements \Iterator, \Countable
     }
     
     /**
+     * @deprecated Deprecated in favour of filter()
+     */
+    public function findBy(callable $fn)
+    {
+        return $this->filter($fn);
+    }
+    
+    /**
      * Find an element or elements using a particular callback
      * 
      * @param \tabs\apiclient\callable $fn Function
      * 
      * @return \tabs\apiclient\StaticCollection
      */
-    public function findBy(callable $fn)
+    public function filter(callable $fn)
     {
-        $p = $this->getElementParent();
-        $col = self::factory(
-            $this->getPath(),
-            $this->getElementClass(),
-            $p
-        );
-        $col->setElements(array_filter($this->getElements(), $fn));
-        $col->setTotal(count($col->getElements()));
-        
-        return $col;
+        return $this->findBy($fn);
     }
     
     /**
@@ -789,8 +788,8 @@ class StaticCollection implements \Iterator, \Countable
     /**
      * Return an assoc array
      * 
-     * @param string $key   Key
-     * @param string $value Value
+     * @param string          $key   Key
+     * @param string|callable $value Value
      * 
      * @return array
      */
@@ -798,10 +797,14 @@ class StaticCollection implements \Iterator, \Countable
     {
         $assoc = [];
         foreach ($this->elements as $element) {
-            if ($element->method_exists($value)) {
-                $assoc[$element->$key] = $element->$value();
+            if (is_callable($value)) {
+                $assoc[$element->$key] = call_user_func($value, $element);
             } else {
-                $assoc[$element->$key] = $element->$value;
+                if ($element->method_exists($value)) {
+                    $assoc[$element->$key] = $element->$value();
+                } else {
+                    $assoc[$element->$key] = $element->$value;
+                }
             }
         }
         
