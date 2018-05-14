@@ -532,7 +532,16 @@ class StaticCollection implements \Iterator, \Countable
      */
     public function filter(callable $fn)
     {
-        return $this->findBy($fn);
+        $p = $this->getElementParent();
+        $col = self::factory(
+            $this->getPath(),
+            $this->getElementClass(),
+            $p
+        );
+        $col->setElements(array_filter($this->getElements(), $fn));
+        $col->setTotal(count($col->getElements()));
+        
+        return $col;
     }
     
     /**
