@@ -806,13 +806,19 @@ class StaticCollection implements \Iterator, \Countable
     {
         $assoc = [];
         foreach ($this->elements as $element) {
+            if (is_callable($key)) {
+                $k = call_user_func($key, $element);
+            } else {
+                $k = $element->$key;
+            }
+            
             if (is_callable($value)) {
-                $assoc[$element->$key] = call_user_func($value, $element);
+                $assoc[$k] = call_user_func($value, $element);
             } else {
                 if ($element->method_exists($value)) {
-                    $assoc[$element->$key] = $element->$value();
+                    $assoc[$k] = $element->$value();
                 } else {
-                    $assoc[$element->$key] = $element->$value;
+                    $assoc[$k] = $element->$value;
                 }
             }
         }
