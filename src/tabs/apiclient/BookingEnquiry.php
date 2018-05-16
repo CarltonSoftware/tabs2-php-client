@@ -92,6 +92,9 @@ use tabs\apiclient\Base;
  * 
  * @method boolean getWebbookingok() Returns the webbookingok
  * @method BookingEnquiry setWebbookingok(boolean $var) Sets the webbookingok
+ * 
+ * @method Property       getProperty() Returns the enquiry property
+ * @method BookingEnquiry setProperty(Property $property) Set the property
  */
 class BookingEnquiry extends Base
 {
@@ -108,6 +111,11 @@ class BookingEnquiry extends Base
      * @var \tabs\apiclient\property\Branding
      */
     protected $propertyBranding;
+
+    /**
+     * @var \tabs\apiclient\Property
+     */
+    protected $property;
 
     /**
      * Branding

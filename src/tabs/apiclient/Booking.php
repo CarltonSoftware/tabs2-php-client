@@ -1297,7 +1297,8 @@ class Booking extends Builder
         if ($this->getId() && $this->getGuesttype() === 'Customer') {
             $be = new \tabs\apiclient\BookingEnquiry();
             $be->setSaleschannel($this->getSaleschannel())
-                ->setPropertyBranding($this->getPropertybranding())
+                ->setProperty($this->getProperty()->getId())
+                ->setBranding($this->getBranding()->getId())
                 ->setFromdate($this->getFromdate())
                 ->setTodate($this->getTodate());
 
