@@ -94,7 +94,6 @@ use tabs\apiclient\Base;
  * @method BookingEnquiry setWebbookingok(boolean $var) Sets the webbookingok
  * 
  * @method Property       getProperty() Returns the enquiry property
- * @method BookingEnquiry setProperty(Property $property) Set the property
  * 
  * @method Branding       getBranding() Returns the enquiry branding
  */
@@ -349,6 +348,22 @@ class BookingEnquiry extends Base
     {
         $this->propertyBranding = \tabs\apiclient\property\Branding::factory(
             $propertyBranding
+        );
+
+        return $this;
+    }
+
+    /**
+     * Set the property
+     *
+     * @param stdclass|array|\tabs\apiclient\Property $property The Property
+     *
+     * @return BookingEnquiry
+     */
+    public function setProperty($property)
+    {
+        $this->property = \tabs\apiclient\Property::factory(
+            $property
         );
 
         return $this;
