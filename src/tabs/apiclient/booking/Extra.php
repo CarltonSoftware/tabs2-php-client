@@ -194,8 +194,8 @@ class Extra extends Builder
      */
     public function setPrice($price)
     {
-        $this->price = $price;
-        $this->setPriceoverridden(true);
+        $this->set('price', $price)
+            ->setPriceoverridden(true);
         
         return $this;
     }
