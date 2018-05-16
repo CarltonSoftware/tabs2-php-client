@@ -299,7 +299,7 @@ abstract class Base implements Collectionable
         if (!$this->getId()) {
             throw new exception\Exception(
                 null,
-                'Parent ' . $this->getClass() . ' not intialised.'
+                'Parent ' . $this->getClass() . ' not initialised.'
             );
         } 
         

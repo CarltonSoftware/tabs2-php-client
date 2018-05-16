@@ -92,6 +92,10 @@ use tabs\apiclient\Base;
  * 
  * @method boolean getWebbookingok() Returns the webbookingok
  * @method BookingEnquiry setWebbookingok(boolean $var) Sets the webbookingok
+ * 
+ * @method Property       getProperty() Returns the enquiry property
+ * 
+ * @method Branding       getBranding() Returns the enquiry branding
  */
 class BookingEnquiry extends Base
 {
@@ -108,6 +112,11 @@ class BookingEnquiry extends Base
      * @var \tabs\apiclient\property\Branding
      */
     protected $propertyBranding;
+
+    /**
+     * @var \tabs\apiclient\Property
+     */
+    protected $property;
 
     /**
      * Branding
@@ -339,6 +348,22 @@ class BookingEnquiry extends Base
     {
         $this->propertyBranding = \tabs\apiclient\property\Branding::factory(
             $propertyBranding
+        );
+
+        return $this;
+    }
+
+    /**
+     * Set the property
+     *
+     * @param stdclass|array|\tabs\apiclient\Property $property The Property
+     *
+     * @return BookingEnquiry
+     */
+    public function setProperty($property)
+    {
+        $this->property = \tabs\apiclient\Property::factory(
+            $property
         );
 
         return $this;
@@ -691,6 +716,13 @@ class BookingEnquiry extends Base
         
         if ($this->getPropertyBranding()) {
             $arr['propertybrandingid'] = $this->getPropertyBranding()->getId();
+        } else {
+            if ($this->getProperty()) {
+                $arr['propertyid'] = $this->getProperty()->getId();
+            }
+            if ($this->getBranding()) {
+                $arr['brandingid'] = $this->getBranding()->getId();
+            }
         }
         
         if ($this->getCurrency()) {

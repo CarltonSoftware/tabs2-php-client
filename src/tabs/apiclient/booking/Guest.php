@@ -22,7 +22,9 @@ use tabs\apiclient\GuestAgeRange;
  * @method string getType() Returns the guesttype
  * @method Guest setType(string $var) Sets the guesttype
  * 
- * @method GuestAgeRange getAgerange() Returns the agerange
+ * @method GuestAgeRange getGuestagerange()           Returns the agerange
+ * @method Guest         setGuestagerange(mixed $var) Set the agerange
+ * 
  * @method integer getAge() Returns the age
  * @method Guest setAge(integer $var) Sets the age
  * 
@@ -46,18 +48,18 @@ class Guest extends Builder
     protected $name = '';
 
     /**
-     * Guesttype
+     * Guest type
      *
      * @var string
      */
-    protected $type;
+    protected $type = 'Adult';
 
     /**
-     * Agerange
+     * Age range
      *
      * @var GuestAgeRange
      */
-    protected $agerange;
+    protected $guestagerange;
 
     /**
      * Age
@@ -88,6 +90,12 @@ class Guest extends Builder
     protected $petbreed;
 
     // -------------------- Public Functions -------------------- //
+    
+    public function __construct($id = null)
+    {
+        $this->guestagerange = new GuestAgeRange();
+        parent::__construct($id);
+    }
 
     /**
      * Set the agerange
@@ -98,9 +106,17 @@ class Guest extends Builder
      */
     public function setAgerange($agerange)
     {
-        $this->agerange = GuestAgeRange::factory($agerange);
+        return $this->setGuestagerange($agerange);
+    }
 
-        return $this;
+    /**
+     * Get the age range
+     *
+     * @return GuestAgeRange
+     */
+    public function getAgerange()
+    {
+        return $this->getGuestagerange();
     }
 
     /**
@@ -108,31 +124,11 @@ class Guest extends Builder
      */
     public function toArray()
     {
-        $arr = array(
-            'name' => $this->getName(),
-            'guesttype' => $this->getType()
+        return array_merge(
+            array(
+                'guesttype' => $this->getType()
+            ),
+            $this->__toArray()
         );
-        
-        if ($this->getAge()) {
-            $arr['age'] = $this->getAge();
-        }
-        
-        if ($this->getPettype()) {
-            $arr['pettype'] = $this->getPettype();
-        }
-        
-        if ($this->getPetbreed()) {
-            $arr['petbreed'] = $this->getPetbreed();
-        }
-        
-        if ($this->getYearofbirth()) {
-            $arr['yearofbirth'] = $this->getYearofbirth();
-        }
-        
-        if ($this->getAgerange()) {
-            $arr['guestagerangeid'] = $this->getAgerange()->getId();
-        }
-        
-        return $arr;
     }
 }

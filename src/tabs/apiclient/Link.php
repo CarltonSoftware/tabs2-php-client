@@ -121,6 +121,26 @@ class Link extends Base
     }
     
     /**
+     * Get the base link object
+     * 
+     * @return Base
+     */
+    public function get()
+    {
+        $cls = $this->objectClass;
+        if (class_exists($cls)) {
+            $that = $cls::_get($this->getLink());
+            if ($this->getCallee()) {
+                call_user_func($this->getCallee(), $that);
+            }
+
+            return $that;
+        }
+        
+        throw new \RuntimeException($cls . ' not found');
+    }
+    
+    /**
      * Overridden string function to stop any additional calls.  Link does
      * not have a toArray method either and would generate an error if this
      * is not here.

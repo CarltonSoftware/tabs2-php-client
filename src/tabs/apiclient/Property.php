@@ -111,6 +111,8 @@ use tabs\apiclient\property\AvailableBreak;
  * @method Collection|AvailableBreak[] getAvailablebreaks() Get the available breaks for a property
  * 
  * @method string getPrimarybookingbrand() Get the primary booking brand (name)
+ * 
+ * @method string getLocation() Returns the property's primary location (only available when using 'fields' filter)
  */
 class Property extends Builder
 {
@@ -351,6 +353,13 @@ class Property extends Builder
      * @var string
      */
     protected $primarybookingbrand;
+    
+    /**
+     * Location
+     *
+     * @var string
+     */
+    protected $location;   
     
 
     // -------------------------- Public Functions -------------------------- //

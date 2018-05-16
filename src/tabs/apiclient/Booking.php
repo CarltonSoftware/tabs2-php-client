@@ -1193,6 +1193,38 @@ class Booking extends Builder
     {
         return $this->_getPaymentSummaryElement('total', substr(__FUNCTION__, 8));
     }
+    
+    /**
+     * Get the booking special offers
+     * 
+     * @return StaticCollection|booking\SpecialOffer[]
+     */
+    public function getSpecialOffers()
+    {
+        $col = StaticCollection::factory(new booking\SpecialOffer());
+        $offers = $this->getDataFromResponse(
+            'price',
+            'specialoffers'
+        );
+        
+        if (is_array($offers)) {
+            $col->setElements($offers);
+        }
+        
+        return $col;
+    }
+    
+    /**
+     * Check if a booking has a promotion or not
+     * 
+     * @return boolean
+     */
+    public function hasPromotion()
+    {
+        return $this->getSpecialOffers()->filter(function($bso) {
+            return $bso->getPromotion() && $bso->getPromotion()->getId();
+        })->count() > 0;
+    }
 
     /**
      * Get the tabs2 url for this booking
@@ -1253,6 +1285,25 @@ class Booking extends Builder
         \tabs\apiclient\client\Client::getClient()->put($url);
 
         return $this;
+    }
+    
+    /**
+     * Get the enquiry information about the booking
+     * 
+     * @return \tabs\apiclient\BookingEnquiry|null
+     */
+    public function getEnquiry()
+    {
+        if ($this->getId() && $this->getGuesttype() === 'Customer') {
+            $be = new \tabs\apiclient\BookingEnquiry();
+            $be->setSaleschannel($this->getSaleschannel())
+                ->setProperty($this->getProperty()->getId())
+                ->setBranding($this->getBranding()->getId())
+                ->setFromdate($this->getFromdate())
+                ->setTodate($this->getTodate());
+
+            return $be->get();
+        }
     }
 
     // -------------------------- Private Functions ------------------------- //

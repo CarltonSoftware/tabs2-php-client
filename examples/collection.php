@@ -7,8 +7,7 @@ if (!function_exists('getParentLink')) {
             getParentLink($object->getParent(), $links);
         }
         
-        $links[] = $object->getClass();
-        $links[] = $object->getId();
+        $links[] = $object->getFullClass() . '-' . $object->getId();
 
         return $links;
     }
@@ -70,8 +69,7 @@ if (!empty($collection)) {
             );
         } else {
             echo sprintf(
-                '<li><a href="exploreelement/%s?map=%s">%s</a></li>',
-                implode('/', $classes),
+                '<li><a href="../exploreelement/?q=%s">%s</a></li>',
                 implode(':', getParentLink($element)),
                 stristr($text, '<title>') ? htmlentities($text) : $text
             );
