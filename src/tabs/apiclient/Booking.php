@@ -1286,6 +1286,24 @@ class Booking extends Builder
 
         return $this;
     }
+    
+    /**
+     * Get the enquiry information about the booking
+     * 
+     * @return \tabs\apiclient\BookingEnquiry|null
+     */
+    public function getEnquiry()
+    {
+        if ($this->getId() && $this->getGuesttype() === 'Customer') {
+            $be = new \tabs\apiclient\BookingEnquiry();
+            $be->setSaleschannel($this->getSaleschannel())
+                ->setPropertyBranding($this->getPropertybranding())
+                ->setFromdate($this->getFromdate())
+                ->setTodate($this->getTodate());
+
+            return $be->get();
+        }
+    }
 
     // -------------------------- Private Functions ------------------------- //
 
