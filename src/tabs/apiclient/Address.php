@@ -120,20 +120,6 @@ class Address extends Builder
     }
     
     /**
-     * Set the country object
-     * 
-     * @param array|stdClass|Country $country Country
-     * 
-     * @return \tabs\apiclient\Address
-     */
-    public function setCountry($country)
-    {
-        $this->country = Country::factory($country);
-        
-        return $this;
-    }
-    
-    /**
      * ToString magic method
      * 
      * @return string
