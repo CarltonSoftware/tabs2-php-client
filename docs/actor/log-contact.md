@@ -1,6 +1,6 @@
-# Requesting a brochure
+# Logging a contact
 
-This example demonstrates how to log a contact to a customer
+This example demonstrates how to log a contact to a customer.
 
 
 ```php
