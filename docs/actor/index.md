@@ -148,6 +148,12 @@ try {
             '<p><a href="log-contact.php?id=%s">Log contact</a></p>',
             $customer->getId()
         );
+
+        // Link to list bookings example
+        echo sprintf(
+            '<p><a href="listing-customer-bookings.php?id=%s">Show bookings</a></p>',
+            $customer->getId()
+        );
             
     } else {
         // Create a customer collection

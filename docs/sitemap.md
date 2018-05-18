@@ -20,6 +20,7 @@
  * [Authenticating actors](actor/authenticating-an-actor.html)
  * [Creating a new customer](actor/creating-a-customer.html)
  * [Accessing customer data](actor/index.html)
+ * [Listing bookings](actor/listing-customer-bookings.html)
  * [Requesting a brochure](actor/log-contact.html)
  * [Requesting a brochure](actor/requesting-a-brochure.html)
 
