@@ -152,6 +152,12 @@ if ($id = filter_input(INPUT_GET, 'id')) {
         $customer->getId()
     );
 
+    // Link to list bookings example
+    echo sprintf(
+        '<p><a href="listing-customer-bookings.php?id=%s">Show bookings</a></p>',
+        $customer->getId()
+    );
+
 } else {
     // Create a customer collection
     $collection = tabs\apiclient\Collection::factory(

@@ -37,6 +37,13 @@ if (!empty($collection)) {
                 $element->getId(),
                 stristr($text, '<title>') ? htmlentities($text) : $text
             );
+        }else if ($element instanceof tabs\apiclient\Booking) {
+            echo sprintf(
+                '<li><a href="%s?id=%s">%s</a></li>',
+                getBaseUrl() . '/../../booking/index.php',
+                $element->getId(),
+                $text
+            );
         } else if ($element instanceof tabs\apiclient\SpecialOffer) {
             echo sprintf(
                 '<li><a href="specialoffer/viewing-special-offer-data.php?id=%s">%s</a></li>',
@@ -78,18 +85,20 @@ if (!empty($collection)) {
     echo '</ul>';
     
     if ($pager->getMaxPages() > 1) {
+        $params = filter_input_array(INPUT_GET);
+        $params['page'] = $pager->getPrevPage();
+        $params['limit'] = $pager->getLimit();
         echo sprintf(
-            '<p><a href="?page=%s&limit=%s"2>&larr; Previous</a>',
-            $pager->getPrevPage(),
-            $pager->getLimit()
+            '<p><a href="?%s">&larr; Previous</a>',
+            http_build_query($params)
         );
 
         echo ' &nbsp; | &nbsp; ';
 
+        $params['page'] = $pager->getNextPage();
         echo sprintf(
-            '<a href="?page=%s&limit=%s">Next &rarr;</a></p>',
-            $pager->getNextPage(),
-            $pager->getLimit()
+            '<a href="?%s">Next &rarr;</a></p>',
+            http_build_query($params)
         );
     }
 }
