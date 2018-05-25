@@ -194,6 +194,10 @@ class SecurityDeposit extends Builder
      */
     public function __construct($id = null)
     {
+        $this->dueindate = new \DateTime();
+        $this->dueoutdate = new \DateTime();
+        $this->refundeddate = new \DateTime();
+        $this->paiddate = new \DateTime();
         $this->holds = Collection::factory(
             'hold',
             new Hold(),
