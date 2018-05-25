@@ -1265,6 +1265,16 @@ class Booking extends Builder
 
         return $be;
     }
+    
+    /**
+     * Get the number of nights
+     * 
+     * @return integer
+     */
+    public function getNights()
+    {
+        return (int) $this->fromdate->diff($this->todate)->format('%a');
+    }
 
     /**
      * Import a sagepay payment into this booking.  Note, you will need to
