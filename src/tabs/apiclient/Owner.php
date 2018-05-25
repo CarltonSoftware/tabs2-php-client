@@ -52,6 +52,11 @@ class Owner extends Actor
      * @var boolean
      */
     protected $enquirer = false;
+    
+    /**
+     * @var \tabs\apiclient\Collection|\tabs\apiclient\owner\Property[]
+     */
+    protected $properties;
 
     // ------------------ Public Functions --------------------- //
     
@@ -61,7 +66,26 @@ class Owner extends Actor
     public function __construct($id = null)
     {
         $this->setAbroad(false);
+        $this->properties = StaticCollection::factory(
+            'property',
+            new owner\Property(),
+            $this
+        );
         parent::__construct($id);
+    }
+    
+    /**
+     * Get the currently owned properties
+     * 
+     * @return \tabs\apiclient\Collection|\tabs\apiclient\owner\Property[]
+     */
+    public function getCurrentProperties()
+    {
+        return $this->properties->filter(function($prop) {
+            $now = new \DateTime();
+            
+            return $prop->getOwnerfromdate() <= $now && $now <= $prop->getOwnertodate();
+        });
     }
     
     /**
