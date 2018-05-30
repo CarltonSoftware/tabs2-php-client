@@ -276,11 +276,7 @@ trait FactoryTrait
             } else if ($this instanceof Link) {
                 // TODO: Look at parent objects within the link object
                 //$parent = $this->$property->getParent();
-                $class = $this->getObjectClass();
-                $that = $class::_get($this->getLink());
-                if ($this->getCallee()) {
-                    call_user_func($this->getCallee(), $that);
-                }
+                $that = $this->get();
                 
                 if ($that->$property instanceof \tabs\apiclient\Collection 
                     && !$that->$property->isFetched()
