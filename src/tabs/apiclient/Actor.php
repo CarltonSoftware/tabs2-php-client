@@ -515,13 +515,13 @@ abstract class Actor extends Builder
      */
     public function getContactDetail(
         ContactDetail $instance,
-        $type = 'Phone',
+        $type = null,
         $subtype = null
     ) {
         return $this->getContactdetails()->filter(
             function($ele) use ($instance, $type, $subtype) {
                 return $ele instanceof $instance 
-                    && ($ele instanceof actor\Address || $ele->getContactmethodtype() == $type)
+                    && ($ele instanceof actor\Address || !$type || $ele->getContactmethodtype() == $type)
                     && (!$subtype || $ele->getContactmethodsubtype() == $subtype)
                     && $ele->getInvalid() === false;
             }
