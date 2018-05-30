@@ -76,8 +76,6 @@ use tabs\apiclient\ActorSecurity;
  * @method Collection|ActorSecurity[] getSecurity() Returns the actor security
  * 
  * @method Collection|actor\Enquiry[] getEnquiries() Returns the customer enquiries
- * 
- * @method string getAddress() Returns the address (only available when using 'fields' filter)
  */
 abstract class Actor extends Builder
 {
@@ -460,16 +458,74 @@ abstract class Actor extends Builder
         if ($this->emailaddress) {
             return $this->emailaddress;
         } else if ($this->getId()) {
-            $emails = $this->getContactdetails()->findBy(function($ele) {
-                return $ele instanceof ContactDetailOther 
-                    && $ele->getContactmethodtype() == 'Email'
-                    && $ele->getInvalid() === false;
-            });
-            
-            if ($emails->count() > 0) {
-                return $emails->first();
-            }
+            return $this->getContactDetail(new ContactDetailOther, 'Email')->first();
         }
+    }
+    
+    /**
+     * Get an phone for the Actor
+     * 
+     * @return PhoneNumber|string|null
+     */
+    public function getPhonenumber()
+    {
+        if ($this->phone) {
+            return $this->phone;
+        } else if ($this->getId()) {
+            return $this->getContactDetail(new PhoneNumber, 'Phone')->first();
+        }
+    }
+    
+    /**
+     * Get a mobile phone for the Actor
+     * 
+     * @return PhoneNumber|string|null
+     */
+    public function getMobilenumber()
+    {
+        if ($this->mobilephone) {
+            return $this->mobilephone;
+        } else if ($this->getId()) {
+            return $this->getContactDetail(new PhoneNumber, 'Mobile')->first();
+        }
+    }
+    
+    /**
+     * Get a address for the Actor
+     * 
+     * @return actor\Address|string|null
+     */
+    public function getAddress()
+    {
+        if ($this->address) {
+            return $this->address;
+        } else if ($this->getId()) {
+            return $this->getContactDetail(new actor\Address)->first();
+        }
+    }
+    
+    /**
+     * Get a collection of contact details an phone for the Actor
+     *
+     * @param ContactDetail $instance Instance to filter by
+     * @param string        $type     Contact method type
+     * @param string        $subtype  Contact method subtype
+     *  
+     * @return ContactDetail[]
+     */
+    public function getContactDetail(
+        ContactDetail $instance,
+        $type = 'Phone',
+        $subtype = null
+    ) {
+        return $this->getContactdetails()->filter(
+            function($ele) use ($instance, $type, $subtype) {
+                return $ele instanceof $instance 
+                    && ($ele instanceof actor\Address || $ele->getContactmethodtype() == $type)
+                    && (!$subtype || $ele->getContactmethodsubtype() == $subtype)
+                    && $ele->getInvalid() === false;
+            }
+        );
     }
 
     /**

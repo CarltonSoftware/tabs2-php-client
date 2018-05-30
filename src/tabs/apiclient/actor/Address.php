@@ -50,4 +50,12 @@ class Address extends ContactDetail
             parent::toArray()
         );
     }
+    
+    /**
+     * @inheritDoc
+     */
+    public function __toString()
+    {
+        return (string) $this->getAddress();
+    }
 }
