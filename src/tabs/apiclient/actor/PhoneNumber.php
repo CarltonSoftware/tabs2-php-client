@@ -72,4 +72,16 @@ class PhoneNumber extends ContactDetail
             parent::toArray()
         );
     }
+    
+    public function __toString()
+    {
+        return implode(
+            '',
+            array(
+                '+',
+                $this->getCountrycode(),
+                $this->getSubscribernumber()
+            )
+        );
+    }
 }

@@ -50,4 +50,12 @@ class ContactDetailOther extends ContactDetail
             parent::toArray()
         );
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function __toString()
+    {
+        return $this->getValue();
+    }
 }

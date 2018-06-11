@@ -50,13 +50,6 @@ interface BuilderInterface
     public function delete();
     
     /**
-     * Array representation of the object
-     * 
-     * @return array
-     */
-    public function toArray();
-    
-    /**
      * Return a string of the url used for create/updates
      * 
      * @return string

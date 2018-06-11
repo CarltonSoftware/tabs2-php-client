@@ -136,6 +136,9 @@ use tabs\apiclient\OwnerBookingType;
  * @method TransferredBooking getTransferredtobooking() Returns the transferred booking
  *
  * @method TransferredBooking getTransferredfrombooking() Returns the transferred booking
+ * 
+ * @method Booking setOverridestatus(boolean $var) Set the override status flag
+ * @method boolean getOverridestatus()             Get the override status flag
  */
 class Booking extends Builder
 {
@@ -467,6 +470,11 @@ class Booking extends Builder
      * @var TransferredBooking
      */
     protected $transferredfrombooking;
+    
+    /**
+     * @var boolean
+     */
+    protected $overridestatus = false;
 
     // -------------------- Public Functions -------------------- //
 
@@ -1265,6 +1273,16 @@ class Booking extends Builder
 
         return $be;
     }
+    
+    /**
+     * Get the number of nights
+     * 
+     * @return integer
+     */
+    public function getNights()
+    {
+        return (int) $this->fromdate->diff($this->todate)->format('%a');
+    }
 
     /**
      * Import a sagepay payment into this booking.  Note, you will need to
@@ -1290,20 +1308,31 @@ class Booking extends Builder
     /**
      * Get the enquiry information about the booking
      * 
-     * @return \tabs\apiclient\BookingEnquiry|null
+     * @return \tabs\apiclient\BookingEnquiry
      */
     public function getEnquiry()
     {
-        if ($this->getId() && $this->getGuesttype() === 'Customer') {
-            $be = new \tabs\apiclient\BookingEnquiry();
-            $be->setSaleschannel($this->getSaleschannel())
-                ->setProperty($this->getProperty()->getId())
-                ->setBranding($this->getBranding()->getId())
-                ->setFromdate($this->getFromdate())
-                ->setTodate($this->getTodate());
-
-            return $be->get();
+        $be = new \tabs\apiclient\BookingEnquiry();
+        $be->setGuestype($this->getGuesttype())
+            ->setFromdate($this->getFromdate())
+            ->setTodate($this->getTodate());
+        
+        if ($this->getProperty()) {
+            $be->setProperty(array('id' => $this->getProperty()->getId()));
         }
+        if ($this->getId() && $this->getGuesttype() === 'Customer') {
+            $be->setSaleschannel($this->getSaleschannel());
+            
+            if ($this->getBranding()) {
+                $be->setBranding(array('id' => $this->getBranding()->getId()));
+            }
+        }
+        
+        if ($this->getGuesttype() === 'Owner') {
+            $be->setBranding(array('id' => $this->getProperty()->getPrimarypropertybranding()->getBranding()->getId()));
+        }
+
+        return $be->get();
     }
 
     // -------------------------- Private Functions ------------------------- //

@@ -31,6 +31,12 @@ namespace tabs\apiclient\note;
  * 
  * @method Notetext setId(integer $id)       Set the note id
  * @method Notetext setNotetext(string $subject) Set the note text
+ * 
+ * @method Notetext  setFollowup(\DateTime $d) Set the follow up date
+ * @method \DateTime getFollowup()             Get the follow up date
+ * 
+ * @method Notetext  setActioned(\DateTime $d) Set the actioned date
+ * @method \DateTime getActioned()             Get the actioned date
  */
 class Notetext extends \tabs\apiclient\Notemeta
 {
@@ -40,8 +46,24 @@ class Notetext extends \tabs\apiclient\Notemeta
      * @var string
      */
     protected $notetext = '';
+    
+    /**
+     * @var \DateTime
+     */
+    protected $followup;
+    
+    /**
+     * @var \DateTime
+     */
+    protected $actioned;
 
     // ------------------ Public Functions --------------------- //
+    
+    public function __construct($id = null) {
+        parent::__construct($id);
+        $this->followup = new \DateTime();
+        $this->actioned = new \DateTime();
+    }
     
     /**
      * Array representation of the address.  Used for creates/updates.
@@ -50,9 +72,7 @@ class Notetext extends \tabs\apiclient\Notemeta
      */
     public function toArray()
     {
-        $arr = array(
-            'notetext' => $this->getNotetext()
-        );
+        $arr = $this->__toArray();
         
         if ($this->getCreatedby()) {
             $arr['createdbyactorid'] = $this->getCreatedby()->getId();

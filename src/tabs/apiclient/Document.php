@@ -130,17 +130,4 @@ class Document extends \tabs\apiclient\FileBuilder
         
         return $this;
     }
-    
-    /**
-     * @inheritDoc
-     */
-    public function toArray()
-    {
-        return array(
-            'name' => $this->getName(),
-            'weight' => $this->getWeight(),
-            'description' => $this->getDescription(),
-            'private' => $this->boolToStr($this->isPrivate())
-        );
-    }
 }
