@@ -129,7 +129,15 @@ class Link extends Base
     {
         $cls = $this->objectClass;
         if (class_exists($cls)) {
-            $that = $cls::_get($this->getLink());
+            
+            $json = self::getJson(
+                \tabs\apiclient\client\Client::getClient()->get(
+                    $this->getLink()
+                )
+            );
+            $that = $cls::factory($json);
+            $that->setResponsedata($json);
+            
             if ($this->getCallee()) {
                 call_user_func($this->getCallee(), $that);
             }

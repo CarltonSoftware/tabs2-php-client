@@ -689,6 +689,16 @@ class BookingEnquiry extends Base
         
         return $objs;
     }
+    
+    /**
+     * Get the number of nights
+     * 
+     * @return integer
+     */
+    public function getNights()
+    {
+        return (int) $this->fromdate->diff($this->todate)->format('%a');
+    }
 
     /**
      * @inheritDoc

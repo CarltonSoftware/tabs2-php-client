@@ -113,6 +113,8 @@ use tabs\apiclient\property\AvailableBreak;
  * @method string getPrimarybookingbrand() Get the primary booking brand (name)
  * 
  * @method string getLocation() Returns the property's primary location (only available when using 'fields' filter)
+ * 
+ * @method Collection|Booking[] getBookings() Returns the properties bookings as a collection
  */
 class Property extends Builder
 {
@@ -359,8 +361,12 @@ class Property extends Builder
      *
      * @var string
      */
-    protected $location;   
+    protected $location;
     
+    /**
+     * @var Collection|Booking[]
+     */
+    protected $bookings;
 
     // -------------------------- Public Functions -------------------------- //
     
@@ -406,6 +412,8 @@ class Property extends Builder
                 $this
             );
         }
+        
+        $this->bookings = Collection::factory(new Booking());
         
         parent::__construct($id);
     }
