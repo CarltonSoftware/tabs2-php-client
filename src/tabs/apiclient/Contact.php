@@ -228,7 +228,23 @@ class Contact extends Builder
      */
     public function setSender($sender)
     {
-        $this->sender = actor\ContactDetail::factory($sender);
+        if ($sender instanceof \stdClass
+            && property_exists($sender, 'type')
+        ) {
+            switch ($sender->type) {
+            case 'P':
+                $this->sender = actor\Address::factory($sender);
+                break;
+            case 'F':
+                $this->sender = actor\PhoneNumber::factory($sender);
+                break;
+            default:
+                $this->sender = actor\ContactDetailOther::factory($sender);
+                break;
+            }
+        } else {
+            $this->sender = actor\ContactDetail::factory($sender);
+        }
         
         return $this;
     }
