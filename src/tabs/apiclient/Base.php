@@ -241,10 +241,14 @@ abstract class Base implements Collectionable
      */
     public function __toString()
     {
-        return implode(
-            ' ',
-            $this->toArray()
-        );
+        if (method_exists($this, 'toArray')) {
+            return implode(
+                ' ',
+                $this->toArray()
+            );
+        } else {
+            return (string) $this->getId();
+        }
     }
     
     /**
