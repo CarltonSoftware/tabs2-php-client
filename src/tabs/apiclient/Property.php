@@ -349,6 +349,16 @@ class Property extends Builder
      */
     protected $checkouttime = '';
     
+    /**
+     * @var string
+     */
+    protected $checkintext = '';
+    
+    /**
+     * @var string
+     */
+    protected $checkouttext = '';
+    
     /*
      * Primary booking brand (name)
      * 
