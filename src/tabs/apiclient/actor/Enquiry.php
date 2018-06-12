@@ -40,6 +40,10 @@ use tabs\apiclient\Builder;
  * @method boolean getClosed() Returns the closed bool
  * @method Enquiry setClosed(boolean $var) Sets the closed bool
  * 
+ * @method message getMessage() Returns the enquiry message
+ * @method Enquiry setMessage(string $var) Sets the enquiry message
+ * 
+ * 
  * @method \tabs\apiclient\Collection|enquiry\Dates[] getDates() Get the enquiry dates
  * @method \tabs\apiclient\Collection|enquiry\Property[] getProperties() Get the enquiry properties
  */
@@ -121,6 +125,11 @@ class Enquiry extends Builder
      * @var \tabs\apiclient\Collection|enquiry\Property[]
      */
     protected $properties;
+    
+    /**
+     * @var string
+     */
+    protected $message;
 
     // -------------------- Public Functions -------------------- //
 
@@ -140,43 +149,8 @@ class Enquiry extends Builder
             new enquiry\Property(),
             $this
         );
+        $this->marketingbrand = new \tabs\apiclient\MarketingBrand();
+        
         parent::__construct($id);
-    }
-
-    /**
-     * Set the marketingbrand
-     *
-     * @param stdclass|array|\tabs\apiclient\MarketingBrand $marketingbrand The Marketingbrand
-     *
-     * @return Enquiry
-     */
-    public function setMarketingbrand($marketingbrand)
-    {
-        $this->marketingbrand = \tabs\apiclient\MarketingBrand::factory($marketingbrand);
-
-        return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function toArray()
-    {
-        $arr = array(
-            'enquirydatetime' => $this->getEnquirydatetime()->format('Y-m-d'),
-            'pets' => $this->getPets(),
-            'bedrooms' => $this->getBedrooms(),
-            'adults' => $this->getAdults(),
-            'children' => $this->getChildren(),
-            'infants' => $this->getInfants(),
-            'contactfrequencydays' => $this->getContactfrequencydays(),
-            'closed' => $this->boolToStr($this->getClosed())
-        );
-        
-        if ($this->getMarketingbrand()) {
-            $arr['marketingbrandid'] = $this->getMarketingbrand()->getId();
-        }
-        
-        return $arr;
     }
 }
