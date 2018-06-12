@@ -153,18 +153,4 @@ class Enquiry extends Builder
         
         parent::__construct($id);
     }
-
-    /**
-     * Set the marketingbrand
-     *
-     * @param stdclass|array|\tabs\apiclient\MarketingBrand $marketingbrand The Marketingbrand
-     *
-     * @return Enquiry
-     */
-    public function setMarketingbrand($marketingbrand)
-    {
-        $this->marketingbrand = \tabs\apiclient\MarketingBrand::factory($marketingbrand);
-
-        return $this;
-    }
 }
