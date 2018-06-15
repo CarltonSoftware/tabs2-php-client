@@ -377,6 +377,16 @@ class Property extends Builder
      * @var Collection|Booking[]
      */
     protected $bookings;
+    
+    /**
+     * @var \tabs\apiclient\BookingEnquiry
+     */
+    protected $enquiry;
+    
+    /**
+     * @var Collection|property\Answer[]
+     */
+    protected $answers;
 
     // -------------------------- Public Functions -------------------------- //
     
@@ -410,6 +420,7 @@ class Property extends Builder
             'supplier' => new Supplier(),
             'room' => new Room(),
             'target' => new Target(),
+            'answers' => new property\Answer(),
             'availablebreak' => new AvailableBreak()
         );
         
@@ -613,6 +624,26 @@ class Property extends Builder
         }
         
         return 0;
+    }
+    
+    /**
+     * Get a new booking enquiry for the property.
+     * 
+     * Dates will need to be added.  See booking enquiry example for 
+     * more details.
+     * 
+     * @return \tabs\apiclient\BookingEnquiry
+     */
+    public function getEnquiry()
+    {
+        if ($this->enquiry) {
+            return BookingEnquiry::factory($this->enquiry);
+        } else {
+            $be = new BookingEnquiry();
+            $be->setProperty($this);
+            
+            return $be;
+        }
     }
     
     /**
