@@ -159,6 +159,9 @@ trait FactoryTrait
         }
         
         foreach ($node as $key => $val) {
+            // Check/create collections if they exist
+            $obj->_check_collection_map($key);
+            
             $func = 'set' . ucfirst($key);
             if (!in_array($key, $exceptions)
                 && (property_exists($obj, $key) || method_exists($obj, $func))
@@ -265,33 +268,14 @@ trait FactoryTrait
                         && !$this->$property->isFetched()
                     ) {
                         self::_fetchCollection($this->$property);
-                    } else if (property_exists($this, 'COLLECTION_MAP')
-                        && array_key_exists($property, $this->COLLECTION_MAP)
-                        && !$this->$property
-                    ) {
-                        $cls = "\\tabs\\apiclient\\" . $this->COLLECTION_MAP[$property]['class'];
-                        $object = new $cls();
-                        if (isset($this->COLLECTION_MAP[$property]['parent']) 
-                            && $this->COLLECTION_MAP[$property]['parent'] === true
-                        ) {
-                            $this->$property = Collection::factory(
-                                $object->getCreateUrl(),
-                                $object,
-                                $this
-                            );
-                        } else {
-                            $this->$property = Collection::factory(
-                                $object
-                            );
-                        }
-
+                    } else if ($col = $this->_check_collection_map($property)) {
                         return $this->$property->fetch();
                     }
 
                     if ($this->$property instanceof StaticCollection) {
                         $this->$property->setAccessor($name);
                     }
-
+                    
                     return $this->$property;
                 }
             } else if ($this instanceof Link) {
@@ -318,6 +302,40 @@ trait FactoryTrait
         );
     }
     
+    /**
+     * Check a collection and create if necessary
+     * 
+     * @param string $collection Collection name/key
+     * 
+     * @return \tabs\apiclient\Collection|null
+     */
+    protected function _check_collection_map($collection)
+    {
+        if (property_exists($this, '__COLLECTION_MAP')
+            && array_key_exists($collection, $this->__COLLECTION_MAP)
+            && !$this->$collection
+        ) {
+            $cls = "\\tabs\\apiclient\\" . $this->__COLLECTION_MAP[$collection]['class'];
+            $object = new $cls();
+            if (isset($this->__COLLECTION_MAP[$collection]['parent']) 
+                && $this->__COLLECTION_MAP[$collection]['parent'] === true
+            ) {
+                $this->$collection = Collection::factory(
+                    $object->getCreateUrl(),
+                    $object,
+                    $this
+                );
+            } else {
+                $this->$collection = Collection::factory(
+                    $object
+                );
+            }
+            
+            return $this->$collection;
+        }
+    }
+
+
     /**
      * Test and fetch a collection
      * 

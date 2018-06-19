@@ -386,13 +386,13 @@ class Property extends Builder
     /**
      * @var array
      */
-    protected $COLLECTION_MAP = array(
+    protected $__COLLECTION_MAP = array(
         'documents' => array(
             'class' => 'property\\Document',
             'parent' => true
         ),
         'notes' => array(
-            'class' => 'PropertyNote',
+            'class' => 'note\\PropertyNote',
             'parent' => true
         ),
         'commissions' => array(
@@ -412,23 +412,23 @@ class Property extends Builder
             'parent' => true
         ),
         'inspections' => array(
-            'class' => 'Inspection',
+            'class' => 'property\\Inspection',
             'parent' => true
         ),
         'attributes' => array(
-            'class' => 'Attribute',
+            'class' => 'property\\Attribute',
             'parent' => true
         ),
         'comments' => array(
-            'class' => 'Comment',
+            'class' => 'property\\Comment',
             'parent' => true
         ),
-        'office' => array(
-            'class' => 'Office',
+        'offices' => array(
+            'class' => 'property\\Office',
             'parent' => true
         ),
-        'owner' => array(
-            'class' => 'Owner',
+        'owners' => array(
+            'class' => 'property\\Owner',
             'parent' => true
         ),
         'ownerpaymenttermss' => array(
@@ -436,19 +436,19 @@ class Property extends Builder
             'parent' => true
         ),
         'securitydeposits' => array(
-            'class' => 'SecurityDeposit',
+            'class' => 'property\\SecurityDeposit',
             'parent' => true
         ),
         'securityfeatures' => array(
-            'class' => 'SecurityFeature',
+            'class' => 'property\\SecurityFeature',
             'parent' => true
         ),
         'suppliers' => array(
-            'class' => 'Supplier',
+            'class' => 'property\\Supplier',
             'parent' => true
         ),
         'rooms' => array(
-            'class' => 'Room',
+            'class' => 'property\\Room',
             'parent' => true
         ),
         'answers' => array(
@@ -456,7 +456,7 @@ class Property extends Builder
             'parent' => true
         ),
         'availablebreaks' => array(
-            'class' => 'AvailableBreak',
+            'class' => 'property\\AvailableBreak',
             'parent' => true
         ),
         'bookings' => array(
@@ -586,7 +586,7 @@ class Property extends Builder
     ) {
         static $availablebreaksprices;
         if (!$availablebreaksprices) {
-            $availablebreaksprices = $this->availablebreaks;
+            $availablebreaksprices = $this->getCollection('availablebreaks');
         }
         
         

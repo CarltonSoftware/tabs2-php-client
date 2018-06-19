@@ -262,6 +262,8 @@ abstract class Base implements Collectionable
     {
         if ($this->$collection instanceof Collection) {
             return $this->$collection;
+        } else if ($col = $this->_check_collection_map($collection)) {
+            return $this->$collection;
         }
     }
 
