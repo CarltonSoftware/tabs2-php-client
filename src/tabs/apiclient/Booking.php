@@ -97,6 +97,12 @@ use tabs\apiclient\OwnerBookingType;
  * @method string getCheckouttime() Returns the checkouttime
  * @method Booking setCheckouttime(string $var) Sets the checkouttime
  *
+ * @method string getCheckintext() Returns the check in text
+ * @method Booking setCheckintext(string $var) Sets the check in text
+ *
+ * @method string getCheckouttext() Returns the check out text
+ * @method Booking setCheckouttext(string $var) Sets the check out text
+ *
  * @method string getPromotioncode() Returns the promotion code
  * @method Booking setPromotioncode(string $var) Sets the promotion code
  * 
@@ -323,6 +329,16 @@ class Booking extends Builder
      * @var string
      */
     protected $checkouttime = '';
+
+    /**
+     * @var string
+     */
+    protected $checkouttext = '';
+
+    /**
+     * @var string
+     */
+    protected $checkintext = '';
 
     /**
      * Promotion code

@@ -349,6 +349,16 @@ class Property extends Builder
      */
     protected $checkouttime = '';
     
+    /**
+     * @var string
+     */
+    protected $checkintext = '';
+    
+    /**
+     * @var string
+     */
+    protected $checkouttext = '';
+    
     /*
      * Primary booking brand (name)
      * 
@@ -367,6 +377,16 @@ class Property extends Builder
      * @var Collection|Booking[]
      */
     protected $bookings;
+    
+    /**
+     * @var \tabs\apiclient\BookingEnquiry
+     */
+    protected $enquiry;
+    
+    /**
+     * @var Collection|property\Answer[]
+     */
+    protected $answers;
 
     // -------------------------- Public Functions -------------------------- //
     
@@ -400,6 +420,7 @@ class Property extends Builder
             'supplier' => new Supplier(),
             'room' => new Room(),
             'target' => new Target(),
+            'answers' => new property\Answer(),
             'availablebreak' => new AvailableBreak()
         );
         
@@ -603,6 +624,29 @@ class Property extends Builder
         }
         
         return 0;
+    }
+    
+    /**
+     * Get a new booking enquiry for the property.
+     * 
+     * Dates will need to be added.  See booking enquiry example for 
+     * more details.
+     * 
+     * @return \tabs\apiclient\BookingEnquiry
+     */
+    public function getEnquiry()
+    {
+        if ($this->enquiry) {
+            $be = BookingEnquiry::factory($this->enquiry);
+            $be->setResponsedata($this->enquiry);
+            
+            return $be;
+        } else {
+            $be = new BookingEnquiry();
+            $be->setProperty($this);
+            
+            return $be;
+        }
     }
     
     /**
