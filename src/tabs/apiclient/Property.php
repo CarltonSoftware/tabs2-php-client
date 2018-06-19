@@ -637,7 +637,10 @@ class Property extends Builder
     public function getEnquiry()
     {
         if ($this->enquiry) {
-            return BookingEnquiry::factory($this->enquiry);
+            $be = BookingEnquiry::factory($this->enquiry);
+            $be->setResponsedata($this->enquiry);
+            
+            return $be;
         } else {
             $be = new BookingEnquiry();
             $be->setProperty($this);
