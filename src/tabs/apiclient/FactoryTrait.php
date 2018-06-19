@@ -238,40 +238,61 @@ trait FactoryTrait
 
             if (property_exists($this, $property)) {
                 switch (substr($name, 0, 2)) {
-                    case 'is':
-                        if (is_bool($this->$property)) {
-                            return ($this->$property === true);
-                        }
+                case 'is':
+                    if (is_bool($this->$property)) {
+                        return ($this->$property === true);
+                    }
                     break;
                 }
                 
                 switch (substr($name, 0, 3)) {
-                    case 'set':
-                        // Set the changes list
-                        $this->_addChange($property, $args[0]);
-                        
-                        $this->setObjectProperty($this, $property, $args[0]);
-                        return $this;
-                    case 'get':
-                        if ($this->$property instanceof Link) {
-                            $setter = 'set' . ucfirst($property);
-                            $that = $this;
-                            $callee = function($value) use ($setter, $that) {
-                                return $that->$setter($value);
-                            };
-                            
-                            $this->$property->setCallee($callee);
-                        } else if ($this->$property instanceof \tabs\apiclient\Collection 
-                            && !$this->$property->isFetched()
+                case 'set':
+                    // Set the changes list
+                    $this->_addChange($property, $args[0]);
+
+                    $this->setObjectProperty($this, $property, $args[0]);
+                    return $this;
+                case 'get':
+                    if ($this->$property instanceof Link) {
+                        $setter = 'set' . ucfirst($property);
+                        $that = $this;
+                        $callee = function($value) use ($setter, $that) {
+                            return $that->$setter($value);
+                        };
+
+                        $this->$property->setCallee($callee);
+                    } else if ($this->$property instanceof \tabs\apiclient\Collection 
+                        && !$this->$property->isFetched()
+                    ) {
+                        self::_fetchCollection($this->$property);
+                    } else if (property_exists($this, 'COLLECTION_MAP')
+                        && array_key_exists($property, $this->COLLECTION_MAP)
+                        && !$this->$property
+                    ) {
+                        $cls = "\\tabs\\apiclient\\" . $this->COLLECTION_MAP[$property]['class'];
+                        $object = new $cls();
+                        if (isset($this->COLLECTION_MAP[$property]['parent']) 
+                            && $this->COLLECTION_MAP[$property]['parent'] === true
                         ) {
-                            self::_fetchCollection($this->$property);
+                            $this->$property = Collection::factory(
+                                $object->getCreateUrl(),
+                                $object,
+                                $this
+                            );
+                        } else {
+                            $this->$property = Collection::factory(
+                                $object
+                            );
                         }
-                        
-                        if ($this->$property instanceof StaticCollection) {
-                            $this->$property->setAccessor($name);
-                        }
-                        
-                        return $this->$property;
+
+                        return $this->$property->fetch();
+                    }
+
+                    if ($this->$property instanceof StaticCollection) {
+                        $this->$property->setAccessor($name);
+                    }
+
+                    return $this->$property;
                 }
             } else if ($this instanceof Link) {
                 // TODO: Look at parent objects within the link object

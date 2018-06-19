@@ -382,6 +382,88 @@ class Property extends Builder
      * @var \tabs\apiclient\BookingEnquiry
      */
     protected $enquiry;
+    
+    /**
+     * @var array
+     */
+    protected $COLLECTION_MAP = array(
+        'documents' => array(
+            'class' => 'property\\Document',
+            'parent' => true
+        ),
+        'notes' => array(
+            'class' => 'PropertyNote',
+            'parent' => true
+        ),
+        'commissions' => array(
+            'class' => 'property\\Commission',
+            'parent' => true
+        ),
+        'marketingbrands' => array(
+            'class' => 'property\\MarketingBrand',
+            'parent' => true
+        ),
+        'bookingbrands' => array(
+            'class' => 'property\\BookingBrand',
+            'parent' => true
+        ),
+        'brandings' => array(
+            'class' => 'property\\Branding',
+            'parent' => true
+        ),
+        'inspections' => array(
+            'class' => 'Inspection',
+            'parent' => true
+        ),
+        'attributes' => array(
+            'class' => 'Attribute',
+            'parent' => true
+        ),
+        'comments' => array(
+            'class' => 'Comment',
+            'parent' => true
+        ),
+        'office' => array(
+            'class' => 'Office',
+            'parent' => true
+        ),
+        'owner' => array(
+            'class' => 'Owner',
+            'parent' => true
+        ),
+        'ownerpaymenttermss' => array(
+            'class' => 'OwnerPaymentTerms',
+            'parent' => true
+        ),
+        'securitydeposits' => array(
+            'class' => 'SecurityDeposit',
+            'parent' => true
+        ),
+        'securityfeatures' => array(
+            'class' => 'SecurityFeature',
+            'parent' => true
+        ),
+        'suppliers' => array(
+            'class' => 'Supplier',
+            'parent' => true
+        ),
+        'rooms' => array(
+            'class' => 'Room',
+            'parent' => true
+        ),
+        'answers' => array(
+            'class' => 'property\\Answer',
+            'parent' => true
+        ),
+        'availablebreaks' => array(
+            'class' => 'AvailableBreak',
+            'parent' => true
+        ),
+        'bookings' => array(
+            'class' => 'Booking',
+            'parent' => true
+        )
+    );
 
     // -------------------------- Public Functions -------------------------- //
     
@@ -396,39 +478,6 @@ class Property extends Builder
     {
         $this->address = new Address();
         $this->status = Status::factory(array('name' => 'New'));
-        
-        $collections = array(
-            'document' => new property\Document(),
-            'note' => new PropertyNote(),
-            'commission' => new property\Commission(),
-            'marketingbrand' => new property\MarketingBrand(),
-            'bookingbrand' => new property\BookingBrand(),
-            'branding' => new property\Branding(),
-            'inspection' => new Inspection(),
-            'attribute' => new Attribute(),
-            'comment' => new Comment(),
-            'offices' => new Office(),
-            'owner' => new Owner(),
-            'ownerpaymentterms' => new OwnerPaymentTerms(),
-            'securitydeposit' => new SecurityDeposit(),
-            'securityfeature' => new SecurityFeature(),
-            'supplier' => new Supplier(),
-            'room' => new Room(),
-            'target' => new Target(),
-            'availablebreak' => new AvailableBreak()
-        );
-        
-        foreach ($collections as $route => $obj) {
-            $prop = $route . 's';
-            
-            $this->$prop = Collection::factory(
-                $route,
-                $obj,
-                $this
-            );
-        }
-        
-        $this->bookings = Collection::factory(new Booking());
         
         parent::__construct($id);
     }
