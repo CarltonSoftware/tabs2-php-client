@@ -382,11 +382,6 @@ class Property extends Builder
      * @var \tabs\apiclient\BookingEnquiry
      */
     protected $enquiry;
-    
-    /**
-     * @var Collection|property\Answer[]
-     */
-    protected $answers;
 
     // -------------------------- Public Functions -------------------------- //
     
@@ -420,7 +415,6 @@ class Property extends Builder
             'supplier' => new Supplier(),
             'room' => new Room(),
             'target' => new Target(),
-            'answers' => new property\Answer(),
             'availablebreak' => new AvailableBreak()
         );
         
