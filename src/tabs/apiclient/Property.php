@@ -432,7 +432,7 @@ class Property extends Builder
             'parent' => true
         ),
         'ownerpaymenttermss' => array(
-            'class' => 'OwnerPaymentTerms',
+            'class' => 'property\\OwnerPaymentTerms',
             'parent' => true
         ),
         'securitydeposits' => array(
