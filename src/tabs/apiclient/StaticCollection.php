@@ -406,7 +406,10 @@ class StaticCollection implements \Iterator, \Countable
      * @return string
      */
     public function getPath()
-    {   
+    {
+        if (is_callable($this->path)) {
+            return call_user_func($this->path);
+        }
         return $this->path;
     }
     
