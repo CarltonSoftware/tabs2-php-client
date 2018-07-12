@@ -26,7 +26,7 @@ gulp.task('default', ['buildexamples'], function() {
 gulp.task('buildexamples', function() {
     
     if (fs.existsSync(dirs.input + '/sitemap.md')) {
-        fs.unlink(dirs.input + '/sitemap.md');
+        fs.unlink(dirs.input + '/sitemap.md', function() {});
     }
     
     Filehound.create().ext(
