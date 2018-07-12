@@ -384,9 +384,86 @@ class Property extends Builder
     protected $enquiry;
     
     /**
-     * @var Collection|property\Answer[]
+     * @var array
      */
-    protected $answers;
+    protected $__COLLECTION_MAP = array(
+        'documents' => array(
+            'class' => 'property\\Document',
+            'parent' => true
+        ),
+        'notes' => array(
+            'class' => 'note\\PropertyNote',
+            'parent' => true
+        ),
+        'commissions' => array(
+            'class' => 'property\\Commission',
+            'parent' => true
+        ),
+        'marketingbrands' => array(
+            'class' => 'property\\MarketingBrand',
+            'parent' => true
+        ),
+        'bookingbrands' => array(
+            'class' => 'property\\BookingBrand',
+            'parent' => true
+        ),
+        'brandings' => array(
+            'class' => 'property\\Branding',
+            'parent' => true
+        ),
+        'inspections' => array(
+            'class' => 'property\\Inspection',
+            'parent' => true
+        ),
+        'attributes' => array(
+            'class' => 'property\\Attribute',
+            'parent' => true
+        ),
+        'comments' => array(
+            'class' => 'property\\Comment',
+            'parent' => true
+        ),
+        'offices' => array(
+            'class' => 'property\\Office',
+            'parent' => true
+        ),
+        'owners' => array(
+            'class' => 'property\\Owner',
+            'parent' => true
+        ),
+        'ownerpaymenttermss' => array(
+            'class' => 'property\\OwnerPaymentTerms',
+            'parent' => true
+        ),
+        'securitydeposits' => array(
+            'class' => 'property\\SecurityDeposit',
+            'parent' => true
+        ),
+        'securityfeatures' => array(
+            'class' => 'property\\SecurityFeature',
+            'parent' => true
+        ),
+        'suppliers' => array(
+            'class' => 'property\\Supplier',
+            'parent' => true
+        ),
+        'rooms' => array(
+            'class' => 'property\\Room',
+            'parent' => true
+        ),
+        'answers' => array(
+            'class' => 'property\\Answer',
+            'parent' => true
+        ),
+        'availablebreaks' => array(
+            'class' => 'property\\AvailableBreak',
+            'parent' => true
+        ),
+        'bookings' => array(
+            'class' => 'Booking',
+            'parent' => true
+        )
+    );
 
     // -------------------------- Public Functions -------------------------- //
     
@@ -401,40 +478,6 @@ class Property extends Builder
     {
         $this->address = new Address();
         $this->status = Status::factory(array('name' => 'New'));
-        
-        $collections = array(
-            'document' => new property\Document(),
-            'note' => new PropertyNote(),
-            'commission' => new property\Commission(),
-            'marketingbrand' => new property\MarketingBrand(),
-            'bookingbrand' => new property\BookingBrand(),
-            'branding' => new property\Branding(),
-            'inspection' => new Inspection(),
-            'attribute' => new Attribute(),
-            'comment' => new Comment(),
-            'offices' => new Office(),
-            'owner' => new Owner(),
-            'ownerpaymentterms' => new OwnerPaymentTerms(),
-            'securitydeposit' => new SecurityDeposit(),
-            'securityfeature' => new SecurityFeature(),
-            'supplier' => new Supplier(),
-            'room' => new Room(),
-            'target' => new Target(),
-            'answers' => new property\Answer(),
-            'availablebreak' => new AvailableBreak()
-        );
-        
-        foreach ($collections as $route => $obj) {
-            $prop = $route . 's';
-            
-            $this->$prop = Collection::factory(
-                $route,
-                $obj,
-                $this
-            );
-        }
-        
-        $this->bookings = Collection::factory(new Booking());
         
         parent::__construct($id);
     }
@@ -543,7 +586,7 @@ class Property extends Builder
     ) {
         static $availablebreaksprices;
         if (!$availablebreaksprices) {
-            $availablebreaksprices = $this->availablebreaks;
+            $availablebreaksprices = $this->getCollection('availablebreaks');
         }
         
         

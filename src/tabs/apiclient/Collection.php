@@ -58,7 +58,7 @@ class Collection extends StaticCollection
             ) {
                 $this->getPagination()->setTotal($json->total);
                 $elements = $json->elements;
-            } else {
+            } else if (is_array($elements)) {
                 $this->setTotal(count($elements))->setLimit(count($elements));
             }
 

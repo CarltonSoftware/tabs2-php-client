@@ -52,131 +52,104 @@ use tabs\apiclient\extra\branding\Configuration;
 class Branding extends Builder
 {
     /**
-     * Branding
-     *
      * @var \tabs\apiclient\Branding
      */
     protected $branding;
 
     /**
-     * Branding group
-     *
      * @var \tabs\apiclient\BrandingGroup
      */
     protected $brandinggroup;
 
     /**
-     * Booking brand
-     *
      * @var BookingBrand
      */
     protected $bookingbrand;
 
     /**
-     * Marketing brand
-     *
      * @var MarketingBrand
      */
     public $marketingbrand;
 
     /**
-     * Primarybookingbrand
-     *
      * @var boolean
      */
     protected $primarybookingbrand;
 
     /**
-     * Primary branding
-     *
      * @var boolean
      */
     protected $primarybranding;
 
     /**
-     * Promote
-     *
      * @var boolean
      */
     protected $promote;
 
     /**
-     * Status
-     *
      * @var \tabs\apiclient\Status
      */
     protected $status;
     
     /**
-     * Collection of prices
-     * 
      * @var Collection|Price[]
      */
     protected $prices;
     
     /**
-     * Collection of extra prices
-     * 
      * @var Collection|Pricing[]
      */
     protected $extraprices;    
     
     /**
-     * Collection of extra configurations
-     * 
      * @var Collection|Configuration[]
      */
     protected $extraconfigurations;    
     
     /**
-     * Collection of change day templates
-     * 
      * @var Collection|ChangeDayTemplate[]
      */
     protected $changedaytemplates;       
     
     /**
-     * Collection of availability
-     * 
      * @var Collection|AvailableDay[]
      */
     protected $availableDays;
     
     /**
-     * Status history
-     * 
      * @var Collection|Status[]
      */
     protected $statuses;
     
     /**
-     * Special offers
-     * 
      * @var Collection|\tabs\apiclient\SpecialOffer[]
      */
     protected $specialoffers;
     
     /**
-     * Allowbookingonwebuntil
-     *
      * @var \DateTime
      */
     protected $allowbookingonwebuntil;
     
     /**
-     * Showpricingonwebuntil
-     *
      * @var \DateTime
      */
     protected $showpricingonwebuntil;
     
     /**
-     * Convertpotentialstoprovisionals
-     * 
      * @var boolean
      */
     protected $convertpotentialstoprovisionals;
     
+    /**
+     * @var array
+     */
+    protected $__COLLECTION_MAP = array(
+        'statuses' => array(
+            'class' => 'property\\branding\\Status',
+            'parent' => true
+        )
+    );
 
     // -------------------- Public Functions -------------------- //
     
@@ -190,36 +163,39 @@ class Branding extends Builder
             new Price,
             $this
         );
+        
         $this->extraprices = Collection::factory(
             'extrapricing', 
             new Pricing(), 
             $this
         );
+        
         $this->extraconfigurations = Collection::factory(
             'extraconfiguration', 
             new Configuration(), 
             $this
         );
+        
         $this->changedaytemplates = Collection::factory(
             'changedaytemplate', 
             new \tabs\apiclient\property\branding\ChangeDayTemplate(), 
             $this
-        );        
+        );
+        
         $this->availableDays = Collection::factory(
             'availability',
             new AvailableDay(),
             $this
         );
-        $this->status = Collection::factory(
-            'status',
-            new Status(),
-            $this
-        );
+        
         $this->specialoffers = Collection::factory(
             'specialoffer',
-            new \tabs\apiclient\SpecialOffer(),
-            $this
+            new \tabs\apiclient\SpecialOffer()
         );
+        
+        $this->specialoffers->setPath(function() {
+            return $this->getUpdateUrl() . '/specialoffer';
+        });
         
         $this->allowbookingonwebuntil = new \DateTime();
         $this->showpricingonwebuntil = new \DateTime();

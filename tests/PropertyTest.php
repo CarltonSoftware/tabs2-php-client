@@ -33,6 +33,31 @@ class PropertyTest extends ApiClientClassTest
     }
     
     /**
+     * Test the collections to make sure they are instantiating properly
+     */
+    public function testCollections()
+    {
+        $property = new \tabs\apiclient\Property(1);
+        foreach ($property->__COLLECTION_MAP as $key => $col) {
+            $this->assertInstanceOf(
+                '\tabs\apiclient\Collection',
+                $property->getCollection($key)
+            );
+            $this->assertInstanceOf(
+                'tabs\apiclient\\' . $col['class'],
+                $property->getCollection($key)->getElementClass()
+            );
+            
+            if (isset($col['parent']) && $col['parent'] === true) {
+                $this->assertEquals(
+                    $property,
+                    $property->getCollection($key)->getElementParent()
+                );
+            }
+        }
+    }
+    
+    /**
      * Test serialising a property using fields
      */
     public function testSerializationTwo()
