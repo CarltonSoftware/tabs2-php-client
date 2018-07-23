@@ -159,4 +159,17 @@ class Link extends Base
     {
         return $this->getLink();
     }
+    
+    /**
+     * Only store scalar values to avoid serialising the closure
+     * 
+     * @return array
+     */
+    public function __sleep()
+    {
+        return array(
+            'link',
+            'objectClass'
+        );
+    }
 }
