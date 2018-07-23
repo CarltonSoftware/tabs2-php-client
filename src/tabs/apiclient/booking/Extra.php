@@ -44,6 +44,9 @@ use tabs\apiclient\extra\branding\Configuration;
  * @method float getOwnerincome() Returns the ownerincome
  * @method Extra setOwnerincome(float $var) Sets the ownerincome
  * 
+ * @method \DateTime getCancelleddatetime() Returns the cancelleddatetime
+ * @method Extra setCancelleddatetime(\DateTime $var) Sets the cancelleddatetime
+ * 
  * @method Configuration getConfiguration() Returns the configuration
  */
 class Extra extends Builder
@@ -124,6 +127,13 @@ class Extra extends Builder
      * @var float
      */
     protected $ownerincome = 0;
+    
+    /**
+     * Cancelleddatetime
+     *
+     * @var \DateTime
+     */
+    protected $cancelleddatetime;    
     
     /**
      * Extra configuration

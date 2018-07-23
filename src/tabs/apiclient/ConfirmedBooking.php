@@ -15,6 +15,8 @@
 
 namespace tabs\apiclient;
 
+use \tabs\apiclient\TabsUser;
+
 /**
  * Tabs Rest API Confirmed Booking object.
  *
@@ -29,7 +31,7 @@ namespace tabs\apiclient;
  * @method \DateTime getDatetime()            Return the datetime
  * @method \DateTime getDepositpaiddate()     Return the deposit paid date
  * @method \DateTime getBalancepaiddate()     Return the balance paid date
- * @method TabsUser  getConfirmedbytabsuser() Return the confirming user
+ * @method \tabs\apiclient\TabsUser getConfirmedbytabsuser() Return the confirming user
  * 
  * @method ConfirmedBooking setDatetime(\DateTime $datetime) Set the datetime
  */
@@ -59,7 +61,7 @@ class ConfirmedBooking extends Base
     /**
      * Confirmed by tabs user
      *
-     * @var Tabsuser
+     * @var \tabs\apiclient\TabsUser
      */
     protected $confirmedbytabsuser;
         
@@ -116,13 +118,13 @@ class ConfirmedBooking extends Base
     /**
      * Set the confirming tabs user
      * 
-     * @param array|\stdClass|Tabsuser $tabsuser User
+     * @param array|\stdClass|\tabs\apiclient\TabsUser $tabsuser User
      * 
      * @return \tabs\apiclient\ConfirmedBooking
      */
     public function setConfirmedbytabsuser($tabsuser)
     {
-        $this->confirmedbytabsuser = Tabsuser::factory($tabsuser);
+        $this->confirmedbytabsuser = TabsUser::factory($tabsuser);
         
         return $this;
     }
@@ -135,7 +137,7 @@ class ConfirmedBooking extends Base
     public function toArray()
     {
         $arr = array();
-        if ($this->getConfirmedbytabsuser() instanceof Tabsuser) {
+        if ($this->getConfirmedbytabsuser() instanceof TabsUser) {
             $arr['tabsuserid'] = $this->getConfirmedbytabsuser()->getId();
         }
         
