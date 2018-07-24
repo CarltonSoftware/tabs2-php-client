@@ -95,6 +95,7 @@ class ContactDetail extends Builder
             new ContactPreference(),
             $this
         );
+        $this->invaliddatetime = new \DateTime();
         parent::__construct($id);
     }
 
@@ -103,18 +104,6 @@ class ContactDetail extends Builder
      */
     public function toArray()
     {
-        $arr = array(
-            'invalid' => $this->boolToStr($this->getInvalid()),
-            'comment' => $this->getComment(),
-            'contactmethodsubtype' => $this->getContactmethodsubtype(),
-            'invalidreason' => $this->getInvalidreason()
-        );
-        if ($this->invaliddatetime) {
-            $arr['invaliddatetime'] = $this->invaliddatetime->format(
-                'Y-m-d H:i:s'
-            );
-        }
-        
-        return $arr;
+        return $this->__toArray();
     }
 }

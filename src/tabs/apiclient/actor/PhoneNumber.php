@@ -73,6 +73,9 @@ class PhoneNumber extends ContactDetail
         );
     }
     
+    /**
+     * @inheritDoc
+     */
     public function __toString()
     {
         return implode(
