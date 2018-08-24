@@ -7,7 +7,6 @@ use tabs\apiclient\property\Attribute;
 use tabs\apiclient\property\Comment;
 use tabs\apiclient\property\Commission;
 use tabs\apiclient\property\Office;
-use tabs\apiclient\property\Owner;
 use tabs\apiclient\property\OwnerPaymentTerms;
 use tabs\apiclient\property\SecurityDeposit;
 use tabs\apiclient\property\SecurityFeature;
@@ -94,7 +93,7 @@ use tabs\apiclient\property\AvailableBreak;
  * 
  * @method Collection|Office[] getOffices() Get the property offices
  * 
- * @method Collection|Owner[] getOwners() Get the property owners
+ * @method Collection|property\Owner[] getOwners() Get the property owners
  * 
  * @method Collection|OwnerPaymentTerms[] getOwnerpaymenttermss() Get the property owner payment terms
  * 
@@ -261,7 +260,7 @@ class Property extends Builder
     /**
      * Property Owners
      * 
-     * @var Collection|Owner[]
+     * @var Collection|property\Owner[]
      */
     protected $owners;
     
