@@ -4,8 +4,6 @@
  * @name Subscribing to a webhook
  * 
  * This file documents how subscribe to a web hook. 
- * 
- * For demonstration purposes we are roughly calculating base url of the file.
  */
 
 require_once __DIR__ . '/../creating-a-new-connection.php';

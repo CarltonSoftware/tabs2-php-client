@@ -1,6 +1,6 @@
 # Add a security deposit
 
-This file documents how to remove a security deposit from a booking.
+This file documents how to add a security deposit from a booking.
 
 ```php
 

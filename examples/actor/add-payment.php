@@ -4,8 +4,6 @@
  * @name Adding a payment to a customer
  * 
  * This file documents how to add an actor payment with the Plato API.
- * 
- * If you have taken funds outside of tabs, you can add the funds to an actor account with the following method.
  */
 
 require_once __DIR__ . '/../creating-a-new-connection.php';

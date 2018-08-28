@@ -4,12 +4,6 @@
  * @name Creating a connection
  * 
  * The tabs2 php client is a library which helps you connect to your tabs2 api.
- * 
- * The client uses a singleton to create a connection, so you only need to initialise the connection once for each runtime call of your code.
- * 
- * You can create a new api connection using the following code. The factory method has five required parameters which are also explained below.
- * 
- * NOTE: Tabs Support will provide you with these details after authorisation from your client.
  */
 
 

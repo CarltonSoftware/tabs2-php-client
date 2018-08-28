@@ -4,8 +4,6 @@
  * @name Accessing booking data
  * 
  * This example details some of the basic properties on a booking.
- * 
- * The example lists links to perform some common tasks you might want to do such as creating a provisional booking, cancelling it and adding a customer.
  */
 
 require_once __DIR__ . '/../creating-a-new-connection.php';

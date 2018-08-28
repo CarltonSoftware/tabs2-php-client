@@ -4,8 +4,6 @@
  * @name Retrieving an available breaks price
  * 
  * This file demonstrates how to get a single price from the available breaks endpoint.
- * 
- * If no price is found or the property is not available, then zero will be returned.
  */
 
 require_once __DIR__ . '/../creating-a-new-connection.php';

@@ -4,10 +4,6 @@
  * @name Requesting property information
  * 
  * This file demonstrates how to request property information.  
- * 
- * Without the id query parameter, the example outputs a list of live properties for the first brand on the target api.
- * 
- * With the id, the example demonstrates how to request standard property information.
  */
 
 require_once __DIR__ . '/../creating-a-new-connection.php';
