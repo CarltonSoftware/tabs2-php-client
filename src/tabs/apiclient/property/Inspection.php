@@ -23,8 +23,8 @@ use tabs\apiclient\InspectionType;
  * @method \DateTime getReinspectiondate() Returns the reinspectiondate
  * @method Inspection setReinspectiondate(\DateTime $var) Sets the reinspectiondate
  * 
- * @method float getGrading() Returns the grading
- * @method Inspection setGrading(float $var) Sets the grading
+ * @method string getGrading() Returns the grading
+ * @method Inspection setGrading(string $var) Sets the grading
  * 
  * @method string getGradingunit() Returns the gradingunit
  * @method Inspection setGradingunit(string $var) Sets the gradingunit
@@ -58,7 +58,7 @@ class Inspection extends Builder
     /**
      * Grading
      *
-     * @var integer
+     * @var string
      */
     protected $grading;
 
