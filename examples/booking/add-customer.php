@@ -4,8 +4,6 @@
  * @name Adding a customer to a booking
  * 
  * This file documents how to add a customer to a Booking object.  You will need to create a new BookingCustomer as detailed in the booking below.
- * 
- * This example also demonstrates how to update the potential booking type.
  */
 
 require_once __DIR__ . '/../creating-a-new-connection.php';

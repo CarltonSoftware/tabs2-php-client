@@ -4,14 +4,6 @@
  * @name Tabs2 templates
  * 
  * Tabs2 has a templating system which you can use to send emails or generate pdfs which include booking/customer data. 
- * 
- * The templating system uses twig and you can see what fields are available to use with the Template::getFields method.
- * 
- * Each template governs what the data can be accesses (via its type), who the recipient can be (via the template target source).
- * 
- * Templates are generated from contact methods listed below.
- * 
- * This example will list what templates are available in the system.
  */
 
 require_once __DIR__ . '/../creating-a-new-connection.php';

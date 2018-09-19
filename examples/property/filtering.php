@@ -4,8 +4,6 @@
  * @name Filtering properties
  * 
  * In this example we're going to filter properties by using tabs2's filter syntax.
- * 
- * You will find all of the filter keywords in the [root](../root) endpoint.
  */
 
 require_once __DIR__ . '/../creating-a-new-connection.php';

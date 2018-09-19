@@ -4,12 +4,6 @@
  * @name Filtering by price
  * 
  * In this example we're going to filter properties by their brochure price.
- * 
- * You can use the `=`, `>`, `<` and `/` operators with this filter.
- * 
- * The `brochureprice` filter will search for properties which are available at a certain date.  
- * 
- * If a `fromdate` filter is not provided, then the the current date will be used.
  */
 
 require_once __DIR__ . '/../creating-a-new-connection.php';

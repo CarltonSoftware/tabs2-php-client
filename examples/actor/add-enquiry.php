@@ -22,8 +22,7 @@ if ($id = filter_input(INPUT_GET, 'id')) {
     $enq = new tabs\apiclient\actor\Enquiry();
     $enq->setAdults(2)
         ->setChildren(1)
-        ->setInfants(1)
-        ->setPets(0);
+        ->setInfants(1);
     $enq->setMarketingbrand($marketingBrands->first());
     $customer->getEnquiries()->addElement($enq);
     $enq->create();

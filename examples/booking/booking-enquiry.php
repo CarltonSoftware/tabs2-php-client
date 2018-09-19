@@ -4,8 +4,6 @@
  * @name Performing a booking enquiry
  * 
  * This file documents how to do a booking enquiry.  
- * 
- * You can also add adults, children, infants and pets to the enquiry (using the respective setter methods) to get a more specific price.
  */
 
 require_once __DIR__ . '/../creating-a-new-connection.php';

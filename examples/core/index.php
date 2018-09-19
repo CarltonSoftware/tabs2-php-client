@@ -4,8 +4,6 @@
  * @name Accessing core data
  * 
  * Much of the data in tabs2 has dependencies on common data such as Branding, Booking Brand or Mimetype for example.
- * 
- * Below is a list of some of the common data types in tabs2.  It is a good idea to cache these to reduce your api calls.
  */
 
 require_once __DIR__ . '/../creating-a-new-connection.php';

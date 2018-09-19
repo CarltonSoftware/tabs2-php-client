@@ -4,8 +4,6 @@
  * @name Adding an extra to a booking
  * 
  * This file documents how to add an extra onto a a Booking.  
- * 
- * The checkExtra method will throw an exception if the specified extra is not valid for the booking.
  */
 
 require_once __DIR__ . '/../creating-a-new-connection.php';

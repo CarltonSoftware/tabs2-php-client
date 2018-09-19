@@ -174,7 +174,7 @@ class Entity extends Builder
             'reference' => $this->getReference(),
             'contactdetailid' => $this->getContactdetail()->getId(),
             'contactdetailvalue' => $this->getContactdetailvalue(),
-            'perform_send' => $this->getPerformsend() === true ? 1 : 0
+            'perform_send' => $this->getPerformsend() === true ? 'true' : 'false'
         );
         
         if ($this->getCreatedbyactor()) {
