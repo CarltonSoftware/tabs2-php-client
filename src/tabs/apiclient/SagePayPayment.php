@@ -28,6 +28,7 @@ use tabs\apiclient\Base;
  * @method string         getFailureurl()            Returns the failure url
  * @method string         getPaymenttype()           Returns the payment type
  * @method boolean        getRepeatpayment()         Returns the repeat payment bool
+ * @method boolean        getBypassamountdue()       Returns the bypass amount due flag
  * 
  * @method SagePayPayment setBookingamount(float $var)         Sets the bookingamount
  * @method SagePayPayment setSecuritydepositamount(float $var) Sets the securitydepositamount
@@ -35,6 +36,7 @@ use tabs\apiclient\Base;
  * @method SagePayPayment setFailureurl(string $var)           Set failure url 
  * @method SagePayPayment setPaymenttype(string $var)          Set payment type
  * @method SagePayPayment setRepeatpayment(boolean $var)       Set the repeat payment flag
+ * @method SagePayPayment setBypassamountdue(boolean $var)     Set the bypass amount due flag
  * 
  * @method boolean getDonotconfirmbooking() Returns the donotconfirmbooking
  * @method Payment setDonotconfirmbooking(boolean $var) Sets the donotconfirmbooking
@@ -117,6 +119,13 @@ class SagePayPayment extends Base
      * @var boolean
      */
     protected $repeatpayment = false;
+    
+    /**
+     * Bypass amount due bool
+     * 
+     * @var boolean
+     */
+    protected $bypassamountdue = false;
     
     /**
      * Payment type.  Can be either PAYMENT OR DEFERRED.
@@ -249,6 +258,10 @@ class SagePayPayment extends Base
         
         if ($this->getSecuritydepositamount() > 0) {
             $arr['securitydepositamount'] = $this->getSecuritydepositamount();
+        }
+
+        if ($this->getBypassamountdue()) {
+            $arr['bypassamountdue'] = $this->boolToStr($this->getBypassamountdue());
         }
         
         return $arr;
