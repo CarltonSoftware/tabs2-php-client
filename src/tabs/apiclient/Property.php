@@ -650,7 +650,7 @@ class Property extends Builder
                 try {
                     $to = clone $fromDate;
                     for ($i = 0; $i < $weeks; $i++) {
-                        $to->add(new \DateInterval('P' . ($i * 7) . 'D'));
+                        $to->add(new \DateInterval('P7D'));
                         $getPrice($prices, $availablebreaksprices, $to, 7);
                     }
 

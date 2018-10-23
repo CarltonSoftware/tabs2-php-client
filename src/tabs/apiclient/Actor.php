@@ -410,15 +410,6 @@ abstract class Actor extends Builder
      */
     public function setPhonenumber($number, $type = 'Phone', $subtype = 'Main')
     {
-        foreach ($this->getContactdetails() as $cd) {
-            if ($cd instanceof PhoneNumber 
-                && $cd->getSubscribernumber() == $number
-            ) {
-                // Dont add a number if it already exists
-                return $this;
-            }
-        }
-        
         $contact = new \tabs\apiclient\actor\PhoneNumber();
         $code = '44';
         if (substr($number, 0, 1) == '+' && strlen($number) > 3) {
@@ -427,6 +418,15 @@ abstract class Actor extends Builder
         }
         
         $number = preg_replace("/[^0-9]/", '', $number);
+        
+        foreach ($this->getContactdetails() as $cd) {
+            if ($cd instanceof PhoneNumber 
+                && $cd->getSubscribernumber() == $number
+            ) {
+                // Dont add a number if it already exists
+                return $this;
+            }
+        }
 
         // TABS2-1613
         if ((substr($number, 0, 2) == '07' 

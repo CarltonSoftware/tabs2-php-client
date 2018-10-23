@@ -48,6 +48,9 @@ use tabs\apiclient\extra\branding\Configuration;
  * @method Collection|ChangeDayTemplate[] getChangedaytemplates Returns the change day templates
  * @method Collection|Pricing[] getExtraprices() Returns the property extra prices
  * @method Collection|Configuration[] getExtraconfigurations() Returns the property extra configurations
+ * 
+ * @method \DateTime getFromdate() Returns the status fromdate
+ * @method \DateTime gettodate() Returns the status todate
  */
 class Branding extends Builder
 {
@@ -142,6 +145,16 @@ class Branding extends Builder
     protected $convertpotentialstoprovisionals;
     
     /**
+     * @var \DateTime
+     */
+    protected $fromdate;
+    
+    /**
+     * @var \DateTime
+     */
+    protected $todate;    
+    
+    /**
      * @var array
      */
     protected $__COLLECTION_MAP = array(
@@ -199,6 +212,8 @@ class Branding extends Builder
         
         $this->allowbookingonwebuntil = new \DateTime();
         $this->showpricingonwebuntil = new \DateTime();
+        $this->fromdate = new \DateTime();
+        $this->todate = new \DateTime();
         
         parent::__construct($id);
     }
