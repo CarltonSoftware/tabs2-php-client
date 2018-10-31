@@ -20,22 +20,46 @@ use tabs\apiclient\Builder;
  * 
  * @method integer getAgeto() Returns the ageto
  * @method GuestAgeRange setAgeto(integer $var) Sets the ageto
+ * 
+ * @method string getAgerange() Returns the age range
+ * @method GuestAgeRange setAgerange(string $var) Sets the age range
  */
 class GuestAgeRange extends Builder
 {
     /**
-     * Agefrom
-     *
      * @var integer
      */
     protected $agefrom;
 
     /**
-     * Ageto
-     *
      * @var integer
      */
     protected $ageto;
+
+    /**
+     * @var string
+     */
+    protected $agerange;
+
+    /**
+     * @var integer
+     */
+    protected $agefrommonths;
+
+    /**
+     * @var integer
+     */
+    protected $agetomonths;
+
+    /**
+     * @var integer
+     */
+    protected $dblagefrom;
+
+    /**
+     * @var integer
+     */
+    protected $dbageto;
 
     // -------------------- Public Functions -------------------- //
 
@@ -53,16 +77,5 @@ class GuestAgeRange extends Builder
         }
         
         return implode(' - ', $args);
-    }
-    
-    /**
-     * @inheritDoc
-     */
-    public function toArray()
-    {
-        return array(
-            'agefrom' => $this->getAgefrom(),
-            'ageto' => $this->getAgeto(),
-        );
     }
 }
