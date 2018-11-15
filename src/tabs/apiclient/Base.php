@@ -28,8 +28,7 @@ namespace tabs\apiclient;
  * @copyright 2014 Carlton Software
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @link      http://www.carltonsoftware.co.uk
- * 
- * @method integer getId()            Returns the object id
+ *
  * @method Base    setId(integer $id) Sets the object id
  */
 abstract class Base implements Collectionable
@@ -37,14 +36,14 @@ abstract class Base implements Collectionable
     use StateTrait;
     use FactoryTrait;
     use DataTrait;
-    
+
     /**
      * Id
-     * 
+     *
      * @var integer
      */
     protected $id;
-    
+
     /**
      * Parent element
      *
@@ -106,22 +105,22 @@ abstract class Base implements Collectionable
     }
 
     // -------------------------- Public Functions -------------------------- //
-    
+
     /**
      * Constructor
-     * 
+     *
      * @param integer $id ID
-     * 
+     *
      * @return void
      */
     public function __construct($id = null)
     {
         $this->id = $id;
     }
-    
+
     /**
      * Get the object the non static extra
-     * 
+     *
      * @return self
      */
     public function get()
@@ -131,12 +130,12 @@ abstract class Base implements Collectionable
                 $this->getUpdateUrl()
             )
         );
-        
+
         self::setObjectProperties(
             $this,
             $this->responsedata
         );
-        
+
         return $this;
     }
 
@@ -181,10 +180,10 @@ abstract class Base implements Collectionable
 
         return $this;
     }
-    
+
     /**
      * Remove the parent
-     * 
+     *
      * @return \tabs\apiclient\Base
      */
     public function removeParent()
@@ -193,11 +192,11 @@ abstract class Base implements Collectionable
 
         return $this;
     }
-    
+
     /**
      * Enforce parent type.  Method should be overriden with a class name string
      * that will be evaluated with the instanceof operand.
-     * 
+     *
      * @return string
      */
     public function isParentInstanceType()
@@ -233,10 +232,10 @@ abstract class Base implements Collectionable
             return;
         }
     }
-    
+
     /**
      * ToString magic method
-     * 
+     *
      * @return string
      */
     public function __toString()
@@ -250,12 +249,12 @@ abstract class Base implements Collectionable
             return (string) $this->getId();
         }
     }
-    
+
     /**
      * Collection getter
-     * 
+     *
      * @param string $collection Collection name
-     * 
+     *
      * @return \tabs\apiclient\Collection|null
      */
     public function getCollection($collection)
@@ -301,14 +300,14 @@ abstract class Base implements Collectionable
         if ($this->getParent()) {
             $segments = $this->getParent()->updateUrl($segments);
         }
-        
+
         if (!$this->getId()) {
             throw new exception\Exception(
                 null,
                 'Parent ' . $this->getClass() . ' not initialised.'
             );
-        } 
-        
+        }
+
         return array_merge(
             $segments,
             array(
@@ -316,5 +315,15 @@ abstract class Base implements Collectionable
                 $this->getId()
             )
         );
+    }
+
+    /**
+     * Returns the object id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 }

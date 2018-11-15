@@ -19,39 +19,39 @@ namespace tabs\apiclient;
 trait FactoryTrait
 {
     // ------------------------- Public Functions ------------------------ //
-    
+
     /**
      * Array of changes
-     * 
+     *
      * @var array
      */
     protected $changes = array();
-    
+
     /**
      * Return the changes made to this object
-     * 
+     *
      * @return array
      */
     public function getChanges()
     {
         return $this->changes;
     }
-    
+
     /**
      * Reset changes
-     * 
+     *
      * @return $this
      */
     public function resetChanges()
     {
         $this->changes = array();
-        
+
         return $this;
     }
-    
+
     /**
      * Returns true if the object has been altered
-     * 
+     *
      * @return boolean
      */
     public function hasChanged()
@@ -61,10 +61,10 @@ trait FactoryTrait
 
     /**
      * Get the json
-     * 
+     *
      * @param \Psr\Http\Message\ResponseInterface $response Response
      * @param boolean                             $assoc    Array or not
-     * 
+     *
      * @return \stdClass|array
      */
     public static function getJson($response, $assoc = false)
@@ -86,10 +86,10 @@ trait FactoryTrait
 
         return $type[count($type) - 1];
     }
-    
+
     /**
      * Get the namespace class name
-     * 
+     *
      * @return string
      */
     public static function getFullClass()
@@ -113,16 +113,16 @@ trait FactoryTrait
         ) {
             return $element;
         }
-        
+
         // Do not set object if its a stdClass and is empty
-        if ($element instanceof \stdClass 
+        if ($element instanceof \stdClass
             && count(get_object_vars($element)) == 0
         ) {
             return null;
         }
-        
+
         $object = new static();
-        
+
         if (is_string($element)) {
             if (strlen($element) > 0) {
                 $link = new Link();
@@ -135,7 +135,7 @@ trait FactoryTrait
         }
 
         self::setObjectProperties($object, $element);
-        
+
         if ($parent && $object instanceof Base) {
             $object->setParent($parent);
         }
@@ -157,11 +157,11 @@ trait FactoryTrait
         if (method_exists($obj, 'setDormant')) {
             $obj->setDormant(false);
         }
-        
+
         foreach ($node as $key => $val) {
             // Check/create collections if they exist
             $obj->_check_collection_map($key);
-            
+
             $func = 'set' . ucfirst($key);
             if (!in_array($key, $exceptions)
                 && (property_exists($obj, $key) || method_exists($obj, $func))
@@ -169,7 +169,7 @@ trait FactoryTrait
                 $obj->$func($val);
             }
         }
-        
+
         if (method_exists($obj, 'setDormant')) {
             $obj->setDormant(true);
         }
@@ -193,8 +193,8 @@ trait FactoryTrait
         if (method_exists($this, $method)) {
             return true;
         }
-
-        if ((substr($method, 0, 3) == 'get' || substr($method, 0, 3) == 'set')
+        $prefix = substr($method, 0, 3);
+        if (($prefix === 'get' || $prefix === 'set')
             && property_exists($this, lcfirst(substr($method, 3)))
         ) {
             return true;
@@ -226,29 +226,30 @@ trait FactoryTrait
     public function __call($name, $args = array())
     {
         // This call method is only for accessors
-        if (strlen($name) > 2) {
-            
+        $nameLength = strlen($name);
+        if ($nameLength > 2) {
+
+            $prefix = substr($name, 0, 3);
             // Get the property
-            $property = substr($name, 3, strlen($name));
-            switch (substr($name, 0, 2)) {
-                case 'is':
-                    $property = substr($name, 2, strlen($name));
-                break;
+            if ($prefix === 'get' || $prefix === 'set') {
+                $property = substr($name, 3, $nameLength);
+            } else {
+                // Not get or set so assume 'is'
+                $property = substr($name, 2, $nameLength);
+                $prefix = substr($name, 0, 2);
             }
-            
+
             // All properties will be camelcase, make first letter lowercase
             $property = lcfirst($property);
 
             if (property_exists($this, $property)) {
-                switch (substr($name, 0, 2)) {
-                case 'is':
+                if ($prefix === 'is') {
                     if (is_bool($this->$property)) {
                         return ($this->$property === true);
                     }
-                    break;
                 }
-                
-                switch (substr($name, 0, 3)) {
+
+                switch ($prefix) {
                 case 'set':
                     // Set the changes list
                     $this->_addChange($property, $args[0]);
@@ -264,7 +265,7 @@ trait FactoryTrait
                         };
 
                         $this->$property->setCallee($callee);
-                    } else if ($this->$property instanceof \tabs\apiclient\Collection 
+                    } else if ($this->$property instanceof \tabs\apiclient\Collection
                         && !$this->$property->isFetched()
                     ) {
                         self::_fetchCollection($this->$property);
@@ -275,23 +276,23 @@ trait FactoryTrait
                     if ($this->$property instanceof StaticCollection) {
                         $this->$property->setAccessor($name);
                     }
-                    
+
                     return $this->$property;
                 }
             } else if ($this instanceof Link) {
                 // TODO: Look at parent objects within the link object
                 //$parent = $this->$property->getParent();
                 $that = $this->get();
-                
-                if ($that->$property instanceof \tabs\apiclient\Collection 
+
+                if ($that->$property instanceof \tabs\apiclient\Collection
                     && !$that->$property->isFetched()
                 ) {
                     $that->$property->setPath(
-                        $this->getLink() . '/' . $that->$property->getPath() 
+                        $this->getLink() . '/' . $that->$property->getPath()
                     );
                     self::_fetchCollection($that->$property);
                 }
-                
+
                 return $that->$name();
             }
         }
@@ -301,12 +302,12 @@ trait FactoryTrait
             'Unknown method called: ' . get_called_class() . ':' . $name
         );
     }
-    
+
     /**
      * Check a collection and create if necessary
-     * 
+     *
      * @param string $collection Collection name/key
-     * 
+     *
      * @return \tabs\apiclient\Collection|null
      */
     protected function _check_collection_map($collection)
@@ -317,7 +318,7 @@ trait FactoryTrait
         ) {
             $cls = "\\tabs\\apiclient\\" . $this->__COLLECTION_MAP[$collection]['class'];
             $object = new $cls();
-            if (isset($this->__COLLECTION_MAP[$collection]['parent']) 
+            if (isset($this->__COLLECTION_MAP[$collection]['parent'])
                 && $this->__COLLECTION_MAP[$collection]['parent'] === true
             ) {
                 $this->$collection = Collection::factory(
@@ -330,7 +331,7 @@ trait FactoryTrait
                     $object
                 );
             }
-            
+
             return $this->$collection;
         }
     }
@@ -338,14 +339,14 @@ trait FactoryTrait
 
     /**
      * Test and fetch a collection
-     * 
+     *
      * @param \tabs\apiclient\Collection &$collection Collection
-     * 
+     *
      * @return void
      */
-    public static function _fetchCollection(&$collection) 
+    public static function _fetchCollection(&$collection)
     {
-        if (!$collection->getElementParent() 
+        if (!$collection->getElementParent()
             || $collection->getElementParent()->getUpdateUrl()
         ) {
             $collection->fetch();
@@ -396,13 +397,13 @@ trait FactoryTrait
     {
         $this->_addChange($name, $value);
         $this->$name = $value;
-        
+
         return $this;
     }
-    
+
     /**
      * Return the changed array
-     * 
+     *
      * @return array
      */
     public function __toArray()
@@ -419,10 +420,10 @@ trait FactoryTrait
                 $arr[$key] = $val;
             }
         }
-        
+
         return $arr;
     }
-    
+
     // ------------------------- Protected Functions ------------------------ //
 
     /**
@@ -445,7 +446,7 @@ trait FactoryTrait
             if ($obj->$property instanceof \DateTime  && (!$value instanceof \DateTime)) {
                 //Special handling for DateTime fields
                 $obj->$property = new \DateTime($value);
-            } else if ($obj->$property instanceof \tabs\apiclient\StaticCollection 
+            } else if ($obj->$property instanceof \tabs\apiclient\StaticCollection
                 && (!$value instanceof \tabs\apiclient\StaticCollection)
                 && is_array($value)
             ) {
@@ -494,10 +495,10 @@ trait FactoryTrait
             $this->$varName = floatval($float);
         }
     }
-    
+
     /**
      * Dependancy checker for dormant state
-     * 
+     *
      * @return boolean
      */
     private function _isDormant()
@@ -508,19 +509,19 @@ trait FactoryTrait
             return true;
         }
     }
-    
+
     /**
      * Add a change to the log for a domant entity
-     * 
+     *
      * @param string $property Property name
      * @param mixed  $value    Value
-     * 
+     *
      * @return void
      */
     private function _addChange($property, $value)
     {
         if (property_exists($this, $property)
-            && $this->_isDormant() 
+            && $this->_isDormant()
             && (is_scalar($value) || $value instanceof \DateTime || $value instanceof Base)
         ) {
             $this->changes[$property] = $value;

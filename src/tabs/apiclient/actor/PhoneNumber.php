@@ -78,7 +78,7 @@ class PhoneNumber extends ContactDetail
      */
     public function __toString()
     {
-        return implode(
+        $number = implode(
             '',
             array(
                 '+',
@@ -86,5 +86,16 @@ class PhoneNumber extends ContactDetail
                 $this->getSubscribernumber()
             )
         );
+        if ($this->getCountrycode() === '44') {
+            return implode(
+                ' ',
+                [
+                    substr(str_replace('+44', '0', $number), 0, 5),
+                    substr(str_replace('+44', '0', $number), 5)
+                ]
+            );
+        }
+        
+        return $number;
     }
 }
