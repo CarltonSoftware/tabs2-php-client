@@ -14,35 +14,6 @@ use tabs\apiclient\Base;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \DateTime getDate() Returns the date
- * @method AvailableDay setDate(\DateTime $var) Sets the date
- * 
- * @method integer getDaysavailable() Returns the daysavailable
- * @method AvailableDay setDaysavailable(integer $var) Sets the daysavailable
- * 
- * @method boolean getIsfromdate() Returns the isfromdate
- * @method AvailableDay setIsfromdate(boolean $var) Sets the isfromdate
- * 
- * @method boolean getIstodate() Returns the istodate
- * @method AvailableDay setIstodate(boolean $var) Sets the istodate
- * 
- * @method \DateTime getEarliestbookingdate() Returns the earliestbookingdate
- * @method AvailableDay setEarliestbookingdate(\DateTime $var) Sets the earliestbookingdate
- * 
- * @method integer getMinimumholiday() Returns the minimumholiday
- * @method AvailableDay setMinimumholiday(integer $var) Sets the minimumholiday
- * 
- * @method integer getUnlessholidayatleast() Returns the unlessholidayatleast
- * @method AvailableDay setUnlessholidayatleast(integer $var) Sets the unlessholidayatleast
- * 
- * @method boolean getShowonavailability() Returns the showonavailability
- * @method AvailableDay setShowonavailability(boolean $var) Sets the showonavailability
- * 
- * @method boolean getPriceanchor() Returns the priceanchor
- * @method AvailableDay setPriceanchor(boolean $var) Sets the priceanchor
- * 
- * @method boolean getDayssincepriceanchor() Returns the days since priceanchor
- * @method AvailableDay setDayssincepriceanchor(boolean $var) Sets the days since priceanchor
  */
 class AvailableDay extends Base
 {
@@ -120,7 +91,7 @@ class AvailableDay extends Base
 
     /**
      * Constructor
-     * 
+     *
      * @return void
      */
     public function __construct()
@@ -146,5 +117,253 @@ class AvailableDay extends Base
             'priceanchor' => $this->boolToStr($this->getPriceanchor()),
             'dayssincepriceanchor' => $this->getDayssincepriceanchor()
         );
+    }
+
+    /**
+     * Returns the date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Returns the daysavailable
+     *
+     * @return integer
+     */
+    public function getDaysavailable()
+    {
+        return $this->daysavailable;
+    }
+
+    /**
+     * Returns the isfromdate
+     *
+     * @return boolean
+     */
+    public function getIsfromdate()
+    {
+        return $this->isfromdate;
+    }
+
+    /**
+     * Returns the istodate
+     *
+     * @return boolean
+     */
+    public function getIstodate()
+    {
+        return $this->istodate;
+    }
+
+    /**
+     * Returns the earliestbookingdate
+     *
+     * @return \DateTime
+     */
+    public function getEarliestbookingdate()
+    {
+        return $this->earliestbookingdate;
+    }
+
+    /**
+     * Returns the minimumholiday
+     *
+     * @return integer
+     */
+    public function getMinimumholiday()
+    {
+        return $this->minimumholiday;
+    }
+
+    /**
+     * Returns the unlessholidayatleast
+     *
+     * @return integer
+     */
+    public function getUnlessholidayatleast()
+    {
+        return $this->unlessholidayatleast;
+    }
+
+    /**
+     * Returns the showonavailability
+     *
+     * @return boolean
+     */
+    public function getShowonavailability()
+    {
+        return $this->showonavailability;
+    }
+
+    /**
+     * Returns the priceanchor
+     *
+     * @return boolean
+     */
+    public function getPriceanchor()
+    {
+        return $this->priceanchor;
+    }
+
+    /**
+     * Returns the the days since priceanchor
+     *
+     * @return boolean
+     */
+    public function getDayssincepriceanchor()
+    {
+        return $this->dayssincepriceanchor;
+    }
+    
+    /**
+     * Set the date
+     *
+     * @param string|\DateTime $date The date
+     *
+     * @return AvailableBreak
+     */
+    public function setDate($date)
+    {
+        if ($date instanceof \DateTime) {
+            $this->date = $date;
+        } else {
+            $this->date = new \DateTime($date);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Sets the daysavailable
+     *
+     * @param integer $var The daysavailable
+     *
+     * @return AvailableDay
+     */
+    public function setDaysavailable($var)
+    {
+        $this->daysavailable = $var;
+
+        return $this;
+    }
+
+    /**
+     * Sets the isfromdate
+     *
+     * @param boolean $var The isfromdate
+     *
+     * @return AvailableDay
+     */
+    public function setIsfromdate($var)
+    {
+        $this->isfromdate = $var;
+
+        return $this;
+    }
+
+    /**
+     * Sets the istodate
+     *
+     * @param boolean $var The istodate
+     *
+     * @return AvailableDay
+     */
+    public function setIstodate($var)
+    {
+        $this->istodate = $var;
+
+        return $this;
+    }
+
+    /**
+     * Set the earliestbookingdate
+     *
+     * @param string|\DateTime $earliestbookingdate The earliestbookingdate
+     *
+     * @return AvailableBreak
+     */
+    public function setEarliestbookingdate($earliestbookingdate)
+    {
+        if ($earliestbookingdate instanceof \DateTime) {
+            $this->earliestbookingdate = $earliestbookingdate;
+        } else {
+            $this->earliestbookingdate = new \DateTime($earliestbookingdate);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Sets the minimumholiday
+     *
+     * @param integer $var The minimumholiday
+     *
+     * @return AvailableDay
+     */
+    public function setMinimumholiday($var)
+    {
+        $this->minimumholiday = $var;
+
+        return $this;
+    }
+
+    /**
+     * Sets the unlessholidayatleast
+     *
+     * @param integer $var Sets the unlessholidayatleast
+     *
+     * @return AvailableDay
+     */
+    public function setUnlessholidayatleast($var)
+    {
+        $this->unlessholidayatleast = $var;
+
+        return $this;
+    }
+
+    /**
+     * Sets the showonavailability
+     *
+     * @param boolean $var The showonavailability
+     *
+     * @return AvailableDay
+     */
+    public function setShowonavailability($var)
+    {
+        $this->showonavailability = $var;
+
+        return $this;
+    }
+
+    /**
+     * Sets the priceanchor
+     *
+     * @param boolean $var The the priceanchor
+     *
+     * @return AvailableDay
+     */
+    public function setPriceanchor($var)
+    {
+        $this->priceanchor = $var;
+
+        return $this;
+    }
+
+    /**
+     * Sets the days since priceanchor
+     *
+     * @param integer $var The days since priceanchor
+     *
+     * @return AvailableDay
+     */
+    public function setDayssincepriceanchor($var)
+    {
+        $this->dayssincepriceanchor = $var;
+
+        return $this;
     }
 }

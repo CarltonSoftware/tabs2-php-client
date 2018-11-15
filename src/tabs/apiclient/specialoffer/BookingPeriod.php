@@ -15,11 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \DateTime getFromdate() Returns the fromdate \DateTime
- * @method BookingPeriod setFromdate(\DateTime $var) Sets the fromdate
- * 
- * @method \DateTime getTodate() Returns the todate \DateTime
- * @method BookingPeriod setTodate(\DateTime $var) Sets the todate
  */
 class BookingPeriod extends Builder
 {
@@ -56,4 +51,61 @@ class BookingPeriod extends Builder
     {
         return $this->__toArray();
     }
-}
+
+    /**
+     * Returns the from date
+     *
+     * @return /DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the from date
+     *
+     * @return /DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
+    }
+
+    /**
+     * Set the fromdate
+     *
+     * @param string|\DateTime $fromdate The Fromdate
+     *
+     * @return BookingPeriod
+     */
+    public function setFromdate($fromdate)
+    {
+        if ($fromdate instanceof \DateTime) {
+            $this->fromdate = $fromdate;
+        } else {
+            $this->fromdate = new \DateTime($fromdate);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set the todate
+     *
+     * @param string|\DateTime $todate The Todate
+     *
+     * @return BookingPeriod
+     */
+    public function setTodate($todate)
+    {
+        if ($todate instanceof \DateTime) {
+            $this->todate = $todate;
+        } else {
+            $this->todate = new \DateTime($todate);
+        }
+
+        return $this;
+    }
+
+ }

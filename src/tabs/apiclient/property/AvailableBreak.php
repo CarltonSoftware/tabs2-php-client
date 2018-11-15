@@ -14,17 +14,6 @@ use tabs\apiclient\Base;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \DateTime getFromdate() Returns the from date
- * @method AvailableBreak setFromdate(\DateTime $var) Sets the from date
- *
- * @method \DateTime getTodate() Returns the to date
- * @method AvailableBreak setTodate(\DateTime $var) Sets the to date
- * 
- * @method integer getDays() Returns the days
- * @method AvailableBreak setDays(integer $var) Sets the days
- * 
- * @method integer getPrice() Returns the price
- * @method AvailableBreak setPrice(integer $var) Sets the price
  */
 class AvailableBreak extends Base
 {
@@ -34,7 +23,7 @@ class AvailableBreak extends Base
      * @var \DateTime
      */
     protected $fromdate;
-    
+
     /**
      * To Date
      *
@@ -60,7 +49,7 @@ class AvailableBreak extends Base
 
     /**
      * Constructor
-     * 
+     *
      * @return void
      */
     public function __construct()
@@ -80,5 +69,109 @@ class AvailableBreak extends Base
             'days' => $this->getDays(),
             'price' => $this->getPrice()
         );
+    }
+
+    /**
+     * Returns the from date
+     *
+     * @return /DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the from date
+     *
+     * @return /DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
+    }
+
+    /**
+     * Returns the days
+     *
+     * @return integer
+     */
+    public function getDays()
+    {
+        return $this->days;
+    }
+
+    /**
+     * Returns the price
+     *
+     * @return integer
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set the fromdate
+     *
+     * @param string|\DateTime $fromdate The Fromdate
+     *
+     * @return AvailableBreak
+     */
+    public function setFromdate($fromdate)
+    {
+        if ($fromdate instanceof \DateTime) {
+            $this->fromdate = $fromdate;
+        } else {
+            $this->fromdate = new \DateTime($fromdate);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set the todate
+     *
+     * @param string|\DateTime $todate The Todate
+     *
+     * @return AvailableBreak
+     */
+    public function setTodate($todate)
+    {
+        if ($todate instanceof \DateTime) {
+            $this->todate = $todate;
+        } else {
+            $this->todate = new \DateTime($todate);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set the number of days
+     *
+     * @param integer $days The number of days
+     *
+     * @return AvailableBreak
+     */
+    public function setDays($days)
+    {
+        $this->days = $days;
+
+        return $this;
+    }
+
+    /**
+     * Set the price
+     *
+     * @param integer $price The price
+     *
+     * @return AvailableBreak
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
     }
 }

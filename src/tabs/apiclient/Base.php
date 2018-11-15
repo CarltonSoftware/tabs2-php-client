@@ -29,7 +29,6 @@ namespace tabs\apiclient;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method Base    setId(integer $id) Sets the object id
  */
 abstract class Base implements Collectionable
 {
@@ -325,5 +324,19 @@ abstract class Base implements Collectionable
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Sets the object id
+     *
+     * @param integer $id The id
+     *
+     * @return Base
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 }
