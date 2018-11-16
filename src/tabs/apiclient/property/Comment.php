@@ -4,6 +4,7 @@ namespace tabs\apiclient\property;
 
 use tabs\apiclient\Builder;
 use tabs\apiclient\Booking;
+use tabs\apiclient\property\comment\Metric;
 
 /**
  * Tabs Rest API Comment object.
@@ -32,6 +33,8 @@ use tabs\apiclient\Booking;
  * @method Comment setCreateddate(\DateTime $var) Sets the createddate
  * 
  * @method \tabs\apiclient\Booking getBooking() Returns the booking
+ * 
+ * @method Collection|Metric[] getMetric() Returns the metrics
  */
 class Comment extends Builder
 {
