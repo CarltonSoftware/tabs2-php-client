@@ -18,7 +18,6 @@ use tabs\apiclient\Collectionable;
  * @method string getDescription() Return the description
  * @method array  getOperators()   Return the operators
  * @method string getType()        Return the type
- * @method string getFilter()        Return the filter key
  *
  * @method Filter setDescription(string $str) Set the description
  * @method Filter setOperators(array $op)     Set the operators
@@ -89,5 +88,15 @@ class Filter implements Collectionable
     public function getEndpoint()
     {
         return $this->endpoint;
+    }
+
+    /**
+     * Return the filter key
+     *
+     * @return string
+     */
+    public function getFilter()
+    {
+        return $this->filter;
     }
 }

@@ -33,17 +33,17 @@ use tabs\apiclient\exception\Exception;
 class StaticCollection implements \Iterator, \Countable
 {
     use StateTrait;
-    
+
     /**
      * Element class
-     * 
+     *
      * @var Base
      */
     protected $elementClass;
-    
+
     /**
      * Path class
-     * 
+     *
      * @var string
      */
     protected $path;
@@ -68,34 +68,34 @@ class StaticCollection implements \Iterator, \Countable
      * @var Pagination
      */
     protected $pagination;
-    
+
     /**
      * Discriminator
-     * 
+     *
      * @var string|boolean
      */
     protected $discriminator = false;
-    
+
     /**
      * Accessor. Stores what property the collection is mapped too in Base class
      * objects;
-     * 
+     *
      * @var string
      */
     protected $accessor;
-    
+
     /**
      * Discriminator map
-     * 
+     *
      * @var array
      */
     protected $discriminatorMap = array();
 
     // ------------------ Static Functions --------------------- //
-    
+
     /**
      * Factory method for the collection
-     * 
+     *
      * @return StaticCollection
      */
     public static function factory()
@@ -104,45 +104,45 @@ class StaticCollection implements \Iterator, \Countable
         $args = func_get_args();
         $path = '';
         $element = null;
-        
+
         if (count($args) == 1) {
             $element = func_get_arg(0);
-            
+
             if ($element instanceof Collectionable) {
                 $path = $element->getCreateUrl();
             }
         } else if (count($args) > 1) {
             $first = array_shift($args);
             $last = array_pop($args);
-            
+
             // Handle 2 args (Object, Parent)
-            if ($first instanceof Collectionable 
+            if ($first instanceof Collectionable
                 && $last instanceof Collectionable
                 && count($args) == 0
             ) {
                 $parent = $last;
                 $path = $first->getCreateUrl();
                 $element = $first;
-                
+
             // Handle 2 args (path, Object)
-            } else if (is_string($first) 
-                && $last instanceof Collectionable 
+            } else if (is_string($first)
+                && $last instanceof Collectionable
                 && count($args) == 0
             ) {
                 $path = $first;
                 $element = $last;
-                
+
             // Handle 2 args (path, Object as string)
-            } else if (is_string($first) 
+            } else if (is_string($first)
                 && is_string($last)
                 && count($args) == 0
             ) {
                 $path = $first;
                 $element = $last;
-                
+
             // Handle 3 args (path, Object, Parent)
-            } else if (is_string($first) 
-                && $last instanceof Collectionable 
+            } else if (is_string($first)
+                && $last instanceof Collectionable
                 && count($args) == 1
             ) {
                 $path = $first;
@@ -150,20 +150,20 @@ class StaticCollection implements \Iterator, \Countable
                 $element = func_get_arg(1);
             }
         }
-        
+
         if (is_string($element)) {
             $element = new $element;
         }
-        
+
         $collection = new static();
         $collection->setPath($path)
             ->setPathOverridden(false)
             ->setElementClass($element);
-        
+
         if ($parent) {
             $collection->setElementParent($parent);
         }
-        
+
         return $collection;
     }
 
@@ -178,22 +178,22 @@ class StaticCollection implements \Iterator, \Countable
     {
         $this->pagination = new Pagination();
     }
-    
+
     /**
      * Get the pagination
-     * 
+     *
      * @return Pagination
      */
     public function getPagination()
     {
         return $this->pagination;
     }
-    
+
     /**
      * Set the element class
-     * 
+     *
      * @param string|Base $class Class
-     * 
+     *
      * @return StaticCollection
      */
     public function setElementClass($class)
@@ -201,15 +201,15 @@ class StaticCollection implements \Iterator, \Countable
         if (is_string($class)) {
             $class = new $class;
         }
-        
+
         $this->elementClass = $class;
-        
+
         return $this;
     }
-    
+
     /**
      * Get the element class
-     * 
+     *
      * @return string|Base
      */
     public function getElementClass()
@@ -230,44 +230,44 @@ class StaticCollection implements \Iterator, \Countable
 
         return $this;
     }
-    
+
     /**
      * Get the element parent
-     * 
+     *
      * @return Builder
      */
     public function getElementParent()
     {
         return $this->elementParent;
     }
-    
+
     /**
      * Set the accessor
-     * 
+     *
      * @param string $accessor
-     * 
+     *
      * @return StaticCollection
      */
     public function setAccessor($accessor)
     {
         $this->accessor = $accessor;
-        
+
         return $this;
     }
-    
+
     /**
      * Return the accessor
-     * 
+     *
      * @return string
      */
     public function getAccessor()
     {
         return $this->accessor;
     }
-    
+
     /**
      * Return the collection of elements
-     * 
+     *
      * @return \tabs\apiclient\Base[]
      */
     public function getElements()
@@ -299,28 +299,28 @@ class StaticCollection implements \Iterator, \Countable
      * @return StaticCollection
      */
     public function addElement(&$element)
-    {     
+    {
         if (!$element instanceof Collectionable) {
             // Get collection class by checking for discriminator map
             $collectionClass = $this->_getCollectionClass($element);
-            
+
             if ($element instanceof \stdClass) {
                 $data = $element;
             }
-            
+
             // Instatiate new element by calling factory method
             $element = $collectionClass::factory($element);
-            
+
             if (!empty($data) && $element instanceof Base) {
                 $element->setResponsedata($data);
             }
         }
-        
+
         if ($this->getElementParent()) {
             $parent = $this->getElementParent();
             $element->setParent($parent);
         }
-        
+
         $this->elements[] = $element;
 
         return $this;
@@ -384,25 +384,25 @@ class StaticCollection implements \Iterator, \Countable
     {
         return $this->getElements();
     }
-    
+
     /**
      * Set the collection path
-     * 
+     *
      * @param string $path Path
-     * 
+     *
      * @return StaticCollection
      */
     public function setPath($path)
-    {   
+    {
         $this->path = $path;
         $this->setPathOverridden(true);
-        
+
         return $this;
     }
-    
+
     /**
      * Get the collection path
-     * 
+     *
      * @return string
      */
     public function getPath()
@@ -412,12 +412,12 @@ class StaticCollection implements \Iterator, \Countable
         }
         return $this->path;
     }
-    
+
     /**
      * Sort the local collection using uasort
-     * 
+     *
      * @param callable $cmp Compare function
-     * 
+     *
      * @return \tabs\apiclient\StaticCollection
      */
     public function sort($cmp)
@@ -425,19 +425,19 @@ class StaticCollection implements \Iterator, \Countable
         $elements = $this->getElements();
         uasort($elements, $cmp);
         $this->elements = $elements;
-        
+
         return $this;
     }
-    
+
     /**
      * Get the collection class.
-     * 
+     *
      * If a discriminator is present attempt to look for a mapped class to return.
-     * 
+     *
      * @param stdClass $element Json element
-     * 
+     *
      * @return string
-     * 
+     *
      * @throws Exception
      */
     private function _getCollectionClass($element)
@@ -446,14 +446,14 @@ class StaticCollection implements \Iterator, \Countable
             $discr = $this->getDiscriminator();
             if (property_exists($element, $discr)) {
                 $map = $this->getDiscriminatorMap();
-                
+
                 if (!array_key_exists($element->$discr, $map)) {
                     throw new Exception(
                         null,
                         'Discrimator type not mapped in collection element'
                     );
                 }
-                
+
                 return $map[$element->$discr];
             } else {
                 throw new Exception(
@@ -462,62 +462,62 @@ class StaticCollection implements \Iterator, \Countable
                 );
             }
         }
-        
+
         if ($this->getElementClass() instanceof Base) {
             return $this->getElementClass()->getFullClass();
         }
-        
+
         return $this->getElementClass();
     }
-    
+
     /**
      * Discriminator
-     * 
+     *
      * @return boolean|string
      */
     public function getDiscriminator()
     {
         return $this->discriminator;
     }
-    
+
     /**
      * Set the Discriminator
-     * 
+     *
      * @param string $dis Discriminator
-     * 
+     *
      * @return StaticCollection
      */
     public function setDiscriminator($dis)
     {
         $this->discriminator = $dis;
-        
+
         return $this;
     }
-    
+
     /**
      * Class discriminator map.
-     * 
+     *
      * @return array
      */
     public function getDiscriminatorMap()
     {
         return $this->discriminatorMap;
     }
-    
+
     /**
      * Set the disciminator map
-     * 
+     *
      * @param array $map Map
-     * 
+     *
      * @return StaticCollection
      */
     public function setDiscriminatorMap(array $map = array())
     {
         $this->discriminatorMap = $map;
-        
+
         return $this;
     }
-    
+
     /**
      * @deprecated Deprecated in favour of filter()
      */
@@ -525,12 +525,12 @@ class StaticCollection implements \Iterator, \Countable
     {
         return $this->filter($fn);
     }
-    
+
     /**
      * Find an element or elements using a particular callback
-     * 
+     *
      * @param \tabs\apiclient\callable $fn Function
-     * 
+     *
      * @return \tabs\apiclient\StaticCollection
      */
     public function filter(callable $fn)
@@ -543,26 +543,26 @@ class StaticCollection implements \Iterator, \Countable
         );
         $col->setElements(array_filter($this->getElements(), $fn));
         $col->setTotal(count($col->getElements()));
-        
+
         return $col;
     }
-    
+
     /**
      * Shift an element from the collection
-     * 
+     *
      * @return \tabs\apiclient\Base
      */
     public function shift()
     {
         $ele = array_shift($this->elements);
         $this->_updateShiftPopTotal();
-        
+
         return $ele;
     }
-    
+
     /**
      * Pop an element from the collection
-     * 
+     *
      * @return \tabs\apiclient\Base
      */
     public function pop()
@@ -571,10 +571,10 @@ class StaticCollection implements \Iterator, \Countable
         $this->_updateShiftPopTotal();
         return $ele;
     }
-    
+
     /**
      * Update the pagination total after a shift/pop call
-     * 
+     *
      * @return void
      */
     private function _updateShiftPopTotal()
@@ -583,13 +583,13 @@ class StaticCollection implements \Iterator, \Countable
             $this->getTotal() > 0 ? $this->getTotal() - 1 : 0
         );
     }
-    
+
     /**
      * Slice the collection
-     * 
+     *
      * @param integer      $offset Offset
      * @param integer|null $length Length
-     * 
+     *
      * @return \tabs\apiclient\StaticCollection
      */
     public function slice($offset, $length = null)
@@ -602,27 +602,27 @@ class StaticCollection implements \Iterator, \Countable
         );
         $col->setElements(array_slice($this->getElements(), $offset, $length));
         $col->getPagination()->setTotal(count($col->getElements()));
-        
+
         return $col;
     }
-    
+
     /**
      * Mapping function
-     * 
+     *
      * @param \tabs\apiclient\callable $fn Callable map
-     * 
+     *
      * @return array
      */
     public function map(callable $fn)
     {
         return array_map($fn, $this->getElements());
     }
-    
+
     /**
      * Map to a collection
-     * 
+     *
      * @param \tabs\apiclient\callable $fn Map function
-     * 
+     *
      * @return \tabs\apiclient\StaticCollection
      */
     public function mapToCollection(callable $fn)
@@ -635,10 +635,10 @@ class StaticCollection implements \Iterator, \Countable
         $col->setTotal(count($elements));
         return $col;
     }
-    
+
     /**
      * Return the local entity ids
-     * 
+     *
      * @return array
      */
     public function getEntityIds()
@@ -651,25 +651,27 @@ class StaticCollection implements \Iterator, \Countable
 
     /**
      * Find an element by its id
-     * 
+     *
      * @param string $id Id
-     * 
+     *
      * @return Base
      */
     public function findById($id)
     {
-        $col = $this->findBy(function($ele) use ($id) {
-            return $ele->getId() == $id;
-        });
-        
-        return $col->first();
+        foreach ($this->elements as $ele) {
+            if ($id == $ele->getId()){
+                return $ele;
+            }
+        }
+
+        return null;
     }
-    
+
     /**
      * Update a specific element in the collection
-     * 
+     *
      * @param Base $element Element
-     * 
+     *
      * @return $this
      */
     public function updateElement(Base $element)
@@ -679,7 +681,7 @@ class StaticCollection implements \Iterator, \Countable
                 $this->elements[$index] = $element;
             }
         }
-        
+
         return $this;
     }
 
@@ -707,7 +709,7 @@ class StaticCollection implements \Iterator, \Countable
 
     /**
      * Returns the current key
-     * 
+     *
      * @return mixed
      */
     public function key()
@@ -718,7 +720,7 @@ class StaticCollection implements \Iterator, \Countable
 
     /**
      * Return the next element
-     * 
+     *
      * @return mixed
      */
     public function next()
@@ -729,14 +731,14 @@ class StaticCollection implements \Iterator, \Countable
 
     /**
      * Check whether the current item is valid or not
-     * 
+     *
      * @return boolean
      */
     public function valid()
     {
         return key($this->elements) !== null;
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -744,10 +746,10 @@ class StaticCollection implements \Iterator, \Countable
     {
         return count($this->elements, $mode);
     }
-    
+
     /**
      * Return the first element
-     * 
+     *
      * @return Base|null
      */
     public function first()
@@ -756,10 +758,10 @@ class StaticCollection implements \Iterator, \Countable
             return $this->elements[0];
         }
     }
-    
+
     /**
      * Return the last element
-     * 
+     *
      * @return Base|null
      */
     public function last()
@@ -768,12 +770,12 @@ class StaticCollection implements \Iterator, \Countable
             return $this->elements[count($this->elements) - 1];
         }
     }
-    
+
     /**
      * Return a specific element
-     * 
+     *
      * @param type $index
-     * 
+     *
      * @return Base|null
      */
     public function get($index)
@@ -781,28 +783,28 @@ class StaticCollection implements \Iterator, \Countable
         if (isset($this->elements[$index])) {
             return $this->elements[$index];
         }
-        
+
         return null;
     }
-    
+
     /**
      * Remove the element parent
-     * 
+     *
      * @return \tabs\apiclient\StaticCollection
      */
     public function removeElementParent()
     {
         $this->elementParent = null;
-        
+
         return $this;
     }
-    
+
     /**
      * Return an assoc array
-     * 
+     *
      * @param string          $key   Key
      * @param string|callable $value Value
-     * 
+     *
      * @return array
      */
     public function toAssocArray($key, $value)
@@ -814,7 +816,7 @@ class StaticCollection implements \Iterator, \Countable
             } else {
                 $k = $element->$key;
             }
-            
+
             if (is_callable($value)) {
                 $assoc[$k] = call_user_func($value, $element);
             } else {
@@ -825,13 +827,13 @@ class StaticCollection implements \Iterator, \Countable
                 }
             }
         }
-        
+
         return $assoc;
     }
-    
+
     /**
      * Reset the collection to its unfetched state
-     * 
+     *
      * @return \tabs\apiclient\StaticCollection
      */
     public function reset()
@@ -839,13 +841,13 @@ class StaticCollection implements \Iterator, \Countable
         $this->elements = array();
         $this->setTotal(0);
         $this->setFetched(false);
-        
+
         return $this;
     }
-    
+
     /**
      * For serialisation
-     * 
+     *
      * @return array
      */
     public function __sleep()
@@ -861,7 +863,7 @@ class StaticCollection implements \Iterator, \Countable
             'states',
             'elements'
         );
-        
+
         return $properties;
     }
 }

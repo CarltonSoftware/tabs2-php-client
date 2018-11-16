@@ -242,6 +242,7 @@ trait FactoryTrait
             // All properties will be camelcase, make first letter lowercase
             $property = lcfirst($property);
 
+            //var_dump(get_class($this) . ' ' . $name . ' ' . $this->getId());
             if (property_exists($this, $property)) {
                 if ($prefix === 'is') {
                     if (is_bool($this->$property)) {

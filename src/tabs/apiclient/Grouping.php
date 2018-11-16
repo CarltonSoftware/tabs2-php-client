@@ -14,10 +14,9 @@ use tabs\apiclient\Builder;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
- * 
- * @method string   getName() Returns the name
+ *
  * @method Grouping setName(string $var) Sets the name
- * 
+ *
  * @method Grouping getParentgrouping() Get the parent grouping
  */
 class Grouping extends Builder
@@ -35,16 +34,16 @@ class Grouping extends Builder
      * @var Grouping
      */
     protected $parentgrouping;
-    
+
     /**
      * Grouping values
-     * 
+     *
      * @var Collection|GroupingValue[]
      */
     protected $groupingvalue;
 
     // -------------------- Public Functions -------------------- //
-    
+
     /**
      * @inheritDoc
      */
@@ -55,21 +54,21 @@ class Grouping extends Builder
             new GroupingValue,
             $this
         );
-        
+
         parent::__construct($id);
     }
-    
+
     /**
      * Set the parent grouping
-     * 
+     *
      * @param array|stdClass|Grouping $grp Parent grouping
-     * 
+     *
      * @return Grouping
      */
     public function setParentgrouping($grp)
     {
         $this->parentgrouping = self::factory($grp);
-        
+
         return $this;
     }
 
@@ -81,11 +80,21 @@ class Grouping extends Builder
         $arr = array(
             'name' => $this->getName()
         );
-        
+
         if ($this->getParentgrouping()) {
             $arr['parentgroupingid'] = $this->getParentgrouping()->getId();
         }
-        
+
         return $arr;
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string Returns the name
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 }
