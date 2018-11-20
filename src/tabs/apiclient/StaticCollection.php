@@ -102,63 +102,60 @@ class StaticCollection implements \Iterator, \Countable
     {
         $parent = null;
         $args = func_get_args();
+        $argsIsString = array();
+        $argsIsCollectionable = array();
         $path = '';
         $element = null;
-
-        if (count($args) == 1) {
-            $element = func_get_arg(0);
-
-            if ($element instanceof Collectionable) {
-                $path = $element->getCreateUrl();
-            }
-        } else if (count($args) > 1) {
-            $first = array_shift($args);
-            $last = array_pop($args);
-
-            // Handle 2 args (Object, Parent)
-            if ($first instanceof Collectionable
-                && $last instanceof Collectionable
-                && count($args) == 0
-            ) {
-                $parent = $last;
-                $path = $first->getCreateUrl();
-                $element = $first;
-
-            // Handle 2 args (path, Object)
-            } else if (is_string($first)
-                && $last instanceof Collectionable
-                && count($args) == 0
-            ) {
-                $path = $first;
-                $element = $last;
-
-            // Handle 2 args (path, Object as string)
-            } else if (is_string($first)
-                && is_string($last)
-                && count($args) == 0
-            ) {
-                $path = $first;
-                $element = $last;
-
-            // Handle 3 args (path, Object, Parent)
-            } else if (is_string($first)
-                && $last instanceof Collectionable
-                && count($args) == 1
-            ) {
-                $path = $first;
-                $parent = $last;
-                $element = func_get_arg(1);
-            }
+        foreach ($args as $arg) {
+            $isString = is_string($arg);
+            $isCollectionable = $isString ? false : $arg instanceof Collectionable;
+            $argsIsString[] = $isString;
+            $argsIsCollectionable[] = $isCollectionable;
         }
 
-        if (is_string($element)) {
-            $element = new $element;
+        switch (count($args)) {
+            case 1:
+                $element = $args[0];
+                if ($argsIsCollectionable[0]) {
+                    $path = $element->getCreateUrl();
+                }
+                break;
+            case 2:
+                // Handle 2 args (Object, Parent)
+                if ($argsIsCollectionable[0] && $argsIsCollectionable[1]) {
+                    $parent = $args[1];
+                    $path = $args[0]->getCreateUrl();
+                    $element = $args[0];
+                    if ($argsIsString[0]) {
+                        $element = new $element;
+                    }
+                } else {
+                // Handle 2 args (path, Object)
+                // or
+                // Handle 2 args (path, Object as string)
+                    $path = $args[0];
+                    $element = $args[1];
+                    if ($argsIsString[1]) {
+                        $element = new $element;
+                    }
+                }
+                break;
+            case 3:
+                // Handle 3 args (path, Object, Parent)
+                if ($argsIsString[0] && $argsIsCollectionable[2]) {
+                    $path = $args[0];
+                    $parent = $args[2];
+                    $element = $args[1];
+                    if ($argsIsString[1]) {
+                        $element = new $element;
+                    }
+                }
+                break;
         }
 
         $collection = new static();
-        $collection->setPath($path)
-            ->setPathOverridden(false)
-            ->setElementClass($element);
+        $collection->path = $path;
+        $collection->elementClass = $element;
 
         if ($parent) {
             $collection->setElementParent($parent);
