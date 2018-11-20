@@ -75,6 +75,9 @@ use tabs\apiclient\OwnerChargeCode;
  * 
  * @method SecurityDeposit setDescription(string $var) Set the description
  * @method string          getDescription()            Get the description
+ *
+ * @method SecurityDeposit setDefaultforperiod(boolean $var) Set defaultforperiod
+ * @method boolean         getDefaultforperiod()             Get defaultforperiod
  */
 class SecurityDeposit extends Builder
 {
@@ -177,21 +180,21 @@ class SecurityDeposit extends Builder
     protected $pricingperiod;
 
     /**
-     * Minimumdays
+     * Minimum days
      *
      * @var integer
      */
     protected $minimumdays;
 
     /**
-     * Maximumdays
+     * Maximum days
      *
      * @var integer
      */
     protected $maximumdays;
 
     /**
-     * Maximumdaysbeforeholiday
+     * Maximum days before holiday
      *
      * @var integer
      */
@@ -205,19 +208,26 @@ class SecurityDeposit extends Builder
     protected $comments;
 
     /**
-     * Ownerchargecode
+     * Owner charge code
      *
      * @var OwnerChargeCode
      */
     protected $ownerchargecode;
 
     /**
-     * Ownerchargeamount
+     * Owner charge amount
      *
      * @var integer
      */
     protected $ownerchargeamount;
     
+    /**
+     * Default for period?
+     *
+     * @var boolean
+     */
+    protected $defaultforperiod;
+
     /**
      * Description
      * 
