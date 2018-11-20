@@ -163,10 +163,12 @@ trait FactoryTrait
             $obj->_check_collection_map($key);
 
             $func = 'set' . ucfirst($key);
-            if (!in_array($key, $exceptions)
-                && (property_exists($obj, $key) || method_exists($obj, $func))
-            ) {
-                $obj->$func($val);
+            if (!in_array($key, $exceptions)) {
+                if (method_exists($obj, $func)) {
+                    $obj->$func($val);
+                } elseif (property_exists($obj, $key) ) {
+                    $obj->setObjectProperty($obj, $key, $val);
+                }
             }
         }
 
@@ -242,7 +244,6 @@ trait FactoryTrait
             // All properties will be camelcase, make first letter lowercase
             $property = lcfirst($property);
 
-            //var_dump(get_class($this) . ' ' . $name . ' ' . $this->getId());
             if (property_exists($this, $property)) {
                 if ($prefix === 'is') {
                     if (is_bool($this->$property)) {
@@ -302,6 +303,25 @@ trait FactoryTrait
             null,
             'Unknown method called: ' . get_called_class() . ':' . $name
         );
+    }
+
+    function generateCallTrace()
+    {
+        $e = new \Exception();
+        $trace = explode("\n", $e->getTraceAsString());
+        // reverse array to make steps line up chronologically
+        $trace = array_reverse($trace);
+        array_shift($trace); // remove {main}
+        array_pop($trace); // remove call to this method
+        $length = count($trace);
+        $result = array();
+
+        for ($i = 0; $i < $length; $i++)
+        {
+            $result[] = ($i + 1)  . ')' . substr($trace[$i], strpos($trace[$i], ' ')); // replace '#someNum' with '$i)', set the right ordering
+        }
+
+        return "\t" . implode("\n\t", $result);
     }
 
     /**
@@ -521,8 +541,8 @@ trait FactoryTrait
      */
     private function _addChange($property, $value)
     {
-        if (property_exists($this, $property)
-            && $this->_isDormant()
+        if ($this->_isDormant()
+            && property_exists($this, $property)
             && (is_scalar($value) || $value instanceof \DateTime || $value instanceof Base)
         ) {
             $this->changes[$property] = $value;
