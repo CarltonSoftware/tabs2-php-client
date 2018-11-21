@@ -16,16 +16,12 @@ use tabs\apiclient\Collection;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method string getName()             Returns the name
  * @method Unit   setName(string $name) Sets the name
  * 
- * @method string getDescription()             Returns the desc
  * @method Unit   setDescription(string $desc) Sets the desc
  * 
- * @method string getDecimalplaces()                Returns the decimal places
  * @method Unit   setDecimalplaces(string $decimal) Sets the decimal places
  * 
- * @method Collection|PerUnit[] getPerunits() Get the PerUnit settings
  */
 class Unit extends Builder
 {
@@ -84,5 +80,45 @@ class Unit extends Builder
             'description' => $this->getDescription(),
             'decimalplaces' => $this->getDecimalplaces()
         );
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the desc
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Returns the decimal places
+     *
+     * @return string
+     */
+    public function getDecimalplaces()
+    {
+        return $this->decimalplaces;
+    }
+
+    /**
+     * Get the PerUnit settings
+     *
+     * @return Collection|PerUnit[]
+     */
+    public function getPerunits()
+    {
+        return $this->perunits;
     }
 }

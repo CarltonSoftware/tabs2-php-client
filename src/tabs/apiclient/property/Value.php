@@ -15,10 +15,8 @@ use tabs\apiclient\Base;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method string getBoolean()                 Returns the boolean
  * @method Value  setBoolean(boolean $boolean) Sets the boolean
  * 
- * @method string getNumber()                Returns the number
  * @method Value  setNumber(boolean $number) Sets the number
  */
 class Value extends Base
@@ -101,5 +99,25 @@ class Value extends Base
         } else {
             return $this->boolToStr($this->boolean) . '|' . $this->number;
         }
+    }
+
+    /**
+     * Returns the boolean
+     *
+     * @return string
+     */
+    public function getBoolean()
+    {
+        return $this->boolean;
+    }
+
+    /**
+     * Returns the number
+     *
+     * @return string
+     */
+    public function getNumber()
+    {
+        return $this->number;
     }
 }

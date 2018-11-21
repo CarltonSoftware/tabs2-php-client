@@ -15,8 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\BookingBrand getBookingbrand() Returns the bookingbrand
- * @method \tabs\apiclient\KeyCheckReason getDefaultkeycheckreason() Returns the defaultkeycheckreason
  */
 class KeysBookingBrand extends Builder
 {
@@ -73,5 +71,25 @@ class KeysBookingBrand extends Builder
             'bookingbrandid' => $this->getBookingbrand()->getId(),
             'defaultkeycheckreasonid' => $this->getDefaultkeycheckreason()->getId(),
         );
+    }
+
+    /**
+     * Returns the bookingbrand
+     *
+     * @return \tabs\apiclient\BookingBrand
+     */
+    public function getBookingbrand()
+    {
+        return $this->bookingbrand;
+    }
+
+    /**
+     * Returns the defaultkeycheckreason
+     *
+     * @return \tabs\apiclient\KeyCheckReason
+     */
+    public function getDefaultkeycheckreason()
+    {
+        return $this->defaultkeycheckreason;
     }
 }

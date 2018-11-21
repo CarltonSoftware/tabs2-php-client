@@ -16,23 +16,16 @@ use tabs\apiclient\Vatband;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getName() Returns the name
  * @method Service setName(string $var) Sets the name
  * 
- * @method string getDescription() Returns the description
  * @method Service setDescription(string $var) Sets the description
  * 
- * @method boolean getDonotmodify() Returns the donotmodify
  * @method Service setDonotmodify(boolean $var) Sets the donotmodify
  * 
- * @method Vatband getVatband() Returns the vatband
- * @method string getDatetouse() Returns the datetouse
  * @method Service setDatetouse(string $var) Sets the datetouse
  * 
- * @method boolean getCustomerbookings() Returns the customerbookings
  * @method Service setCustomerbookings(boolean $var) Sets the customerbookings
  * 
- * @method boolean getOwnerbookings() Returns the ownerbookings
  * @method Service setOwnerbookings(boolean $var) Sets the ownerbookings
  * 
  */
@@ -117,5 +110,75 @@ class Service extends Builder
             'customerbookings' => $this->boolToStr($this->getCustomerbookings()),
             'ownerbookings' => $this->boolToStr($this->getOwnerbookings()),
         );
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Returns the donotmodify
+     *
+     * @return boolean
+     */
+    public function getDonotmodify()
+    {
+        return $this->donotmodify;
+    }
+
+    /**
+     * Returns the vatband
+     *
+     * @return Vatband
+     */
+    public function getVatband()
+    {
+        return $this->vatband;
+    }
+
+    /**
+     * Returns the datetouse
+     *
+     * @return string
+     */
+    public function getDatetouse()
+    {
+        return $this->datetouse;
+    }
+
+    /**
+     * Returns the customerbookings
+     *
+     * @return boolean
+     */
+    public function getCustomerbookings()
+    {
+        return $this->customerbookings;
+    }
+
+    /**
+     * Returns the ownerbookings
+     *
+     * @return boolean
+     */
+    public function getOwnerbookings()
+    {
+        return $this->ownerbookings;
     }
 }

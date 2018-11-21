@@ -16,19 +16,14 @@ use tabs\apiclient\InstructionType;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \DateTime getFromdate() Returns the fromdate
  * @method Instruction setFromdate(\DateTime $var) Sets the fromdate
  * 
- * @method \DateTime getTodate() Returns the todate
  * @method Instruction setTodate(\DateTime $var) Sets the todate
  * 
- * @method string getInstructiontext() Returns the instructiontext
  * @method Instruction setInstructiontext(string $var) Sets the instructiontext
  * 
- * @method boolean getHtml() Returns the html
  * @method Instruction setHtml(boolean $var) Sets the html
  * 
- * @method InstructionType getInstructiontype() Returns the instructiontype
  */
 class Instruction extends Builder
 {
@@ -106,5 +101,55 @@ class Instruction extends Builder
             'html' => $this->boolToStr($this->getHtml()),
             'instructiontypeid' => $this->getInstructiontype()->getId()
         );
+    }
+
+    /**
+     * Returns the fromdate
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the todate
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
+    }
+
+    /**
+     * Returns the instructiontext
+     *
+     * @return string
+     */
+    public function getInstructiontext()
+    {
+        return $this->instructiontext;
+    }
+
+    /**
+     * Returns the html
+     *
+     * @return boolean
+     */
+    public function getHtml()
+    {
+        return $this->html;
+    }
+
+    /**
+     * Returns the instructiontype
+     *
+     * @return InstructionType
+     */
+    public function getInstructiontype()
+    {
+        return $this->instructiontype;
     }
 }

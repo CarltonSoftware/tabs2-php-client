@@ -15,11 +15,8 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\OwnerPaymentTerms getOwnerpaymentterms() Returns the ownerpaymentterms
- * @method \DateTime getFromdate() Returns the fromdate
  * @method OwnerPaymentTerms setFromdate(\DateTime $var) Sets the fromdate
  * 
- * @method \DateTime getTodate() Returns the todate
  * @method OwnerPaymentTerms setTodate(\DateTime $var) Sets the todate
  * 
  */
@@ -84,5 +81,35 @@ class OwnerPaymentTerms extends Builder
             'fromdate' => $this->getFromdate()->format('Y-m-d'),
             'todate' => $this->getTodate()->format('Y-m-d')
         );
+    }
+
+    /**
+     * Returns the ownerpaymentterms
+     *
+     * @return \tabs\apiclient\OwnerPaymentTerms
+     */
+    public function getOwnerpaymentterms()
+    {
+        return $this->ownerpaymentterms;
+    }
+
+    /**
+     * Returns the fromdate
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the todate
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
     }
 }

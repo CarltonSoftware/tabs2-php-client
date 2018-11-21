@@ -13,15 +13,11 @@ namespace tabs\apiclient;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method boolean getAroard() Returns the abroad boolean
  * @method Owner   setAbroad(boolean $var) Sets the abroad boolean
  * 
- * @method boolean getEnquirer() Returns the enquirer boolean
  * @method Owner   setEnquirer(boolean $var) Sets the enquirer boolean
  * 
- * @method \tabs\apiclient\Branding getBranding() Returns the owner branding
  * 
- * @method \tabs\apiclient\Source getSource() Returns the source
  */
 class Owner extends Actor
 {
@@ -132,5 +128,45 @@ class Owner extends Actor
         }
         
         return $arr;
+    }
+
+    /**
+     * Returns the abroad boolean
+     *
+     * @return boolean
+     */
+    public function getAroard()
+    {
+        return $this->aroard;
+    }
+
+    /**
+     * Returns the enquirer boolean
+     *
+     * @return boolean
+     */
+    public function getEnquirer()
+    {
+        return $this->enquirer;
+    }
+
+    /**
+     * Returns the owner branding
+     *
+     * @return \tabs\apiclient\Branding
+     */
+    public function getBranding()
+    {
+        return $this->branding;
+    }
+
+    /**
+     * Returns the source
+     *
+     * @return \tabs\apiclient\Source
+     */
+    public function getSource()
+    {
+        return $this->source;
     }
 }

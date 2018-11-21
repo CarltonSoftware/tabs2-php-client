@@ -14,10 +14,8 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method string       getSaleschannel()             Returns the short name
  * @method SalesChannel setSaleschannel(string $code) Sets the short name
  * 
- * @method string       getDescription()             Returns the description
  * @method SalesChannel setDescription(string $code) Sets the description
  */
 class SalesChannel extends Builder
@@ -48,5 +46,25 @@ class SalesChannel extends Builder
             'saleschannel' => $this->getSaleschannel(),
             'description' => $this->getDescription()
         );
+    }
+
+    /**
+     * Returns the short name
+     *
+     * @return string
+     */
+    public function getSaleschannel()
+    {
+        return $this->saleschannel;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

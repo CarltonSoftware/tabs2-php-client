@@ -15,12 +15,8 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method Role getRole() Returns the role
- * @method Reason getReason() Returns the reason
- * @method boolean getDonotdelete() Returns the donotdelete
  * @method RoleReason setDonotdelete(boolean $var) Sets the donotdelete
  * 
- * @method boolean getRequired() Returns the required
  * @method RoleReason setRequired(boolean $var) Sets the required
  */
 class RoleReason extends Builder
@@ -94,5 +90,45 @@ class RoleReason extends Builder
             'donotdelete' => $this->boolToStr($this->getDonotdelete()),
             'required' => $this->boolToStr($this->getRequired()),
         );
+    }
+
+    /**
+     * Returns the role
+     *
+     * @return Role
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * Returns the reason
+     *
+     * @return Reason
+     */
+    public function getReason()
+    {
+        return $this->reason;
+    }
+
+    /**
+     * Returns the donotdelete
+     *
+     * @return boolean
+     */
+    public function getDonotdelete()
+    {
+        return $this->donotdelete;
+    }
+
+    /**
+     * Returns the required
+     *
+     * @return boolean
+     */
+    public function getRequired()
+    {
+        return $this->required;
     }
 }

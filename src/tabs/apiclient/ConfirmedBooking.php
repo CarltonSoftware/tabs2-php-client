@@ -28,10 +28,6 @@ use \tabs\apiclient\TabsUser;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \DateTime getDatetime()            Return the datetime
- * @method \DateTime getDepositpaiddate()     Return the deposit paid date
- * @method \DateTime getBalancepaiddate()     Return the balance paid date
- * @method \tabs\apiclient\TabsUser getConfirmedbytabsuser() Return the confirming user
  * 
  * @method ConfirmedBooking setDatetime(\DateTime $datetime) Set the datetime
  */
@@ -144,4 +140,44 @@ class ConfirmedBooking extends Base
         return $arr;
     }
     
+
+    /**
+     * Return the datetime
+     *
+     * @return \DateTime
+     */
+    public function getDatetime()
+    {
+        return $this->datetime;
+    }
+
+    /**
+     * Return the deposit paid date
+     *
+     * @return \DateTime
+     */
+    public function getDepositpaiddate()
+    {
+        return $this->depositpaiddate;
+    }
+
+    /**
+     * Return the balance paid date
+     *
+     * @return \DateTime
+     */
+    public function getBalancepaiddate()
+    {
+        return $this->balancepaiddate;
+    }
+
+    /**
+     * Return the confirming user
+     *
+     * @return \tabs\apiclient\TabsUser
+     */
+    public function getConfirmedbytabsuser()
+    {
+        return $this->confirmedbytabsuser;
+    }
 }

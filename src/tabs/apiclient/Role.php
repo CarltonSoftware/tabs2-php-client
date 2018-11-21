@@ -15,10 +15,8 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getName() Returns the name
  * @method Role setName(string $var) Sets the name
  * 
- * @method boolean getDonotdelete() Returns the donotdelete
  * @method Role setDonotdelete(boolean $var) Sets the donotdelete
  */
 class Role extends Builder
@@ -48,5 +46,25 @@ class Role extends Builder
             'name' => $this->getName(),
             'donotdelete' => $this->boolToStr($this->getDonotdelete())
         );
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the donotdelete
+     *
+     * @return boolean
+     */
+    public function getDonotdelete()
+    {
+        return $this->donotdelete;
     }
 }

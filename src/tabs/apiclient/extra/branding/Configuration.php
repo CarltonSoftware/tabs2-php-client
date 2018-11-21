@@ -15,56 +15,38 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \DateTime getFromdate() Returns the fromdate
  * @method Configuration setFromdate(\DateTime $var) Sets the fromdate
  * 
- * @method \DateTime getTodate() Returns the todate
  * @method Configuration setTodate(\DateTime $var) Sets the todate
  * 
- * @method boolean getCompulsory() Returns the compulsory
  * @method Configuration setCompulsory(boolean $var) Sets the compulsory
  * 
- * @method boolean getIncluded() Returns the included
  * @method Configuration setIncluded(boolean $var) Sets the included
  * 
- * @method integer getDecimalplaces() Returns the decimalplaces
  * @method Configuration setDecimalplaces(integer $var) Sets the decimalplaces
  * 
- * @method boolean getPayagency() Returns the payagency
  * @method Configuration setPayagency(boolean $var) Sets the payagency
  * 
- * @method boolean getPayowner() Returns the payowner
  * @method Configuration setPayowner(boolean $var) Sets the payowner
  * 
- * @method boolean getVisibletoowner() Returns the visibletoowner
  * @method Configuration setVisibletoowner(boolean $var) Sets the visibletoowner
  * 
- * @method boolean getVisibletocustomer() Returns the visibletocustomer
  * @method Configuration setVisibletocustomer(boolean $var) Sets the visibletocustomer
  * 
- * @method \tabs\apiclient\Vatband getVatband() Returns the vatband
- * @method boolean getCustomerselectable() Returns the customerselectable
  * @method Configuration setCustomerselectable(boolean $var) Sets the customerselectable
  * 
- * @method boolean getPriceoverrideallowed() Returns the priceoverrideallowed
  * @method Configuration setPriceoverrideallowed(boolean $var) Sets the priceoverrideallowed
  * 
- * @method integer getDefaultquantity() Returns the defaultquantity
  * @method Configuration setDefaultquantity(integer $var) Sets the defaultquantity
  * 
- * @method boolean getQuantityoverrideallowed() Returns the quantityoverrideallowed
  * @method Configuration setQuantityoverrideallowed(boolean $var) Sets the quantityoverrideallowed
  * 
- * @method integer getMaximumquantity() Returns the maximumquantity
  * @method Configuration setMaximumquantity(integer $var) Sets the maximumquantity
  * 
- * @method boolean getUsepropertyprimarybranding() Returns the usepropertyprimarybranding
  * @method Configuration setUsepropertyprimarybranding(boolean $var) Sets the usepropertyprimarybranding
  * 
- * @method boolean getChangesbrochureprice() Returns the changesbrochureprice
  * @method Configuration setChangesbrochureprice(boolean $var) Sets the changesbrochureprice
  * 
- * @method \tabs\apiclient\Property getProperty() Returns the property
  */
 class Configuration extends Builder
 {
@@ -265,4 +247,184 @@ class Configuration extends Builder
             
             return $arr;
 	}
+
+    /**
+     * Returns the fromdate
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the todate
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
+    }
+
+    /**
+     * Returns the compulsory
+     *
+     * @return boolean
+     */
+    public function getCompulsory()
+    {
+        return $this->compulsory;
+    }
+
+    /**
+     * Returns the included
+     *
+     * @return boolean
+     */
+    public function getIncluded()
+    {
+        return $this->included;
+    }
+
+    /**
+     * Returns the decimalplaces
+     *
+     * @return integer
+     */
+    public function getDecimalplaces()
+    {
+        return $this->decimalplaces;
+    }
+
+    /**
+     * Returns the payagency
+     *
+     * @return boolean
+     */
+    public function getPayagency()
+    {
+        return $this->payagency;
+    }
+
+    /**
+     * Returns the payowner
+     *
+     * @return boolean
+     */
+    public function getPayowner()
+    {
+        return $this->payowner;
+    }
+
+    /**
+     * Returns the visibletoowner
+     *
+     * @return boolean
+     */
+    public function getVisibletoowner()
+    {
+        return $this->visibletoowner;
+    }
+
+    /**
+     * Returns the visibletocustomer
+     *
+     * @return boolean
+     */
+    public function getVisibletocustomer()
+    {
+        return $this->visibletocustomer;
+    }
+
+    /**
+     * Returns the vatband
+     *
+     * @return \tabs\apiclient\Vatband
+     */
+    public function getVatband()
+    {
+        return $this->vatband;
+    }
+
+    /**
+     * Returns the customerselectable
+     *
+     * @return boolean
+     */
+    public function getCustomerselectable()
+    {
+        return $this->customerselectable;
+    }
+
+    /**
+     * Returns the priceoverrideallowed
+     *
+     * @return boolean
+     */
+    public function getPriceoverrideallowed()
+    {
+        return $this->priceoverrideallowed;
+    }
+
+    /**
+     * Returns the defaultquantity
+     *
+     * @return integer
+     */
+    public function getDefaultquantity()
+    {
+        return $this->defaultquantity;
+    }
+
+    /**
+     * Returns the quantityoverrideallowed
+     *
+     * @return boolean
+     */
+    public function getQuantityoverrideallowed()
+    {
+        return $this->quantityoverrideallowed;
+    }
+
+    /**
+     * Returns the maximumquantity
+     *
+     * @return integer
+     */
+    public function getMaximumquantity()
+    {
+        return $this->maximumquantity;
+    }
+
+    /**
+     * Returns the usepropertyprimarybranding
+     *
+     * @return boolean
+     */
+    public function getUsepropertyprimarybranding()
+    {
+        return $this->usepropertyprimarybranding;
+    }
+
+    /**
+     * Returns the changesbrochureprice
+     *
+     * @return boolean
+     */
+    public function getChangesbrochureprice()
+    {
+        return $this->changesbrochureprice;
+    }
+
+    /**
+     * Returns the property
+     *
+     * @return \tabs\apiclient\Property
+     */
+    public function getProperty()
+    {
+        return $this->property;
+    }
 }

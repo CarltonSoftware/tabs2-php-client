@@ -15,10 +15,8 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getTiggerevent() Returns the tiggerevent string
  * @method TriggerEvent setTiggerevent(string $var) Sets the tiggerevent
  * 
- * @method string getEventdescription() Returns the eventdescription string
  * @method TriggerEvent setEventdescription(string $var) Sets the eventdescription
  */
 class TriggerEvent extends Builder
@@ -45,5 +43,25 @@ class TriggerEvent extends Builder
     public function toArray()
     {
         return $this->__toArray();
+    }
+
+    /**
+     * Returns the tiggerevent string
+     *
+     * @return string
+     */
+    public function getTiggerevent()
+    {
+        return $this->tiggerevent;
+    }
+
+    /**
+     * Returns the eventdescription string
+     *
+     * @return string
+     */
+    public function getEventdescription()
+    {
+        return $this->eventdescription;
     }
 }

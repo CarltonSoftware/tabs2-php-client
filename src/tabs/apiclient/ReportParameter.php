@@ -14,22 +14,16 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method string          getName()                             Returns the name
  * @method ReportParameter setName(string $name)                 Sets the name
  * 
- * @method string          getDescription()                      Returns the description
  * @method ReportParameter setDescription(string $description)   Sets the description
  * 
- * @method string          getType()                             Returns the type
  * @method ReportParameter setType(string $type)                 Sets the type
  * 
- * @method string          getDefaultvalue()                     Returns the defaultvalue
  * @method ReportParameter setDefaultvalue(string $defaultvalue) Sets the defaultvalue
  * 
- * @method integer         getSortorder()                        Returns the sortorder
  * @method ReportParameter setSortorder(integer $sortorder)      Sets the sortorder
  * 
- * @method boolean         getRequired()                         Returns the required
  * @method ReportParameter setRequired(boolean $required)        Sets the required
  */
 class ReportParameter extends Builder
@@ -91,5 +85,65 @@ class ReportParameter extends Builder
             'sortorder' => $this->getSortorder(),
             'required' => $this->getRequired(),
         );
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Returns the type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Returns the defaultvalue
+     *
+     * @return string
+     */
+    public function getDefaultvalue()
+    {
+        return $this->defaultvalue;
+    }
+
+    /**
+     * Returns the sortorder
+     *
+     * @return integer
+     */
+    public function getSortorder()
+    {
+        return $this->sortorder;
+    }
+
+    /**
+     * Returns the required
+     *
+     * @return boolean
+     */
+    public function getRequired()
+    {
+        return $this->required;
     }
 }

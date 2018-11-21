@@ -15,7 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\SalesChannel getSaleschannel() Returns the saleschannel object
  */
 class SalesChannel extends Builder
 {
@@ -54,5 +53,15 @@ class SalesChannel extends Builder
         }
 
         return $arr;
+    }
+
+    /**
+     * Returns the saleschannel object
+     *
+     * @return \tabs\apiclient\SalesChannel
+     */
+    public function getSaleschannel()
+    {
+        return $this->saleschannel;
     }
 }

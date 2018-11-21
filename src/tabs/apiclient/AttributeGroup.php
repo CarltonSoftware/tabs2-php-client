@@ -15,7 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method string getName()             Returns the name
  * @method Group  setName(string $name) Sets the name
  */
 class AttributeGroup extends Builder
@@ -35,5 +34,15 @@ class AttributeGroup extends Builder
         return array(
             'name' => $this->getName()
         );
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 }

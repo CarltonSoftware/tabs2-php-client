@@ -15,20 +15,13 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getName() Returns the name string
  * @method TextItem setName(string $var) Sets the name
  * 
- * @method string getText() Returns the text string
  * @method TextItem setText(string $var) Sets the text
  * 
- * @method \tabs\apiclient\Language getLanguage() Returns the language object
- * @method \tabs\apiclient\Encoding getEncoding() Returns the encoding object
- * @method \tabs\apiclient\Branding getBranding() Returns the branding object
  * 
- * @method boolean getHeader() Returns the header boolean
  * @method TextItem setHeader(boolean $var) Sets the header boolean
  * 
- * @method boolean getFooter() Returns the footer boolean
  * @method TextItem setFooter(boolean $var) Sets the footer boolean
  */
 class TextItem extends Builder
@@ -146,5 +139,75 @@ class TextItem extends Builder
         }
 
         return $arr;
+    }
+
+    /**
+     * Returns the name string
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the text string
+     *
+     * @return string
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * Returns the language object
+     *
+     * @return \tabs\apiclient\Language
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
+    /**
+     * Returns the encoding object
+     *
+     * @return \tabs\apiclient\Encoding
+     */
+    public function getEncoding()
+    {
+        return $this->encoding;
+    }
+
+    /**
+     * Returns the branding object
+     *
+     * @return \tabs\apiclient\Branding
+     */
+    public function getBranding()
+    {
+        return $this->branding;
+    }
+
+    /**
+     * Returns the header boolean
+     *
+     * @return boolean
+     */
+    public function getHeader()
+    {
+        return $this->header;
+    }
+
+    /**
+     * Returns the footer boolean
+     *
+     * @return boolean
+     */
+    public function getFooter()
+    {
+        return $this->footer;
     }
 }

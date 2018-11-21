@@ -16,7 +16,6 @@ use tabs\apiclient\property\Document;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method Document getPropertyimage() Returns the propertyimage
  */
 class Image extends Builder
 {
@@ -51,5 +50,15 @@ class Image extends Builder
         return array(
             'propertydocumentid' => $this->getPropertyimage()->getId()
         );
+    }
+
+    /**
+     * Returns the propertyimage
+     *
+     * @return Document
+     */
+    public function getPropertyimage()
+    {
+        return $this->propertyimage;
     }
 }

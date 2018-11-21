@@ -15,13 +15,10 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getSerialnumber() Returns the serialnumber
  * @method Keyy setSerialnumber(string $var) Sets the serialnumber
  * 
- * @method string getManufacturerortype() Returns the manufacturerortype
  * @method Keyy setManufacturerortype(string $var) Sets the manufacturerortype
  * 
- * @method string getDescription() Returns the description
  * @method Keyy setDescription(string $var) Sets the description
  */
 class Keyy extends Builder
@@ -59,5 +56,35 @@ class Keyy extends Builder
             'manufacturerortype' => $this->getManufacturerortype(),
             'description' => $this->getDescription(),
         );
+    }
+
+    /**
+     * Returns the serialnumber
+     *
+     * @return string
+     */
+    public function getSerialnumber()
+    {
+        return $this->serialnumber;
+    }
+
+    /**
+     * Returns the manufacturerortype
+     *
+     * @return string
+     */
+    public function getManufacturerortype()
+    {
+        return $this->manufacturerortype;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

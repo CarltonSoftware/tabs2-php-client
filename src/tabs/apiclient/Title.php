@@ -14,7 +14,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getTitle()            Returns the title
  * @method Title  setTitle(string $var) Sets the title
  */
 class Title extends Builder
@@ -34,5 +33,15 @@ class Title extends Builder
     public function toArray()
     {
         return $this->__toArray();
+    }
+
+    /**
+     * Returns the title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 }

@@ -13,16 +13,12 @@ namespace tabs\apiclient\actor;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getContactmethodtype() Returns the contactmethodtype
  * @method ContactDetailOther setContactmethodtype(string $var) Sets the contactmethodtype
  *
- * @method string getCountrycode() Returns the countrycode
  * @method PhoneNumber setCountrycode(string $var) Sets the countrycode
  * 
- * @method string getSubscribernumber() Returns the subscribernumber
  * @method PhoneNumber setSubscribernumber(string $var) Sets the subscribernumber
  * 
- * @method string getExtension() Returns the extension
  * @method PhoneNumber setExtension(string $var) Sets the extension
  */
 class PhoneNumber extends ContactDetail
@@ -97,5 +93,45 @@ class PhoneNumber extends ContactDetail
         }
         
         return $number;
+    }
+
+    /**
+     * Returns the contactmethodtype
+     *
+     * @return string
+     */
+    public function getContactmethodtype()
+    {
+        return $this->contactmethodtype;
+    }
+
+    /**
+     * Returns the countrycode
+     *
+     * @return string
+     */
+    public function getCountrycode()
+    {
+        return $this->countrycode;
+    }
+
+    /**
+     * Returns the subscribernumber
+     *
+     * @return string
+     */
+    public function getSubscribernumber()
+    {
+        return $this->subscribernumber;
+    }
+
+    /**
+     * Returns the extension
+     *
+     * @return string
+     */
+    public function getExtension()
+    {
+        return $this->extension;
     }
 }

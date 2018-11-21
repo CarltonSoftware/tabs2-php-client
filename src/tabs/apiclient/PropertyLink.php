@@ -16,10 +16,8 @@ use tabs\apiclient\Property;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getName() Returns the name
  * @method PropertyLink setName(string $var) Sets the name
  * 
- * @method Property getDetails() Returns the details
  */
 class PropertyLink extends Base
 {
@@ -51,5 +49,25 @@ class PropertyLink extends Base
         $this->details = Property::factory($details);
 
         return $this;
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the details
+     *
+     * @return Property
+     */
+    public function getDetails()
+    {
+        return $this->details;
     }
 }

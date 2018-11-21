@@ -17,13 +17,6 @@ use tabs\apiclient\actor\ContactPreference;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method boolean                              getInvalid()              Return the invalid flag
- * @method string                               getType()                 Return the contact type
- * @method string                               getContactmethodsubtype() Return the contact subtype
- * @method string                               getInvalidreason()        Return the invalid reason
- * @method string                               getComment()              Return the comment
- * @method \DateTime                            getInvaliddatetime()      Return the contact invalid date time
- * @method StaticCollection|ContactPreference[] getContactpreferences()   Return the contact preference array
  *
  * @method ContactDetail setInvalid(boolean $invalid)            Set the invalid flag
  * @method ContactDetail setInvaliddatetime(\DateTime $date)     Set the invalid date time
@@ -105,5 +98,75 @@ class ContactDetail extends Builder
     public function toArray()
     {
         return $this->__toArray();
+    }
+
+    /**
+     * Return the invalid flag
+     *
+     * @return boolean
+     */
+    public function getInvalid()
+    {
+        return $this->invalid;
+    }
+
+    /**
+     * Return the contact type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Return the contact subtype
+     *
+     * @return string
+     */
+    public function getContactmethodsubtype()
+    {
+        return $this->contactmethodsubtype;
+    }
+
+    /**
+     * Return the invalid reason
+     *
+     * @return string
+     */
+    public function getInvalidreason()
+    {
+        return $this->invalidreason;
+    }
+
+    /**
+     * Return the comment
+     *
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * Return the contact invalid date time
+     *
+     * @return \DateTime
+     */
+    public function getInvaliddatetime()
+    {
+        return $this->invaliddatetime;
+    }
+
+    /**
+     * Return the contact preference array
+     *
+     * @return StaticCollection|ContactPreference[]
+     */
+    public function getContactpreferences()
+    {
+        return $this->contactpreferences;
     }
 }

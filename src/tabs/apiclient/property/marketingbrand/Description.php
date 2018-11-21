@@ -16,10 +16,8 @@ use tabs\apiclient\DescriptionType;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getDescription() Returns the description
  * @method Description setDescription(string $var) Sets the description
  * 
- * @method DescriptionType getDescriptiontype() Returns the descriptiontype
  */
 class Description extends Builder
 {
@@ -62,5 +60,25 @@ class Description extends Builder
             'description' => $this->getDescription(),
             'descriptiontype' => $this->getDescriptiontype()->getName()
         );
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Returns the descriptiontype
+     *
+     * @return DescriptionType
+     */
+    public function getDescriptiontype()
+    {
+        return $this->descriptiontype;
     }
 }

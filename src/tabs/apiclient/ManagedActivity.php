@@ -17,16 +17,12 @@ use tabs\apiclient\managedactivity\Service;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getName() Returns the name
  * @method ManagedActivity setName(string $var) Sets the name
  * 
- * @method string getDescription() Returns the description
  * @method ManagedActivity setDescription(string $var) Sets the description
  * 
- * @method boolean getDonotmodify() Returns the donotmodify
  * @method ManagedActivity setDonotmodify(boolean $var) Sets the donotmodify
  * 
- * @method Collection|Service[] getServices() Get the services collection
  */
 class ManagedActivity extends Builder
 {
@@ -83,5 +79,45 @@ class ManagedActivity extends Builder
             'description' => $this->getDescription(),
             'donotmodify' => $this->boolToStr($this->getDonotmodify()),
         );
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Returns the donotmodify
+     *
+     * @return boolean
+     */
+    public function getDonotmodify()
+    {
+        return $this->donotmodify;
+    }
+
+    /**
+     * Get the services collection
+     *
+     * @return Collection|Service[]
+     */
+    public function getServices()
+    {
+        return $this->services;
     }
 }

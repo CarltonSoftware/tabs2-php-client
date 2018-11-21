@@ -20,40 +20,25 @@ use tabs\apiclient\Branding;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getType() Returns the type
  * @method DepositAmount setType(string $var) Sets the type
  * 
- * @method string getName() Returns the name
  * @method DepositAmount setName(string $var) Sets the name
  * 
- * @method string getDescription() Returns the description
  * @method DepositAmount setDescription(string $var) Sets the description
  * 
- * @method Currency getCurrency() Returns the currency
- * @method PricingPeriod getPricingperiod() Returns the pricingperiod
- * @method DepositAmountType getDepositamounttype() Returns the depositamounttype
- * @method float getAmount() Returns the amount
  * @method DepositAmount setAmount(float $var) Sets the amount
  * 
- * @method boolean getPlusincludedextras() Returns the plusincludedextras
  * @method DepositAmount setPlusincludedextras(boolean $var) Sets the plusincludedextras
  * 
- * @method boolean getPlusadditionalextras() Returns the plusadditionalextras
  * @method DepositAmount setPlusadditionalextras(boolean $var) Sets the plusadditionalextras
  * 
- * @method integer getDecimalplaces() Returns the decimalplaces
  * @method DepositAmount setDecimalplaces(integer $var) Sets the decimalplaces
  * 
- * @method Property getProperty() Returns the property
- * @method Branding getBranding() Returns the branding
  * 
- * @method \DateTime getFromdate() Returns the fromdate
  * @method DepositAmount setFromdate(\DateTime $var) Sets the fromdate
  * 
- * @method \DateTime getTodate() Returns the todate
  * @method DepositAmount setTodate(\DateTime $var) Sets the todate
  * 
- * @method integer getMinimumamount() Returns the minimumamount
  * @method DepositAmount setMinimumamount(integer $var) Sets the minimumamount
  */
 class DepositAmount extends Builder
@@ -278,5 +263,155 @@ class DepositAmount extends Builder
         }
         
         return $arr;
+    }
+
+    /**
+     * Returns the type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Returns the currency
+     *
+     * @return Currency
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * Returns the pricingperiod
+     *
+     * @return PricingPeriod
+     */
+    public function getPricingperiod()
+    {
+        return $this->pricingperiod;
+    }
+
+    /**
+     * Returns the depositamounttype
+     *
+     * @return DepositAmountType
+     */
+    public function getDepositamounttype()
+    {
+        return $this->depositamounttype;
+    }
+
+    /**
+     * Returns the amount
+     *
+     * @return float
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * Returns the plusincludedextras
+     *
+     * @return boolean
+     */
+    public function getPlusincludedextras()
+    {
+        return $this->plusincludedextras;
+    }
+
+    /**
+     * Returns the plusadditionalextras
+     *
+     * @return boolean
+     */
+    public function getPlusadditionalextras()
+    {
+        return $this->plusadditionalextras;
+    }
+
+    /**
+     * Returns the decimalplaces
+     *
+     * @return integer
+     */
+    public function getDecimalplaces()
+    {
+        return $this->decimalplaces;
+    }
+
+    /**
+     * Returns the property
+     *
+     * @return Property
+     */
+    public function getProperty()
+    {
+        return $this->property;
+    }
+
+    /**
+     * Returns the branding
+     *
+     * @return Branding
+     */
+    public function getBranding()
+    {
+        return $this->branding;
+    }
+
+    /**
+     * Returns the fromdate
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the todate
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
+    }
+
+    /**
+     * Returns the minimumamount
+     *
+     * @return integer
+     */
+    public function getMinimumamount()
+    {
+        return $this->minimumamount;
     }
 }

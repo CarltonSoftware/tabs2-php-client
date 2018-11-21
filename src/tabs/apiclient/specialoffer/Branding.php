@@ -15,11 +15,8 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\Branding getBranding() Returns the branding object
- * @method string getDescription() Returns the description string
  * @method Branding setDescription(string $var) Sets the description
  * 
- * @method boolean getActive() Returns the active boolean
  * @method Branding setActive(boolean $var) Sets the active
  */
 class Branding extends Builder
@@ -73,5 +70,35 @@ class Branding extends Builder
         }
 
         return $arr;
+    }
+
+    /**
+     * Returns the branding object
+     *
+     * @return \tabs\apiclient\Branding
+     */
+    public function getBranding()
+    {
+        return $this->branding;
+    }
+
+    /**
+     * Returns the description string
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Returns the active boolean
+     *
+     * @return boolean
+     */
+    public function getActive()
+    {
+        return $this->active;
     }
 }

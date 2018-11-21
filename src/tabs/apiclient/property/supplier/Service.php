@@ -17,23 +17,16 @@ use tabs\apiclient\property\supplier\service\BookingEvent;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\Service getService() Returns the service
- * @method \DateTime getFromdate() Returns the fromdate
  * @method Service setFromdate(\DateTime $var) Sets the fromdate
  * 
- * @method \DateTime getTodate() Returns the todate
  * @method Service setTodate(\DateTime $var) Sets the todate
  * 
- * @method string getDatetouse() Returns the datetouse
  * @method Service setDatetouse(string $var) Sets the datetouse
  * 
- * @method boolean getCustomerbookings() Returns the customerbookings
  * @method Service setCustomerbookings(boolean $var) Sets the customerbookings
  * 
- * @method boolean getOwnerbookings() Returns the ownerbookings
  * @method Service setOwnerbookings(boolean $var) Sets the ownerbookings
  * 
- * @method Collection|BookingEvent[] getBookingevents() Returns the booking events
  */
 class Service extends Builder
 {
@@ -131,5 +124,75 @@ class Service extends Builder
             'customerbookings' => $this->boolToStr($this->getCustomerbookings()),
             'ownerbookings' => $this->boolToStr($this->getOwnerbookings()),
         );
+    }
+
+    /**
+     * Returns the service
+     *
+     * @return \tabs\apiclient\Service
+     */
+    public function getService()
+    {
+        return $this->service;
+    }
+
+    /**
+     * Returns the fromdate
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the todate
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
+    }
+
+    /**
+     * Returns the datetouse
+     *
+     * @return string
+     */
+    public function getDatetouse()
+    {
+        return $this->datetouse;
+    }
+
+    /**
+     * Returns the customerbookings
+     *
+     * @return boolean
+     */
+    public function getCustomerbookings()
+    {
+        return $this->customerbookings;
+    }
+
+    /**
+     * Returns the ownerbookings
+     *
+     * @return boolean
+     */
+    public function getOwnerbookings()
+    {
+        return $this->ownerbookings;
+    }
+
+    /**
+     * Returns the booking events
+     *
+     * @return Collection|BookingEvent[]
+     */
+    public function getBookingevents()
+    {
+        return $this->bookingevents;
     }
 }

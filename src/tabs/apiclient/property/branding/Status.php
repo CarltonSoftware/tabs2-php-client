@@ -15,11 +15,8 @@ use tabs\apiclient\Base;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\Status getStatus() Returns the status
- * @method \DateTime getFromdate() Returns the fromdate
  * @method Status setFromdate(\DateTime $var) Sets the fromdate
  * 
- * @method \DateTime getTodate() Returns the todate
  * @method Status setTodate(\DateTime $var) Sets the todate
  */
 class Status extends Base
@@ -81,5 +78,35 @@ class Status extends Base
             'fromdate' => $this->getFromdate()->format('Y-m-d'),
             'todate' => $this->getTodate()->format('Y-m-d')
         );
+    }
+
+    /**
+     * Returns the status
+     *
+     * @return \tabs\apiclient\Status
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Returns the fromdate
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the todate
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
     }
 }

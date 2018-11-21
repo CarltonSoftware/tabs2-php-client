@@ -27,16 +27,13 @@ namespace tabs\apiclient\note;
  * @link      http://www.carltonsoftware.co.uk
  * 
  * 
- * @method string   getNotetext()            Returns the NoteText text
  * 
  * @method Notetext setId(integer $id)       Set the note id
  * @method Notetext setNotetext(string $subject) Set the note text
  * 
  * @method Notetext  setFollowup(\DateTime $d) Set the follow up date
- * @method \DateTime getFollowup()             Get the follow up date
  * 
  * @method Notetext  setActioned(\DateTime $d) Set the actioned date
- * @method \DateTime getActioned()             Get the actioned date
  */
 class Notetext extends \tabs\apiclient\Notemeta
 {
@@ -99,5 +96,35 @@ class Notetext extends \tabs\apiclient\Notemeta
     public function getUrlStub()
     {
         return 'text';
+    }
+
+    /**
+     * Returns the NoteText text
+     *
+     * @return string
+     */
+    public function getNotetext()
+    {
+        return $this->notetext;
+    }
+
+    /**
+     * Get the follow up date
+     *
+     * @return \DateTime
+     */
+    public function getFollowup()
+    {
+        return $this->followup;
+    }
+
+    /**
+     * Get the actioned date
+     *
+     * @return \DateTime
+     */
+    public function getActioned()
+    {
+        return $this->actioned;
     }
 }

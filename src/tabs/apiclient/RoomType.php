@@ -15,13 +15,10 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getName() Returns the name
  * @method RoomType setName(string $var) Sets the name
  * 
- * @method integer getSleeps() Returns the sleeps
  * @method RoomType setSleeps(integer $var) Sets the sleeps
  * 
- * @method string getDescription() Returns the description
  * @method RoomType setDescription(string $var) Sets the description
  */
 class RoomType extends Builder
@@ -59,5 +56,35 @@ class RoomType extends Builder
             'sleeps' => $this->getSleeps(),
             'description' => $this->getDescription(),
         );
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the sleeps
+     *
+     * @return integer
+     */
+    public function getSleeps()
+    {
+        return $this->sleeps;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

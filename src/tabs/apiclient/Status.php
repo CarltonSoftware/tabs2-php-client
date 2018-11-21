@@ -14,16 +14,12 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method string getName()             Return the status name
  * @method Status setName(string $name) Set the name
  * 
- * @method boolean getAllowbooking() Return the allow booking
  * @method Status  setAllowbooking(boolean $bool) Set the allow booking
  * 
- * @method boolean getAllowoverride() Return the allow override
  * @method Status  setAllowoverride(boolean $bool) Set the allow override
  * 
- * @method integer getPriority() Return the priority
  * @method Status  setPriority(integer $int) Set the priority
  */
 class Status extends Builder
@@ -80,5 +76,45 @@ class Status extends Builder
             'allowoverride' => $this->boolToStr($this->getAllowoverride()),
             'priority' => $this->getPriority()
         );
+    }
+
+    /**
+     * Return the status name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Return the allow booking
+     *
+     * @return boolean
+     */
+    public function getAllowbooking()
+    {
+        return $this->allowbooking;
+    }
+
+    /**
+     * Return the allow override
+     *
+     * @return boolean
+     */
+    public function getAllowoverride()
+    {
+        return $this->allowoverride;
+    }
+
+    /**
+     * Return the priority
+     *
+     * @return integer
+     */
+    public function getPriority()
+    {
+        return $this->priority;
     }
 }

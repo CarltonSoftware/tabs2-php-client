@@ -14,10 +14,8 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string           getValuetype()            Returns the valuetype
  * @method AccountValueType setValuetype(string $var) Sets the valuetype
  * 
- * @method string           getDescription()            Returns the description
  * @method AccountValueType setDescription(string $var) Sets the description
  */
 class AccountValueType extends Builder
@@ -47,5 +45,25 @@ class AccountValueType extends Builder
             'valuetype' => $this->getValuetype(),
             'description' => $this->getDescription()
         );
+    }
+
+    /**
+     * Returns the valuetype
+     *
+     * @return string
+     */
+    public function getValuetype()
+    {
+        return $this->valuetype;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

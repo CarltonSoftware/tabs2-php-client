@@ -15,8 +15,6 @@ use tabs\apiclient\Base;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\SecurityRole  getSecurityrole()  Returns the securityrole
- * @method \tabs\apiclient\SecurityGroup getSecuritygroup() Returns the securitygroup
  */
 class ActorSecurity extends Base
 {
@@ -95,5 +93,25 @@ class ActorSecurity extends Base
         }
         
         return $arr;
+    }
+
+    /**
+     * Returns the securityrole
+     *
+     * @return \tabs\apiclient\SecurityRole
+     */
+    public function getSecurityrole()
+    {
+        return $this->securityrole;
+    }
+
+    /**
+     * Returns the securitygroup
+     *
+     * @return \tabs\apiclient\SecurityGroup
+     */
+    public function getSecuritygroup()
+    {
+        return $this->securitygroup;
     }
 }

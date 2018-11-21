@@ -15,17 +15,10 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\Supplier getActor() Returns the actor
- * @method \tabs\apiclient\Service getService() Returns the service
- * @method boolean getAutoadded() Returns the autoadded
  * @method Supplier setAutoadded(boolean $var) Sets the autoadded
  * 
- * @method \tabs\apiclient\TabsUser getMarkcompletedbyactor() Returns the markcompletedbyactor
- * @method \DateTime getCompleteddatetime() Returns the completeddatetime
  * @method Supplier setCompleteddatetime(\DateTime $var) Sets the completeddatetime
  * 
- * @method \tabs\apiclient\TabsUser getCancelledbybyactor() Returns the cancelledbybyactor
- * @method \DateTime getCancelleddatetime() Returns the cancelleddatetime
  * @method Supplier setCancelleddatetime(\DateTime $var) Sets the cancelleddatetime
  * 
  */
@@ -168,5 +161,75 @@ class Supplier extends Builder
         }
         
         return $arr;
+    }
+
+    /**
+     * Returns the actor
+     *
+     * @return \tabs\apiclient\Supplier
+     */
+    public function getActor()
+    {
+        return $this->actor;
+    }
+
+    /**
+     * Returns the service
+     *
+     * @return \tabs\apiclient\Service
+     */
+    public function getService()
+    {
+        return $this->service;
+    }
+
+    /**
+     * Returns the autoadded
+     *
+     * @return boolean
+     */
+    public function getAutoadded()
+    {
+        return $this->autoadded;
+    }
+
+    /**
+     * Returns the markcompletedbyactor
+     *
+     * @return \tabs\apiclient\TabsUser
+     */
+    public function getMarkcompletedbyactor()
+    {
+        return $this->markcompletedbyactor;
+    }
+
+    /**
+     * Returns the completeddatetime
+     *
+     * @return \DateTime
+     */
+    public function getCompleteddatetime()
+    {
+        return $this->completeddatetime;
+    }
+
+    /**
+     * Returns the cancelledbybyactor
+     *
+     * @return \tabs\apiclient\TabsUser
+     */
+    public function getCancelledbybyactor()
+    {
+        return $this->cancelledbybyactor;
+    }
+
+    /**
+     * Returns the cancelleddatetime
+     *
+     * @return \DateTime
+     */
+    public function getCancelleddatetime()
+    {
+        return $this->cancelleddatetime;
     }
 }

@@ -14,8 +14,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getCode() Return the language code
- * @method string getName() Return the language name
  *
  * @method Language setCode(string $alpha2)   Set the Language code
  * @method Language setLanguage(string $name) Set the language name
@@ -47,5 +45,25 @@ class Language extends Builder
             'code' => $this->getCode(),
             'name' => $this->getName()
         );
+    }
+
+    /**
+     * Return the language code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Return the language name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 }

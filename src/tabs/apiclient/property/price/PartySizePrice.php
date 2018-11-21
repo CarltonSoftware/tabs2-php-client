@@ -15,8 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\property\price\PartySizePricing getPartysizepricing() Returns the partysizepricing
- * @method float getPrice() Returns the price
  * @method PartySizePrice setPrice(float $var) Sets the price
  */
 class PartySizePrice extends Builder
@@ -60,5 +58,25 @@ class PartySizePrice extends Builder
             'partysizepricingid' => $this->getPartysizepricing()->getId(),
             'price' => $this->getPrice(),
         );
+    }
+
+    /**
+     * Returns the partysizepricing
+     *
+     * @return \tabs\apiclient\property\price\PartySizePricing
+     */
+    public function getPartysizepricing()
+    {
+        return $this->partysizepricing;
+    }
+
+    /**
+     * Returns the price
+     *
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
     }
 }

@@ -15,12 +15,8 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\Branding getBranding() Returns the branding
- * @method \tabs\apiclient\RoleReason getRolereason() Returns the rolereason
- * @method integer getPriority() Returns the priority
  * @method ContactPreference setPriority(integer $var) Sets the priority
  * 
- * @method boolean getDonotuse() Returns the donotuse
  * @method ContactPreference setDonotuse(boolean $var) Sets the donotuse
  */
 class ContactPreference extends Builder
@@ -124,5 +120,45 @@ class ContactPreference extends Builder
     public function getUpdateUrl()
     {
         return $this->getCreateUrl() . '/' . $this->getId();
+    }
+
+    /**
+     * Returns the branding
+     *
+     * @return \tabs\apiclient\Branding
+     */
+    public function getBranding()
+    {
+        return $this->branding;
+    }
+
+    /**
+     * Returns the rolereason
+     *
+     * @return \tabs\apiclient\RoleReason
+     */
+    public function getRolereason()
+    {
+        return $this->rolereason;
+    }
+
+    /**
+     * Returns the priority
+     *
+     * @return integer
+     */
+    public function getPriority()
+    {
+        return $this->priority;
+    }
+
+    /**
+     * Returns the donotuse
+     *
+     * @return boolean
+     */
+    public function getDonotuse()
+    {
+        return $this->donotuse;
     }
 }

@@ -16,11 +16,8 @@ use tabs\apiclient\Role;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getKeyusertype() Returns the keyusertype
  * @method KeyUserType setKeyusertype(string $var) Sets the keyusertype
  * 
- * @method Role getRole() Returns the role
- * @method string getDescription() Returns the description
  * @method KeyUserType setDescription(string $var) Sets the description
  */
 class KeyUserType extends Builder
@@ -72,5 +69,35 @@ class KeyUserType extends Builder
             'roleid' => $this->getRole()->getId(),
             'description' => $this->getDescription(),
         );
+    }
+
+    /**
+     * Returns the keyusertype
+     *
+     * @return string
+     */
+    public function getKeyusertype()
+    {
+        return $this->keyusertype;
+    }
+
+    /**
+     * Returns the role
+     *
+     * @return Role
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

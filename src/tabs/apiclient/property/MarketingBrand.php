@@ -19,10 +19,6 @@ use tabs\apiclient\property\marketingbrand\GroupingValue;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\MarketingBrand getMarketingbrand() Returns the marketingbrand
- * @method Collection|Brochure[] getBrochures() Returns the brochure collection
- * @method Collection|Description[] getDescriptions() Returns the property descriptions collection
- * @method Collection|GroupingValue[] getGroupingvalues() Returns the marketingbrand grouping values
  */
 class MarketingBrand extends Builder
 {
@@ -123,5 +119,45 @@ class MarketingBrand extends Builder
             'groupingvalues',
             'parent'
         );
+    }
+
+    /**
+     * Returns the marketingbrand
+     *
+     * @return \tabs\apiclient\MarketingBrand
+     */
+    public function getMarketingbrand()
+    {
+        return $this->marketingbrand;
+    }
+
+    /**
+     * Returns the brochure collection
+     *
+     * @return Collection|Brochure[]
+     */
+    public function getBrochures()
+    {
+        return $this->brochures;
+    }
+
+    /**
+     * Returns the property descriptions collection
+     *
+     * @return Collection|Description[]
+     */
+    public function getDescriptions()
+    {
+        return $this->descriptions;
+    }
+
+    /**
+     * Returns the marketingbrand grouping values
+     *
+     * @return Collection|GroupingValue[]
+     */
+    public function getGroupingvalues()
+    {
+        return $this->groupingvalues;
     }
 }

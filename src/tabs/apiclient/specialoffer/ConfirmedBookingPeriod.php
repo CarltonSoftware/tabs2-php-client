@@ -15,13 +15,10 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getPeriodfrom() Returns the periodfrom string
  * @method ConfirmedBookingPeriod setPeriodfrom(string $var) Sets the periodfrom
  * 
- * @method string getPeriod() Returns the period string
  * @method ConfirmedBookingPeriod setPeriod(string $var) Sets the period
  * 
- * @method string getPeriodto() Returns the periodto string
  * @method ConfirmedBookingPeriod setPeriodto(string $var) Sets the periodto
  */
 class ConfirmedBookingPeriod extends Builder
@@ -55,5 +52,35 @@ class ConfirmedBookingPeriod extends Builder
     public function toArray()
     {
         return $this->__toArray();
+    }
+
+    /**
+     * Returns the periodfrom string
+     *
+     * @return string
+     */
+    public function getPeriodfrom()
+    {
+        return $this->periodfrom;
+    }
+
+    /**
+     * Returns the period string
+     *
+     * @return string
+     */
+    public function getPeriod()
+    {
+        return $this->period;
+    }
+
+    /**
+     * Returns the periodto string
+     *
+     * @return string
+     */
+    public function getPeriodto()
+    {
+        return $this->periodto;
     }
 }

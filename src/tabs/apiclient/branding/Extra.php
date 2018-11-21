@@ -16,8 +16,6 @@ use tabs\apiclient\StaticCollection;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\Extra getExtra() Returns the extra
- * @method StaticCollection|\tabs\apiclient\extra\Configuration[] getConfigurations() Returns the configurations
  */
 class Extra extends Base
 {
@@ -73,5 +71,25 @@ class Extra extends Base
         return array(
             'extraid' => $this->getExtra()->getId()
         );
+    }
+
+    /**
+     * Returns the extra
+     *
+     * @return \tabs\apiclient\Extra
+     */
+    public function getExtra()
+    {
+        return $this->extra;
+    }
+
+    /**
+     * Returns the configurations
+     *
+     * @return StaticCollection|\tabs\apiclient\extra\Configuration[]
+     */
+    public function getConfigurations()
+    {
+        return $this->configurations;
     }
 }

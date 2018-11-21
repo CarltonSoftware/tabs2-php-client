@@ -15,17 +15,12 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\KeyUserType getKeyusertype() Returns the keyusertype
- * @method string getKeycheckreason() Returns the keycheckreason
  * @method KeyCheckReason setKeycheckreason(string $var) Sets the keycheckreason
  * 
- * @method string getDescription() Returns the description
  * @method KeyCheckReason setDescription(string $var) Sets the description
  * 
- * @method string getCheckoutperioddays() Returns the checkoutperioddays
  * @method KeyCheckReason setCheckoutperioddays(string $var) Sets the checkoutperioddays
  * 
- * @method string getCheckoutperiodhours() Returns the checkoutperiodhours
  * @method KeyCheckReason setCheckoutperiodhours(string $var) Sets the checkoutperiodhours
  * 
  */
@@ -94,5 +89,55 @@ class KeyCheckReason extends Builder
             'checkoutperioddays' => $this->getCheckoutperioddays(),
             'checkoutperiodhours' => $this->getCheckoutperiodhours(),
         );
+    }
+
+    /**
+     * Returns the keyusertype
+     *
+     * @return \tabs\apiclient\KeyUserType
+     */
+    public function getKeyusertype()
+    {
+        return $this->keyusertype;
+    }
+
+    /**
+     * Returns the keycheckreason
+     *
+     * @return string
+     */
+    public function getKeycheckreason()
+    {
+        return $this->keycheckreason;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Returns the checkoutperioddays
+     *
+     * @return string
+     */
+    public function getCheckoutperioddays()
+    {
+        return $this->checkoutperioddays;
+    }
+
+    /**
+     * Returns the checkoutperiodhours
+     *
+     * @return string
+     */
+    public function getCheckoutperiodhours()
+    {
+        return $this->checkoutperiodhours;
     }
 }

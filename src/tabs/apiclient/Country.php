@@ -14,10 +14,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method string getAlpha2()    Return the Alpha2 code
- * @method string getAlpha3()    Return the Alpha3 code
- * @method string getName()      Return the country name
- * @method string getPhonecode() Return the phone code
  * 
  * @method Base setAlpha2(string $alpha2)     Set the Alpha2 code
  * @method Base setAlpha3(string $alpha3)     Set the Alpha3 code
@@ -77,5 +73,45 @@ class Country extends Builder
             'name' => $this->getName(),
             'phonecode' => $this->getPhonecode()
         );
+    }
+
+    /**
+     * Return the Alpha2 code
+     *
+     * @return string
+     */
+    public function getAlpha2()
+    {
+        return $this->alpha2;
+    }
+
+    /**
+     * Return the Alpha3 code
+     *
+     * @return string
+     */
+    public function getAlpha3()
+    {
+        return $this->alpha3;
+    }
+
+    /**
+     * Return the country name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Return the phone code
+     *
+     * @return string
+     */
+    public function getPhonecode()
+    {
+        return $this->phonecode;
     }
 }

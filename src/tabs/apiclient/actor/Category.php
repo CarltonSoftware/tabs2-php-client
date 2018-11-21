@@ -15,7 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\Category getCategory() Returns the category
  */
 class Category extends Builder
 {
@@ -50,5 +49,15 @@ class Category extends Builder
         return array(
             'categoryid' => $this->getCategory()->getId(),
         );
+    }
+
+    /**
+     * Returns the category
+     *
+     * @return \tabs\apiclient\Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }

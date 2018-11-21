@@ -16,22 +16,16 @@ use tabs\apiclient\Booking;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getComment() Returns the comment
  * @method Comment setComment(string $var) Sets the comment
  * 
- * @method string getCommenter() Returns the commenter
  * @method Comment setCommenter(string $var) Sets the commenter
  * 
- * @method boolean getVisibletoowner() Returns the visibletoowner
  * @method Comment setVisibletoowner(boolean $var) Sets the visibletoowner
  * 
- * @method boolean getVisibleonweb() Returns the visibleonweb
  * @method Comment setVisibleonweb(boolean $var) Sets the visibleonweb
  * 
- * @method \DateTime getCreateddate() Returns the createddate
  * @method Comment setCreateddate(\DateTime $var) Sets the createddate
  * 
- * @method \tabs\apiclient\Booking getBooking() Returns the booking
  */
 class Comment extends Builder
 {
@@ -119,5 +113,65 @@ class Comment extends Builder
         }
         
         return $arr;
+    }
+
+    /**
+     * Returns the comment
+     *
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * Returns the commenter
+     *
+     * @return string
+     */
+    public function getCommenter()
+    {
+        return $this->commenter;
+    }
+
+    /**
+     * Returns the visibletoowner
+     *
+     * @return boolean
+     */
+    public function getVisibletoowner()
+    {
+        return $this->visibletoowner;
+    }
+
+    /**
+     * Returns the visibleonweb
+     *
+     * @return boolean
+     */
+    public function getVisibleonweb()
+    {
+        return $this->visibleonweb;
+    }
+
+    /**
+     * Returns the createddate
+     *
+     * @return \DateTime
+     */
+    public function getCreateddate()
+    {
+        return $this->createddate;
+    }
+
+    /**
+     * Returns the booking
+     *
+     * @return \tabs\apiclient\Booking
+     */
+    public function getBooking()
+    {
+        return $this->booking;
     }
 }

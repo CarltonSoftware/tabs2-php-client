@@ -15,9 +15,6 @@ use tabs\apiclient\Builder;
  * @link      http://www.carltonsoftware.co.uk
  * 
  * 
- * @method string  getCode()          Return the currency code
- * @method string  getName()          Return the currency name
- * @method integer getDecimalplaces() Return the number of decimal places
  * 
  * @method Currency setCode(integer $code)                   Set the code
  * @method Currency setName(integer $name)                   Set the name
@@ -60,5 +57,35 @@ class Currency extends Builder
             'name' => $this->getName(),
             'decimalplaces' => $this->getDecimalplaces(),
         );
+    }
+
+    /**
+     * Return the currency code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Return the currency name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Return the number of decimal places
+     *
+     * @return integer
+     */
+    public function getDecimalplaces()
+    {
+        return $this->decimalplaces;
     }
 }

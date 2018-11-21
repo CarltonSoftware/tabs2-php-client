@@ -16,7 +16,6 @@ use tabs\apiclient\Builder;
  * @link      http://www.carltonsoftware.co.uk
  * 
  * @method HolidayPeriod setDonotsplit(boolean $var) Set the do not split variable
- * @method boolean       getDonotsplit()             Get the donotsplit
  */
 class HolidayPeriod extends BookingPeriod
 {
@@ -45,5 +44,15 @@ class HolidayPeriod extends BookingPeriod
     public function toArray()
     {
         return $this->__toArray();
+    }
+
+    /**
+     * Get the donotsplit
+     *
+     * @return boolean
+     */
+    public function getDonotsplit()
+    {
+        return $this->donotsplit;
     }
 }

@@ -15,14 +15,10 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getPromotioncode() Returns the promotioncode string
  * @method Promotion setPromotioncode(string $var) Sets the promotioncode
  * 
- * @method \tabs\apiclient\Extra getExtra() Returns the extra object
- * @method integer getUsagelimit() Returns the usagelimit integer
  * @method Promotion setUsagelimit(integer $var) Sets the usagelimit
  * 
- * @method integer getUsedcount() Returns the usedcount integer
  * @method Promotion setUsedcount(integer $var) Sets the usedcount
  * 
  */
@@ -84,5 +80,45 @@ class Promotion extends Builder
         }
 
         return $arr;
+    }
+
+    /**
+     * Returns the promotioncode string
+     *
+     * @return string
+     */
+    public function getPromotioncode()
+    {
+        return $this->promotioncode;
+    }
+
+    /**
+     * Returns the extra object
+     *
+     * @return \tabs\apiclient\Extra
+     */
+    public function getExtra()
+    {
+        return $this->extra;
+    }
+
+    /**
+     * Returns the usagelimit integer
+     *
+     * @return integer
+     */
+    public function getUsagelimit()
+    {
+        return $this->usagelimit;
+    }
+
+    /**
+     * Returns the usedcount integer
+     *
+     * @return integer
+     */
+    public function getUsedcount()
+    {
+        return $this->usedcount;
     }
 }

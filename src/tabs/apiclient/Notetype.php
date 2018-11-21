@@ -28,9 +28,6 @@ use tabs\apiclient\Builder;
  * @link      http://www.carltonsoftware.co.uk
  *
  *
- * @method string getNotetype()    Returns the type
- * @method string getDescription() Returns the description
- * @method string getDonotdelete() Returns the do not delete
  *
  * @method Notetype setNotetype(string $type          Set the type
  * @method Notetype setDescription(string $desc)  Set the description
@@ -83,5 +80,35 @@ class Notetype extends Builder
     public function toArray()
     {
         return $this->__toArray();
+    }
+
+    /**
+     * Returns the type
+     *
+     * @return string
+     */
+    public function getNotetype()
+    {
+        return $this->notetype;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Returns the do not delete
+     *
+     * @return string
+     */
+    public function getDonotdelete()
+    {
+        return $this->donotdelete;
     }
 }

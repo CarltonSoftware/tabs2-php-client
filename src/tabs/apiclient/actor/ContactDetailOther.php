@@ -13,10 +13,8 @@ namespace tabs\apiclient\actor;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getContactmethodtype() Returns the contactmethodtype
  * @method ContactDetailOther setContactmethodtype(string $var) Sets the contactmethodtype
  * 
- * @method string getValue() Returns the value
  * @method ContactDetailOther setValue(string $var) Sets the value
  */
 class ContactDetailOther extends ContactDetail
@@ -57,5 +55,25 @@ class ContactDetailOther extends ContactDetail
     public function __toString()
     {
         return $this->getValue();
+    }
+
+    /**
+     * Returns the contactmethodtype
+     *
+     * @return string
+     */
+    public function getContactmethodtype()
+    {
+        return $this->contactmethodtype;
+    }
+
+    /**
+     * Returns the value
+     *
+     * @return string
+     */
+    public function getValue()
+    {
+        return $this->value;
     }
 }

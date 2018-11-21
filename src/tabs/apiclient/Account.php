@@ -14,16 +14,12 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string  getGroup()            Returns the group
  * @method Account setGroup(string $var) Sets the group
  * 
- * @method string  getNominalcode()            Returns the nominalcode
  * @method Account setNominalcode(string $var) Sets the nominalcode
  * 
- * @method string  getDescription()            Returns the description
  * @method Account setDescription(string $var) Sets the description
  * 
- * @method boolean  getUsebranding()            Returns the usebranding
  * @method Account setUsebranding(boolean $var) Sets the usebranding
  */
 class Account extends Builder
@@ -69,5 +65,45 @@ class Account extends Builder
             'description' => $this->getDescription(),
             'usebranding' => $this->getUsebranding(),
         );
+    }
+
+    /**
+     * Returns the group
+     *
+     * @return string
+     */
+    public function getGroup()
+    {
+        return $this->group;
+    }
+
+    /**
+     * Returns the nominalcode
+     *
+     * @return string
+     */
+    public function getNominalcode()
+    {
+        return $this->nominalcode;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Returns the usebranding
+     *
+     * @return boolean
+     */
+    public function getUsebranding()
+    {
+        return $this->usebranding;
     }
 }

@@ -15,19 +15,14 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \DateTime getFromdate() Returns the fromdate \DateTime
  * @method Element setFromdate(\DateTime $var) Sets the fromdate
  * 
- * @method \DateTime getTodate() Returns the todate \DateTime
  * @method Element setTodate(\DateTime $var) Sets the todate
  * 
- * @method integer getElementorder() Returns the elementorder integer
  * @method Element setElementorder(integer $var) Sets the elementorder
  * 
- * @method integer getHeightinmm() Returns the heightinmm integer
  * @method Element setHeightinmm(integer $var) Sets the heightinmm
  * 
- * @method \tabs\apiclient\contactmethodtype\Element getContactmethodelement() Returns the contactmethodelement object
  */
 abstract class Element extends Builder
 {
@@ -104,5 +99,55 @@ abstract class Element extends Builder
         }
 
         return $arr;
+    }
+
+    /**
+     * Returns the fromdate \DateTime
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the todate \DateTime
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
+    }
+
+    /**
+     * Returns the elementorder integer
+     *
+     * @return integer
+     */
+    public function getElementorder()
+    {
+        return $this->elementorder;
+    }
+
+    /**
+     * Returns the heightinmm integer
+     *
+     * @return integer
+     */
+    public function getHeightinmm()
+    {
+        return $this->heightinmm;
+    }
+
+    /**
+     * Returns the contactmethodelement object
+     *
+     * @return \tabs\apiclient\contactmethodtype\Element
+     */
+    public function getContactmethodelement()
+    {
+        return $this->contactmethodelement;
     }
 }

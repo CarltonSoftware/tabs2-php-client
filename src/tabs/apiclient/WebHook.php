@@ -15,7 +15,6 @@ use tabs\apiclient\exception\Exception;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method string         getSection()            Returns the section name
  * @method WebsiteSection setSection(string $str) Sets the section name
  */
 class WebHook extends Base
@@ -63,5 +62,15 @@ class WebHook extends Base
         }
 
         return $data;
+    }
+
+    /**
+     * Returns the section name
+     *
+     * @return string
+     */
+    public function getSection()
+    {
+        return $this->section;
     }
 }

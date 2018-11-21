@@ -16,36 +16,23 @@ use tabs\apiclient\Collection;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\ContactType getContacttype() Returns the contacttype
- * @method \DateTime getContactdatetime() Returns the contactdatetime
  * @method Contact setContactdatetime(\DateTime $var) Sets the contactdatetime
  * 
- * @method \tabs\apiclient\ContactMethodType getContactmethodtype() Returns the contactmethodtype
  * 
- * @method string  getContent()            Returns the content
  * @method Contact setContent(string $var) Sets the content
  * 
- * @method string  getSubject()            Returns the subject
  * @method Contact setSubject(string $var) Sets the subject
  * 
- * @method boolean getDeleted()             Returns the delete
  * @method Contact setDeleted(boolean $var) Sets the delete
  * 
- * @method string getStatus_status()            Returns the status_status
  * @method string setStatus_status(string $var) Sets the status_status
  * 
- * @method \tabs\apiclient\SourceMarketingBrand getSourcemarketingbrand() Returns the sourcemarketingbrand
  * 
- * @method \tabs\apiclient\Template getTemplate() Returns the template
  * 
- * @method string  getTemplateentityid()            Returns the template entity id
  * @method Contact setTemplateentityid(string $var) Set the template entity id
  * 
- * @method Collection|contact\Entity[] getContactentities() Returns the contactentities
  * 
- * @method Collection|contact\Document[] getDocuments() Returns the contact documents
  * 
- * @method \tabs\apiclient\actor\ContactDetail getSender() Returns the sender contact detail
  */
 class Contact extends Builder
 {
@@ -277,5 +264,135 @@ class Contact extends Builder
         }
         
         return $arr;
+    }
+
+    /**
+     * Returns the contacttype
+     *
+     * @return \tabs\apiclient\ContactType
+     */
+    public function getContacttype()
+    {
+        return $this->contacttype;
+    }
+
+    /**
+     * Returns the contactdatetime
+     *
+     * @return \DateTime
+     */
+    public function getContactdatetime()
+    {
+        return $this->contactdatetime;
+    }
+
+    /**
+     * Returns the contactmethodtype
+     *
+     * @return \tabs\apiclient\ContactMethodType
+     */
+    public function getContactmethodtype()
+    {
+        return $this->contactmethodtype;
+    }
+
+    /**
+     * Returns the content
+     *
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * Returns the subject
+     *
+     * @return string
+     */
+    public function getSubject()
+    {
+        return $this->subject;
+    }
+
+    /**
+     * Returns the delete
+     *
+     * @return boolean
+     */
+    public function getDeleted()
+    {
+        return $this->deleted;
+    }
+
+    /**
+     * Returns the status_status
+     *
+     * @return string
+     */
+    public function getStatus_status()
+    {
+        return $this->status_status;
+    }
+
+    /**
+     * Returns the sourcemarketingbrand
+     *
+     * @return \tabs\apiclient\SourceMarketingBrand
+     */
+    public function getSourcemarketingbrand()
+    {
+        return $this->sourcemarketingbrand;
+    }
+
+    /**
+     * Returns the template
+     *
+     * @return \tabs\apiclient\Template
+     */
+    public function getTemplate()
+    {
+        return $this->template;
+    }
+
+    /**
+     * Returns the template entity id
+     *
+     * @return string
+     */
+    public function getTemplateentityid()
+    {
+        return $this->templateentityid;
+    }
+
+    /**
+     * Returns the contactentities
+     *
+     * @return Collection|contact\Entity[]
+     */
+    public function getContactentities()
+    {
+        return $this->contactentities;
+    }
+
+    /**
+     * Returns the contact documents
+     *
+     * @return Collection|contact\Document[]
+     */
+    public function getDocuments()
+    {
+        return $this->documents;
+    }
+
+    /**
+     * Returns the sender contact detail
+     *
+     * @return \tabs\apiclient\actor\ContactDetail
+     */
+    public function getSender()
+    {
+        return $this->sender;
     }
 }

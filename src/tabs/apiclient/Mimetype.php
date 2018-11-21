@@ -14,8 +14,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method string getName()      Returns the mimetype
- * @method string getShortname() Returns the short name
  * 
  * @method Mimetype setName(string $name)      Sets the mimetype
  * @method Mimetype setShortname(string $name) Sets the short name
@@ -47,5 +45,25 @@ class Mimetype extends Builder
             'name' => $this->getName(),
             'shortname' => $this->getShortname()
         );
+    }
+
+    /**
+     * Returns the mimetype
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the short name
+     *
+     * @return string
+     */
+    public function getShortname()
+    {
+        return $this->shortname;
     }
 }

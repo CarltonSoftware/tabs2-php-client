@@ -15,9 +15,7 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\Extra getExtra() Returns the extra
  * 
- * @method boolean getTakefromdeposit() Returns the takefromdeposit
  * @method Extra setTakefromdeposit(boolean $var) Sets the takefromdeposit
  */
 class Extra extends Builder
@@ -61,5 +59,25 @@ class Extra extends Builder
             'extraid' => $this->getExtra()->getId(),
             'takefromdeposit' => $this->boolToStr($this->getTakefromdeposit())
         );
+    }
+
+    /**
+     * Returns the extra
+     *
+     * @return \tabs\apiclient\Extra
+     */
+    public function getExtra()
+    {
+        return $this->extra;
+    }
+
+    /**
+     * Returns the takefromdeposit
+     *
+     * @return boolean
+     */
+    public function getTakefromdeposit()
+    {
+        return $this->takefromdeposit;
     }
 }

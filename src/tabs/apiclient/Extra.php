@@ -15,18 +15,13 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getExtracode() Returns the extracode
  * @method Extra setExtracode(string $var) Sets the extracode
  * 
- * @method string getExtratype() Returns the extratype
  * @method Extra setExtratype(string $var) Sets the extratype
  * 
- * @method string getDescription() Returns the description
  * @method Extra setDescription(string $var) Sets the description
  * 
- * @method ExtraGroup getExtragroup() Returns the extra group
  * 
- * @method Collection|Branding[] getExtrabrandings() Returns the brandings
  */
 class Extra extends Builder
 {
@@ -104,5 +99,55 @@ class Extra extends Builder
         }
         
         return $arr;
+    }
+
+    /**
+     * Returns the extracode
+     *
+     * @return string
+     */
+    public function getExtracode()
+    {
+        return $this->extracode;
+    }
+
+    /**
+     * Returns the extratype
+     *
+     * @return string
+     */
+    public function getExtratype()
+    {
+        return $this->extratype;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Returns the extra group
+     *
+     * @return ExtraGroup
+     */
+    public function getExtragroup()
+    {
+        return $this->extragroup;
+    }
+
+    /**
+     * Returns the brandings
+     *
+     * @return Collection|Branding[]
+     */
+    public function getExtrabrandings()
+    {
+        return $this->extrabrandings;
     }
 }

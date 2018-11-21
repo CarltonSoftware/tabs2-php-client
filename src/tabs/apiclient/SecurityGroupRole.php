@@ -15,8 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\SecurityGroup getSecuritygroup() Returns the securitygroup
- * @method \tabs\apiclient\SecurityRole getSecurityrole() Returns the securityrole
  */
 class SecurityGroupRole extends Builder
 {
@@ -73,5 +71,25 @@ class SecurityGroupRole extends Builder
             'securitygroupid' => $this->getSecuritygroup()->getId(),
             'securityroleid' => $this->getSecurityrole()->getId(),
         );
+    }
+
+    /**
+     * Returns the securitygroup
+     *
+     * @return \tabs\apiclient\SecurityGroup
+     */
+    public function getSecuritygroup()
+    {
+        return $this->securitygroup;
+    }
+
+    /**
+     * Returns the securityrole
+     *
+     * @return \tabs\apiclient\SecurityRole
+     */
+    public function getSecurityrole()
+    {
+        return $this->securityrole;
     }
 }

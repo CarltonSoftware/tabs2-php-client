@@ -13,9 +13,6 @@ namespace tabs\apiclient;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method string  getAlt()    Returns the title
- * @method integer getHeight() Returns the height
- * @method integer getWidth()  Returns the width
  *
  * @method Image setAlt(string $alt)        Set the title
  * @method Image setHeight(integer $height) Set the height
@@ -175,5 +172,35 @@ class Image extends Document
     public function __toString()
     {
         return $this->getImageTag();
+    }
+
+    /**
+     * Returns the title
+     *
+     * @return string
+     */
+    public function getAlt()
+    {
+        return $this->alt;
+    }
+
+    /**
+     * Returns the height
+     *
+     * @return integer
+     */
+    public function getHeight()
+    {
+        return $this->height;
+    }
+
+    /**
+     * Returns the width
+     *
+     * @return integer
+     */
+    public function getWidth()
+    {
+        return $this->width;
     }
 }

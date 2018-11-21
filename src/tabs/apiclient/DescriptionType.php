@@ -16,23 +16,16 @@ use tabs\apiclient\Encoding;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getCode() Returns the code
  * @method DescriptionType setCode(string $var) Sets the code
  * 
- * @method string getName() Returns the name
  * @method DescriptionType setName(string $var) Sets the name
  * 
- * @method string getDescription() Returns the description
  * @method DescriptionType setDescription(string $var) Sets the description
  * 
- * @method Encoding getEncoding() Returns the encoding
- * @method string getMinimumlength() Returns the minimumlength
  * @method DescriptionType setMinimumlength(string $var) Sets the minimumlength
  * 
- * @method integer getMaximumlength() Returns the maximumlength
  * @method DescriptionType setMaximumlength(integer $var) Sets the maximumlength
  * 
- * @method integer getSortorder() Returns the sortorder
  * @method DescriptionType setSortorder(integer $var) Sets the sortorder
  */
 class DescriptionType extends Builder
@@ -116,5 +109,75 @@ class DescriptionType extends Builder
             'maximumlength' => $this->getMaximumlength(),
             'sortorder' => $this->getSortorder()
         );
+    }
+
+    /**
+     * Returns the code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Returns the encoding
+     *
+     * @return Encoding
+     */
+    public function getEncoding()
+    {
+        return $this->encoding;
+    }
+
+    /**
+     * Returns the minimumlength
+     *
+     * @return string
+     */
+    public function getMinimumlength()
+    {
+        return $this->minimumlength;
+    }
+
+    /**
+     * Returns the maximumlength
+     *
+     * @return integer
+     */
+    public function getMaximumlength()
+    {
+        return $this->maximumlength;
+    }
+
+    /**
+     * Returns the sortorder
+     *
+     * @return integer
+     */
+    public function getSortorder()
+    {
+        return $this->sortorder;
     }
 }

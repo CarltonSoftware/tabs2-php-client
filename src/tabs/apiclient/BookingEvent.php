@@ -15,10 +15,8 @@ use tabs\apiclient\Base;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getEvent() Returns the event
  * @method BookingEvent setEvent(string $var) Sets the event
  * 
- * @method string getDescription() Returns the description
  * @method BookingEvent setDescription(string $var) Sets the description
  */
 class BookingEvent extends Base
@@ -48,5 +46,25 @@ class BookingEvent extends Base
             'event' => $this->getEvent(),
             'description' => $this->getDescription()
         );
+    }
+
+    /**
+     * Returns the event
+     *
+     * @return string
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

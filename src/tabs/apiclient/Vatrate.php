@@ -14,13 +14,10 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method integer getPercentage()             Returns the percentage
  * @method Vatrate setPercentage(integer $pct) Sets the percentage
  * 
- * @method \DateTime getFromdate()              Returns the fromdate
  * @method Vatrate   setFromdate(\DateTime $dt) Set the fromdate
  * 
- * @method \DateTime getTodate()              Returns the todate
  * @method Vatrate   setTodate(\DateTime $dt) Set the todate
  */
 class Vatrate extends Builder
@@ -69,5 +66,35 @@ class Vatrate extends Builder
             'todate' => $this->getFromdate()->format('Y-m-d'),
             'percentage' => $this->getPercentage()
         );
+    }
+
+    /**
+     * Returns the percentage
+     *
+     * @return integer
+     */
+    public function getPercentage()
+    {
+        return $this->percentage;
+    }
+
+    /**
+     * Returns the fromdate
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the todate
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
     }
 }

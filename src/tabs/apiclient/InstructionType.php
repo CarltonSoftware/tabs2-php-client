@@ -14,10 +14,8 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getInstructiontype() Returns the instructiontype
  * @method InstructionType setInstructiontype(string $var) Sets the instructiontype
  * 
- * @method string getDescription() Returns the description
  * @method InstructionType setDescription(string $var) Sets the description
  */
 class InstructionType extends Builder
@@ -47,5 +45,25 @@ class InstructionType extends Builder
             'instructiontype' => $this->getInstructiontype(),
             'description' => $this->getDescription()
         );
+    }
+
+    /**
+     * Returns the instructiontype
+     *
+     * @return string
+     */
+    public function getInstructiontype()
+    {
+        return $this->instructiontype;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

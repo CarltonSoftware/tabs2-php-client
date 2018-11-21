@@ -15,14 +15,10 @@ use tabs\apiclient\MarketingBrand;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method \DateTime            getFromdate()              Returns the fromdate
  * @method SourceMarketingBrand setFromdate(\DateTime $dt) Set the fromdate
  * 
- * @method \DateTime getTodate() Returns the todate
  * @method SourceMarketingBrand  setTodate(\DateTime $dt) Set the todate
  * 
- * @method MarketingBrand getMarketingbrand() Returns the marketing brand
- * @method Source getSource() Returns the source
  */
 class SourceMarketingBrand extends Builder
 {
@@ -114,5 +110,45 @@ class SourceMarketingBrand extends Builder
     public function getUrlStub()
     {
         return 'marketing';
+    }
+
+    /**
+     * Returns the fromdate
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the todate
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
+    }
+
+    /**
+     * Returns the marketing brand
+     *
+     * @return MarketingBrand
+     */
+    public function getMarketingbrand()
+    {
+        return $this->marketingbrand;
+    }
+
+    /**
+     * Returns the source
+     *
+     * @return Source
+     */
+    public function getSource()
+    {
+        return $this->source;
     }
 }

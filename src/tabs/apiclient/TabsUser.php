@@ -13,8 +13,6 @@ namespace tabs\apiclient;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method integer                  getTabsusername()    Returns the tabsusername 
- * @method \tabs\apiclient\Branding getDefaultbranding() Returns the default branding
  */
 class TabsUser extends Actor
 {
@@ -60,5 +58,25 @@ class TabsUser extends Actor
         }
         
         return $arr;
+    }
+
+    /**
+     * Returns the tabsusername
+     *
+     * @return integer
+     */
+    public function getTabsusername()
+    {
+        return $this->tabsusername;
+    }
+
+    /**
+     * Returns the default branding
+     *
+     * @return \tabs\apiclient\Branding
+     */
+    public function getDefaultbranding()
+    {
+        return $this->defaultbranding;
     }
 }

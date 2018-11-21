@@ -15,18 +15,12 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getType() Returns the type string
  * @method Check setType(string $var) Sets the type
  * 
- * @method \DateTime getCheckdatetime() Returns the checkdatetime \DateTime
  * @method Check setCheckdatetime(\DateTime $var) Sets the checkdatetime
  * 
- * @method string getNotes() Returns the notes string
  * @method Check setNotes(string $var) Sets the notes
  * 
- * @method \tabs\apiclient\KeyCheckReason getKeycheckreason() Returns the keycheckreason object
- * @method \tabs\apiclient\TabsUser getTabsuser() Returns the tabsuser object
- * @method \DateTime getExpectedbackdatetime() Returns the expectedbackdatetime \DateTime
  * @method Check setExpectedbackdatetime(\DateTime $var) Sets the expectedbackdatetime
  */
 class Check extends Builder
@@ -129,5 +123,65 @@ class Check extends Builder
         }
 
         return $arr;
+    }
+
+    /**
+     * Returns the type string
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Returns the checkdatetime \DateTime
+     *
+     * @return \DateTime
+     */
+    public function getCheckdatetime()
+    {
+        return $this->checkdatetime;
+    }
+
+    /**
+     * Returns the notes string
+     *
+     * @return string
+     */
+    public function getNotes()
+    {
+        return $this->notes;
+    }
+
+    /**
+     * Returns the keycheckreason object
+     *
+     * @return \tabs\apiclient\KeyCheckReason
+     */
+    public function getKeycheckreason()
+    {
+        return $this->keycheckreason;
+    }
+
+    /**
+     * Returns the tabsuser object
+     *
+     * @return \tabs\apiclient\TabsUser
+     */
+    public function getTabsuser()
+    {
+        return $this->tabsuser;
+    }
+
+    /**
+     * Returns the expectedbackdatetime \DateTime
+     *
+     * @return \DateTime
+     */
+    public function getExpectedbackdatetime()
+    {
+        return $this->expectedbackdatetime;
     }
 }

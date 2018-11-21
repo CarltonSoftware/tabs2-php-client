@@ -15,10 +15,8 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getName() Returns the name
  * @method SecurityRole setName(string $var) Sets the name
  * 
- * @method string getDescription() Returns the description
  * @method SecurityRole setDescription(string $var) Sets the description
  */
 class SecurityRole extends Builder
@@ -48,5 +46,25 @@ class SecurityRole extends Builder
             'name' => $this->getName(),
             'description' => $this->getDescription(),
         );
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

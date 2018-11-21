@@ -19,27 +19,18 @@ use tabs\apiclient\property\price\PriceTypeBranding;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getType() Returns the type
  * @method Price setType(string $var) Sets the type
  * 
- * @method \DateTime getFromdate() Returns the fromdate
  * @method Price setFromdate(\DateTime $var) Sets the fromdate
  * 
- * @method \DateTime getTodate() Returns the todate
  * @method Price setTodate(\DateTime $var) Sets the todate
  * 
- * @method string getBand() Returns the band
  * @method Price setBand(string $var) Sets the band
  * 
- * @method string getDescription() Returns the description
  * @method Price setDescription(string $var) Sets the description
  * 
- * @method float getPrice() Returns the price
  * @method Price setPrice(float $var) Sets the price
  * 
- * @method Collection|PartySizePrice[] getPartysizeprices() Returns the partysizeprices
- * @method Currency getCurrency() Returns the currency
- * @method PriceTypeBranding getPricetypebranding() Returns the pricetypebranding
  */
 class Price extends Builder
 {
@@ -166,5 +157,95 @@ class Price extends Builder
             'currencycode' => $this->getCurrency()->getCode(),
             'pricetypebrandingid' => $this->getPricetypebranding()->getId()
         );
+    }
+
+    /**
+     * Returns the type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Returns the fromdate
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the todate
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
+    }
+
+    /**
+     * Returns the band
+     *
+     * @return string
+     */
+    public function getBand()
+    {
+        return $this->band;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Returns the price
+     *
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Returns the partysizeprices
+     *
+     * @return Collection|PartySizePrice[]
+     */
+    public function getPartysizeprices()
+    {
+        return $this->partysizeprices;
+    }
+
+    /**
+     * Returns the currency
+     *
+     * @return Currency
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * Returns the pricetypebranding
+     *
+     * @return PriceTypeBranding
+     */
+    public function getPricetypebranding()
+    {
+        return $this->pricetypebranding;
     }
 }

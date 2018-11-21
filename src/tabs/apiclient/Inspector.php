@@ -14,10 +14,8 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getName() Returns the name
  * @method Inspector setName(string $var) Sets the name
  * 
- * @method string getSchedule() Returns the schedule
  * @method Inspector setSchedule(string $var) Sets the schedule
  */
 class Inspector extends Builder
@@ -47,5 +45,25 @@ class Inspector extends Builder
             'name' => $this->getName(),
             'schedule' => $this->getSchedule(),
         );
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the schedule
+     *
+     * @return string
+     */
+    public function getSchedule()
+    {
+        return $this->schedule;
     }
 }

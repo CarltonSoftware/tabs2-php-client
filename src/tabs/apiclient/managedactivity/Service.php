@@ -15,11 +15,8 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\Service getService() Returns the service
- * @method \DateTime getFromdate() Returns the fromdate
  * @method Service setFromdate(\DateTime $var) Sets the fromdate
  * 
- * @method \DateTime getTodate() Returns the todate
  * @method Service setTodate(\DateTime $var) Sets the todate
  */
 class Service extends Builder
@@ -81,5 +78,35 @@ class Service extends Builder
             'fromdate' => $this->getFromdate()->format('Y-m-d'),
             'todate' => $this->getTodate()->format('Y-m-d'),
         );
+    }
+
+    /**
+     * Returns the service
+     *
+     * @return \tabs\apiclient\Service
+     */
+    public function getService()
+    {
+        return $this->service;
+    }
+
+    /**
+     * Returns the fromdate
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the todate
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
     }
 }

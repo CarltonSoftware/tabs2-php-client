@@ -15,13 +15,10 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string           getName()            Returns the name
  * @method OwnerBookingType setName(string $var) Sets the name
  * 
- * @method string           getDescription()            Returns the description
  * @method OwnerBookingType setDescription(string $var) Sets the description
  *
- * @method boolean          getInactive()             Returns whether the owner type is inactive
  * @method OwnerBookingType setInactive(boolean $var) Sets whether the owner booking type is inactive
  */
 class OwnerBookingType extends Builder
@@ -57,5 +54,35 @@ class OwnerBookingType extends Builder
             'description' => $this->getDescription(),
             'inactive' => $this->getInactive(),
         );
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Returns whether the owner type is inactive
+     *
+     * @return boolean
+     */
+    public function getInactive()
+    {
+        return $this->inactive;
     }
 }

@@ -16,20 +16,13 @@ use tabs\apiclient\Collection;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\Property getProperty() Returns the property
- * @method string getTag() Returns the tag
  * @method KeyTag setTag(string $var) Sets the tag
  * 
- * @method string getColour() Returns the colour
  * @method KeyTag setColour(string $var) Sets the colour
  * 
- * @method \tabs\apiclient\KeySet getKeyset() Returns the keyset
- * @method boolean getDeleted() Returns the deleted
  * @method KeyTag setDeleted(boolean $var) Sets the deleted
  * 
- * @method \tabs\apiclient\keytag\Check getLastcheck() Returns the lastcheck
  * 
- * @method Collection|keytag\Keyy[] getKeys() Returns the keys
  */
 class KeyTag extends Builder
 {
@@ -147,5 +140,75 @@ class KeyTag extends Builder
             'keysetid' => $this->getKeyset()->getId(),
             'deleted' => $this->boolToStr($this->getDeleted()),
         );
+    }
+
+    /**
+     * Returns the property
+     *
+     * @return \tabs\apiclient\Property
+     */
+    public function getProperty()
+    {
+        return $this->property;
+    }
+
+    /**
+     * Returns the tag
+     *
+     * @return string
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    /**
+     * Returns the colour
+     *
+     * @return string
+     */
+    public function getColour()
+    {
+        return $this->colour;
+    }
+
+    /**
+     * Returns the keyset
+     *
+     * @return \tabs\apiclient\KeySet
+     */
+    public function getKeyset()
+    {
+        return $this->keyset;
+    }
+
+    /**
+     * Returns the deleted
+     *
+     * @return boolean
+     */
+    public function getDeleted()
+    {
+        return $this->deleted;
+    }
+
+    /**
+     * Returns the lastcheck
+     *
+     * @return \tabs\apiclient\keytag\Check
+     */
+    public function getLastcheck()
+    {
+        return $this->lastcheck;
+    }
+
+    /**
+     * Returns the keys
+     *
+     * @return Collection|keytag\Keyy[]
+     */
+    public function getKeys()
+    {
+        return $this->keys;
     }
 }

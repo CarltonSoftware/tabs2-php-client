@@ -15,8 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\property\Branding getPropertybranding() Returns the propertybranding object
- * @method string getDescription() Returns the description string
  * @method PropertyBranding setDescription(string $var) Sets the description
  * 
  */
@@ -74,5 +72,25 @@ class PropertyBranding extends Builder
         }
 
         return $arr;
+    }
+
+    /**
+     * Returns the propertybranding object
+     *
+     * @return \tabs\apiclient\property\Branding
+     */
+    public function getPropertybranding()
+    {
+        return $this->propertybranding;
+    }
+
+    /**
+     * Returns the description string
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

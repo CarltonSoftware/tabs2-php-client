@@ -15,16 +15,12 @@ use tabs\apiclient\Base;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \DateTime getCreated() Returns the created
  * @method PotentialBooking setCreated(\DateTime $var) Sets the created
  * 
- * @method string getType() Returns the type
  * @method PotentialBooking setType(string $var) Sets the type
  * 
- * @method \DateTime getExpiry() Returns the expiry
  * @method PotentialBooking setExpiry(\DateTime $var) Sets the expiry
  * 
- * @method boolean getExpired() Returns the expired
  * @method PotentialBooking setExpired(boolean $var) Sets the expired
  */
 class PotentialBooking extends Base
@@ -80,5 +76,45 @@ class PotentialBooking extends Base
         }
         
         return $arr;
+    }
+
+    /**
+     * Returns the created
+     *
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Returns the type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Returns the expiry
+     *
+     * @return \DateTime
+     */
+    public function getExpiry()
+    {
+        return $this->expiry;
+    }
+
+    /**
+     * Returns the expired
+     *
+     * @return boolean
+     */
+    public function getExpired()
+    {
+        return $this->expired;
     }
 }

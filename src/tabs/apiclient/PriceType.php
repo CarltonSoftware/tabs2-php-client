@@ -15,22 +15,16 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getPricetype() Returns the pricetype
  * @method PriceType setPricetype(string $var) Sets the pricetype
  * 
- * @method string getDescription() Returns the description
  * @method PriceType setDescription(string $var) Sets the description
  * 
- * @method string getPricingperiod() Returns the pricingperiod
  * @method PriceType setPricingperiod(string $var) Sets the pricingperiod
  * 
- * @method integer getPeriods() Returns the periods
  * @method PriceType setPeriods(integer $var) Sets the periods
  * 
- * @method boolean getAdditional() Returns the additional
  * @method PriceType setAdditional(boolean $var) Sets the additional
  * 
- * @method Collection|\tabs\apiclient\pricetype\Branding[] getBrandings() Get the PriceType Brandings
  */
 class PriceType extends Builder
 {
@@ -104,5 +98,65 @@ class PriceType extends Builder
             'periods' => $this->getPeriods(),
             'additional' => $this->getAdditional()
         );
+    }
+
+    /**
+     * Returns the pricetype
+     *
+     * @return string
+     */
+    public function getPricetype()
+    {
+        return $this->pricetype;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Returns the pricingperiod
+     *
+     * @return string
+     */
+    public function getPricingperiod()
+    {
+        return $this->pricingperiod;
+    }
+
+    /**
+     * Returns the periods
+     *
+     * @return integer
+     */
+    public function getPeriods()
+    {
+        return $this->periods;
+    }
+
+    /**
+     * Returns the additional
+     *
+     * @return boolean
+     */
+    public function getAdditional()
+    {
+        return $this->additional;
+    }
+
+    /**
+     * Get the PriceType Brandings
+     *
+     * @return Collection|\tabs\apiclient\pricetype\Branding[]
+     */
+    public function getBrandings()
+    {
+        return $this->brandings;
     }
 }

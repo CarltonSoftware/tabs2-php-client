@@ -13,7 +13,6 @@ namespace tabs\apiclient;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method string      getFileLocation()            Return the location of the file
  * @method FileBuilder setFileLocation(string $loc) Set the file location
  */
 abstract class FileBuilder extends Builder
@@ -159,5 +158,15 @@ abstract class FileBuilder extends Builder
         if ($this->fileId) {
             return implode('/', array('file', $this->fileId));
         }
+    }
+
+    /**
+     * Return the location of the file
+     *
+     * @return string
+     */
+    public function getFileLocation()
+    {
+        return $this->filelocation;
     }
 }

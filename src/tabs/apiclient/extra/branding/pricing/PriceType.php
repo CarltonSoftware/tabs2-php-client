@@ -15,8 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\PriceType getPricetype() Returns the pricetype
- * @method float getPrice() Returns the price
  * @method PriceType setPrice(float $var) Sets the price
  * 
  */
@@ -61,5 +59,25 @@ class PriceType extends Builder
             'pricetypeid' => $this->getPricetype()->getId(),
             'price' => $this->getPrice(),
         );
+    }
+
+    /**
+     * Returns the pricetype
+     *
+     * @return \tabs\apiclient\PriceType
+     */
+    public function getPricetype()
+    {
+        return $this->pricetype;
+    }
+
+    /**
+     * Returns the price
+     *
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
     }
 }

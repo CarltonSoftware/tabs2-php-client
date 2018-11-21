@@ -15,7 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getTemplatesource() Returns the templatesource string
  * @method TemplateSource setTemplatesource(string $var) Sets the templatesource
  */
 class TemplateSource extends Builder
@@ -37,5 +36,15 @@ class TemplateSource extends Builder
         $arr = $this->__toArray();
         $arr['sourcesql'] = 'SELECT * FROM ' . $this->getTemplatesource();
         return $arr;
+    }
+
+    /**
+     * Returns the templatesource string
+     *
+     * @return string
+     */
+    public function getTemplatesource()
+    {
+        return $this->templatesource;
     }
 }

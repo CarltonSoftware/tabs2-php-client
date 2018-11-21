@@ -15,7 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string       getAnsweroption()            Returns the group
  * @method AnswerOption setAnsweroption(string $var) Sets the group
  */
 class AnswerOption extends Builder
@@ -24,4 +23,14 @@ class AnswerOption extends Builder
      * @var string
      */
     protected $answeroption;
+
+    /**
+     * Returns the group
+     *
+     * @return string
+     */
+    public function getAnsweroption()
+    {
+        return $this->answeroption;
+    }
 }

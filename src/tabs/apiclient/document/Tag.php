@@ -15,7 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\DocumentTag getDocumenttag() Returns the documenttag object
  */
 class Tag extends Builder
 {
@@ -54,5 +53,15 @@ class Tag extends Builder
         }
 
         return $arr;
+    }
+
+    /**
+     * Returns the documenttag object
+     *
+     * @return \tabs\apiclient\DocumentTag
+     */
+    public function getDocumenttag()
+    {
+        return $this->documenttag;
     }
 }

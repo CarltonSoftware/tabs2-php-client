@@ -15,7 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\Property getProperty() Returns the property \tabs\apiclient\Property
  */
 class Property extends Builder
 {
@@ -50,5 +49,15 @@ class Property extends Builder
         return array(
             'propertyid' => $this->getProperty()->getId(),
         );
+    }
+
+    /**
+     * Returns the property \tabs\apiclient\Property
+     *
+     * @return \tabs\apiclient\Property
+     */
+    public function getProperty()
+    {
+        return $this->property;
     }
 }

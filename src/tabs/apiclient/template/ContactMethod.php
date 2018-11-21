@@ -15,15 +15,10 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \DateTime getFromdate() Returns the fromdate \DateTime
  * @method ContactMethod setFromdate(\DateTime $var) Sets the fromdate
  * 
- * @method \DateTime getTodate() Returns the todate \DateTime
  * @method ContactMethod setTodate(\DateTime $var) Sets the todate
  * 
- * @method \tabs\apiclient\Language getLanguage() Returns the language object
- * @method \tabs\apiclient\ContactMethodType getContactmethodtype() Returns the contactmethodtype object
- * @method Collection\tabs\apiclient\template\Element[] getElements() Returns the elements object
  */
 class ContactMethod extends Builder
 {
@@ -221,5 +216,55 @@ class ContactMethod extends Builder
             $d->setParent($p);
             return $d;
         }
+    }
+
+    /**
+     * Returns the fromdate \DateTime
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the todate \DateTime
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
+    }
+
+    /**
+     * Returns the language object
+     *
+     * @return \tabs\apiclient\Language
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
+    /**
+     * Returns the contactmethodtype object
+     *
+     * @return \tabs\apiclient\ContactMethodType
+     */
+    public function getContactmethodtype()
+    {
+        return $this->contactmethodtype;
+    }
+
+    /**
+     * Returns the elements object
+     *
+     * @return Collection\tabs\apiclient\template\Element[]
+     */
+    public function getElements()
+    {
+        return $this->elements;
     }
 }

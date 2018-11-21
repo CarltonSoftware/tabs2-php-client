@@ -15,10 +15,8 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method integer getYear() Returns the year
  * @method Target setYear(integer $var) Sets the year
  * 
- * @method integer getDaysbooked() Returns the daysbooked
  * @method Target setDaysbooked(integer $var) Sets the daysbooked
  */
 class Target extends Builder
@@ -48,5 +46,25 @@ class Target extends Builder
             'year' => $this->getYear(),
             'daysbooked' => $this->getDaysbooked(),
         );
+    }
+
+    /**
+     * Returns the year
+     *
+     * @return integer
+     */
+    public function getYear()
+    {
+        return $this->year;
+    }
+
+    /**
+     * Returns the daysbooked
+     *
+     * @return integer
+     */
+    public function getDaysbooked()
+    {
+        return $this->daysbooked;
     }
 }

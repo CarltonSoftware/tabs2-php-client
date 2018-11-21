@@ -15,32 +15,22 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getName() Returns the name
  * @method Ownerpaymentterms setName(string $var) Sets the name
  * 
- * @method string getDescription() Returns the description
  * @method Ownerpaymentterms setDescription(string $var) Sets the description
  * 
- * @method boolean getOndeposit() Returns the ondeposit
  * @method Ownerpaymentterms setOndeposit(boolean $var) Sets the ondeposit
  * 
- * @method boolean getOninterim() Returns the oninterim
  * @method Ownerpaymentterms setOninterim(boolean $var) Sets the oninterim
  * 
- * @method boolean getOnbalance() Returns the onbalance
  * @method Ownerpaymentterms setOnbalance(boolean $var) Sets the onbalance
  * 
- * @method float getAmountperperiod() Returns the amountperperiod
  * @method Ownerpaymentterms setAmountperperiod(float $var) Sets the amountperperiod
  * 
- * @method integer getPercentageofbasic() Returns the percentageofbasic
  * @method Ownerpaymentterms setPercentageofbasic(integer $var) Sets the percentageofbasic
  * 
- * @method string getOwnerpaid() Returns the ownerpaid
  * @method Ownerpaymentterms setOwnerpaid(string $var) Sets the ownerpaid
  * 
- * @method \tabs\apiclient\Currency getCurrency() Returns the currency
- * @method Collection|Extra[] getExtras() Returns the extras
  */
 class OwnerPaymentTerms extends Builder
 {
@@ -156,5 +146,105 @@ class OwnerPaymentTerms extends Builder
             'ownerpaid' => $this->getOwnerpaid(),
             'currencyid' => $this->getCurrency()->getId()
         );
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Returns the ondeposit
+     *
+     * @return boolean
+     */
+    public function getOndeposit()
+    {
+        return $this->ondeposit;
+    }
+
+    /**
+     * Returns the oninterim
+     *
+     * @return boolean
+     */
+    public function getOninterim()
+    {
+        return $this->oninterim;
+    }
+
+    /**
+     * Returns the onbalance
+     *
+     * @return boolean
+     */
+    public function getOnbalance()
+    {
+        return $this->onbalance;
+    }
+
+    /**
+     * Returns the amountperperiod
+     *
+     * @return float
+     */
+    public function getAmountperperiod()
+    {
+        return $this->amountperperiod;
+    }
+
+    /**
+     * Returns the percentageofbasic
+     *
+     * @return integer
+     */
+    public function getPercentageofbasic()
+    {
+        return $this->percentageofbasic;
+    }
+
+    /**
+     * Returns the ownerpaid
+     *
+     * @return string
+     */
+    public function getOwnerpaid()
+    {
+        return $this->ownerpaid;
+    }
+
+    /**
+     * Returns the currency
+     *
+     * @return \tabs\apiclient\Currency
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * Returns the extras
+     *
+     * @return Collection|Extra[]
+     */
+    public function getExtras()
+    {
+        return $this->extras;
     }
 }

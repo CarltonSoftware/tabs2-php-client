@@ -16,13 +16,10 @@ use tabs\apiclient\StaticCollection;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getName() Returns the name
  * @method SecurityGroup setName(string $var) Sets the name
  * 
- * @method string getDescription() Returns the description
  * @method SecurityGroup setDescription(string $var) Sets the description
  * 
- * @method Collection|\tabs\apiclient\SecurityRole[] getSecurityroles() Returns the securityroles
  */
 class SecurityGroup extends Builder
 {
@@ -70,5 +67,35 @@ class SecurityGroup extends Builder
             'name' => $this->getName(),
             'description' => $this->getDescription(),
         );
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Returns the securityroles
+     *
+     * @return Collection|\tabs\apiclient\SecurityRole[]
+     */
+    public function getSecurityroles()
+    {
+        return $this->securityroles;
     }
 }

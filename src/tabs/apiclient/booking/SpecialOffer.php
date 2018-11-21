@@ -13,9 +13,7 @@ namespace tabs\apiclient\booking;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method float getSaving() Get the saving for the booking special offer
  * 
- * @method \tabs\apiclient\specialoffer\Promotion getPromotion() Get any applicable promotion
  */
 class SpecialOffer extends \tabs\apiclient\SpecialOffer
 {
@@ -39,5 +37,25 @@ class SpecialOffer extends \tabs\apiclient\SpecialOffer
         $this->promotion = new \tabs\apiclient\specialoffer\Promotion();
 
         parent::__construct($id);
+    }
+
+    /**
+     * Get the saving for the booking special offer
+     *
+     * @return float
+     */
+    public function getSaving()
+    {
+        return $this->saving;
+    }
+
+    /**
+     * Get any applicable promotion
+     *
+     * @return \tabs\apiclient\specialoffer\Promotion
+     */
+    public function getPromotion()
+    {
+        return $this->promotion;
     }
 }

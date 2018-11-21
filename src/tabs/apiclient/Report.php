@@ -15,19 +15,14 @@ use tabs\apiclient\ReportParameter;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method string         getName()                            Returns the name
  * @method Report         setName(string $name)                Sets the name
  * 
- * @method string         getDescription()                     Returns the description
  * @method Report         setDescription(string $description)  Sets the description
  * 
- * @method string         getFilename()                        Returns the filename
  * @method Report         setFilename(string $filename)        Sets the filename
  * 
- * @method string         getCategory()                        Returns the category
  * @method Report         setCategory(string $category)        Sets the category
  * 
- * @method Collection|ReportParameter[] getParameters() Returns the parameters
  */
 class Report extends Builder
 {
@@ -93,5 +88,55 @@ class Report extends Builder
             'filename' => $this->getFilename(),
             'category' => $this->getCategory(),
         );
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Returns the filename
+     *
+     * @return string
+     */
+    public function getFilename()
+    {
+        return $this->filename;
+    }
+
+    /**
+     * Returns the category
+     *
+     * @return string
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Returns the parameters
+     *
+     * @return Collection|ReportParameter[]
+     */
+    public function getParameters()
+    {
+        return $this->parameters;
     }
 }

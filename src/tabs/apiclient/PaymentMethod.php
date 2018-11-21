@@ -15,10 +15,8 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getPaymentmethod() Returns the paymentmethod
  * @method PaymentMethod setPaymentmethod(string $var) Sets the paymentmethod
  * 
- * @method string getDescription() Returns the description
  * @method PaymentMethod setDescription(string $var) Sets the description
  */
 class PaymentMethod extends Builder
@@ -48,5 +46,25 @@ class PaymentMethod extends Builder
             'paymentmethod' => $this->getPaymentmethod(),
             'description' => $this->getDescription()
         );
+    }
+
+    /**
+     * Returns the paymentmethod
+     *
+     * @return string
+     */
+    public function getPaymentmethod()
+    {
+        return $this->paymentmethod;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

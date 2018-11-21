@@ -19,21 +19,14 @@ use tabs\apiclient\MarketingBrand;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method BrandingGroup getBrandinggroup() Returns the brandinggroup
  * 
- * @method MarketingBrand getMarketingbrand() Returns the marketingbrand
  * 
- * @method BookingBrand getBookingbrand() Returns the bookingbrand
  * 
- * @method VatBand getLettingincomevatband() Returns the lettingincomevatband
  * 
- * @method string getBacsoutputtype() Returns the bacsoutputtype
  * @method Branding setBacsoutputtype(string $var) Sets the bacsoutputtype
  * 
- * @method string getBacssettings() Returns the bacssettings
  * @method Branding setBacssettings(string $var) Sets the bacssettings
  * 
- * @method Collection|branding\Extra[] getExtras() Returns the branding extras
  */
 class Branding extends Builder
 {
@@ -192,5 +185,75 @@ class Branding extends Builder
             'bacsoutputtype' => $this->getBacsoutputtype(),
             'bacssettings' => $this->getBacssettings(),
         );
+    }
+
+    /**
+     * Returns the brandinggroup
+     *
+     * @return BrandingGroup
+     */
+    public function getBrandinggroup()
+    {
+        return $this->brandinggroup;
+    }
+
+    /**
+     * Returns the marketingbrand
+     *
+     * @return MarketingBrand
+     */
+    public function getMarketingbrand()
+    {
+        return $this->marketingbrand;
+    }
+
+    /**
+     * Returns the bookingbrand
+     *
+     * @return BookingBrand
+     */
+    public function getBookingbrand()
+    {
+        return $this->bookingbrand;
+    }
+
+    /**
+     * Returns the lettingincomevatband
+     *
+     * @return VatBand
+     */
+    public function getLettingincomevatband()
+    {
+        return $this->lettingincomevatband;
+    }
+
+    /**
+     * Returns the bacsoutputtype
+     *
+     * @return string
+     */
+    public function getBacsoutputtype()
+    {
+        return $this->bacsoutputtype;
+    }
+
+    /**
+     * Returns the bacssettings
+     *
+     * @return string
+     */
+    public function getBacssettings()
+    {
+        return $this->bacssettings;
+    }
+
+    /**
+     * Returns the branding extras
+     *
+     * @return Collection|branding\Extra[]
+     */
+    public function getExtras()
+    {
+        return $this->extras;
     }
 }

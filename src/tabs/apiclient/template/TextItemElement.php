@@ -15,7 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\TextItem getTextitem() Returns the textitem object
  */
 class TextItemElement extends Element
 {
@@ -63,5 +62,15 @@ class TextItemElement extends Element
     public function getUrlStub()
     {
         return 'element';
+    }
+
+    /**
+     * Returns the textitem object
+     *
+     * @return \tabs\apiclient\TextItem
+     */
+    public function getTextitem()
+    {
+        return $this->textitem;
     }
 }

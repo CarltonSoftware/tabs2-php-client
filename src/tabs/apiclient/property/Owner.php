@@ -15,11 +15,8 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\Owner getOwner() Returns the owner
- * @method \DateTime getOwnerfromdate() Returns the fromdate
  * @method Owner setOwnerfromdate(\DateTime $var) Sets the fromdate
  * 
- * @method \DateTime getOwnertodate() Returns the todate
  * @method Owner setOwnertodate(\DateTime $var) Sets the todate
  * 
  */
@@ -83,5 +80,35 @@ class Owner extends Builder
             'ownerfromdate' => $this->getOwnerfromdate()->format('Y-m-d'),
             'ownertodate' => $this->getOwnertodate()->format('Y-m-d')
         );
+    }
+
+    /**
+     * Returns the owner
+     *
+     * @return \tabs\apiclient\Owner
+     */
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+
+    /**
+     * Returns the fromdate
+     *
+     * @return \DateTime
+     */
+    public function getOwnerfromdate()
+    {
+        return $this->ownerfromdate;
+    }
+
+    /**
+     * Returns the todate
+     *
+     * @return \DateTime
+     */
+    public function getOwnertodate()
+    {
+        return $this->ownertodate;
     }
 }
