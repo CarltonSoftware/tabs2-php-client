@@ -167,6 +167,6 @@ abstract class FileBuilder extends Builder
      */
     public function getFileLocation()
     {
-        return $this->filelocation;
+        return $this->fileLocation;
     }
 }
