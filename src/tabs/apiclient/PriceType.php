@@ -25,6 +25,7 @@ use tabs\apiclient\Builder;
  * 
  * @method PriceType setAdditional(boolean $var) Sets the additional
  * 
+ * @method Collection|\tabs\apiclient\pricetype\Branding[] getBrandings() Get the PriceType Brandings
  */
 class PriceType extends Builder
 {
@@ -148,15 +149,5 @@ class PriceType extends Builder
     public function getAdditional()
     {
         return $this->additional;
-    }
-
-    /**
-     * Get the PriceType Brandings
-     *
-     * @return Collection|\tabs\apiclient\pricetype\Branding[]
-     */
-    public function getBrandings()
-    {
-        return $this->brandings;
     }
 }

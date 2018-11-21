@@ -20,13 +20,9 @@ use tabs\apiclient\MarketingBrand;
  * @link      http://www.carltonsoftware.co.uk
  *
  * 
- * 
- * 
- * 
  * @method Branding setBacsoutputtype(string $var) Sets the bacsoutputtype
- * 
  * @method Branding setBacssettings(string $var) Sets the bacssettings
- * 
+ * @method Collection|branding\Extra[] getExtras() Returns the branding extras
  */
 class Branding extends Builder
 {
@@ -245,15 +241,5 @@ class Branding extends Builder
     public function getBacssettings()
     {
         return $this->bacssettings;
-    }
-
-    /**
-     * Returns the branding extras
-     *
-     * @return Collection|branding\Extra[]
-     */
-    public function getExtras()
-    {
-        return $this->extras;
     }
 }

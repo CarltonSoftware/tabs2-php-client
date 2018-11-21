@@ -53,7 +53,8 @@ use tabs\apiclient\Builder;
  * 
  * @method TriggerEvent setShowcancelledflexilet(boolean $var) Sets the showcancelledflexilet
  * 
- * 
+ * @method Collection|\tabs\apiclient\template\ContactMethod[] getContactmethods() Returns the contactmethods collection
+ * @method Collection|\tabs\apiclient\template\RoleReason[] getRolereasons() Returns the role reasons collection
  */
 class Template extends Builder
 {
@@ -615,25 +616,5 @@ class Template extends Builder
     public function getTriggerevent()
     {
         return $this->triggerevent;
-    }
-
-    /**
-     * Returns the contactmethods collection
-     *
-     * @return Collection|\tabs\apiclient\template\ContactMethod[]
-     */
-    public function getContactmethods()
-    {
-        return $this->contactmethods;
-    }
-
-    /**
-     * Returns the role reasons collection
-     *
-     * @return Collection|\tabs\apiclient\template\RoleReason[]
-     */
-    public function getRolereasons()
-    {
-        return $this->rolereasons;
     }
 }

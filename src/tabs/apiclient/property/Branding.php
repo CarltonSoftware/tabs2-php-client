@@ -35,6 +35,9 @@ use tabs\apiclient\extra\branding\Configuration;
  *
  * @method Branding setConvertpotentialstoprovisionals(boolean $var) Sets the convertpotentialstoprovisionals
  * 
+ * @method Collection|ChangeDayTemplate[] getChangedaytemplates Returns the change day templates
+ * @method Collection|Pricing[] getExtraprices() Returns the property extra prices
+ * @method Collection|Configuration[] getExtraconfigurations() Returns the property extra configurations
  */
 class Branding extends Builder
 {
@@ -586,36 +589,6 @@ class Branding extends Builder
     public function getStatus()
     {
         return $this->status;
-    }
-
-    /**
-     * Returns the change day templates
-     *
-     * @return Collection|ChangeDayTemplate[]
-     */
-    public function getChangedaytemplates()
-    {
-        return $this->changedaytemplates;
-    }
-
-    /**
-     * Returns the property extra prices
-     *
-     * @return Collection|Pricing[]
-     */
-    public function getExtraprices()
-    {
-        return $this->extraprices;
-    }
-
-    /**
-     * Returns the property extra configurations
-     *
-     * @return Collection|Configuration[]
-     */
-    public function getExtraconfigurations()
-    {
-        return $this->extraconfigurations;
     }
 
     /**

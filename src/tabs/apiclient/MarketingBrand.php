@@ -24,7 +24,7 @@ use tabs\apiclient\marketingbrand\EmailList;
  * 
  * @method MarketingBrand setWebsite(string $var) Sets the website
  * 
- * 
+ * @method Collection|EmailList[] getEmaillists() Returns the emaillists
  */
 class MarketingBrand extends Builder
 {
@@ -196,15 +196,5 @@ class MarketingBrand extends Builder
     public function getDefaultbookingbrand()
     {
         return $this->defaultbookingbrand;
-    }
-
-    /**
-     * Returns the emaillists
-     *
-     * @return Collection|EmailList[]
-     */
-    public function getEmaillists()
-    {
-        return $this->emaillists;
     }
 }

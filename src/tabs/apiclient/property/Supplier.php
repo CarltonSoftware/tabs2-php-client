@@ -19,6 +19,8 @@ use tabs\apiclient\property\supplier\Service;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
+ * @method Collection|DateRange[] getDates() Returns the dates
+ * @method Collection|Service[] getServices() Returns the services
  */
 class Supplier extends Builder
 {
@@ -129,25 +131,5 @@ class Supplier extends Builder
     public function getActor()
     {
         return $this->actor;
-    }
-
-    /**
-     * Returns the dates
-     *
-     * @return Collection|DateRange[]
-     */
-    public function getDates()
-    {
-        return $this->dates;
-    }
-
-    /**
-     * Returns the services
-     *
-     * @return Collection|Service[]
-     */
-    public function getServices()
-    {
-        return $this->services;
     }
 }

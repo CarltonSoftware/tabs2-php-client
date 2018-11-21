@@ -22,7 +22,7 @@ use tabs\apiclient\Collection;
  * 
  * @method KeyTag setDeleted(boolean $var) Sets the deleted
  * 
- * 
+ * @method Collection|keytag\Keyy[] getKeys() Returns the keys
  */
 class KeyTag extends Builder
 {
@@ -200,15 +200,5 @@ class KeyTag extends Builder
     public function getLastcheck()
     {
         return $this->lastcheck;
-    }
-
-    /**
-     * Returns the keys
-     *
-     * @return Collection|keytag\Keyy[]
-     */
-    public function getKeys()
-    {
-        return $this->keys;
     }
 }

@@ -23,6 +23,7 @@ use tabs\apiclient\managedactivity\Service;
  * 
  * @method ManagedActivity setDonotmodify(boolean $var) Sets the donotmodify
  * 
+ * @method Collection|Service[] getServices() Get the services collection
  */
 class ManagedActivity extends Builder
 {
@@ -109,15 +110,5 @@ class ManagedActivity extends Builder
     public function getDonotmodify()
     {
         return $this->donotmodify;
-    }
-
-    /**
-     * Get the services collection
-     *
-     * @return Collection|Service[]
-     */
-    public function getServices()
-    {
-        return $this->services;
     }
 }

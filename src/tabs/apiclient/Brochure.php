@@ -30,7 +30,7 @@ use tabs\apiclient\MarketingBrand;
  * 
  * @method Brochure setCost(float $var) Sets the cost
  * 
- * 
+ * @method Collection getBrochurerequests() Returns the brochure requests collection
  */
 class Brochure extends Builder
 {
@@ -231,15 +231,5 @@ class Brochure extends Builder
     public function getMarketingbrand()
     {
         return $this->marketingbrand;
-    }
-
-    /**
-     * Returns the brochure requests collection
-     *
-     * @return Collection
-     */
-    public function getBrochurerequests()
-    {
-        return $this->brochurerequests;
     }
 }

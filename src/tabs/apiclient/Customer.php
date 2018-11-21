@@ -22,7 +22,13 @@ use tabs\apiclient\marketingbrand\EmailList;
  * 
  * @method Customer setBookings(Collection $col) Set the bookings
  * 
+ * @method Collection|MarketingBrand[] getMarketingbrands() Returns the customer MarketingBrands
  * 
+ * @method Collection|Booking[] getBookings() Returns the customer bookings
+ * 
+ * @method Collection|actor\Category[] getCategories() Returns the customer categories
+ * 
+ * @method Collection|actor\Payment[] getPayments() Returns the customer categories
  */
 class Customer extends Actor
 {
@@ -215,45 +221,5 @@ class Customer extends Actor
     public function getAccountbalance()
     {
         return $this->accountbalance;
-    }
-
-    /**
-     * Returns the customer MarketingBrands
-     *
-     * @return Collection|MarketingBrand[]
-     */
-    public function getMarketingbrands()
-    {
-        return $this->marketingbrands;
-    }
-
-    /**
-     * Returns the customer bookings
-     *
-     * @return Collection|Booking[]
-     */
-    public function getBookings()
-    {
-        return $this->bookings;
-    }
-
-    /**
-     * Returns the customer categories
-     *
-     * @return Collection|actor\Category[]
-     */
-    public function getCategories()
-    {
-        return $this->categories;
-    }
-
-    /**
-     * Returns the customer categories
-     *
-     * @return Collection|actor\Payment[]
-     */
-    public function getPayments()
-    {
-        return $this->payments;
     }
 }

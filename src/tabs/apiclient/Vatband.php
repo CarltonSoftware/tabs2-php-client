@@ -17,6 +17,7 @@ use tabs\apiclient\Collection;
  * 
  * @method Vatband setVatband(string $vatband) Sets the Vatband
  * 
+ * @method Collection getVatrates() Return the vatrates collection
  */
 class Vatband extends Builder
 {
@@ -115,15 +116,5 @@ class Vatband extends Builder
     public function getVatband()
     {
         return $this->vatband;
-    }
-
-    /**
-     * Return the vatrates collection
-     *
-     * @return Collection
-     */
-    public function getVatrates()
-    {
-        return $this->vatrates;
     }
 }

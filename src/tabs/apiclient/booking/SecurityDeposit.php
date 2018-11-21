@@ -42,12 +42,11 @@ use tabs\apiclient\OwnerChargeCode;
  * 
  * @method SecurityDeposit setRefundeddate(\DateTime $var) Sets the refundeddate
  * 
- * 
  * @method SecurityDeposit setOwnerchargeamount(integer $var) Sets the ownerchargeamount
  * 
  * @method SecurityDeposit setOwnercharge(string $var) Sets the ownercharge
  * 
- * 
+ * @method \tabs\apiclient\property\SecurityDeposit getPropertysecuritydeposit() Get the property SD
  */
 class SecurityDeposit extends Builder
 {
@@ -384,16 +383,6 @@ class SecurityDeposit extends Builder
     public function getOwnercharge()
     {
         return $this->ownercharge;
-    }
-
-    /**
-     * Returns the holds
-     *
-     * @return Collection|Hold[]
-     */
-    public function getHolds()
-    {
-        return $this->holds;
     }
 
     /**

@@ -74,6 +74,20 @@ use tabs\apiclient\OwnerBookingType;
  * @method Booking setSourcecode(string $var) Sets the source code
  *
  * @method Booking setOverridestatus(boolean $var) Set the override status flag
+ * 
+ * @method Collection|booking\SecurityDeposit[] getSecuritydeposits() Returns the securitydeposits
+ *
+ * @method booking\SecurityDeposit getSecuritydeposit() Returns booking securitydeposit
+ *
+ * @method Collection|booking\Customer[] getCustomers() Returns the customers
+ *
+ * @method Collection|booking\Document[] getDocuments() Returns the booking documents
+ *
+ * @method Collection|BookingNote[] getNotes() Returns the booking notes
+ *
+ * @method Collection|booking\Extra[] getExtras() Returns the booking extras
+ *
+ * @method Collection|booking\Guest[] getGuests() Returns the booking guests
  */
 class Booking extends Builder
 {
@@ -1691,76 +1705,6 @@ class Booking extends Builder
     public function getCancelledbooking()
     {
         return $this->cancelledbooking;
-    }
-
-    /**
-     * Returns the securitydeposits
-     *
-     * @return Collection|booking\SecurityDeposit[]
-     */
-    public function getSecuritydeposits()
-    {
-        return $this->securitydeposits;
-    }
-
-    /**
-     * Returns booking securitydeposit
-     *
-     * @return booking\SecurityDeposit[]
-     */
-    public function getSecuritydeposit()
-    {
-        return $this->securitydeposit;
-    }
-
-    /**
-     * Returns the customers
-     *
-     * @return Collection|booking\Customer[]
-     */
-    public function getCustomers()
-    {
-        return $this->customers;
-    }
-
-    /**
-     * Returns the booking documents
-     *
-     * @return Collection|booking\Document[]
-     */
-    public function getDocuments()
-    {
-        return $this->documents;
-    }
-
-    /**
-     * Returns the booking notes
-     *
-     * @return Collection|BookingNote[]
-     */
-    public function getNotes()
-    {
-        return $this->notes;
-    }
-
-    /**
-     * Returns the booking extras
-     *
-     * @return Collection|booking\Extra[]
-     */
-    public function getExtras()
-    {
-        return $this->extras;
-    }
-
-    /**
-     * Returns the booking guests
-     *
-     * @return Collection|booking\Guest[]
-     */
-    public function getGuests()
-    {
-        return $this->guests;
     }
 
     /**

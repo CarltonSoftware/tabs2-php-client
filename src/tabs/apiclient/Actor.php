@@ -34,7 +34,6 @@ use tabs\apiclient\ActorSecurity;
  * 
  * @method Actor setTabscode(string $var) Sets the tabscode
  * 
- * 
  * @method Actor setInactive(boolean $var) Sets the inactive
  * 
  * @method Actor setCompanyname(string $var) Sets the companyname
@@ -47,7 +46,6 @@ use tabs\apiclient\ActorSecurity;
  * 
  * @method Actor setBankaccounts(Collection $col) Set the bank accounts
  * 
- * 
  * @method Actor setDocuments(Collection $col) Set the documents
  * 
  * @method Actor setNotes(Collection $col) Set the notes
@@ -56,7 +54,15 @@ use tabs\apiclient\ActorSecurity;
  * 
  * @method Actor setManagedactivities(StaticCollection $col) Set the managed activities
  * 
+ * @method Actor setBankaccounts(Collection $col) Set the bank accounts
  * 
+ * @method Collection|actor\Document[] getDocuments() Returns the actor documents
+ * 
+ * @method Collection|ActorNote[] getNotes() Returns the actor notes
+ * 
+ * @method Collection|ActorSecurity[] getSecurity() Returns the actor security
+ * 
+ * @method Collection|actor\Enquiry[] getEnquiries() Returns the customer enquiries
  */
 abstract class Actor extends Builder
 {
@@ -650,16 +656,6 @@ abstract class Actor extends Builder
     }
 
     /**
-     * Returns the bank account collection
-     *
-     * @return Collection|BankAccount
-     */
-    public function getBankaccounts()
-    {
-        return $this->bankaccounts;
-    }
-
-    /**
      * Returns the bacs bank account
      *
      * @return BankAccount
@@ -667,26 +663,6 @@ abstract class Actor extends Builder
     public function getBacsbankaccount()
     {
         return $this->bacsbankaccount;
-    }
-
-    /**
-     * Returns the actor documents
-     *
-     * @return Collection|actor\Document[]
-     */
-    public function getDocuments()
-    {
-        return $this->documents;
-    }
-
-    /**
-     * Returns the actor notes
-     *
-     * @return Collection|ActorNote[]
-     */
-    public function getNotes()
-    {
-        return $this->notes;
     }
 
     /**
@@ -698,7 +674,7 @@ abstract class Actor extends Builder
     {
         return $this->contactdetails;
     }
-
+    
     /**
      * Returns the actor managed activities
      *
@@ -707,25 +683,5 @@ abstract class Actor extends Builder
     public function getManagedactivities()
     {
         return $this->managedactivities;
-    }
-
-    /**
-     * Returns the actor security
-     *
-     * @return Collection|ActorSecurity[]
-     */
-    public function getSecurity()
-    {
-        return $this->security;
-    }
-
-    /**
-     * Returns the customer enquiries
-     *
-     * @return Collection|actor\Enquiry[]
-     */
-    public function getEnquiries()
-    {
-        return $this->enquiries;
     }
 }

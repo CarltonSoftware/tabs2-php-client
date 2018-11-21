@@ -22,6 +22,7 @@ use tabs\apiclient\Collection;
  * 
  * @method Unit   setDecimalplaces(string $decimal) Sets the decimal places
  * 
+ * @method Collection|PerUnit[] getPerunits() Get the PerUnit settings
  */
 class Unit extends Builder
 {
@@ -110,15 +111,5 @@ class Unit extends Builder
     public function getDecimalplaces()
     {
         return $this->decimalplaces;
-    }
-
-    /**
-     * Get the PerUnit settings
-     *
-     * @return Collection|PerUnit[]
-     */
-    public function getPerunits()
-    {
-        return $this->perunits;
     }
 }

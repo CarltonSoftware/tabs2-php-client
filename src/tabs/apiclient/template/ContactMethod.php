@@ -18,7 +18,7 @@ use tabs\apiclient\Builder;
  * @method ContactMethod setFromdate(\DateTime $var) Sets the fromdate
  * 
  * @method ContactMethod setTodate(\DateTime $var) Sets the todate
- * 
+ * @method Collection\tabs\apiclient\template\Element[] getElements() Returns the elements object
  */
 class ContactMethod extends Builder
 {
@@ -256,15 +256,5 @@ class ContactMethod extends Builder
     public function getContactmethodtype()
     {
         return $this->contactmethodtype;
-    }
-
-    /**
-     * Returns the elements object
-     *
-     * @return Collection\tabs\apiclient\template\Element[]
-     */
-    public function getElements()
-    {
-        return $this->elements;
     }
 }

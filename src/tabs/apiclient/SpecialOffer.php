@@ -65,7 +65,15 @@ use tabs\apiclient\Builder;
  * 
  * @method SpecialOffer setApplytopartysizepricing(boolean $var) Sets the applytopartysizepricing
  * 
- * 
+ * @method Collection|specialoffer\BookingPeriod[]          getBookingperiods()          Returns the booking periods collection
+ * @method Collection|specialoffer\HolidayPeriod[]          getHolidayperiods()          Returns the holiday periods collection
+ * @method Collection|specialoffer\Branding[]               getBrandings()               Returns the offer brandings
+ * @method Collection|specialoffer\Attribute[]              getAttributes()              Returns the offers attributes
+ * @method Collection|specialoffer\PropertyBranding[]       getPropertybrandings()       Returns the offers property brandings
+ * @method Collection|specialoffer\ConfirmedBookingPeriod[] getConfirmedbookingperiods() Returns the confirmed booking periods
+ * @method Collection|specialoffer\Promotion[]              getPromotions()              Returns the promotions
+ * @method Collection|specialoffer\SalesChannel[]           getSaleschannels()           Returns the sales channels
+ * @method Collection|specialoffer\WebsiteSection[]         getWebsitesections()         Returns the website sections
  */
 class SpecialOffer extends Builder
 {
@@ -758,95 +766,5 @@ class SpecialOffer extends Builder
     public function getArchivedby()
     {
         return $this->archivedby;
-    }
-
-    /**
-     * Returns the booking periods collection
-     *
-     * @return Collection|specialoffer\BookingPeriod[]
-     */
-    public function getBookingperiods()
-    {
-        return $this->bookingperiods;
-    }
-
-    /**
-     * Returns the holiday periods collection
-     *
-     * @return Collection|specialoffer\HolidayPeriod[]
-     */
-    public function getHolidayperiods()
-    {
-        return $this->holidayperiods;
-    }
-
-    /**
-     * Returns the offer brandings
-     *
-     * @return Collection|specialoffer\Branding[]
-     */
-    public function getBrandings()
-    {
-        return $this->brandings;
-    }
-
-    /**
-     * Returns the offers attributes
-     *
-     * @return Collection|specialoffer\Attribute[]
-     */
-    public function getAttributes()
-    {
-        return $this->attributes;
-    }
-
-    /**
-     * Returns the offers property brandings
-     *
-     * @return Collection|specialoffer\PropertyBranding[]
-     */
-    public function getPropertybrandings()
-    {
-        return $this->propertybrandings;
-    }
-
-    /**
-     * Returns the confirmed booking periods
-     *
-     * @return Collection|specialoffer\ConfirmedBookingPeriod[]
-     */
-    public function getConfirmedbookingperiods()
-    {
-        return $this->confirmedbookingperiods;
-    }
-
-    /**
-     * Returns the promotions
-     *
-     * @return Collection|specialoffer\Promotion[]
-     */
-    public function getPromotions()
-    {
-        return $this->promotions;
-    }
-
-    /**
-     * Returns the sales channels
-     *
-     * @return Collection|specialoffer\SalesChannel[]
-     */
-    public function getSaleschannels()
-    {
-        return $this->saleschannels;
-    }
-
-    /**
-     * Returns the website sections
-     *
-     * @return Collection|specialoffer\WebsiteSection[]
-     */
-    public function getWebsitesections()
-    {
-        return $this->websitesections;
     }
 }

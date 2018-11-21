@@ -26,6 +26,7 @@ use tabs\apiclient\Encoding;
  * 
  * @method ContactMethodType setAddressvalidation(string $var) Sets the addressvalidation
  * 
+ * @method Collection|contactmethodtype\Element[] getElements() Returns the elements
  */
 class ContactMethodType extends Base
 {
@@ -181,15 +182,5 @@ class ContactMethodType extends Base
     public function getAddressvalidation()
     {
         return $this->addressvalidation;
-    }
-
-    /**
-     * Returns the elements
-     *
-     * @return Collection|contactmethodtype\Element[]
-     */
-    public function getElements()
-    {
-        return $this->elements;
     }
 }

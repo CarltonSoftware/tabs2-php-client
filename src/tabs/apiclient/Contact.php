@@ -18,7 +18,6 @@ use tabs\apiclient\Collection;
  *
  * @method Contact setContactdatetime(\DateTime $var) Sets the contactdatetime
  * 
- * 
  * @method Contact setContent(string $var) Sets the content
  * 
  * @method Contact setSubject(string $var) Sets the subject
@@ -27,12 +26,9 @@ use tabs\apiclient\Collection;
  * 
  * @method string setStatus_status(string $var) Sets the status_status
  * 
- * 
- * 
  * @method Contact setTemplateentityid(string $var) Set the template entity id
- * 
- * 
- * 
+ * @method Collection|contact\Entity[] getContactentities() Returns the contactentities
+ * @method Collection|contact\Document[] getDocuments() Returns the contact documents
  */
 class Contact extends Builder
 {
@@ -364,26 +360,6 @@ class Contact extends Builder
     public function getTemplateentityid()
     {
         return $this->templateentityid;
-    }
-
-    /**
-     * Returns the contactentities
-     *
-     * @return Collection|contact\Entity[]
-     */
-    public function getContactentities()
-    {
-        return $this->contactentities;
-    }
-
-    /**
-     * Returns the contact documents
-     *
-     * @return Collection|contact\Document[]
-     */
-    public function getDocuments()
-    {
-        return $this->documents;
     }
 
     /**

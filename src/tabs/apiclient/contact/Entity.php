@@ -30,7 +30,7 @@ use tabs\apiclient\Collection;
  * 
  * @method Entity setPerformsend(boolean $var) Sets the performsend
  * 
- * 
+ * @method Collection|entity\Status[] getStatus() Returns the status
  */
 class Entity extends Builder
 {
@@ -262,16 +262,6 @@ class Entity extends Builder
     public function getPerformsend()
     {
         return $this->performsend;
-    }
-
-    /**
-     * Returns the status
-     *
-     * @return Collection|entity\Status[]
-     */
-    public function getStatus()
-    {
-        return $this->status;
     }
 
     /**

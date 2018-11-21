@@ -26,6 +26,7 @@ use tabs\apiclient\ChangeDayRule;
  *
  * @method ChangeDayTemplate setTodate(\DateTime $var) Sets the todate
  *
+ * @method Collection|ChangeDayRule[] getChangedayrules Returns the change day rules
  */
 class ChangeDayTemplate extends Base
 {
@@ -187,15 +188,5 @@ class ChangeDayTemplate extends Base
     public function getTodate()
     {
         return $this->todate;
-    }
-
-    /**
-     *   Returns the change day rules
-     *
-     * @return Collection|ChangeDayRule[]
-     */
-    public function getChangedayrules()
-    {
-        return $this->changedayrules;
     }
 }

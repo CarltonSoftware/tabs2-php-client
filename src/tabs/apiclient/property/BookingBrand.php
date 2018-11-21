@@ -18,6 +18,7 @@ use tabs\apiclient\Collection;
  * @link      http://www.carltonsoftware.co.uk
  *
  * @method BookingBrand setPrimarybookingbrand(boolean $var) Sets the primarybookingbrand
+ * @method Collection|Instruction[] getInstructions() Get the instructions
  */
 class BookingBrand extends Builder
 {
@@ -96,16 +97,6 @@ class BookingBrand extends Builder
             'instructions',
             'parent'
         );
-    }
-
-    /**
-     * Get the instructions
-     *
-     * @return Collection|Instruction[]
-     */
-    public function getInstructions()
-    {
-        return $this->instructions;
     }
 
     /**

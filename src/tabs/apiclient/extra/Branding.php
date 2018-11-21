@@ -16,9 +16,9 @@ use tabs\apiclient\Collection;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * 
  * @method Branding setPetextrabranding(boolean $bool) Set the pet extra branding setting
- * 
+ * @method Collection|branding\Pricing[]       getPricing() Returns the extra branding pricing
+ * @method Collection|branding\Configuration[] getConfiguration() Returns the extra branding configuration
  */
 class Branding extends Builder
 {
@@ -114,25 +114,5 @@ class Branding extends Builder
     public function getPetextrabranding()
     {
         return $this->petextrabranding;
-    }
-
-    /**
-     * Returns the extra branding pricing
-     *
-     * @return Collection|branding\Pricing[]
-     */
-    public function getPricing()
-    {
-        return $this->pricing;
-    }
-
-    /**
-     * Returns the extra branding configuration
-     *
-     * @return Collection|branding\Configuration[]
-     */
-    public function getConfiguration()
-    {
-        return $this->configuration;
     }
 }

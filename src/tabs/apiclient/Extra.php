@@ -21,7 +21,7 @@ use tabs\apiclient\Builder;
  * 
  * @method Extra setDescription(string $var) Sets the description
  * 
- * 
+ * @method Collection|Branding[] getExtrabrandings() Returns the brandings
  */
 class Extra extends Builder
 {
@@ -139,15 +139,5 @@ class Extra extends Builder
     public function getExtragroup()
     {
         return $this->extragroup;
-    }
-
-    /**
-     * Returns the brandings
-     *
-     * @return Collection|Branding[]
-     */
-    public function getExtrabrandings()
-    {
-        return $this->extrabrandings;
     }
 }

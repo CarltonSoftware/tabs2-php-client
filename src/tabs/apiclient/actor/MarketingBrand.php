@@ -20,8 +20,9 @@ use tabs\apiclient\actor\marketingbrand\EmailList;
  *
  * @method MarketingBrand setNocontact(boolean $var) Sets the nocontact
  * 
+ * @method Collection|CustomerSource[] getSources() Returns the sources
  * 
- * 
+ * @method Collection|EmailList[] getEmaillists() Returns the email lists
  */
 class MarketingBrand extends Builder
 {
@@ -155,25 +156,5 @@ class MarketingBrand extends Builder
     public function getFirstcustomersource()
     {
         return $this->firstcustomersource;
-    }
-
-    /**
-     * Returns the sources
-     *
-     * @return Collection|CustomerSource[]
-     */
-    public function getSources()
-    {
-        return $this->sources;
-    }
-
-    /**
-     * Returns the email lists
-     *
-     * @return Collection|EmailList[]
-     */
-    public function getEmaillists()
-    {
-        return $this->emaillists;
     }
 }
