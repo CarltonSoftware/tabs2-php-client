@@ -316,7 +316,7 @@ class BookingEnquiry extends Base
      */
     public function setPropertyBranding($propertyBranding)
     {
-        $this->propertyBranding = \tabs\apiclient\property\Branding::factory(
+        $this->propertybranding = \tabs\apiclient\property\Branding::factory(
             $propertyBranding
         );
 
