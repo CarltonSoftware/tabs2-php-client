@@ -34,8 +34,6 @@ use tabs\apiclient\property\AvailableBreak;
  *
  * @method Property setAccomodationdescription(string $desc) Sets the accomodation description
  *
- *
- *
  * @method Property setSleeps(integer $sleeps) Sets the sleeps value
  *
  * @method Property setBedrooms(integer $bedrooms) Sets the bedrooms value
@@ -52,8 +50,45 @@ use tabs\apiclient\property\AvailableBreak;
  *
  * @method Property setCheckintext(string $var) Sets the checkintext
  *
- * @method Property setCheckouttext(string $var) Sets the checkouttext
- *
+ * @method Property setCheckouttext(string $var) Sets the checkouttext * @method integer  getRating() Returns the property rating
+ * 
+ * @method Collection|property\Document[] getDocuments() Get the documents
+ * 
+ * @method Collection|PropertyNote[] getNotes() Get the Notes
+ * 
+ * @method Collection|property\MarketingBrand[] getMarketingbrands() Get the property marketing brands
+ * 
+ * @method Collection|property\BookingBrand[] getBookingbrands() Get the property booking brands
+ * 
+ * @method Collection|property\Branding[] getBrandings() Get the property brandings
+ * 
+ * @method Collection|Inspection[] getInspections() Get the property inspections
+ * 
+ * @method Collection|Comment[] getComments() Get the property comments
+ * 
+ * @method Collection|Attribute[] getAttributes() Get the property attributes
+ * 
+ * @method Collection|Commission[] getCommissions() Get the property commissions
+ * 
+ * @method Collection|Office[] getOffices() Get the property offices
+ * 
+ * @method Collection|property\Owner[] getOwners() Get the property owners
+ * 
+ * @method Collection|OwnerPaymentTerms[] getOwnerpaymenttermss() Get the property owner payment terms
+ * 
+ * @method Collection|SecurityDeposit[] getSecuritydeposits() Get the property security deposits
+ * 
+ * @method Collection|SecurityFeature[] getSecurityfeatures() Get the property security features
+ * 
+ * @method Collection|Supplier[] getSuppliers() Get the property suppliers
+ * 
+ * @method Collection|Room[] getRooms() Get the property rooms
+ * 
+ * @method Collection|Target[] getTargets() Get the property targets
+ * 
+ * @method Collection|AvailableBreak[] getAvailablebreaks() Get the available breaks for a property
+ * 
+ * @method Collection|Booking[] getBookings() Returns the properties bookings as a collection
  */
 class Property extends Builder
 {
@@ -814,57 +849,7 @@ class Property extends Builder
     {
         return $this->rating;
     }
-
-    /**
-     * Get the documents
-     *
-     * @return Collection|property\Document[]
-     */
-    public function getDocuments()
-    {
-        return $this->documents;
-    }
-
-    /**
-     * Get the Notes
-     *
-     * @return Collection|PropertyNote[]
-     */
-    public function getNotes()
-    {
-        return $this->notes;
-    }
-
-    /**
-     * Get the property marketing brands
-     *
-     * @return Collection|property\MarketingBrand[]
-     */
-    public function getMarketingbrands()
-    {
-        return $this->marketingbrands;
-    }
-
-    /**
-     * Get the property booking brands
-     *
-     * @return Collection|property\BookingBrand[]
-     */
-    public function getBookingbrands()
-    {
-        return $this->bookingbrands;
-    }
-
-    /**
-     * Get the property brandings
-     *
-     * @return Collection|property\Branding[]
-     */
-    public function getBrandings()
-    {
-        return $this->brandings;
-    }
-
+    
     /**
      * Get the primary property branding
      *
@@ -873,136 +858,6 @@ class Property extends Builder
     public function getPrimarypropertybranding()
     {
         return $this->primarypropertybranding;
-    }
-
-    /**
-     * Get the property inspections
-     *
-     * @return Collection|Inspection[]
-     */
-    public function getInspections()
-    {
-        return $this->inspections;
-    }
-
-    /**
-     * Get the property comments
-     *
-     * @return Collection|Comment[]
-     */
-    public function getComments()
-    {
-        return $this->comments;
-    }
-
-    /**
-     * Get the property attributes
-     *
-     * @return Collection|Attribute[]
-     */
-    public function getAttributes()
-    {
-        return $this->attributes;
-    }
-
-    /**
-     * Get the property commissions
-     *
-     * @return Collection|Commission[]
-     */
-    public function getCommissions()
-    {
-        return $this->commissions;
-    }
-
-    /**
-     * Get the property offices
-     *
-     * @return Collection|Office[]
-     */
-    public function getOffices()
-    {
-        return $this->offices;
-    }
-
-    /**
-     * Get the property owners
-     *
-     * @return Collection|property\Owner[]
-     */
-    public function getOwners()
-    {
-        return $this->owners;
-    }
-
-    /**
-     * Get the property owner payment terms
-     *
-     * @return Collection|OwnerPaymentTerms[]
-     */
-    public function getOwnerpaymenttermss()
-    {
-        return $this->ownerpaymenttermss;
-    }
-
-    /**
-     * Get the property security deposits
-     *
-     * @return Collection|SecurityDeposit[]
-     */
-    public function getSecuritydeposits()
-    {
-        return $this->securitydeposits;
-    }
-
-    /**
-     * Get the property security features
-     *
-     * @return Collection|SecurityFeature[]
-     */
-    public function getSecurityfeatures()
-    {
-        return $this->securityfeatures;
-    }
-
-    /**
-     * Get the property suppliers
-     *
-     * @return Collection|Supplier[]
-     */
-    public function getSuppliers()
-    {
-        return $this->suppliers;
-    }
-
-    /**
-     * Get the property rooms
-     *
-     * @return Collection|Room[]
-     */
-    public function getRooms()
-    {
-        return $this->rooms;
-    }
-
-    /**
-     * Get the property targets
-     *
-     * @return Collection|Target[]
-     */
-    public function getTargets()
-    {
-        return $this->targets;
-    }
-
-    /**
-     * Get the available breaks for a property
-     *
-     * @return Collection|AvailableBreak[]
-     */
-    public function getAvailablebreaks()
-    {
-        return $this->availablebreaks;
     }
 
     /**
@@ -1023,15 +878,5 @@ class Property extends Builder
     public function getLocation()
     {
         return $this->location;
-    }
-
-    /**
-     * Returns the properties bookings as a collection
-     *
-     * @return Collection|Booking[]
-     */
-    public function getBookings()
-    {
-        return $this->bookings;
     }
 }
