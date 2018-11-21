@@ -15,24 +15,17 @@ use tabs\apiclient\Address;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getAccountnumber() Returns the accountnumber
  * @method BankAccount setAccountnumber(string $var) Sets the accountnumber
  * 
- * @method string getAccountname() Returns the accountname
  * @method BankAccount setAccountname(string $var) Sets the accountname
  * 
- * @method string getBankname() Returns the bankname
  * @method BankAccount setBankname(string $var) Sets the bankname
  * 
- * @method Address getAddress() Returns the address
  * 
- * @method string getSortcode() Returns the sortcode
  * @method BankAccount setSortcode(string $var) Sets the sortcode
  * 
- * @method string getPaymentreference() Returns the paymentreference
  * @method BankAccount setPaymentreference(string $var) Sets the paymentreference
  * 
- * @method string getRollnumber() Returns the rollnumber
  * @method BankAccount setRollnumber(string $var) Sets the rollnumber
  */
 class BankAccount extends Builder
@@ -135,5 +128,75 @@ class BankAccount extends Builder
             'paymentreference' => $this->getPaymentreference(),
             'rollnumber' => $this->getRollnumber(),
         );
+    }
+
+    /**
+     * Returns the accountnumber
+     *
+     * @return string
+     */
+    public function getAccountnumber()
+    {
+        return $this->accountnumber;
+    }
+
+    /**
+     * Returns the accountname
+     *
+     * @return string
+     */
+    public function getAccountname()
+    {
+        return $this->accountname;
+    }
+
+    /**
+     * Returns the bankname
+     *
+     * @return string
+     */
+    public function getBankname()
+    {
+        return $this->bankname;
+    }
+
+    /**
+     * Returns the address
+     *
+     * @return Address
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Returns the sortcode
+     *
+     * @return string
+     */
+    public function getSortcode()
+    {
+        return $this->sortcode;
+    }
+
+    /**
+     * Returns the paymentreference
+     *
+     * @return string
+     */
+    public function getPaymentreference()
+    {
+        return $this->paymentreference;
+    }
+
+    /**
+     * Returns the rollnumber
+     *
+     * @return string
+     */
+    public function getRollnumber()
+    {
+        return $this->rollnumber;
     }
 }

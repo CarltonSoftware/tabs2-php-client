@@ -30,16 +30,11 @@ use tabs\apiclient\SourceMarketingBrand;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method \DateTime       getRequestdatetime()              Returns the requested date time
  * @method BrochureRequest setRequestdatetime(\DateTime $dt) Set the requested date time
  * 
- * @method boolean         getEmailoptin()             Return the email optin flag
  * @method BrochureRequest setEmailoptin(boolean $opt) Set the email optin flag
  * 
- * @method Customer getCustomer() Returns the brochure request customer
- * @method Tabsuser getTabsuser() Returns the tabs user
  * 
- * @method SourceMarketingBrand getSourcemarketingbrand() Return the smb
  */
 class BrochureRequest extends Builder
 {
@@ -159,5 +154,55 @@ class BrochureRequest extends Builder
     public function getUrlStub()
     {
         return 'request';
+    }
+
+    /**
+     * Returns the requested date time
+     *
+     * @return \DateTime
+     */
+    public function getRequestdatetime()
+    {
+        return $this->requestdatetime;
+    }
+
+    /**
+     * Return the email optin flag
+     *
+     * @return boolean
+     */
+    public function getEmailoptin()
+    {
+        return $this->emailoptin;
+    }
+
+    /**
+     * Returns the brochure request customer
+     *
+     * @return Customer
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
+
+    /**
+     * Returns the tabs user
+     *
+     * @return Tabsuser
+     */
+    public function getTabsuser()
+    {
+        return $this->tabsuser;
+    }
+
+    /**
+     * Return the smb
+     *
+     * @return SourceMarketingBrand
+     */
+    public function getSourcemarketingbrand()
+    {
+        return $this->sourcemarketingbrand;
     }
 }

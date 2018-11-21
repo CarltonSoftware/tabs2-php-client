@@ -15,14 +15,10 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\KeyUserType getKeyusertype() Returns the keyusertype
- * @method integer getCheckoutperioddays() Returns the checkoutperioddays
  * @method UserType setCheckoutperioddays(integer $var) Sets the checkoutperioddays
  * 
- * @method integer getCheckoutperiodhours() Returns the checkoutperiodhours
  * @method UserType setCheckoutperiodhours(integer $var) Sets the checkoutperiodhours
  * 
- * @method string getKeyusersql() Returns the keyusersql
  * @method UserType setKeyusersql(string $var) Sets the keyusersql
  * 
  */
@@ -83,5 +79,45 @@ class UserType extends Builder
             'checkoutperiodhours' => $this->getCheckoutperiodhours(),
             'keyusersql' => $this->getKeyusersql(),
         );
+    }
+
+    /**
+     * Returns the keyusertype
+     *
+     * @return \tabs\apiclient\KeyUserType
+     */
+    public function getKeyusertype()
+    {
+        return $this->keyusertype;
+    }
+
+    /**
+     * Returns the checkoutperioddays
+     *
+     * @return integer
+     */
+    public function getCheckoutperioddays()
+    {
+        return $this->checkoutperioddays;
+    }
+
+    /**
+     * Returns the checkoutperiodhours
+     *
+     * @return integer
+     */
+    public function getCheckoutperiodhours()
+    {
+        return $this->checkoutperiodhours;
+    }
+
+    /**
+     * Returns the keyusersql
+     *
+     * @return string
+     */
+    public function getKeyusersql()
+    {
+        return $this->keyusersql;
     }
 }

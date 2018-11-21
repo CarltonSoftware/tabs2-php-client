@@ -16,8 +16,6 @@ use tabs\apiclient\Source;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method Source getSource() Returns the source
- * @method \DateTime getSourcedate() Returns the sourcedate
  * @method CustomerSource setSourcedate(\DateTime $var) Sets the sourcedate
  * 
  */
@@ -71,5 +69,25 @@ class CustomerSource extends Builder
             'sourceid' => $this->getSource()->getId(),
             'sourcedate' => $this->getSourcedate()->format('Y-m-d')
         );
+    }
+
+    /**
+     * Returns the source
+     *
+     * @return Source
+     */
+    public function getSource()
+    {
+        return $this->source;
+    }
+
+    /**
+     * Returns the sourcedate
+     *
+     * @return \DateTime
+     */
+    public function getSourcedate()
+    {
+        return $this->sourcedate;
     }
 }

@@ -14,10 +14,8 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string      getBrandsource()            Returns the brandsource
  * @method BrandSource setBrandsource(string $var) Sets the brandsource
  * 
- * @method string      getDescription()            Returns the description
  * @method BrandSource setDescription(string $var) Sets the description
  * 
  */
@@ -48,5 +46,25 @@ class BrandSource extends Builder
             'brandsource' => $this->getBrandsource(),
             'description' => $this->getDescription()
         );
+    }
+
+    /**
+     * Returns the brandsource
+     *
+     * @return string
+     */
+    public function getBrandsource()
+    {
+        return $this->brandsource;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

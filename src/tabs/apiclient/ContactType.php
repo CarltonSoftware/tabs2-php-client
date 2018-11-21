@@ -15,7 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string      getType()            Returns the type
  * @method ContactType setType(string $var) Sets the type
  */
 class ContactType extends Builder
@@ -37,5 +36,15 @@ class ContactType extends Builder
         return array(
             'type' => $this->getType()
         );
+    }
+
+    /**
+     * Returns the type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

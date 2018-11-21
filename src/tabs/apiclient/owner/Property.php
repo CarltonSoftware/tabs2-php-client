@@ -14,16 +14,12 @@ use tabs\apiclient\Base;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \DateTime getCreated() Returns the created
  * @method Document setCreated(\DateTime $var) Sets the created
  * 
- * @method \tabs\apiclient\Property getProperty() Returns the property
  * @method \tabs\apiclient\owner\Property setProperty($prop) Set the property
  * 
- * @method \DateTime getOwnerfromdate() Returns the owner fromdate
  * @method Property  setOwnerfromdate($var) Set the owner fromdate
  * 
- * @method \DateTime getOwnertodate() Returns the owner todate
  * @method Property  setOwnertodate($var) Set the owner todate
  */
 class Property extends Base
@@ -55,5 +51,45 @@ class Property extends Base
         $this->ownertodate = new \DateTime();
 
         parent::__construct($id);
+    }
+
+    /**
+     * Returns the created
+     *
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Returns the property
+     *
+     * @return \tabs\apiclient\Property
+     */
+    public function getProperty()
+    {
+        return $this->property;
+    }
+
+    /**
+     * Returns the owner fromdate
+     *
+     * @return \DateTime
+     */
+    public function getOwnerfromdate()
+    {
+        return $this->ownerfromdate;
+    }
+
+    /**
+     * Returns the owner todate
+     *
+     * @return \DateTime
+     */
+    public function getOwnertodate()
+    {
+        return $this->ownertodate;
     }
 }

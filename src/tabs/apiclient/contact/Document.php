@@ -15,11 +15,8 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \DateTime getCreated() Returns the created
  * @method Document setCreated(\DateTime $var) Sets the created
  * 
- * @method \tabs\apiclient\Document getDocument() Returns the document
- * @method \tabs\apiclient\Image getImage() Returns the image
  */
 class Document extends Builder
 {
@@ -97,5 +94,35 @@ class Document extends Builder
                 'imageid' => $this->getImage()->getId()
             );
         }
+    }
+
+    /**
+     * Returns the created
+     *
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Returns the document
+     *
+     * @return \tabs\apiclient\Document
+     */
+    public function getDocument()
+    {
+        return $this->document;
+    }
+
+    /**
+     * Returns the image
+     *
+     * @return \tabs\apiclient\Image
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

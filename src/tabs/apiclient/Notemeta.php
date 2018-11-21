@@ -16,8 +16,6 @@ use tabs\apiclient\Actor;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \DateTime getCreated()   Returns the created time of the note
- * @method Actor     getCreatedby() Returns the actor
  */
 abstract class Notemeta extends Builder
 {
@@ -69,5 +67,25 @@ abstract class Notemeta extends Builder
         }
 
         return $this;
+    }
+
+    /**
+     * Returns the created time of the note
+     *
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Returns the actor
+     *
+     * @return Actor
+     */
+    public function getCreatedby()
+    {
+        return $this->createdby;
     }
 }

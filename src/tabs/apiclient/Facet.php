@@ -13,19 +13,14 @@ namespace tabs\apiclient;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method integer getAmount() Returns the amount integer
  * @method Facet setAmount(integer $var) Sets the amount
  * 
- * @method string getContext() Returns the context string
  * @method Facet setContext(string $var) Sets the context
  * 
- * @method integer getValue() Returns the value integer
  * @method Facet setValue(integer $var) Sets the value
  * 
- * @method string getType() Returns the type string
  * @method Facet setType(string $var) Sets the type
  * 
- * @method mixed getEntity() Returns the entity
  */
 class Facet
 {
@@ -90,5 +85,55 @@ class Facet
         }
         
         return $this;
+    }
+
+    /**
+     * Returns the amount integer
+     *
+     * @return integer
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * Returns the context string
+     *
+     * @return string
+     */
+    public function getContext()
+    {
+        return $this->context;
+    }
+
+    /**
+     * Returns the value integer
+     *
+     * @return integer
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     * Returns the type string
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Returns the entity
+     *
+     * @return mixed
+     */
+    public function getEntity()
+    {
+        return $this->entity;
     }
 }

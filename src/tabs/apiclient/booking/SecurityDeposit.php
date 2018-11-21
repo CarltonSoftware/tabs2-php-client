@@ -18,53 +18,36 @@ use tabs\apiclient\OwnerChargeCode;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method integer getAmount() Returns the amount
  * @method SecurityDeposit setAmount(integer $var) Sets the amount
  * 
- * @method integer getPaid() Returns the paid
  * @method SecurityDeposit setPaid(integer $var) Sets the paid
  * 
- * @method integer getRefunded() Returns the refunded
  * @method SecurityDeposit setRefunded(integer $var) Sets the refunded
  * 
- * @method integer getBalance() Returns the balance
  * @method SecurityDeposit setBalance(integer $var) Sets the balance
  * 
- * @method integer getOutstanding() Returns the outstanding
  * @method SecurityDeposit setOutstanding(integer $var) Sets the outstanding
  * 
- * @method \DateTime getDueindate() Returns the dueindate
  * @method SecurityDeposit setDueindate(\DateTime $var) Sets the dueindate
  * 
- * @method \DateTime getPaiddate() Returns the paiddate
  * @method SecurityDeposit setPaiddate(\DateTime $var) Sets the paiddate
  * 
- * @method integer getWithheld() Returns the withheld
  * @method SecurityDeposit setWithheld(integer $var) Sets the withheld
  * 
- * @method integer getRefundable() Returns the refundable
  * @method SecurityDeposit setRefundable(integer $var) Sets the refundable
  * 
- * @method boolean getHeld() Returns the held
  * @method SecurityDeposit setHeld(boolean $var) Sets the held
  * 
- * @method \DateTime getDueoutdate() Returns the dueoutdate
  * @method SecurityDeposit setDueoutdate(\DateTime $var) Sets the dueoutdate
  * 
- * @method \DateTime getRefundeddate() Returns the refundeddate
  * @method SecurityDeposit setRefundeddate(\DateTime $var) Sets the refundeddate
  * 
- * @method OwnerChargeCode getOwnerchargecode() Returns the ownerchargecode
- * @method integer getOwnerchargeamount() Returns the ownerchargeamount
  * 
  * @method SecurityDeposit setOwnerchargeamount(integer $var) Sets the ownerchargeamount
  * 
- * @method string getOwnercharge() Returns the ownercharge
  * @method SecurityDeposit setOwnercharge(string $var) Sets the ownercharge
  * 
- * @method Collection|Hold[] getHolds() Returns the holds
  * 
- * @method \tabs\apiclient\property\SecurityDeposit getPropertysecuritydeposit() Get the property SD
  */
 class SecurityDeposit extends Builder
 {
@@ -251,5 +234,175 @@ class SecurityDeposit extends Builder
         }
         
         return $arr;
+    }
+
+    /**
+     * Returns the amount
+     *
+     * @return integer
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * Returns the paid
+     *
+     * @return integer
+     */
+    public function getPaid()
+    {
+        return $this->paid;
+    }
+
+    /**
+     * Returns the refunded
+     *
+     * @return integer
+     */
+    public function getRefunded()
+    {
+        return $this->refunded;
+    }
+
+    /**
+     * Returns the balance
+     *
+     * @return integer
+     */
+    public function getBalance()
+    {
+        return $this->balance;
+    }
+
+    /**
+     * Returns the outstanding
+     *
+     * @return integer
+     */
+    public function getOutstanding()
+    {
+        return $this->outstanding;
+    }
+
+    /**
+     * Returns the dueindate
+     *
+     * @return \DateTime
+     */
+    public function getDueindate()
+    {
+        return $this->dueindate;
+    }
+
+    /**
+     * Returns the paiddate
+     *
+     * @return \DateTime
+     */
+    public function getPaiddate()
+    {
+        return $this->paiddate;
+    }
+
+    /**
+     * Returns the withheld
+     *
+     * @return integer
+     */
+    public function getWithheld()
+    {
+        return $this->withheld;
+    }
+
+    /**
+     * Returns the refundable
+     *
+     * @return integer
+     */
+    public function getRefundable()
+    {
+        return $this->refundable;
+    }
+
+    /**
+     * Returns the held
+     *
+     * @return boolean
+     */
+    public function getHeld()
+    {
+        return $this->held;
+    }
+
+    /**
+     * Returns the dueoutdate
+     *
+     * @return \DateTime
+     */
+    public function getDueoutdate()
+    {
+        return $this->dueoutdate;
+    }
+
+    /**
+     * Returns the refundeddate
+     *
+     * @return \DateTime
+     */
+    public function getRefundeddate()
+    {
+        return $this->refundeddate;
+    }
+
+    /**
+     * Returns the ownerchargecode
+     *
+     * @return OwnerChargeCode
+     */
+    public function getOwnerchargecode()
+    {
+        return $this->ownerchargecode;
+    }
+
+    /**
+     * Returns the ownerchargeamount
+     *
+     * @return integer
+     */
+    public function getOwnerchargeamount()
+    {
+        return $this->ownerchargeamount;
+    }
+
+    /**
+     * Returns the ownercharge
+     *
+     * @return string
+     */
+    public function getOwnercharge()
+    {
+        return $this->ownercharge;
+    }
+
+    /**
+     * Returns the holds
+     *
+     * @return Collection|Hold[]
+     */
+    public function getHolds()
+    {
+        return $this->holds;
+    }
+
+    /**
+     * Get the property SD
+     *
+     * @return \tabs\apiclient\property\SecurityDeposit
+     */
+    public function getPropertysecuritydeposit()
+    {
+        return $this->propertysecuritydeposit;
     }
 }

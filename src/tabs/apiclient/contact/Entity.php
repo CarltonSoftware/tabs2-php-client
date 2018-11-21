@@ -16,31 +16,21 @@ use tabs\apiclient\Collection;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getContactentitytype() Returns the contactentitytype
  * @method Entity setContactentitytype(string $var) Sets the contactentitytype
  * 
- * @method integer getEntity() Returns the entity
  * @method Entity setEntity(integer $var) Sets the entity
  * 
- * @method string getFunction() Returns the function
  * @method Entity setFunction(string $var) Sets the function
  * 
- * @method string getIntermediary() Returns the intermediary
  * @method Entity setIntermediary(string $var) Sets the intermediary
  * 
- * @method string getReference() Returns the reference
  * @method Entity setReference(string $var) Sets the reference
  * 
- * @method \tabs\apiclient\actor\ContactDetail getContactdetail() Returns the contactdetail
- * @method string getContactdetailvalue() Returns the contactdetailvalue
  * @method Entity setContactdetailvalue(string $var) Sets the contactdetailvalue
  * 
- * @method boolean getPerformsend() Returns the performsend
  * @method Entity setPerformsend(boolean $var) Sets the performsend
  * 
- * @method Collection|entity\Status[] getStatus() Returns the status
  * 
- * @method \tabs\apiclient\TabsUser getCreatedbyactor() Returns the createdbyactor
  */
 class Entity extends Builder
 {
@@ -192,5 +182,105 @@ class Entity extends Builder
         }
         
         return $arr;
+    }
+
+    /**
+     * Returns the contactentitytype
+     *
+     * @return string
+     */
+    public function getContactentitytype()
+    {
+        return $this->contactentitytype;
+    }
+
+    /**
+     * Returns the entity
+     *
+     * @return integer
+     */
+    public function getEntity()
+    {
+        return $this->entity;
+    }
+
+    /**
+     * Returns the function
+     *
+     * @return string
+     */
+    public function getFunction()
+    {
+        return $this->function;
+    }
+
+    /**
+     * Returns the intermediary
+     *
+     * @return string
+     */
+    public function getIntermediary()
+    {
+        return $this->intermediary;
+    }
+
+    /**
+     * Returns the reference
+     *
+     * @return string
+     */
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+    /**
+     * Returns the contactdetail
+     *
+     * @return \tabs\apiclient\actor\ContactDetail
+     */
+    public function getContactdetail()
+    {
+        return $this->contactdetail;
+    }
+
+    /**
+     * Returns the contactdetailvalue
+     *
+     * @return string
+     */
+    public function getContactdetailvalue()
+    {
+        return $this->contactdetailvalue;
+    }
+
+    /**
+     * Returns the performsend
+     *
+     * @return boolean
+     */
+    public function getPerformsend()
+    {
+        return $this->performsend;
+    }
+
+    /**
+     * Returns the status
+     *
+     * @return Collection|entity\Status[]
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Returns the createdbyactor
+     *
+     * @return \tabs\apiclient\TabsUser
+     */
+    public function getCreatedbyactor()
+    {
+        return $this->createdbyactor;
     }
 }

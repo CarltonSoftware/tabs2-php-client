@@ -25,32 +25,16 @@ use tabs\apiclient\extra\branding\Configuration;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\Branding getBranding() Returns the branding
- * @method \tabs\apiclient\BrandingGroup getBrandinggroup() Returns the brandinggroup
- * @method boolean getPrimarybookingbrand() Returns the primary booking brand
- * @method boolean getPrimarybranding() Returns the primary branding boolean
  * @method Branding setPrimarybookingbrand(boolean $var) Sets the primarybookingbrand
- * 
- * @method boolean getPromote() Returns the promote
+ *
  * @method Branding setPromote(boolean $var) Sets the promote
- * 
- * @method \DateTime getAllowbookingonwebuntil() Returns the allowbookingonwebuntil
+ *
  * @method Branding setAllowbookingonwebuntil(\DateTime $var) Sets the allowbookingonwebuntil
- * 
- * @method \DateTime getShowpricingonwebuntil() Returns the showpricingonwebuntil
+ *
  * @method Branding setShowpricingonwebuntil(\DateTime $var) Sets the showpricingonwebuntil
- * 
- * @method boolean getConvertpotentialstoprovisionals() Returns the convertpotentialstoprovisionals
+ *
  * @method Branding setConvertpotentialstoprovisionals(boolean $var) Sets the convertpotentialstoprovisionals
  * 
- * @method \tabs\apiclient\property\branding\Status getStatus() Returns the status
- * 
- * @method Collection|ChangeDayTemplate[] getChangedaytemplates Returns the change day templates
- * @method Collection|Pricing[] getExtraprices() Returns the property extra prices
- * @method Collection|Configuration[] getExtraconfigurations() Returns the property extra configurations
- * 
- * @method \DateTime getFromdate() Returns the status fromdate
- * @method \DateTime gettodate() Returns the status todate
  */
 class Branding extends Builder
 {
@@ -93,67 +77,67 @@ class Branding extends Builder
      * @var \tabs\apiclient\Status
      */
     protected $status;
-    
+
     /**
      * @var Collection|Price[]
      */
     protected $prices;
-    
+
     /**
      * @var Collection|Pricing[]
      */
-    protected $extraprices;    
-    
+    protected $extraprices;
+
     /**
      * @var Collection|Configuration[]
      */
-    protected $extraconfigurations;    
-    
+    protected $extraconfigurations;
+
     /**
      * @var Collection|ChangeDayTemplate[]
      */
-    protected $changedaytemplates;       
-    
+    protected $changedaytemplates;
+
     /**
      * @var Collection|AvailableDay[]
      */
     protected $availableDays;
-    
+
     /**
      * @var Collection|Status[]
      */
     protected $statuses;
-    
+
     /**
      * @var Collection|\tabs\apiclient\SpecialOffer[]
      */
     protected $specialoffers;
-    
+
     /**
      * @var \DateTime
      */
     protected $allowbookingonwebuntil;
-    
+
     /**
      * @var \DateTime
      */
     protected $showpricingonwebuntil;
-    
+
     /**
      * @var boolean
      */
     protected $convertpotentialstoprovisionals;
-    
+
     /**
      * @var \DateTime
      */
     protected $fromdate;
-    
+
     /**
      * @var \DateTime
      */
-    protected $todate;    
-    
+    protected $todate;
+
     /**
      * @var array
      */
@@ -165,7 +149,7 @@ class Branding extends Builder
     );
 
     // -------------------- Public Functions -------------------- //
-    
+
     /**
      * @inheritDoc
      */
@@ -176,54 +160,54 @@ class Branding extends Builder
             new Price,
             $this
         );
-        
+
         $this->extraprices = Collection::factory(
-            'extrapricing', 
-            new Pricing(), 
+            'extrapricing',
+            new Pricing(),
             $this
         );
-        
+
         $this->extraconfigurations = Collection::factory(
-            'extraconfiguration', 
-            new Configuration(), 
+            'extraconfiguration',
+            new Configuration(),
             $this
         );
-        
+
         $this->changedaytemplates = Collection::factory(
-            'changedaytemplate', 
-            new \tabs\apiclient\property\branding\ChangeDayTemplate(), 
+            'changedaytemplate',
+            new \tabs\apiclient\property\branding\ChangeDayTemplate(),
             $this
         );
-        
+
         $this->availableDays = Collection::factory(
             'availability',
             new AvailableDay(),
             $this
         );
-        
+
         $this->specialoffers = Collection::factory(
             'specialoffer',
             new \tabs\apiclient\SpecialOffer()
         );
-        
+
         $this->specialoffers->setPath(function() {
             return $this->getUpdateUrl() . '/specialoffer';
         });
-        
+
         $this->allowbookingonwebuntil = new \DateTime();
         $this->showpricingonwebuntil = new \DateTime();
         $this->fromdate = new \DateTime();
         $this->todate = new \DateTime();
-        
+
         parent::__construct($id);
     }
-    
+
     /**
      * Get some prices for the property brand
-     * 
+     *
      * @param \DateTime $fromDate Start date of price range
      * @param \DateTime $toDate   End date of price range
-     * 
+     *
      * @return Collection|Price[]
      */
     public function getPrices(
@@ -238,38 +222,38 @@ class Branding extends Builder
             $this->prices->getPagination()->removeParameter('fromdate')
                 ->removeParameter('todate');
         }
-        
+
         return $this->prices->fetch();
     }
-    
+
     /**
      * Return the prices collection
-     * 
+     *
      * @return Collection|Price[]
      */
     public function getPricesCollection()
     {
         return $this->prices;
     }
-    
+
     /**
      * Return the available days collection
-     * 
+     *
      * @return Collection|AvailableDay[]
      */
     public function getAvailableDaysCollection()
     {
         return $this->availableDays;
     }
-    
+
     /**
      * Get some availability for the brand
-     * 
+     *
      * @param \DateTime $fromDate          Start date of availability range
      * @param \DateTime $toDate            End date of availability range
      * @param boolean   $includechangedays Whether to include change day information
      * @param int       $affiliateid       Optional affiliate id
-     * 
+     *
      * @return Collection|AvailableDay[]
      */
     public function getAvailableDays(
@@ -286,7 +270,7 @@ class Branding extends Builder
             $this->availableDays->getPagination()->removeParameter('fromdate')
                 ->removeParameter('todate');
         }
-        
+
         $this->availableDays->getPagination()->addParameter(
             'includechangedays',
             $this->boolToStr($includechangedays)
@@ -301,13 +285,13 @@ class Branding extends Builder
 
         return $this->availableDays->fetch();
     }
-    
+
     /**
      * Get a calendar object with availability for a specific month
-     * 
+     *
      * @param \DateTime $fromDate Fromdate
      * @param array     $options  Calendar options
-     * 
+     *
      * @return Calendar
      */
     public function getCalendar(
@@ -317,20 +301,20 @@ class Branding extends Builder
         if (!$fromDate) {
             $fromDate = new \DateTime('first day of this month');
         }
-        
+
         $fromDate->setTime(0, 0, 0);
         $toDate = clone $fromDate;
         $availStart = clone $fromDate;
         $availStart->sub(new \DateInterval('P7D'));
         $toDate->modify('last day of this month');
         $toDate->add(new \DateInterval('P7D'));
-        
+
         $days = $this->getAvailableDays($fromDate, $toDate);
-        
+
         $cal = new Calendar($options);
         $cal->setAvailableDays($days)
             ->setTargetMonth($fromDate);
-        
+
         return $cal;
     }
 
@@ -372,7 +356,7 @@ class Branding extends Builder
     public function setBookingbrand($bookingbrand)
     {
         $this->bookingbrand = BookingBrand::factory($bookingbrand);
-        
+
         // Fix for the non hateoas urls in the api
         if ($this->getParentProperty()) {
             $prop = $this->getParentProperty();
@@ -392,7 +376,7 @@ class Branding extends Builder
     public function setMarketingbrand($marketingbrand)
     {
         $this->marketingbrand = MarketingBrand::factory($marketingbrand);
-        
+
         // Fix for the non hateoas urls in the api
         if ($this->getParentProperty()) {
             $prop = $this->getParentProperty();
@@ -415,13 +399,13 @@ class Branding extends Builder
 
         return $this;
     }
-    
+
     /**
      * Get the applicable offers for the property brand
-     * 
+     *
      * @param \DateTime $fromDate Start date of offer holiday period range
      * @param \DateTime $toDate   End date of offer holiday period range
-     * 
+     *
      * @return Collection|\tabs\apiclient\SpecialOffer[]
      */
     public function getSpecialoffers(
@@ -436,21 +420,21 @@ class Branding extends Builder
             $this->specialoffers->getPagination()->removeParameter('fromdate')
                 ->removeParameter('todate');
         }
-        
+
         return $this->specialoffers->fetch();
     }
-    
+
     /**
      * Override the set parent method to handle the non hateoas urls
-     * 
+     *
      * @param \tabs\apiclient\Property $element  Element
-     * 
+     *
      * @return Branding
      */
     public function setParent(&$element)
     {
         $this->parent = $element;
-        
+
         if ($element instanceof \tabs\apiclient\Property) {
             if ($this->marketingbrand) {
                 $this->marketingbrand->setParent($element);
@@ -459,7 +443,7 @@ class Branding extends Builder
                 $this->bookingbrand->setParent($element);
             }
         }
-        
+
         return $this;
     }
 
@@ -482,17 +466,17 @@ class Branding extends Builder
             'extraprices' => $this->getExtraprices()->toArray(),
             'changedaytemplates' => $this->getChangedaytemplates()->toArray(),
         );
-        
+
         if ($this->getConvertpotentialstoprovisionals()) {
             $arr['convertpotentialstoprovisionals'] = true;
         }
 
         return $arr;
     }
-    
+
     /**
      * For serialisation
-     * 
+     *
      * @return array
      */
     public function __sleep()
@@ -512,5 +496,145 @@ class Branding extends Builder
             'changedaytemplates',
             'parent'
         );
+    }
+
+    /**
+     * Returns the branding
+     *
+     * @return \tabs\apiclient\Branding
+     */
+    public function getBranding()
+    {
+        return $this->branding;
+    }
+
+    /**
+     * Returns the brandinggroup
+     *
+     * @return \tabs\apiclient\BrandingGroup
+     */
+    public function getBrandinggroup()
+    {
+        return $this->brandinggroup;
+    }
+
+    /**
+     * Returns the primary booking brand
+     *
+     * @return boolean
+     */
+    public function getPrimarybookingbrand()
+    {
+        return $this->primarybookingbrand;
+    }
+
+    /**
+     * Returns the primary branding boolean
+     *
+     * @return boolean
+     */
+    public function getPrimarybranding()
+    {
+        return $this->primarybranding;
+    }
+
+    /**
+     * Returns the promote
+     *
+     * @return boolean
+     */
+    public function getPromote()
+    {
+        return $this->promote;
+    }
+
+    /**
+     * Returns the allowbookingonwebuntil
+     *
+     * @return \DateTime
+     */
+    public function getAllowbookingonwebuntil()
+    {
+        return $this->allowbookingonwebuntil;
+    }
+
+    /**
+     * Returns the showpricingonwebuntil
+     *
+     * @return \DateTime
+     */
+    public function getShowpricingonwebuntil()
+    {
+        return $this->showpricingonwebuntil;
+    }
+
+    /**
+     * Returns the convertpotentialstoprovisionals
+     *
+     * @return boolean
+     */
+    public function getConvertpotentialstoprovisionals()
+    {
+        return $this->convertpotentialstoprovisionals;
+    }
+
+    /**
+     * Returns the status
+     *
+     * @return \tabs\apiclient\property\branding\Status
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Returns the change day templates
+     *
+     * @return Collection|ChangeDayTemplate[]
+     */
+    public function getChangedaytemplates()
+    {
+        return $this->changedaytemplates;
+    }
+
+    /**
+     * Returns the property extra prices
+     *
+     * @return Collection|Pricing[]
+     */
+    public function getExtraprices()
+    {
+        return $this->extraprices;
+    }
+
+    /**
+     * Returns the property extra configurations
+     *
+     * @return Collection|Configuration[]
+     */
+    public function getExtraconfigurations()
+    {
+        return $this->extraconfigurations;
+    }
+
+    /**
+     * Returns the status fromdate
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the status todate
+     *
+     * @return \DateTime
+     */
+    public function gettodate()
+    {
+        return $this->todate;
     }
 }

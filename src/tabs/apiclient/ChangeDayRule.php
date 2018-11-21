@@ -15,70 +15,48 @@ use tabs\apiclient\Base;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method integer getRuleorder() Returns the ruleorder
  * @method ChangeDayRule setRuleorder(integer $var) Sets the ruleorder
  * 
- * @method integer getEverysaturday() Returns the everysaturday
  * @method ChangeDayRule setEverysaturday(integer $var) Sets the everysaturday
  * 
- * @method integer getEverysunday() Returns the everysunday
  * @method ChangeDayRule setEverysunday(integer $var) Sets the everysunday
  * 
- * @method integer getEverymonday() Returns the everymonday
  * @method ChangeDayRule setEverymonday(integer $var) Sets the everymonday
  * 
- * @method integer getEverytuesday() Returns the everytuesday
  * @method ChangeDayRule setEverytuesday(integer $var) Sets the everytuesday
  * 
- * @method integer getEverywednesday() Returns the everywednesday
  * @method ChangeDayRule setEverywednesday(integer $var) Sets the everywednesday
  * 
- * @method integer getEverythursday() Returns the everythursday
  * @method ChangeDayRule setEverythursday(integer $var) Sets the everythursday
  * 
- * @method integer getEveryfriday() Returns the everyfriday
  * @method ChangeDayRule setEveryfriday(integer $var) Sets the everyfriday
  * 
- * @method \DateTime getFromdate() Returns the fromdate
  * @method ChangeDayTemplate setFromdate(\DateTime $var) Sets the fromdate
  * 
- * @method \DateTime getTodate() Returns the todate
  * @method ChangeDayTemplate setTodate(\DateTime $var) Sets the todate
  * 
- * @method boolean getIsfromdate() Returns the isfromdate
  * @method ChangeDayRule setIsfromdate(boolean $var) Sets the isfromdate
  * 
- * @method boolean getIsnotfromdate() Returns the isnotfromdate
  * @method ChangeDayRule setIsnotfromdate(boolean $var) Sets the isnotfromdate
  * 
- * @method boolean getIstodate() Returns the istodate
  * @method ChangeDayRule setIstodate(boolean $var) Sets the istodate
  * 
- * @method boolean getIsnottodate() Returns the isnottodate
  * @method ChangeDayRule setIsnottodate(boolean $var) Sets the isnottodate
  * 
- * @method integer getWithindays() Returns the withindays
  * @method ChangeDayRule setWithindays(integer $var) Sets the withindays
  * 
- * @method integer getUnlessholidayatleast() Returns the unlessholidayatleast
  * @method ChangeDayRule setUnlessholidayatleast(integer $var) Sets the unlessholidayatleast
  * 
- * @method integer getMinimumholiday() Returns the minimumholiday
  * @method ChangeDayRule setMinimumholiday(integer $var) Sets the minimumholiday
  * 
- * @method boolean getShowonavailability() Returns the showonavailability
  * @method ChangeDayRule setShowonavailability(boolean $var) Sets the showonavailability
  * 
- * @method integer getDaysbeforeeaster() Returns the daysbeforeeaster
  * @method ChangeDayRule setDaysbeforeeaster(integer $var) Sets the daysbeforeeaster
  * 
- * @method integer getDaysaftereaster() Returns the daysaftereaster
  * @method ChangeDayRule setDaysaftereaster(integer $var) Sets the daysaftereaster
  * 
- * @method boolean getIspriceanchor() Returns the ispriceanchor
  * @method ChangeDayRule setIspriceanchor(boolean $var) Sets the ispriceanchor
  * 
- * @method boolean getIsnotpriceanchor() Returns the isnotpriceanchor
  * @method ChangeDayRule setIsnotpriceanchor(boolean $var) Sets the isnotpriceanchor
  */
 class ChangeDayRule extends Builder
@@ -288,4 +266,224 @@ class ChangeDayRule extends Builder
     {
         return 'rule';
     }    
+
+    /**
+     * Returns the ruleorder
+     *
+     * @return integer
+     */
+    public function getRuleorder()
+    {
+        return $this->ruleorder;
+    }
+
+    /**
+     * Returns the everysaturday
+     *
+     * @return integer
+     */
+    public function getEverysaturday()
+    {
+        return $this->everysaturday;
+    }
+
+    /**
+     * Returns the everysunday
+     *
+     * @return integer
+     */
+    public function getEverysunday()
+    {
+        return $this->everysunday;
+    }
+
+    /**
+     * Returns the everymonday
+     *
+     * @return integer
+     */
+    public function getEverymonday()
+    {
+        return $this->everymonday;
+    }
+
+    /**
+     * Returns the everytuesday
+     *
+     * @return integer
+     */
+    public function getEverytuesday()
+    {
+        return $this->everytuesday;
+    }
+
+    /**
+     * Returns the everywednesday
+     *
+     * @return integer
+     */
+    public function getEverywednesday()
+    {
+        return $this->everywednesday;
+    }
+
+    /**
+     * Returns the everythursday
+     *
+     * @return integer
+     */
+    public function getEverythursday()
+    {
+        return $this->everythursday;
+    }
+
+    /**
+     * Returns the everyfriday
+     *
+     * @return integer
+     */
+    public function getEveryfriday()
+    {
+        return $this->everyfriday;
+    }
+
+    /**
+     * Returns the fromdate
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the todate
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
+    }
+
+    /**
+     * Returns the isfromdate
+     *
+     * @return boolean
+     */
+    public function getIsfromdate()
+    {
+        return $this->isfromdate;
+    }
+
+    /**
+     * Returns the isnotfromdate
+     *
+     * @return boolean
+     */
+    public function getIsnotfromdate()
+    {
+        return $this->isnotfromdate;
+    }
+
+    /**
+     * Returns the istodate
+     *
+     * @return boolean
+     */
+    public function getIstodate()
+    {
+        return $this->istodate;
+    }
+
+    /**
+     * Returns the isnottodate
+     *
+     * @return boolean
+     */
+    public function getIsnottodate()
+    {
+        return $this->isnottodate;
+    }
+
+    /**
+     * Returns the withindays
+     *
+     * @return integer
+     */
+    public function getWithindays()
+    {
+        return $this->withindays;
+    }
+
+    /**
+     * Returns the unlessholidayatleast
+     *
+     * @return integer
+     */
+    public function getUnlessholidayatleast()
+    {
+        return $this->unlessholidayatleast;
+    }
+
+    /**
+     * Returns the minimumholiday
+     *
+     * @return integer
+     */
+    public function getMinimumholiday()
+    {
+        return $this->minimumholiday;
+    }
+
+    /**
+     * Returns the showonavailability
+     *
+     * @return boolean
+     */
+    public function getShowonavailability()
+    {
+        return $this->showonavailability;
+    }
+
+    /**
+     * Returns the daysbeforeeaster
+     *
+     * @return integer
+     */
+    public function getDaysbeforeeaster()
+    {
+        return $this->daysbeforeeaster;
+    }
+
+    /**
+     * Returns the daysaftereaster
+     *
+     * @return integer
+     */
+    public function getDaysaftereaster()
+    {
+        return $this->daysaftereaster;
+    }
+
+    /**
+     * Returns the ispriceanchor
+     *
+     * @return boolean
+     */
+    public function getIspriceanchor()
+    {
+        return $this->ispriceanchor;
+    }
+
+    /**
+     * Returns the isnotpriceanchor
+     *
+     * @return boolean
+     */
+    public function getIsnotpriceanchor()
+    {
+        return $this->isnotpriceanchor;
+    }
 }

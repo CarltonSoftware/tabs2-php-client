@@ -15,7 +15,6 @@ use tabs\apiclient\Note;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method Note  getNote()  Get the Note
  */
 class ActorNote extends Builder
 {
@@ -59,5 +58,15 @@ class ActorNote extends Builder
     public function getCreateUrl()
     {
         return 'actornote';
+    }
+
+    /**
+     * Get the Note
+     *
+     * @return Note
+     */
+    public function getNote()
+    {
+        return $this->note;
     }
 }

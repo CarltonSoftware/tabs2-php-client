@@ -20,10 +20,7 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method Value getValue() Returns the value
- * @method AttributeBoolean|AttributeHybrid|AttributeNumber|AttributeString getAttribute() Returns the attribute
  * 
- * @method string    getComments() Returns any comments for the attribute
  * @method Attribute setComments(string $comments) Set a attribute comment
  */
 class Attribute extends Builder
@@ -147,5 +144,35 @@ class Attribute extends Builder
         }
         
         return $arr;
+    }
+
+    /**
+     * Returns the value
+     *
+     * @return Value
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     * Returns the attribute
+     *
+     * @return AttributeBoolean|AttributeHybrid|AttributeNumber|AttributeString
+     */
+    public function getAttribute()
+    {
+        return $this->attribute;
+    }
+
+    /**
+     * Returns any comments for the attribute
+     *
+     * @return string
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

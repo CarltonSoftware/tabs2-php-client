@@ -15,10 +15,8 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getPriceband() Returns the band
  * @method PriceBand setPriceband(string $var) Sets the band
  * 
- * @method string getDescription() Returns the description
  * @method PriceType setDescription(string $var) Sets the description
  */
 class PriceBand extends Builder
@@ -32,4 +30,24 @@ class PriceBand extends Builder
      * @var string
      */
     protected $description;
+
+    /**
+     * Returns the band
+     *
+     * @return string
+     */
+    public function getPriceband()
+    {
+        return $this->priceband;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
 }

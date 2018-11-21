@@ -15,13 +15,10 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getDescription() Returns the description
  * @method PartySizePricing setDescription(string $var) Sets the description
  * 
- * @method integer getPartysizefrom() Returns the partysizefrom
  * @method PartySizePricing setPartysizefrom(integer $var) Sets the partysizefrom
  * 
- * @method integer getPartysizeto() Returns the partysizeto
  * @method PartySizePricing setPartysizeto(integer $var) Sets the partysizeto
  */
 class PartySizePricing extends Builder
@@ -59,5 +56,35 @@ class PartySizePricing extends Builder
             'partysizefrom' => $this->getPartysizefrom(),
             'partysizeto' => $this->getPartysizeto()
         );
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Returns the partysizefrom
+     *
+     * @return integer
+     */
+    public function getPartysizefrom()
+    {
+        return $this->partysizefrom;
+    }
+
+    /**
+     * Returns the partysizeto
+     *
+     * @return integer
+     */
+    public function getPartysizeto()
+    {
+        return $this->partysizeto;
     }
 }

@@ -18,15 +18,10 @@ use tabs\apiclient\actor\marketingbrand\EmailList;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\MarketingBrand getMarketingbrand() Returns the marketingbrand
- * @method boolean getNocontact() Returns the nocontact
  * @method MarketingBrand setNocontact(boolean $var) Sets the nocontact
  * 
- * @method CustomerSource getFirstcustomersource() Returns the firstcustomersource
  * 
- * @method Collection|CustomerSource[] getSources() Returns the sources
  * 
- * @method Collection|EmailList[] getEmaillists() Returns the email lists
  */
 class MarketingBrand extends Builder
 {
@@ -130,5 +125,55 @@ class MarketingBrand extends Builder
         }
         
         return $arr;
+    }
+
+    /**
+     * Returns the marketingbrand
+     *
+     * @return \tabs\apiclient\MarketingBrand
+     */
+    public function getMarketingbrand()
+    {
+        return $this->marketingbrand;
+    }
+
+    /**
+     * Returns the nocontact
+     *
+     * @return boolean
+     */
+    public function getNocontact()
+    {
+        return $this->nocontact;
+    }
+
+    /**
+     * Returns the firstcustomersource
+     *
+     * @return CustomerSource
+     */
+    public function getFirstcustomersource()
+    {
+        return $this->firstcustomersource;
+    }
+
+    /**
+     * Returns the sources
+     *
+     * @return Collection|CustomerSource[]
+     */
+    public function getSources()
+    {
+        return $this->sources;
+    }
+
+    /**
+     * Returns the email lists
+     *
+     * @return Collection|EmailList[]
+     */
+    public function getEmaillists()
+    {
+        return $this->emaillists;
     }
 }

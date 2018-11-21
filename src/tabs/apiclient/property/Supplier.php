@@ -19,10 +19,6 @@ use tabs\apiclient\property\supplier\Service;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method ManagedActivity getActivity() Returns the activity
- * @method \tabs\apiclient\Supplier getActor() Returns the actor
- * @method Collection|DateRange[] getDates() Returns the dates
- * @method Collection|Service[] getServices() Returns the services
  */
 class Supplier extends Builder
 {
@@ -113,5 +109,45 @@ class Supplier extends Builder
             'managedactivityid' => $this->getActivity()->getId(),
             'actorid' => $this->getActor()->getId(),
         );
+    }
+
+    /**
+     * Returns the activity
+     *
+     * @return ManagedActivity
+     */
+    public function getActivity()
+    {
+        return $this->activity;
+    }
+
+    /**
+     * Returns the actor
+     *
+     * @return \tabs\apiclient\Supplier
+     */
+    public function getActor()
+    {
+        return $this->actor;
+    }
+
+    /**
+     * Returns the dates
+     *
+     * @return Collection|DateRange[]
+     */
+    public function getDates()
+    {
+        return $this->dates;
+    }
+
+    /**
+     * Returns the services
+     *
+     * @return Collection|Service[]
+     */
+    public function getServices()
+    {
+        return $this->services;
     }
 }

@@ -13,13 +13,6 @@ namespace tabs\apiclient;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method string    getName()         Returns the name
- * @method string    getFilename()     Returns the filename
- * @method string    getDescription()  Returns the description
- * @method string    getWeight()       Returns the weight
- * @method Mimetype  getMimetype()     Returns the mimetype
- * @method \DateTime getTimeadded()    Returns the created time
- * @method boolean   getPrivate()      Returns the visibility flag
  *
  * @method Document  setName(string $filename)     Set the name
  * @method Document  setFilename(string $filename) Set the filename
@@ -27,7 +20,6 @@ namespace tabs\apiclient;
  * @method Document  setWeight(integer $weight)    Set the weight
  * @method Document  setPrivate(boolean $boolean)  Set the visibility flag
  * 
- * @method StaticCollection getTags() Returns the document tags
  */
 class Document extends \tabs\apiclient\FileBuilder
 {
@@ -129,5 +121,85 @@ class Document extends \tabs\apiclient\FileBuilder
         $this->mimetype = Mimetype::factory($mimeType);
         
         return $this;
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the filename
+     *
+     * @return string
+     */
+    public function getFilename()
+    {
+        return $this->filename;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Returns the weight
+     *
+     * @return string
+     */
+    public function getWeight()
+    {
+        return $this->weight;
+    }
+
+    /**
+     * Returns the mimetype
+     *
+     * @return Mimetype
+     */
+    public function getMimetype()
+    {
+        return $this->mimetype;
+    }
+
+    /**
+     * Returns the created time
+     *
+     * @return \DateTime
+     */
+    public function getTimeadded()
+    {
+        return $this->timeadded;
+    }
+
+    /**
+     * Returns the visibility flag
+     *
+     * @return boolean
+     */
+    public function getPrivate()
+    {
+        return $this->private;
+    }
+
+    /**
+     * Returns the document tags
+     *
+     * @return StaticCollection
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }

@@ -15,10 +15,8 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getContactmethodelement() Returns the contactmethodelement
  * @method Element setContactmethodelement(string $var) Sets the contactmethodelement
  * 
- * @method string getDescription() Returns the description
  * @method Element setDescription(string $var) Sets the description
  */
 class Element extends Builder
@@ -48,5 +46,25 @@ class Element extends Builder
             'contactmethodelement' => $this->getContactmethodelement(),
             'description' => $this->getDescription(),
         );
+    }
+
+    /**
+     * Returns the contactmethodelement
+     *
+     * @return string
+     */
+    public function getContactmethodelement()
+    {
+        return $this->contactmethodelement;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

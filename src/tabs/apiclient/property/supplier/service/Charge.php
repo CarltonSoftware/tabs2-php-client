@@ -18,30 +18,20 @@ use tabs\apiclient\OwnerChargeCode;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getType() Returns the type
  * @method Charge setType(string $var) Sets the type
  * 
- * @method \DateTime getFromdate() Returns the fromdate
  * @method Charge setFromdate(\DateTime $var) Sets the fromdate
  * 
- * @method \DateTime getTodate() Returns the todate
  * @method Charge setTodate(\DateTime $var) Sets the todate
  * 
- * @method float getCharge() Returns the charge
  * @method Charge setCharge(float $var) Sets the charge
  * 
- * @method Currency getCurrency() Returns the currency
- * @method Vatband getVatband() Returns the vatband
- * @method boolean getAutoaddcustomer() Returns the autoaddcustomer
  * @method Charge setAutoaddcustomer(boolean $var) Sets the autoaddcustomer
  * 
- * @method boolean getAutoaddowner() Returns the autoaddowner
  * @method Charge setAutoaddowner(boolean $var) Sets the autoaddowner
  * 
- * @method boolean getIncludesvat() Returns the includesvat
  * @method Charge setIncludesvat(boolean $var) Sets the includesvat
  * 
- * @method OwnerChargeCode getOwnerchargecode() Returns the ownerchargecode
  */
 class Charge extends Builder
 {
@@ -192,5 +182,105 @@ class Charge extends Builder
         }
         
         return $arr;
+    }
+
+    /**
+     * Returns the type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Returns the fromdate
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the todate
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
+    }
+
+    /**
+     * Returns the charge
+     *
+     * @return float
+     */
+    public function getCharge()
+    {
+        return $this->charge;
+    }
+
+    /**
+     * Returns the currency
+     *
+     * @return Currency
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * Returns the vatband
+     *
+     * @return Vatband
+     */
+    public function getVatband()
+    {
+        return $this->vatband;
+    }
+
+    /**
+     * Returns the autoaddcustomer
+     *
+     * @return boolean
+     */
+    public function getAutoaddcustomer()
+    {
+        return $this->autoaddcustomer;
+    }
+
+    /**
+     * Returns the autoaddowner
+     *
+     * @return boolean
+     */
+    public function getAutoaddowner()
+    {
+        return $this->autoaddowner;
+    }
+
+    /**
+     * Returns the includesvat
+     *
+     * @return boolean
+     */
+    public function getIncludesvat()
+    {
+        return $this->includesvat;
+    }
+
+    /**
+     * Returns the ownerchargecode
+     *
+     * @return OwnerChargeCode
+     */
+    public function getOwnerchargecode()
+    {
+        return $this->ownerchargecode;
     }
 }

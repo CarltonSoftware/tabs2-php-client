@@ -24,58 +24,39 @@ use tabs\apiclient\ActorSecurity;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getFirstname() Returns the firstname
  * @method Actor setFirstname(string $var) Sets the firstname
  * 
- * @method string getSurname() Returns the surname
  * @method Actor setSurname(string $var) Sets the surname
  * 
- * @method string getTitle() Returns the title
  * @method Actor setTitle(string $var) Sets the title
  * 
- * @method string getSalutation() Returns the salutation
  * @method Actor setSalutation(string $var) Sets the salutation
  * 
- * @method string getTabscode() Returns the tabscode
  * @method Actor setTabscode(string $var) Sets the tabscode
  * 
- * @method Language getLanguage() Returns the language
  * 
- * @method boolean getInactive() Returns the inactive
  * @method Actor setInactive(boolean $var) Sets the inactive
  * 
- * @method string getCompanyname() Returns the companyname
  * @method Actor setCompanyname(string $var) Sets the companyname
  * 
- * @method string getVatnumber() Returns the vatnumber
  * @method Actor setVatnumber(string $var) Sets the vatnumber
  * 
- * @method string getCompanynumber() Returns the companynumber
  * @method Actor setCompanynumber(string $var) Sets the companynumber
  * 
- * @method string getAccountingreference() Returns the accountingreference
  * @method Actor  setAccountingreference(string $var) Sets the accountingreference
  * 
- * @method Collection|BankAccount getBankaccounts() Returns the bank account collection
  * @method Actor setBankaccounts(Collection $col) Set the bank accounts
  * 
- * @method BankAccount getBacsbankaccount() Returns the bacs bank account
  * 
- * @method Collection|actor\Document[] getDocuments() Returns the actor documents
  * @method Actor setDocuments(Collection $col) Set the documents
  * 
- * @method Collection|ActorNote[] getNotes() Returns the actor notes
  * @method Actor setNotes(Collection $col) Set the notes
  * 
- * @method StaticCollection|ContactDetail[] getContactdetails() Returns the actor contact details
  * @method Actor setContactdetails(StaticCollection $col) Set the contact details
  * 
- * @method StaticCollection|ManagedActivity[] getManagedactivities() Returns the actor managed activities
  * @method Actor setManagedactivities(StaticCollection $col) Set the managed activities
  * 
- * @method Collection|ActorSecurity[] getSecurity() Returns the actor security
  * 
- * @method Collection|actor\Enquiry[] getEnquiries() Returns the customer enquiries
  */
 abstract class Actor extends Builder
 {
@@ -556,5 +537,195 @@ abstract class Actor extends Builder
         return \tabs\apiclient\client\Client::getClient()->getTabs2Uri(
             '/' . strtolower($this->getClass()) . '/' . $this->getId()
         );
+    }
+
+    /**
+     * Returns the firstname
+     *
+     * @return string
+     */
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    /**
+     * Returns the surname
+     *
+     * @return string
+     */
+    public function getSurname()
+    {
+        return $this->surname;
+    }
+
+    /**
+     * Returns the title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Returns the salutation
+     *
+     * @return string
+     */
+    public function getSalutation()
+    {
+        return $this->salutation;
+    }
+
+    /**
+     * Returns the tabscode
+     *
+     * @return string
+     */
+    public function getTabscode()
+    {
+        return $this->tabscode;
+    }
+
+    /**
+     * Returns the language
+     *
+     * @return Language
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
+    /**
+     * Returns the inactive
+     *
+     * @return boolean
+     */
+    public function getInactive()
+    {
+        return $this->inactive;
+    }
+
+    /**
+     * Returns the companyname
+     *
+     * @return string
+     */
+    public function getCompanyname()
+    {
+        return $this->companyname;
+    }
+
+    /**
+     * Returns the vatnumber
+     *
+     * @return string
+     */
+    public function getVatnumber()
+    {
+        return $this->vatnumber;
+    }
+
+    /**
+     * Returns the companynumber
+     *
+     * @return string
+     */
+    public function getCompanynumber()
+    {
+        return $this->companynumber;
+    }
+
+    /**
+     * Returns the accountingreference
+     *
+     * @return string
+     */
+    public function getAccountingreference()
+    {
+        return $this->accountingreference;
+    }
+
+    /**
+     * Returns the bank account collection
+     *
+     * @return Collection|BankAccount
+     */
+    public function getBankaccounts()
+    {
+        return $this->bankaccounts;
+    }
+
+    /**
+     * Returns the bacs bank account
+     *
+     * @return BankAccount
+     */
+    public function getBacsbankaccount()
+    {
+        return $this->bacsbankaccount;
+    }
+
+    /**
+     * Returns the actor documents
+     *
+     * @return Collection|actor\Document[]
+     */
+    public function getDocuments()
+    {
+        return $this->documents;
+    }
+
+    /**
+     * Returns the actor notes
+     *
+     * @return Collection|ActorNote[]
+     */
+    public function getNotes()
+    {
+        return $this->notes;
+    }
+
+    /**
+     * Returns the actor contact details
+     *
+     * @return StaticCollection|ContactDetail[]
+     */
+    public function getContactdetails()
+    {
+        return $this->contactdetails;
+    }
+
+    /**
+     * Returns the actor managed activities
+     *
+     * @return StaticCollection|ManagedActivity[]
+     */
+    public function getManagedactivities()
+    {
+        return $this->managedactivities;
+    }
+
+    /**
+     * Returns the actor security
+     *
+     * @return Collection|ActorSecurity[]
+     */
+    public function getSecurity()
+    {
+        return $this->security;
+    }
+
+    /**
+     * Returns the customer enquiries
+     *
+     * @return Collection|actor\Enquiry[]
+     */
+    public function getEnquiries()
+    {
+        return $this->enquiries;
     }
 }

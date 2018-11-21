@@ -18,18 +18,13 @@ use tabs\apiclient\MarketingBrand;
  *
  * @method Grouping setName(string $var) Sets the name
  *
- * @method string getCode() Returns the code
  * @method GroupingValue setCode(string $var) Sets the code
  *
- * @method string getDescription() Returns the description
  * @method GroupingValue setDescription(string $var) Sets the description
  *
- * @method string getGeohash() Return the geohash
  *
- * @method float getLatitude() Returns the latitude
  * @method GroupingValue setLatitude(float $var) Sets the latitude
  *
- * @method float getLongitude() Returns the longitude
  * @method GroupingValue setLongitude(float $var) Sets the longitude
  *
  * @method GroupingValue setRadiuskm(float $var) Sets the radiuskm
@@ -38,7 +33,6 @@ use tabs\apiclient\MarketingBrand;
  *
  * @method GroupingValue setPromote(boolean $var) Sets the promote
  *
- * @method MarketingBrand getMarketingbrand() Get the gv marketing brand
  */
 class GroupingValue extends Builder
 {
@@ -234,4 +228,64 @@ class GroupingValue extends Builder
         return $this->radiuskm;
     }
 
+
+    /**
+     * Returns the code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Return the geohash
+     *
+     * @return string
+     */
+    public function getGeohash()
+    {
+        return $this->geohash;
+    }
+
+    /**
+     * Returns the latitude
+     *
+     * @return float
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * Returns the longitude
+     *
+     * @return float
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * Get the gv marketing brand
+     *
+     * @return MarketingBrand
+     */
+    public function getMarketingbrand()
+    {
+        return $this->marketingbrand;
+    }
 }

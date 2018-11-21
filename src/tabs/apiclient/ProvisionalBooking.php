@@ -17,31 +17,22 @@ use tabs\apiclient\DepositAmount;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method Tabsuser getTabsuser() Returns the tabsuser
  * @method ProvisionalBooking setTabsuser(Tabsuser $tu) Set a tabsuser
  * 
- * @method DepositAmount getDepositamount() Returns the depositamount
  * @method ProvisionalBooking setDepositamount(DepositAmount $da) Set the depositamount
  * 
- * @method integer getDeposit() Returns the deposit
  * @method ProvisionalBooking setDeposit(integer $var) Sets the deposit
  * 
- * @method boolean getDepositoverridden() Returns the depositoverridden
  * @method ProvisionalBooking setDepositoverridden(boolean $var) Sets the depositoverridden
  * 
- * @method \DateTime getDepositduedate() Returns the depositduedate
  * @method ProvisionalBooking setDepositduedate(\DateTime $var) Sets the depositduedate
  * 
- * @method \DateTime getBalanceduedate() Returns the balanceduedate
  * @method ProvisionalBooking setBalanceduedate(\DateTime $var) Sets the balanceduedate
  * 
- * @method string getCommissionpercentage() Returns the commissionpercentage
  * @method ProvisionalBooking setCommissionpercentage(string $var) Sets the commissionpercentage
  * 
- * @method string getCommissionpercentagesetby() Returns the commissionpercentagesetby
  * @method ProvisionalBooking setCommissionpercentagesetby(string $var) Sets the commissionpercentagesetby
  * 
- * @method OwnerPaymentTerms getOwnerpaymentterms() Returns the ownerpaymentterms
  * @method ProvisionalBooking setOwnerpaymentterms(OwnerPaymentTerms $var) Set the ownerpaymentterms
  */
 class ProvisionalBooking extends Base
@@ -131,5 +122,95 @@ class ProvisionalBooking extends Base
     public function toArray()
     {
         return $this->__toArray();
+    }
+
+    /**
+     * Returns the tabsuser
+     *
+     * @return Tabsuser
+     */
+    public function getTabsuser()
+    {
+        return $this->tabsuser;
+    }
+
+    /**
+     * Returns the depositamount
+     *
+     * @return DepositAmount
+     */
+    public function getDepositamount()
+    {
+        return $this->depositamount;
+    }
+
+    /**
+     * Returns the deposit
+     *
+     * @return integer
+     */
+    public function getDeposit()
+    {
+        return $this->deposit;
+    }
+
+    /**
+     * Returns the depositoverridden
+     *
+     * @return boolean
+     */
+    public function getDepositoverridden()
+    {
+        return $this->depositoverridden;
+    }
+
+    /**
+     * Returns the depositduedate
+     *
+     * @return \DateTime
+     */
+    public function getDepositduedate()
+    {
+        return $this->depositduedate;
+    }
+
+    /**
+     * Returns the balanceduedate
+     *
+     * @return \DateTime
+     */
+    public function getBalanceduedate()
+    {
+        return $this->balanceduedate;
+    }
+
+    /**
+     * Returns the commissionpercentage
+     *
+     * @return string
+     */
+    public function getCommissionpercentage()
+    {
+        return $this->commissionpercentage;
+    }
+
+    /**
+     * Returns the commissionpercentagesetby
+     *
+     * @return string
+     */
+    public function getCommissionpercentagesetby()
+    {
+        return $this->commissionpercentagesetby;
+    }
+
+    /**
+     * Returns the ownerpaymentterms
+     *
+     * @return OwnerPaymentTerms
+     */
+    public function getOwnerpaymentterms()
+    {
+        return $this->ownerpaymentterms;
     }
 }

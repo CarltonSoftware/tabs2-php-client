@@ -15,11 +15,8 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\ManagedActivity getManagedactivity() Returns the managedactivity
- * @method \DateTime getFromdate() Returns the fromdate
  * @method ManagedActivity setFromdate(\DateTime $var) Sets the fromdate
  * 
- * @method \DateTime getTodate() Returns the todate
  * @method ManagedActivity setTodate(\DateTime $var) Sets the todate
  */
 class ManagedActivity extends Builder
@@ -84,5 +81,35 @@ class ManagedActivity extends Builder
             'fromdate' => $this->getFromdate()->format('Y-m-d'),
             'todate' => $this->getTodate()->format('Y-m-d'),
         );
+    }
+
+    /**
+     * Returns the managedactivity
+     *
+     * @return \tabs\apiclient\ManagedActivity
+     */
+    public function getManagedactivity()
+    {
+        return $this->managedactivity;
+    }
+
+    /**
+     * Returns the fromdate
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the todate
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
     }
 }

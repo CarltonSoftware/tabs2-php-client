@@ -17,7 +17,6 @@ use tabs\apiclient\Builder;
  *
  * @method Grouping setName(string $var) Sets the name
  *
- * @method Grouping getParentgrouping() Get the parent grouping
  */
 class Grouping extends Builder
 {
@@ -96,5 +95,15 @@ class Grouping extends Builder
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Get the parent grouping
+     *
+     * @return Grouping
+     */
+    public function getParentgrouping()
+    {
+        return $this->parentgrouping;
     }
 }

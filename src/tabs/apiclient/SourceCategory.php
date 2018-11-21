@@ -14,7 +14,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method string         getSourcecategory()                       Returns the sourcecategory
  * @method SourceCategory setSourcecategory(string $sourcecategory) Sets the sourcecategory
  */
 class SourceCategory extends Builder
@@ -36,5 +35,15 @@ class SourceCategory extends Builder
         return array(
             'sourcecategory' => $this->getSourcecategory(),
         );
+    }
+
+    /**
+     * Returns the sourcecategory
+     *
+     * @return string
+     */
+    public function getSourcecategory()
+    {
+        return $this->sourcecategory;
     }
 }

@@ -14,7 +14,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method string         getSection()            Returns the section name
  * @method WebsiteSection setSection(string $str) Sets the section name
  */
 class WebsiteSection extends Builder
@@ -36,5 +35,15 @@ class WebsiteSection extends Builder
         return array(
             'section' => $this->getSection()
         );
+    }
+
+    /**
+     * Returns the section name
+     *
+     * @return string
+     */
+    public function getSection()
+    {
+        return $this->section;
     }
 }

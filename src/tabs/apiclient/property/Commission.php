@@ -15,16 +15,12 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \DateTime getFromdate() Returns the fromdate
  * @method Commission setFromdate(\DateTime $var) Sets the fromdate
  * 
- * @method \DateTime getTodate() Returns the todate
  * @method Commission setTodate(\DateTime $var) Sets the todate
  * 
- * @method float getCommissionpercentage() Returns the commissionpercentage
  * @method Commission setCommissionpercentage(float $var) Sets the commissionpercentage
  * 
- * @method boolean getUpdateexistingbookings() Returns the updateexistingbookings
  * @method Commission setUpdateexistingbookings(boolean $var) Sets the updateexistingbookings
  */
 class Commission extends Builder
@@ -81,5 +77,45 @@ class Commission extends Builder
             'commissionpercentage' => $this->getCommissionpercentage(),
             'updateexistingbookings' => $this->boolToStr($this->updateexistingbookings)
         );
+    }
+
+    /**
+     * Returns the fromdate
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the todate
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
+    }
+
+    /**
+     * Returns the commissionpercentage
+     *
+     * @return float
+     */
+    public function getCommissionpercentage()
+    {
+        return $this->commissionpercentage;
+    }
+
+    /**
+     * Returns the updateexistingbookings
+     *
+     * @return boolean
+     */
+    public function getUpdateexistingbookings()
+    {
+        return $this->updateexistingbookings;
     }
 }

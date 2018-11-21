@@ -16,22 +16,15 @@ use tabs\apiclient\marketingbrand\EmailList;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getCode() Returns the code
  * @method MarketingBrand setCode(string $var) Sets the code
  * 
- * @method string getName() Returns the name
  * @method MarketingBrand setName(string $var) Sets the name
  * 
- * @method string getEmail() Returns the email
  * @method MarketingBrand setEmail(string $var) Sets the email
  * 
- * @method string getWebsite() Returns the website
  * @method MarketingBrand setWebsite(string $var) Sets the website
  * 
- * @method \tabs\apiclient\Agency getAgency() Returns the agency
- * @method \tabs\apiclient\BookingBrand getDefaultbookingbrand() Returns the defaultbookingbrand
  * 
- * @method Collection|EmailList[] getEmaillists() Returns the emaillists
  */
 class MarketingBrand extends Builder
 {
@@ -143,5 +136,75 @@ class MarketingBrand extends Builder
             'agencyid' => $this->getAgency()->getId(),
             'defaultbookingbrandid' => $this->getDefaultbookingbrand()->getId()
         );
+    }
+
+    /**
+     * Returns the code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Returns the website
+     *
+     * @return string
+     */
+    public function getWebsite()
+    {
+        return $this->website;
+    }
+
+    /**
+     * Returns the agency
+     *
+     * @return \tabs\apiclient\Agency
+     */
+    public function getAgency()
+    {
+        return $this->agency;
+    }
+
+    /**
+     * Returns the defaultbookingbrand
+     *
+     * @return \tabs\apiclient\BookingBrand
+     */
+    public function getDefaultbookingbrand()
+    {
+        return $this->defaultbookingbrand;
+    }
+
+    /**
+     * Returns the emaillists
+     *
+     * @return Collection|EmailList[]
+     */
+    public function getEmaillists()
+    {
+        return $this->emaillists;
     }
 }

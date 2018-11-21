@@ -16,11 +16,8 @@ use tabs\apiclient\RoomType;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method RoomType getRoomtype() Returns the roomtype
- * @method integer getQuantity() Returns the quantity
  * @method Room setQuantity(integer $var) Sets the quantity
  * 
- * @method string getDescription() Returns the description
  * @method Room setDescription(string $var) Sets the description
  */
 class Room extends Builder
@@ -72,5 +69,35 @@ class Room extends Builder
             'quantity' => $this->getQuantity(),
             'description' => $this->getDescription(),
         );
+    }
+
+    /**
+     * Returns the roomtype
+     *
+     * @return RoomType
+     */
+    public function getRoomtype()
+    {
+        return $this->roomtype;
+    }
+
+    /**
+     * Returns the quantity
+     *
+     * @return integer
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

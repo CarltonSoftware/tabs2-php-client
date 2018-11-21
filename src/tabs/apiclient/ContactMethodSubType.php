@@ -15,7 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getContactmethodsubtype() Returns the contactmethodsubtype
  * @method ContactMethodSubType setContactmethodsubtype(string $var) Sets the contactmethodsubtype
  */
 class ContactMethodSubType extends Builder
@@ -37,5 +36,15 @@ class ContactMethodSubType extends Builder
         return array(
             'contactmethodsubtype' => $this->getContactmethodsubtype()
         );
+    }
+
+    /**
+     * Returns the contactmethodsubtype
+     *
+     * @return string
+     */
+    public function getContactmethodsubtype()
+    {
+        return $this->contactmethodsubtype;
     }
 }

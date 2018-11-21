@@ -14,13 +14,10 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getCode() Returns the code
  * @method BookingBrand setCode(string $var) Sets the code
  * 
- * @method string getName() Returns the name
  * @method BookingBrand setName(string $var) Sets the name
  * 
- * @method \tabs\apiclient\Agency getAgency() Returns the agency
  */
 class BrandingGroup extends Builder
 {
@@ -71,5 +68,35 @@ class BrandingGroup extends Builder
             'name' => $this->getName(),
             'agencyid' => $this->getAgency()->getId()
         );
+    }
+
+    /**
+     * Returns the code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the agency
+     *
+     * @return \tabs\apiclient\Agency
+     */
+    public function getAgency()
+    {
+        return $this->agency;
     }
 }

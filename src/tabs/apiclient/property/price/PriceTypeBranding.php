@@ -20,28 +20,18 @@ use tabs\apiclient\property\price\PartySizePrice;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method PriceType getPricetype() Returns the pricetype
- * @method SalesChannel getSaleschannel() Returns the saleschannel
- * @method \DateTime getFromdate() Returns the fromdate
  * @method PriceTypeBranding setFromdate(\DateTime $var) Sets the fromdate
  * 
- * @method \DateTime getTodate() Returns the todate
  * @method PriceTypeBranding setTodate(\DateTime $var) Sets the todate
  * 
- * @method string getType() Returns the type
  * @method PriceTypeBranding setType(string $var) Sets the type
  * 
- * @method integer getDecimalplaces() Returns the decimalplaces
  * @method PriceTypeBranding setDecimalplaces(integer $var) Sets the decimalplaces
  * 
- * @method float getPrice() Returns the price
  * @method PriceTypeBranding setPrice(float $var) Sets the price
  * 
- * @method integer getPercentage() Returns the percentage
  * @method PriceTypeBranding setPercentage(integer $var) Sets the percentage
  * 
- * @method Collection|PriceTypeBranding[] getPercentages() Returns the percentages
- * @method Collection|PartySizePrice[] getPartysizeprices() Returns the partysizeprices
  */
 class PriceTypeBranding extends Builder
 {
@@ -165,5 +155,105 @@ class PriceTypeBranding extends Builder
         return array(
             
         );
+    }
+
+    /**
+     * Returns the pricetype
+     *
+     * @return PriceType
+     */
+    public function getPricetype()
+    {
+        return $this->pricetype;
+    }
+
+    /**
+     * Returns the saleschannel
+     *
+     * @return SalesChannel
+     */
+    public function getSaleschannel()
+    {
+        return $this->saleschannel;
+    }
+
+    /**
+     * Returns the fromdate
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the todate
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
+    }
+
+    /**
+     * Returns the type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Returns the decimalplaces
+     *
+     * @return integer
+     */
+    public function getDecimalplaces()
+    {
+        return $this->decimalplaces;
+    }
+
+    /**
+     * Returns the price
+     *
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Returns the percentage
+     *
+     * @return integer
+     */
+    public function getPercentage()
+    {
+        return $this->percentage;
+    }
+
+    /**
+     * Returns the percentages
+     *
+     * @return Collection|PriceTypeBranding[]
+     */
+    public function getPercentages()
+    {
+        return $this->percentages;
+    }
+
+    /**
+     * Returns the partysizeprices
+     *
+     * @return Collection|PartySizePrice[]
+     */
+    public function getPartysizeprices()
+    {
+        return $this->partysizeprices;
     }
 }

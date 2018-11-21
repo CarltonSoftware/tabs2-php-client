@@ -15,9 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\TabsUser      getActor()         Returns the actor
- * @method \tabs\apiclient\SecurityRole  getSecurityrole()  Returns the securityrole
- * @method \tabs\apiclient\SecurityGroup getSecuritygroup() Returns the securitygroup
  */
 class ActorSecurity extends Builder
 {
@@ -104,5 +101,35 @@ class ActorSecurity extends Builder
         }
         
         return $arr;
+    }
+
+    /**
+     * Returns the actor
+     *
+     * @return \tabs\apiclient\TabsUser
+     */
+    public function getActor()
+    {
+        return $this->actor;
+    }
+
+    /**
+     * Returns the securityrole
+     *
+     * @return \tabs\apiclient\SecurityRole
+     */
+    public function getSecurityrole()
+    {
+        return $this->securityrole;
+    }
+
+    /**
+     * Returns the securitygroup
+     *
+     * @return \tabs\apiclient\SecurityGroup
+     */
+    public function getSecuritygroup()
+    {
+        return $this->securitygroup;
     }
 }

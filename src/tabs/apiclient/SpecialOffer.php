@@ -15,94 +15,57 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getType() Returns the type string
  * @method SpecialOffer setType(string $var) Sets the type
  * 
- * @method boolean getActive() Returns the active boolean
  * @method SpecialOffer setActive(boolean $var) Sets the active
  * 
- * @method boolean getAvailabilityexists() Returns the availabilityexists boolean
  * @method SpecialOffer setAvailabilityexists(boolean $var) Sets the availabilityexists
  * 
- * @method boolean getArchived() Returns the archived boolean
  * @method SpecialOffer setArchived(boolean $var) Sets the archived
  * 
- * @method \DateTime getArchiveddatetime() Returns the archiveddatetime \DateTime
  * @method SpecialOffer setArchiveddatetime(\DateTime $var) Sets the archiveddatetime
  * 
- * @method string getDescription() Returns the description string
  * @method SpecialOffer setDescription(string $var) Sets the description
  * 
- * @method string getOfficedescription() Returns the officedescription string
  * @method SpecialOffer setOfficedescription(string $var) Sets the officedescription
  * 
- * @method integer getMinimumholidaylength() Returns the minimumholidaylength integer
  * @method SpecialOffer setMinimumholidaylength(integer $var) Sets the minimumholidaylength
  * 
- * @method integer getMaximumholidaylength() Returns the maximumholidaylength integer
  * @method SpecialOffer setMaximumholidaylength(integer $var) Sets the maximumholidaylength
  * 
- * @method integer getMinimumoccupancy() Returns the minimumoccupancy integer
  * @method SpecialOffer setMinimumoccupancy(integer $var) Sets the minimumoccupancy
  * 
- * @method integer getMaximumoccupancy() Returns the maximumoccupancy integer
  * @method SpecialOffer setMaximumoccupancy(integer $var) Sets the maximumoccupancy
  * 
- * @method integer getMinimumdaysbeforeholiday() Returns the minimumdaysbeforeholiday integer
  * @method SpecialOffer setMinimumdaysbeforeholiday(integer $var) Sets the minimumdaysbeforeholiday
  * 
- * @method integer getMaximumdaysbeforeholiday() Returns the maximumdaysbeforeholiday integer
  * @method SpecialOffer setMaximumdaysbeforeholiday(integer $var) Sets the maximumdaysbeforeholiday
  * 
- * @method boolean getDaysbeforeappliestowholeholiday() Returns the daysbeforeappliestowholeholiday boolean
  * @method SpecialOffer setDaysbeforeappliestowholeholiday(boolean $var) Sets the daysbeforeappliestowholeholiday
  * 
- * @method boolean getAdditional() Returns the additional boolean
  * @method SpecialOffer setAdditional(boolean $var) Sets the additional
  * 
- * @method boolean getAdvertise() Returns the advertise boolean
  * @method SpecialOffer setAdvertise(boolean $var) Sets the advertise
  * 
- * @method boolean getChangedaystartfinishonly() Returns the changedaystartfinishonly boolean
  * @method SpecialOffer setChangedaystartfinishonly(boolean $var) Sets the changedaystartfinishonly
  * 
- * @method boolean getHaspromotions() Returns the haspromotions boolean
  * @method SpecialOffer setHaspromotions(boolean $var) Sets the haspromotions
  * 
- * @method integer getConfirmedbookingsinperiod() Returns the confirmedbookingsinperiod integer
  * @method SpecialOffer setConfirmedbookingsinperiod(integer $var) Sets the confirmedbookingsinperiod
  * 
- * @method float getCommissionpercentage() Returns the commissionpercentage float
  * @method SpecialOffer setCommissionpercentage(float $var) Sets the commissionpercentage
  * 
- * @method float getFixedprice() Returns the fixedprice float
  * @method SpecialOffer setFixedprice(float $var) Sets the fixedprice
  * 
- * @method float getAmount() Returns the amount float
  * @method SpecialOffer setAmount(float $var) Sets the amount
  * 
- * @method float getPercentage() Returns the percentage float
  * @method SpecialOffer setPercentage(float $var) Sets the percentage
  * 
- * @method Currency getCurrency() Returns the currency object
- * @method boolean getPerperiod() Returns the perperiod boolean
  * @method SpecialOffer setPerperiod(boolean $var) Sets the perperiod
  * 
- * @method boolean getApplytopartysizepricing() Returns the applytopartysizepricing boolean
  * @method SpecialOffer setApplytopartysizepricing(boolean $var) Sets the applytopartysizepricing
  * 
- * @method PricingPeriod getPricingperiod() Returns the pricingperiod object
- * @method TabsUser getArchivedby() Returns the archivedby object
  * 
- * @method Collection|specialoffer\BookingPeriod[]          getBookingperiods()          Returns the booking periods collection
- * @method Collection|specialoffer\HolidayPeriod[]          getHolidayperiods()          Returns the holiday periods collection
- * @method Collection|specialoffer\Branding[]               getBrandings()               Returns the offer brandings
- * @method Collection|specialoffer\Attribute[]              getAttributes()              Returns the offers attributes
- * @method Collection|specialoffer\PropertyBranding[]       getPropertybrandings()       Returns the offers property brandings
- * @method Collection|specialoffer\ConfirmedBookingPeriod[] getConfirmedbookingperiods() Returns the confirmed booking periods
- * @method Collection|specialoffer\Promotion[]              getPromotions()              Returns the promotions
- * @method Collection|specialoffer\SalesChannel[]           getSaleschannels()           Returns the sales channels
- * @method Collection|specialoffer\WebsiteSection[]         getWebsitesections()         Returns the website sections
  */
 class SpecialOffer extends Builder
 {
@@ -515,5 +478,375 @@ class SpecialOffer extends Builder
         }
 
         return $arr;
+    }
+
+    /**
+     * Returns the type string
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Returns the active boolean
+     *
+     * @return boolean
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * Returns the availabilityexists boolean
+     *
+     * @return boolean
+     */
+    public function getAvailabilityexists()
+    {
+        return $this->availabilityexists;
+    }
+
+    /**
+     * Returns the archived boolean
+     *
+     * @return boolean
+     */
+    public function getArchived()
+    {
+        return $this->archived;
+    }
+
+    /**
+     * Returns the archiveddatetime \DateTime
+     *
+     * @return \DateTime
+     */
+    public function getArchiveddatetime()
+    {
+        return $this->archiveddatetime;
+    }
+
+    /**
+     * Returns the description string
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Returns the officedescription string
+     *
+     * @return string
+     */
+    public function getOfficedescription()
+    {
+        return $this->officedescription;
+    }
+
+    /**
+     * Returns the minimumholidaylength integer
+     *
+     * @return integer
+     */
+    public function getMinimumholidaylength()
+    {
+        return $this->minimumholidaylength;
+    }
+
+    /**
+     * Returns the maximumholidaylength integer
+     *
+     * @return integer
+     */
+    public function getMaximumholidaylength()
+    {
+        return $this->maximumholidaylength;
+    }
+
+    /**
+     * Returns the minimumoccupancy integer
+     *
+     * @return integer
+     */
+    public function getMinimumoccupancy()
+    {
+        return $this->minimumoccupancy;
+    }
+
+    /**
+     * Returns the maximumoccupancy integer
+     *
+     * @return integer
+     */
+    public function getMaximumoccupancy()
+    {
+        return $this->maximumoccupancy;
+    }
+
+    /**
+     * Returns the minimumdaysbeforeholiday integer
+     *
+     * @return integer
+     */
+    public function getMinimumdaysbeforeholiday()
+    {
+        return $this->minimumdaysbeforeholiday;
+    }
+
+    /**
+     * Returns the maximumdaysbeforeholiday integer
+     *
+     * @return integer
+     */
+    public function getMaximumdaysbeforeholiday()
+    {
+        return $this->maximumdaysbeforeholiday;
+    }
+
+    /**
+     * Returns the daysbeforeappliestowholeholiday boolean
+     *
+     * @return boolean
+     */
+    public function getDaysbeforeappliestowholeholiday()
+    {
+        return $this->daysbeforeappliestowholeholiday;
+    }
+
+    /**
+     * Returns the additional boolean
+     *
+     * @return boolean
+     */
+    public function getAdditional()
+    {
+        return $this->additional;
+    }
+
+    /**
+     * Returns the advertise boolean
+     *
+     * @return boolean
+     */
+    public function getAdvertise()
+    {
+        return $this->advertise;
+    }
+
+    /**
+     * Returns the changedaystartfinishonly boolean
+     *
+     * @return boolean
+     */
+    public function getChangedaystartfinishonly()
+    {
+        return $this->changedaystartfinishonly;
+    }
+
+    /**
+     * Returns the haspromotions boolean
+     *
+     * @return boolean
+     */
+    public function getHaspromotions()
+    {
+        return $this->haspromotions;
+    }
+
+    /**
+     * Returns the confirmedbookingsinperiod integer
+     *
+     * @return integer
+     */
+    public function getConfirmedbookingsinperiod()
+    {
+        return $this->confirmedbookingsinperiod;
+    }
+
+    /**
+     * Returns the commissionpercentage float
+     *
+     * @return float
+     */
+    public function getCommissionpercentage()
+    {
+        return $this->commissionpercentage;
+    }
+
+    /**
+     * Returns the fixedprice float
+     *
+     * @return float
+     */
+    public function getFixedprice()
+    {
+        return $this->fixedprice;
+    }
+
+    /**
+     * Returns the amount float
+     *
+     * @return float
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * Returns the percentage float
+     *
+     * @return float
+     */
+    public function getPercentage()
+    {
+        return $this->percentage;
+    }
+
+    /**
+     * Returns the currency object
+     *
+     * @return Currency
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * Returns the perperiod boolean
+     *
+     * @return boolean
+     */
+    public function getPerperiod()
+    {
+        return $this->perperiod;
+    }
+
+    /**
+     * Returns the applytopartysizepricing boolean
+     *
+     * @return boolean
+     */
+    public function getApplytopartysizepricing()
+    {
+        return $this->applytopartysizepricing;
+    }
+
+    /**
+     * Returns the pricingperiod object
+     *
+     * @return PricingPeriod
+     */
+    public function getPricingperiod()
+    {
+        return $this->pricingperiod;
+    }
+
+    /**
+     * Returns the archivedby object
+     *
+     * @return TabsUser
+     */
+    public function getArchivedby()
+    {
+        return $this->archivedby;
+    }
+
+    /**
+     * Returns the booking periods collection
+     *
+     * @return Collection|specialoffer\BookingPeriod[]
+     */
+    public function getBookingperiods()
+    {
+        return $this->bookingperiods;
+    }
+
+    /**
+     * Returns the holiday periods collection
+     *
+     * @return Collection|specialoffer\HolidayPeriod[]
+     */
+    public function getHolidayperiods()
+    {
+        return $this->holidayperiods;
+    }
+
+    /**
+     * Returns the offer brandings
+     *
+     * @return Collection|specialoffer\Branding[]
+     */
+    public function getBrandings()
+    {
+        return $this->brandings;
+    }
+
+    /**
+     * Returns the offers attributes
+     *
+     * @return Collection|specialoffer\Attribute[]
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+
+    /**
+     * Returns the offers property brandings
+     *
+     * @return Collection|specialoffer\PropertyBranding[]
+     */
+    public function getPropertybrandings()
+    {
+        return $this->propertybrandings;
+    }
+
+    /**
+     * Returns the confirmed booking periods
+     *
+     * @return Collection|specialoffer\ConfirmedBookingPeriod[]
+     */
+    public function getConfirmedbookingperiods()
+    {
+        return $this->confirmedbookingperiods;
+    }
+
+    /**
+     * Returns the promotions
+     *
+     * @return Collection|specialoffer\Promotion[]
+     */
+    public function getPromotions()
+    {
+        return $this->promotions;
+    }
+
+    /**
+     * Returns the sales channels
+     *
+     * @return Collection|specialoffer\SalesChannel[]
+     */
+    public function getSaleschannels()
+    {
+        return $this->saleschannels;
+    }
+
+    /**
+     * Returns the website sections
+     *
+     * @return Collection|specialoffer\WebsiteSection[]
+     */
+    public function getWebsitesections()
+    {
+        return $this->websitesections;
     }
 }

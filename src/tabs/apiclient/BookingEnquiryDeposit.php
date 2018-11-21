@@ -15,17 +15,12 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \DateTime getBalanceduedate() Returns the balanceduedate
  * @method BookingEnquiryDeposit setBalanceduedate(\DateTime $var) Sets the balanceduedate
  * 
- * @method integer getDeposit() Returns the deposit
  * @method BookingEnquiryDeposit setDeposit(integer $var) Sets the deposit
  * 
- * @method \tabs\apiclient\DepositAmount getDepositamount() Returns the depositamount
- * @method string getDescription() Returns the description
  * @method BookingEnquiryDeposit setDescription(string $var) Sets the description
  * 
- * @method \DateTime getDuedate() Returns the duedate
  * @method BookingEnquiryDeposit setDuedate(\DateTime $var) Sets the duedate
  */
 class BookingEnquiryDeposit extends Builder
@@ -105,5 +100,55 @@ class BookingEnquiryDeposit extends Builder
             'description' => $this->getDescription(),
             'duedate' => $this->getDuedate()->format('Y-m-d'),
         );
+    }
+
+    /**
+     * Returns the balanceduedate
+     *
+     * @return \DateTime
+     */
+    public function getBalanceduedate()
+    {
+        return $this->balanceduedate;
+    }
+
+    /**
+     * Returns the deposit
+     *
+     * @return integer
+     */
+    public function getDeposit()
+    {
+        return $this->deposit;
+    }
+
+    /**
+     * Returns the depositamount
+     *
+     * @return \tabs\apiclient\DepositAmount
+     */
+    public function getDepositamount()
+    {
+        return $this->depositamount;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Returns the duedate
+     *
+     * @return \DateTime
+     */
+    public function getDuedate()
+    {
+        return $this->duedate;
     }
 }

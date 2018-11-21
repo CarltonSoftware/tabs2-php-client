@@ -15,8 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\BookingEvent getEvent() Returns the event
- * @method string getAction() Returns the action
  * @method BookingEvent setAction(string $var) Sets the action
  */
 class BookingEvent extends Builder
@@ -60,5 +58,25 @@ class BookingEvent extends Builder
             'bookingeventid' => $this->getEvent()->getId(),
             'action' => $this->getAction()
         );
+    }
+
+    /**
+     * Returns the event
+     *
+     * @return \tabs\apiclient\BookingEvent
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+    /**
+     * Returns the action
+     *
+     * @return string
+     */
+    public function getAction()
+    {
+        return $this->action;
     }
 }

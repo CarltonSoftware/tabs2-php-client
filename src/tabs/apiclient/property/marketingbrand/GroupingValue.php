@@ -16,8 +16,6 @@ use tabs\apiclient\Grouping;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method Grouping getGrouping() Returns the grouping
- * @method \tabs\apiclient\GroupingValue getGroupingvalue() Returns the groupingvalue
  */
 class GroupingValue extends Builder
 {
@@ -73,5 +71,25 @@ class GroupingValue extends Builder
         return array(
             'groupingvalueid' => $this->getGroupingvalue()->getId()
         );
+    }
+
+    /**
+     * Returns the grouping
+     *
+     * @return Grouping
+     */
+    public function getGrouping()
+    {
+        return $this->grouping;
+    }
+
+    /**
+     * Returns the groupingvalue
+     *
+     * @return \tabs\apiclient\GroupingValue
+     */
+    public function getGroupingvalue()
+    {
+        return $this->groupingvalue;
     }
 }

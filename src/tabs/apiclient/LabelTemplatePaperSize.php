@@ -15,7 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getName() Returns the name
  * @method LabelTemplatePaperSize setName(string $var) Sets the name
  */
 class LabelTemplatePaperSize extends Builder
@@ -37,5 +36,15 @@ class LabelTemplatePaperSize extends Builder
         return array(
             'name' => $this->getName()
         );
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 }

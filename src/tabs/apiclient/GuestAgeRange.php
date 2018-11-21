@@ -15,13 +15,10 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method integer getAgefrom() Returns the agefrom
  * @method GuestAgeRange setAgefrom(integer $var) Sets the agefrom
  * 
- * @method integer getAgeto() Returns the ageto
  * @method GuestAgeRange setAgeto(integer $var) Sets the ageto
  * 
- * @method string getAgerange() Returns the age range
  * @method GuestAgeRange setAgerange(string $var) Sets the age range
  */
 class GuestAgeRange extends Builder
@@ -77,5 +74,35 @@ class GuestAgeRange extends Builder
         }
         
         return implode(' - ', $args);
+    }
+
+    /**
+     * Returns the agefrom
+     *
+     * @return integer
+     */
+    public function getAgefrom()
+    {
+        return $this->agefrom;
+    }
+
+    /**
+     * Returns the ageto
+     *
+     * @return integer
+     */
+    public function getAgeto()
+    {
+        return $this->ageto;
+    }
+
+    /**
+     * Returns the age range
+     *
+     * @return string
+     */
+    public function getAgerange()
+    {
+        return $this->agerange;
     }
 }

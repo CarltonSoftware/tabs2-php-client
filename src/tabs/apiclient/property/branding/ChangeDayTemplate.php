@@ -15,12 +15,9 @@ use tabs\apiclient\Base;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\ChangeDayTemplate getChangedaytemplate() Returns the ChangeDayTemplate
  * 
- * @method \DateTime getFromdate() Returns the fromdate
  * @method ChangeDayTemplate setFromdate(\DateTime $var) Sets the fromdate
  * 
- * @method \DateTime getTodate() Returns the todate
  * @method ChangeDayTemplate setTodate(\DateTime $var) Sets the todate
  */
 class ChangeDayTemplate extends Base
@@ -82,5 +79,35 @@ class ChangeDayTemplate extends Base
             'fromdate' => $this->getFromdate()->format('Y-m-d'),
             'todate' => $this->getTodate()->format('Y-m-d')
         );
+    }
+
+    /**
+     * Returns the ChangeDayTemplate
+     *
+     * @return \tabs\apiclient\ChangeDayTemplate
+     */
+    public function getChangedaytemplate()
+    {
+        return $this->changedaytemplate;
+    }
+
+    /**
+     * Returns the fromdate
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the todate
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
     }
 }

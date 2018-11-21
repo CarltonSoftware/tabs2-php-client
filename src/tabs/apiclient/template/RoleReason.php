@@ -15,11 +15,8 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\RoleReason getRolereason() Returns the rolereason object
- * @method \DateTime getFromdate() Returns the fromdate \DateTime
  * @method RoleReason setFromdate(\DateTime $var) Sets the fromdate
  * 
- * @method \DateTime getTodate() Returns the todate \DateTime
  * @method RoleReason setTodate(\DateTime $var) Sets the todate
  */
 class RoleReason extends Builder
@@ -82,5 +79,35 @@ class RoleReason extends Builder
                 'rolereasonid' => $this->getRolereason()->getId()
             )
         );
+    }
+
+    /**
+     * Returns the rolereason object
+     *
+     * @return \tabs\apiclient\RoleReason
+     */
+    public function getRolereason()
+    {
+        return $this->rolereason;
+    }
+
+    /**
+     * Returns the fromdate \DateTime
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the todate \DateTime
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
     }
 }

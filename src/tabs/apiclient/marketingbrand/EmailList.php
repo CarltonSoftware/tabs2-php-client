@@ -15,13 +15,10 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getListname() Returns the listname
  * @method EmailList setListname(string $var) Sets the listname
  * 
- * @method \DateTime getFromdate() Returns the fromdate
  * @method EmailList setFromdate(\DateTime $var) Sets the fromdate
  * 
- * @method \DateTime getTodate() Returns the todate
  * @method EmailList setTodate(\DateTime $var) Sets the todate
  */
 class EmailList extends Builder
@@ -69,5 +66,35 @@ class EmailList extends Builder
             'fromdate' => $this->getFromdate()->format('Y-m-d'),
             'todate' => $this->getTodate()->format('Y-m-d')
         );
+    }
+
+    /**
+     * Returns the listname
+     *
+     * @return string
+     */
+    public function getListname()
+    {
+        return $this->listname;
+    }
+
+    /**
+     * Returns the fromdate
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the todate
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
     }
 }

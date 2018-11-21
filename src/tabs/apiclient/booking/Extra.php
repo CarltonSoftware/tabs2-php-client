@@ -16,38 +16,25 @@ use tabs\apiclient\extra\branding\Configuration;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \DateTime getBookeddatetime() Returns the bookeddatetime
  * @method Extra setBookeddatetime(\DateTime $var) Sets the bookeddatetime
  * 
- * @method \tabs\apiclient\Extra getExtra() Returns the extra
- * @method float getUnitprice() Returns the unitprice
  * @method Extra setUnitprice(float $var) Sets the unitprice
  * 
- * @method float getPrice()           Returns the Price
  * 
- * @method float getQuantity() Returns the quantity
  * @method Extra setQuantity(float $var) Sets the quantity
  * 
- * @method boolean getPriceoverridden() Returns the priceoverridden
  * @method Extra setPriceoverridden(boolean $var) Sets the priceoverridden
  * 
- * @method string getAgencypercentage() Returns the agencypercentage
  * @method Extra setAgencypercentage(string $var) Sets the agencypercentage
  * 
- * @method float getAgencyincomeexvat() Returns the agencyincomeexvat
  * @method Extra setAgencyincomeexvat(float $var) Sets the agencyincomeexvat
  * 
- * @method \tabs\apiclient\Vatrate getVatrate() Returns the vatrate
- * @method float getVat() Returns the vat
  * @method Extra setVat(float $var) Sets the vat
  * 
- * @method float getOwnerincome() Returns the ownerincome
  * @method Extra setOwnerincome(float $var) Sets the ownerincome
  * 
- * @method \DateTime getCancelleddatetime() Returns the cancelleddatetime
  * @method Extra setCancelleddatetime(\DateTime $var) Sets the cancelleddatetime
  * 
- * @method Configuration getConfiguration() Returns the configuration
  */
 class Extra extends Builder
 {
@@ -219,5 +206,135 @@ class Extra extends Builder
         $arr['extraid'] = $this->getExtra()->getId();
         
         return $arr;
+    }
+
+    /**
+     * Returns the bookeddatetime
+     *
+     * @return \DateTime
+     */
+    public function getBookeddatetime()
+    {
+        return $this->bookeddatetime;
+    }
+
+    /**
+     * Returns the extra
+     *
+     * @return \tabs\apiclient\Extra
+     */
+    public function getExtra()
+    {
+        return $this->extra;
+    }
+
+    /**
+     * Returns the unitprice
+     *
+     * @return float
+     */
+    public function getUnitprice()
+    {
+        return $this->unitprice;
+    }
+
+    /**
+     * Returns the Price
+     *
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Returns the quantity
+     *
+     * @return float
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+
+    /**
+     * Returns the priceoverridden
+     *
+     * @return boolean
+     */
+    public function getPriceoverridden()
+    {
+        return $this->priceoverridden;
+    }
+
+    /**
+     * Returns the agencypercentage
+     *
+     * @return string
+     */
+    public function getAgencypercentage()
+    {
+        return $this->agencypercentage;
+    }
+
+    /**
+     * Returns the agencyincomeexvat
+     *
+     * @return float
+     */
+    public function getAgencyincomeexvat()
+    {
+        return $this->agencyincomeexvat;
+    }
+
+    /**
+     * Returns the vatrate
+     *
+     * @return \tabs\apiclient\Vatrate
+     */
+    public function getVatrate()
+    {
+        return $this->vatrate;
+    }
+
+    /**
+     * Returns the vat
+     *
+     * @return float
+     */
+    public function getVat()
+    {
+        return $this->vat;
+    }
+
+    /**
+     * Returns the ownerincome
+     *
+     * @return float
+     */
+    public function getOwnerincome()
+    {
+        return $this->ownerincome;
+    }
+
+    /**
+     * Returns the cancelleddatetime
+     *
+     * @return \DateTime
+     */
+    public function getCancelleddatetime()
+    {
+        return $this->cancelleddatetime;
+    }
+
+    /**
+     * Returns the configuration
+     *
+     * @return Configuration
+     */
+    public function getConfiguration()
+    {
+        return $this->configuration;
     }
 }

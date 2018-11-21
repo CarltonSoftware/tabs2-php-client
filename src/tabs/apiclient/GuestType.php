@@ -15,7 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getGuestype() Returns the guestype
  * @method GuestType setGuestype(string $var) Sets the guestype
  */
 class GuestType extends Builder
@@ -37,5 +36,15 @@ class GuestType extends Builder
         return array(
             'guestype' => $this->getGuestype()
         );
+    }
+
+    /**
+     * Returns the guestype
+     *
+     * @return string
+     */
+    public function getGuestype()
+    {
+        return $this->guestype;
     }
 }

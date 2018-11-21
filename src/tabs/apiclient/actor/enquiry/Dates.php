@@ -15,16 +15,12 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method integer getDaysfrom() Returns the daysfrom integer
  * @method Dates setDaysfrom(integer $var) Sets the daysfrom
  * 
- * @method integer getDaysto() Returns the daysto integer
  * @method Dates setDaysto(integer $var) Sets the daysto
  * 
- * @method \DateTime getFromdate() Returns the fromdate \DateTime
  * @method Dates setFromdate(\DateTime $var) Sets the fromdate
  * 
- * @method \DateTime getTodate() Returns the todate \DateTime
  * @method Dates setTodate(\DateTime $var) Sets the todate
  */
 class Dates extends Builder
@@ -80,5 +76,45 @@ class Dates extends Builder
             'fromdate' => $this->getFromdate()->format('Y-m-d'),
             'todate' => $this->getTodate()->format('Y-m-d'),
         );
+    }
+
+    /**
+     * Returns the daysfrom integer
+     *
+     * @return integer
+     */
+    public function getDaysfrom()
+    {
+        return $this->daysfrom;
+    }
+
+    /**
+     * Returns the daysto integer
+     *
+     * @return integer
+     */
+    public function getDaysto()
+    {
+        return $this->daysto;
+    }
+
+    /**
+     * Returns the fromdate \DateTime
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the todate \DateTime
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
     }
 }

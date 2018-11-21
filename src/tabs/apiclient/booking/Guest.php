@@ -16,25 +16,18 @@ use tabs\apiclient\GuestAgeRange;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getName() Returns the name
  * @method Guest setName(string $var) Sets the name
  * 
- * @method string getType() Returns the guesttype
  * @method Guest setType(string $var) Sets the guesttype
  * 
- * @method GuestAgeRange getGuestagerange()           Returns the agerange
  * @method Guest         setGuestagerange(mixed $var) Set the agerange
  * 
- * @method integer getAge() Returns the age
  * @method Guest setAge(integer $var) Sets the age
  * 
- * @method integer getYearofbirth() Returns the yearofbirth
  * @method Guest setYearofbirth(integer $var) Sets the yearofbirth
  * 
- * @method string getPettype() Returns the pettype
  * @method Guest setPettype(string $var) Sets the pettype
  * 
- * @method string getPetbreed() Returns the petbreed
  * @method Guest setPetbreed(string $var) Sets the petbreed
  * 
  */
@@ -130,5 +123,75 @@ class Guest extends Builder
             ),
             $this->__toArray()
         );
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the guesttype
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Returns the agerange
+     *
+     * @return GuestAgeRange
+     */
+    public function getGuestagerange()
+    {
+        return $this->guestagerange;
+    }
+
+    /**
+     * Returns the age
+     *
+     * @return integer
+     */
+    public function getAge()
+    {
+        return $this->age;
+    }
+
+    /**
+     * Returns the yearofbirth
+     *
+     * @return integer
+     */
+    public function getYearofbirth()
+    {
+        return $this->yearofbirth;
+    }
+
+    /**
+     * Returns the pettype
+     *
+     * @return string
+     */
+    public function getPettype()
+    {
+        return $this->pettype;
+    }
+
+    /**
+     * Returns the petbreed
+     *
+     * @return string
+     */
+    public function getPetbreed()
+    {
+        return $this->petbreed;
     }
 }

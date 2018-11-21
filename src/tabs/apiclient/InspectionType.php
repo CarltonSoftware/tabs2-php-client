@@ -14,16 +14,12 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getInspectiontype() Returns the inspectiontype
  * @method InspectionType setInspectiontype(string $var) Sets the inspectiontype
  * 
- * @method string getSchedule() Returns the schedule
  * @method InspectionType setSchedule(string $var) Sets the schedule
  * 
- * @method string getGradingunit() Returns the gradingunit
  * @method InspectionType setGradingunit(string $var) Sets the gradingunit
  * 
- * @method string getDefaultgrading() Returns the defaultgrading
  * @method InspectionType setDefaultgrading(string $var) Sets the defaultgrading
  */
 class InspectionType extends Builder
@@ -69,5 +65,45 @@ class InspectionType extends Builder
             'gradingunit' => $this->getGradingunit(),
             'defaultgrading' => $this->getDefaultgrading()
         );
+    }
+
+    /**
+     * Returns the inspectiontype
+     *
+     * @return string
+     */
+    public function getInspectiontype()
+    {
+        return $this->inspectiontype;
+    }
+
+    /**
+     * Returns the schedule
+     *
+     * @return string
+     */
+    public function getSchedule()
+    {
+        return $this->schedule;
+    }
+
+    /**
+     * Returns the gradingunit
+     *
+     * @return string
+     */
+    public function getGradingunit()
+    {
+        return $this->gradingunit;
+    }
+
+    /**
+     * Returns the defaultgrading
+     *
+     * @return string
+     */
+    public function getDefaultgrading()
+    {
+        return $this->defaultgrading;
     }
 }

@@ -15,7 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getTemplatetarget() Returns the templatetarget string
  * @method TemplateTarget setTemplatetarget(string $var) Sets the templatetarget
  */
 class TemplateTarget extends Builder
@@ -35,5 +34,15 @@ class TemplateTarget extends Builder
     public function toArray()
     {
         return $this->__toArray();
+    }
+
+    /**
+     * Returns the templatetarget string
+     *
+     * @return string
+     */
+    public function getTemplatetarget()
+    {
+        return $this->templatetarget;
     }
 }

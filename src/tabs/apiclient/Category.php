@@ -15,31 +15,22 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getCategory() Returns the category
  * @method Category setCategory(string $var) Sets the category
  * 
- * @method string getDescription() Returns the description
  * @method Category setDescription(string $var) Sets the description
  * 
- * @method integer getBookingsminimum() Returns the bookingsminimum
  * @method Category setBookingsminimum(integer $var) Sets the bookingsminimum
  * 
- * @method integer getBookingsmaximum() Returns the bookingsmaximum
  * @method Category setBookingsmaximum(integer $var) Sets the bookingsmaximum
  * 
- * @method string getAndor() Returns the andor
  * @method Category setAndor(string $var) Sets the andor
  * 
- * @method integer getBookingvaluemaximum() Returns the bookingvaluemaximum
  * @method Category setBookingvaluemaximum(integer $var) Sets the bookingvaluemaximum
  * 
- * @method integer getBookingvalueminimum() Returns the bookingvalueminimum
  * @method Category setBookingvalueminimum(integer $var) Sets the bookingvalueminimum
  * 
- * @method string getPeriod() Returns the period
  * @method Category setPeriod(string $var) Sets the period
  * 
- * @method \DateTime getPeriodstartdate() Returns the periodstartdate
  * @method Category setPeriodstartdate(\DateTime $var) Sets the periodstartdate
  */
 class Category extends Builder
@@ -134,5 +125,95 @@ class Category extends Builder
             'period' => $this->getPeriod(),
             'periodstartdate' => $this->getPeriodstartdate()->format('Y-m-d'),
         );
+    }
+
+    /**
+     * Returns the category
+     *
+     * @return string
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Returns the bookingsminimum
+     *
+     * @return integer
+     */
+    public function getBookingsminimum()
+    {
+        return $this->bookingsminimum;
+    }
+
+    /**
+     * Returns the bookingsmaximum
+     *
+     * @return integer
+     */
+    public function getBookingsmaximum()
+    {
+        return $this->bookingsmaximum;
+    }
+
+    /**
+     * Returns the andor
+     *
+     * @return string
+     */
+    public function getAndor()
+    {
+        return $this->andor;
+    }
+
+    /**
+     * Returns the bookingvaluemaximum
+     *
+     * @return integer
+     */
+    public function getBookingvaluemaximum()
+    {
+        return $this->bookingvaluemaximum;
+    }
+
+    /**
+     * Returns the bookingvalueminimum
+     *
+     * @return integer
+     */
+    public function getBookingvalueminimum()
+    {
+        return $this->bookingvalueminimum;
+    }
+
+    /**
+     * Returns the period
+     *
+     * @return string
+     */
+    public function getPeriod()
+    {
+        return $this->period;
+    }
+
+    /**
+     * Returns the periodstartdate
+     *
+     * @return \DateTime
+     */
+    public function getPeriodstartdate()
+    {
+        return $this->periodstartdate;
     }
 }

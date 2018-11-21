@@ -16,30 +16,21 @@ use tabs\apiclient\MarketingBrand;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \DateTime getOrderfromdate() Returns the orderfromdate
  * @method Brochure setOrderfromdate(\DateTime $var) Sets the orderfromdate
  * 
- * @method \DateTime getAvailablefromdate() Returns the availablefromdate
  * @method Brochure setAvailablefromdate(\DateTime $var) Sets the availablefromdate
  * 
- * @method \DateTime getOrdertodate() Returns the ordertodate
  * @method Brochure setOrdertodate(\DateTime $var) Sets the ordertodate
  * 
- * @method string getName() Returns the name
  * @method Brochure setName(string $var) Sets the name
  * 
- * @method string getYear() Returns the year
  * @method Brochure setYear(string $var) Sets the year
  * 
- * @method string getWeight() Returns the weight
  * @method Brochure setWeight(string $var) Sets the weight
  * 
- * @method float getCost() Returns the cost
  * @method Brochure setCost(float $var) Sets the cost
  * 
- * @method MarketingBrand getMarketingbrand() Returns the marketingbrand
  * 
- * @method Collection getBrochurerequests() Returns the brochure requests collection
  */
 class Brochure extends Builder
 {
@@ -160,5 +151,95 @@ class Brochure extends Builder
             'cost' => $this->getCost(),
             'marketingbrand' => $this->getMarketingbrand()->getId()
         );
+    }
+
+    /**
+     * Returns the orderfromdate
+     *
+     * @return \DateTime
+     */
+    public function getOrderfromdate()
+    {
+        return $this->orderfromdate;
+    }
+
+    /**
+     * Returns the availablefromdate
+     *
+     * @return \DateTime
+     */
+    public function getAvailablefromdate()
+    {
+        return $this->availablefromdate;
+    }
+
+    /**
+     * Returns the ordertodate
+     *
+     * @return \DateTime
+     */
+    public function getOrdertodate()
+    {
+        return $this->ordertodate;
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the year
+     *
+     * @return string
+     */
+    public function getYear()
+    {
+        return $this->year;
+    }
+
+    /**
+     * Returns the weight
+     *
+     * @return string
+     */
+    public function getWeight()
+    {
+        return $this->weight;
+    }
+
+    /**
+     * Returns the cost
+     *
+     * @return float
+     */
+    public function getCost()
+    {
+        return $this->cost;
+    }
+
+    /**
+     * Returns the marketingbrand
+     *
+     * @return MarketingBrand
+     */
+    public function getMarketingbrand()
+    {
+        return $this->marketingbrand;
+    }
+
+    /**
+     * Returns the brochure requests collection
+     *
+     * @return Collection
+     */
+    public function getBrochurerequests()
+    {
+        return $this->brochurerequests;
     }
 }

@@ -16,51 +16,35 @@ use tabs\apiclient\LabelTemplatePaperSize;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getName() Returns the name
  * @method LabelTemplate setName(string $var) Sets the name
  * 
- * @method LabelTemplatePaperSize getPapersize() Returns the papersize
  * 
- * @method integer getHeadersize() Returns the headersize
  * @method LabelTemplate setHeadersize(integer $var) Sets the headersize
  * 
- * @method integer getHorizontalcount() Returns the horizontalcount
  * @method LabelTemplate setHorizontalcount(integer $var) Sets the horizontalcount
  * 
- * @method integer getVerticalcount() Returns the verticalcount
  * @method LabelTemplate setVerticalcount(integer $var) Sets the verticalcount
  * 
- * @method integer getLabelwidth() Returns the labelwidth
  * @method LabelTemplate setLabelwidth(integer $var) Sets the labelwidth
  * 
- * @method integer getLabelheight() Returns the labelheight
  * @method LabelTemplate setLabelheight(integer $var) Sets the labelheight
  * 
- * @method integer getColumnspacing() Returns the columnspacing
  * @method LabelTemplate setColumnspacing(integer $var) Sets the columnspacing
  * 
- * @method integer getRowspacing() Returns the rowspacing
  * @method LabelTemplate setRowspacing(integer $var) Sets the rowspacing
  * 
- * @method integer getLabelpadding() Returns the labelpadding
  * @method LabelTemplate setLabelpadding(integer $var) Sets the labelpadding
  * 
- * @method string getFontfamily() Returns the fontfamily
  * @method LabelTemplate setFontfamily(string $var) Sets the fontfamily
  * 
- * @method integer getFontsize() Returns the fontsize
  * @method LabelTemplate setFontsize(integer $var) Sets the fontsize
  * 
- * @method integer getMargintop() Returns the margintop
  * @method LabelTemplate setMargintop(integer $var) Sets the margintop
  * 
- * @method integer getMarginbottom() Returns the marginbottom
  * @method LabelTemplate setMarginbottom(integer $var) Sets the marginbottom
  * 
- * @method integer getMarginleft() Returns the marginleft
  * @method LabelTemplate setMarginleft(integer $var) Sets the marginleft
  * 
- * @method integer getMarginright() Returns the marginright
  * @method LabelTemplate setMarginright(integer $var) Sets the marginright
  */
 class LabelTemplate extends Builder
@@ -216,5 +200,165 @@ class LabelTemplate extends Builder
             'marginleft' => $this->getMarginleft(),
             'marginright' => $this->getMarginright(),
         );
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the papersize
+     *
+     * @return LabelTemplatePaperSize
+     */
+    public function getPapersize()
+    {
+        return $this->papersize;
+    }
+
+    /**
+     * Returns the headersize
+     *
+     * @return integer
+     */
+    public function getHeadersize()
+    {
+        return $this->headersize;
+    }
+
+    /**
+     * Returns the horizontalcount
+     *
+     * @return integer
+     */
+    public function getHorizontalcount()
+    {
+        return $this->horizontalcount;
+    }
+
+    /**
+     * Returns the verticalcount
+     *
+     * @return integer
+     */
+    public function getVerticalcount()
+    {
+        return $this->verticalcount;
+    }
+
+    /**
+     * Returns the labelwidth
+     *
+     * @return integer
+     */
+    public function getLabelwidth()
+    {
+        return $this->labelwidth;
+    }
+
+    /**
+     * Returns the labelheight
+     *
+     * @return integer
+     */
+    public function getLabelheight()
+    {
+        return $this->labelheight;
+    }
+
+    /**
+     * Returns the columnspacing
+     *
+     * @return integer
+     */
+    public function getColumnspacing()
+    {
+        return $this->columnspacing;
+    }
+
+    /**
+     * Returns the rowspacing
+     *
+     * @return integer
+     */
+    public function getRowspacing()
+    {
+        return $this->rowspacing;
+    }
+
+    /**
+     * Returns the labelpadding
+     *
+     * @return integer
+     */
+    public function getLabelpadding()
+    {
+        return $this->labelpadding;
+    }
+
+    /**
+     * Returns the fontfamily
+     *
+     * @return string
+     */
+    public function getFontfamily()
+    {
+        return $this->fontfamily;
+    }
+
+    /**
+     * Returns the fontsize
+     *
+     * @return integer
+     */
+    public function getFontsize()
+    {
+        return $this->fontsize;
+    }
+
+    /**
+     * Returns the margintop
+     *
+     * @return integer
+     */
+    public function getMargintop()
+    {
+        return $this->margintop;
+    }
+
+    /**
+     * Returns the marginbottom
+     *
+     * @return integer
+     */
+    public function getMarginbottom()
+    {
+        return $this->marginbottom;
+    }
+
+    /**
+     * Returns the marginleft
+     *
+     * @return integer
+     */
+    public function getMarginleft()
+    {
+        return $this->marginleft;
+    }
+
+    /**
+     * Returns the marginright
+     *
+     * @return integer
+     */
+    public function getMarginright()
+    {
+        return $this->marginright;
     }
 }

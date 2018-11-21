@@ -16,30 +16,20 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \DateTime getPaymentdatetime() Returns the paymentdatetime
  * @method Payment setPaymentdatetime(\DateTime $var) Sets the paymentdatetime
  * 
- * @method string getReference() Returns the reference
  * @method Payment setReference(string $var) Sets the reference
  * 
- * @method \tabs\apiclient\PaymentMethod getMethod() Returns the method
- * @method float getAmount() Returns the amount
  * @method Payment setAmount(float $var) Sets the amount
  * 
- * @method float getRefunded() Returns the refunded
  * @method Payment setRefunded(float $var) Sets the refunded
  * 
- * @method float getUnrefunded() Returns the unrefunded
  * @method Payment setUnrefunded(float $var) Sets the unrefunded
  * 
- * @method \tabs\apiclient\Currency getCurrency() Returns the currency
- * @method integer getUnitsperbaseunit() Returns the unitsperbaseunit
  * @method Payment setUnitsperbaseunit(integer $var) Sets the unitsperbaseunit
  * 
- * @method float getBasecurrencyamount() Returns the basecurrencyamount
  * @method Payment setBasecurrencyamount(float $var) Sets the basecurrencyamount
  * 
- * @method \tabs\apiclient\Actor getMadeby() Returns the madeby
  */
 class Payment extends Builder
 {
@@ -194,5 +184,105 @@ class Payment extends Builder
         }
         
         return $arr;
+    }
+
+    /**
+     * Returns the paymentdatetime
+     *
+     * @return \DateTime
+     */
+    public function getPaymentdatetime()
+    {
+        return $this->paymentdatetime;
+    }
+
+    /**
+     * Returns the reference
+     *
+     * @return string
+     */
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+    /**
+     * Returns the method
+     *
+     * @return \tabs\apiclient\PaymentMethod
+     */
+    public function getMethod()
+    {
+        return $this->method;
+    }
+
+    /**
+     * Returns the amount
+     *
+     * @return float
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * Returns the refunded
+     *
+     * @return float
+     */
+    public function getRefunded()
+    {
+        return $this->refunded;
+    }
+
+    /**
+     * Returns the unrefunded
+     *
+     * @return float
+     */
+    public function getUnrefunded()
+    {
+        return $this->unrefunded;
+    }
+
+    /**
+     * Returns the currency
+     *
+     * @return \tabs\apiclient\Currency
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * Returns the unitsperbaseunit
+     *
+     * @return integer
+     */
+    public function getUnitsperbaseunit()
+    {
+        return $this->unitsperbaseunit;
+    }
+
+    /**
+     * Returns the basecurrencyamount
+     *
+     * @return float
+     */
+    public function getBasecurrencyamount()
+    {
+        return $this->basecurrencyamount;
+    }
+
+    /**
+     * Returns the madeby
+     *
+     * @return \tabs\apiclient\Actor
+     */
+    public function getMadeby()
+    {
+        return $this->madeby;
     }
 }

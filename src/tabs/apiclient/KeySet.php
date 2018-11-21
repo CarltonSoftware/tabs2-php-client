@@ -15,7 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getKeyset() Returns the keyset
  * @method KeySet setKeyset(string $var) Sets the keyset
  * 
  */
@@ -38,5 +37,15 @@ class KeySet extends Builder
         return array(
             'keyset' => $this->getKeyset()
         );
+    }
+
+    /**
+     * Returns the keyset
+     *
+     * @return string
+     */
+    public function getKeyset()
+    {
+        return $this->keyset;
     }
 }

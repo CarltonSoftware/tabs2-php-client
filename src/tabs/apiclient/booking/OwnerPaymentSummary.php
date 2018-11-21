@@ -16,13 +16,10 @@ use tabs\apiclient\extra\branding\Configuration;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method float getOwnerincome() Returns the ownerincome
  * @method OwnerPaymentSummary setOwnerincome(float $var) Sets the ownerincome
  * 
- * @method float getAgencyincome() Returns the agencyincome
  * @method OwnerPaymentSummary setAgencyincome(float $var) Sets the agencyincome
  * 
- * @method float getAgencyvat() Returns the agencyvat
  * @method OwnerPaymentSummary setAgencyvat(float $var) Sets the agencyvat
  * 
  */
@@ -87,5 +84,35 @@ class OwnerPaymentSummary extends Builder
         );
         
         return $arr;
+    }
+
+    /**
+     * Returns the ownerincome
+     *
+     * @return float
+     */
+    public function getOwnerincome()
+    {
+        return $this->ownerincome;
+    }
+
+    /**
+     * Returns the agencyincome
+     *
+     * @return float
+     */
+    public function getAgencyincome()
+    {
+        return $this->agencyincome;
+    }
+
+    /**
+     * Returns the agencyvat
+     *
+     * @return float
+     */
+    public function getAgencyvat()
+    {
+        return $this->agencyvat;
     }
 }

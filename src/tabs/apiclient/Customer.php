@@ -17,20 +17,12 @@ use tabs\apiclient\marketingbrand\EmailList;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method \DateTime getFirstbookingbookeddate() Returns the firstbookingbookeddate
- * @method integer getConfirmedbookings()        Returns the confirmedbookings
- * @method integer getConfirmedbookingsvalue()   Returns the confirmedbookingsvalue
- * @method integer getAccountbalance()           Returns the accountbalance
  * 
- * @method Collection|MarketingBrand[] getMarketingbrands() Returns the customer MarketingBrands
  * @method Customer setMarketingbrands(Collection $col) Set the marketing brands
  * 
- * @method Collection|Booking[] getBookings() Returns the customer bookings
  * @method Customer setBookings(Collection $col) Set the bookings
  * 
- * @method Collection|actor\Category[] getCategories() Returns the customer categories
  * 
- * @method Collection|actor\Payment[] getPayments() Returns the customer categories
  */
 class Customer extends Actor
 {
@@ -183,5 +175,85 @@ class Customer extends Actor
         }
         
         return $this;
+    }
+
+    /**
+     * Returns the firstbookingbookeddate
+     *
+     * @return \DateTime
+     */
+    public function getFirstbookingbookeddate()
+    {
+        return $this->firstbookingbookeddate;
+    }
+
+    /**
+     * Returns the confirmedbookings
+     *
+     * @return integer
+     */
+    public function getConfirmedbookings()
+    {
+        return $this->confirmedbookings;
+    }
+
+    /**
+     * Returns the confirmedbookingsvalue
+     *
+     * @return integer
+     */
+    public function getConfirmedbookingsvalue()
+    {
+        return $this->confirmedbookingsvalue;
+    }
+
+    /**
+     * Returns the accountbalance
+     *
+     * @return integer
+     */
+    public function getAccountbalance()
+    {
+        return $this->accountbalance;
+    }
+
+    /**
+     * Returns the customer MarketingBrands
+     *
+     * @return Collection|MarketingBrand[]
+     */
+    public function getMarketingbrands()
+    {
+        return $this->marketingbrands;
+    }
+
+    /**
+     * Returns the customer bookings
+     *
+     * @return Collection|Booking[]
+     */
+    public function getBookings()
+    {
+        return $this->bookings;
+    }
+
+    /**
+     * Returns the customer categories
+     *
+     * @return Collection|actor\Category[]
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * Returns the customer categories
+     *
+     * @return Collection|actor\Payment[]
+     */
+    public function getPayments()
+    {
+        return $this->payments;
     }
 }

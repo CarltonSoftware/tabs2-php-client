@@ -15,10 +15,8 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string     getExtragroup() Returns the extra group
  * @method ExtraGroup setExtragroup(string $var) Sets the extra group
  * 
- * @method string     getDescription() Returns the description
  * @method ExtraGroup setDescription(string $var) Sets the description
  */
 class ExtraGroup extends Builder
@@ -48,5 +46,25 @@ class ExtraGroup extends Builder
             'extragroup' => $this->getExtragroup(),
             'description' => $this->getDescription()
         );
+    }
+
+    /**
+     * Returns the extra group
+     *
+     * @return string
+     */
+    public function getExtragroup()
+    {
+        return $this->extragroup;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

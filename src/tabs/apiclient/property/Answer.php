@@ -15,18 +15,12 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\PropertyQuestion getQuestion() Returns the question object
- * @method boolean getBooleananswer() Returns the boolean answer boolean
  * @method Answer setBooleananswer(boolean $var) Sets the boolean answer
  * 
- * @method string getTextanswer() Returns the text answer string
  * @method Answer setTextanswer(string $var) Sets the text answer
  * 
- * @method \tabs\apiclient\property\AnswerOption getAnsweroption() Returns the answer option object
- * @method \DateTime getLastupdated() Returns the last updated \DateTime
  * @method Answer setLastupdated(\DateTime $var) Sets the last updated
  * 
- * @method \tabs\apiclient\TabsUser getLastupdatedby() Returns the last updated by object
  */
 class Answer extends Builder
 {
@@ -73,5 +67,65 @@ class Answer extends Builder
         $this->question = new \tabs\apiclient\PropertyQuestion();
         
         parent::__construct($id);
+    }
+
+    /**
+     * Returns the question object
+     *
+     * @return \tabs\apiclient\PropertyQuestion
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
+
+    /**
+     * Returns the boolean answer boolean
+     *
+     * @return boolean
+     */
+    public function getBooleananswer()
+    {
+        return $this->booleananswer;
+    }
+
+    /**
+     * Returns the text answer string
+     *
+     * @return string
+     */
+    public function getTextanswer()
+    {
+        return $this->textanswer;
+    }
+
+    /**
+     * Returns the answer option object
+     *
+     * @return \tabs\apiclient\property\AnswerOption
+     */
+    public function getAnsweroption()
+    {
+        return $this->answeroption;
+    }
+
+    /**
+     * Returns the last updated \DateTime
+     *
+     * @return \DateTime
+     */
+    public function getLastupdated()
+    {
+        return $this->lastupdated;
+    }
+
+    /**
+     * Returns the last updated by object
+     *
+     * @return \tabs\apiclient\TabsUser
+     */
+    public function getLastupdatedby()
+    {
+        return $this->lastupdatedby;
     }
 }

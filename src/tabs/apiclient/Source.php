@@ -14,15 +14,11 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method string         getSourcecode()                     Returns the sourcecode
  * @method Source         setSourcecode(string $sourcecode)   Sets the sourcecode
  * 
- * @method string         getDescription()                    Returns the description
  * @method Source         setDescription(string $description) Sets the description
  * 
- * @method SourceCategory getSourceCategory()                 Returns the sourcecategory
  * 
- * @method StaticCollection|SourceMarketingBrand[] getSourcemarketingbrands() Returns the sourcemarketingbrands
  */
 class Source extends Builder
 {
@@ -92,5 +88,45 @@ class Source extends Builder
             'description' => $this->getDescription(),
             'sourcecategory' => $this->getSourceCategory()->getId()
         );
+    }
+
+    /**
+     * Returns the sourcecode
+     *
+     * @return string
+     */
+    public function getSourcecode()
+    {
+        return $this->sourcecode;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Returns the sourcecategory
+     *
+     * @return SourceCategory
+     */
+    public function getSourceCategory()
+    {
+        return $this->sourcecategory;
+    }
+
+    /**
+     * Returns the sourcemarketingbrands
+     *
+     * @return StaticCollection|SourceMarketingBrand[]
+     */
+    public function getSourcemarketingbrands()
+    {
+        return $this->sourcemarketingbrands;
     }
 }

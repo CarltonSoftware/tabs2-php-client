@@ -15,7 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getTag() Returns the tag string
  * @method DocumentTag setTag(string $var) Sets the tag
  */
 class DocumentTag extends Builder
@@ -37,5 +36,15 @@ class DocumentTag extends Builder
         return array(
             'tag' => $this->getTag(),
         );
+    }
+
+    /**
+     * Returns the tag string
+     *
+     * @return string
+     */
+    public function getTag()
+    {
+        return $this->tag;
     }
 }

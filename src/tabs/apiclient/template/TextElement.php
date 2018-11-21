@@ -15,7 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string      getText() Returns the text string
  * @method TextElement setText(string $var) Set the text string
  */
 class TextElement extends Element
@@ -47,5 +46,15 @@ class TextElement extends Element
     public function getUrlStub()
     {
         return 'element';
+    }
+
+    /**
+     * Returns the text string
+     *
+     * @return string
+     */
+    public function getText()
+    {
+        return $this->text;
     }
 }

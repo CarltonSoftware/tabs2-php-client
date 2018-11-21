@@ -15,8 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\Customer getCustomer()        Returns the customer
- * @method string                   getName()            Returns the name
  * @method Customer                 setName(string $var) Sets the name
  * 
  */
@@ -75,5 +73,25 @@ class Customer extends Builder
         }
         
         return $arr;
+    }
+
+    /**
+     * Returns the customer
+     *
+     * @return \tabs\apiclient\Customer
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 }

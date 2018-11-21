@@ -15,15 +15,11 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getSortreference() Returns the sortreference
  * @method LabelQueue setSortreference(string $var) Sets the sortreference
  * 
- * @method string getReference() Returns the reference
  * @method LabelQueue setReference(string $var) Sets the reference
  * 
- * @method string getTextjson() Returns the textjson
  * 
- * @method boolean getPrinted() Returns the printed
  * @method LabelQueue setPrinted(boolean $var) Sets the printed
  */
 class LabelQueue extends Builder
@@ -101,5 +97,45 @@ class LabelQueue extends Builder
             'textjson' => $this->getTextjson(),
             'printed' => $this->boolToStr($this->getPrinted())
         );
+    }
+
+    /**
+     * Returns the sortreference
+     *
+     * @return string
+     */
+    public function getSortreference()
+    {
+        return $this->sortreference;
+    }
+
+    /**
+     * Returns the reference
+     *
+     * @return string
+     */
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+    /**
+     * Returns the textjson
+     *
+     * @return string
+     */
+    public function getTextjson()
+    {
+        return $this->textjson;
+    }
+
+    /**
+     * Returns the printed
+     *
+     * @return boolean
+     */
+    public function getPrinted()
+    {
+        return $this->printed;
     }
 }

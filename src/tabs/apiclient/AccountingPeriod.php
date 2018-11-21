@@ -15,12 +15,8 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getName() Returns the name
  * @method AccountingPeriod setName(string $var) Sets the name
  * 
- * @method \DateTime getStartdate() Returns the startdate
- * @method \DateTime getEnddate() Returns the enddate
- * @method \DateTime getClosed() Returns the closed
  */
 class AccountingPeriod extends Builder
 {
@@ -119,5 +115,45 @@ class AccountingPeriod extends Builder
             'enddate' => $this->getEnddate()->format('Y-m-d'),
             'closed' => $this->getClosed()->format('Y-m-d H:i:s')
         );
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the startdate
+     *
+     * @return \DateTime
+     */
+    public function getStartdate()
+    {
+        return $this->startdate;
+    }
+
+    /**
+     * Returns the enddate
+     *
+     * @return \DateTime
+     */
+    public function getEnddate()
+    {
+        return $this->enddate;
+    }
+
+    /**
+     * Returns the closed
+     *
+     * @return \DateTime
+     */
+    public function getClosed()
+    {
+        return $this->closed;
     }
 }

@@ -15,8 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\TemplateTarget getTemplatetarget() Returns the templatetarget
- * @method \tabs\apiclient\TemplateSource getTemplatesource() Returns the templatesource
  */
 class TemplateTargetSource extends Builder
 {
@@ -73,5 +71,25 @@ class TemplateTargetSource extends Builder
             'templatetargetid' => $this->getTemplatetarget()->getId(),
             'templatesourceid' => $this->getTemplatesource()->getId(),
         );
+    }
+
+    /**
+     * Returns the templatetarget
+     *
+     * @return \tabs\apiclient\TemplateTarget
+     */
+    public function getTemplatetarget()
+    {
+        return $this->templatetarget;
+    }
+
+    /**
+     * Returns the templatesource
+     *
+     * @return \tabs\apiclient\TemplateSource
+     */
+    public function getTemplatesource()
+    {
+        return $this->templatesource;
     }
 }

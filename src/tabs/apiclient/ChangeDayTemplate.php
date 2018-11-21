@@ -16,24 +16,16 @@ use tabs\apiclient\ChangeDayRule;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getType() Returns the type
  * @method ChangeDayTemplate setType(string $var) Sets the type
- * 
- * @method string getName() Returns the name
+ *
  * @method ChangeDayTemplate setName(string $var) Sets the name
- * 
- * @method string getDescription() Returns the description
+ *
  * @method ChangeDayTemplate setDescription(string $var) Sets the description
- * 
- * @method \tabs\apiclient\ChangeDayTemplate getParent() Returns the parent ChangeDayTemplate
- * 
- * @method \DateTime getFromdate() Returns the fromdate
+ *
  * @method ChangeDayTemplate setFromdate(\DateTime $var) Sets the fromdate
- * 
- * @method \DateTime getTodate() Returns the todate
+ *
  * @method ChangeDayTemplate setTodate(\DateTime $var) Sets the todate
- * 
-* @method Collection|ChangeDayRule[] getChangedayrules Returns the change day rules
+ *
  */
 class ChangeDayTemplate extends Base
 {
@@ -42,29 +34,29 @@ class ChangeDayTemplate extends Base
      *
      * @var string
      */
-    protected $type;    
-    
+    protected $type;
+
     /**
      * Name
      *
      * @var string
      */
-    protected $name;    
+    protected $name;
 
     /**
      * Description
      *
      * @var string
      */
-    protected $description;  
-    
+    protected $description;
+
     /**
      * Parent ChangeDayTemplate
      *
      * @var \tabs\apiclient\ChangeDayTemplate
      */
-    protected $parent;    
-    
+    protected $parent;
+
     /**
      * Fromdate
      *
@@ -78,13 +70,13 @@ class ChangeDayTemplate extends Base
      * @var \DateTime
      */
     protected $todate;
-    
+
     /**
      * Collection of change day rules
-     * 
+     *
      * @var Collection|ChangeDayRule[]
      */
-    protected $changedayrules; 
+    protected $changedayrules;
 
     // -------------------- Public Functions -------------------- //
 
@@ -95,16 +87,16 @@ class ChangeDayTemplate extends Base
     {
         $this->fromdate = new \DateTime();
         $this->todate = new \DateTime();
-        
+
         $this->changedayrules = Collection::factory(
-            'rule', 
-            new ChangeDayRule(), 
+            'rule',
+            new ChangeDayRule(),
             $this
-        );           
-        
+        );
+
         parent::__construct($id);
     }
-    
+
     /**
      * Set the parent ChangeDayTemplate
      *
@@ -119,7 +111,7 @@ class ChangeDayTemplate extends Base
         } else {
             $this->parent = $parent;
         }
-        
+
         return $this;
     }
 
@@ -135,5 +127,75 @@ class ChangeDayTemplate extends Base
             'fromdate' => $this->getFromdate()->format('Y-m-d'),
             'todate' => $this->getTodate()->format('Y-m-d')
         );
+    }
+
+    /**
+     * Returns the type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Returns the parent ChangeDayTemplate
+     *
+     * @return \tabs\apiclient\ChangeDayTemplate
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * Returns the fromdate
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the todate
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
+    }
+
+    /**
+     *   Returns the change day rules
+     *
+     * @return Collection|ChangeDayRule[]
+     */
+    public function getChangedayrules()
+    {
+        return $this->changedayrules;
     }
 }

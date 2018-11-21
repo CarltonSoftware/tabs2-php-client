@@ -17,27 +17,19 @@ use tabs\apiclient\InspectionType;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \DateTime getInspectiondate() Returns the inspectiondate
  * @method Inspection setInspectiondate(\DateTime $var) Sets the inspectiondate
  * 
- * @method \DateTime getReinspectiondate() Returns the reinspectiondate
  * @method Inspection setReinspectiondate(\DateTime $var) Sets the reinspectiondate
  * 
- * @method string getGrading() Returns the grading
  * @method Inspection setGrading(string $var) Sets the grading
  * 
- * @method string getGradingunit() Returns the gradingunit
  * @method Inspection setGradingunit(string $var) Sets the gradingunit
  * 
- * @method string getInspectorname() Returns the inspectorname
  * @method Inspection setInspectorname(string $var) Sets the inspectorname
  * 
- * @method string getNotes() Returns the notes
  * @method Inspection setNotes(string $var) Sets the notes
  * 
- * @method Inspector getInspector() Returns the inspector
  * 
- * @method InspectionType getInspectiontype() Returns the inspectiontype
  */
 class Inspection extends Builder
 {
@@ -157,5 +149,85 @@ class Inspection extends Builder
         }
         
         return $arr;
+    }
+
+    /**
+     * Returns the inspectiondate
+     *
+     * @return \DateTime
+     */
+    public function getInspectiondate()
+    {
+        return $this->inspectiondate;
+    }
+
+    /**
+     * Returns the reinspectiondate
+     *
+     * @return \DateTime
+     */
+    public function getReinspectiondate()
+    {
+        return $this->reinspectiondate;
+    }
+
+    /**
+     * Returns the grading
+     *
+     * @return string
+     */
+    public function getGrading()
+    {
+        return $this->grading;
+    }
+
+    /**
+     * Returns the gradingunit
+     *
+     * @return string
+     */
+    public function getGradingunit()
+    {
+        return $this->gradingunit;
+    }
+
+    /**
+     * Returns the inspectorname
+     *
+     * @return string
+     */
+    public function getInspectorname()
+    {
+        return $this->inspectorname;
+    }
+
+    /**
+     * Returns the notes
+     *
+     * @return string
+     */
+    public function getNotes()
+    {
+        return $this->notes;
+    }
+
+    /**
+     * Returns the inspector
+     *
+     * @return Inspector
+     */
+    public function getInspector()
+    {
+        return $this->inspector;
+    }
+
+    /**
+     * Returns the inspectiontype
+     *
+     * @return InspectionType
+     */
+    public function getInspectiontype()
+    {
+        return $this->inspectiontype;
     }
 }

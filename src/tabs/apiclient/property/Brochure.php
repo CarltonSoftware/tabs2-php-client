@@ -14,14 +14,10 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\brochure\Brochure getBrochure() Returns the brochure
- * @method integer getPage() Returns the page
  * @method Brochure setPage(integer $var) Sets the page
  * 
- * @method integer getSequence() Returns the sequence
  * @method Brochure setSequence(integer $var) Sets the sequence
  * 
- * @method integer getProminence() Returns the prominence
  * @method Brochure setProminence(integer $var) Sets the prominence
  * 
  */
@@ -82,5 +78,45 @@ class Brochure extends Builder
             'sequence' => $this->getSequence(),
             'prominence' => $this->getProminence()
         );
+    }
+
+    /**
+     * Returns the brochure
+     *
+     * @return \tabs\apiclient\brochure\Brochure
+     */
+    public function getBrochure()
+    {
+        return $this->brochure;
+    }
+
+    /**
+     * Returns the page
+     *
+     * @return integer
+     */
+    public function getPage()
+    {
+        return $this->page;
+    }
+
+    /**
+     * Returns the sequence
+     *
+     * @return integer
+     */
+    public function getSequence()
+    {
+        return $this->sequence;
+    }
+
+    /**
+     * Returns the prominence
+     *
+     * @return integer
+     */
+    public function getProminence()
+    {
+        return $this->prominence;
     }
 }

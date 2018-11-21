@@ -15,7 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string          getName()            Returns the name
  * @method SecurityFeature setName(string $var) Sets the name
  */
 class SecurityFeature extends Builder
@@ -37,5 +36,15 @@ class SecurityFeature extends Builder
         return array(
             'name' => $this->getName()
         );
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 }

@@ -15,8 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\marketingbrand\EmailList getMarketingbrandemaillist() Returns the marketingbrand email list
- * @method boolean getUnsubscribed() Returns the unsubscribed
  * 
  * @method EmailList setUnsubscribed(boolean $var) Sets the unsubscribed
  */
@@ -61,5 +59,25 @@ class EmailList extends Builder
             'marketingbrandemaillistid' => $this->getMarketingbrandemaillist()->getId(),
             'unsubscribed' => $this->boolToStr($this->getUnsubscribed()),
         );
+    }
+
+    /**
+     * Returns the marketingbrand email list
+     *
+     * @return \tabs\apiclient\marketingbrand\EmailList
+     */
+    public function getMarketingbrandemaillist()
+    {
+        return $this->marketingbrandemaillist;
+    }
+
+    /**
+     * Returns the unsubscribed
+     *
+     * @return boolean
+     */
+    public function getUnsubscribed()
+    {
+        return $this->unsubscribed;
     }
 }

@@ -15,9 +15,6 @@ use tabs\apiclient\Collectionable;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getDescription() Return the description
- * @method array  getOperators()   Return the operators
- * @method string getType()        Return the type
  *
  * @method Filter setDescription(string $str) Set the description
  * @method Filter setOperators(array $op)     Set the operators
@@ -98,5 +95,35 @@ class Filter implements Collectionable
     public function getFilter()
     {
         return $this->filter;
+    }
+
+    /**
+     * Return the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Return the operators
+     *
+     * @return array
+     */
+    public function getOperators()
+    {
+        return $this->operators;
+    }
+
+    /**
+     * Return the type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

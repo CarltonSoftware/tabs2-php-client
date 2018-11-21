@@ -15,27 +15,18 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\PropertyQuestion getPropertyquestioncategory() Returns the propertyquestioncategory object
- * @method string getQuestion() Returns the question string
  * @method PropertyQuestion setQuestion(string $var) Sets the question
  * 
- * @method boolean getBooleananswerallowed() Returns the booleananswerallowed boolean
  * @method PropertyQuestion setBooleananswerallowed(boolean $var) Sets the booleananswerallowed
  * 
- * @method boolean getBooleananswerrequired() Returns the booleananswerrequired boolean
  * @method PropertyQuestion setBooleananswerrequired(boolean $var) Sets the booleananswerrequired
  * 
- * @method boolean getTextanswerallowed() Returns the textanswerallowed boolean
  * @method PropertyQuestion setTextanswerallowed(boolean $var) Sets the textanswerallowed
  * 
- * @method boolean getTextanswerrequired() Returns the textanswerrequired boolean
  * @method PropertyQuestion setTextanswerrequired(boolean $var) Sets the textanswerrequired
  * 
- * @method boolean getOptionanswerrequired() Returns the optionanswerrequired boolean
  * @method PropertyQuestion setOptionanswerrequired(boolean $var) Sets the optionanswerrequired
  * 
- * @method \tabs\apiclient\AnswerOptionGroup getAnsweroptiongroup() Returns the answeroptiongroup object
- * @method \tabs\apiclient\property\AnswerOption getDefaultansweroption() Returns the defaultansweroption object
  */
 class PropertyQuestion extends Builder
 {
@@ -94,5 +85,95 @@ class PropertyQuestion extends Builder
         $this->defaultansweroption = new property\AnswerOption();
         
         parent::__construct($id);
+    }
+
+    /**
+     * Returns the propertyquestioncategory object
+     *
+     * @return \tabs\apiclient\PropertyQuestion
+     */
+    public function getPropertyquestioncategory()
+    {
+        return $this->propertyquestioncategory;
+    }
+
+    /**
+     * Returns the question string
+     *
+     * @return string
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
+
+    /**
+     * Returns the booleananswerallowed boolean
+     *
+     * @return boolean
+     */
+    public function getBooleananswerallowed()
+    {
+        return $this->booleananswerallowed;
+    }
+
+    /**
+     * Returns the booleananswerrequired boolean
+     *
+     * @return boolean
+     */
+    public function getBooleananswerrequired()
+    {
+        return $this->booleananswerrequired;
+    }
+
+    /**
+     * Returns the textanswerallowed boolean
+     *
+     * @return boolean
+     */
+    public function getTextanswerallowed()
+    {
+        return $this->textanswerallowed;
+    }
+
+    /**
+     * Returns the textanswerrequired boolean
+     *
+     * @return boolean
+     */
+    public function getTextanswerrequired()
+    {
+        return $this->textanswerrequired;
+    }
+
+    /**
+     * Returns the optionanswerrequired boolean
+     *
+     * @return boolean
+     */
+    public function getOptionanswerrequired()
+    {
+        return $this->optionanswerrequired;
+    }
+
+    /**
+     * Returns the answeroptiongroup object
+     *
+     * @return \tabs\apiclient\AnswerOptionGroup
+     */
+    public function getAnsweroptiongroup()
+    {
+        return $this->answeroptiongroup;
+    }
+
+    /**
+     * Returns the defaultansweroption object
+     *
+     * @return \tabs\apiclient\property\AnswerOption
+     */
+    public function getDefaultansweroption()
+    {
+        return $this->defaultansweroption;
     }
 }

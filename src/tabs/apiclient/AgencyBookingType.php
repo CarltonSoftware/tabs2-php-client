@@ -15,10 +15,8 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getName() Returns the name
  * @method AgencyBookingType setName(string $var) Sets the name
  * 
- * @method string getDescription() Returns the description
  * @method AgencyBookingType setDescription(string $var) Sets the description
  */
 class AgencyBookingType extends Builder
@@ -48,5 +46,25 @@ class AgencyBookingType extends Builder
             'name' => $this->getName(),
             'description' => $this->getDescription(),
         );
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

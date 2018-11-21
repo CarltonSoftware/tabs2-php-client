@@ -15,11 +15,8 @@ use tabs\apiclient\Base;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \DateTime getCreated() Returns the created
  * @method WebBooking setCreated(\DateTime $var) Sets the created
  * 
- * @method \tabs\apiclient\TabsUser getReviewer() Returns the reviewer
- * @method \DateTime getProccessed() Returns the proccessed
  * @method WebBooking setProccessed(\DateTime $var) Sets the proccessed
  */
 class WebBooking extends Base
@@ -83,5 +80,35 @@ class WebBooking extends Base
         }
         
         return $arr;
+    }
+
+    /**
+     * Returns the created
+     *
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Returns the reviewer
+     *
+     * @return \tabs\apiclient\TabsUser
+     */
+    public function getReviewer()
+    {
+        return $this->reviewer;
+    }
+
+    /**
+     * Returns the proccessed
+     *
+     * @return \DateTime
+     */
+    public function getProccessed()
+    {
+        return $this->proccessed;
     }
 }

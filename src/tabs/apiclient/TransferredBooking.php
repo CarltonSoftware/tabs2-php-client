@@ -26,9 +26,6 @@ namespace tabs\apiclient;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \DateTime getDatetime()    Return the datetime
- * @method Booking   getTobooking()   Return the booking that this booking was transferred to
- * @method Booking   getFrombooking() Return the booking that this booking was transferred from
  * 
  * @method TransferredBooking setDatetime(\DateTime $datetime) Set the datetime
  */
@@ -113,5 +110,35 @@ class TransferredBooking extends Base
         }
         
         return $arr;
+    }
+
+    /**
+     * Return the datetime
+     *
+     * @return \DateTime
+     */
+    public function getDatetime()
+    {
+        return $this->datetime;
+    }
+
+    /**
+     * Return the booking that this booking was transferred to
+     *
+     * @return Booking
+     */
+    public function getTobooking()
+    {
+        return $this->tobooking;
+    }
+
+    /**
+     * Return the booking that this booking was transferred from
+     *
+     * @return Booking
+     */
+    public function getFrombooking()
+    {
+        return $this->frombooking;
     }
 }

@@ -15,10 +15,8 @@ use tabs\apiclient\Base;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getCode()            Returns the code
  * @method Error  setCode(string $var) Sets the code
  *
- * @method string getMessage()            Returns the message
  * @method Error  setMessage(string $var) Sets the message
  */
 class Error extends Base
@@ -45,5 +43,25 @@ class Error extends Base
     public function __toString()
     {
         return $this->getMessage();
+    }
+
+    /**
+     * Returns the code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Returns the message
+     *
+     * @return string
+     */
+    public function getMessage()
+    {
+        return $this->message;
     }
 }

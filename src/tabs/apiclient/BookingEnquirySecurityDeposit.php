@@ -15,13 +15,10 @@ use tabs\apiclient\Base;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method integer getAmount() Returns the amount
  * @method BookingEnquirySecurityDeposit setAmount(integer $var) Sets the amount
  * 
- * @method \DateTime getDueindate() Returns the dueindate
  * @method BookingEnquirySecurityDeposit setDueindate(\DateTime $var) Sets the dueindate
  * 
- * @method \DateTime getDueoutdate() Returns the dueoutdate
  * @method BookingEnquirySecurityDeposit setDueoutdate(\DateTime $var) Sets the dueoutdate
  */
 class BookingEnquirySecurityDeposit extends Base
@@ -69,5 +66,35 @@ class BookingEnquirySecurityDeposit extends Base
             'dueindate' => $this->getDueindate()->format('Y-m-d'),
             'dueoutdate' => $this->getDueoutdate()->format('Y-m-d')
         );
+    }
+
+    /**
+     * Returns the amount
+     *
+     * @return integer
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * Returns the dueindate
+     *
+     * @return \DateTime
+     */
+    public function getDueindate()
+    {
+        return $this->dueindate;
+    }
+
+    /**
+     * Returns the dueoutdate
+     *
+     * @return \DateTime
+     */
+    public function getDueoutdate()
+    {
+        return $this->dueoutdate;
     }
 }

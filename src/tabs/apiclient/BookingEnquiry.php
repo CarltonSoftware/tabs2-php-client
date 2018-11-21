@@ -15,87 +15,57 @@ use tabs\apiclient\Base;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getGuestype() Returns the guestype
  * @method BookingEnquiry setGuestype(string $var) Sets the guestype
  * 
- * @method \tabs\apiclient\property\Branding getPropertyBranding() Returns the property branding
  * 
- * @method \DateTime getFromdate() Returns the fromdate
  * @method BookingEnquiry setFromdate(\DateTime $var) Sets the fromdate
  * 
- * @method \DateTime getTodate() Returns the todate
  * @method BookingEnquiry setTodate(\DateTime $var) Sets the todate
  * 
- * @method integer getAdults() Returns the adults
  * @method BookingEnquiry setAdults(integer $var) Sets the adults
  * 
- * @method integer getChildren() Returns the children
  * @method BookingEnquiry setChildren(integer $var) Sets the children
  * 
- * @method integer getInfants() Returns the infants
  * @method BookingEnquiry setInfants(integer $var) Sets the infants
  * 
- * @method integer getPets() Returns the pets
  * @method BookingEnquiry setPets(integer $var) Sets the pets
  * 
- * @method \tabs\apiclient\Currency getCurrency() Returns the currency
- * @method \tabs\apiclient\SalesChannel getSaleschannel() Returns the saleschannel
  * 
- * @method string|\tabs\apiclient\PricingPeriod getPricingperiod() Returns the pricingperiod
  * 
- * @method string getPromotionalcode() Returns the promotionalcode
  * @method BookingEnquiry setPromotionalcode(string $var) Sets the promotionalcode
  * 
- * @method boolean getCalculatebrochureprice() Returns the calculatebrochureprice
  * @method BookingEnquiry setCalculatebrochureprice(boolean $var) Sets the calculatebrochureprice
  * 
- * @method boolean getCalculateadditionalextras() Returns the calculateadditionalextras
  * @method BookingEnquiry setCalculateadditionalextras(boolean $var) Sets the calculateadditionalextras
  * 
- * @method boolean getCalculateincludedextras() Returns the calculateincludedextras
  * @method BookingEnquiry setCalculateincludedextras(boolean $var) Sets the calculateincludedextras
  * 
- * @method boolean getIncludedpartysizepricing() Returns the includedpartysizepricing
  * @method BookingEnquiry setIncludedpartysizepricing(boolean $var) Sets the includedpartysizepricing
  * 
- * @method boolean getIncludespecialoffers() Returns the includespecialoffers
  * @method BookingEnquiry setIncludespecialoffers(boolean $var) Sets the includespecialoffers
  * 
- * @method boolean getCalculatedeposit() Returns the calculatedeposit
  * @method BookingEnquiry setCalculatedeposit(boolean $var) Sets the calculatedeposit
  * 
- * @method integer getBrochurepricedecimalplaces() Returns the brochurepricedecimalplaces
  * @method BookingEnquiry setBrochurepricedecimalplaces(integer $var) Sets the brochurepricedecimalplaces
  * 
- * @method integer getBasicpricedecimalplaces() Returns the basicpricedecimalplaces
  * @method BookingEnquiry setBasicpricedecimalplaces(integer $var) Sets the basicpricedecimalplaces
  * 
- * @method \tabs\apiclient\Booking getCurrentbooking() Returns the currentbooking
  * 
- * @method boolean getBookingok() Returns the bookingok
  * @method BookingEnquiry setBookingok(boolean $var) Sets the bookingok
  * 
- * @method boolean getPartyok() Returns the partyok
  * @method BookingEnquiry setPartyok(boolean $var) Sets the partyok
  * 
- * @method boolean getPetsok() Returns the petsok
  * @method BookingEnquiry setPetsok(boolean $var) Sets the petsok
  * 
- * @method boolean getAvailable() Returns the available
  * @method BookingEnquiry setAvailable(boolean $var) Sets the available
  * 
- * @method boolean getChangedaysok() Returns the changedaysok
  * @method BookingEnquiry setChangedaysok(boolean $var) Sets the changedaysok
  * 
- * @method boolean getPriceok() Returns the priceok
  * @method BookingEnquiry setPriceok(boolean $var) Sets the priceok
  * 
- * @method boolean getWebbookingok() Returns the webbookingok
  * @method BookingEnquiry setWebbookingok(boolean $var) Sets the webbookingok
  * 
- * @method Property       getProperty() Returns the enquiry property
  * 
- * @method Branding       getBranding() Returns the enquiry branding
  */
 class BookingEnquiry extends Base
 {
@@ -748,5 +718,305 @@ class BookingEnquiry extends Base
         }
         
         return $arr;
+    }
+
+    /**
+     * Returns the guestype
+     *
+     * @return string
+     */
+    public function getGuestype()
+    {
+        return $this->guestype;
+    }
+
+    /**
+     * Returns the property branding
+     *
+     * @return \tabs\apiclient\property\Branding
+     */
+    public function getPropertyBranding()
+    {
+        return $this->propertybranding;
+    }
+
+    /**
+     * Returns the fromdate
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the todate
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
+    }
+
+    /**
+     * Returns the adults
+     *
+     * @return integer
+     */
+    public function getAdults()
+    {
+        return $this->adults;
+    }
+
+    /**
+     * Returns the children
+     *
+     * @return integer
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * Returns the infants
+     *
+     * @return integer
+     */
+    public function getInfants()
+    {
+        return $this->infants;
+    }
+
+    /**
+     * Returns the pets
+     *
+     * @return integer
+     */
+    public function getPets()
+    {
+        return $this->pets;
+    }
+
+    /**
+     * Returns the currency
+     *
+     * @return \tabs\apiclient\Currency
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * Returns the saleschannel
+     *
+     * @return \tabs\apiclient\SalesChannel
+     */
+    public function getSaleschannel()
+    {
+        return $this->saleschannel;
+    }
+
+    /**
+     * Returns the pricingperiod
+     *
+     * @return string|\tabs\apiclient\PricingPeriod
+     */
+    public function getPricingperiod()
+    {
+        return $this->pricingperiod;
+    }
+
+    /**
+     * Returns the promotionalcode
+     *
+     * @return string
+     */
+    public function getPromotionalcode()
+    {
+        return $this->promotionalcode;
+    }
+
+    /**
+     * Returns the calculatebrochureprice
+     *
+     * @return boolean
+     */
+    public function getCalculatebrochureprice()
+    {
+        return $this->calculatebrochureprice;
+    }
+
+    /**
+     * Returns the calculateadditionalextras
+     *
+     * @return boolean
+     */
+    public function getCalculateadditionalextras()
+    {
+        return $this->calculateadditionalextras;
+    }
+
+    /**
+     * Returns the calculateincludedextras
+     *
+     * @return boolean
+     */
+    public function getCalculateincludedextras()
+    {
+        return $this->calculateincludedextras;
+    }
+
+    /**
+     * Returns the includedpartysizepricing
+     *
+     * @return boolean
+     */
+    public function getIncludedpartysizepricing()
+    {
+        return $this->includedpartysizepricing;
+    }
+
+    /**
+     * Returns the includespecialoffers
+     *
+     * @return boolean
+     */
+    public function getIncludespecialoffers()
+    {
+        return $this->includespecialoffers;
+    }
+
+    /**
+     * Returns the calculatedeposit
+     *
+     * @return boolean
+     */
+    public function getCalculatedeposit()
+    {
+        return $this->calculatedeposit;
+    }
+
+    /**
+     * Returns the brochurepricedecimalplaces
+     *
+     * @return integer
+     */
+    public function getBrochurepricedecimalplaces()
+    {
+        return $this->brochurepricedecimalplaces;
+    }
+
+    /**
+     * Returns the basicpricedecimalplaces
+     *
+     * @return integer
+     */
+    public function getBasicpricedecimalplaces()
+    {
+        return $this->basicpricedecimalplaces;
+    }
+
+    /**
+     * Returns the currentbooking
+     *
+     * @return \tabs\apiclient\Booking
+     */
+    public function getCurrentbooking()
+    {
+        return $this->currentbooking;
+    }
+
+    /**
+     * Returns the bookingok
+     *
+     * @return boolean
+     */
+    public function getBookingok()
+    {
+        return $this->bookingok;
+    }
+
+    /**
+     * Returns the partyok
+     *
+     * @return boolean
+     */
+    public function getPartyok()
+    {
+        return $this->partyok;
+    }
+
+    /**
+     * Returns the petsok
+     *
+     * @return boolean
+     */
+    public function getPetsok()
+    {
+        return $this->petsok;
+    }
+
+    /**
+     * Returns the available
+     *
+     * @return boolean
+     */
+    public function getAvailable()
+    {
+        return $this->available;
+    }
+
+    /**
+     * Returns the changedaysok
+     *
+     * @return boolean
+     */
+    public function getChangedaysok()
+    {
+        return $this->changedaysok;
+    }
+
+    /**
+     * Returns the priceok
+     *
+     * @return boolean
+     */
+    public function getPriceok()
+    {
+        return $this->priceok;
+    }
+
+    /**
+     * Returns the webbookingok
+     *
+     * @return boolean
+     */
+    public function getWebbookingok()
+    {
+        return $this->webbookingok;
+    }
+
+    /**
+     * Returns the enquiry property
+     *
+     * @return Property
+     */
+    public function getProperty()
+    {
+        return $this->property;
+    }
+
+    /**
+     * Returns the enquiry branding
+     *
+     * @return Branding
+     */
+    public function getBranding()
+    {
+        return $this->branding;
     }
 }

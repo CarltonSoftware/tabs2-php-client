@@ -15,71 +15,45 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getType() Returns the type string
  * @method Template setType(string $var) Sets the type
  * 
- * @method string getTemplatename() Returns the templatename string
  * @method Template setTemplatename(string $var) Sets the templatename
  * 
- * @method string getSubject() Returns the subject string
  * @method Template setSubject(string $var) Sets the subject
  * 
- * @method string getTemplatedescription() Returns the templatedescription string
  * @method Template setTemplatedescription(string $var) Sets the templatedescription
  * 
- * @method \DateTime getFromdate() Returns the fromdate \DateTime
  * @method Template setFromdate(\DateTime $var) Sets the fromdate
  * 
- * @method \DateTime getTodate() Returns the todate \DateTime
  * @method Template setTodate(\DateTime $var) Sets the todate
  * 
- * @method boolean getMandatory() Returns the mandatory boolean
  * @method TriggerEvent setMandatory(boolean $var) Sets the mandatory
  * 
- * @method boolean getSendonce() Returns the sendonce boolean
  * @method TriggerEvent setSendonce(boolean $var) Sets the sendonce
  * 
- * @method string getSendonceper() Returns the sendonceper string
  * @method TriggerEvent setSendonceper(string $var) Sets the sendonceper
  * 
- * @method integer getDaysbeforetrigger() Returns the daysbeforetrigger integer
  * @method TriggerEvent setDaysbeforetrigger(integer $var) Sets the daysbeforetrigger
  * 
- * @method boolean getShowprovisional() Returns the showprovisional boolean
  * @method TriggerEvent setShowprovisional(boolean $var) Sets the showprovisional
  * 
- * @method boolean getShowdepositpaid() Returns the showdepositpaid boolean
  * @method TriggerEvent setShowdepositpaid(boolean $var) Sets the showdepositpaid
  * 
- * @method boolean getShowbalancepaid() Returns the showbalancepaid boolean
  * @method TriggerEvent setShowbalancepaid(boolean $var) Sets the showbalancepaid
  * 
- * @method boolean getShowcancelledprovisional() Returns the showcancelledprovisional boolean
  * @method TriggerEvent setShowcancelledprovisional(boolean $var) Sets the showcancelledprovisional
  * 
- * @method boolean getShowcancelledconfirmed() Returns the showcancelledconfirmed boolean
  * @method TriggerEvent setShowcancelledconfirmed(boolean $var) Sets the showcancelledconfirmed
  * 
- * @method boolean getShowtransferred() Returns the showtransferred boolean
  * @method TriggerEvent setShowtransferred(boolean $var) Sets the showtransferred
  * 
- * @method boolean getShowowner() Returns the showowner boolean
  * @method TriggerEvent setShowowner(boolean $var) Sets the showowner
  * 
- * @method boolean getShowflexilet() Returns the showflexilet boolean
  * @method TriggerEvent setShowflexilet(boolean $var) Sets the showflexilet
  * 
- * @method boolean getShowcancelledflexilet() Returns the showcancelledflexilet boolean
  * @method TriggerEvent setShowcancelledflexilet(boolean $var) Sets the showcancelledflexilet
  * 
- * @method \tabs\apiclient\TemplateTargetSource getTemplatetargetsource() Returns the templatetargetsource object
- * @method \tabs\apiclient\Branding getBranding() Returns the branding object
- * @method \tabs\apiclient\BookingBrand getBookingbrand() Returns the bookingbrand object
- * @method \tabs\apiclient\MarketingBrand getMarketingbrand() Returns the marketingbrand object
- * @method \tabs\apiclient\TriggerEvent getTriggerevent() Returns the trigger event object
  * 
- * @method Collection|\tabs\apiclient\template\ContactMethod[] getContactmethods() Returns the contactmethods collection
- * @method Collection|\tabs\apiclient\template\RoleReason[] getRolereasons() Returns the role reasons collection
  */
 class Template extends Builder
 {
@@ -401,5 +375,265 @@ class Template extends Builder
         }
         
         return $arr;
+    }
+
+    /**
+     * Returns the type string
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Returns the templatename string
+     *
+     * @return string
+     */
+    public function getTemplatename()
+    {
+        return $this->templatename;
+    }
+
+    /**
+     * Returns the subject string
+     *
+     * @return string
+     */
+    public function getSubject()
+    {
+        return $this->subject;
+    }
+
+    /**
+     * Returns the templatedescription string
+     *
+     * @return string
+     */
+    public function getTemplatedescription()
+    {
+        return $this->templatedescription;
+    }
+
+    /**
+     * Returns the fromdate \DateTime
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the todate \DateTime
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
+    }
+
+    /**
+     * Returns the mandatory boolean
+     *
+     * @return boolean
+     */
+    public function getMandatory()
+    {
+        return $this->mandatory;
+    }
+
+    /**
+     * Returns the sendonce boolean
+     *
+     * @return boolean
+     */
+    public function getSendonce()
+    {
+        return $this->sendonce;
+    }
+
+    /**
+     * Returns the sendonceper string
+     *
+     * @return string
+     */
+    public function getSendonceper()
+    {
+        return $this->sendonceper;
+    }
+
+    /**
+     * Returns the daysbeforetrigger integer
+     *
+     * @return integer
+     */
+    public function getDaysbeforetrigger()
+    {
+        return $this->daysbeforetrigger;
+    }
+
+    /**
+     * Returns the showprovisional boolean
+     *
+     * @return boolean
+     */
+    public function getShowprovisional()
+    {
+        return $this->showprovisional;
+    }
+
+    /**
+     * Returns the showdepositpaid boolean
+     *
+     * @return boolean
+     */
+    public function getShowdepositpaid()
+    {
+        return $this->showdepositpaid;
+    }
+
+    /**
+     * Returns the showbalancepaid boolean
+     *
+     * @return boolean
+     */
+    public function getShowbalancepaid()
+    {
+        return $this->showbalancepaid;
+    }
+
+    /**
+     * Returns the showcancelledprovisional boolean
+     *
+     * @return boolean
+     */
+    public function getShowcancelledprovisional()
+    {
+        return $this->showcancelledprovisional;
+    }
+
+    /**
+     * Returns the showcancelledconfirmed boolean
+     *
+     * @return boolean
+     */
+    public function getShowcancelledconfirmed()
+    {
+        return $this->showcancelledconfirmed;
+    }
+
+    /**
+     * Returns the showtransferred boolean
+     *
+     * @return boolean
+     */
+    public function getShowtransferred()
+    {
+        return $this->showtransferred;
+    }
+
+    /**
+     * Returns the showowner boolean
+     *
+     * @return boolean
+     */
+    public function getShowowner()
+    {
+        return $this->showowner;
+    }
+
+    /**
+     * Returns the showflexilet boolean
+     *
+     * @return boolean
+     */
+    public function getShowflexilet()
+    {
+        return $this->showflexilet;
+    }
+
+    /**
+     * Returns the showcancelledflexilet boolean
+     *
+     * @return boolean
+     */
+    public function getShowcancelledflexilet()
+    {
+        return $this->showcancelledflexilet;
+    }
+
+    /**
+     * Returns the templatetargetsource object
+     *
+     * @return \tabs\apiclient\TemplateTargetSource
+     */
+    public function getTemplatetargetsource()
+    {
+        return $this->templatetargetsource;
+    }
+
+    /**
+     * Returns the branding object
+     *
+     * @return \tabs\apiclient\Branding
+     */
+    public function getBranding()
+    {
+        return $this->branding;
+    }
+
+    /**
+     * Returns the bookingbrand object
+     *
+     * @return \tabs\apiclient\BookingBrand
+     */
+    public function getBookingbrand()
+    {
+        return $this->bookingbrand;
+    }
+
+    /**
+     * Returns the marketingbrand object
+     *
+     * @return \tabs\apiclient\MarketingBrand
+     */
+    public function getMarketingbrand()
+    {
+        return $this->marketingbrand;
+    }
+
+    /**
+     * Returns the trigger event object
+     *
+     * @return \tabs\apiclient\TriggerEvent
+     */
+    public function getTriggerevent()
+    {
+        return $this->triggerevent;
+    }
+
+    /**
+     * Returns the contactmethods collection
+     *
+     * @return Collection|\tabs\apiclient\template\ContactMethod[]
+     */
+    public function getContactmethods()
+    {
+        return $this->contactmethods;
+    }
+
+    /**
+     * Returns the role reasons collection
+     *
+     * @return Collection|\tabs\apiclient\template\RoleReason[]
+     */
+    public function getRolereasons()
+    {
+        return $this->rolereasons;
     }
 }

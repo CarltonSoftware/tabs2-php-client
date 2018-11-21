@@ -15,10 +15,8 @@ use tabs\apiclient\Collection;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method string  getVatband()                Returns the Vatband
  * @method Vatband setVatband(string $vatband) Sets the Vatband
  * 
- * @method Collection getVatrates() Return the vatrates collection
  */
 class Vatband extends Builder
 {
@@ -107,5 +105,25 @@ class Vatband extends Builder
             $this->getVatband(),
             (strlen($vrate) > 0) ? ' - ' . $vrate : 'No vat rate set'
         );
+    }
+
+    /**
+     * Returns the Vatband
+     *
+     * @return string
+     */
+    public function getVatband()
+    {
+        return $this->vatband;
+    }
+
+    /**
+     * Return the vatrates collection
+     *
+     * @return Collection
+     */
+    public function getVatrates()
+    {
+        return $this->vatrates;
     }
 }

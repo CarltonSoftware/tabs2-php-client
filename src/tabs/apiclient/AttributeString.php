@@ -16,7 +16,6 @@ use tabs\apiclient\Collection;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method Collection|Option[] getOptions() Get all the options for this attribute
  */
 class AttributeString extends Attribute
 {
@@ -36,5 +35,15 @@ class AttributeString extends Attribute
         $this->options = Collection::factory('option', new Option(), $this);
         
         parent::__construct($id);
+    }
+
+    /**
+     * Get all the options for this attribute
+     *
+     * @return Collection|Option[]
+     */
+    public function getOptions()
+    {
+        return $this->options;
     }
 }

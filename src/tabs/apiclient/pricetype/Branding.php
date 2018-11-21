@@ -15,21 +15,14 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\Branding getBranding() Returns the branding
- * @method \tabs\apiclient\SalesChannel getSaleschannel() Returns the saleschannel
- * @method \DateTime getFromdate() Returns the fromdate
  * @method Branding setFromdate(\DateTime $var) Sets the fromdate
  * 
- * @method \DateTime getTodate() Returns the todate
  * @method Branding setTodate(\DateTime $var) Sets the todate
  * 
- * @method integer getDecimalplaces() Returns the decimalplaces
  * @method Branding setDecimalplaces(integer $var) Sets the decimalplaces
  * 
- * @method integer getPercentage() Returns the percentage
  * @method Branding setPercentage(integer $var) Sets the percentage
  * 
- * @method Branding getBasepricetypebranding() Returns the basepricetypebranding
  */
 class Branding extends Builder
 {
@@ -170,5 +163,75 @@ class Branding extends Builder
     public function getType()
     {
         return ($this->getPercentage()) ? 'Percentage' : 'Fixed';
+    }
+
+    /**
+     * Returns the branding
+     *
+     * @return \tabs\apiclient\Branding
+     */
+    public function getBranding()
+    {
+        return $this->branding;
+    }
+
+    /**
+     * Returns the saleschannel
+     *
+     * @return \tabs\apiclient\SalesChannel
+     */
+    public function getSaleschannel()
+    {
+        return $this->saleschannel;
+    }
+
+    /**
+     * Returns the fromdate
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the todate
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
+    }
+
+    /**
+     * Returns the decimalplaces
+     *
+     * @return integer
+     */
+    public function getDecimalplaces()
+    {
+        return $this->decimalplaces;
+    }
+
+    /**
+     * Returns the percentage
+     *
+     * @return integer
+     */
+    public function getPercentage()
+    {
+        return $this->percentage;
+    }
+
+    /**
+     * Returns the basepricetypebranding
+     *
+     * @return Branding
+     */
+    public function getBasepricetypebranding()
+    {
+        return $this->basepricetypebranding;
     }
 }

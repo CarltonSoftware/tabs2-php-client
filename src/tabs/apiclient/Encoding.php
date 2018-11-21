@@ -14,7 +14,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string   getEncoding()                 Returns the encoding type
  * @method Encoding setEncoding(string $encoding) Set the encoding
  */
 class Encoding extends Builder
@@ -36,5 +35,15 @@ class Encoding extends Builder
         return array(
             'encoding' => $this->getEncoding()
         );
+    }
+
+    /**
+     * Returns the encoding type
+     *
+     * @return string
+     */
+    public function getEncoding()
+    {
+        return $this->encoding;
     }
 }

@@ -13,7 +13,6 @@ namespace tabs\apiclient;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getOfficename() Returns the office name
  * @method Actor  setOfficename(string $var) Sets the office name
  */
 class Office extends Actor
@@ -38,5 +37,15 @@ class Office extends Actor
                 'name' => $this->getOfficename()
             )
         );
+    }
+
+    /**
+     * Returns the office name
+     *
+     * @return string
+     */
+    public function getOfficename()
+    {
+        return $this->officename;
     }
 }

@@ -15,10 +15,8 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string                   getQuestioncategory()            Returns the pqc
  * @method PropertyQuestionCategory setQuestioncategory(string $var) Sets the pqc
  * 
- * @method string                   getDescription()            Returns the description
  * @method PropertyQuestionCategory setDescription(string $var) Sets the description
  */
 class PropertyQuestionCategory extends Builder
@@ -32,4 +30,24 @@ class PropertyQuestionCategory extends Builder
      * @var string
      */
     protected $description;
+
+    /**
+     * Returns the pqc
+     *
+     * @return string
+     */
+    public function getQuestioncategory()
+    {
+        return $this->questioncategory;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
 }

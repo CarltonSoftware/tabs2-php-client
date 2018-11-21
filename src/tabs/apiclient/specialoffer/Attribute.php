@@ -17,8 +17,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method Value            getValue()     Returns the value
- * @method AttributeBoolean getAttribute() Returns the attribute
  */
 class Attribute extends Builder
 {
@@ -90,5 +88,25 @@ class Attribute extends Builder
             'attributeid' => $this->getAttribute()->getId(),
             'type' => 'Boolean'
         );
+    }
+
+    /**
+     * Returns the value
+     *
+     * @return Value
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     * Returns the attribute
+     *
+     * @return AttributeBoolean
+     */
+    public function getAttribute()
+    {
+        return $this->attribute;
     }
 }

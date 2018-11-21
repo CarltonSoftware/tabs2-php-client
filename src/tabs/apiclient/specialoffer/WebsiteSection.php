@@ -15,7 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\WebsiteSection getWebsitesection() Returns the websitesection object
  */
 class WebsiteSection extends Builder
 {
@@ -54,5 +53,15 @@ class WebsiteSection extends Builder
         }
 
         return $arr;
+    }
+
+    /**
+     * Returns the websitesection object
+     *
+     * @return \tabs\apiclient\WebsiteSection
+     */
+    public function getWebsitesection()
+    {
+        return $this->websitesection;
     }
 }

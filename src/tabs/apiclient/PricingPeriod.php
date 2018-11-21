@@ -15,19 +15,14 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getPricingperiod() Returns the pricingperiod
  * @method PricingPeriod setPricingperiod(string $var) Sets the pricingperiod
  * 
- * @method integer getDays() Returns the days
  * @method PricingPeriod setDays(integer $var) Sets the days
  * 
- * @method integer getWeeks() Returns the weeks
  * @method PricingPeriod setWeeks(integer $var) Sets the weeks
  * 
- * @method integer getMonths() Returns the months
  * @method PricingPeriod setMonths(integer $var) Sets the months
  * 
- * @method string getSubperiod() Returns the subperiod
  * @method PricingPeriod setSubperiod(string $var) Sets the subperiod
  */
 class PricingPeriod extends Builder
@@ -81,5 +76,55 @@ class PricingPeriod extends Builder
             'months' => $this->getMonths(),
             'subperiod' => $this->getSubperiod()
         );
+    }
+
+    /**
+     * Returns the pricingperiod
+     *
+     * @return string
+     */
+    public function getPricingperiod()
+    {
+        return $this->pricingperiod;
+    }
+
+    /**
+     * Returns the days
+     *
+     * @return integer
+     */
+    public function getDays()
+    {
+        return $this->days;
+    }
+
+    /**
+     * Returns the weeks
+     *
+     * @return integer
+     */
+    public function getWeeks()
+    {
+        return $this->weeks;
+    }
+
+    /**
+     * Returns the months
+     *
+     * @return integer
+     */
+    public function getMonths()
+    {
+        return $this->months;
+    }
+
+    /**
+     * Returns the subperiod
+     *
+     * @return string
+     */
+    public function getSubperiod()
+    {
+        return $this->subperiod;
     }
 }

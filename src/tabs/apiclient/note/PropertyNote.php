@@ -34,12 +34,6 @@ use tabs\apiclient\Note;
  * @method NoteAssociation setShowonweb(boolean $bool)            Bool setter
  * @method NoteAssociation setShowonavailability(boolean $bool)   Bool setter
  * 
- * @method \DateTime getFromdate() Get the Date
- * @method \DateTime getTodate()   Get the Date
- * @method boolean getRequiresconfirmation() Bool getter
- * @method boolean getShowonweb()            Bool getter
- * @method boolean getShowonavailability()   Bool getter
- * @method Note    getNote()                 Get the Note
  */
 class PropertyNote extends Builder
 {
@@ -134,5 +128,65 @@ class PropertyNote extends Builder
     public function getCreateUrl()
     {
         return 'propertynote';
+    }
+
+    /**
+     * Get the Date
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Get the Date
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
+    }
+
+    /**
+     * Bool getter
+     *
+     * @return boolean
+     */
+    public function getRequiresconfirmation()
+    {
+        return $this->requiresconfirmation;
+    }
+
+    /**
+     * Bool getter
+     *
+     * @return boolean
+     */
+    public function getShowonweb()
+    {
+        return $this->showonweb;
+    }
+
+    /**
+     * Bool getter
+     *
+     * @return boolean
+     */
+    public function getShowonavailability()
+    {
+        return $this->showonavailability;
+    }
+
+    /**
+     * Get the Note
+     *
+     * @return Note
+     */
+    public function getNote()
+    {
+        return $this->note;
     }
 }

@@ -16,14 +16,10 @@ use tabs\apiclient\Vatband;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getOwnerchargecode() Returns the ownerchargecode
  * @method OwnerChargeCode setOwnerchargecode(string $var) Sets the ownerchargecode
  * 
- * @method string getDescription() Returns the description
  * @method OwnerChargeCode setDescription(string $var) Sets the description
  * 
- * @method \tabs\apiclient\VatBand getVatband() Returns the vatband
- * @method boolean getRecharge() Returns the recharge
  * @method OwnerChargeCode setRecharge(boolean $var) Sets the recharge
  * 
  */
@@ -84,5 +80,45 @@ class OwnerChargeCode extends Builder
             'vatbandid' => $this->getVatband()->getId(),
             'recharge' => $this->boolToStr($this->getRecharge())
         );
+    }
+
+    /**
+     * Returns the ownerchargecode
+     *
+     * @return string
+     */
+    public function getOwnerchargecode()
+    {
+        return $this->ownerchargecode;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Returns the vatband
+     *
+     * @return \tabs\apiclient\VatBand
+     */
+    public function getVatband()
+    {
+        return $this->vatband;
+    }
+
+    /**
+     * Returns the recharge
+     *
+     * @return boolean
+     */
+    public function getRecharge()
+    {
+        return $this->recharge;
     }
 }

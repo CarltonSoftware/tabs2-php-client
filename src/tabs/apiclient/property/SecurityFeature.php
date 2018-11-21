@@ -15,17 +15,12 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\SecurityFeature getSecurityfeature() Returns the securityfeature
- * @method string getCode() Returns the code
  * @method SecurityFeature setCode(string $var) Sets the code
  * 
- * @method \DateTime getFromdate() Returns the fromdate
  * @method SecurityFeature setFromdate(\DateTime $var) Sets the fromdate
  * 
- * @method \DateTime getTodate() Returns the todate
  * @method SecurityFeature setTodate(\DateTime $var) Sets the todate
  * 
- * @method string getNotes() Returns the notes
  * @method SecurityFeature setNotes(string $var) Sets the notes
  * 
  */
@@ -104,5 +99,55 @@ class SecurityFeature extends Builder
             'todate' => $this->getTodate()->format('Y-m-d'),
             'notes' => $this->getNotes(),
         );
+    }
+
+    /**
+     * Returns the securityfeature
+     *
+     * @return \tabs\apiclient\SecurityFeature
+     */
+    public function getSecurityfeature()
+    {
+        return $this->securityfeature;
+    }
+
+    /**
+     * Returns the code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Returns the fromdate
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the todate
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
+    }
+
+    /**
+     * Returns the notes
+     *
+     * @return string
+     */
+    public function getNotes()
+    {
+        return $this->notes;
     }
 }

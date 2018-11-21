@@ -16,23 +16,16 @@ use tabs\apiclient\Encoding;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getMethod() Returns the method
  * @method ContactMethodType setMethod(string $var) Sets the method
  * 
- * @method Encoding getEncoding() Returns the encoding
- * @method integer getCharacterlimit() Returns the characterlimit
  * @method ContactMethodType setCharacterlimit(integer $var) Sets the characterlimit
  * 
- * @method integer getMaximumaddresslength() Returns the maximumaddresslength
  * @method ContactMethodType setMaximumaddresslength(integer $var) Sets the maximumaddresslength
  * 
- * @method string getAddressvalidationtype() Returns the addressvalidationtype
  * @method ContactMethodType setAddressvalidationtype(string $var) Sets the addressvalidationtype
  * 
- * @method string getAddressvalidation() Returns the addressvalidation
  * @method ContactMethodType setAddressvalidation(string $var) Sets the addressvalidation
  * 
- * @method Collection|contactmethodtype\Element[] getElements() Returns the elements
  */
 class ContactMethodType extends Base
 {
@@ -128,5 +121,75 @@ class ContactMethodType extends Base
             'addressvalidationtype' => $this->getAddressvalidationtype(),
             'addressvalidation' => $this->getAddressvalidation()
         );
+    }
+
+    /**
+     * Returns the method
+     *
+     * @return string
+     */
+    public function getMethod()
+    {
+        return $this->method;
+    }
+
+    /**
+     * Returns the encoding
+     *
+     * @return Encoding
+     */
+    public function getEncoding()
+    {
+        return $this->encoding;
+    }
+
+    /**
+     * Returns the characterlimit
+     *
+     * @return integer
+     */
+    public function getCharacterlimit()
+    {
+        return $this->characterlimit;
+    }
+
+    /**
+     * Returns the maximumaddresslength
+     *
+     * @return integer
+     */
+    public function getMaximumaddresslength()
+    {
+        return $this->maximumaddresslength;
+    }
+
+    /**
+     * Returns the addressvalidationtype
+     *
+     * @return string
+     */
+    public function getAddressvalidationtype()
+    {
+        return $this->addressvalidationtype;
+    }
+
+    /**
+     * Returns the addressvalidation
+     *
+     * @return string
+     */
+    public function getAddressvalidation()
+    {
+        return $this->addressvalidation;
+    }
+
+    /**
+     * Returns the elements
+     *
+     * @return Collection|contactmethodtype\Element[]
+     */
+    public function getElements()
+    {
+        return $this->elements;
     }
 }

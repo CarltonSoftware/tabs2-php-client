@@ -15,13 +15,10 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getStatus() Returns the status
  * @method Status setStatus(string $var) Sets the status
  * 
- * @method \DateTime getStatusdatetime() Returns the statusdatetime
  * @method Status setStatusdatetime(\DateTime $var) Sets the statusdatetime
  * 
- * @method string getDetail() Returns the detail
  * @method Status setDetail(string $var) Sets the detail
  */
 class Status extends Builder
@@ -68,5 +65,35 @@ class Status extends Builder
             'statusdatetime' => $this->getStatusdatetime()->format('Y-m-d'),
             'detail' => $this->getDetail(),
         );
+    }
+
+    /**
+     * Returns the status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Returns the statusdatetime
+     *
+     * @return \DateTime
+     */
+    public function getStatusdatetime()
+    {
+        return $this->statusdatetime;
+    }
+
+    /**
+     * Returns the detail
+     *
+     * @return string
+     */
+    public function getDetail()
+    {
+        return $this->detail;
     }
 }

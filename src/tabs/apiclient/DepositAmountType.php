@@ -15,7 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string            getDepositamounttype()            Returns the deposit amount type
  * @method DepositAmountType setDepositamounttype(string $var) Sets the deposit amount type
  */
 class DepositAmountType extends Builder
@@ -37,5 +36,15 @@ class DepositAmountType extends Builder
         return array(
             'depositamounttype' => $this->getDepositamounttype()
         );
+    }
+
+    /**
+     * Returns the deposit amount type
+     *
+     * @return string
+     */
+    public function getDepositamounttype()
+    {
+        return $this->depositamounttype;
     }
 }

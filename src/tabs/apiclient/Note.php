@@ -28,9 +28,6 @@ use tabs\apiclient\note\Notetext;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string                   getSubject()   Returns the Note subject
- * @method Collection|Notetext[]    getNotetexts() Returns the array of NoteText items
- * @method Notetype                 getNotetype()  Returns the array of Notetype
  *
  * @method Note setSubject(string $subject)          Set the note subject
  * @method Note setVisibletocustomer(boolean $bool)  Visible to customer bool
@@ -238,5 +235,35 @@ class Note extends Notemeta
         }
         
         return $arr;
+    }
+
+    /**
+     * Returns the Note subject
+     *
+     * @return string
+     */
+    public function getSubject()
+    {
+        return $this->subject;
+    }
+
+    /**
+     * Returns the array of NoteText items
+     *
+     * @return Collection|Notetext[]
+     */
+    public function getNotetexts()
+    {
+        return $this->notetexts;
+    }
+
+    /**
+     * Returns the array of Notetype
+     *
+     * @return Notetype
+     */
+    public function getNotetype()
+    {
+        return $this->notetype;
     }
 }

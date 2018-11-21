@@ -17,51 +17,33 @@ use tabs\apiclient\Extra;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getPricingperiod() Returns the pricingperiod
  * @method Pricing setPricingperiod(string $var) Sets the pricingperiod
  * 
- * @method \tabs\apiclient\Property getProperty() Returns the property
- * @method \DateTime getFromdate() Returns the fromdate
  * @method Pricing setFromdate(\DateTime $var) Sets the fromdate
  * 
- * @method \DateTime getTodate() Returns the todate
  * @method Pricing setTodate(\DateTime $var) Sets the todate
  * 
- * @method \tabs\apiclient\Currency getCurrency() Returns the currency
- * @method string getPricingtype() Returns the pricingtype
  * @method Pricing setPricingtype(string $var) Sets the pricingtype
  * 
- * @method boolean getPerperiod() Returns the perperiod
  * @method Pricing setPerperiod(boolean $var) Sets the perperiod
  * 
- * @method float getPrice() Returns the price
  * @method Pricing setPrice(float $var) Sets the price
  * 
- * @method float getPercentage() Returns the percentage
  * @method Pricing setPercentage(float $var) Sets the percentage
  * 
- * @method string getBasedon() Returns the basedon
  * @method Pricing setBasedon(string $var) Sets the basedon
  * 
- * @method integer getMinimum() Returns the minimum
  * @method Pricing setMinimum(integer $var) Sets the minimum
  * 
- * @method integer getMaximum() Returns the maximum
  * @method Pricing setMaximum(integer $var) Sets the maximum
  * 
- * @method boolean getPeradult() Returns the peradult
  * @method Pricing setPeradult(boolean $var) Sets the peradult
  * 
- * @method boolean getPerchild() Returns the perchild
  * @method Pricing setPerchild(boolean $var) Sets the perchild
  * 
- * @method boolean getPerinfant() Returns the perinfant
  * @method Pricing setPerinfant(boolean $var) Sets the perinfant
  * 
- * @method Collection|pricing\PriceType[] getDailyprices() Returns the dailyprices
- * @method Collection|pricing\RangeElement[] getRanges()   Returns the range prices
  * 
- * @method Extra getExtradetails() Returns the extra details
  */
 class Pricing extends Builder
 {
@@ -295,5 +277,185 @@ class Pricing extends Builder
         }
         
         return $arr;
+    }
+
+    /**
+     * Returns the pricingperiod
+     *
+     * @return string
+     */
+    public function getPricingperiod()
+    {
+        return $this->pricingperiod;
+    }
+
+    /**
+     * Returns the property
+     *
+     * @return \tabs\apiclient\Property
+     */
+    public function getProperty()
+    {
+        return $this->property;
+    }
+
+    /**
+     * Returns the fromdate
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the todate
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
+    }
+
+    /**
+     * Returns the currency
+     *
+     * @return \tabs\apiclient\Currency
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * Returns the pricingtype
+     *
+     * @return string
+     */
+    public function getPricingtype()
+    {
+        return $this->pricingtype;
+    }
+
+    /**
+     * Returns the perperiod
+     *
+     * @return boolean
+     */
+    public function getPerperiod()
+    {
+        return $this->perperiod;
+    }
+
+    /**
+     * Returns the price
+     *
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Returns the percentage
+     *
+     * @return float
+     */
+    public function getPercentage()
+    {
+        return $this->percentage;
+    }
+
+    /**
+     * Returns the basedon
+     *
+     * @return string
+     */
+    public function getBasedon()
+    {
+        return $this->basedon;
+    }
+
+    /**
+     * Returns the minimum
+     *
+     * @return integer
+     */
+    public function getMinimum()
+    {
+        return $this->minimum;
+    }
+
+    /**
+     * Returns the maximum
+     *
+     * @return integer
+     */
+    public function getMaximum()
+    {
+        return $this->maximum;
+    }
+
+    /**
+     * Returns the peradult
+     *
+     * @return boolean
+     */
+    public function getPeradult()
+    {
+        return $this->peradult;
+    }
+
+    /**
+     * Returns the perchild
+     *
+     * @return boolean
+     */
+    public function getPerchild()
+    {
+        return $this->perchild;
+    }
+
+    /**
+     * Returns the perinfant
+     *
+     * @return boolean
+     */
+    public function getPerinfant()
+    {
+        return $this->perinfant;
+    }
+
+    /**
+     * Returns the dailyprices
+     *
+     * @return Collection|pricing\PriceType[]
+     */
+    public function getDailyprices()
+    {
+        return $this->dailyprices;
+    }
+
+    /**
+     * Returns the range prices
+     *
+     * @return Collection|pricing\RangeElement[]
+     */
+    public function getRanges()
+    {
+        return $this->ranges;
+    }
+
+    /**
+     * Returns the extra details
+     *
+     * @return Extra
+     */
+    public function getExtradetails()
+    {
+        return $this->extradetails;
     }
 }

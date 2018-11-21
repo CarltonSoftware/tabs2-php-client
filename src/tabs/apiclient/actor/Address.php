@@ -13,7 +13,6 @@ namespace tabs\apiclient\actor;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \tabs\apiclient\Address getAddress() Returns the address
  */
 class Address extends ContactDetail
 {
@@ -57,5 +56,15 @@ class Address extends ContactDetail
     public function __toString()
     {
         return (string) $this->getAddress();
+    }
+
+    /**
+     * Returns the address
+     *
+     * @return \tabs\apiclient\Address
+     */
+    public function getAddress()
+    {
+        return $this->address;
     }
 }

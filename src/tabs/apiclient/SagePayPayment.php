@@ -14,21 +14,8 @@ use tabs\apiclient\Base;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method float getAmount() Returns the amount
  * @method SagePayPayment setAmount(float $var) Sets the amount
  * 
- * @method Currency       getCurrency()              Returns the currency
- * @method PaymentMethod  getPaymentmethod()         Returns the paymentmethod
- * @method actor\Address  getAddress()               Returns the address
- * @method Customer       getCustomer()              Returns the booking
- * @method Booking        getBooking()               Returns the booking
- * @method float          getBookingamount()         Returns the bookingamount
- * @method float          getSecuritydepositamount() Returns the securitydepositamount
- * @method string         getCallbackurl()           Returns the callback url
- * @method string         getFailureurl()            Returns the failure url
- * @method string         getPaymenttype()           Returns the payment type
- * @method boolean        getRepeatpayment()         Returns the repeat payment bool
- * @method boolean        getBypassamountdue()       Returns the bypass amount due flag
  * 
  * @method SagePayPayment setBookingamount(float $var)         Sets the bookingamount
  * @method SagePayPayment setSecuritydepositamount(float $var) Sets the securitydepositamount
@@ -38,7 +25,6 @@ use tabs\apiclient\Base;
  * @method SagePayPayment setRepeatpayment(boolean $var)       Set the repeat payment flag
  * @method SagePayPayment setBypassamountdue(boolean $var)     Set the bypass amount due flag
  * 
- * @method boolean getDonotconfirmbooking() Returns the donotconfirmbooking
  * @method Payment setDonotconfirmbooking(boolean $var) Sets the donotconfirmbooking
  */
 class SagePayPayment extends Base
@@ -319,5 +305,145 @@ class SagePayPayment extends Base
         }
         
         return (string) $req->getBody();
+    }
+
+    /**
+     * Returns the amount
+     *
+     * @return float
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * Returns the currency
+     *
+     * @return Currency
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * Returns the paymentmethod
+     *
+     * @return PaymentMethod
+     */
+    public function getPaymentmethod()
+    {
+        return $this->paymentmethod;
+    }
+
+    /**
+     * Returns the address
+     *
+     * @return actor\Address
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Returns the booking
+     *
+     * @return Customer
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
+
+    /**
+     * Returns the booking
+     *
+     * @return Booking
+     */
+    public function getBooking()
+    {
+        return $this->booking;
+    }
+
+    /**
+     * Returns the bookingamount
+     *
+     * @return float
+     */
+    public function getBookingamount()
+    {
+        return $this->bookingamount;
+    }
+
+    /**
+     * Returns the securitydepositamount
+     *
+     * @return float
+     */
+    public function getSecuritydepositamount()
+    {
+        return $this->securitydepositamount;
+    }
+
+    /**
+     * Returns the callback url
+     *
+     * @return string
+     */
+    public function getCallbackurl()
+    {
+        return $this->callbackurl;
+    }
+
+    /**
+     * Returns the failure url
+     *
+     * @return string
+     */
+    public function getFailureurl()
+    {
+        return $this->failureurl;
+    }
+
+    /**
+     * Returns the payment type
+     *
+     * @return string
+     */
+    public function getPaymenttype()
+    {
+        return $this->paymenttype;
+    }
+
+    /**
+     * Returns the repeat payment bool
+     *
+     * @return boolean
+     */
+    public function getRepeatpayment()
+    {
+        return $this->repeatpayment;
+    }
+
+    /**
+     * Returns the bypass amount due flag
+     *
+     * @return boolean
+     */
+    public function getBypassamountdue()
+    {
+        return $this->bypassamountdue;
+    }
+
+    /**
+     * Returns the donotconfirmbooking
+     *
+     * @return boolean
+     */
+    public function getDonotconfirmbooking()
+    {
+        return $this->donotconfirmbooking;
     }
 }

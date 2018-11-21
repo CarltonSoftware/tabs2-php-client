@@ -15,16 +15,12 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \DateTime getHelddate() Returns the helddate
  * @method Hold setHelddate(\DateTime $var) Sets the helddate
  * 
- * @method \DateTime getHelduntildate() Returns the helduntildate
  * @method Hold setHelduntildate(\DateTime $var) Sets the helduntildate
  * 
- * @method string getReason() Returns the reason
  * @method Hold setReason(string $var) Sets the reason
  * 
- * @method \tabs\apiclient\TabsUser getTabsuser() Returns the tabsuser
  */
 class Hold extends Builder
 {
@@ -94,5 +90,45 @@ class Hold extends Builder
         }
         
         return $arr;
+    }
+
+    /**
+     * Returns the helddate
+     *
+     * @return \DateTime
+     */
+    public function getHelddate()
+    {
+        return $this->helddate;
+    }
+
+    /**
+     * Returns the helduntildate
+     *
+     * @return \DateTime
+     */
+    public function getHelduntildate()
+    {
+        return $this->helduntildate;
+    }
+
+    /**
+     * Returns the reason
+     *
+     * @return string
+     */
+    public function getReason()
+    {
+        return $this->reason;
+    }
+
+    /**
+     * Returns the tabsuser
+     *
+     * @return \tabs\apiclient\TabsUser
+     */
+    public function getTabsuser()
+    {
+        return $this->tabsuser;
     }
 }

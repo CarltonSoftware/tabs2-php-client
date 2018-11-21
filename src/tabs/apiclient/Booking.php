@@ -29,122 +29,51 @@ use tabs\apiclient\OwnerBookingType;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getBookref() Returns the bookref
  * @method Booking setBookref(string $var) Sets the bookref
  *
- * @method \tabs\apiclient\Branding getBranding() Returns the branding
- *
- * @method \tabs\apiclient\property\Branding getPropertybranding() Returns the propertybranding
- *
- * @method \DateTime getBookeddatetime() Returns the bookeddatetime
  * @method Booking setBookeddatetime(\DateTime $var) Sets the bookeddatetime
  *
- * @method \DateTime getFromdate() Returns the fromdate
  * @method Booking setFromdate(\DateTime $var) Sets the fromdate
  *
- * @method \DateTime getTodate() Returns the todate
  * @method Booking setTodate(\DateTime $var) Sets the todate
  *
- * @method integer getAdults() Returns the adults
  * @method Booking setAdults(integer $var) Sets the adults
  *
- * @method integer getChildren() Returns the children
  * @method Booking setChildren(integer $var) Sets the children
  *
- * @method integer getInfants() Returns the infants
  * @method Booking setInfants(integer $var) Sets the infants
  *
- * @method integer getPets() Returns the pets
  * @method Booking setPets(integer $var) Sets the pets
  *
- * @method boolean getIgnorechangedayrules() Returns the ignorechangedayrules
  * @method Booking setIgnorechangedayrules(boolean $var) Sets the ignorechangedayrules
  *
- * @method boolean getBypasschecks() Returns the bypasschecks
  * @method Booking setBypasschecks(boolean $var) Sets the bypasschecks
  *
- * @method boolean getBypasspetchecks() Returns the bypasspetchecks
  * @method Booking setBypasspetchecks(boolean $var) Sets the bypasspetchecks
  *
- * @method string  getGuesttype() Returns the guesttype
  * @method Booking setGuesttype(string $var) Sets the guestype
  *
- * @method StaticCollection|booking\Supplier[]|property\Supplier[] getSuppliers() Returns the assigned suppliers
- *
- * @method string getStatus() Returns the status
  * @method Booking setStatus(string $var) Sets the status
  *
- * @method boolean getCancelled() Returns the cancelled
  * @method Booking setCancelled(boolean $var) Sets the cancelled
  *
- * @method SalesChannel getSaleschannel() Returns the saleschannel
- *
- * @method Currency getCurrency() Returns the currency
- *
- * @method PricingPeriod getPricingperiod() Returns the pricingperiod
- *
- * @method SourceMarketingBrand getSourcemarketingbrand() Returns the source marketing brand
- *
- * @method string getEstimatedarrivaltime() Returns the estimatedarrivaltime
  * @method Booking setEstimatedarrivaltime(string $var) Sets the estimatedarrivaltime
  *
- * @method string getCheckinearliesttime() Returns the checkinearliesttime
  * @method Booking setCheckinearliesttime(string $var) Sets the checkinearliesttime
  *
- * @method string getCheckinlatesttime() Returns the checkinlatesttime
  * @method Booking setCheckinlatesttime(string $var) Sets the checkinlatesttime
  *
- * @method string getCheckouttime() Returns the checkouttime
  * @method Booking setCheckouttime(string $var) Sets the checkouttime
  *
- * @method string getCheckintext() Returns the check in text
  * @method Booking setCheckintext(string $var) Sets the check in text
  *
- * @method string getCheckouttext() Returns the check out text
  * @method Booking setCheckouttext(string $var) Sets the check out text
  *
- * @method string getPromotioncode() Returns the promotion code
  * @method Booking setPromotioncode(string $var) Sets the promotion code
- * 
- * @method string getSourcecode() Returns the source code
+ *
  * @method Booking setSourcecode(string $var) Sets the source code
  *
- * @method PotentialBooking getPotentialbooking() Returns the potentialbooking
- *
- * @method WebBooking getWebbooking() Returns the webbooking
- *
- * @method ProvisionalBooking getProvisionalbooking() Returns the provisionalbooking
- *
- * @method ConfirmedBooking getConfirmedbooking() Returns the confirmed booking
- *
- * @method CancelledBooking getCancelledbooking() Returns the cancelled booking
- *
- * @method Collection|booking\SecurityDeposit[] getSecuritydeposits() Returns the securitydeposits
- *
- * @method booking\SecurityDeposit[] getSecuritydeposit() Returns booking securitydeposit
- *
- * @method Collection|booking\Customer[] getCustomers() Returns the customers
- *
- * @method Collection|booking\Document[] getDocuments() Returns the booking documents
- *
- * @method Collection|BookingNote[] getNotes() Returns the booking notes
- *
- * @method Collection|booking\Extra[] getExtras() Returns the booking extras
- *
- * @method Collection|booking\Guest[] getGuests() Returns the booking guests
- *
- * @method OwnerPaymentSummary getOwnerpaymentsummary() Returns the Ownerpaymentsummary
- *
- * @method AgencyBookingType getAgencybookingtype() Returns the booking type for agency bookings
- * 
- * @method OwnerBookingType getOwnerbookingtype() Returns the booking type for owner bookings
- *
- * @method TransferredBooking getTransferredtobooking() Returns the transferred booking
- *
- * @method TransferredBooking getTransferredfrombooking() Returns the transferred booking
- * 
  * @method Booking setOverridestatus(boolean $var) Set the override status flag
- * @method boolean getOverridestatus()             Get the override status flag
  */
 class Booking extends Builder
 {
@@ -346,13 +275,13 @@ class Booking extends Builder
      * @var string
      */
     protected $promotioncode = '';
-    
+
     /**
      * Source code
      *
      * @var string
      */
-    protected $sourcecode = '';    
+    protected $sourcecode = '';
 
     /**
      * Potential Booking
@@ -465,13 +394,13 @@ class Booking extends Builder
      * @var AgencyBookingType
      */
     protected $agencybookingtype;
-    
+
     /**
      * Owner booking type
      *
      * @var OwnerBookingType
      */
-    protected $ownerbookingtype;    
+    protected $ownerbookingtype;
 
     /**
      * Transferred booking
@@ -486,7 +415,7 @@ class Booking extends Builder
      * @var TransferredBooking
      */
     protected $transferredfrombooking;
-    
+
     /**
      * @var boolean
      */
@@ -819,7 +748,7 @@ class Booking extends Builder
 
         return $this;
     }
-    
+
     /**
      * Set the OwnerBookingType on the booking
      *
@@ -832,7 +761,7 @@ class Booking extends Builder
         $this->ownerbookingtype = OwnerBookingType::factory($obt);
 
         return $this;
-    }    
+    }
 
     /**
      * Shortcut function for adding a note
@@ -933,7 +862,7 @@ class Booking extends Builder
         if (($this->getGuesttype() === 'Agency' || $this->getGuesttype() === 'None') && $this->getAgencybookingtype()) {
             $arr['agencybookingtypeid'] = $this->getAgencybookingtype()->getId();
         }
-        
+
         if ($this->getGuesttype() === 'Owner' && $this->getOwnerbookingtype()) {
             $arr['ownerbookingtypeid'] = $this->getOwnerbookingtype()->getId();
         }
@@ -1217,10 +1146,10 @@ class Booking extends Builder
     {
         return $this->_getPaymentSummaryElement('total', substr(__FUNCTION__, 8));
     }
-    
+
     /**
      * Get the booking special offers
-     * 
+     *
      * @return StaticCollection|booking\SpecialOffer[]
      */
     public function getSpecialOffers()
@@ -1230,17 +1159,17 @@ class Booking extends Builder
             'price',
             'specialoffers'
         );
-        
+
         if (is_array($offers)) {
             $col->setElements($offers);
         }
-        
+
         return $col;
     }
-    
+
     /**
      * Check if a booking has a promotion or not
-     * 
+     *
      * @return boolean
      */
     public function hasPromotion()
@@ -1289,10 +1218,10 @@ class Booking extends Builder
 
         return $be;
     }
-    
+
     /**
      * Get the number of nights
-     * 
+     *
      * @return integer
      */
     public function getNights()
@@ -1311,19 +1240,19 @@ class Booking extends Builder
     public function importSagePayPayment(SagePayPayment $payment)
     {
         $url = 'sagepaypayment/' . $payment->getId() . '/import/' . $this->getId();
-        
+
         if ($payment->getDonotconfirmbooking() === true) {
-            $url .= '/true'; 
+            $url .= '/true';
         }
-        
+
         \tabs\apiclient\client\Client::getClient()->put($url);
 
         return $this;
     }
-    
+
     /**
      * Get the enquiry information about the booking
-     * 
+     *
      * @return \tabs\apiclient\BookingEnquiry
      */
     public function getEnquiry()
@@ -1332,18 +1261,18 @@ class Booking extends Builder
         $be->setGuestype($this->getGuesttype())
             ->setFromdate($this->getFromdate())
             ->setTodate($this->getTodate());
-        
+
         if ($this->getProperty()) {
             $be->setProperty(array('id' => $this->getProperty()->getId()));
         }
         if ($this->getId() && $this->getGuesttype() === 'Customer') {
             $be->setSaleschannel($this->getSaleschannel());
-            
+
             if ($this->getBranding()) {
                 $be->setBranding(array('id' => $this->getBranding()->getId()));
             }
         }
-        
+
         if ($this->getGuesttype() === 'Owner') {
             $be->setBranding(array('id' => $this->getProperty()->getPrimarypropertybranding()->getBranding()->getId()));
         }
@@ -1396,10 +1325,10 @@ class Booking extends Builder
             return 0;
         }
     }
-    
+
     /**
      * For serialisation
-     * 
+     *
      * @return void
      */
     public function __wakeup()
@@ -1410,10 +1339,10 @@ class Booking extends Builder
             $this->setObjectProperties($this, $this->getResponsedata());
         }
     }
-    
+
     /**
      * For serialisation
-     * 
+     *
      * @return void
      */
     public function __sleep()
@@ -1422,5 +1351,475 @@ class Booking extends Builder
             'id',
             'responsedata'
         );
+    }
+
+    /**
+     * Returns the bookref
+     *
+     * @return string
+     */
+    public function getBookref()
+    {
+        return $this->bookref;
+    }
+
+    /**
+     * Returns the branding
+     *
+     * @return \tabs\apiclient\Branding
+     */
+    public function getBranding()
+    {
+        return $this->branding;
+    }
+
+    /**
+     * Returns the propertybranding
+     *
+     * @return \tabs\apiclient\property\Branding
+     */
+    public function getPropertybranding()
+    {
+        return $this->propertybranding;
+    }
+
+    /**
+     * Returns the bookeddatetime
+     *
+     * @return \DateTime
+     */
+    public function getBookeddatetime()
+    {
+        return $this->bookeddatetime;
+    }
+
+    /**
+     * Returns the fromdate
+     *
+     * @return \DateTime
+     */
+    public function getFromdate()
+    {
+        return $this->fromdate;
+    }
+
+    /**
+     * Returns the todate
+     *
+     * @return \DateTime
+     */
+    public function getTodate()
+    {
+        return $this->todate;
+    }
+
+    /**
+     * Returns the adults
+     *
+     * @return integer
+     */
+    public function getAdults()
+    {
+        return $this->adults;
+    }
+
+    /**
+     * Returns the children
+     *
+     * @return integer
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * Returns the infants
+     *
+     * @return integer
+     */
+    public function getInfants()
+    {
+        return $this->infants;
+    }
+
+    /**
+     * Returns the pets
+     *
+     * @return integer
+     */
+    public function getPets()
+    {
+        return $this->pets;
+    }
+
+    /**
+     * Returns the ignorechangedayrules
+     *
+     * @return boolean
+     */
+    public function getIgnorechangedayrules()
+    {
+        return $this->ignorechangedayrules;
+    }
+
+    /**
+     * Returns the bypasschecks
+     *
+     * @return boolean
+     */
+    public function getBypasschecks()
+    {
+        return $this->bypasschecks;
+    }
+
+    /**
+     * Returns the bypasspetchecks
+     *
+     * @return boolean
+     */
+    public function getBypasspetchecks()
+    {
+        return $this->bypasspetchecks;
+    }
+
+    /**
+     * Returns the guesttype
+     *
+     * @return string
+     */
+    public function getGuesttype()
+    {
+        return $this->guesttype;
+    }
+
+    /**
+     * Returns the assigned suppliers
+     *
+     * @return StaticCollection|booking\Supplier[]|property\Supplier[]
+     */
+    public function getSuppliers()
+    {
+        return $this->suppliers;
+    }
+
+    /**
+     * Returns the status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Returns the cancelled
+     *
+     * @return boolean
+     */
+    public function getCancelled()
+    {
+        return $this->cancelled;
+    }
+
+    /**
+     * Returns the saleschannel
+     *
+     * @return SalesChannel
+     */
+    public function getSaleschannel()
+    {
+        return $this->saleschannel;
+    }
+
+    /**
+     * Returns the currency
+     *
+     * @return Currency
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * Returns the pricingperiod
+     *
+     * @return PricingPeriod
+     */
+    public function getPricingperiod()
+    {
+        return $this->pricingperiod;
+    }
+
+    /**
+     * Returns the source marketing brand
+     *
+     * @return SourceMarketingBrand
+     */
+    public function getSourcemarketingbrand()
+    {
+        return $this->sourcemarketingbrand;
+    }
+
+    /**
+     * Returns the estimatedarrivaltime
+     *
+     * @return string
+     */
+    public function getEstimatedarrivaltime()
+    {
+        return $this->estimatedarrivaltime;
+    }
+
+    /**
+     * Returns the checkinearliesttime
+     *
+     * @return string
+     */
+    public function getCheckinearliesttime()
+    {
+        return $this->checkinearliesttime;
+    }
+
+    /**
+     * Returns the checkinlatesttime
+     *
+     * @return string
+     */
+    public function getCheckinlatesttime()
+    {
+        return $this->checkinlatesttime;
+    }
+
+    /**
+     * Returns the checkouttime
+     *
+     * @return string
+     */
+    public function getCheckouttime()
+    {
+        return $this->checkouttime;
+    }
+
+    /**
+     * Returns the check in text
+     *
+     * @return string
+     */
+    public function getCheckintext()
+    {
+        return $this->checkintext;
+    }
+
+    /**
+     * Returns the check out text
+     *
+     * @return string
+     */
+    public function getCheckouttext()
+    {
+        return $this->checkouttext;
+    }
+
+    /**
+     * Returns the promotion code
+     *
+     * @return string
+     */
+    public function getPromotioncode()
+    {
+        return $this->promotioncode;
+    }
+
+    /**
+     * Returns the source code
+     *
+     * @return string
+     */
+    public function getSourcecode()
+    {
+        return $this->sourcecode;
+    }
+
+    /**
+     * Returns the potentialbooking
+     *
+     * @return PotentialBooking
+     */
+    public function getPotentialbooking()
+    {
+        return $this->potentialbooking;
+    }
+
+    /**
+     * Returns the webbooking
+     *
+     * @return WebBooking
+     */
+    public function getWebbooking()
+    {
+        return $this->webbooking;
+    }
+
+    /**
+     * Returns the provisionalbooking
+     *
+     * @return ProvisionalBooking
+     */
+    public function getProvisionalbooking()
+    {
+        return $this->provisionalbooking;
+    }
+
+    /**
+     * Returns the confirmed booking
+     *
+     * @return ConfirmedBooking
+     */
+    public function getConfirmedbooking()
+    {
+        return $this->confirmedbooking;
+    }
+
+    /**
+     * Returns the cancelled booking
+     *
+     * @return CancelledBooking
+     */
+    public function getCancelledbooking()
+    {
+        return $this->cancelledbooking;
+    }
+
+    /**
+     * Returns the securitydeposits
+     *
+     * @return Collection|booking\SecurityDeposit[]
+     */
+    public function getSecuritydeposits()
+    {
+        return $this->securitydeposits;
+    }
+
+    /**
+     * Returns booking securitydeposit
+     *
+     * @return booking\SecurityDeposit[]
+     */
+    public function getSecuritydeposit()
+    {
+        return $this->securitydeposit;
+    }
+
+    /**
+     * Returns the customers
+     *
+     * @return Collection|booking\Customer[]
+     */
+    public function getCustomers()
+    {
+        return $this->customers;
+    }
+
+    /**
+     * Returns the booking documents
+     *
+     * @return Collection|booking\Document[]
+     */
+    public function getDocuments()
+    {
+        return $this->documents;
+    }
+
+    /**
+     * Returns the booking notes
+     *
+     * @return Collection|BookingNote[]
+     */
+    public function getNotes()
+    {
+        return $this->notes;
+    }
+
+    /**
+     * Returns the booking extras
+     *
+     * @return Collection|booking\Extra[]
+     */
+    public function getExtras()
+    {
+        return $this->extras;
+    }
+
+    /**
+     * Returns the booking guests
+     *
+     * @return Collection|booking\Guest[]
+     */
+    public function getGuests()
+    {
+        return $this->guests;
+    }
+
+    /**
+     * Returns the Ownerpaymentsummary
+     *
+     * @return OwnerPaymentSummary
+     */
+    public function getOwnerpaymentsummary()
+    {
+        return $this->ownerpaymentsummary;
+    }
+
+    /**
+     * Returns the booking type for agency bookings
+     *
+     * @return AgencyBookingType
+     */
+    public function getAgencybookingtype()
+    {
+        return $this->agencybookingtype;
+    }
+
+    /**
+     * Returns the booking type for owner bookings
+     *
+     * @return OwnerBookingType
+     */
+    public function getOwnerbookingtype()
+    {
+        return $this->ownerbookingtype;
+    }
+
+    /**
+     * Returns the transferred booking
+     *
+     * @return TransferredBooking
+     */
+    public function getTransferredtobooking()
+    {
+        return $this->transferredtobooking;
+    }
+
+    /**
+     * Returns the transferred booking
+     *
+     * @return TransferredBooking
+     */
+    public function getTransferredfrombooking()
+    {
+        return $this->transferredfrombooking;
+    }
+
+    /**
+     * Get the override status flag
+     *
+     * @return boolean
+     */
+    public function getOverridestatus()
+    {
+        return $this->overridestatus;
     }
 }

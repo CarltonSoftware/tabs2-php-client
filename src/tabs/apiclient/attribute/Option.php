@@ -15,10 +15,8 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method string getOption() Returns the option
  * @method Option setOption(string $var) Sets the option
  * 
- * @method integer getOptionorder() Returns the optionorder
  * @method Option setOptionorder(integer $var) Sets the optionorder
  */
 class Option extends Builder
@@ -49,5 +47,25 @@ class Option extends Builder
             'optionorder' => $this->getOptionorder(),
             'attributeid' => $this->getParent()->getId()
         );
+    }
+
+    /**
+     * Returns the option
+     *
+     * @return string
+     */
+    public function getOption()
+    {
+        return $this->option;
+    }
+
+    /**
+     * Returns the optionorder
+     *
+     * @return integer
+     */
+    public function getOptionorder()
+    {
+        return $this->optionorder;
     }
 }

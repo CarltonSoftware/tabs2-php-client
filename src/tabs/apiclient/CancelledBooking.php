@@ -26,8 +26,6 @@ namespace tabs\apiclient;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method \DateTime getDatetime() Return the datetime
- * @method string    getReason()   Return the cancellation reason
  * 
  * @method CancelledBooking setReason(string $reason) set the cancellation reason
  * @method CancelledBooking setDatetime(\DateTime $datetime) Set the datetime
@@ -71,5 +69,25 @@ class CancelledBooking extends Base
             'reason' => $this->getReason(),
             'datetime' => $this->getDatetime()->format('Y-m-d H:i:s')
         );
+    }
+
+    /**
+     * Return the datetime
+     *
+     * @return \DateTime
+     */
+    public function getDatetime()
+    {
+        return $this->datetime;
+    }
+
+    /**
+     * Return the cancellation reason
+     *
+     * @return string
+     */
+    public function getReason()
+    {
+        return $this->reason;
     }
 }

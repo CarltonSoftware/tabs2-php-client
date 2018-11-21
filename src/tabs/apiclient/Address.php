@@ -15,16 +15,6 @@ use tabs\apiclient\Builder;
  * @link      http://www.carltonsoftware.co.uk
  * 
  * 
- * @method string  getLine1()     Return the Address line 1
- * @method string  getLine2()     Return the Address line 2
- * @method string  getLine3()     Return the Address line 3
- * @method string  getTown()      Return the Address town
- * @method string  getCounty()    Return the Address county
- * @method string  getPostcode()  Return the Address postcode
- * @method float   getLongitude() Return the longitude
- * @method float   getLatitude()  Return the latitude
- * @method string  getGeohash()   Return the geohash
- * @method Country getCountry()   Return the Address country
  * 
  * @method Address setLine1(string $line1)        Set the Address line 1
  * @method Address setLine2(string $line2)        Set the Address line 2
@@ -155,5 +145,105 @@ class Address extends Builder
             'longitude' => (float) $this->getLongitude(),
             'latitude' => (float) $this->getLatitude()
         );
+    }
+
+    /**
+     * Return the Address line 1
+     *
+     * @return string
+     */
+    public function getLine1()
+    {
+        return $this->line1;
+    }
+
+    /**
+     * Return the Address line 2
+     *
+     * @return string
+     */
+    public function getLine2()
+    {
+        return $this->line2;
+    }
+
+    /**
+     * Return the Address line 3
+     *
+     * @return string
+     */
+    public function getLine3()
+    {
+        return $this->line3;
+    }
+
+    /**
+     * Return the Address town
+     *
+     * @return string
+     */
+    public function getTown()
+    {
+        return $this->town;
+    }
+
+    /**
+     * Return the Address county
+     *
+     * @return string
+     */
+    public function getCounty()
+    {
+        return $this->county;
+    }
+
+    /**
+     * Return the Address postcode
+     *
+     * @return string
+     */
+    public function getPostcode()
+    {
+        return $this->postcode;
+    }
+
+    /**
+     * Return the longitude
+     *
+     * @return float
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * Return the latitude
+     *
+     * @return float
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * Return the geohash
+     *
+     * @return string
+     */
+    public function getGeohash()
+    {
+        return $this->geohash;
+    }
+
+    /**
+     * Return the Address country
+     *
+     * @return Country
+     */
+    public function getCountry()
+    {
+        return $this->country;
     }
 }

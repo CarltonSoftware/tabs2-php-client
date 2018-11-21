@@ -16,16 +16,12 @@ use tabs\apiclient\Collection;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method integer getLowvalue() Returns the lowvalue
  * @method RangeElement setLowvalue(integer $var) Sets the lowvalue
  * 
- * @method integer getHighvalue() Returns the highvalue
  * @method RangeElement setHighvalue(integer $var) Sets the highvalue
  * 
- * @method integer getPrice() Returns the price
  * @method RangeElement setPrice(integer $var) Sets the price
  * 
- * @method Collection|PriceType[] getPrices() Returns the prices
  */
 class RangeElement extends Builder
 {
@@ -83,5 +79,45 @@ class RangeElement extends Builder
             'highvalue' => $this->getHighvalue(),
             'price' => $this->getPrice()
         );
+    }
+
+    /**
+     * Returns the lowvalue
+     *
+     * @return integer
+     */
+    public function getLowvalue()
+    {
+        return $this->lowvalue;
+    }
+
+    /**
+     * Returns the highvalue
+     *
+     * @return integer
+     */
+    public function getHighvalue()
+    {
+        return $this->highvalue;
+    }
+
+    /**
+     * Returns the price
+     *
+     * @return integer
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Returns the prices
+     *
+     * @return Collection|PriceType[]
+     */
+    public function getPrices()
+    {
+        return $this->prices;
     }
 }

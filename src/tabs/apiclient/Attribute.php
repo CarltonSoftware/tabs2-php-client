@@ -17,47 +17,32 @@ use tabs\apiclient\AttributeGroup;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  * 
- * @method string    getCode()             Returns the code
  * @method Attribute setCode(string $code) Sets the code
  * 
- * @method AttributeGroup getGroup() Return the attribute group
  * 
- * @method string     getName()             Returns the name
  * @method Attribute  setName(string $name) Sets the name
  * 
- * @method string     getType()             Returns the type
  * @method Attribute  setType(string $type) Sets the type
  * 
- * @method string     getDescription()             Returns the desc
  * @method Attribute  setDescription(string $desc) Sets the desc
  * 
- * @method string     getUsedinavailabilitysearch()              Returns the bool
  * @method Attribute  setUsedinavailabilitysearch(boolean $bool) Sets the type
  * 
- * @method string     getBase()              Returns the bool
  * @method Attribute  setBase(boolean $bool) Sets the type
  * 
- * @method object     getDefaultvalue()                     Returns the default value
  * @method Attribute  setDefaultvalue(object $defaultvalue) Set the default value
  * 
- * @method Unit       getUnit() Return the attribute unit
  * 
- * @method integer    getMinimumvalue()             Return the min value
  * @method Attribute  setMinimumvalue(integer $int) Set the min value
  * 
- * @method integer    getMaximumvalue()             Return the max value
  * @method Attribute  setMaximumvalue(integer $int) Set the max value
  * 
- * @method integer    getLimitvalue()             Return the limit value
  * @method Attribute  setLimitvalue(integer $int) Set the limit value
  * 
- * @method integer    getOperator()           Return the operand
  * @method Attribute  setOperator(string $op) Set the operand
  * 
- * @method integer    getDefaultbooleanvalue()              Returns the default boolean value
  * @method Attribute  setDefaultbooleanvalue(boolean $bool) Set the default boolean value
  * 
- * @method integer    getDefaultnumbervalue()               Returns the default number value
  * @method Attribute  setDefaultnumbervalue(integer $value) Set the default number value
  */
 abstract class Attribute extends Builder
@@ -279,5 +264,155 @@ abstract class Attribute extends Builder
     public function getUrlStub()
     {
         return 'attribute';
+    }
+
+    /**
+     * Returns the code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Return the attribute group
+     *
+     * @return AttributeGroup
+     */
+    public function getGroup()
+    {
+        return $this->group;
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Returns the desc
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Returns the bool
+     *
+     * @return string
+     */
+    public function getUsedinavailabilitysearch()
+    {
+        return $this->usedinavailabilitysearch;
+    }
+
+    /**
+     * Returns the bool
+     *
+     * @return string
+     */
+    public function getBase()
+    {
+        return $this->base;
+    }
+
+    /**
+     * Returns the default value
+     *
+     * @return object
+     */
+    public function getDefaultvalue()
+    {
+        return $this->defaultvalue;
+    }
+
+    /**
+     * Return the attribute unit
+     *
+     * @return Unit
+     */
+    public function getUnit()
+    {
+        return $this->unit;
+    }
+
+    /**
+     * Return the min value
+     *
+     * @return integer
+     */
+    public function getMinimumvalue()
+    {
+        return $this->minimumvalue;
+    }
+
+    /**
+     * Return the max value
+     *
+     * @return integer
+     */
+    public function getMaximumvalue()
+    {
+        return $this->maximumvalue;
+    }
+
+    /**
+     * Return the limit value
+     *
+     * @return integer
+     */
+    public function getLimitvalue()
+    {
+        return $this->limitvalue;
+    }
+
+    /**
+     * Return the operand
+     *
+     * @return integer
+     */
+    public function getOperator()
+    {
+        return $this->operator;
+    }
+
+    /**
+     * Returns the default boolean value
+     *
+     * @return integer
+     */
+    public function getDefaultbooleanvalue()
+    {
+        return $this->defaultbooleanvalue;
+    }
+
+    /**
+     * Returns the default number value
+     *
+     * @return integer
+     */
+    public function getDefaultnumbervalue()
+    {
+        return $this->defaultnumbervalue;
     }
 }

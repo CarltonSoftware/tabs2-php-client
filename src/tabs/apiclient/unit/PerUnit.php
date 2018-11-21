@@ -16,8 +16,6 @@ use tabs\apiclient\Unit;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method Unit getTounit() Returns the tounit
- * @method integer getMultiplier() Returns the multiplier
  * @method PerUnit setMultiplier(integer $var) Sets the multiplier
  * 
  */
@@ -62,5 +60,25 @@ class PerUnit extends Builder
             'tounitid' => $this->getTounit()->getId(),
             'multiplier' => $this->getMultiplier(),
         );
+    }
+
+    /**
+     * Returns the tounit
+     *
+     * @return Unit
+     */
+    public function getTounit()
+    {
+        return $this->tounit;
+    }
+
+    /**
+     * Returns the multiplier
+     *
+     * @return integer
+     */
+    public function getMultiplier()
+    {
+        return $this->multiplier;
     }
 }
