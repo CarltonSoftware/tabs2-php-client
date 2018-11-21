@@ -4,6 +4,10 @@
  * @name Creating a connection
  * 
  * The tabs2 php client is a library which helps you connect to your tabs2 api.
+ * @name Important note!
+ * 
+ * If you wish to run these examples on a development machine you can clone the repository 
+and access the `examples` folder from a directory that your local server is running.
  */
 
 

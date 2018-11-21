@@ -58,7 +58,7 @@ var_dump($p->getName());
 
 ```
 
-After instantiating your client you may access the rest of the api. Some examples of which can be seen below.
+After instantiating your client you may access the rest of the api. Some examples of which can be seen below.  
 
 * [Read/Write Property data](property)
 * [Read/Write Actor data](actor)
@@ -67,3 +67,10 @@ After instantiating your client you may access the rest of the api. Some example
 * [Accessing data from the root endpoint](root)
 * [Accessing special offer data](specialoffer)
 * [Site Map](sitemap.html)
+
+### Important note!
+
+If you wish to run these examples on a development machine you can clone the repository 
+and access the `examples` folder from a directory that your local server is running.
+
+You will need to copy the `config.sample.php` and create a `config.php` for the examples to run.
