@@ -162,7 +162,8 @@ class Image extends Document
             'alt' => $this->getAlt(),
             'description' => $this->getDescription(),
             'height' => $this->getHeight(),
-            'width' => $this->getWidth()
+            'width' => $this->getWidth(),
+            'weight' => $this->getWeight(),
         );
     }
     
