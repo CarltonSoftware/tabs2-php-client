@@ -142,7 +142,7 @@ class StaticCollection implements \Iterator, \Countable
                 break;
             case 3:
                 // Handle 3 args (path, Object, Parent)
-                if ($argsIsString[0] && $argsIsCollectionable[2]) {
+                if ($argsIsString[0] && $argsIsCollectionable[1]) {
                     $path = $args[0];
                     $parent = $args[2];
                     $element = $args[1];
