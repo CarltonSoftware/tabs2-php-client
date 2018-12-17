@@ -81,7 +81,7 @@ class Image extends Document
             '/',
             array(
                 'image',
-                $this->fileId,
+                $this->getId(),
                 'resize',
                 $type,
                 $width,
