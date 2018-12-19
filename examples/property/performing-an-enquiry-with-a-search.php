@@ -24,6 +24,10 @@ $collection
     // Add the fromdate filter.  In this example we'll search for properties available 2 weeks from now
     ->addFilter('fromdate', '+2 weeks')
 
+    // As we are perfoming a 'web' search, we'll need to exclude properties which have their allowbookingonwebuntildate date
+    // set to less than our from date
+    ->addFilter('allowbookingonwebuntildate', '>+2 weeks')
+
     // Optionally we can add the number of nights (the default is 7 however)
     ->addFilter('nights', 7)
 
@@ -31,7 +35,7 @@ $collection
     // Plus minus is limited to a maximum of 5 in the tabs2 api.
     // The enquiry field will use this as well to try to find another price if it doesn't find one on
     // the fromdate supplied.
-    ->addFilter('plusminus', 1)
+    ->addFilter('plusminus', 4)
 
     // Add the changedayrules filter to only return properties which allow bookings in this period.
     // Setting false or not adding this filter here would mean that all 'available' properties
@@ -59,9 +63,14 @@ $collection
         // Finally add a search seed to persist the order througout pages
         ->setSearchId(1);
 
+    // Fetch collection
+    $collection->fetch();
+
+    // Output title
+    echo '<h1>' . $collection->getTotal() . ' found</h1>';
 
     // Fetch the collection and iterate through the results
-    foreach ($collection->fetch() as $property) {
+    foreach ($collection as $property) {
         echo '<p>' . $property->getName() . ' (' . $property->getTabspropref() . ')</p>';
         $enq = $property->getEnquiry();
 
