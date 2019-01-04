@@ -18,6 +18,8 @@ use tabs\apiclient\Builder;
  * @method OwnerBookingType setName(string $var) Sets the name
  * 
  * @method OwnerBookingType setDescription(string $var) Sets the description
+ * 
+ * @method OwnerBookingType setLongdescription(string $var) Sets the long description
  *
  * @method OwnerBookingType setInactive(boolean $var) Sets whether the owner booking type is inactive
  */
@@ -38,6 +40,13 @@ class OwnerBookingType extends Builder
     protected $description;
 
     /**
+     * Long Description
+     *
+     * @var string
+     */
+    protected $longdescription;
+
+    /**
      * Inactive
      *
      * @var boolean
@@ -52,6 +61,7 @@ class OwnerBookingType extends Builder
         return array(
             'name' => $this->getName(),
             'description' => $this->getDescription(),
+            'longdescription' => $this->getLongdescription(),
             'inactive' => $this->getInactive(),
         );
     }
@@ -74,6 +84,16 @@ class OwnerBookingType extends Builder
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Returns the long description
+     *
+     * @return string
+     */
+    public function getLongdescription()
+    {
+        return $this->longdescription;
     }
 
     /**
