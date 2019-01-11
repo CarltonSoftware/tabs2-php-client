@@ -67,85 +67,61 @@ use tabs\apiclient\ActorSecurity;
 abstract class Actor extends Builder
 {
     /**
-     * Firstname
-     *
      * @var string
      */
     protected $firstname;
 
     /**
-     * Surname
-     *
      * @var string
      */
     protected $surname;
 
     /**
-     * Title
-     *
      * @var string
      */
     protected $title;
 
     /**
-     * Salutation
-     *
      * @var string
      */
     protected $salutation;
 
     /**
-     * Tabscode
-     *
      * @var string
      */
     protected $tabscode;
 
     /**
-     * Language
-     *
      * @var Language
      */
     protected $language;
 
     /**
-     * Inactive
-     *
      * @var boolean
      */
     protected $inactive;
 
     /**
-     * Companyname
-     *
      * @var string
      */
     protected $companyname;
 
     /**
-     * Vatnumber
-     *
      * @var string
      */
     protected $vatnumber;
 
     /**
-     * Companynumber
-     *
      * @var string
      */
     protected $companynumber;
 
     /**
-     * Accounting reference
-     *
      * @var string
      */
     protected $accountingreference;
 
     /**
-     * Bacs bank account
-     *
      * @var BankAccount
      */
     protected $bacsbankaccount;
@@ -200,14 +176,14 @@ abstract class Actor extends Builder
     protected $enquiries;
     
     /**
-     * Address
+     * Address (from fields request)
      *
      * @var string
      */
     protected $address;    
     
     /**
-     * Email address
+     * Email address (from fields request)
      *
      * @var string
      */
@@ -351,6 +327,48 @@ abstract class Actor extends Builder
     {
         $req = client\Client::getClient()->put(
             $this->getUpdateUrl() . '/resetpassword'
+        );
+        
+        return $req->getStatusCode() === 204;
+    }
+    
+    /**
+     * Request an actor token email
+     * 
+     * @param Branding $branding Optional branding which determines the branding
+     *                           context for the api email
+     * @param string   $email    Optional email address (otherwise all emails will be sent).
+     * 
+     * @return boolean
+     */
+    public function requestToken(Branding $branding = null, $email = null)
+    {
+        $params = [];
+        if ($branding) {
+            $params['brandingid'] = $branding->getId();
+        }
+        
+        if ($email) {
+            $params['email'] = $email;
+        }
+        
+        $req = client\Client::getClient()->put(
+            $this->getUpdateUrl() . '/token',
+            $params
+        );
+        
+        return $req->getStatusCode() === 204;
+    }
+    
+    /**
+     * Manual reset an actor token
+     * 
+     * @return boolean
+     */
+    public function resetToken()
+    {
+        $req = client\Client::getClient()->put(
+            $this->getUpdateUrl() . '/resettoken'
         );
         
         return $req->getStatusCode() === 204;
