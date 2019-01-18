@@ -32,7 +32,14 @@ $config = array(
  * @return string
  */
 function getBaseUrl() {
-    return $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . str_replace(parse_url(basename($_SERVER['REQUEST_URI']), PHP_URL_PATH), '', $_SERVER['SCRIPT_NAME']);
+    $scheme = 'http';
+    if (isset($_SERVER['REQUEST_SCHEME'])) {
+        $scheme = $_SERVER['REQUEST_SCHEME'];
+    }
+    if (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
+        $scheme = $_SERVER['HTTP_X_FORWARDED_PROTO'];
+    }
+    return $scheme . '://' . $_SERVER['HTTP_HOST'] . str_replace(parse_url(basename($_SERVER['REQUEST_URI']), PHP_URL_PATH), '', $_SERVER['SCRIPT_NAME']);
 }
 
 session_start();

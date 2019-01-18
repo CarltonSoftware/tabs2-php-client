@@ -337,7 +337,11 @@ class Calendar
         if ($collection->getTotal() == 1) {
             return $collection->first();
         } else {
-            return;
+            $availableDay = new AvailableDay();
+            $availableDay->setDaysavailable(0)
+                ->setDate($date);
+            
+            return $availableDay;
         }
     }
     
@@ -351,7 +355,6 @@ class Calendar
     public function processDayCell($day)
     {
         $today = new \DateTime();
-        $availableDay = null;
         $attributes = array(
             'id' => '',
             'class' => array()
@@ -365,6 +368,10 @@ class Calendar
             $this->targetMonth->format('m'),
             0
         );
+        $availableDay = new AvailableDay();
+        $availableDay->setDaysavailable(0)
+            ->setDate($currentDate);
+        
         if ($day > 0) {
             $currentDate->add(new \DateInterval('P' . $day . 'D'));
         } else {
