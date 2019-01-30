@@ -3,7 +3,7 @@
 namespace tabs\apiclient;
 
 /**
- * Tabs Rest Agency object.
+ * Tabs Rest Office object.
  *
  * @category  Tabs_Client
  * @package   Tabs

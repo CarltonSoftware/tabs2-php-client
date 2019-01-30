@@ -92,6 +92,11 @@ abstract class Actor extends Builder
     protected $tabscode;
 
     /**
+     * @var string
+     */
+    protected $actorcode;
+
+    /**
      * @var Language
      */
     protected $language;
