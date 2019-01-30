@@ -73,7 +73,9 @@ class WebBooking extends Base
      */
     public function toArray()
     {
-        $arr = array('createddatetime' => $this->getCreated()->format('Y-m-d'));
+        $arr = array(
+            'createddatetime' => $this->getCreated()->format('Y-m-d H:i:s')
+        );
         
         if ($this->getReviewer()) {
             $arr['reviewingtabsuserid'] = $this->getReviewer()->getId();
