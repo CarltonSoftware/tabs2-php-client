@@ -29,11 +29,6 @@ class AvailableBreaksPriceTest extends ApiClientClassTest
         return array(
             array(
                 new \DateTime('2018-12-04'),
-                15,
-                1310
-            ),
-            array(
-                new \DateTime('2018-12-04'),
                 7,
                 612
             ),
