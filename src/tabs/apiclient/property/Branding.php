@@ -33,7 +33,7 @@ use tabs\apiclient\extra\branding\Configuration;
  *
  * @method Branding setShowpricingonwebuntil(\DateTime $var) Sets the showpricingonwebuntil
  *
- * @method Branding setConvertpotentialstoprovisionals(boolean $var) Sets the convertpotentialstoprovisionals
+ * @method Branding setConvertpotentialstoprovisionals(string $var) Sets the convertpotentialstoprovisionals
  * 
  * @method Collection|ChangeDayTemplate[] getChangedaytemplates Returns the change day templates
  * @method Collection|Pricing[] getExtraprices() Returns the property extra prices
@@ -127,7 +127,7 @@ class Branding extends Builder
     protected $showpricingonwebuntil;
 
     /**
-     * @var boolean
+     * @var string
      */
     protected $convertpotentialstoprovisionals;
 
@@ -471,9 +471,9 @@ class Branding extends Builder
         );
 
         if ($this->getConvertpotentialstoprovisionals()) {
-            $arr['convertpotentialstoprovisionals'] = true;
+            $arr['convertpotentialstoprovisionals'] = $this->getConvertpotentialstoprovisionals();
         }
-
+        
         return $arr;
     }
 
@@ -574,7 +574,7 @@ class Branding extends Builder
     /**
      * Returns the convertpotentialstoprovisionals
      *
-     * @return boolean
+     * @return string
      */
     public function getConvertpotentialstoprovisionals()
     {
