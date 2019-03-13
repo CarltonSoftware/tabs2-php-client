@@ -164,7 +164,7 @@ class Entity extends Builder
             'reference' => $this->getReference(),
             'contactdetailid' => $this->getContactdetail()->getId(),
             'contactdetailvalue' => $this->getContactdetailvalue(),
-            'perform_send' => $this->getPerformsend() === true ? 'true' : 'false'
+            'perform_send' => $this->getPerformsend() === true ? 'true' : 'false',
         );
         
         if ($this->getCreatedbyactor()) {
@@ -180,6 +180,8 @@ class Entity extends Builder
                 )
             );
         }
+        
+        //var_dump($arr); die;
         
         return $arr;
     }

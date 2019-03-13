@@ -625,8 +625,8 @@ class Property extends Builder
                 try {
                     $to = clone $fromDate;
                     for ($i = 0; $i < $weeks; $i++) {
-                        $to->add(new \DateInterval('P7D'));
                         $getPrice($prices, $availablebreaksprices, $to, 7);
+                        $to->add(new \DateInterval('P7D'));
                     }
 
                     if ($to && $add > 0) {

@@ -29,14 +29,20 @@ class WebHook extends Base
      * 
      * @return void
      */
-    public static function subscribe($url, $type = 'property')
+    public static function subscribe($url, $type = 'property', $marketingBrandCode = null)
     {
         try {
+            $args = array(
+                'url' => $url
+            );
+            
+            if ($marketingBrandCode) {
+                $args['brandcode'] = $marketingBrandCode;
+            }
+            
             $res = \tabs\apiclient\client\Client::getClient()->get(
                 'webhook/subscribe/' . strtolower($type),
-                array(
-                    'url' => $url
-                )
+                $args
             );
 
             if ($res->getStatusCode() != 200) {

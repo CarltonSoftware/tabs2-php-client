@@ -22,3 +22,5 @@ examples/template/copytemplate.php
 examples/template/copytemplatetargetsources.php
 examples/template/copytextitems.php
 examples/sandbox.php
+build/logs/
+.phpunit.result.cache
