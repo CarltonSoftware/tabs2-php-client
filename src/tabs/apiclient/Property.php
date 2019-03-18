@@ -1,6 +1,7 @@
 <?php
 
 namespace tabs\apiclient;
+use tabs\apiclient\InspectionType;
 use tabs\apiclient\property\Inspection;
 use tabs\apiclient\note\PropertyNote;
 use tabs\apiclient\property\Attribute;
@@ -356,6 +357,13 @@ class Property extends Builder
      * @var \tabs\apiclient\BookingEnquiry
      */
     protected $enquiry;
+    
+    /**
+     * Ratinginspectiontype
+     *
+     * @var \tabs\apiclient\InspectionType
+     */
+    protected $ratinginspectiontype;    
 
     /**
      * @var array
@@ -506,17 +514,29 @@ class Property extends Builder
 
         return $this;
     }
+    
+    /**
+     * Set the ratinginspectiontype
+     *
+     * @param stdclass|array|InspectionType $inspectiontype The inspectiontype
+     *
+     * @return InspectionType
+     */
+    public function setRatinginspectiontype($inspectiontype)
+    {
+        $this->ratinginspectiontype = InspectionType::factory($inspectiontype);
+
+        return $this;
+    }
 
     /**
      * @inheritDoc
      */
     public function toArray()
     {
-        return array(
+        $arr = array(
             'name' => $this->getName(),
             'namequalifier' => $this->getNamequalifier(),
-            'address' => $this->getAddress()->toArray(),
-            'status' => $this->getStatus()->toArray(),
             'sleeps' => $this->getSleeps(),
             'bedrooms' => $this->getBedrooms(),
             'tabspropref' => $this->getTabspropref(),
@@ -528,6 +548,26 @@ class Property extends Builder
             'checkintext' => $this->getCheckintext(),
             'checkouttext' => $this->getCheckouttext()
         );
+        
+        if ($this->getStatus()) {
+            $arr['status'] = $this->getStatus()->getName();
+        }
+        if ($this->getRatinginspectiontype()) {
+            $arr['ratinginspectiontypeid'] = $this->getRatinginspectiontype()->getId();
+        }
+        if ($this->getAddress()) {
+            $arr['address_line1'] = $this->getAddress()->getLine1();
+            $arr['address_line2'] = $this->getAddress()->getLine2();
+            $arr['address_line3'] = $this->getAddress()->getLine3();
+            $arr['address_town'] = $this->getAddress()->getTown();
+            $arr['address_county'] = $this->getAddress()->getCounty();
+            $arr['address_postcode'] = $this->getAddress()->getPostcode();
+            $arr['address_countryalpha2code'] = $this->getAddress()->getCountry()->getAlpha2();
+            $arr['address_latitude'] = $this->getAddress()->getLongitude();
+            $arr['address_longitude'] = $this->getAddress()->getLatitude();
+        }
+        
+        return $arr;
     }
 
     /**
@@ -879,4 +919,14 @@ class Property extends Builder
     {
         return $this->location;
     }
+    
+    /**
+     * Returns the ratinginspectiontype
+     *
+     * @return InspectionType
+     */
+    public function getRatinginspectiontype()
+    {
+        return $this->ratinginspectiontype;
+    }    
 }
