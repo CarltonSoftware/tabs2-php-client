@@ -63,6 +63,8 @@ use tabs\apiclient\ActorSecurity;
  * @method Collection|ActorSecurity[] getSecurity() Returns the actor security
  * 
  * @method Collection|actor\Enquiry[] getEnquiries() Returns the customer enquiries
+ * 
+ * @method Collection|actor\Setting[] getSettings() Returns the actor settings
  */
 abstract class Actor extends Builder
 {
@@ -181,6 +183,13 @@ abstract class Actor extends Builder
     protected $enquiries;
     
     /**
+     * Actor settings
+     * 
+     * @var Collection|actor\Setting[]
+     */
+    protected $settings;
+    
+    /**
      * Address (from fields request)
      *
      * @var string
@@ -245,6 +254,12 @@ abstract class Actor extends Builder
         $this->enquiries = Collection::factory(
             'enquiry',
             new actor\Enquiry(),
+            $this
+        );
+        
+        $this->settings = Collection::factory(
+            'setting',
+            new actor\Setting(),
             $this
         );
         
