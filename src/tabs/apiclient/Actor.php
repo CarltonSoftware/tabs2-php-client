@@ -343,11 +343,18 @@ abstract class Actor extends Builder
      * @param Branding $branding Optional branding which determines the branding
      *                           context for the api email
      * @param string   $email    Optional email address (otherwise all emails will be sent).
+     * @param string   $body     Optional email body. You can use the {{token}} 
+     *                           variable in the body string to customise the email sent to actors.
+     * @param string   $subject  Optional email subject.
      * 
      * @return boolean
      */
-    public function requestToken(Branding $branding = null, $email = null)
-    {
+    public function requestToken(
+        Branding $branding = null,
+        $email = null,
+        $body = null,
+        $subject = null
+    ) {
         $params = [];
         if ($branding) {
             $params['brandingid'] = $branding->getId();
@@ -355,6 +362,14 @@ abstract class Actor extends Builder
         
         if ($email) {
             $params['email'] = $email;
+        }
+        
+        if ($body) {
+            $params['body'] = $body;
+        }
+        
+        if ($subject) {
+            $params['subject'] = $subject;
         }
         
         $req = client\Client::getClient()->put(

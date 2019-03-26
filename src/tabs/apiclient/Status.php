@@ -72,7 +72,7 @@ class Status extends Builder
         return array(
             'id' => $this->getId(),
             'name' => $this->getName(),
-            'allowbooking' => $this->boolToStr($this->setAllowbooking()),
+            'allowbooking' => $this->boolToStr($this->getAllowbooking()),
             'allowoverride' => $this->boolToStr($this->getAllowoverride()),
             'priority' => $this->getPriority()
         );
