@@ -563,8 +563,8 @@ class Property extends Builder
             $arr['address_county'] = $this->getAddress()->getCounty();
             $arr['address_postcode'] = $this->getAddress()->getPostcode();
             $arr['address_countryalpha2code'] = $this->getAddress()->getCountry()->getAlpha2();
-            $arr['address_latitude'] = $this->getAddress()->getLongitude();
-            $arr['address_longitude'] = $this->getAddress()->getLatitude();
+            $arr['address_latitude'] = $this->getAddress()->getLatitude();
+            $arr['address_longitude'] = $this->getAddress()->getLongitude();
         }
         
         return $arr;
