@@ -98,7 +98,7 @@ class Payment extends Builder
      * 
      * @return $this
      */
-    public function setActor(\tabs\apiclient\Actor $actor)
+    public function setActor($actor)
     {
         $this->actor = $actor;
         
