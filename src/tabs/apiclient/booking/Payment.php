@@ -94,13 +94,13 @@ class Payment extends Builder
     /**
      * Set the actor paying responsible for paying for this booking
      * 
-     * @param \tabs\apiclient\Actor|array|\stdClass $actor Actor
+     * @param \tabs\apiclient\Actor $actor Actor
      * 
      * @return $this
      */
     public function setActor($actor)
     {
-        $this->actor = \tabs\apiclient\Actor::factory($actor);
+        $this->actor = $actor;
         
         return $this;
     }
