@@ -113,7 +113,7 @@ class Payment extends Builder
         $arr = array(
             'amount' => $this->getAmount(),
             'type' => $this->getType(),
-            'paymentdatetime' => $this->getPaymentdatetime()->format('Y-m-d')
+            'paymentdatetime' => $this->getPaymentdatetime()->format('Y-m-d H:i:s')
         );
         
         if ($this->getTransferbooking()) {
