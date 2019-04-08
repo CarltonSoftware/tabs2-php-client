@@ -300,7 +300,7 @@ class SagePayPayment extends Base
         $id = self::getRequestId($req);
         if ($id) {
             $this->setId(
-                (integer) $id
+                $id
             );
         }
         

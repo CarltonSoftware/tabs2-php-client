@@ -15,69 +15,56 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method Payment setAmount(float $var) Sets the amount
- * 
- * @method Payment setType(string $var) Sets the type
- * 
- * @method Payment setPaymentdatetime(\DateTime $var) Sets the paymentdatetime
- * 
- * @method Payment setBookingamount(float $var) Sets the bookingamount
- * 
+ * @method Payment setAmount(float $var)                Sets the amount
+ * @method Payment setType(string $var)                 Sets the type
+ * @method Payment setPaymentdatetime(\DateTime $var)   Sets the paymentdatetime
+ * @method Payment setBookingamount(float $var)         Sets the bookingamount
  * @method Payment setSecuritydepositamount(float $var) Sets the securitydepositamount
- * 
  * @method Payment setDonotconfirmbooking(boolean $var) Sets the donotconfirmbooking
  * 
+ * @method Actor   getActor()                           Get the actor
  */
 class Payment extends Builder
 {
     /**
-     * Amount
-     *
      * @var float
      */
     protected $amount = 0;
 
     /**
-     * Type
-     *
      * @var string
      */
     protected $type = 'Booking';
 
     /**
-     * Paymentdatetime
-     *
      * @var \DateTime
      */
     protected $paymentdatetime;
 
     /**
-     * Bookingamount
-     *
      * @var float
      */
     protected $bookingamount;
 
     /**
-     * Securitydepositamount
-     *
      * @var float
      */
     protected $securitydepositamount;
 
     /**
-     * Transferbooking
-     *
      * @var \tabs\apiclient\Booking
      */
     protected $transferbooking;
     
     /**
-     * Donotconfirmbooking
-     *
      * @var boolean
      */
     protected $donotconfirmbooking = false;    
+    
+    /**
+     * @var \tabs\apiclient\Actor
+     */
+    protected $actor;
 
     // -------------------- Public Functions -------------------- //
 
@@ -103,6 +90,20 @@ class Payment extends Builder
 
         return $this;
     }
+    
+    /**
+     * Set the actor paying responsible for paying for this booking
+     * 
+     * @param \tabs\apiclient\Actor $actor Actor
+     * 
+     * @return $this
+     */
+    public function setActor($actor)
+    {
+        $this->actor = $actor;
+        
+        return $this;
+    }
 
     /**
      * @inheritDoc
@@ -112,11 +113,15 @@ class Payment extends Builder
         $arr = array(
             'amount' => $this->getAmount(),
             'type' => $this->getType(),
-            'paymentdatetime' => $this->getPaymentdatetime()->format('Y-m-d')
+            'paymentdatetime' => $this->getPaymentdatetime()->format('Y-m-d H:i:s')
         );
         
         if ($this->getTransferbooking()) {
             $arr['transferbookingid'] = $this->getTransferbooking()->getId();
+        }
+        
+        if ($this->getActor()) {
+            $arr['actorid'] = $this->getActor()->getId();
         }
         
         if ($this->getType() == 'BookingAndSecurityDeposit') {

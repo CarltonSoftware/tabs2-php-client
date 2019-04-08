@@ -90,4 +90,12 @@ class CustomerSource extends Builder
     {
         return $this->sourcedate;
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public function getUrlStub()
+    {
+        return 'source';
+    }
 }
