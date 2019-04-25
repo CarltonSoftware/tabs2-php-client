@@ -24,3 +24,6 @@ examples/template/copytextitems.php
 examples/sandbox.php
 build/logs/
 .phpunit.result.cache
+.vagrant
+ubuntu-xenial-16.04-cloudimg-console.log
+html
