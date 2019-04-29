@@ -9,7 +9,7 @@ try {
         $b = new tabs\apiclient\Booking($id);
         $b->get();
         
-        // Create a new confirm booking and set the
+        // Create a new cancelled booking object and set the
         // tabs user
         $canc = new \tabs\apiclient\CancelledBooking();
         $canc->setReason('test booking');

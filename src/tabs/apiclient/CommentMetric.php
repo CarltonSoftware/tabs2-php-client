@@ -16,8 +16,10 @@ use tabs\apiclient\Builder;
  * 
  * 
  * @method string  getMetricname() Return the metricname
+ * @method string  getReference() Return the reference
  * 
  * @method CommentMetric setMetricname(string $metricname) Set the metricname
+ * @method CommentMetric setReference(string $reference) Set the reference
  */
 class CommentMetric extends Builder
 {
@@ -28,6 +30,13 @@ class CommentMetric extends Builder
      */
     protected $metricname;
     
+    /**
+     * Reference
+     * 
+     * @var string
+     */
+    protected $reference;    
+    
     // ------------------ Public Functions --------------------- //
     
     /**
@@ -37,6 +46,7 @@ class CommentMetric extends Builder
     {
         return array(
             'metricname' => $this->getMetricname(),
+            'reference' => $this->getReference(),
         );
     }
 }

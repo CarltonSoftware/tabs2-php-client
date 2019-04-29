@@ -16,6 +16,13 @@
 
 // Include the autoloader
 require_once __DIR__ . '/../autoload.php';
+
+if (!file_exists('config.php')) {
+    die(
+        'config.php does not exist. Copy config.sample.php, rename and update with your supplied the credentials before continuing.'
+    );
+}
+
 require_once 'config.php';
 
 $container = array();
