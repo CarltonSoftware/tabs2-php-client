@@ -422,8 +422,12 @@ abstract class Actor extends Builder
         foreach ($this->getContactdetails() as $cd) {
             if ($cd instanceof ContactDetailOther 
                 && $cd->getValue() == $email
-                && $cd->getContactmethodsubtype() == $subtype
             ) {
+                if ($cd->getContactmethodsubtype() != $subtype) {
+                    $cd->setContactmethodsubtype($subtype);
+                    $cd->update();
+                }
+                
                 // Dont add the email if it already exists
                 return $this;
             }
