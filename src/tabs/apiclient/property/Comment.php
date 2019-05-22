@@ -176,4 +176,40 @@ class Comment extends Builder
     {
         return $this->booking;
     }
+    
+    /**
+     * Get a more anonymous name for the commenter
+     * 
+     * @param string $anon              Anonymous name when method logic fails
+     * @param array  $shortenExceptions Exceptions to the rule
+     * 
+     * @return string
+     */
+    public function getShortCommenter(
+        $anon = 'Previous Customer',
+        $shortenExceptions = ['Family']
+    ) {
+        if (!$this->commenter || strlen($this->commenter) === 0) {
+            return $anon;
+        }
+        
+        $nameParts = array_filter(explode(' ', $this->commenter));
+        if (count($nameParts) <= 1) {
+            return $anon;
+        }
+        
+        if (count($nameParts) <= 3) {
+            $lastPart = array_pop($nameParts);
+            
+            if (!in_array($lastPart, $shortenExceptions)) {
+                array_push($nameParts, $lastPart[0]);
+            } else {
+                array_push($nameParts, $lastPart);
+            }
+            
+            return implode(' ', $nameParts);
+        }
+        
+        return $anon;
+    }
 }
