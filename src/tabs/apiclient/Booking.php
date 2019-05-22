@@ -434,6 +434,11 @@ class Booking extends Builder
      * @var boolean
      */
     protected $overridestatus = false;
+    
+    /**
+     * @var int
+     */
+    protected $propertyid;    
 
     // -------------------- Public Functions -------------------- //
 
@@ -1766,4 +1771,14 @@ class Booking extends Builder
     {
         return $this->overridestatus;
     }
+    
+    /**
+     * Returns the propertyid
+     *
+     * @return int
+     */
+    public function getPropertyid()
+    {
+        return $this->propertyid;
+    }    
 }
