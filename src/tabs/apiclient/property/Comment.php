@@ -187,7 +187,7 @@ class Comment extends Builder
      */
     public function getShortCommenter(
         $anon = 'Previous Customer',
-        $shortenExceptions = ['Family']
+        $shortenExceptions = ['Family', 'Party']
     ) {
         if (!$this->commenter || strlen($this->commenter) === 0) {
             return $anon;
