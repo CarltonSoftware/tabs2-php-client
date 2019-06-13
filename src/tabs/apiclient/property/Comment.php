@@ -187,7 +187,12 @@ class Comment extends Builder
      */
     public function getShortCommenter(
         $anon = 'Previous Customer',
-        $shortenExceptions = ['Family', 'Party']
+        $shortenExceptions = [
+            'family',
+            'party',
+            'friend',
+            'friends'
+        ]
     ) {
         if (!$this->commenter || strlen($this->commenter) === 0) {
             return $anon;
@@ -201,7 +206,7 @@ class Comment extends Builder
         if (count($nameParts) <= 3) {
             $lastPart = array_pop($nameParts);
             
-            if (!in_array(ucfirst(strtolower($lastPart)), $shortenExceptions)) {
+            if (!in_array(strtolower($lastPart), $shortenExceptions)) {
                 array_push($nameParts, $lastPart[0]);
             } else {
                 array_push($nameParts, $lastPart);
