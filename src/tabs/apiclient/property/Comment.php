@@ -201,7 +201,7 @@ class Comment extends Builder
         if (count($nameParts) <= 3) {
             $lastPart = array_pop($nameParts);
             
-            if (!in_array($lastPart, $shortenExceptions)) {
+            if (!in_array(ucfirst(strtolower($lastPart)), $shortenExceptions)) {
                 array_push($nameParts, $lastPart[0]);
             } else {
                 array_push($nameParts, $lastPart);
