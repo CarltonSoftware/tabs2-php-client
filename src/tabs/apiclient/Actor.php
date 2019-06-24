@@ -449,13 +449,17 @@ abstract class Actor extends Builder
      * @param string $number  Number
      * @param string $type    Number type
      * @param string $subtype Number subtype
+     * @param string $code    Subscriber code
      * 
      * @return \tabs\apiclient\Actor
      */
-    public function setPhonenumber($number, $type = 'Phone', $subtype = 'Main')
-    {
+    public function setPhonenumber(
+        $number,
+        $type = 'Phone',
+        $subtype = 'Main',
+        $code = '44'
+    ) {
         $contact = new \tabs\apiclient\actor\PhoneNumber();
-        $code = '44';
         if (substr($number, 0, 1) == '+' && strlen($number) > 3) {
             $code = substr($number, 1, 2);
             $number = substr($number, 3);
