@@ -14,37 +14,32 @@ namespace tabs\apiclient;
  * @link      http://www.carltonsoftware.co.uk
  * 
  * @method Owner   setAbroad(boolean $var) Sets the abroad boolean
- * 
  * @method Owner   setEnquirer(boolean $var) Sets the enquirer boolean
- * 
- * 
+ * @method Owner   setEnquirydate(\DateTime $date) Sets the enquiry date
  */
 class Owner extends Actor
 {
     /**
-     * Branding
-     * 
      * @var \tabs\apiclient\Branding
      */
     protected $branding;
     
     /**
-     * Source
-     * 
      * @var \tabs\apiclient\Source
      */
     protected $source;
     
     /**
-     * Abroad
-     * 
+     * @var \DateTime
+     */
+    protected $enquirydate;
+
+    /**
      * @var boolean
      */
     protected $abroad = false;
     
     /**
-     * Enquirer
-     * 
      * @var boolean
      */
     protected $enquirer = false;
