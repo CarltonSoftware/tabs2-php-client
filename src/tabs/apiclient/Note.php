@@ -93,7 +93,18 @@ class Note extends Notemeta
      * @var Collection|note\Notetext[]
      */
     protected $notetexts;
-            
+    
+    /**
+     * @var \DateTime
+     */
+    protected $archived;
+    
+    /**
+     * @var \stdClass()
+     */
+    protected $archivedby;
+
+
     // ------------------------- Public Functions --------------------------- //
     
     /**
@@ -265,5 +276,13 @@ class Note extends Notemeta
     public function getNotetype()
     {
         return $this->notetype;
+    }
+
+    /**
+     * @return string
+     */
+    public function getArchived()
+    {
+        return $this->archived;
     }
 }
