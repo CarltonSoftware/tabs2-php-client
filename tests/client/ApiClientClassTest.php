@@ -24,11 +24,11 @@ abstract class ApiClientClassTest extends \PHPUnit\Framework\TestCase
     {
         // Create your api connection here.
         \tabs\apiclient\client\Client::factory(
-            'https://dummy.test.api.tabs-software.co.uk/v2/', // Api Url
-            'phpclient', // Api Key
-            'phpclient', // Api Secret
-            '5_1ocqemslaf0g8w4c8kggckss4kgccgkokw4gs88ocko8kwoww0',
-            '2cs2fx1nfjtwgc8w0wowg80wckkk4swc0ggswggwkkoos8kg8g'
+            'https://toccl.test.api.tabs-software.co.uk/v2/', // Api Url
+            'template3', // Api Key
+            '3etalpmet!', // Api Secret
+            '15_468yq9yhyq04ks8o0w4kkckcwsg804ckwg8g8cs8wgs4s0scg0',
+            '1crapwsm6lc0so4kow044oo8cg08s04ogwsowkosk0cc44kogg'
         );
     }
 }
