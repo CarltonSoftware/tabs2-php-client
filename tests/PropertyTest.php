@@ -18,7 +18,7 @@ class PropertyTest extends ApiClientClassTest
         $property->get();
         
         $this->assertEquals(1, $property->getId());
-        $this->assertEquals('Cottage 1', $property->getName());
+        $this->assertEquals('Bicclescombe Park Road', $property->getName());
     }
     
     /**
