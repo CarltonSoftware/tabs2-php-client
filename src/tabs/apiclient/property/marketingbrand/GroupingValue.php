@@ -27,9 +27,8 @@ class GroupingValue extends Builder
     protected $grouping;
 
     /**
-     * Weight
-     *
-     * @var Weight
+     * 
+     * @var $weight
      */
     protected $weight;
 
