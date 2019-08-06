@@ -27,6 +27,13 @@ class GroupingValue extends Builder
     protected $grouping;
 
     /**
+     * Weight
+     *
+     * @var Weight
+     */
+    protected $weight;
+
+    /**
      * Groupingvalue
      *
      * @var \tabs\apiclient\GroupingValue
