@@ -102,6 +102,21 @@ class SecurityFeature extends Builder
     }
 
     /**
+     * @inheritDoc
+     */
+    public function toArrayFull()
+    {
+        return array(
+            'securityfeatureid' => $this->getSecurityfeature()->getId(),
+            'name' => $this->getSecurityfeature()->getName(),
+            'code' => $this->getCode(),
+            'fromdate' => $this->getFromdate()->format('Y-m-d'),
+            'todate' => $this->getTodate()->format('Y-m-d'),
+            'notes' => $this->getNotes(),
+        );
+    }
+
+    /**
      * Returns the securityfeature
      *
      * @return \tabs\apiclient\SecurityFeature
