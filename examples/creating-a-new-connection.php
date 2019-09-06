@@ -14,16 +14,17 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
+
 // Include the autoloader
 require_once __DIR__ . '/../autoload.php';
 
-if (!file_exists('config.php')) {
+// Check for a config file and include
+if (!file_exists(__DIR__.'/config.php')) {
     die(
         'config.php does not exist. Copy config.sample.php, rename and update with your supplied the credentials before continuing.'
     );
 }
-
-require_once 'config.php';
+require_once __DIR__.'/config.php';
 
 $container = array();
 $history = GuzzleHttp\Middleware::history($container);
@@ -35,10 +36,11 @@ $config = array(
 
 /**
  * Roughly guess the base url for external endpoint examples.
- * 
+ *
  * @return string
  */
-function getBaseUrl() {
+function getBaseUrl()
+{
     $scheme = 'http';
     if (isset($_SERVER['REQUEST_SCHEME'])) {
         $scheme = $_SERVER['REQUEST_SCHEME'];
@@ -50,7 +52,7 @@ function getBaseUrl() {
 }
 
 session_start();
-if (isset($_SESSION['AccessToken']) 
+if (isset($_SESSION['AccessToken'])
     && is_array($_SESSION['AccessToken'])
     && isset($_SESSION['AccessToken'][TABS2APIURL])
     && $_SESSION['AccessToken'][TABS2APIURL] instanceof Sainsburys\Guzzle\Oauth2\AccessToken
