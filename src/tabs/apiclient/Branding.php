@@ -169,6 +169,17 @@ class Branding extends Builder
     }
 
     /**
+     * Output Custome name for Branding
+     * 
+     * @return string
+     */
+    public function getBrandingCombinedBradingName()
+    {
+        return "(bb*) " . $this->getBookingbrand()->getName() . " / (mb*) " . $this->getMarketingbrand()->getName() . " (branding id*: " . $this->getId() . ")";
+    }
+
+
+    /**
      * @inheritDoc
      */
     public function toArray()
