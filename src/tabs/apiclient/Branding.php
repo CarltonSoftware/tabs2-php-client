@@ -175,7 +175,7 @@ class Branding extends Builder
      */
     public function getBrandingCombinedBradingName()
     {
-        return "(bb*) " . $this->getBookingbrand()->getName() . " / (mb*) " . $this->getMarketingbrand()->getName() . " (branding id*: " . $this->getId() . ")";
+        return "(bb) " . $this->getBookingbrand()->getName() . " / (mb) " . $this->getMarketingbrand()->getName() . " (branding id: " . $this->getId() . ")";
     }
 
 
