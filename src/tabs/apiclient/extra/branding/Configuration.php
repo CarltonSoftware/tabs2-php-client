@@ -65,6 +65,23 @@ class Configuration extends Builder
     protected $todate;
 
     /**
+     * Bookingbookedfromdate
+     * 
+     * @var \DateTime
+     * 
+     * 
+     */
+
+     protected $bookingbookedfromdate;
+
+    /**
+     * Bookingbookedtodate 
+     * 
+     */ 
+
+     protected $bookingbookedtodate;
+
+    /**
      * Compulsory
      *
      * @var boolean
@@ -224,6 +241,8 @@ class Configuration extends Builder
             $arr = array(
                 'fromdate' => $this->getFromdate()->format('Y-m-d'),
                 'todate' => $this->getTodate()->format('Y-m-d'),
+                'bookingbookedfromdate' => $this->getBookingbookedfromdate()->format('Y-m-d'),
+                'bookingbookedtodate'=> $this->getBookingbookedtodate()->format('Y-m-d'),
                 'compulsory' => $this->boolToStr($this->getCompulsory()),
                 'included' => $this->boolToStr($this->getIncluded()),
                 'decimalplaces' => $this->getDecimalplaces(),
@@ -266,6 +285,26 @@ class Configuration extends Builder
     public function getTodate()
     {
         return $this->todate;
+    }
+
+    /**
+     * Returns the bookingbookedfromdate
+     *
+     * @return \DateTime
+     */
+    public function getBookingbookedfromdate()
+    {
+        return $this->bookingbookedfromdate;
+    }
+
+    /**
+     * Returns the bookingbookedtodate
+     *
+     * @return \DateTime
+     */
+    public function getBookingbookedtodate()
+    {
+        return $this->bookingbookedtodate;
     }
 
     /**
