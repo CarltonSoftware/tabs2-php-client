@@ -139,7 +139,8 @@ class Customer extends Actor
     public function subscribeToMailingList(
         \tabs\apiclient\marketingbrand\EmailList $eml,
         $nocontact = false,
-        $unsubscribed = false
+        $unsubscribed = false,
+        $sourceId = null
     ) {
         $cmbs = $this->getMarketingbrands()->findBy(function($ele) use ($eml) {
             return intval($ele->getMarketingbrand()->getId()) === intval($eml->getParent()->getId());
@@ -177,6 +178,21 @@ class Customer extends Actor
             // its different
             if ($sub->first()->getUnsubscribed() != $unsubscribed) {
                 $sub->first()->setUnsubscribed($unsubscribed)->update();
+            }
+        }
+
+        // Add sourceId if one specified
+        if ($sourceId) {
+            $sources = $cmb->getSources()->findBy(function ($ele) use ($sourceId) {
+                return intval($ele->getSource()->getId() === intval($sourceId));
+            });
+
+            // If not found, add the source
+            if ($sources->count() === 0) {
+                $source = new \tabs\apiclient\actor\marketingbrand\CustomerSource();
+                $source->setSource(new \tabs\apiclient\Source($sourceId));
+                $cmb->getSources()->addElement($source);
+                $source->create();
             }
         }
         
