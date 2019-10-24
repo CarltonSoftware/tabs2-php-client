@@ -9,7 +9,7 @@ require_once $file;
 
 class BookingTest extends ApiClientClassTest
 {
-    const BOOKING_ID = 4276073;
+    const BOOKING_ID = 4350400;
 
     /**
      * Test booking get
@@ -36,14 +36,14 @@ class BookingTest extends ApiClientClassTest
     private function _validateBooking(tabs\apiclient\Booking $booking)
     {
         $this->assertEquals(self::BOOKING_ID, $booking->getId());
-        $this->assertEquals(669, $booking->getBasicPrice());
-        $this->assertEquals(699, $booking->getBrochurePrice());
+        $this->assertEquals(1753, $booking->getBasicPrice());
+        $this->assertEquals(1832, $booking->getBrochurePrice());
         $this->assertEquals(2, $booking->getExtras()->count());
-        $this->assertEquals(30, $booking->getIncludedExtrasPrice());
+        $this->assertEquals(79, $booking->getIncludedExtrasPrice());
         $this->assertEquals(36, $booking->getAdditionalExtrasPrice());
-        $this->assertEquals(20, $booking->getSecuritydeposit()->getAmount());
-        $this->assertEquals(0, $booking->getSecuritydeposit()->getOutstanding());
-        $this->assertEquals(20, $booking->getSecuritydeposit()->getRefundable());
+        $this->assertEquals(50, $booking->getSecuritydeposit()->getAmount());
+        $this->assertEquals(50, $booking->getSecuritydeposit()->getOutstanding());
+        $this->assertEquals(0, $booking->getSecuritydeposit()->getRefundable());
         $this->assertEquals(0, $booking->getSecuritydeposit()->getRefunded());
     }
 }

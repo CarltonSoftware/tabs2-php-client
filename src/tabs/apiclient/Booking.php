@@ -1281,6 +1281,10 @@ class Booking extends Builder
             ->setFromdate($this->getFromdate())
             ->setTodate($this->getTodate());
 
+        if ($this->getId()) {
+            $be->setCurrentbooking($this);
+        }
+
         if ($this->getProperty()) {
             $be->setProperty(array('id' => $this->getProperty()->getId()));
         }
