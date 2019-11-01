@@ -76,6 +76,22 @@ class Pricing extends Builder
     protected $todate;
 
     /**
+     * Bookingbookedfromdate
+     * 
+     * @var \DateTime
+     * 
+     */
+
+    protected $bookingbookedfromdate;
+
+    /**
+     * Bookingbookedtodate 
+     * 
+     */ 
+
+     protected $bookingbookedtodate;
+
+    /**
      * Currency
      *
      * @var \tabs\apiclient\Currency
@@ -248,6 +264,8 @@ class Pricing extends Builder
             'pricingperiod' => $this->getPricingperiod(),
             'fromdate' => $this->getFromdate()->format('Y-m-d'),
             'todate' => $this->getTodate()->format('Y-m-d'),
+            'bookingbookedfromdate' => $this->getBookingbookedfromdate(),
+            'bookingbookedtodate'=> $this->getBookingbookedtodate(),
             'currencycode' => $this->getCurrency()->getCode(),
             'pricingtype' => $this->getPricingtype(),
             'perperiod' => $this->boolToStr($this->getPerperiod())
@@ -317,6 +335,26 @@ class Pricing extends Builder
     public function getTodate()
     {
         return $this->todate;
+    }
+
+    /**
+     * Returns the bookingbookedfromdate
+     *
+     * @return \DateTime
+     */
+    public function getBookingbookedfromdate()
+    {
+        return $this->bookingbookedfromdate;
+    }
+
+    /**
+     * Returns the bookingbookedtodate
+     *
+     * @return \DateTime
+     */
+    public function getBookingbookedtodate()
+    {
+        return $this->bookingbookedtodate;
     }
 
     /**
