@@ -11,6 +11,7 @@ use tabs\apiclient\property\branding\AvailableDay;
 use tabs\apiclient\property\branding\Status;
 use tabs\apiclient\property\branding\Calendar;
 use tabs\apiclient\property\branding\ChangeDayTemplate;
+use tabs\apiclient\property\branding\PricingYear;
 use tabs\apiclient\extra\branding\Pricing;
 use tabs\apiclient\extra\branding\Configuration;
 
@@ -70,6 +71,11 @@ class Branding extends Builder
      * @var boolean
      */
     protected $primarybranding;
+
+    /**
+     * @var PricingYear
+     */
+    protected $pricingyear;
 
     /**
      * @var boolean
@@ -158,6 +164,12 @@ class Branding extends Builder
      */
     public function __construct($id = null)
     {
+        $this->pricingyear = Collection::factory(
+            'pricingyear',
+            new PricingYear,
+            $this
+        );
+        
         $this->prices = Collection::factory(
             'price',
             new Price,
