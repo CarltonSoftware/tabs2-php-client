@@ -852,15 +852,38 @@ class StaticCollection implements \Iterator, \Countable
         $properties = array(
             'elementClass',
             'path',
-            'elementParent',
-            'pagination',
-            'discriminator',
-            'discriminatorMap',
-            'accessor',
-            'states',
             'elements'
         );
 
+        if ($this->elementParent) {
+            $properties[] = 'elementParent';
+        }
+
+        if ($this->accessor) {
+            $properties[] = 'accessor';
+        }
+
+        if (!$this->isStateDefault()) {
+            $properties[] = 'states';
+        }
+
+        if ($this->discriminator) {
+            $properties[] = 'discriminator';
+            $properties[] = 'discriminatorMap';
+        }
+
+        if ($this->pagination && $this->pagination->getTotal() > 0) {
+            $properties[] = 'pagination';
+        }
+
+
         return $properties;
+    }
+
+    public function __wakeup()
+    {
+        if (!$this->pagination) {
+            $this->pagination = new Pagination();
+        }
     }
 }

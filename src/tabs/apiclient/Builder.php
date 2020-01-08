@@ -29,7 +29,7 @@ namespace tabs\apiclient;
 abstract class Builder extends Base implements BuilderInterface
 {
     // -------------------------- Public Functions -------------------------- //
-    
+
     /**
      * Perform a create request
      *
@@ -52,7 +52,7 @@ abstract class Builder extends Base implements BuilderInterface
                 (integer) $id
             );
         }
-        
+
         $this->resetChanges();
 
         return $this;
@@ -72,9 +72,9 @@ abstract class Builder extends Base implements BuilderInterface
             $this->getUpdateUrl(),
             $this->toUpdateArray()
         );
-        
+
         $this->resetChanges();
-        
+
         return $this;
     }
 
@@ -91,7 +91,7 @@ abstract class Builder extends Base implements BuilderInterface
         \tabs\apiclient\client\Client::getClient()->put(
             $this->getUpdateUrl()
         );
-        
+
         $this->resetChanges();
 
         return $this;
@@ -173,14 +173,14 @@ abstract class Builder extends Base implements BuilderInterface
     {
         return $this->_getParentProperty($this);
     }
-    
+
     // ------------------------- Private Functions -------------------------- //
 
     /**
      * Traverse through the relationship to look for an actor object
      *
      * @param Base $object Object to traverse
-     * 
+     *
      * @throws \tabs\apiclient\exception\Exception
      *
      * @return \tabs\apiclient\Actor
@@ -215,13 +215,13 @@ abstract class Builder extends Base implements BuilderInterface
             return null;
         }
     }
-    
+
     /**
      * Prefix toarray indexes
-     * 
+     *
      * @param string $string Prefix String
      * @param Base   $object Object
-     * 
+     *
      * @return array
      */
     public function prefixToArray($string, $object)
@@ -231,7 +231,23 @@ abstract class Builder extends Base implements BuilderInterface
             $arr[$string . $key] = $value;
             unset($arr[$key]);
         }
-        
+
         return $arr;
+    }
+
+    public function __sleep() {
+        $properties = array_keys(get_class_vars(get_class($this)));
+
+         if (property_exists($this, 'id') && !$this->getId()) {
+            return [];
+        }
+
+        $propertiesNotNull = array();
+        foreach ($properties as $property) {
+            if ($this->$property !== null && $this->$property !== '') {
+                $propertiesNotNull[] = $property;
+            }
+        }
+        return $propertiesNotNull;
     }
 }
