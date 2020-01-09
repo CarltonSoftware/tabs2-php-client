@@ -68,6 +68,7 @@ use tabs\apiclient\Builder;
  * @method Collection|specialoffer\BookingPeriod[]          getBookingperiods()          Returns the booking periods collection
  * @method Collection|specialoffer\HolidayPeriod[]          getHolidayperiods()          Returns the holiday periods collection
  * @method Collection|specialoffer\Branding[]               getBrandings()               Returns the offer brandings
+ * @method Collection|specialoffer\MarketingBrand[]         getMarketingbrands()         Returns the offer marketing brands
  * @method Collection|specialoffer\Attribute[]              getAttributes()              Returns the offers attributes
  * @method Collection|specialoffer\PropertyBranding[]       getPropertybrandings()       Returns the offers property brandings
  * @method Collection|specialoffer\ConfirmedBookingPeriod[] getConfirmedbookingperiods() Returns the confirmed booking periods
@@ -302,6 +303,13 @@ class SpecialOffer extends Builder
     protected $brandings;
     
     /**
+     * Special offer marketing brands
+     * 
+     * @var Collection|specialoffer\MarketingBrand[]
+     */
+    protected $marketingbrands;
+
+    /**
      * Special offer property brandings
      * 
      * @var Collection|specialoffer\PropertyBranding[]
@@ -367,6 +375,12 @@ class SpecialOffer extends Builder
             $this
         );
         
+        $this->marketingbrands = Collection::factory(
+            'marketingbrand',
+            new specialoffer\MarketingBrand(),
+            $this
+        );
+
         $this->propertybrandings = Collection::factory(
             'propertybranding',
             new specialoffer\PropertyBranding(),
