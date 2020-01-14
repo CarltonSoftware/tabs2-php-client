@@ -31,7 +31,7 @@ use tabs\apiclient\exception\Exception;
  * @link      http://www.carltonsoftware.co.uk
  */
 class Collection extends StaticCollection
-{   
+{
     /**
      * Fetch an array of elements
      *
@@ -45,9 +45,9 @@ class Collection extends StaticCollection
             $this->getRoute(),
             $this->getPagination()->toArray()
         );
-        
+
         $this->setFetched(true);
-        
+
         if ($response
             && $response->getStatusCode() == 200
         ) {
@@ -65,10 +65,17 @@ class Collection extends StaticCollection
             // Clear elements array first
             $this->elements = array();
 
-            // Populate with new elements
-            foreach ($elements as $element) {                
-                // Add new element to collection
-                $this->addElement($element);
+            if ($class->getClass() =='AvailableDay') {
+                foreach ($elements as $element) {
+                    $avd = new property\branding\AvailableDay();
+                    $this->elements[] = $avd->quickSet($element);
+                }
+            } else {
+                // Populate with new elements
+                foreach ($elements as $element) {
+                    // Add new element to collection
+                    $this->addElement($element);
+                }
             }
 
             return $this;
@@ -79,7 +86,7 @@ class Collection extends StaticCollection
             'Unable to fetch GET: ' . $class
         );
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -88,7 +95,7 @@ class Collection extends StaticCollection
         if (!$this->isFetched()) {
             $this->fetch();
         }
-        
+
         return parent::findBy($fn);
     }
 
@@ -121,20 +128,20 @@ class Collection extends StaticCollection
 
         return $this;
     }
-    
+
     /**
      * Return the filters set on the collection
-     * 
+     *
      * @return array
      */
     public function getFilters()
     {
         return $this->getPagination()->getFilters();
     }
-    
+
     /**
      * Get the fields string
-     * 
+     *
      * @return array
      */
     public function getFields()
@@ -148,42 +155,42 @@ class Collection extends StaticCollection
             )
         ) : array();
     }
-    
+
     /**
      * Add a field to the collection request
-     * 
+     *
      * @param string $field Field
-     * 
+     *
      * @return \tabs\apiclient\Collection
      */
     public function addField($field)
     {
         $fields = $this->getFields();
         $fields[] = $field;
-        
+
         return $this->setFields($fields);
     }
-    
+
     /**
      * Add a field to the collection request
-     * 
+     *
      * @param string $field Field
-     * 
+     *
      * @return \tabs\apiclient\Collection
      */
     public function removeField($field)
     {
         $fields = array_flip($this->getFields());
         unset($fields[$field]);
-        
+
         return $this->setFields(array_flip($fields));
     }
-    
+
     /**
      * Set the fields in bulk
-     * 
+     *
      * @param string|array $fields Fields
-     * 
+     *
      * @return \tabs\apiclient\Collection
      */
     public function setFields($fields)
@@ -195,30 +202,30 @@ class Collection extends StaticCollection
         } else {
             $this->getPagination()->removeParameter('fields');
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Shortcut function for the Pagination::addFilter method
-     * 
+     *
      * @param string   $key   Filter key
      * @param string   $value Filter value
-     * @param integer  $group Filter group (used for OR filtering if greater 
+     * @param integer  $group Filter group (used for OR filtering if greater
      *                        than zero)
-     * 
+     *
      * @return Collection
      */
     public function addFilter($key, $value, $group = 0)
     {
         $this->getPagination()->addFilter($key, $value, $group);
-        
+
         return $this;
     }
-    
+
     /**
      * Get the route for the collection based on the url
-     * 
+     *
      * @return string
      */
     public function getRoute()
@@ -226,7 +233,7 @@ class Collection extends StaticCollection
         if ($this->getElementParent() && !$this->isPathOverridden()) {
             return $this->getElementParent()->getUpdateUrl() . '/' . $this->getPath();
         }
-        
+
         return $this->getPath();
     }
 }

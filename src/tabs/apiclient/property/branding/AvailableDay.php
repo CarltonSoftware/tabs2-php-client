@@ -60,6 +60,13 @@ class AvailableDay extends Base
     protected $minimumholiday;
 
     /**
+     * Maximumholiday
+     *
+     * @var integer
+     */
+    protected $maximumholiday;
+
+    /**
      * Unlessholidayatleast
      *
      * @var integer
@@ -100,6 +107,24 @@ class AvailableDay extends Base
         $this->earliestbookingdate = new \DateTime();
     }
 
+    public function quickSet($data)
+    {
+        $this->date = new \DateTime($data->date);
+        $this->daysavailable = $data->daysavailable;
+        $this->bookingstatus = $data->bookingstatus;
+        $this->isfromdate = $data->isfromdate;
+        $this->istodate = $data->istodate;
+        $this->earliestbookingdate = new \DateTime($data->earliestbookingdate);
+        $this->minimumholiday = $data->minimumholiday;
+        $this->maximumholiday = $data->maximumholiday;
+        $this->unlessholidayatleast = $data->unlessholidayatleast;
+        $this->showonavailability = $data->showonavailability;
+        $this->priceanchor = $data->priceanchor;
+        $this->dayssincepriceanchor = $data->dayssincepriceanchor;
+
+        return $this;
+    }
+
     /**
      * @inheritDoc
      */
@@ -112,6 +137,7 @@ class AvailableDay extends Base
             'istodate' => $this->boolToStr($this->getIstodate()),
             'earliestbookingdate' => $this->getEarliestbookingdate()->format('Y-m-d'),
             'minimumholiday' => $this->getMinimumholiday(),
+            'maximumholiday' => $this->getMaximumholiday(),
             'unlessholidayatleast' => $this->getUnlessholidayatleast(),
             'showonavailability' => $this->boolToStr($this->getShowonavailability()),
             'priceanchor' => $this->boolToStr($this->getPriceanchor()),
@@ -180,6 +206,16 @@ class AvailableDay extends Base
     }
 
     /**
+     * Returns the maximumholiday
+     *
+     * @return integer
+     */
+    public function getMaximumholiday()
+    {
+        return $this->maximumholiday;
+    }
+
+    /**
      * Returns the unlessholidayatleast
      *
      * @return integer
@@ -218,7 +254,7 @@ class AvailableDay extends Base
     {
         return $this->dayssincepriceanchor;
     }
-    
+
     /**
      * Set the date
      *
@@ -307,6 +343,20 @@ class AvailableDay extends Base
     public function setMinimumholiday($var)
     {
         $this->minimumholiday = $var;
+
+        return $this;
+    }
+
+    /**
+     * Sets the maximumholiday
+     *
+     * @param integer $var The maximumholiday
+     *
+     * @return AvailableDay
+     */
+    public function setMaximumholiday($var)
+    {
+        $this->maximumholiday = $var;
 
         return $this;
     }
