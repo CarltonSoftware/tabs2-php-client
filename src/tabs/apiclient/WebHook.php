@@ -54,6 +54,61 @@ class WebHook extends Base
     }
     
     /**
+     * Retrieve the subscriptions for an endpoint
+     * 
+     * @param string $url  URL you want to check web hook subscriptions for
+     * 
+     * @throws Exception
+     * 
+     * @return array
+     */
+    public static function subscribed($url)
+    {
+        try {
+            $args = array(
+                'url' => $url
+            );
+
+            $res = \tabs\apiclient\client\Client::getClient()->get(
+                'webhook/subscribed',
+                $args
+            );
+
+            if ($res->getStatusCode() != 200) {
+                throw new Exception($req, (string) $res->getBody());
+            }
+
+            return self::getJson($res);
+        } catch (\GuzzleHttp\Exception\RequestException $ex) {
+            throw new Exception(null, $ex->getMessage());
+        }
+    }
+
+    /**
+     * Unsubscribe from a SubscriptionARN
+     * 
+     * @param string $arn  SubscriptionARN you want to unsubscribe from
+     * 
+     * @throws Exception
+     * 
+     * @return void
+     */
+    public static function unsubscribe($arn)
+    {
+        try {
+            $res = \tabs\apiclient\client\Client::getClient()->delete(
+                'webhook/unsubscribe/' . $arn
+            );
+
+            if ($res->getStatusCode() != 200) {
+                throw new Exception($req, (string) $res->getBody());
+            }
+        } catch (\GuzzleHttp\Exception\RequestException $ex) {
+            throw new Exception(null, $ex->getMessage());
+        }
+    }
+    
+    /**
      * Get the request body from the webhook notification
      * 
      * @return array
