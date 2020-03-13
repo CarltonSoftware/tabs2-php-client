@@ -42,8 +42,8 @@ class BookingTest extends ApiClientClassTest
         $this->assertEquals(79, $booking->getIncludedExtrasPrice());
         $this->assertEquals(36, $booking->getAdditionalExtrasPrice());
         $this->assertEquals(50, $booking->getSecuritydeposit()->getAmount());
-        $this->assertEquals(50, $booking->getSecuritydeposit()->getOutstanding());
-        $this->assertEquals(0, $booking->getSecuritydeposit()->getRefundable());
+        $this->assertEquals(0, $booking->getSecuritydeposit()->getOutstanding());
+        $this->assertEquals(50, $booking->getSecuritydeposit()->getRefundable());
         $this->assertEquals(0, $booking->getSecuritydeposit()->getRefunded());
     }
 }
