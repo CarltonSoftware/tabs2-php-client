@@ -333,6 +333,13 @@ class Booking extends Builder
     protected $cancelledbooking;
 
     /**
+     * Potential cancellation
+     * 
+     * @var PotentialCancellation
+     */
+    protected $potentialcancellation;
+
+    /**
      * Collection of suppliers for the booking
      *
      * @var StaticCollection|booking\Supplier[]|property\Supplier[]
@@ -681,6 +688,20 @@ class Booking extends Builder
     }
 
     /**
+     * Set the potential cancellation
+     * 
+     * @param stdclass|array|PotentialCancellation $potentialcancellation Potential Cancellation
+     * 
+     * @return Booking
+     */
+    public function setPotentialcancellation($potentialcancellation)
+    {
+        $this->potentialcancellation = PotentialCancellation::factory($potentialcancellation);
+
+        return $this;
+    }
+
+    /**
      * Set the property
      *
      * @param stdclass|array|PropertyLink $property The Property
@@ -937,6 +958,16 @@ class Booking extends Builder
             );
         }
 
+        if ($this->getPotentialcancellation()) {
+            $arr = array_merge(
+                $arr,
+                $this->prefixToArray(
+                    'potentialcancellation_',
+                    $this->getPotentialcancellation()
+                )
+                );
+        }
+
         if ($this->getTransferredfrombooking()
             && !$this->getTransferredfrombooking()->getId()
         ) {
@@ -995,6 +1026,17 @@ class Booking extends Builder
     {
         return $this->getCancelledbooking()
             && $this->getCancelledbooking()->getId();
+    }
+
+    /**
+     * Return true/false if the booking is a potential cancellation or not
+     * 
+     * @return boolean
+     */
+    public function isPotentialcancellation()
+    {
+        return $this->getPotentialcancellation()
+            && $this->getPotentialcancellation()->getId();
     }
 
     /**
@@ -1714,6 +1756,16 @@ class Booking extends Builder
     public function getCancelledbooking()
     {
         return $this->cancelledbooking;
+    }
+
+    /**
+     * Returns the potential cancellation
+     * 
+     * @return PotentialCancellation
+     */
+    public function getPotentialcancellation()
+    {
+        return $this->potentialcancellation;
     }
 
     /**
