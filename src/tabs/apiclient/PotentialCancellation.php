@@ -28,6 +28,7 @@ namespace tabs\apiclient;
  *
  * 
  * @method PotentialCancellation setPotentialtransfer(boolean $flag) set the potential transfer flag
+ * @method PotentialCancellation setCancellationrequested(boolean $flag) set the cancellation requested flag
  * @method PotentialCancellation setRequestedfromdate(\DateTime $datetime) Set the request from date
  * @method PotentialCancellation setRequestedtodate(\DateTime $datetime) Set the request to date
  */
@@ -39,6 +40,13 @@ class PotentialCancellation extends Base
      * @var boolean
      */
     protected $potentialtransfer = false;
+
+    /**
+     * Cancellation Requested
+     * 
+     * @var boolean
+     */
+    protected $cancellationrequested = false;
 
     /**
      * Request From Datetime
@@ -75,6 +83,7 @@ class PotentialCancellation extends Base
 
         return array(
             'potentialtransfer' => $this->getPotentialtransfer(),
+            'cancellationrequested' => $this->getCancellationrequested(),
             'requestedfromdate' => $fromDate,
             'requestedtodate' => $toDate
         );
@@ -88,6 +97,16 @@ class PotentialCancellation extends Base
     public function getPotentialtransfer()
     {
         return $this->potentialtransfer;
+    }
+
+    /**
+     * Return the cancellation requested flag
+     * 
+     * @return boolean
+     */
+    public function getCancellationrequested()
+    {
+        return $this->cancellationrequested;
     }
 
     /**
