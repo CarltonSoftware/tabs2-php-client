@@ -903,7 +903,7 @@ class Booking extends Builder
         if ($this->getCancelledbooking()) {
             $this->prefixToArray(
                 $arr,
-                'cancelledbooking_',
+                'cancelledbooking',
                 $this->getCancelledbooking()
             );
         }
@@ -911,7 +911,7 @@ class Booking extends Builder
         if ($this->getPotentialcancellation()) {
             $this->prefixToArray(
                 $arr,
-                'potentialcancellation_',
+                'potentialcancellation',
                 $this->getPotentialcancellation()
             );
         }
