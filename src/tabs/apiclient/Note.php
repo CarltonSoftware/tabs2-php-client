@@ -232,12 +232,10 @@ class Note extends Notemeta
         );
         
         if (!$this->getId() && $this->notetexts->count() > 0) {
-            $arr = array_merge(
+            $this->prefixToArray(
                 $arr,
-                $this->prefixToArray(
-                    'notetext_',
-                    $this->notetexts->first()
-                )
+                'notetext',
+                $this->notetexts->first()
             );
         }
         
