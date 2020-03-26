@@ -217,22 +217,23 @@ abstract class Builder extends Base implements BuilderInterface
     }
 
     /**
-     * Prefix toarray indexes
+     * Prefix to array indexes
      *
+     * @param array  $array  Array to prefix
      * @param string $string Prefix String
      * @param Base   $object Object
      *
-     * @return array
+     * @return void
      */
-    public function prefixToArray($string, $object)
+    public function prefixToArray(&$array, $string, $object)
     {
-        $arr = $object->toArray();
-        foreach ($arr as $key => $value) {
-            $arr[$string . $key] = $value;
-            unset($arr[$key]);
+        foreach ($object->toArray() as $key => $value) {
+            $array[$string . '_' . $key] = $value;
         }
-
-        return $arr;
+        
+        if (isset($array[$string . 'id'])) {
+            unset($array[$string . 'id']);
+        }
     }
 
     public function __sleep() {

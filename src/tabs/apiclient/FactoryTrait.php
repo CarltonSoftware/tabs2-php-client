@@ -58,6 +58,16 @@ trait FactoryTrait
     {
         return count($this->getChanges()) > 0;
     }
+    
+    /**
+     * @param string $key Key
+     * 
+     * @return boolean
+     */
+    public function hasChange($key)
+    {
+        return array_key_exists($key, $this->changes);
+    }
 
     /**
      * Get the json
