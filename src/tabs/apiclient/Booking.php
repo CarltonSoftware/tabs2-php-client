@@ -74,6 +74,12 @@ use tabs\apiclient\OwnerBookingType;
  * @method Booking setSourcecode(string $var) Sets the source code
  *
  * @method Booking setOverridestatus(boolean $var) Set the override status flag
+ *
+ * @method Booking setSourcemarketingbrand(SourceMarketingBrand $var) Set the source marketing brand
+ * 
+ * @method Booking setSource(Source $var) Set the source
+ * 
+ * @method Booking setWebbooking(WebBooking $var) Set the webbooking
  * 
  * @method Collection|booking\SecurityDeposit[] getSecuritydeposits() Returns the securitydeposits
  *
@@ -497,6 +503,9 @@ class Booking extends Builder
             $this
         );
         $this->ownerpaymentsummary = new OwnerPaymentSummary();
+        $this->sourcemarketingbrand = new SourceMarketingBrand();
+        $this->source = new Source();
+        $this->webbooking = new WebBooking();
 
         parent::__construct($id);
     }
@@ -590,34 +599,6 @@ class Booking extends Builder
     }
 
     /**
-     * Set the source
-     *
-     * @param stdclass|array|Source $source The Source
-     *
-     * @return Booking
-     */
-    public function setSource($source)
-    {
-        $this->source = Source::factory($source);
-
-        return $this;
-    }
-
-    /**
-     * Set the source marketing brand
-     *
-     * @param stdclass|array|SourceMarketingBrand $smb The Source
-     *
-     * @return Booking
-     */
-    public function setSourcemarketingbrand($smb)
-    {
-        $this->sourcemarketingbrand = SourceMarketingBrand::factory($smb);
-
-        return $this;
-    }
-
-    /**
      * Set the potentialbooking
      *
      * @param stdclass|array|PotentialBooking $potentialbooking The Potentialbooking
@@ -627,20 +608,6 @@ class Booking extends Builder
     public function setPotentialbooking($potentialbooking)
     {
         $this->potentialbooking = PotentialBooking::factory($potentialbooking);
-
-        return $this;
-    }
-
-    /**
-     * Set the webbooking
-     *
-     * @param stdclass|array|WebBooking $webbooking The Webbooking
-     *
-     * @return Booking
-     */
-    public function setWebbooking($webbooking)
-    {
-        $this->webbooking = WebBooking::factory($webbooking);
 
         return $this;
     }
@@ -853,12 +820,10 @@ class Booking extends Builder
             if ($this->notes->count() > 0) {
                 $bookingnote = $this->notes->first();
                 if ($bookingnote->getNote()) {
-                    $arr = array_merge(
+                    $this->prefixToArray(
                         $arr,
-                        $this->prefixToArray(
-                            'note_',
-                            $bookingnote->getNote()
-                        )
+                        'note',
+                        $bookingnote->getNote()
                     );
                 }
             }
@@ -879,24 +844,16 @@ class Booking extends Builder
             }
 
             if ($this->getSecuritydeposit()) {
-                $arr = array_merge(
+                $this->prefixToArray(
                     $arr,
-                    $this->prefixToArray(
-                        'securitydeposit_',
-                        $this->getSecuritydeposit()
-                    )
+                    'securitydeposit',
+                    $this->getSecuritydeposit()
                 );
             }
         }
 
         if ($this->getGuesttype() !== 'Customer' && $this->getProperty()) {
             $arr['propertyid'] = $this->getProperty()->getId();
-        }
-
-        if ($this->getSourcemarketingbrand()) {
-            $arr['sourcemarketingbrandid'] = $this->getSourcemarketingbrand()->getId();
-        } else if ($this->getSource()) {
-            $arr['sourceid'] = $this->getSource()->getId();
         }
 
         if (($this->getGuesttype() === 'Agency' || $this->getGuesttype() === 'None') && $this->getAgencybookingtype()) {
@@ -912,71 +869,60 @@ class Booking extends Builder
         }
 
         if ($this->getPotentialbooking()) {
-            $arr = array_merge(
+            $this->prefixToArray(
                 $arr,
-                $this->prefixToArray(
-                    'potentialbooking_',
-                    $this->getPotentialbooking()
-                )
+                'potentialbooking',
+                $this->getPotentialbooking()
             );
         }
 
-        if ($this->getWebbooking()) {
-            $arr = array_merge(
+        if ($this->hasChange('webbooking')) {
+            $this->prefixToArray(
                 $arr,
-                $this->prefixToArray('webbooking_', $this->getWebbooking())
+                'webbooking',
+                $this->getWebbooking()
             );
         }
 
         if ($this->getProvisionalbooking()) {
-            $arr = array_merge(
+            $this->prefixToArray(
                 $arr,
-                $this->prefixToArray(
-                    'provisionalbooking_',
-                    $this->getProvisionalbooking()
-                )
+                'provisionalbooking',
+                $this->getProvisionalbooking()
             );
         }
 
         if ($this->getConfirmedbooking()) {
-            $arr = array_merge(
+            $this->prefixToArray(
                 $arr,
-                $this->prefixToArray(
-                    'confirmedbooking_',
-                    $this->getConfirmedbooking()
-                )
+                'confirmedbooking',
+                $this->getConfirmedbooking()
             );
         }
 
         if ($this->getCancelledbooking()) {
-            $arr = array_merge(
+            $this->prefixToArray(
                 $arr,
-                $this->prefixToArray(
-                    'cancelledbooking_',
-                    $this->getCancelledbooking()
-                )
+                'cancelledbooking',
+                $this->getCancelledbooking()
             );
         }
 
         if ($this->getPotentialcancellation()) {
-            $arr = array_merge(
+            $this->prefixToArray(
                 $arr,
-                $this->prefixToArray(
-                    'potentialcancellation_',
-                    $this->getPotentialcancellation()
-                )
-                );
+                'potentialcancellation',
+                $this->getPotentialcancellation()
+            );
         }
 
         if ($this->getTransferredfrombooking()
             && !$this->getTransferredfrombooking()->getId()
         ) {
-            $arr = array_merge(
+            $this->prefixToArray(
                 $arr,
-                $this->prefixToArray(
-                    'transferredbooking',
-                    $this->getTransferredfrombooking()
-                )
+                'transferredbooking',
+                $this->getTransferredfrombooking()
             );
         }
 

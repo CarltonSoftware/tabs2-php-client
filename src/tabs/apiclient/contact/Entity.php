@@ -172,12 +172,10 @@ class Entity extends Builder
         }
         
         if ($this->getStatus()) {
-            $arr = array_merge(
+            $this->prefixToArray(
                 $arr,
-                $this->prefixToArray(
-                    'status_',
-                    $this->getStatus()
-                )
+                'status',
+                $this->getStatus()
             );
         }
         
