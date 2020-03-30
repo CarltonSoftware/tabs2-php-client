@@ -106,7 +106,7 @@ class TransferredBooking extends Base
         if ($this->getTobooking()) {
             $arr['tobookingid'] = $this->getTobooking()->getId();
         } else if ($this->getFrombooking()) {
-            $arr['frombookingid'] = $this->getTobooking()->getId();
+            $arr['frombookingid'] = $this->getFrombooking()->getId();
         }
         
         return $arr;
