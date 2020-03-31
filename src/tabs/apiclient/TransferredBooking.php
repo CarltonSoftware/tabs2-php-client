@@ -27,10 +27,19 @@ namespace tabs\apiclient;
  * @link      http://www.carltonsoftware.co.uk
  *
  * 
+ * @method TransferredBooking setTabsuser(Tabsuser $tu) Set a tabsuser
+ *
  * @method TransferredBooking setDatetime(\DateTime $datetime) Set the datetime
  */
 class TransferredBooking extends Base
 {
+    /**
+     * Tabsuser
+     *
+     * @var Tabsuser
+     */
+    protected $tabsuser;
+
     /**
      * Datetime
      *
@@ -106,7 +115,11 @@ class TransferredBooking extends Base
         if ($this->getTobooking()) {
             $arr['tobookingid'] = $this->getTobooking()->getId();
         } else if ($this->getFrombooking()) {
-            $arr['frombookingid'] = $this->getTobooking()->getId();
+            $arr['frombookingid'] = $this->getFrombooking()->getId();
+        }
+        
+        if ($this->getTabsuser()) {
+            $arr['tabsuserid'] = $this->getTabsuser()->getId();
         }
         
         return $arr;
@@ -140,5 +153,15 @@ class TransferredBooking extends Base
     public function getFrombooking()
     {
         return $this->frombooking;
+    }
+
+    /**
+     * Returns the tabsuser
+     *
+     * @return Tabsuser
+     */
+    public function getTabsuser()
+    {
+        return $this->tabsuser;
     }
 }
