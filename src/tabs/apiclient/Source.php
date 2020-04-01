@@ -41,7 +41,7 @@ class Source extends Builder
      * 
      * @var Sourcecategory
      */
-    protected $sourceCategory;
+    protected $sourcecategory;
     
     /**
      * SourceMarketingBrand Collection
@@ -73,7 +73,7 @@ class Source extends Builder
      */
     public function setSourcecategory($sourcecategory)
     {
-        $this->sourceCategory = SourceCategory::factory($sourcecategory);
+        $this->sourcecategory = SourceCategory::factory($sourcecategory);
         
         return $this;
     }
@@ -86,7 +86,7 @@ class Source extends Builder
         return array(
             'sourcecode' => $this->getSourcecode(),
             'description' => $this->getDescription(),
-            'sourcecategory' => $this->getSourceCategory()->getId()
+            'sourcecategory' => $this->getSourcecategory()->getId()
         );
     }
 
@@ -115,7 +115,7 @@ class Source extends Builder
      *
      * @return SourceCategory
      */
-    public function getSourceCategory()
+    public function getSourcecategory()
     {
         return $this->sourcecategory;
     }
