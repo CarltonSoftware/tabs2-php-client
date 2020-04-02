@@ -26,45 +26,101 @@ namespace tabs\apiclient;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * 
+ *
  * @method PotentialCancellation setPotentialtransfer(boolean $flag) set the potential transfer flag
  * @method PotentialCancellation setCancellationrequested(boolean $flag) set the cancellation requested flag
  * @method PotentialCancellation setRequestedfromdate(\DateTime $datetime) Set the request from date
  * @method PotentialCancellation setRequestedtodate(\DateTime $datetime) Set the request to date
+ * @method PotentialCancellation setCreatedatetime(\DateTime $datetime) Set the created date
+ * @method PotentialCancellation setNoaction(boolean $var)
+ * @method PotentialCancellation setCpsclaim(boolean $var)
+ * @method PotentialCancellation setPricematched(boolean $var)
+ * @method PotentialCancellation setAddtocustomeraccountbalance(boolean $var)
+ * @method PotentialCancellation setTransferfailedreason(string $var)
+ * @method PotentialCancellation setAssignedtoactor(\tabs\apiclient\TabsUser $var)
  */
 class PotentialCancellation extends Base
 {
     /**
-     * Potential Transfer
-     * 
      * @var boolean
      */
     protected $potentialtransfer = false;
 
     /**
-     * Cancellation Requested
-     * 
+     * @var boolean
+     */
+    protected $cpsclaim = false;
+
+    /**
+     * @var boolean
+     */
+    protected $noaction = false;
+
+    /**
+     * @var float
+     */
+    protected $oldtotalprice = 0;
+
+    /**
+     * @var float
+     */
+    protected $newtotalprice = 0;
+
+    /**
+     * @var boolean
+     */
+    protected $pricematched = false;
+
+    /**
+     * @var \tabs\apiclient\TabsUser
+     */
+    protected $assignedtoactor;
+
+    /**
+     * @var boolean
+     */
+    protected $transferfailedreason = '';
+
+    /**
+     * @var boolean
+     */
+    protected $addtocustomeraccountbalance = false;
+
+    /**
      * @var boolean
      */
     protected $cancellationrequested = false;
 
     /**
-     * Request From Datetime
-     *
      * @var \DateTime
      */
     protected $requestedfromdate;
-    
+
     /**
-     * Request To Datetime
-     *
      * @var \DateTime
      */
     protected $requestedtodate;
 
+    /**
+     * @var \DateTime
+     */
+    protected $createddatetime;
 
     // -------------------------- Public Functions -------------------------- //
-    
+
+    /**
+     * @return void
+     */
+    public function __construct($id = null)
+    {
+        parent::__construct($id);
+
+        $this->requestedfromdate = new \DateTime();
+        $this->requestedtodate = new \DateTime();
+        $this->createddatetime = new \DateTime();
+        $this->assignedtoactor = new TabsUser();
+    }
+
     /**
      * Array representation of the object
      *
@@ -72,26 +128,18 @@ class PotentialCancellation extends Base
      */
     public function toArray()
     {
-        $fromDate = $this->getRequestedfromdate();
-        $toDate = $this->getRequestedtodate();
-        if ($fromDate instanceof \DateTime) {
-            $fromDate = $fromDate->format('Y-m-d');
-        }
-        if ($toDate instanceof \DateTime) {
-            $toDate = $toDate->format('Y-m-d');
-        }
-
-        return array(
-            'potentialtransfer' => $this->getPotentialtransfer(),
-            'cancellationrequested' => $this->getCancellationrequested(),
-            'requestedfromdate' => $fromDate,
-            'requestedtodate' => $toDate
-        );
+        return $this->__toArray();
     }
 
     /**
-     * Return the potential transfer flag
-     * 
+     * @alias setAssignedtoactor
+     */
+    public function setAssignedto($actor)
+    {
+        return $this->setAssignedtoactor($actor);
+    }
+
+    /**
      * @return boolean
      */
     public function getPotentialtransfer()
@@ -100,8 +148,6 @@ class PotentialCancellation extends Base
     }
 
     /**
-     * Return the cancellation requested flag
-     * 
      * @return boolean
      */
     public function getCancellationrequested()
@@ -110,8 +156,6 @@ class PotentialCancellation extends Base
     }
 
     /**
-     * Return the requested from datetime
-     *
      * @return \DateTime
      */
     public function getRequestedfromdate()
@@ -120,12 +164,82 @@ class PotentialCancellation extends Base
     }
 
     /**
-     * Return the requested from datetime
-     *
      * @return \DateTime
      */
     public function getRequestedtodate()
     {
         return $this->requestedtodate;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreateddatetime()
+    {
+        return $this->createddatetime;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getNoaction()
+    {
+        return $this->noaction;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getCpsclaim()
+    {
+        return $this->cpsclaim;
+    }
+
+    /**
+     * @return float
+     */
+    public function getOldtotalprice()
+    {
+        return $this->oldtotalprice;
+    }
+
+    /**
+     * @return float
+     */
+    public function getNewtotalprice()
+    {
+        return $this->newtotalprice;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getPricematched()
+    {
+        return $this->pricematched;
+    }
+
+    /**
+     * @return \tabs\apiclient\TabsUser
+     */
+    public function getAssignedtoactor()
+    {
+        return $this->assignedtoactor;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTransferfailedreason()
+    {
+        return $this->transferfailedreason;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getAddtocustomeraccountbalance()
+    {
+        return $this->addtocustomeraccountbalance;
     }
 }
