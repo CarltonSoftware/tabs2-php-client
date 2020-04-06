@@ -36,6 +36,8 @@ namespace tabs\apiclient;
  * @method PotentialCancellation setCpsclaim(boolean $var)
  * @method PotentialCancellation setPricematched(boolean $var)
  * @method PotentialCancellation setAddtocustomeraccountbalance(boolean $var)
+ * @method PotentialCancellation setOldtotalprice(float $var)
+ * @method PotentialCancellation setNewtotalprice(float $var)
  * @method PotentialCancellation setTransferfailedreason(string $var)
  * @method PotentialCancellation setAssignedtoactor(\tabs\apiclient\TabsUser $var)
  */
