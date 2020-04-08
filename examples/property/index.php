@@ -3,7 +3,7 @@
 /**
  * @name Requesting property information
  * 
- * This file demonstrates how to request property information.  
+ * This file demonstrates how to request property information.
  */
 
 require_once __DIR__ . '/../creating-a-new-connection.php';
@@ -54,7 +54,7 @@ try {
         );
 
         // Get available breaks prices for 'changeover' days
-        if ($property->getBrandings()->first() 
+        if ($property->getBrandings()->first()
             && filter_input(INPUT_GET, 'fromdate')
         ) {
             // As we are getting multiple prices its a good idea to get all
@@ -78,7 +78,7 @@ try {
             }
         }
 
-        if ($property->getBrandings()->first() 
+        if ($property->getBrandings()->first()
             && !filter_input(INPUT_GET, 'fromdate')
         ) {
             $branding = $property->getBrandings()->first();
@@ -112,6 +112,7 @@ try {
             ?>
                 <p><a href="add-document.php?id=<?php echo $property->getId(); ?>">Add a document</a></p>
                 <p><a href="add-image.php?id=<?php echo $property->getId(); ?>">Add an image</a></p>
+                <p><a href="add-attribute.php?id=<?php echo $property->getId(); ?>">Add an attribute</a></p>
             <?php
             $collection = $property->getNotes();
             include __DIR__ . '/../collection.php';

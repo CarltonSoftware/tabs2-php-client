@@ -57,6 +57,7 @@
 
 
 ## Property examples
+ * [Adding a attribute to a property](property/add-attribute.html)
  * [Adding a document to a property](property/add-document.html)
  * [Adding an image to a property](property/add-image.html)
  * [Adding a note to a property](property/add-note.html)
