@@ -49,6 +49,7 @@ try {
         if (!$pattr) {
             $pattr = new \tabs\apiclient\property\Attribute();
             $pattr->setAttribute($attribute);
+            $propertyAttributes->addElement($pattr);
         }
 
         // Set the attribute comment to know users what we're doing!

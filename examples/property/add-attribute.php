@@ -2,7 +2,7 @@
 
 /**
  * @name Adding a attribute to a property
- * 
+ *
  */
 
 require_once __DIR__ . '/../creating-a-new-connection.php';
@@ -52,6 +52,7 @@ if ($id = filter_input(INPUT_GET, 'id')) {
     if (!$pattr) {
         $pattr = new \tabs\apiclient\property\Attribute();
         $pattr->setAttribute($attribute);
+        $propertyAttributes->addElement($pattr);
     }
 
     // Set the attribute comment to know users what we're doing!
