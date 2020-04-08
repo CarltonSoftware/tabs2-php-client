@@ -12,7 +12,7 @@ $public_endpoint_url = getBaseUrl() . 'webhook-endpoint.php';
 try {
     // Subscribe to all notifications about bookings.  Additional groups are
     // property, actor and admin.
-    \tabs\apiclient\WebHook::subscribe($public_endpoint_url, 'property', 'MA');
+    \tabs\apiclient\WebHook::subscribe($public_endpoint_url, 'booking');
 } catch (Exception $ex) {
     echo $ex->getMessage();
 }
