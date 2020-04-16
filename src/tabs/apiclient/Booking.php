@@ -76,11 +76,11 @@ use tabs\apiclient\OwnerBookingType;
  * @method Booking setOverridestatus(boolean $var) Set the override status flag
  *
  * @method Booking setSourcemarketingbrand(SourceMarketingBrand $var) Set the source marketing brand
- * 
+ *
  * @method Booking setSource(Source $var) Set the source
- * 
+ *
  * @method Booking setWebbooking(WebBooking $var) Set the webbooking
- * 
+ *
  * @method Collection|booking\SecurityDeposit[] getSecuritydeposits() Returns the securitydeposits
  *
  * @method booking\SecurityDeposit getSecuritydeposit() Returns booking securitydeposit
@@ -340,7 +340,7 @@ class Booking extends Builder
 
     /**
      * Potential cancellation
-     * 
+     *
      * @var PotentialCancellation
      */
     protected $potentialcancellation;
@@ -409,6 +409,11 @@ class Booking extends Builder
     protected $extras;
 
     /**
+     * @var Collection|booking\Voucher[]
+     */
+    protected $vouchers;
+
+    /**
      * Owner payment summary
      *
      * @var OwnerPaymentSummary
@@ -447,11 +452,11 @@ class Booking extends Builder
      * @var boolean
      */
     protected $overridestatus = false;
-    
+
     /**
      * @var int
      */
-    protected $propertyid;    
+    protected $propertyid;
 
     // -------------------- Public Functions -------------------- //
 
@@ -500,6 +505,11 @@ class Booking extends Builder
         $this->extras = Collection::factory(
             'extra',
             new booking\Extra(),
+            $this
+        );
+        $this->vouchers = Collection::factory(
+            'voucher',
+            new booking\Voucher(),
             $this
         );
         $this->ownerpaymentsummary = new OwnerPaymentSummary();
@@ -656,9 +666,9 @@ class Booking extends Builder
 
     /**
      * Set the potential cancellation
-     * 
+     *
      * @param stdclass|array|PotentialCancellation $potentialcancellation Potential Cancellation
-     * 
+     *
      * @return Booking
      */
     public function setPotentialcancellation($potentialcancellation)
@@ -976,7 +986,7 @@ class Booking extends Builder
 
     /**
      * Return true/false if the booking is a potential cancellation or not
-     * 
+     *
      * @return boolean
      */
     public function isPotentialcancellation()
@@ -1706,7 +1716,7 @@ class Booking extends Builder
 
     /**
      * Returns the potential cancellation
-     * 
+     *
      * @return PotentialCancellation
      */
     public function getPotentialcancellation()
@@ -1773,7 +1783,7 @@ class Booking extends Builder
     {
         return $this->overridestatus;
     }
-    
+
     /**
      * Returns the propertyid
      *
@@ -1782,5 +1792,5 @@ class Booking extends Builder
     public function getPropertyid()
     {
         return $this->propertyid;
-    }    
+    }
 }
