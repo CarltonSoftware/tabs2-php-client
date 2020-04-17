@@ -224,6 +224,30 @@ class Voucher extends Builder
     }
 
     /**
+     * @return \tabs\apiclient\voucher\BookingPeriod[]\tabs\apiclient\Collection
+     */
+    public function getBookingperiods()
+    {
+        return $this->bookingperiods;
+    }
+
+    /**
+     * @return \tabs\apiclient\voucher\HolidayPeriod[]\tabs\apiclient\Collection
+     */
+    public function getHolidayperiods()
+    {
+        return $this->holidayperiods;
+    }
+    
+    /**
+     * @return \tabs\apiclient\voucher\Restriction[]\tabs\apiclient\Collection
+     */
+    public function getRestrictions()
+    {
+        return $this->restrictions;
+    }
+
+    /**
      * @inheritDoc
      */
     public function toArray()
