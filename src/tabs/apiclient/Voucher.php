@@ -26,6 +26,10 @@ use tabs\apiclient\Builder;
  * @method Voucher setBooking(\tabs\apiclient\Booking $var) Sets the booking
  * @method Voucher setExpirydate(\DateTime $var) Sets the expirydate
  * @method Voucher setExpired(boolean $var) Sets the expired
+ *
+ * @method Collection|BookingPeriod[] getBookingperiods() Returns the booking periods
+ * @method Collection|HolidayPeriod[] getHolidayperiods() Returns the holiday periods
+ * @method Collection|Restriction[] getRestrictions() Returns the restrictions for the voucher
  */
 class Voucher extends Builder
 {
@@ -221,30 +225,6 @@ class Voucher extends Builder
     public function getExpired()
     {
         return $this->expired;
-    }
-
-    /**
-     * @return \tabs\apiclient\voucher\BookingPeriod[]\tabs\apiclient\Collection
-     */
-    public function getBookingperiods()
-    {
-        return $this->bookingperiods;
-    }
-
-    /**
-     * @return \tabs\apiclient\voucher\HolidayPeriod[]\tabs\apiclient\Collection
-     */
-    public function getHolidayperiods()
-    {
-        return $this->holidayperiods;
-    }
-    
-    /**
-     * @return \tabs\apiclient\voucher\Restriction[]\tabs\apiclient\Collection
-     */
-    public function getRestrictions()
-    {
-        return $this->restrictions;
     }
 
     /**
