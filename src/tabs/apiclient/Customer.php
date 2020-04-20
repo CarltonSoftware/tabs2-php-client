@@ -16,85 +16,78 @@ use tabs\apiclient\marketingbrand\EmailList;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
- * 
- * 
+ *
+ *
  * @method Customer setMarketingbrands(Collection $col) Set the marketing brands
- * 
+ *
  * @method Customer setBookings(Collection $col) Set the bookings
- * 
+ *
  * @method Collection|MarketingBrand[] getMarketingbrands() Returns the customer MarketingBrands
- * 
+ *
  * @method Collection|Booking[] getBookings() Returns the customer bookings
- * 
+ *
  * @method Collection|actor\Category[] getCategories() Returns the customer categories
- * 
+ *
  * @method Collection|actor\Payment[] getPayments() Returns the customer categories
  */
 class Customer extends Actor
 {
     /**
      * First booking date
-     * 
+     *
      * @var \DateTime
      */
     protected $firstbookingbookeddate;
-    
+
     /**
      * Number of confirmed bookings
-     * 
+     *
      * @var integer
      */
     protected $confirmedbookings = 0;
-    
+
     /**
      * Value of confirmed bookings
-     * 
+     *
      * @var integer
      */
     protected $confirmedbookingsvalue = 0;
-    
+
     /**
      * Account balance
-     * 
+     *
      * @var integer
      */
     protected $accountbalance = 0;
-    
+
     /**
      * Marketing brands collection
-     * 
+     *
      * @var Collection|MarketingBrand[]
      */
     protected $marketingbrands;
-    
-    /**
-     * Customer bookings
-     * 
-     * @var Collection|Booking[]
-     */
-    protected $bookings;
-    
+
     /**
      * Customer categories
-     * 
+     *
      * @var Collection|actor\Category[]
      */
     protected $categories;
-    
+
     /**
      * Customer payments
-     * 
+     *
      * @var Collection|actor\Payment[]
      */
     protected $payments;
 
     // -------------------- Public Functions -------------------- //
-    
+
     /**
      * Constructor
      *
      * @param integer $id ID
-     * 
+     *
      * @return void
      */
     public function __construct($id = null)
@@ -105,35 +98,29 @@ class Customer extends Actor
             new actor\MarketingBrand(),
             $this
         );
-        
-        $this->bookings = Collection::factory(
-            'booking',
-            new Booking(),
-            $this
-        );
-        
+
         $this->categories = Collection::factory(
             'category',
             new actor\Category(),
             $this
         );
-        
+
         $this->payments = Collection::factory(
             'payment',
             new actor\Payment(),
             $this
         );
-        
+
         parent::__construct($id);
     }
-    
+
     /**
      * Subscribe or unsubscribe to a mailing list
-     * 
+     *
      * @param EmailList $eml          Mailing list to subscribe to
      * @param boolean   $nocontact    The customer marketing brand optin flag
      * @param boolean   $unsubscribed The mailing list optin preference
-     * 
+     *
      * @return Customer
      */
     public function subscribeToMailingList(
@@ -145,7 +132,7 @@ class Customer extends Actor
         $cmbs = $this->getMarketingbrands()->findBy(function($ele) use ($eml) {
             return intval($ele->getMarketingbrand()->getId()) === intval($eml->getParent()->getId());
         });
-        
+
         if ($cmbs->count() === 0) {
             $cmb = new \tabs\apiclient\actor\MarketingBrand();
             $cmb->setMarketingbrand($eml->getParent());
@@ -155,12 +142,12 @@ class Customer extends Actor
         } else {
             $cmb = $cmbs->first();
         }
-        
+
         // Check if the no contact boolean is the same and if not, update.
         if ($cmb->getNocontact() != $nocontact) {
             $cmb->setNocontact($nocontact)->update();
         }
-        
+
         $sub = $cmb->getEmaillists()->findBy(function($ele) use ($eml) {
             return intval($ele->getMarketingbrandemaillist()->getId()) === intval($eml->getId());
         });
@@ -174,7 +161,7 @@ class Customer extends Actor
             $cmb->getEmaillists()->addElement($ceml);
             $ceml->create();
         } else {
-            // As there is one, set the unsubscribed flag to false if 
+            // As there is one, set the unsubscribed flag to false if
             // its different
             if ($sub->first()->getUnsubscribed() != $unsubscribed) {
                 $sub->first()->setUnsubscribed($unsubscribed)->update();
@@ -195,7 +182,7 @@ class Customer extends Actor
                 $source->create();
             }
         }
-        
+
         return $this;
     }
 

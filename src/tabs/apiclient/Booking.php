@@ -94,6 +94,8 @@ use tabs\apiclient\OwnerBookingType;
  * @method Collection|booking\Extra[] getExtras() Returns the booking extras
  *
  * @method Collection|booking\Guest[] getGuests() Returns the booking guests
+ *
+ * @method Collection|booking\Voucher[] getVouchers() Returns the booking vouchers
  */
 class Booking extends Builder
 {

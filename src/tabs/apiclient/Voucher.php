@@ -23,7 +23,6 @@ use tabs\apiclient\Builder;
  * @method Voucher setCancelleddatetime(\DateTime $var) Sets the cancelleddatetime
  * @method Voucher setUseddatetime(\DateTime $var) Sets the useddatetime
  * @method Voucher setUsedbyactor(\tabs\apiclient\Customer $var) Sets the usedbyactor
- * @method Voucher setBooking(\tabs\apiclient\Booking $var) Sets the booking
  * @method Voucher setExpirydate(\DateTime $var) Sets the expirydate
  * @method Voucher setExpired(boolean $var) Sets the expired
  *
@@ -74,11 +73,6 @@ class Voucher extends Builder
     protected $usedbyactor;
 
     /**
-     * @var \tabs\apiclient\Booking
-     */
-    protected $booking;
-
-    /**
      * @var \DateTime
      */
     protected $expirydate;
@@ -112,11 +106,10 @@ class Voucher extends Builder
     {
         $this->paidforbyactor = new \tabs\apiclient\Customer();
         $this->forusebyactor = new \tabs\apiclient\Customer();
+        $this->usedbyactor = new \tabs\apiclient\Customer();
         $this->createddatetime = new \DateTime();
         $this->cancelleddatetime = new \DateTime();
         $this->useddatetime = new \DateTime();
-        $this->usedbyactor = new \tabs\apiclient\Customer();
-        $this->booking = new \tabs\apiclient\Booking();
         $this->expirydate = new \DateTime();
 
         $this->bookingperiods = Collection::factory(
@@ -201,14 +194,6 @@ class Voucher extends Builder
     public function getUsedbyactor()
     {
         return $this->usedbyactor;
-    }
-
-    /**
-     * @return \tabs\apiclient\Booking
-     */
-    public function getBooking()
-    {
-        return $this->booking;
     }
 
     /**
