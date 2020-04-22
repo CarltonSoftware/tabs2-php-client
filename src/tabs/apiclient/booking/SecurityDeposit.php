@@ -19,33 +19,35 @@ use tabs\apiclient\OwnerChargeCode;
  * @link      http://www.carltonsoftware.co.uk
  *
  * @method SecurityDeposit setAmount(integer $var) Sets the amount
- * 
+ *
  * @method SecurityDeposit setPaid(integer $var) Sets the paid
- * 
+ *
  * @method SecurityDeposit setRefunded(integer $var) Sets the refunded
- * 
+ *
  * @method SecurityDeposit setBalance(integer $var) Sets the balance
- * 
+ *
  * @method SecurityDeposit setOutstanding(integer $var) Sets the outstanding
- * 
+ *
  * @method SecurityDeposit setDueindate(\DateTime $var) Sets the dueindate
- * 
+ *
  * @method SecurityDeposit setPaiddate(\DateTime $var) Sets the paiddate
- * 
+ *
  * @method SecurityDeposit setWithheld(integer $var) Sets the withheld
- * 
+ *
  * @method SecurityDeposit setRefundable(integer $var) Sets the refundable
- * 
+ *
  * @method SecurityDeposit setHeld(boolean $var) Sets the held
- * 
+ *
  * @method SecurityDeposit setDueoutdate(\DateTime $var) Sets the dueoutdate
- * 
+ *
  * @method SecurityDeposit setRefundeddate(\DateTime $var) Sets the refundeddate
- * 
+ *
  * @method SecurityDeposit setOwnerchargeamount(integer $var) Sets the ownerchargeamount
- * 
+ *
  * @method SecurityDeposit setOwnercharge(string $var) Sets the ownercharge
- * 
+ *
+ * @method SecurityDeposit setDonotaddsd(string $var) Sets the do not add sd bool
+ *
  * @method \tabs\apiclient\property\SecurityDeposit getPropertysecuritydeposit() Get the property SD
  */
 class SecurityDeposit extends Builder
@@ -70,6 +72,11 @@ class SecurityDeposit extends Builder
      * @var integer
      */
     protected $refunded = 0;
+
+    /**
+     * @var boolean
+     */
+    protected $donotaddsd = false;
 
     /**
      * Balance
@@ -223,15 +230,15 @@ class SecurityDeposit extends Builder
     public function toArray()
     {
         $arr = $this->__toArray();
-        
+
         if ($this->getOwnerchargecode()) {
             $arr['ownerchargecodeid'] = $this->getOwnerchargecode()->getId();
         }
-        
+
         if ($this->getPropertysecuritydeposit()) {
             $arr['propertysecuritydepositid'] = $this->getPropertysecuritydeposit()->getId();
         }
-        
+
         return $arr;
     }
 
@@ -393,5 +400,13 @@ class SecurityDeposit extends Builder
     public function getPropertysecuritydeposit()
     {
         return $this->propertysecuritydeposit;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getDonotaddsd()
+    {
+        return $this->donotaddsd;
     }
 }
