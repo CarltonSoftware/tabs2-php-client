@@ -1167,6 +1167,20 @@ class Booking extends Builder
     }
 
     /**
+     * Get the total paid in vouchers
+     * 
+     * @return float
+     */
+    public function getVouchersPaid()
+    {
+        $total = 0;
+        foreach ($this->getVouchers() as $v) {
+            $total += $v->getVoucher()->getValue();
+        }
+        return $total;
+    }
+
+    /**
      * Get the booking special offers
      *
      * @return StaticCollection|booking\SpecialOffer[]
