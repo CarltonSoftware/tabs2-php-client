@@ -73,6 +73,8 @@ class EventLog extends Builder
      */
     public function __construct($id = null)
     {
+        $this->eventdatetime = new \DateTime(); // not optional as the docs say
+
         parent::__construct($id);
     }
 
