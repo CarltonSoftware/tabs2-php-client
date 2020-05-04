@@ -74,6 +74,18 @@ if (!empty($collection)) {
                 $element->getDocument()->getId(),
                 (string) $element->getDocument()
             );
+        }else if ($element instanceof tabs\apiclient\EventType) {
+            echo sprintf(
+                '<li>%s - %s</li>',
+                $element->getId(),
+                $element->getEventtype()
+            );
+        }else if ($element instanceof tabs\apiclient\EventLog) {
+            echo sprintf(
+                '<li>%s - %s</li>',
+                $element->getType(),
+                $element->getEventtype()->eventtype
+            );
         } else {
             echo sprintf(
                 '<li><a href="../exploreelement/?q=%s">%s</a></li>',

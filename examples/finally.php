@@ -13,7 +13,14 @@ if (tabs\apiclient\client\Client::getClient()->getMiddleware()
 if (!empty($container)) {
     echo '<ul>';
     foreach ($container as $transaction) {
-        echo '<li>' .  urldecode($transaction['request']->getUri()) . '</li>';
+        switch ($transaction['request']->getMethod()) {
+            default:
+                echo sprintf(
+                    '<li>%s %s</li>',
+                    $transaction['request']->getMethod(),
+                    urldecode($transaction['request']->getUri())
+                );
+        }
     }
     echo '</ul>';
 }

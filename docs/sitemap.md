@@ -56,6 +56,12 @@
  * [Viewing a image](document/viewing-an-image.html)
 
 
+## Events examples
+ * [This example demonstrates how to add a new event type](events/add-new-event-type.html)
+ * [This file documents how to get create a new event log.](events/add-new-eventlog.html)
+ * [Get a list of events](events/index.html)
+
+
 ## Property examples
  * [Adding a attribute to a property](property/add-attribute.html)
  * [Adding a document to a property](property/add-document.html)
