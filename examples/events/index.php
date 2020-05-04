@@ -1,9 +1,8 @@
 <?php
 
 /**
- * @name Getting event log data
+ * @name Get a list of events
  * 
- * This file documents how to get information on event logs.
  */
 
 require_once __DIR__ . '/../creating-a-new-connection.php';
@@ -14,7 +13,6 @@ try {
         new \tabs\apiclient\EventLog
     );
 $collection->fetch();
-
 include __DIR__ . '/../collection.php';
 } catch(Exception $e) {
     echo $e->getMessage();

@@ -2,7 +2,7 @@
 
 /**
  * @name Adding a attribute to a property
- *
+ * 
  */
 
 require_once __DIR__ . '/../creating-a-new-connection.php';
