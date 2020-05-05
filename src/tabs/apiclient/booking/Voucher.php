@@ -18,6 +18,7 @@ use tabs\apiclient\Builder;
  * @method Voucher setVoucher(\tabs\apiclient\Voucher $var) Sets the voucher
  * @method Voucher setBookingamount(float $var) Sets the bookingamount
  * @method Voucher setSecuritydepositamount(float $var) Sets the securitydepositamount
+ * @method Voucher setDonotconfirmbooking(boolean $var) Sets the donotconfirmbooking flag
  */
 class Voucher extends Builder
 {
@@ -35,6 +36,11 @@ class Voucher extends Builder
      * @var float
      */
     protected $securitydepositamount;
+
+    /**
+     * @var boolean
+     */
+    protected $donotconfirmbooking;
 
     // -------------------- Public Functions -------------------- //
 
