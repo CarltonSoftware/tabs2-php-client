@@ -44,14 +44,14 @@ class EventLog extends Builder
      * @var DateTime
      */
     protected $eventdatetime;
-    
+
     /**
      * Actor
      *
      * @var \tabs\apiclient\Actor
      */
     protected $actor;
-    
+
     /**
      * Booking
      *
@@ -74,7 +74,8 @@ class EventLog extends Builder
     public function __construct($id = null)
     {
         $this->eventdatetime = new \DateTime(); // not optional as the docs say
-
+        $this->eventype = new EventType();
+        
         parent::__construct($id);
     }
 
@@ -84,7 +85,7 @@ class EventLog extends Builder
     public function toArray()
     {
         $arr = $this->__toArray();
-        
+
         return $arr;
     }
 
