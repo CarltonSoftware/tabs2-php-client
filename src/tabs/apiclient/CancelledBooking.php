@@ -29,6 +29,7 @@ namespace tabs\apiclient;
  * 
  * @method CancelledBooking setReason(string $reason) set the cancellation reason
  * @method CancelledBooking setDatetime(\DateTime $datetime) Set the datetime
+ * @method CancelledBooking setFullrefund(boolean $fullrefund) Sets the fullrefund
  */
 class CancelledBooking extends Base
 {
@@ -45,6 +46,13 @@ class CancelledBooking extends Base
      * @var string
      */
     protected $reason = '';
+
+    /**
+     * Fullrefund
+     *
+     * @var boolean
+     */
+    protected $fullrefund = false;
 
     // -------------------------- Public Functions -------------------------- //
     
@@ -65,10 +73,16 @@ class CancelledBooking extends Base
      */
     public function toArray()
     {
-        return array(
+        $arr = array(
             'reason' => $this->getReason(),
             'datetime' => $this->getDatetime()->format('Y-m-d H:i:s')
         );
+
+        if ($this->getFullrefund() === true) {
+            $arr['fullrefund'] = $this->boolToStr(true);
+        }
+  
+        return $arr;
     }
 
     /**
@@ -89,5 +103,15 @@ class CancelledBooking extends Base
     public function getReason()
     {
         return $this->reason;
+    }
+
+    /**
+     * Returns the fullrefund
+     *
+     * @return boolean
+     */
+    public function getFullrefund()
+    {
+        return $this->fullrefund;
     }
 }
