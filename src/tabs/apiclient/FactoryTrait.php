@@ -58,10 +58,10 @@ trait FactoryTrait
     {
         return count($this->getChanges()) > 0;
     }
-    
+
     /**
      * @param string $key Key
-     * 
+     *
      * @return boolean
      */
     public function hasChange($key)
@@ -236,6 +236,10 @@ trait FactoryTrait
      */
     public function __call($name, $args = array())
     {
+        if ($name === 'toArray') {
+            return $this->__toArray();
+        }
+
         // This call method is only for accessors
         $nameLength = strlen($name);
         if ($nameLength > 2) {

@@ -230,13 +230,17 @@ abstract class Builder extends Base implements BuilderInterface
         foreach ($object->toArray() as $key => $value) {
             $array[$string . '_' . $key] = $value;
         }
-        
+
         if (isset($array[$string . 'id'])) {
             unset($array[$string . 'id']);
         }
     }
 
-    public function __sleep() {
+    /**
+     * @return void
+     */
+    public function __sleep()
+    {
         $properties = array_keys(get_class_vars(get_class($this)));
 
          if (property_exists($this, 'id') && !$this->getId()) {

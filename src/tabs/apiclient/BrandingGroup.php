@@ -14,61 +14,28 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method BookingBrand setCode(string $var) Sets the code
- * 
- * @method BookingBrand setName(string $var) Sets the name
- * 
+ * @method BrandingGroup setCode(string $var) Sets the code
+ * @method BrandingGroup setName(string $var) Sets the name
+ * @method BookingBrand setAgency(Agency $var) Set the agency
  */
 class BrandingGroup extends Builder
 {
     /**
-     * Code
-     *
      * @var string
      */
     protected $code;
 
     /**
-     * Name
-     *
      * @var string
      */
     protected $name;
 
     /**
-     * Agency
-     *
      * @var \tabs\apiclient\Agency
      */
     protected $agency;
 
     // -------------------- Public Functions -------------------- //
-
-    /**
-     * Set the agency
-     *
-     * @param string|\tabs\apiclient\Agency $agency The Agency
-     *
-     * @return BookingBrand
-     */
-    public function setAgency($agency)
-    {
-        $this->agency = \tabs\apiclient\Agency::factory($agency);
-
-        return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function toArray()
-    {
-        return array(
-            'code' => $this->getCode(),
-            'name' => $this->getName(),
-            'agencyid' => $this->getAgency()->getId()
-        );
-    }
 
     /**
      * Returns the code

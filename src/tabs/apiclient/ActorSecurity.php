@@ -15,26 +15,23 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
+ * @method ActorSecurity setActor(\tabs\apiclient\Actor $var) Sets the actor
+ * @method ActorSecurity setSecurityrole(\tabs\apiclient\SecurityRole $var) Sets the role
+ * @method ActorSecurity setSecuritygroup(\tabs\apiclient\SecurityGroup $var) Sets the group
  */
 class ActorSecurity extends Builder
 {
     /**
-     * Actor
-     *
      * @var \tabs\apiclient\TabsUser
      */
     protected $actor;
 
     /**
-     * Securityrole
-     *
      * @var \tabs\apiclient\SecurityRole
      */
     protected $securityrole;
 
     /**
-     * Securitygroup
-     *
      * @var \tabs\apiclient\SecurityGroup
      */
     protected $securitygroup;
@@ -42,45 +39,14 @@ class ActorSecurity extends Builder
     // -------------------- Public Functions -------------------- //
 
     /**
-     * Set the actor
-     *
-     * @param stdclass|array|\tabs\apiclient\TabsUser $actor The Actor
-     *
-     * @return ActorSecurity
+     * @inheritDoc
      */
-    public function setActor($actor)
+    public function __construct($id = null)
     {
-        $this->actor = \tabs\apiclient\TabsUser::factory($actor);
-
-        return $this;
-    }
-
-    /**
-     * Set the securityrole
-     *
-     * @param stdclass|array|\tabs\apiclient\SecurityRole $securityrole The Securityrole
-     *
-     * @return ActorSecurity
-     */
-    public function setSecurityrole($securityrole)
-    {
-        $this->securityrole = \tabs\apiclient\SecurityRole::factory($securityrole);
-
-        return $this;
-    }
-
-    /**
-     * Set the securitygroup
-     *
-     * @param stdclass|array|\tabs\apiclient\SecurityGroup $securitygroup The Securitygroup
-     *
-     * @return ActorSecurity
-     */
-    public function setSecuritygroup($securitygroup)
-    {
-        $this->securitygroup = \tabs\apiclient\SecurityGroup::factory($securitygroup);
-
-        return $this;
+        $this->actor = new TabsUser();
+        $this->securityrole = new SecurityRole();
+        $this->securitygroup = new SecurityGroup();
+        parent::__construct($id);
     }
 
     /**
@@ -88,18 +54,9 @@ class ActorSecurity extends Builder
      */
     public function toArray()
     {
-        $arr = array(
-            'actorid' => $this->getActor()->getId()
-        );
-        
-        if ($this->getSecurityrole()) {
-            $arr['securityroleid'] = $this->getSecurityrole()->getId();
-            $arr['type'] = 'Role';
-        } else if ($this->getSecuritygroup()) {
-            $arr['securitygroupid'] = $this->getSecuritygroup()->getId();
-            $arr['type'] = 'Group';
-        }
-        
+        $arr = $this->__toArray();
+        $arr['type'] = isset($arr['securityroleid']) ? 'Role' : 'Group';
+
         return $arr;
     }
 
