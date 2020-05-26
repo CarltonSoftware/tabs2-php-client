@@ -15,38 +15,21 @@ use tabs\apiclient\Builder;
  * @link      http://www.carltonsoftware.co.uk
  *
  * @method tabs\apiclient\core\AccountingDateDefinition setName(string $var) Sets the name
- * 
  * @method tabs\apiclient\core\AccountingDateDefinition setDescription(string $var) Sets the description
- * 
  */
 class AccountingDateDefinition extends Builder
 {
     /**
-     * Name
-     *
      * @var string
      */
     protected $name;
 
     /**
-     * Description
-     *
      * @var string
      */
     protected $description;
 
     // -------------------- Public Functions -------------------- //
-
-    /**
-     * @inheritDoc
-     */
-    public function toArray()
-    {
-        return array(
-            'name' => $this->getName(),
-            'description' => $this->getDescription(),
-        );
-    }
 
     /**
      * Returns the name

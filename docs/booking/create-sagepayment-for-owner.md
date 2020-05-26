@@ -1,19 +1,11 @@
-# Creating a sagepay payment
-
-This file documents how to create a sagepay payment and add it to a booking.
-
-The tabs api uses SagePay Server to create an iframe url and return it to you.
-
-You will need to provide two callback urls to handle success and failed payments.
-
-Card surcharges are handled from within tabs, there is no need to add one on separately.
+# Creating a payment for an owner
 
 ```php
 
 try {
     if ($id = filter_input(INPUT_GET, 'id')) {
-        $b = new tabs\apiclient\Booking($id);
-        $b->get();
+        $o = new tabs\apiclient\Owner($id);
+        $o->get();
 
         // Get the payment methods
         $paymentMethods = \tabs\apiclient\Collection::factory(
@@ -35,15 +27,12 @@ try {
             return $ele->getCode() == 'GBP';
         })->first();
 
-        $customer = $b->getCustomers()->first()->getCustomer();
         $sp = new tabs\apiclient\SagePayPayment();
         $sp->setAmount(10)
-            ->setBookingamount(10)
-            ->setCustomer($customer)
-            ->setBooking($b);
+            ->setOwner($o);
 
         // Get the address of the customer.  If you do not have one, you can provide an empty Actor Address object.
-        $addresses = $customer->getContactdetails()->findBy(function($ele) {
+        $addresses = $o->getContactdetails()->findBy(function($ele) {
             return $ele instanceof \tabs\apiclient\actor\Address;
         });
 
@@ -55,11 +44,11 @@ try {
 
             // Set the payment type or be either DEFERRED or PAYMENT.
             // DEFERRED payments need to be released and will not take payment.
-            ->setPaymenttype('DEFERRED')
+            ->setPaymenttype('PAYMENT')
 
             // Set the callback url so that you can be notified of the confirmed payment
-            ->setCallbackurl($base . 'thank-you-for-your-payment.php?id=' . $b->getId())
-            ->setFailureurl($base . 'whoops.php?id=' . $b->getId());
+            ->setCallbackurl($base . 'thank-you-for-your-payment.php?id=' . $o->getId())
+            ->setFailureurl($base . 'whoops.php?id=' . $o->getId());
 
         echo $sp->create();
 

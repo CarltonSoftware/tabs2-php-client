@@ -16,37 +16,21 @@ use tabs\apiclient\Builder;
  * @link      http://www.carltonsoftware.co.uk
  *
  * @method AgencyBookingType setName(string $var) Sets the name
- * 
  * @method AgencyBookingType setDescription(string $var) Sets the description
  */
 class AgencyBookingType extends Builder
 {
     /**
-     * Name
-     *
      * @var string
      */
     protected $name;
 
     /**
-     * Description
-     *
      * @var string
      */
     protected $description;
 
     // -------------------- Public Functions -------------------- //
-
-    /**
-     * @inheritDoc
-     */
-    public function toArray()
-    {
-        return array(
-            'name' => $this->getName(),
-            'description' => $this->getDescription(),
-        );
-    }
 
     /**
      * Returns the name

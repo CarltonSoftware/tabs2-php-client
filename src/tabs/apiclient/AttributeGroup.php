@@ -14,27 +14,15 @@ use tabs\apiclient\Builder;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
- * 
- * @method Group  setName(string $name) Sets the name
+ *
+ * @method AttributeGroup setName(string $name) Sets the name
  */
 class AttributeGroup extends Builder
 {
     /**
-     * Name
-     * 
      * @var string
      */
-    protected $name = '';
-    
-    /**
-     * @inheritDoc
-     */
-    public function toArray()
-    {
-        return array(
-            'name' => $this->getName()
-        );
-    }
+    protected $name;
 
     /**
      * Returns the name
