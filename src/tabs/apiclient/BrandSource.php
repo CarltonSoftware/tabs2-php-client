@@ -15,38 +15,22 @@ use tabs\apiclient\Builder;
  * @link      http://www.carltonsoftware.co.uk
  *
  * @method BrandSource setBrandsource(string $var) Sets the brandsource
- * 
  * @method BrandSource setDescription(string $var) Sets the description
- * 
+ *
  */
 class BrandSource extends Builder
 {
     /**
-     * Brandsource
-     *
      * @var string
      */
     protected $brandsource;
 
     /**
-     * Description
-     *
      * @var string
      */
     protected $description;
 
     // -------------------- Public Functions -------------------- //
-
-    /**
-     * @inheritDoc
-     */
-    public function toArray()
-    {
-        return array(
-            'brandsource' => $this->getBrandsource(),
-            'description' => $this->getDescription()
-        );
-    }
 
     /**
      * Returns the brandsource

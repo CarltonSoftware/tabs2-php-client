@@ -15,37 +15,22 @@ use tabs\apiclient\Builder;
  * @link      http://www.carltonsoftware.co.uk
  *
  * @method AccountValueType setValuetype(string $var) Sets the valuetype
- * 
+ *
  * @method AccountValueType setDescription(string $var) Sets the description
  */
 class AccountValueType extends Builder
 {
     /**
-     * Valuetype
-     *
      * @var string
      */
     protected $valuetype;
 
     /**
-     * Description
-     *
      * @var string
      */
     protected $description;
 
     // -------------------- Public Functions -------------------- //
-
-    /**
-     * @inheritDoc
-     */
-    public function toArray()
-    {
-        return array(
-            'valuetype' => $this->getValuetype(),
-            'description' => $this->getDescription()
-        );
-    }
 
     /**
      * Returns the valuetype

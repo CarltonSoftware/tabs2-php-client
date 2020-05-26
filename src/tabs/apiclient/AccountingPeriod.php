@@ -16,105 +16,46 @@ use tabs\apiclient\Builder;
  * @link      http://www.carltonsoftware.co.uk
  *
  * @method AccountingPeriod setName(string $var) Sets the name
- * 
+ * @method AccountingPeriod setStartdate(\DateTime $var) Sets the start date
+ * @method AccountingPeriod setClosed(\DateTime $var) Sets the closed date
+ * @method AccountingPeriod setEnddate(\DateTime $var) Sets the end date
+ *
  */
 class AccountingPeriod extends Builder
 {
     /**
-     * Name
-     *
      * @var string
      */
     protected $name;
 
     /**
-     * Startdate
-     *
      * @var \DateTime
      */
     protected $startdate;
 
     /**
-     * Enddate
-     *
      * @var \DateTime
      */
     protected $enddate;
 
     /**
-     * Closed
-     *
      * @var \DateTime
      */
     protected $closed;
 
     // -------------------- Public Functions -------------------- //
 
-    /**
-     * Set the startdate
-     *
-     * @param string|\DateTime $startdate The Startdate
-     *
-     * @return AccountingPeriod
-     */
-    public function setStartdate($startdate)
-    {
-        if ($startdate instanceof \DateTime) {
-            $this->startdate = $startdate;
-        } else {
-            $this->startdate = new \DateTime($startdate);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Set the enddate
-     *
-     * @param string|\DateTime $enddate The Enddate
-     *
-     * @return AccountingPeriod
-     */
-    public function setEnddate($enddate)
-    {
-        if ($enddate instanceof \DateTime) {
-            $this->enddate = $enddate;
-        } else {
-            $this->enddate = new \DateTime($enddate);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Set the closed
-     *
-     * @param string|\DateTime $closed The Closed
-     *
-     * @return AccountingPeriod
-     */
-    public function setClosed($closed)
-    {
-        if ($closed instanceof \DateTime) {
-            $this->closed = $closed;
-        } else {
-            $this->closed = new \DateTime($closed);
-        }
-
-        return $this;
-    }
 
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function __construct($id = null)
     {
-        return array(
-            'name' => $this->getName(),
-            'startdate' => $this->getStartdate()->format('Y-m-d'),
-            'enddate' => $this->getEnddate()->format('Y-m-d'),
-            'closed' => $this->getClosed()->format('Y-m-d H:i:s')
-        );
+        $this->enddate = new \DateTime();
+        $this->startdate = new \DateTime();
+        $this->closed = new \DateTime();
+
+        parent::__construct($id);
     }
 
     /**

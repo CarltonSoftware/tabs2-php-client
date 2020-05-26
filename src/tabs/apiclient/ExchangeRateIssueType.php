@@ -2,28 +2,28 @@
 
 namespace tabs\apiclient;
 
-use tabs\apiclient\Base;
+use tabs\apiclient\Builder;
 
 /**
- * Tabs Rest API BookingEvent object.
+ * Tabs Rest API ExchangeRateIssueType object.
  *
  * @category  Tabs_Client
  * @package   Tabs
  * @author    Carlton Software <support@carltonsoftware.co.uk>
- * @copyright 2016 Carlton Software
+ * @copyright 2020 Carlton Software
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method BookingEvent setEvent(string $var) Sets the event
- * @method BookingEvent setDescription(string $var) Sets the description
+ * @method ExchangeRateIssueType setExchangerateissuetype(string $var) Sets the exchangerateissuetype
+ * @method ExchangeRateIssueType setDescription(string $var) Sets the description
  */
-class BookingEvent extends Base
+class ExchangeRateIssueType extends Builder
 {
     /**
      * @var string
      */
-    protected $event;
+    protected $exchangerateissuetype;
 
     /**
      * @var string
@@ -33,18 +33,24 @@ class BookingEvent extends Base
     // -------------------- Public Functions -------------------- //
 
     /**
-     * Returns the event
-     *
-     * @return string
+     * @inheritDoc
      */
-    public function getEvent()
+    public function toArray()
     {
-        return $this->event;
+        $arr = $this->__toArray();
+
+        return $arr;
     }
 
     /**
-     * Returns the description
-     *
+     * @return string
+     */
+    public function getExchangerateissuetype()
+    {
+        return $this->exchangerateissuetype;
+    }
+
+    /**
      * @return string
      */
     public function getDescription()

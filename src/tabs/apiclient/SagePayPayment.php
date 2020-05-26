@@ -15,17 +15,21 @@ use tabs\apiclient\Base;
  * @link      http://www.carltonsoftware.co.uk
  *
  * @method SagePayPayment setAmount(float $var) Sets the amount
- * 
- * 
+ *
+ *
  * @method SagePayPayment setBookingamount(float $var)         Sets the bookingamount
  * @method SagePayPayment setSecuritydepositamount(float $var) Sets the securitydepositamount
- * @method SagePayPayment setCallbackurl(string $var)          Set callback url 
- * @method SagePayPayment setFailureurl(string $var)           Set failure url 
+ * @method SagePayPayment setCallbackurl(string $var)          Set callback url
+ * @method SagePayPayment setFailureurl(string $var)           Set failure url
  * @method SagePayPayment setPaymenttype(string $var)          Set payment type
  * @method SagePayPayment setRepeatpayment(boolean $var)       Set the repeat payment flag
  * @method SagePayPayment setBypassamountdue(boolean $var)     Set the bypass amount due flag
- * 
- * @method Payment setDonotconfirmbooking(boolean $var) Sets the donotconfirmbooking
+ * @method SagePayPayment setPaymentmethod(PaymentMethod $var) Set the payment method
+ * @method SagePayPayment setCurrency(Currency $var)           Set the currency
+ * @method SagePayPayment setCustomer(Customer $var)           Set the customer
+ * @method SagePayPayment setOwner(Owner $var)                 Set the owner
+ * @method SagePayPayment setBooking(Booking $var)             Set the booking
+ * @method SagePayPayment setDonotconfirmbooking(boolean $var) Sets the donotconfirmbooking
  */
 class SagePayPayment extends Base
 {
@@ -72,6 +76,13 @@ class SagePayPayment extends Base
     protected $customer;
 
     /**
+     * Customer
+     *
+     * @var \tabs\apiclient\Owner
+     */
+    protected $owner;
+
+    /**
      * Bookingamount
      *
      * @var float
@@ -84,91 +95,63 @@ class SagePayPayment extends Base
      * @var float
      */
     protected $securitydepositamount = 0;
-    
+
     /**
      * Callback url
-     * 
+     *
      * @var string
      */
     protected $callbackurl = '';
-    
+
     /**
      * Failure url
-     * 
+     *
      * @var string
      */
     protected $failureurl = '';
-    
+
     /**
      * Continuous authority bool
-     * 
+     *
      * @var boolean
      */
     protected $repeatpayment = false;
-    
+
     /**
      * Bypass amount due bool
-     * 
+     *
      * @var boolean
      */
     protected $bypassamountdue = false;
-    
+
     /**
      * Payment type.  Can be either PAYMENT OR DEFERRED.
-     * 
+     *
      * @var string
      */
     protected $paymenttype = 'PAYMENT';
-    
+
     /**
      * Donotconfirmbooking
      *
      * @var boolean
      */
-    protected $donotconfirmbooking = false;       
+    protected $donotconfirmbooking = false;
 
     // -------------------- Public Functions -------------------- //
 
     /**
-     * Set the currency
-     *
-     * @param stdclass|array|\tabs\apiclient\Currency $currency The Currency
-     *
-     * @return SagePayPayment
+     * @inheritDoc
      */
-    public function setCurrency($currency)
+    public function __construct($id = null)
     {
-        $this->currency = \tabs\apiclient\Currency::factory($currency);
+        parent::__construct($id);
 
-        return $this;
-    }
-
-    /**
-     * Set the customer
-     *
-     * @param stdclass|array|\tabs\apiclient\Customer $customer Customer
-     *
-     * @return SagePayPayment
-     */
-    public function setCustomer($customer)
-    {
-        $this->customer = \tabs\apiclient\Customer::factory($customer);
-
-        return $this;
-    }
-
-    /**
-     * Set the paymentmethod
-     *
-     * @param stdclass|array|\tabs\apiclient\PaymentMethod $paymentmethod The Paymentmethod
-     *
-     * @return SagePayPayment
-     */
-    public function setPaymentmethod($paymentmethod)
-    {
-        $this->paymentmethod = \tabs\apiclient\PaymentMethod::factory($paymentmethod);
-
-        return $this;
+        $this->paymentmethod = new PaymentMethod();
+        $this->currency = new Currency();
+        $this->customer = new Customer();
+        $this->owner = new Owner();
+        $this->booking = new Booking();
     }
 
     /**
@@ -186,46 +169,12 @@ class SagePayPayment extends Base
     }
 
     /**
-     * Set the booking
-     *
-     * @param stdclass|array|\tabs\apiclient\Booking $booking The Booking
-     *
-     * @return SagePayPayment
-     */
-    public function setBooking($booking)
-    {
-        $this->booking = \tabs\apiclient\Booking::factory($booking);
-
-        return $this;
-    }
-
-    /**
      * @inheritDoc
      */
     public function toArray()
     {
-        $arr = array(
-            'amount' => $this->getAmount(),
-            'callbackurl' => $this->getCallbackurl(),
-            'failureurl' => $this->getFailureurl(),
-            'paymenttype' => $this->getPaymenttype(),
-            'repeatpayment' => $this->boolToStr(
-                $this->getRepeatpayment()
-            )
-        );
-        
-        if ($this->getPaymentmethod()) {
-            $arr['paymentmethodid'] = $this->getPaymentmethod()->getId();
-        }
-        
-        if ($this->getCurrency()) {
-            $arr['currencyid'] = $this->getCurrency()->getId();
-        }
-        
-        if ($this->getCustomer()) {
-            $arr['customerid'] = $this->getCustomer()->getId();
-        }
-        
+        $arr = $this->__toArray();
+
         if ($this->getAddress()) {
             if (!$this->getAddress()->getId()) {
                 $arr = array_merge($arr, $this->getAddress()->toArray());
@@ -233,29 +182,13 @@ class SagePayPayment extends Base
                 $arr['contactdetailpostalid'] = $this->getAddress()->getId();
             }
         }
-        
-        if ($this->getBooking()) {
-            $arr['bookingid'] = $this->getBooking()->getId();
-        }
-        
-        if ($this->getBookingamount() > 0) {
-            $arr['bookingamount'] = $this->getBookingamount();
-        }
-        
-        if ($this->getSecuritydepositamount() > 0) {
-            $arr['securitydepositamount'] = $this->getSecuritydepositamount();
-        }
 
-        if ($this->getBypassamountdue()) {
-            $arr['bypassamountdue'] = $this->boolToStr($this->getBypassamountdue());
-        }
-        
         return $arr;
     }
-    
+
     /**
      * Return the payment details from the sagepay api
-     * 
+     *
      * @return stdClass
      */
     public function getDetails()
@@ -266,10 +199,10 @@ class SagePayPayment extends Base
             )
         );
     }
-    
+
     /**
      * Release the payment
-     * 
+     *
      * @return \tabs\apiclient\SagePayPayment
      */
     public function releasePayment()
@@ -277,10 +210,10 @@ class SagePayPayment extends Base
         \tabs\apiclient\client\Client::getClient()->put(
             $this->getUpdateUrl() . '/release'
         );
-        
+
         return $this;
     }
-    
+
     /**
      * Perform a create request
      *
@@ -303,7 +236,7 @@ class SagePayPayment extends Base
                 $id
             );
         }
-        
+
         return (string) $req->getBody();
     }
 
