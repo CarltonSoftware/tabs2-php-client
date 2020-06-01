@@ -267,7 +267,7 @@ trait FactoryTrait
                 switch ($prefix) {
                 case 'set':
                     // Set the changes list
-                    $this->_addChange($property, $args[0]);
+                    $this->addChange($property, $args[0]);
 
                     $this->setObjectProperty($this, $property, $args[0]);
                     return $this;
@@ -410,7 +410,7 @@ trait FactoryTrait
      */
     public function set($name, $value)
     {
-        $this->_addChange($name, $value);
+        $this->addChange($name, $value);
         $this->$name = $value;
 
         return $this;
@@ -533,7 +533,7 @@ trait FactoryTrait
      *
      * @return void
      */
-    private function _addChange($property, $value)
+    public function addChange($property, $value)
     {
         if ($this->_isDormant()
             && property_exists($this, $property)

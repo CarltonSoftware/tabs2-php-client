@@ -25,6 +25,7 @@ use tabs\apiclient\Builder;
  * @method Voucher setUsedbyactor(\tabs\apiclient\Customer $var) Sets the usedbyactor
  * @method Voucher setExpirydate(\DateTime $var) Sets the expirydate
  * @method Voucher setExpired(boolean $var) Sets the expired
+ * @method Voucher setVouchersource(VoucherSource $var) Set the voucher source
  *
  * @method Collection|BookingPeriod[] getBookingperiods() Returns the booking periods
  * @method Collection|HolidayPeriod[] getHolidayperiods() Returns the holiday periods
@@ -97,6 +98,16 @@ class Voucher extends Builder
      */
     protected $restrictions;
 
+    /**
+     * @var \tabs\apiclient\VoucherSource
+     */
+    protected $vouchersource;
+
+    /**
+     * @var \tabs\apiclient\Booking
+     */
+    protected $frombooking;
+
     // -------------------- Public Functions -------------------- //
 
     /**
@@ -111,6 +122,7 @@ class Voucher extends Builder
         $this->cancelleddatetime = new \DateTime();
         $this->useddatetime = new \DateTime();
         $this->expirydate = new \DateTime();
+        $this->vouchersource = new \tabs\apiclient\VoucherSource();
 
         $this->bookingperiods = Collection::factory(
             'bookingperiod',
@@ -220,5 +232,35 @@ class Voucher extends Builder
         $arr = $this->__toArray();
 
         return $arr;
+    }
+
+    /**
+     * @return \tabs\apiclient\VoucherSource
+     */
+    public function getVouchersource()
+    {
+        return $this->vouchersource;
+    }
+
+    /**
+     * @return \tabs\apiclient\Booking
+     */
+    public function getFrombooking()
+    {
+        return $this->frombooking;
+    }
+
+    /**
+     * @param Booking|Array $booking Booking
+     *
+     * @return $this
+     */
+    public function setFrombooking($booking)
+    {
+        $this->frombooking = new Booking();
+        $this->setObjectProperty($this, 'frombooking', $booking);
+        $this->addChange('frombooking', $this->frombooking);
+
+        return $this;
     }
 }
