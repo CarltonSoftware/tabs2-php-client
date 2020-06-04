@@ -183,6 +183,14 @@ class Setting extends Builder
     }
 
     /**
+     * @return string
+     */
+    public function getValue()
+    {
+        return $this->getDefaultvalue();
+    }
+
+    /**
      * Get the setting value with a provided entity and entity id
      *
      * Eg: Setting->getSettingValue('BookingBrand', 3)
@@ -194,7 +202,30 @@ class Setting extends Builder
      *
      * @throws \RuntimeException
      */
-    public function getSettingValue($entity = null, $entityid = null)
+    public function getSettingEntityValue($entity = null, $entityid = null)
+    {
+        $e = $this->getSettingEntity($entity, $entityid);
+
+        if ($this->getType() === 'Number') {
+            return (float) $e->getValue();
+        }
+
+        return $e->getValue();
+    }
+
+    /**
+     * Get the setting value with a provided entity and entity id
+     *
+     * Eg: Setting->getSettingValue('BookingBrand', 3)
+     *
+     * @param integer $entity   Entity name
+     * @param integer $entityid Entity id
+     *
+     * @return Setting|setting\Entity|setting\entity\Value
+     *
+     * @throws \RuntimeException
+     */
+    public function getSettingEntity($entity = null, $entityid = null)
     {
         if (!is_string($entity)) {
             throw new \RuntimeException(
@@ -224,27 +255,14 @@ class Setting extends Builder
                     )->first();
 
                     if ($entityIdValue instanceof setting\entity\Value) {
-                        if ($this->getType() === 'Number') {
-                            return (float) $entityIdValue->getDefaultvalue();
-                        }
-
-                        return $entityIdValue->getValue();
+                        return $entityIdValue;
                     }
                 }
 
-
-                if ($this->getType() === 'Number') {
-                    return (float) $entityValue->getDefaultvalue();
-                }
-
-                return $entityValue->getDefaultvalue();
+                return $entityValue;
             }
         }
 
-        if ($this->getType() === 'Number') {
-            return (float) $this->getDefaultvalue();
-        }
-
-        return $this->getDefaultvalue();
+        return $this;
     }
 }

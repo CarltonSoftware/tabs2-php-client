@@ -83,4 +83,12 @@ class Entity extends Builder
     {
         return $this->defaultvalue;
     }
+
+    /**
+     * @return string
+     */
+    public function getValue()
+    {
+        return $this->getDefaultvalue();
+    }
 }
