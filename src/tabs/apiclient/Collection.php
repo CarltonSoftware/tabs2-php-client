@@ -65,7 +65,9 @@ class Collection extends StaticCollection
             // Clear elements array first
             $this->elements = array();
 
-            if ($class->getClass() =='AvailableDay') {
+            if (($class instanceof Base && $class->getClass() =='AvailableDay')
+                || is_string($class) && $class === 'AvailableDay'
+            ) {
                 foreach ($elements as $element) {
                     $avd = new property\branding\AvailableDay();
                     $this->elements[] = $avd->quickSet($element);
