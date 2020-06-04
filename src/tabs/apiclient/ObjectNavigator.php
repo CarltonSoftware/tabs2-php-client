@@ -20,17 +20,17 @@ class ObjectNavigator
      * One way recursive function to navigate through the responsedata from
      * a get request
      *
-     * @param array     $steps  Steps to nagivate through
-     * @param \stdClass $object Object to look at
+     * @param array $steps  Steps to nagivate through
+     * @param mixed $object Object to look at
      *
      * @return null|mixed
      */
-    public static function navigate($steps, \stdClass $object)
+    public static function navigate($steps, $object)
     {
         if (!is_array($steps)) {
             return;
         }
-        
+
         if (count($steps) > 0) {
             $step = array_shift($steps);
             if ($object instanceof \stdClass
