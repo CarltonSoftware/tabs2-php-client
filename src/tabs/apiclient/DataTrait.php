@@ -20,96 +20,51 @@ trait DataTrait
 {
     /**
      * Data returned from the get request
-     * 
+     *
      * @var \stdClass
      */
     protected $responsedata;
-    
+
     /**
      * Get data from the response data object
-     * 
+     *
      * Uses func_get_args to get the steps to navigate the json. I.e:
-     * 
+     *
      * $this->getDataFromResponse('price', 'total', 'brochureprice')
-     * 
+     *
      * Would return the brochure price on a booking object if found.
-     * 
+     *
 -     * @return null|mixed
      */
     public function getDataFromResponse()
     {
-        return $this->_getDataFromObject(
+        return ObjectNavigator::navigate(
             func_get_args(),
             $this->responsedata
         );
     }
-    
+
     /**
      * Set the response data
-     * 
+     *
      * @param object $data Data
-     * 
+     *
      * @return Base
      */
     public function setResponsedata($data)
     {
         $this->responsedata = $data;
-        
+
         return $this;
     }
-    
+
     /**
      * Get the response data
-     * 
+     *
      * @return object|null
      */
     public function getResponsedata()
     {
         return $this->responsedata;
-    }
-    
-    /**
-     * One way recursive function to navigate through the responsedata from
-     * a get request
-     * 
-     * @param array     $steps  Steps to nagivate through
-     * @param \stdClass $object Object to look at
-     * 
-     * @return null|mixed
-     */
-    private function _getDataFromObject($steps, $object)
-    {
-        if (count($steps) > 0) {
-            $step = array_shift($steps);
-            if ($object instanceof \stdClass 
-                && property_exists($object, $step)
-                && count($steps) == 0
-            ) {
-                return $object->$step;
-            }
-            
-            if (is_array($object)
-                && isset($object[$step])
-                && count($steps) == 0
-            ) {
-                return $object[$step];
-            }
-            
-            if ($object instanceof \stdClass 
-                && property_exists($object, $step)
-                && count($steps) > 0
-            ) {
-                return $this->_getDataFromObject($steps, $object->$step);
-            }
-            
-            if (is_array($object)
-                && isset($object[$step])
-                && count($steps) > 0
-            ) {
-                return $this->_getDataFromObject($steps, $object[$step]);
-            }
-        }
-        
-        return;
     }
 }
