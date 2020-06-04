@@ -208,6 +208,10 @@ class Setting extends Builder
 
         if ($this->getType() === 'Number') {
             return (float) $e->getValue();
+        } else if ($this->getType() === 'JSON') {
+            return json_decode($e->getValue());
+        } else if ($this->getType() === 'XML') {
+            return simplexml_load_string($e->getValue());
         }
 
         return $e->getValue();
