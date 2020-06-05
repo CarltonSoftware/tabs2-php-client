@@ -21,6 +21,7 @@ use tabs\apiclient\Builder;
  * @method Voucher setForusebyactor(\tabs\apiclient\Customer $var) Sets the forusebyactor
  * @method Voucher setCreateddatetime(\DateTime $var) Sets the createddatetime
  * @method Voucher setCancelleddatetime(\DateTime $var) Sets the cancelleddatetime
+ * @method Voucher setCancelledbyactor(\tabs\apiclient\Actor $var) Sets who cancelled a voucher
  * @method Voucher setUseddatetime(\DateTime $var) Sets the useddatetime
  * @method Voucher setUsedbyactor(\tabs\apiclient\Customer $var) Sets the usedbyactor
  * @method Voucher setExpirydate(\DateTime $var) Sets the expirydate
@@ -63,6 +64,11 @@ class Voucher extends Builder
      * @var \DateTime
      */
     protected $cancelleddatetime;
+
+    /**
+     * @var \tabs\apiclient\Actor
+     */
+    protected $cancelledbyactor;
 
     /**
      * @var \DateTime
@@ -125,8 +131,8 @@ class Voucher extends Builder
         $this->forusebyactor = new \tabs\apiclient\Customer();
         $this->usedbyactor = new \tabs\apiclient\Customer();
         $this->createddatetime = new \DateTime();
-        $this->cancelleddatetime = new \DateTime();
-        $this->useddatetime = new \DateTime();
+        $this->cancelleddatetime = '';
+        $this->useddatetime = '';
         $this->expirydate = new \DateTime();
         $this->vouchersource = new \tabs\apiclient\VoucherSource();
 
