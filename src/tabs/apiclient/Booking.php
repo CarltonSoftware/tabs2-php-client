@@ -1167,6 +1167,16 @@ class Booking extends Builder
     }
 
     /**
+     * Get the total refunded on the booking
+     *
+     * @return float
+     */
+    public function getTotalRefunded()
+    {
+        return $this->_getPaymentSummaryElement('total', substr(__FUNCTION__, 8));
+    }
+
+    /**
      * Get the total paid in vouchers
      * 
      * @return float
