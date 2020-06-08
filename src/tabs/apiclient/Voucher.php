@@ -21,10 +21,12 @@ use tabs\apiclient\Builder;
  * @method Voucher setForusebyactor(\tabs\apiclient\Customer $var) Sets the forusebyactor
  * @method Voucher setCreateddatetime(\DateTime $var) Sets the createddatetime
  * @method Voucher setCancelleddatetime(\DateTime $var) Sets the cancelleddatetime
+ * @method Voucher setCancelledbyactor(\tabs\apiclient\Actor $var) Sets who cancelled a voucher
  * @method Voucher setUseddatetime(\DateTime $var) Sets the useddatetime
  * @method Voucher setUsedbyactor(\tabs\apiclient\Customer $var) Sets the usedbyactor
  * @method Voucher setExpirydate(\DateTime $var) Sets the expirydate
- * @method Voucher setExpired(boolean $var) Sets the expired
+ * @method Voucher setExpired(boolean $var) Sets the expired flag
+ * @method Voucher setRefundable(boolean $var) Sets the refundable flag
  * @method Voucher setVouchersource(VoucherSource $var) Set the voucher source
  *
  * @method Collection|BookingPeriod[] getBookingperiods() Returns the booking periods
@@ -64,6 +66,11 @@ class Voucher extends Builder
     protected $cancelleddatetime;
 
     /**
+     * @var \tabs\apiclient\Actor
+     */
+    protected $cancelledbyactor;
+
+    /**
      * @var \DateTime
      */
     protected $useddatetime;
@@ -82,6 +89,11 @@ class Voucher extends Builder
      * @var boolean
      */
     protected $expired;
+
+    /**
+     * @var boolean
+     */
+    protected $refundable;
 
     /**
      * @var \tabs\apiclient\voucher\BookingPeriod[]\tabs\apiclient\Collection
@@ -119,8 +131,8 @@ class Voucher extends Builder
         $this->forusebyactor = new \tabs\apiclient\Customer();
         $this->usedbyactor = new \tabs\apiclient\Customer();
         $this->createddatetime = new \DateTime();
-        $this->cancelleddatetime = new \DateTime();
-        $this->useddatetime = new \DateTime();
+        $this->cancelleddatetime = '';
+        $this->useddatetime = '';
         $this->expirydate = new \DateTime();
         $this->vouchersource = new \tabs\apiclient\VoucherSource();
 
@@ -222,6 +234,14 @@ class Voucher extends Builder
     public function getExpired()
     {
         return $this->expired;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getRefundable()
+    {
+        return $this->refundable;
     }
 
     /**
