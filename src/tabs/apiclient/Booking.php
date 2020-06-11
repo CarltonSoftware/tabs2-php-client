@@ -1037,6 +1037,17 @@ class Booking extends Builder
     }
 
     /**
+     * Return true/false if the booking was transferred from another booking or not
+     * 
+     * @return boolean
+     */
+    public function wasTransferred()
+    {
+        return $this->getTransferredfrombooking()
+            && $this->getTransferredfrombooking()->getId();
+    }
+
+    /**
      * Get the total price
      *
      * @return integer
