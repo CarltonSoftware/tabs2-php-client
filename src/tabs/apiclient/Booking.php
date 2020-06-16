@@ -96,6 +96,8 @@ use tabs\apiclient\OwnerBookingType;
  * @method Collection|booking\Guest[] getGuests() Returns the booking guests
  *
  * @method Collection|booking\Voucher[] getVouchers() Returns the booking vouchers
+ *
+ * @method Collection|booking\Approval[] getApprovals() Returns the booking approvals
  */
 class Booking extends Builder
 {
@@ -460,6 +462,13 @@ class Booking extends Builder
      */
     protected $propertyid;
 
+    /**
+     * Approvals
+     *
+     * @var Collection|booking\Approval[]
+     */
+    protected $approvals;
+
     // -------------------- Public Functions -------------------- //
 
     /**
@@ -518,6 +527,11 @@ class Booking extends Builder
         $this->sourcemarketingbrand = new SourceMarketingBrand();
         $this->source = new Source();
         $this->webbooking = new WebBooking();
+        $this->approvals = Collection::factory(
+            'approval',
+            new booking\Approval(),
+            $this
+        );
 
         parent::__construct($id);
     }
@@ -1038,7 +1052,7 @@ class Booking extends Builder
 
     /**
      * Return true/false if the booking was transferred from another booking or not
-     * 
+     *
      * @return boolean
      */
     public function wasTransferred()
@@ -1189,7 +1203,7 @@ class Booking extends Builder
 
     /**
      * Get the total paid in vouchers
-     * 
+     *
      * @return float
      */
     public function getVouchersPaid()
