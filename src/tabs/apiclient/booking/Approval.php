@@ -68,17 +68,13 @@ class Approval extends Builder
      */
     public function __construct($id = null)
     {
+        $this->approvingactor = new \tabs\apiclient\TabsUser();
+        $this->actionedbyactor = new \tabs\apiclient\TabsUser();
+        $this->createddatetime = new \DateTime();
+        $this->approveddatetime = new \DateTime();
+        $this->actioneddatetime = new \DateTime();
+        
         parent::__construct($id);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function toArray()
-    {
-        $arr = $this->__toArray();
-
-        return $arr;
     }
 
     /**

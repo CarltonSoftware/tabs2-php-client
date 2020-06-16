@@ -527,6 +527,11 @@ class Booking extends Builder
         $this->sourcemarketingbrand = new SourceMarketingBrand();
         $this->source = new Source();
         $this->webbooking = new WebBooking();
+        $this->approvals = Collection::factory(
+            'approval',
+            new booking\Approval(),
+            $this
+        );
 
         parent::__construct($id);
     }
