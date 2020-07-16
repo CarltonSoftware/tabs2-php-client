@@ -33,21 +33,21 @@ class ContactDetail extends Builder
      * @var boolean
      */
     protected $invalid;
-    
+
     /**
      * Invalid date time
      *
      * @var \DateTime
      */
     protected $invaliddatetime;
-    
+
     /**
      * Invalid reason
      *
      * @var string
      */
     protected $invalidreason;
-    
+
     /**
      * Comment
      *
@@ -77,7 +77,7 @@ class ContactDetail extends Builder
     protected $contactpreferences;
 
     // ------------------ Public Functions --------------------- //
-    
+
     /**
      * @inheritDoc
      */
