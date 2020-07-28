@@ -26,10 +26,12 @@ namespace tabs\apiclient;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * 
+ *
  * @method CancelledBooking setReason(string $reason) set the cancellation reason
  * @method CancelledBooking setDatetime(\DateTime $datetime) Set the datetime
  * @method CancelledBooking setFullrefund(boolean $fullrefund) Sets the fullrefund
+ * @method CancelledBooking setPriorityrebook(boolean $priorityrebook) Sets the priorityrebook
+ * @method CancelledBooking setTemplateoffer(\tabs\apiclient\SpecialOffer $templateoffer) Special offer template to create an offer from
  */
 class CancelledBooking extends Base
 {
@@ -39,10 +41,10 @@ class CancelledBooking extends Base
      * @var \DateTime
      */
     protected $datetime;
-    
+
     /**
      * Cancellation reason
-     * 
+     *
      * @var string
      */
     protected $reason = '';
@@ -54,18 +56,32 @@ class CancelledBooking extends Base
      */
     protected $fullrefund = false;
 
+    /**
+     * Priority rebook
+     *
+     * @var boolean
+     */
+    protected $priorityrebook = false;
+
+    /**
+     * Special Offer Template
+     *
+     * @var \tabs\apiclient\SpecialOffer
+     */
+    protected $templateoffer;
+
     // -------------------------- Public Functions -------------------------- //
-    
+
     /**
      * @inheritDoc
      */
     public function __construct($id = null)
     {
         $this->datetime = new \DateTime();
-        
+
         parent::__construct($id);
     }
-    
+
     /**
      * Array representation of the object
      *
@@ -73,16 +89,7 @@ class CancelledBooking extends Base
      */
     public function toArray()
     {
-        $arr = array(
-            'reason' => $this->getReason(),
-            'datetime' => $this->getDatetime()->format('Y-m-d H:i:s')
-        );
-
-        if ($this->getFullrefund() === true) {
-            $arr['fullrefund'] = $this->boolToStr(true);
-        }
-  
-        return $arr;
+        return $this->__toArray();
     }
 
     /**
@@ -113,5 +120,15 @@ class CancelledBooking extends Base
     public function getFullrefund()
     {
         return $this->fullrefund;
+    }
+
+    /**
+     * Returns the priorityrebook
+     *
+     * @return boolean
+     */
+    public function getPriortyrebook()
+    {
+        return $this->priorityrebook;
     }
 }
