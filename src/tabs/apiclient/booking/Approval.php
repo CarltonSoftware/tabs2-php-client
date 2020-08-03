@@ -16,6 +16,7 @@ use tabs\apiclient\Builder;
  * @link      http://www.carltonsoftware.co.uk
  *
  * @method Approval setApprovingactor(\tabs\apiclient\Actor $var) Sets the approvingactor
+ * @method Approval setApprovingactortype(string $var) Sets the actor type
  * @method Approval setActionedbyactor(\tabs\apiclient\Actor $var) Sets the actionedbyactor
  * @method Approval setCreateddatetime(\DateTime $var) Sets the createddatetime
  * @method Approval setApproved(boolean $var) Sets the approved flag
@@ -29,6 +30,11 @@ class Approval extends Builder
      * @var \tabs\apiclient\Actor
      */
     protected $approvingactor;
+
+    /**
+     * @var string
+     */
+    protected $approvingactortype;
 
     /**
      * @var \tabs\apiclient\Actor
@@ -69,11 +75,12 @@ class Approval extends Builder
     public function __construct($id = null)
     {
         $this->approvingactor = new \tabs\apiclient\TabsUser();
+        $this->approvingactortype = '';
         $this->actionedbyactor = new \tabs\apiclient\TabsUser();
         $this->createddatetime = new \DateTime();
         $this->approveddatetime = new \DateTime();
         $this->actioneddatetime = new \DateTime();
-        
+
         parent::__construct($id);
     }
 
@@ -83,6 +90,14 @@ class Approval extends Builder
     public function getApprovingactor()
     {
         return $this->approvingactor;
+    }
+
+    /**
+     * @return string
+     */
+    public function getApprovingactortype()
+    {
+        return $this->approvingactortype;
     }
 
     /**
