@@ -2,7 +2,7 @@
 
 /**
  * @name Accessing core data
- * 
+ *
  * Much of the data in tabs2 has dependencies on common data such as Branding, Booking Brand or Mimetype for example.
  */
 
@@ -40,6 +40,7 @@ $lists = array(
     'Unit',
     'Vatrate',
     'Vatband',
+    'PotentialBookingType',
     'WebsiteSection'
 );
 
@@ -72,7 +73,7 @@ foreach ($lists as $list) {
     $collection->fetch();
 
     include __DIR__ . '/../collection.php';
-}   
+}
 } catch(Exception $e) {
     echo $e->getMessage();
 }
