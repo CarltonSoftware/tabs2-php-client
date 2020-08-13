@@ -96,6 +96,8 @@ use tabs\apiclient\OwnerBookingType;
  * @method Collection|booking\Guest[] getGuests() Returns the booking guests
  *
  * @method Collection|booking\Voucher[] getVouchers() Returns the booking vouchers
+ * 
+ * @method Collection|booking\Voucher[] getVehicles() Returns the booking vehicles
  *
  * @method Collection|booking\Approval[] getApprovals() Returns the booking approvals
  */
