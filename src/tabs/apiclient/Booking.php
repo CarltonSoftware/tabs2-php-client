@@ -418,6 +418,11 @@ class Booking extends Builder
     protected $vouchers;
 
     /**
+     * @var Collection|booking\Vehicles[]
+     */
+    protected $vehicles;
+
+    /**
      * Owner payment summary
      *
      * @var OwnerPaymentSummary
@@ -523,6 +528,13 @@ class Booking extends Builder
             new booking\Voucher(),
             $this
         );
+
+        $this->vehicles = Collection::factory(
+            'vehicle',
+            new booking\Vehicle(),
+            $this
+        );
+
         $this->ownerpaymentsummary = new OwnerPaymentSummary();
         $this->sourcemarketingbrand = new SourceMarketingBrand();
         $this->source = new Source();
