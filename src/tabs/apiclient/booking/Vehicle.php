@@ -78,6 +78,10 @@ class Vehicle extends Builder
             $data['registration'] = $this->vehicle->getRegistration();
         }
 
+        if($this->vehicle->getId()) {
+            $data['vehicleid'] = $this->vehicle->getId();
+        }
+
         return $data;
 
     }
