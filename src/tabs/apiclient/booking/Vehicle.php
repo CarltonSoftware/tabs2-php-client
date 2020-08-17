@@ -24,11 +24,6 @@ class Vehicle extends Builder
      */
     protected $vehicle;
 
-    /**
-     * @var \tabs\apiclient\Vehicle
-     */
-    protected $vehicleid;
-
         // -------------------- Public Functions -------------------- //
 
     /**
@@ -37,7 +32,6 @@ class Vehicle extends Builder
     public function __construct($id = null)
     {
         $this->vehicle = new \tabs\apiclient\Vehicle();
-        $this->vehicleid = $id;
         parent::__construct($id);
     }
 
