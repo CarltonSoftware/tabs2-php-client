@@ -24,6 +24,11 @@ class Vehicle extends Builder
      */
     protected $vehicle;
 
+    /**
+     * @var \tabs\apiclient\Vehicle
+     */
+    protected $vehicleid;
+
         // -------------------- Public Functions -------------------- //
 
     /**
@@ -32,6 +37,7 @@ class Vehicle extends Builder
     public function __construct($id = null)
     {
         $this->vehicle = new \tabs\apiclient\Vehicle();
+        $this->vehicleid = $id;
         parent::__construct($id);
     }
 
@@ -51,6 +57,29 @@ class Vehicle extends Builder
     public function getVehicle()
     {
         return $this->vehicle;
+    }
+
+    /**
+     * @return Array
+     */
+    public function getData()
+    {
+        $data = [];
+
+        if($this->vehicle->getMake()) {
+            $data['make'] = $this->vehicle->getMake();
+        }
+
+        if($this->vehicle->getModel()) {
+            $data['model'] = $this->vehicle->getModel();
+        }
+
+        if($this->vehicle->getRegistration()) {
+            $data['registration'] = $this->vehicle->getRegistration();
+        }
+
+        return $data;
+
     }
 
     
