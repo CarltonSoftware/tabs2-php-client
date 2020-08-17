@@ -65,21 +65,24 @@ class Vehicle extends Builder
     public function getData()
     {
         $data = [];
+        
+        $data['bookingvehicleid'] = $this->getId();
+        $data['vehicle'] = [];
 
         if($this->vehicle->getMake()) {
-            $data['make'] = $this->vehicle->getMake();
+            $data['vehicle']['make'] = $this->vehicle->getMake();
         }
 
         if($this->vehicle->getModel()) {
-            $data['model'] = $this->vehicle->getModel();
+            $data['vehicle']['model'] = $this->vehicle->getModel();
         }
 
         if($this->vehicle->getRegistration()) {
-            $data['registration'] = $this->vehicle->getRegistration();
+            $data['vehicle']['registration'] = $this->vehicle->getRegistration();
         }
 
         if($this->vehicle->getId()) {
-            $data['vehicleid'] = $this->vehicle->getId();
+            $data['vehicle']['vehicleid'] = $this->vehicle->getId();
         }
 
         return $data;
