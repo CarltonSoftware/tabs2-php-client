@@ -71,6 +71,14 @@ class Vehicle extends Builder
             $data['vehicle']['model'] = $this->vehicle->getModel();
         }
 
+        if($this->vehicle->getColour()) {
+            $data['vehicle']['colour'] = $this->vehicle->getColour();
+        }
+
+        if($this->vehicle->getComments()) {
+            $data['vehicle']['comments'] = $this->vehicle->getComments();
+        }
+
         if($this->vehicle->getRegistration()) {
             $data['vehicle']['registration'] = $this->vehicle->getRegistration();
         }
