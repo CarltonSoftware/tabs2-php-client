@@ -60,7 +60,7 @@ class Vehicle extends Builder
     {
         $data = [];
         
-        $data['bookingvehicleid'] = $this->getId();
+        $data['id'] = $this->getId();
         $data['vehicle'] = [];
 
         if($this->vehicle->getMake()) {
