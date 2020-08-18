@@ -16,11 +16,11 @@ use tabs\apiclient\Base;
  * @link      http://www.carltonsoftware.co.uk
  *
  * @method PotentialBooking setCreated(\DateTime $var) Sets the created
- * 
+ *
  * @method PotentialBooking setType(string $var) Sets the type
- * 
+ *
  * @method PotentialBooking setExpiry(\DateTime $var) Sets the expiry
- * 
+ *
  * @method PotentialBooking setExpired(boolean $var) Sets the expired
  */
 class PotentialBooking extends Base
@@ -74,7 +74,8 @@ class PotentialBooking extends Base
         if ($this->getExpiry() && $this->getExpiry() instanceof \DateTime) {
             $arr['expirydatetime'] = $this->getExpiry()->format('Y-m-d H:i:s');
         }
-        
+        $arr['expired'] = $this->getExpired();
+
         return $arr;
     }
 
