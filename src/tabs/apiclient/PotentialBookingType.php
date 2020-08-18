@@ -139,4 +139,12 @@ class PotentialBookingType extends Builder
     {
         return $this->getName();
     }
+
+    /**
+     * @return integer
+     */
+    public function totalExpiryminutes()
+    {
+        return ($this->expirydays * 1440) + ($this->expiryhours * 60) + $this->expiryminutes;
+    }
 }
