@@ -96,6 +96,8 @@ use tabs\apiclient\OwnerBookingType;
  * @method Collection|booking\Guest[] getGuests() Returns the booking guests
  *
  * @method Collection|booking\Voucher[] getVouchers() Returns the booking vouchers
+ * 
+ * @method Collection|booking\Voucher[] getVehicles() Returns the booking vehicles
  *
  * @method Collection|booking\Approval[] getApprovals() Returns the booking approvals
  */
@@ -418,6 +420,11 @@ class Booking extends Builder
     protected $vouchers;
 
     /**
+     * @var Collection|booking\Vehicles[]
+     */
+    protected $vehicles;
+
+    /**
      * Owner payment summary
      *
      * @var OwnerPaymentSummary
@@ -523,6 +530,13 @@ class Booking extends Builder
             new booking\Voucher(),
             $this
         );
+
+        $this->vehicles = Collection::factory(
+            'vehicle',
+            new booking\Vehicle(),
+            $this
+        );
+
         $this->ownerpaymentsummary = new OwnerPaymentSummary();
         $this->sourcemarketingbrand = new SourceMarketingBrand();
         $this->source = new Source();
