@@ -80,6 +80,8 @@ use tabs\apiclient\OwnerBookingType;
  * @method Booking setSource(Source $var) Set the source
  *
  * @method Booking setWebbooking(WebBooking $var) Set the webbooking
+ * 
+ * @method Booking setParkingpermitsrequired(boolean $isRequired) Set the parking permits required
  *
  * @method Collection|booking\SecurityDeposit[] getSecuritydeposits() Returns the securitydeposits
  *
@@ -475,6 +477,17 @@ class Booking extends Builder
      * @var Collection|booking\Approval[]
      */
     protected $approvals;
+
+
+    /**
+     * @var boolean
+     */
+    protected $parkingpermitsrequired;
+
+    /**
+     * @var int
+     */
+    protected $parkingpermitsavailable;
 
     // -------------------- Public Functions -------------------- //
 
@@ -1849,6 +1862,38 @@ class Booking extends Builder
         return $this->overridestatus;
     }
 
+    /**
+    * Returns the parkingpermitsavailable
+    *
+    * @return bool
+    */
+
+    public function getParkingpermitsrequired()
+    {
+        return $this->parkingpermitsrequired;
+    }
+
+    /**
+    * Returns the parkingpermitsavailable
+    *
+    * @return Booking
+    */
+    public function setParkingpermitsrequired($isRequired)
+    {
+        $this->parkingpermitsrequired = $isRequired;
+        return $this;
+    }
+
+    /**
+    * Returns the parkingpermitsavailable
+    *
+    * @return int
+    */
+    public function getParkingpermitsavailable()
+    {
+        return $this->parkingpermitsavailable;
+    }
+    
     /**
      * Returns the propertyid
      *
