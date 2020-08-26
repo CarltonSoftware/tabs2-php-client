@@ -81,7 +81,7 @@ use tabs\apiclient\OwnerBookingType;
  *
  * @method Booking setWebbooking(WebBooking $var) Set the webbooking
  * 
- * @method Booking setParkingpermitsrequired(integer $$vehiclesRequired) Set the parking permits required
+ * @method Booking setParkingpermitsrequired(integer $vehiclesRequired) Set the parking permits required
  *
  * @method Collection|booking\SecurityDeposit[] getSecuritydeposits() Returns the securitydeposits
  *
