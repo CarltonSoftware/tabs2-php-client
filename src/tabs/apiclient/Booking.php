@@ -979,6 +979,10 @@ class Booking extends Builder
             );
         }
 
+        if ($this->getParkingpermitsrequired()) {
+            $arr['parkingpermitsrequired'] = $this->getParkingpermitsrequired();
+        }
+
         return $arr;
     }
 
@@ -1863,9 +1867,9 @@ class Booking extends Builder
     }
 
     /**
-    * Returns the parkingpermitsavailable
+    * Returns the parkingpermitsrequired
     *
-    * @return bool
+    * @return int
     */
 
     public function getParkingpermitsrequired()
@@ -1874,7 +1878,9 @@ class Booking extends Builder
     }
 
     /**
-    * Returns the parkingpermitsavailable
+    * parkingpermitsrequired setter
+    *
+    * @param int $vehiclesRequired
     *
     * @return Booking
     */
