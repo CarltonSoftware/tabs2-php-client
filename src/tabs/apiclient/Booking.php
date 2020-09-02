@@ -979,7 +979,7 @@ class Booking extends Builder
             );
         }
 
-        if ($this->getParkingpermitsrequired()) {
+        if ($this->getParkingpermitsrequired() !== null) {
             $arr['parkingpermitsrequired'] = $this->getParkingpermitsrequired();
         }
 
