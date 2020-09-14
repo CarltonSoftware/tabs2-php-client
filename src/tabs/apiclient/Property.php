@@ -15,6 +15,7 @@ use tabs\apiclient\property\Supplier;
 use tabs\apiclient\property\Room;
 use tabs\apiclient\property\Target;
 use tabs\apiclient\property\AvailableBreak;
+use tabs\apiclient\property\ParkingPermit;
 
 /**
  * Tabs Rest API Property object.
@@ -52,44 +53,46 @@ use tabs\apiclient\property\AvailableBreak;
  * @method Property setCheckintext(string $var) Sets the checkintext
  *
  * @method Property setCheckouttext(string $var) Sets the checkouttext * @method integer  getRating() Returns the property rating
- * 
+ *
  * @method Collection|property\Document[] getDocuments() Get the documents
- * 
+ *
  * @method Collection|PropertyNote[] getNotes() Get the Notes
- * 
+ *
  * @method Collection|property\MarketingBrand[] getMarketingbrands() Get the property marketing brands
- * 
+ *
  * @method Collection|property\BookingBrand[] getBookingbrands() Get the property booking brands
- * 
+ *
  * @method Collection|property\Branding[] getBrandings() Get the property brandings
- * 
+ *
  * @method Collection|Inspection[] getInspections() Get the property inspections
- * 
+ *
  * @method Collection|Comment[] getComments() Get the property comments
- * 
+ *
  * @method Collection|Attribute[] getAttributes() Get the property attributes
- * 
+ *
  * @method Collection|Commission[] getCommissions() Get the property commissions
- * 
+ *
  * @method Collection|Office[] getOffices() Get the property offices
- * 
+ *
  * @method Collection|property\Owner[] getOwners() Get the property owners
- * 
+ *
  * @method Collection|OwnerPaymentTerms[] getOwnerpaymenttermss() Get the property owner payment terms
- * 
+ *
  * @method Collection|SecurityDeposit[] getSecuritydeposits() Get the property security deposits
- * 
+ *
  * @method Collection|SecurityFeature[] getSecurityfeatures() Get the property security features
- * 
+ *
  * @method Collection|Supplier[] getSuppliers() Get the property suppliers
- * 
+ *
  * @method Collection|Room[] getRooms() Get the property rooms
- * 
+ *
  * @method Collection|Target[] getTargets() Get the property targets
- * 
+ *
  * @method Collection|AvailableBreak[] getAvailablebreaks() Get the available breaks for a property
- * 
+ *
  * @method Collection|Booking[] getBookings() Returns the properties bookings as a collection
+ *
+ * @method Collection|ParkingPermit[] getParkingpermits() Returns the properties parking permits as a collection
  */
 class Property extends Builder
 {
@@ -357,13 +360,20 @@ class Property extends Builder
      * @var \tabs\apiclient\BookingEnquiry
      */
     protected $enquiry;
-    
+
     /**
      * Ratinginspectiontype
      *
      * @var \tabs\apiclient\InspectionType
      */
-    protected $ratinginspectiontype;    
+    protected $ratinginspectiontype;
+
+    /**
+     * Parkingpermits
+     *
+     * @var Collection|ParkingPermit[]
+     */
+    protected $parkingpermits;
 
     /**
      * @var array
@@ -444,7 +454,11 @@ class Property extends Builder
         'bookings' => array(
             'class' => 'Booking',
             'parent' => true
-        )
+        ),
+        'parkingpermits' => array(
+            'class' => 'property\\ParkingPermit',
+            'parent' => true
+        ),
     );
 
     // -------------------------- Public Functions -------------------------- //
@@ -514,7 +528,7 @@ class Property extends Builder
 
         return $this;
     }
-    
+
     /**
      * Set the ratinginspectiontype
      *
@@ -546,9 +560,9 @@ class Property extends Builder
             'checkinlatesttime' => $this->getCheckinlatesttime(),
             'checkouttime' => $this->getCheckouttime(),
             'checkintext' => $this->getCheckintext(),
-            'checkouttext' => $this->getCheckouttext()
+            'checkouttext' => $this->getCheckouttext(),
         );
-        
+
         if ($this->getStatus()) {
             $arr['status'] = $this->getStatus()->getName();
         }
@@ -566,7 +580,7 @@ class Property extends Builder
             $arr['address_latitude'] = $this->getAddress()->getLatitude();
             $arr['address_longitude'] = $this->getAddress()->getLongitude();
         }
-        
+
         return $arr;
     }
 
@@ -889,7 +903,7 @@ class Property extends Builder
     {
         return $this->rating;
     }
-    
+
     /**
      * Get the primary property branding
      *
@@ -919,7 +933,7 @@ class Property extends Builder
     {
         return $this->location;
     }
-    
+
     /**
      * Returns the ratinginspectiontype
      *
@@ -928,5 +942,5 @@ class Property extends Builder
     public function getRatinginspectiontype()
     {
         return $this->ratinginspectiontype;
-    }    
+    }
 }
