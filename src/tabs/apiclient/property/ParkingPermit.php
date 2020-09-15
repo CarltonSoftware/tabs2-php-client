@@ -69,6 +69,17 @@ class ParkingPermit extends Builder
      */
     protected $holidayperiods;
 
+
+    /**
+     * @var array
+     */
+    protected $__COLLECTION_MAP = array(
+        'holidayperiods' => array(
+            'class' => 'property\\parkingpermit\\HolidayPeriod',
+            'parent' => true
+        ),
+    );
+
     // -------------------- Public Functions -------------------- //
 
     /**
