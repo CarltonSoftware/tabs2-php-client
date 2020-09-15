@@ -91,14 +91,14 @@ if (!empty($collection)) {
                 '<li>%s - %s<br>%s</li>',
                 $element->getLocation(),
                 $element->getLocationofpermit(),
-                implode('<br>', array_map(function ($h) {
+                implode('<br>', $element->getHolidayperiods()->map(function ($h) {
                     return sprintf(
                         '%s-%s (%d)',
                         $h->fromdate,
                         $h->todate,
                         $h->samedateseveryyear
                     );
-                }, $element->getHolidayperiods()))
+                }))
             );
         } else {
             echo sprintf(
