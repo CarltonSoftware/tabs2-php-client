@@ -6,7 +6,7 @@ if (!function_exists('getParentLink')) {
         if ($object->getParent()) {
             getParentLink($object->getParent(), $links);
         }
-        
+
         $links[] = $object->getFullClass() . '-' . $object->getId();
 
         return $links;
@@ -24,39 +24,39 @@ if (!empty($collection)) {
         $classes = array(
             str_replace('\\', '_', $element->getFullClass()) . '-' . $element->getId()
         );
-        
+
         if (in_array($element->getClass(), array('Property', 'Template'))) {
             echo sprintf(
                 '<li><a href="?id=%s">%s</a></li>',
                 $element->getId(),
                 stristr($text, '<title>') ? htmlentities($text) : $text
             );
-        } else if ($element instanceof tabs\apiclient\Actor) {
+        } elseif ($element instanceof tabs\apiclient\Actor) {
             echo sprintf(
                 '<li><a href="?id=%s">%s</a></li>',
                 $element->getId(),
                 stristr($text, '<title>') ? htmlentities($text) : $text
             );
-        }else if ($element instanceof tabs\apiclient\Booking) {
+        } elseif ($element instanceof tabs\apiclient\Booking) {
             echo sprintf(
                 '<li><a href="%s?id=%s">%s</a></li>',
                 getBaseUrl() . '/../../booking/index.php',
                 $element->getId(),
                 $text
             );
-        } else if ($element instanceof tabs\apiclient\SpecialOffer) {
+        } elseif ($element instanceof tabs\apiclient\SpecialOffer) {
             echo sprintf(
                 '<li><a href="specialoffer/viewing-special-offer-data.php?id=%s">%s</a></li>',
                 $element->getId(),
                 $element->getDescription()
             );
-        } else if ($element instanceof tabs\apiclient\Booking) {
+        } elseif ($element instanceof tabs\apiclient\Booking) {
             echo sprintf(
                 '<li><a href="?id=%s">%s</a></li>',
                 $element->getId(),
                 $text
             );
-        } else if ($element instanceof tabs\apiclient\actor\Document 
+        } elseif ($element instanceof tabs\apiclient\actor\Document
             || ($element instanceof tabs\apiclient\property\Document && !$element->getDocument() instanceof \tabs\apiclient\Image)
             || $element instanceof tabs\apiclient\booking\Document
         ) {
@@ -64,9 +64,9 @@ if (!empty($collection)) {
                 '<li><a href="../document/viewing-a-document.php?id=%s">%s</a><a href="../document/tagging-a-document.php?id=%s">Tag this document</a></li>',
                 $element->getDocument()->getId(),
                 $element->getDocument()->getName(),
-                $element->getDocument()->getId() 
+                $element->getDocument()->getId()
             );
-        }else if ($element instanceof tabs\apiclient\property\Document 
+        } elseif ($element instanceof tabs\apiclient\property\Document
             && $element->getDocument() instanceof \tabs\apiclient\Image
         ) {
             echo sprintf(
@@ -74,17 +74,31 @@ if (!empty($collection)) {
                 $element->getDocument()->getId(),
                 (string) $element->getDocument()
             );
-        }else if ($element instanceof tabs\apiclient\EventType) {
+        } elseif ($element instanceof tabs\apiclient\EventType) {
             echo sprintf(
                 '<li>%s - %s</li>',
                 $element->getId(),
                 $element->getEventtype()
             );
-        }else if ($element instanceof tabs\apiclient\EventLog) {
+        } elseif ($element instanceof tabs\apiclient\EventLog) {
             echo sprintf(
                 '<li>%s - %s</li>',
                 $element->getType(),
                 $element->getEventtype()->eventtype
+            );
+        } elseif ($element instanceof tabs\apiclient\property\ParkingPermit) {
+            echo sprintf(
+                '<li>%s - %s<br>%s</li>',
+                $element->getLocation(),
+                $element->getLocationofpermit(),
+                implode('<br>', $element->getHolidayperiods()->map(function ($h) {
+                    return sprintf(
+                        '%s-%s (%d)',
+                        $h->fromdate,
+                        $h->todate,
+                        $h->samedateseveryyear
+                    );
+                }))
             );
         } else {
             echo sprintf(
@@ -95,7 +109,7 @@ if (!empty($collection)) {
         }
     }
     echo '</ul>';
-    
+
     if ($pager->getMaxPages() > 1) {
         $params = filter_input_array(INPUT_GET);
         $params['page'] = $pager->getPrevPage();
