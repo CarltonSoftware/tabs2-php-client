@@ -50,6 +50,9 @@ class HolidayPeriod extends Builder
      */
     public function __construct($id = null)
     {
+        $this->fromdate = new \DateTime();
+        $this->todate = new \DateTime();
+
         parent::__construct($id);
     }
 
