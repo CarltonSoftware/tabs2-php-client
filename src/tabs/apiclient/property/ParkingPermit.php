@@ -3,6 +3,7 @@
 namespace tabs\apiclient\property;
 
 use tabs\apiclient\Builder;
+use tabs\apiclient\Collection;
 use tabs\apiclient\property\parkingpermit\HolidayPeriod;
 
 /**
@@ -87,6 +88,12 @@ class ParkingPermit extends Builder
      */
     public function __construct($id = null)
     {
+        $this->holidayperiods = Collection::factory(
+            'holidayperiod',
+            new HolidayPeriod(),
+            $this
+        );
+
         parent::__construct($id);
     }
 
