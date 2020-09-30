@@ -100,6 +100,22 @@ if (!empty($collection)) {
                     );
                 }))
             );
+        } elseif ($element instanceof tabs\apiclient\property\Room) {
+            echo sprintf(
+                '<li>%s - %s<br />%s</li>',
+                $element->getName(),
+                $element->getDescription(),
+                implode('<br>', $element->getRoomtypes()->map(function($r)use($element) {
+                    return sprintf(
+                        '%s%s (Sleeps: %d) - %s%s',
+                        $r->getRoomtype()->getId() == $element->getRoomtype()->getId() ? '<strong>' : '',
+                        $r->getRoomtype()->getName(),
+                        $r->getRoomtype()->getSleeps(),
+                        $r->getRoomtype()->getDescription(),
+                        $r->getRoomtype()->getId() == $element->getRoomtype()->getId() ? '</strong>' : ''
+                    );
+                }))
+            );
         } else {
             echo sprintf(
                 '<li><a href="../exploreelement/?q=%s">%s</a></li>',

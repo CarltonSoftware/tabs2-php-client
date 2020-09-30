@@ -3,7 +3,7 @@
 namespace tabs\apiclient\property;
 
 use tabs\apiclient\Builder;
-use tabs\apiclient\RoomType;
+use tabs\apiclient\Collection;
 
 /**
  * Tabs Rest API Property Room object.
@@ -17,15 +17,15 @@ use tabs\apiclient\RoomType;
  * @link      http://www.carltonsoftware.co.uk
  *
  * @method Room setQuantity(integer $var) Sets the quantity
- * 
  * @method Room setDescription(string $var) Sets the description
+ * @method Room setName(string $var) Sets the name
  */
 class Room extends Builder
 {
     /**
      * Roomtype
      *
-     * @var RoomType
+     * @var \tabs\apiclient\RoomType
      */
     protected $roomtype;
 
@@ -43,7 +43,35 @@ class Room extends Builder
      */
     protected $description;
 
+    /**
+     * Name
+     *
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * Roomtypes
+     *
+     * @var Collection|\tabs\apiclient\property\room\RoomType[]
+     */
+    protected $roomtypes;
+
     // -------------------- Public Functions -------------------- //
+
+    /**
+     * @inheritDoc
+     */
+    public function __construct($id = null)
+    {
+        $this->roomtypes = Collection::factory(
+            '',
+            new \tabs\apiclient\property\room\RoomType,
+            $this
+        );
+
+        parent::__construct($id);
+    }
 
     /**
      * Set the roomtype
@@ -54,7 +82,7 @@ class Room extends Builder
      */
     public function setRoomtype($roomtype)
     {
-        $this->roomtype = RoomType::factory($roomtype);
+        $this->roomtype = \tabs\apiclient\RoomType::factory($roomtype);
 
         return $this;
     }
@@ -68,13 +96,14 @@ class Room extends Builder
             'roomtypeid' => $this->getRoomtype()->getId(),
             'quantity' => $this->getQuantity(),
             'description' => $this->getDescription(),
+            'name' => $this->getName(),
         );
     }
 
     /**
      * Returns the roomtype
      *
-     * @return RoomType
+     * @return \tabs\apiclient\RoomType
      */
     public function getRoomtype()
     {
@@ -99,5 +128,25 @@ class Room extends Builder
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the room types
+     *
+     * @return Collection|\tabs\apiclient\property\room\RoomType[]
+     */
+    public function getRoomtypes()
+    {
+        return $this->roomtypes;
     }
 }
