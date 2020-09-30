@@ -20,17 +20,17 @@ use tabs\apiclient\property\price\PriceTypeBranding;
  * @link      http://www.carltonsoftware.co.uk
  *
  * @method Price setType(string $var) Sets the type
- * 
+ *
  * @method Price setFromdate(\DateTime $var) Sets the fromdate
- * 
+ *
  * @method Price setTodate(\DateTime $var) Sets the todate
- * 
+ *
  * @method Price setBand(string $var) Sets the band
- * 
+ *
  * @method Price setDescription(string $var) Sets the description
- * 
+ *
  * @method Price setPrice(float $var) Sets the price
- * 
+ *
  */
 class Price extends Builder
 {
@@ -111,6 +111,7 @@ class Price extends Builder
             new PartySizePrice,
             $this
         );
+
         parent::__construct($id);
     }
 
@@ -154,8 +155,8 @@ class Price extends Builder
             'band' => $this->getBand(),
             'description' => $this->getDescription(),
             'price' => $this->getPrice(),
-            'currencycode' => $this->getCurrency()->getCode(),
-            'pricetypebrandingid' => $this->getPricetypebranding()->getId()
+            'currencycode' => $this->getCurrency() ? $this->getCurrency()->getCode() : null,
+            'pricetypebrandingid' => $this->getPricetypebranding() ? $this->getPricetypebranding()->getId() : null,
         );
     }
 

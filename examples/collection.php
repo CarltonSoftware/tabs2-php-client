@@ -94,8 +94,8 @@ if (!empty($collection)) {
                 implode('<br>', $element->getHolidayperiods()->map(function ($h) {
                     return sprintf(
                         '%s-%s (%d)',
-                        $h->fromdate,
-                        $h->todate,
+                        $h->fromdate->format('Y-m-d'),
+                        $h->todate->format('Y-m-d'),
                         $h->samedateseveryyear
                     );
                 }))
