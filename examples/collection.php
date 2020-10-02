@@ -116,6 +116,21 @@ if (!empty($collection)) {
                     );
                 }))
             );
+        } elseif ($element instanceof tabs\apiclient\booking\Vehicle) {
+            echo sprintf(
+                '<li>%s: %s %s %s</li>',
+                $element->getVehicle()->getRegistration(),
+                $element->getVehicle()->getColour(),
+                $element->getVehicle()->getMake(),
+                $element->getVehicle()->getModel()
+            );
+        } elseif ($element instanceof tabs\apiclient\booking\Room) {
+            echo sprintf(
+                '<li>%s<br />%s (Sleeps: %d)</li>',
+                $element->getRoom()->getName(),
+                $element->getRoomType()->getName(),
+                $element->getRoomType()->getSleeps()
+            );
         } else {
             echo sprintf(
                 '<li><a href="../exploreelement/?q=%s">%s</a></li>',
