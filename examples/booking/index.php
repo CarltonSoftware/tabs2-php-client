@@ -143,8 +143,17 @@ try {
         include __DIR__ . '/../collection.php';
 
         // Rooms
-        $collection = $booking->getRooms();
-        include __DIR__ . '/../collection.php';
+        $bookingRooms = $booking->getRooms();
+        $propertyRooms = $booking->getProperty()->getRooms();
+        if ($bookingRooms->count()>0 || $propertyRooms->count()>0) {
+            echo '<h5>Rooms</h5>';
+            echo sprintf(
+                '<p><a href="room-configuration.php?id=%s">%d property rooms / %d booking rooms configured</a></p>',
+                $booking->getId(),
+                $propertyRooms->count(),
+                $bookingRooms->count()
+            );
+        }
 
         // Get the branding extras and output list of available
         $extras = $booking->getBranding()->getExtras();

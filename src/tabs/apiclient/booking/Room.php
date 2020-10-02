@@ -6,7 +6,7 @@ use tabs\apiclient\Builder;
 use tabs\apiclient\RoomType;
 
 /**
- * Tabs Rest API Vehicle object.
+ * Tabs Rest API BookingRoom object.
  *
  * @category  Tabs_Client
  * @package   Tabs
@@ -30,6 +30,11 @@ class Room extends Builder
      */
     protected $roomtype;
 
+    /**
+     * @var int
+     */
+    protected $roomroomtypeid;
+
     // -------------------- Public Functions -------------------- //
 
     /**
@@ -39,6 +44,7 @@ class Room extends Builder
     {
         $this->room = new \tabs\apiclient\property\Room();
         $this->roomtype = new RoomType();
+        $this->roomroomtypeid = null;
 
         parent::__construct($id);
     }
@@ -67,5 +73,41 @@ class Room extends Builder
     public function getRoomtype()
     {
         return $this->roomtype;
+    }
+
+    /**
+     * Set the room room type id
+     */
+    public function setRoomroomtypeid($id)
+    {
+        $this->roomroomtypeid = $id;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toCreateArray()
+    {
+        if ($this->roomroomtypeid) {
+            return [
+                'roomroomtypeid' => $this->roomroomtypeid
+            ];
+        }
+
+        return [];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toUpdateArray()
+    {
+        if ($this->roomroomtypeid) {
+            return [
+                'roomroomtypeid' => $this->roomroomtypeid
+            ];
+        }
+
+        return [];
     }
 }
