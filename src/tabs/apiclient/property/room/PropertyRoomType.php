@@ -3,6 +3,8 @@
 namespace tabs\apiclient\property\room;
 
 use tabs\apiclient\Builder;
+use tabs\apiclient\Room;
+use tabs\apiclient\RoomType;
 
 /**
  * Tabs Rest API Image object.
@@ -16,12 +18,19 @@ use tabs\apiclient\Builder;
  * @link      http://www.carltonsoftware.co.uk
  *
  */
-class RoomType extends Builder
+class PropertyRoomType extends Builder
 {
+    /**
+     * Room
+     *
+     * @var Room
+     */
+    protected $room;
+
     /**
      * Roomtype
      *
-     * @var \tabs\apiclient\RoomType
+     * @var RoomType
      */
     protected $roomtype;
 
@@ -30,15 +39,25 @@ class RoomType extends Builder
      */
     public function __construct($id = null)
     {
-        $this->roomtype = new \tabs\apiclient\RoomType();
+        $this->roomtype = new RoomType();
 
         parent::__construct($id);
     }
 
     /**
+     * Returns the room
+     *
+     * @return Room
+     */
+    public function getRoom()
+    {
+        return $this->room;
+    }
+
+    /**
      * Returns the roomtype
      *
-     * @return \tabs\apiclient\RoomType
+     * @return RoomType
      */
     public function getRoomtype()
     {

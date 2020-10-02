@@ -4,6 +4,8 @@ namespace tabs\apiclient\property;
 
 use tabs\apiclient\Builder;
 use tabs\apiclient\Collection;
+use tabs\apiclient\RoomType;
+use tabs\apiclient\property\room\PropertyRoomType;
 
 /**
  * Tabs Rest API Property Room object.
@@ -25,7 +27,7 @@ class Room extends Builder
     /**
      * Roomtype
      *
-     * @var \tabs\apiclient\RoomType
+     * @var RoomType
      */
     protected $roomtype;
 
@@ -53,7 +55,7 @@ class Room extends Builder
     /**
      * Roomtypes
      *
-     * @var Collection|\tabs\apiclient\property\room\RoomType[]
+     * @var Collection|PropertyRoomType[]
      */
     protected $roomtypes;
 
@@ -66,7 +68,7 @@ class Room extends Builder
     {
         $this->roomtypes = Collection::factory(
             '',
-            new \tabs\apiclient\property\room\RoomType,
+            new PropertyRoomType,
             $this
         );
 
@@ -82,7 +84,7 @@ class Room extends Builder
      */
     public function setRoomtype($roomtype)
     {
-        $this->roomtype = \tabs\apiclient\RoomType::factory($roomtype);
+        $this->roomtype = RoomType::factory($roomtype);
 
         return $this;
     }
@@ -103,7 +105,7 @@ class Room extends Builder
     /**
      * Returns the roomtype
      *
-     * @return \tabs\apiclient\RoomType
+     * @return RoomType
      */
     public function getRoomtype()
     {
@@ -143,7 +145,7 @@ class Room extends Builder
     /**
      * Returns the room types
      *
-     * @return Collection|\tabs\apiclient\property\room\RoomType[]
+     * @return Collection|PropertyRoomType[]
      */
     public function getRoomtypes()
     {
