@@ -81,6 +81,8 @@ class Room extends Builder
     public function setRoomroomtypeid($id)
     {
         $this->roomroomtypeid = $id;
+
+        return $this;
     }
 
     /**
