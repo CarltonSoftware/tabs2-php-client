@@ -80,7 +80,7 @@ use tabs\apiclient\OwnerBookingType;
  * @method Booking setSource(Source $var) Set the source
  *
  * @method Booking setWebbooking(WebBooking $var) Set the webbooking
- * 
+ *
  * @method Booking setParkingpermitsrequired(integer $vehiclesRequired) Set the parking permits required
  *
  * @method Collection|booking\SecurityDeposit[] getSecuritydeposits() Returns the securitydeposits
@@ -98,8 +98,10 @@ use tabs\apiclient\OwnerBookingType;
  * @method Collection|booking\Guest[] getGuests() Returns the booking guests
  *
  * @method Collection|booking\Voucher[] getVouchers() Returns the booking vouchers
- * 
+ *
  * @method Collection|booking\Voucher[] getVehicles() Returns the booking vehicles
+ *
+ * @method Collection|booking\Room[] getRooms() Returns the booking rooms
  *
  * @method Collection|booking\Approval[] getApprovals() Returns the booking approvals
  */
@@ -427,6 +429,11 @@ class Booking extends Builder
     protected $vehicles;
 
     /**
+     * @var Collection|booking\Room[]
+     */
+    protected $rooms;
+
+    /**
      * Owner payment summary
      *
      * @var OwnerPaymentSummary
@@ -547,6 +554,12 @@ class Booking extends Builder
         $this->vehicles = Collection::factory(
             'vehicle',
             new booking\Vehicle(),
+            $this
+        );
+
+        $this->rooms = Collection::factory(
+            'room',
+            new booking\Room(),
             $this
         );
 
@@ -1899,7 +1912,7 @@ class Booking extends Builder
     {
         return $this->parkingpermitsavailable;
     }
-    
+
     /**
      * Returns the propertyid
      *

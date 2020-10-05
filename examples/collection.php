@@ -94,11 +94,42 @@ if (!empty($collection)) {
                 implode('<br>', $element->getHolidayperiods()->map(function ($h) {
                     return sprintf(
                         '%s-%s (%d)',
-                        $h->fromdate,
-                        $h->todate,
+                        $h->fromdate->format('Y-m-d'),
+                        $h->todate->format('Y-m-d'),
                         $h->samedateseveryyear
                     );
                 }))
+            );
+        } elseif ($element instanceof tabs\apiclient\property\Room) {
+            echo sprintf(
+                '<li>%s - %s<br />%s</li>',
+                $element->getName(),
+                $element->getDescription(),
+                implode('<br>', $element->getRoomtypes()->map(function($r)use($element) {
+                    return sprintf(
+                        '%s%s (Sleeps: %d) - %s%s',
+                        $r->getRoomtype()->getId() == $element->getRoomtype()->getId() ? '<strong>' : '',
+                        $r->getRoomtype()->getName(),
+                        $r->getRoomtype()->getSleeps(),
+                        $r->getRoomtype()->getDescription(),
+                        $r->getRoomtype()->getId() == $element->getRoomtype()->getId() ? '</strong>' : ''
+                    );
+                }))
+            );
+        } elseif ($element instanceof tabs\apiclient\booking\Vehicle) {
+            echo sprintf(
+                '<li>%s: %s %s %s</li>',
+                $element->getVehicle()->getRegistration(),
+                $element->getVehicle()->getColour(),
+                $element->getVehicle()->getMake(),
+                $element->getVehicle()->getModel()
+            );
+        } elseif ($element instanceof tabs\apiclient\booking\Room) {
+            echo sprintf(
+                '<li>%s<br />%s (Sleeps: %d)</li>',
+                $element->getRoom()->getName(),
+                $element->getRoomType()->getName(),
+                $element->getRoomType()->getSleeps()
             );
         } else {
             echo sprintf(
