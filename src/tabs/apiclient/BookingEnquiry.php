@@ -16,56 +16,57 @@ use tabs\apiclient\Base;
  * @link      http://www.carltonsoftware.co.uk
  *
  * @method BookingEnquiry setGuestype(string $var) Sets the guestype
- * 
- * 
+ *
+ *
  * @method BookingEnquiry setFromdate(\DateTime $var) Sets the fromdate
- * 
+ *
  * @method BookingEnquiry setTodate(\DateTime $var) Sets the todate
- * 
+ *
  * @method BookingEnquiry setAdults(integer $var) Sets the adults
- * 
+ *
  * @method BookingEnquiry setChildren(integer $var) Sets the children
- * 
+ *
  * @method BookingEnquiry setInfants(integer $var) Sets the infants
- * 
+ *
  * @method BookingEnquiry setPets(integer $var) Sets the pets
- * 
- * 
- * 
+ *
+ *
+ *
  * @method BookingEnquiry setPromotionalcode(string $var) Sets the promotionalcode
- * 
+ *
  * @method BookingEnquiry setCalculatebrochureprice(boolean $var) Sets the calculatebrochureprice
- * 
+ *
  * @method BookingEnquiry setCalculateadditionalextras(boolean $var) Sets the calculateadditionalextras
- * 
+ *
  * @method BookingEnquiry setCalculateincludedextras(boolean $var) Sets the calculateincludedextras
- * 
+ *
  * @method BookingEnquiry setIncludedpartysizepricing(boolean $var) Sets the includedpartysizepricing
- * 
+ *
  * @method BookingEnquiry setIncludespecialoffers(boolean $var) Sets the includespecialoffers
- * 
+ *
  * @method BookingEnquiry setCalculatedeposit(boolean $var) Sets the calculatedeposit
- * 
+ *
  * @method BookingEnquiry setBrochurepricedecimalplaces(integer $var) Sets the brochurepricedecimalplaces
- * 
+ *
  * @method BookingEnquiry setBasicpricedecimalplaces(integer $var) Sets the basicpricedecimalplaces
- * 
- * 
+ *
+ *
  * @method BookingEnquiry setBookingok(boolean $var) Sets the bookingok
- * 
+ *
  * @method BookingEnquiry setPartyok(boolean $var) Sets the partyok
- * 
+ *
  * @method BookingEnquiry setPetsok(boolean $var) Sets the petsok
- * 
+ *
  * @method BookingEnquiry setAvailable(boolean $var) Sets the available
- * 
+ *
  * @method BookingEnquiry setChangedaysok(boolean $var) Sets the changedaysok
- * 
+ *
  * @method BookingEnquiry setPriceok(boolean $var) Sets the priceok
- * 
+ *
  * @method BookingEnquiry setWebbookingok(boolean $var) Sets the webbookingok
- * 
- * 
+ *
+ * @method BookingEnquiry setDonotaddtransferextras(boolean $var) Sets the donotaddtransferextras
+ *
  */
 class BookingEnquiry extends Base
 {
@@ -283,13 +284,18 @@ class BookingEnquiry extends Base
      * @var \tabs\apiclient\Booking
      */
     protected $currentbooking;
-    
+
     /**
      * Booking enquiry errors
-     * 
+     *
      * @var \tabs\apiclient\booking\Error[]
      */
     protected $errors;
+
+    /**
+     * @var boolean
+     */
+    protected $donotaddtransferextras = false;
 
     // -------------------- Public Functions -------------------- //
 
@@ -394,24 +400,24 @@ class BookingEnquiry extends Base
 
         return $this;
     }
-    
+
     /**
      * Set the pricing period
-     * 
+     *
      * @param stdclass|array|\tabs\apiclient\PricingPeriod $pricingperiod Pricing period
-     * 
+     *
      * @return BookingEnquiry
      */
     public function setPricingperiod($pricingperiod)
     {
         $this->pricingperiod = \tabs\apiclient\PricingPeriod::factory($pricingperiod);
-        
+
         return $this;
     }
-    
+
     /**
      * Get the booking enquiry data
-     * 
+     *
      * @return BookingEnquiry
      */
     public function get()
@@ -426,9 +432,9 @@ class BookingEnquiry extends Base
             $this,
             $json
         );
-        
+
         $this->setResponsedata($json);
-        
+
         // ReMap the fromdate/todate/adults etc from the price criteria
         if (property_exists($json, 'price') && property_exists($json->price, 'criteria')) {
             foreach (get_object_vars($json->price->criteria) as $key => $val) {
@@ -439,140 +445,140 @@ class BookingEnquiry extends Base
                 }
             }
         }
-        
+
         $errors = $this->getDataFromResponse('price', 'bookings', 0, 'errors');
         if (is_array($errors)) {
             foreach ($errors as $error) {
                 $this->errors->addElement($error);
             }
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Return the additional extras price
-     * 
+     *
      * @return integer
      */
     public function getAdditionalExtrasPrice()
     {
         return $this->_sumTotalsData('additionalextrasprice');
     }
-    
+
     /**
      * Return the basic price
-     * 
+     *
      * @return integer
      */
     public function getBasicPrice()
     {
         return $this->_sumTotalsData('basicprice');
     }
-    
+
     /**
      * Return the brochure price
-     * 
+     *
      * @return integer
      */
     public function getBrochurePrice()
     {
         return $this->_sumTotalsData('brochureprice');
     }
-    
+
     /**
      * Return the change brochure price extras price
-     * 
+     *
      * @return integer
      */
     public function getChangeBrochurePriceExtrasPrice()
     {
         return $this->_sumTotalsData('changebrochurepriceextrasprice');
     }
-    
+
     /**
      * Return the included extras price
-     * 
+     *
      * @return integer
      */
     public function getIncludedExtrasPrice()
     {
         return $this->_sumTotalsData('includedextrasprice');
     }
-    
+
     /**
      * Return the owner price
-     * 
+     *
      * @return integer
      */
     public function getOwnerPrice()
     {
         return $this->_sumTotalsData('ownerprice');
     }
-    
+
     /**
      * Return the party size saving
-     * 
+     *
      * @return integer
      */
     public function getPartySizeSaving()
     {
         return $this->_sumTotalsData('partysizesaving');
     }
-    
+
     /**
      * Return the promotional code saving
-     * 
+     *
      * @return integer
      */
     public function getPromotionCodeSaving()
     {
         return $this->_sumTotalsData('promotioncodesaving');
     }
-    
+
     /**
      * Return the special offer saving
-     * 
+     *
      * @return integer
      */
     public function getSpecialOfferSaving()
     {
         return $this->_sumTotalsData('specialoffersaving');
     }
-    
+
     /**
      * Return the standard price
-     * 
+     *
      * @return integer
      */
     public function getStandardPrice()
     {
         return $this->_sumTotalsData('standardprice');
     }
-    
+
     /**
      * Return the total price
-     * 
+     *
      * @return integer
      */
     public function getTotalPrice()
     {
         return $this->_sumTotalsData('totalprice');
     }
-    
+
     /**
      * Return the standard price
-     * 
+     *
      * @return integer
      */
     public function getSecurityDepositPrice()
     {
         return $this->_sumTotalsData('standardprice');
     }
-    
+
     /**
      * Return an collection of security deposit objects
-     * 
+     *
      * @return StaticCollection|BookingEnquirySecurityDeposit[]
      */
     public function getSecurityDeposits()
@@ -584,13 +590,13 @@ class BookingEnquiry extends Base
         $col->setElementClass(new BookingEnquirySecurityDeposit())
             ->setElements($arr)
             ->setTotal(count($arr));
-        
+
         return $col;
     }
-    
+
     /**
      * Return an collection of security deposit objects
-     * 
+     *
      * @return StaticCollection|BookingEnquiryDeposit[]
      */
     public function getDeposits()
@@ -602,15 +608,15 @@ class BookingEnquiry extends Base
         $col->setElementClass(new BookingEnquiryDeposit())
             ->setElements($arr)
             ->setTotal(count($arr));
-        
+
         return $col;
     }
-    
+
     /**
      * Sum an integer element returned from a callable element
-     * 
+     *
      * @param string $index Totals index
-     * 
+     *
      * @return integer
      */
     private function _sumTotalsData($index)
@@ -619,50 +625,50 @@ class BookingEnquiry extends Base
             return $booking->pricing->total->$index;
         });
     }
-    
+
     /**
      * Sum an integer element returned from a callable element
-     * 
+     *
      * @param callable $callable Callable function to use
-     * 
+     *
      * @return integer
      */
     private function _sumBookingsData($callable)
     {
-        $total = 0;        
+        $total = 0;
         foreach ($this->_getPriceObjects($callable) as $element) {
             $total += $element;
         }
-        
+
         return $total;
     }
-    
+
     /**
      * Return an array of elements from the price response using a callable function
-     * 
+     *
      * @param callable $callable Callable function to use
-     * 
+     *
      * @return array
      */
     private function _getPriceObjects($callable)
     {
         $objs = array();
-        if (!$this->getResponsedata()->price->bookings 
+        if (!$this->getResponsedata()->price->bookings
             || count($this->getResponsedata()->price->bookings) == 0
         ) {
             return $objs;
         }
-        
+
         foreach ($this->getResponsedata()->price->bookings as $booking) {
             $objs[] = call_user_func($callable, $booking);
         }
-        
+
         return $objs;
     }
-    
+
     /**
      * Get the number of nights
-     * 
+     *
      * @return integer
      */
     public function getNights()
@@ -687,13 +693,14 @@ class BookingEnquiry extends Base
         $arr['calculatedeposit'] = $this->boolToStr($this->getCalculatedeposit());
         $arr['brochurepricedecimalplaces'] = $this->getBrochurepricedecimalplaces();
         $arr['basicpricedecimalplaces'] = $this->getBasicpricedecimalplaces();
-        
+        $arr['donotaddtransferextras'] = $this->boolToStr($this->getDonotaddtransferextras());
+
         if ($this->getPricingperiod() instanceof core\PricingPeriod) {
             $arr['pricingperiod'] = $this->getPricingperiod()->getPricingperiod();
         } else {
             $arr['pricingperiod'] = $this->getPricingperiod();
         }
-        
+
         if ($this->getPropertyBranding()) {
             $arr['propertybrandingid'] = $this->getPropertyBranding()->getId();
         } else {
@@ -704,19 +711,19 @@ class BookingEnquiry extends Base
                 $arr['brandingid'] = $this->getBranding()->getId();
             }
         }
-        
+
         if ($this->getCurrency()) {
             $arr['currencycode'] = $this->getCurrency()->getCode();
         }
-        
+
         if ($this->getSaleschannel()) {
             $arr['saleschannel'] = $this->getSaleschannel()->getSaleschannel();
         }
-        
+
         if ($this->getCurrentbooking()) {
             $arr['currentbookingid'] = $this->getCurrentbooking()->getId();
         }
-        
+
         return $arr;
     }
 
@@ -1018,5 +1025,15 @@ class BookingEnquiry extends Base
     public function getBranding()
     {
         return $this->branding;
+    }
+
+    /**
+     * Returns the donotaddtransferextras
+     *
+     * @return boolean
+     */
+    public function getDonotaddtransferextras()
+    {
+        return $this->donotaddtransferextras;
     }
 }
