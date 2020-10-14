@@ -83,6 +83,8 @@ use tabs\apiclient\OwnerBookingType;
  *
  * @method Booking setParkingpermitsrequired(integer $vehiclesRequired) Set the parking permits required
  *
+ * @method Booking setDonotaddtransferextras(boolean $var) Sets the donotaddtransferextras
+ *
  * @method Collection|booking\SecurityDeposit[] getSecuritydeposits() Returns the securitydeposits
  *
  * @method booking\SecurityDeposit getSecuritydeposit() Returns booking securitydeposit
@@ -104,6 +106,7 @@ use tabs\apiclient\OwnerBookingType;
  * @method Collection|booking\Room[] getRooms() Returns the booking rooms
  *
  * @method Collection|booking\Approval[] getApprovals() Returns the booking approvals
+ *
  */
 class Booking extends Builder
 {
@@ -495,6 +498,11 @@ class Booking extends Builder
      * @var int
      */
     protected $parkingpermitsavailable;
+
+    /**
+     * @var boolean
+     */
+    protected $donotaddtransferextras = false;
 
     // -------------------- Public Functions -------------------- //
 
@@ -915,6 +923,10 @@ class Booking extends Builder
                     'securitydeposit',
                     $this->getSecuritydeposit()
                 );
+            }
+
+            if ($this->getDonotaddtransferextras() === true) {
+                $arr['donotaddtransferextras'] = true;
             }
         }
 
@@ -1921,5 +1933,15 @@ class Booking extends Builder
     public function getPropertyid()
     {
         return $this->propertyid;
+    }
+
+    /**
+     * Returns the donotaddtransferextras
+     *
+     * @return boolean
+     */
+    public function getDonotaddtransferextras()
+    {
+        return $this->donotaddtransferextras;
     }
 }
