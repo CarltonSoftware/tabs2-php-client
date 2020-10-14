@@ -926,7 +926,7 @@ class Booking extends Builder
             }
 
             if ($this->getDonotaddtransferextras() === true) {
-                $arr['donotaddtransferextras'] = true;
+                $arr['donotaddtransferextras'] = 'true';
             }
         }
 
