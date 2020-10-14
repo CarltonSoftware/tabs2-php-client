@@ -100,30 +100,27 @@ try {
                 return $ele->getDocument() instanceof tabs\apiclient\Image && !$ele->getDocument()->isPrivate();
             })->slice(0, 2);
             include __DIR__ . '/../collection.php';
+            ?><p><a href="add-image.php?id=<?php echo $property->getId(); ?>">Add an image</a></p><?php
 
             $collection = $property->getDocuments()->findBy(function ($ele) {
                 return !$ele->getDocument() instanceof tabs\apiclient\Image;
             })->slice(0, 2);
             include __DIR__ . '/../collection.php';
+            ?><p><a href="add-document.php?id=<?php echo $property->getId(); ?>">Add a document</a></p><?php
         }
 
         if (!filter_input(INPUT_GET, 'fromdate')) {
             $collection = $property->getParkingpermits();
             include __DIR__ . '/../collection.php';
         }
-
+/*
         if (!filter_input(INPUT_GET, 'fromdate')) {
-            ?>
-                <p><a href="add-document.php?id=<?php echo $property->getId(); ?>">Add a document</a></p>
-                <p><a href="add-image.php?id=<?php echo $property->getId(); ?>">Add an image</a></p>
-                <p><a href="add-attribute.php?id=<?php echo $property->getId(); ?>">Add an attribute</a></p>
-            <?php
             $collection = $property->getNotes();
             include __DIR__ . '/../collection.php'; ?>
                 <p><a href="add-note.php?id=<?php echo $property->getId(); ?>">Add a note</a></p>
             <?php
         }
-
+*/
         if (!filter_input(INPUT_GET, 'fromdate')) {
             $collection = $property->getInspections();
             include __DIR__ . '/../collection.php';
@@ -136,6 +133,7 @@ try {
 
             $collection = $property->getAttributes();
             include __DIR__ . '/../collection.php';
+            ?><p><a href="add-attribute.php?id=<?php echo $property->getId(); ?>">Add an attribute</a></p><?php
 
             $collection = $property->getBrandings()->first()->getAvailableDays();
             include __DIR__ . '/../collection.php';

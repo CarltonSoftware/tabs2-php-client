@@ -80,8 +80,10 @@ use tabs\apiclient\OwnerBookingType;
  * @method Booking setSource(Source $var) Set the source
  *
  * @method Booking setWebbooking(WebBooking $var) Set the webbooking
- * 
+ *
  * @method Booking setParkingpermitsrequired(integer $vehiclesRequired) Set the parking permits required
+ *
+ * @method Booking setDonotaddtransferextras(boolean $var) Sets the donotaddtransferextras
  *
  * @method Collection|booking\SecurityDeposit[] getSecuritydeposits() Returns the securitydeposits
  *
@@ -98,10 +100,13 @@ use tabs\apiclient\OwnerBookingType;
  * @method Collection|booking\Guest[] getGuests() Returns the booking guests
  *
  * @method Collection|booking\Voucher[] getVouchers() Returns the booking vouchers
- * 
+ *
  * @method Collection|booking\Voucher[] getVehicles() Returns the booking vehicles
  *
+ * @method Collection|booking\Room[] getRooms() Returns the booking rooms
+ *
  * @method Collection|booking\Approval[] getApprovals() Returns the booking approvals
+ *
  */
 class Booking extends Builder
 {
@@ -427,6 +432,11 @@ class Booking extends Builder
     protected $vehicles;
 
     /**
+     * @var Collection|booking\Room[]
+     */
+    protected $rooms;
+
+    /**
      * Owner payment summary
      *
      * @var OwnerPaymentSummary
@@ -489,6 +499,11 @@ class Booking extends Builder
      */
     protected $parkingpermitsavailable;
 
+    /**
+     * @var boolean
+     */
+    protected $donotaddtransferextras = false;
+
     // -------------------- Public Functions -------------------- //
 
     /**
@@ -547,6 +562,12 @@ class Booking extends Builder
         $this->vehicles = Collection::factory(
             'vehicle',
             new booking\Vehicle(),
+            $this
+        );
+
+        $this->rooms = Collection::factory(
+            'room',
+            new booking\Room(),
             $this
         );
 
@@ -902,6 +923,10 @@ class Booking extends Builder
                     'securitydeposit',
                     $this->getSecuritydeposit()
                 );
+            }
+
+            if ($this->getDonotaddtransferextras() === true) {
+                $arr['donotaddtransferextras'] = 'true';
             }
         }
 
@@ -1899,7 +1924,7 @@ class Booking extends Builder
     {
         return $this->parkingpermitsavailable;
     }
-    
+
     /**
      * Returns the propertyid
      *
@@ -1908,5 +1933,15 @@ class Booking extends Builder
     public function getPropertyid()
     {
         return $this->propertyid;
+    }
+
+    /**
+     * Returns the donotaddtransferextras
+     *
+     * @return boolean
+     */
+    public function getDonotaddtransferextras()
+    {
+        return $this->donotaddtransferextras;
     }
 }

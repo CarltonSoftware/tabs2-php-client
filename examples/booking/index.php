@@ -2,7 +2,7 @@
 
 /**
  * @name Accessing booking data
- * 
+ *
  * This example details some of the basic properties on a booking.
  */
 
@@ -57,7 +57,7 @@ try {
             ?>
         <p><a href="add-guests.php?id=<?php echo $booking->getId(); ?>">Add booking guest</a></p>
             <?php
-        } else {                
+        } else {
             $collection = $booking->getGuests();
             include __DIR__ . '/../collection.php';
         }
@@ -136,6 +136,23 @@ try {
                 ;
             }));
             echo '<p><a href="add-a-booking-note.php?id=' . $booking->getId() . '">Add a booking note</a></p>';
+        }
+
+        // Vehicles
+        $collection = $booking->getVehicles();
+        include __DIR__ . '/../collection.php';
+
+        // Rooms
+        $bookingRooms = $booking->getRooms();
+        $propertyRooms = $booking->getProperty()->getRooms();
+        if ($bookingRooms->count()>0 || $propertyRooms->count()>0) {
+            echo '<h5>Rooms</h5>';
+            echo sprintf(
+                '<p><a href="room-configuration.php?id=%s">%d property rooms / %d booking rooms configured</a></p>',
+                $booking->getId(),
+                $propertyRooms->count(),
+                $bookingRooms->count()
+            );
         }
 
         // Get the branding extras and output list of available

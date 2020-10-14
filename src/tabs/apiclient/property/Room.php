@@ -3,7 +3,9 @@
 namespace tabs\apiclient\property;
 
 use tabs\apiclient\Builder;
+use tabs\apiclient\Collection;
 use tabs\apiclient\RoomType;
+use tabs\apiclient\property\room\PropertyRoomType;
 
 /**
  * Tabs Rest API Property Room object.
@@ -17,8 +19,8 @@ use tabs\apiclient\RoomType;
  * @link      http://www.carltonsoftware.co.uk
  *
  * @method Room setQuantity(integer $var) Sets the quantity
- * 
  * @method Room setDescription(string $var) Sets the description
+ * @method Room setName(string $var) Sets the name
  */
 class Room extends Builder
 {
@@ -43,7 +45,35 @@ class Room extends Builder
      */
     protected $description;
 
+    /**
+     * Name
+     *
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * Roomtypes
+     *
+     * @var Collection|PropertyRoomType[]
+     */
+    protected $roomtypes;
+
     // -------------------- Public Functions -------------------- //
+
+    /**
+     * @inheritDoc
+     */
+    public function __construct($id = null)
+    {
+        $this->roomtypes = Collection::factory(
+            '',
+            new PropertyRoomType,
+            $this
+        );
+
+        parent::__construct($id);
+    }
 
     /**
      * Set the roomtype
@@ -68,6 +98,7 @@ class Room extends Builder
             'roomtypeid' => $this->getRoomtype()->getId(),
             'quantity' => $this->getQuantity(),
             'description' => $this->getDescription(),
+            'name' => $this->getName(),
         );
     }
 
@@ -99,5 +130,25 @@ class Room extends Builder
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the room types
+     *
+     * @return Collection|PropertyRoomType[]
+     */
+    public function getRoomtypes()
+    {
+        return $this->roomtypes;
     }
 }
