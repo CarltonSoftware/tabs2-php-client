@@ -140,9 +140,9 @@ class Owner extends Actor
      *
      * @return boolean
      */
-    public function getAroard()
+    public function getAbroad()
     {
-        return $this->aroard;
+        return $this->abroad;
     }
 
     /**
