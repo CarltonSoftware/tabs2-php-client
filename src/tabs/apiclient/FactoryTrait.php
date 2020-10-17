@@ -167,17 +167,20 @@ trait FactoryTrait
         if (method_exists($obj, 'setDormant')) {
             $obj->setDormant(false);
         }
+        if (\method_exists($obj, 'quickSet')) {
+            $obj->quickSet($node);
+        } else {
+            foreach ($node as $key => $val) {
+                // Check/create collections if they exist
+                $obj->_check_collection_map($key);
 
-        foreach ($node as $key => $val) {
-            // Check/create collections if they exist
-            $obj->_check_collection_map($key);
-
-            $func = 'set' . ucfirst($key);
-            if (!in_array($key, $exceptions)) {
-                if (method_exists($obj, $func)) {
-                    $obj->$func($val);
-                } elseif (property_exists($obj, $key) ) {
-                    $obj->setObjectProperty($obj, $key, $val);
+                $func = 'set' . ucfirst($key);
+                if (!in_array($key, $exceptions)) {
+                    if (method_exists($obj, $func)) {
+                        $obj->$func($val);
+                    } elseif (property_exists($obj, $key) ) {
+                        $obj->setObjectProperty($obj, $key, $val);
+                    }
                 }
             }
         }
@@ -452,6 +455,7 @@ trait FactoryTrait
      */
     protected function setObjectProperty($obj, $property, $value)
     {
+        //echo "<p>".get_class($obj)." ".$property." ".strtolower(gettype($obj->$property))." ". ($value instanceof \DateTime ? $value->format('y-M-d') : $value). "</p>";
         switch (strtolower(gettype($obj->$property))) {
         case 'array':
         case 'integer':
@@ -461,7 +465,8 @@ trait FactoryTrait
             if ($obj->$property instanceof \DateTime  && (!$value instanceof \DateTime)) {
                 //Special handling for DateTime fields
                 $obj->$property = new \DateTime($value);
-            } else if ($obj->$property instanceof \tabs\apiclient\StaticCollection
+         //echo "<p>".get_class($obj)." ".$property." ".strtolower(gettype($obj->$property))." ". ($value instanceof \DateTime ? $value->format('y-M-d') : $value). "</p>";
+           } else if ($obj->$property instanceof \tabs\apiclient\StaticCollection
                 && (!$value instanceof \tabs\apiclient\StaticCollection)
                 && is_array($value)
             ) {

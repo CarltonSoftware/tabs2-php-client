@@ -35,7 +35,7 @@ use tabs\apiclient\extra\branding\Configuration;
  * @method Branding setShowpricingonwebuntil(\DateTime $var) Sets the showpricingonwebuntil
  *
  * @method Branding setConvertpotentialstoprovisionals(string $var) Sets the convertpotentialstoprovisionals
- * 
+ *
  * @method Collection|ChangeDayTemplate[] getChangedaytemplates Returns the change day templates
  * @method Collection|Pricing[] getExtraprices() Returns the property extra prices
  * @method Collection|Configuration[] getExtraconfigurations() Returns the property extra configurations
@@ -162,14 +162,14 @@ class Branding extends Builder
     /**
      * @inheritDoc
      */
-    public function __construct($id = null)
+    public function __construct($id = null, $data = null)
     {
         $this->pricingyear = Collection::factory(
             'pricingyear',
             new PricingYear,
             $this
         );
-        
+
         $this->prices = Collection::factory(
             'price',
             new Price,
@@ -194,11 +194,11 @@ class Branding extends Builder
             $this
         );
 
-        $this->availableDays = Collection::factory(
-            'availability',
-            new AvailableDay(),
-            $this
-        );
+//        $this->availableDays = Collection::factory(
+//            'availability',
+//            new AvailableDay(),
+//            $this
+//        );
 
         $this->specialoffers = Collection::factory(
             'specialoffer',
@@ -209,12 +209,17 @@ class Branding extends Builder
             return $this->getUpdateUrl() . '/specialoffer';
         });
 
-        $this->allowbookingonwebuntil = new \DateTime();
-        $this->showpricingonwebuntil = new \DateTime();
-        $this->fromdate = new \DateTime();
-        $this->todate = new \DateTime();
 
-        parent::__construct($id);
+        if($data) {
+            $this->quickSet($data);
+        } else {
+            $this->allowbookingonwebuntil = new \DateTime();
+            $this->showpricingonwebuntil = new \DateTime();
+            $this->fromdate = new \DateTime();
+            $this->todate = new \DateTime();
+
+            parent::__construct($id);
+        }
     }
 
     /**
@@ -485,7 +490,7 @@ class Branding extends Builder
         if ($this->getConvertpotentialstoprovisionals()) {
             $arr['convertpotentialstoprovisionals'] = $this->getConvertpotentialstoprovisionals();
         }
-        
+
         return $arr;
     }
 
@@ -621,5 +626,19 @@ class Branding extends Builder
     public function gettodate()
     {
         return $this->todate;
+    }
+
+    public function quickSet($data)
+    {
+        $this->primarybranding = $data->primarybranding;
+        $this->primarybookingbrand = $data->primarybookingbrand;
+        $this->fromdate = new \DateTime($data->fromdate);
+        $this->todate = new \DateTime($data->todate);
+        $this->promote = $data->promote;
+        $this->allowbookingonwebuntil = new \DateTime($data->allowbookingonwebuntil);
+        $this->showpricingonwebuntil = new \DateTime($data->showpricingonwebuntil);
+        $this->status = Status::factory($data->status);
+
+        return $this;
     }
 }

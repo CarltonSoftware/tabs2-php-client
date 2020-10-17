@@ -12,44 +12,63 @@ namespace tabs\apiclient;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
- * 
  *
- * @method Image setAlt(string $alt)        Set the title
- * @method Image setHeight(integer $height) Set the height
- * @method Image setWidth(integer $width)   Set the width
  */
 class Image extends Document
 {
     /**
      * Image title
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $alt = '';
-    
+
     /**
      * Image height in px
-     * 
-     * @var integer 
+     *
+     * @var integer
      */
     protected $height = 0;
-    
+
     /**
      * Image width in px
-     * 
-     * @var integer 
+     *
+     * @var integer
      */
     protected $width = 0;
 
     // -------------------------- Public Functions -------------------------- //
-    
+
+    /**
+     * Constructor
+     *
+     * @param integer $id ID
+     * @param object $data Data to populate object
+     *
+     * @return void
+     */
+    public function __construct($id = null, $data = null)
+    {
+        if($data) {
+            $this->quickSet($data);
+        } else {
+            $this->timeadded = new \DateTime();
+            $this->tags = Collection::factory(
+                new document\Tag(),
+                $this
+            );
+
+            parent::__construct($id);
+        }
+    }
+
     /**
      * Get the image url
-     * 
+     *
      * @param string $type   Resize type
      * @param string $width  Width in px
      * @param string $height Height in px
-     * 
+     *
      * @return string
      */
     public function getImageUrl($type, $width = 150, $height = 100)
@@ -64,15 +83,15 @@ class Image extends Document
             )
         );
     }
-    
+
     /**
      * Get the public url
-     * 
-     * @param string $type   Resize type. Types can be resize, width, 
+     *
+     * @param string $type   Resize type. Types can be resize, width,
      *                       height, smart, original and normal.
      * @param string $width  Width in px
      * @param string $height Height in px
-     * 
+     *
      * @return string
      */
     public function getPublicImageUrl($type = 'smart', $width = 100, $height = 100)
@@ -90,14 +109,14 @@ class Image extends Document
             )
         );
     }
-    
+
     /**
      * Get the full public url function.
-     * 
+     *
      * @param string $type   Resize type
      * @param string $width  Width in px
      * @param string $height Height in px
-     * 
+     *
      * @return string
      */
     public function getFullPublicImageUrl($type = 'smart', $width = 100, $height = 100)
@@ -106,17 +125,17 @@ class Image extends Document
             $this->getPublicImageUrl($type, $width, $height)
         );
     }
-    
+
     /**
      * Debugging function. Output the image to screen.
-     * 
+     *
      * This should not be used in a production environment! You should cache
      * images locally.
-     * 
+     *
      * @param string $type   Resize type
      * @param string $width  Width in px
      * @param string $height Height in px
-     * 
+     *
      * @return string
      */
     public function getImageTag($type = 'tocc', $width = 100, $height = 100)
@@ -124,7 +143,7 @@ class Image extends Document
         $data = base64_encode(
             $this->getFileFromUrl($this->getImageUrl($type, $width, $height))
         );
-        
+
         return sprintf(
             '<img src="data:image/jpg;base64,%s" alt="%s" title="%s" width="%s" height="%s">',
             $data,
@@ -134,14 +153,14 @@ class Image extends Document
             $height
         );
     }
-    
+
     /**
      * Get the full url function.
-     * 
+     *
      * @param string $type   Resize type
      * @param string $width  Width in px
      * @param string $height Height in px
-     * 
+     *
      * @return string
      */
     public function getFullImageUrl($type = 'tocc', $width = 100, $height = 100)
@@ -150,7 +169,7 @@ class Image extends Document
             $this->getImageUrl($type, $width, $height)
         );
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -166,7 +185,7 @@ class Image extends Document
             'weight' => $this->getWeight(),
         );
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -203,5 +222,59 @@ class Image extends Document
     public function getWidth()
     {
         return $this->width;
+    }
+
+    /**
+     * Set the title
+     *
+     * @return Image
+     */
+    public function setAlt(string $alt)
+    {
+        $this->alt = $alt;
+
+        return $this;
+    }
+
+    /**
+     * Set the height
+     *
+     * @return Image
+     */
+    public function setHeight($height)
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    /**
+     * Set the width
+     *
+     * @return Image
+     */
+    public function setWidth($width)
+    {
+        $this->width = $width;
+
+        return $this->width;
+    }
+
+    public function quickSet($data)
+    {
+        $this->id = $data->id;
+        $this->name = $data->name;
+        $this->filename = $data->filename;
+        $this->description = $data->description;
+        $this->weight = $data->weight;
+        $this->timeadded = new \DateTime($data->timeadded);
+        $this->private = $data->private;
+        $this->tags = $data->tags;
+        $this->alt = $data->alt;
+        $this->height = $data->height;
+        $this->width = $data->width;
+        $this->mimetype = Mimetype::factory($data->mimetype);
+
+        return $this;
     }
 }

@@ -12,114 +12,113 @@ namespace tabs\apiclient;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
- * 
  *
- * @method Document  setName(string $filename)     Set the name
- * @method Document  setFilename(string $filename) Set the filename
- * @method Document  setDescription(string $desc)  Set the description
- * @method Document  setWeight(integer $weight)    Set the weight
- * @method Document  setPrivate(boolean $boolean)  Set the visibility flag
- * 
+ *
  */
 class Document extends \tabs\apiclient\FileBuilder
 {
     /**
      * Name
-     * 
+     *
      * @var string
      */
     protected $name = '';
-    
+
     /**
      * Filename
-     * 
+     *
      * @var string
      */
     protected $filename = '';
-    
+
     /**
      * Time added
-     * 
+     *
      * @var \DateTime
      */
     protected $timeadded;
-    
+
     /**
      * Description
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $description = '';
-    
+
     /**
      * Weight
-     * 
-     * @var integer 
+     *
+     * @var integer
      */
     protected $weight = 0;
-    
+
     /**
      * Private bool
-     * 
-     * @var boolean 
+     *
+     * @var boolean
      */
     protected $private = false;
-    
+
     /**
      * Mimetype
-     * 
-     * @var Mimetype 
+     *
+     * @var Mimetype
      */
     protected $mimetype;
-    
+
     /**
      * Document tags
-     * 
+     *
      * @var Collection|\tabs\apiclient\document\Tag[]
      */
     protected $tags;
 
     // -------------------------- Public Functions -------------------------- //
-    
+
     /**
      * Constructor
-     * 
+     *
      * @param integer $id ID
-     * 
+     * @param object $data Data to populate object
+     *
      * @return void
      */
-    public function __construct($id = null)
+    public function __construct($id = null, $data = null)
     {
-        $this->timeadded = new \DateTime();
-        $this->tags = Collection::factory(
-            new document\Tag(),
-            $this
-        );
-        
-        parent::__construct($id);
+        if($data) {
+            $this->quickSet($data);
+        } else {
+            $this->timeadded = new \DateTime();
+            $this->tags = Collection::factory(
+                new document\Tag(),
+                $this
+            );
+
+            parent::__construct($id);
+        }
     }
-    
+
     /**
      * Return visibility flag
-     * 
+     *
      * @return boolean
      */
     public function isPrivate()
     {
         return $this->private;
     }
-    
+
     /**
      * Set the document mimetype
-     * 
+     *
      * @param array|stdClass|Mimetype $mimeType Mimetype
-     * 
+     *
      * @return Document
      */
     public function setMimetype($mimeType)
     {
         $this->mimetype = Mimetype::factory($mimeType);
-        
+
         return $this;
     }
 
@@ -201,5 +200,19 @@ class Document extends \tabs\apiclient\FileBuilder
     public function getTags()
     {
         return $this->tags;
+    }
+
+    public function quickSet($data)
+    {
+        $this->name = $data->name;
+        $this->filename = $data->filename;
+        $this->description = $data->description;
+        $this->weight = $data->weight;
+        $this->timeadded = new \DateTime($data->timeadded);
+        $this->private = $data->private;
+        $this->tags = $data->tags;
+        $this->mimetype = Mimetype::factory($data->mimetype);
+
+        return $this;
     }
 }

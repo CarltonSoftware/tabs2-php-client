@@ -249,4 +249,21 @@ class Address extends Builder
     {
         return $this->country;
     }
+
+    public function quickSet($data)
+    {
+        $this->id = $data->id;
+        $this->line1 = $data->line1;
+        $this->line2 = $data->line2;
+        $this->line3 = $data->line3;
+        $this->town = $data->town;
+        $this->county = $data->county;
+        $this->postcode = $data->postcode;
+        $this->longitude = $data->longitude;
+        $this->latitude = $data->latitude;
+        $this->geohash = $data->geohash;
+        $this->country = Country::factory($data->country);
+
+        return $this;
+    }
 }
