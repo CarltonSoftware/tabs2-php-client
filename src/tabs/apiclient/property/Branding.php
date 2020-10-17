@@ -633,8 +633,8 @@ class Branding extends Builder
         $this->id = $data->id;
         $this->primarybranding = $data->primarybranding;
         $this->primarybookingbrand = $data->primarybookingbrand;
-        $this->fromdate = new \DateTime($data->fromdate);
-        $this->todate = new \DateTime($data->todate);
+        $this->fromdate = property_exists($data, 'fromdate') ? new \DateTime($data->fromdate) : new \DateTime();
+        $this->todate = property_exists($data, 'todate') ? new \DateTime($data->todate) : new \DateTime();
         $this->promote = $data->promote;
         $this->allowbookingonwebuntil = new \DateTime($data->allowbookingonwebuntil);
         $this->showpricingonwebuntil = new \DateTime($data->showpricingonwebuntil);
