@@ -69,8 +69,8 @@ class Mimetype extends Builder
 
     public function quickSet($data)
     {
-        $this->name = $data->name;
-        $this->shortname = $data->shortname;
+        if (array_key_exists('name', $data)) { $this->name = $data['name']; }
+        if (array_key_exists('shortname', $data)) { $this->shortname = $data['shortname']; }
 
         return $this;
     }

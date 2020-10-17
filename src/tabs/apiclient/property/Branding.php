@@ -194,11 +194,11 @@ class Branding extends Builder
             $this
         );
 
-//        $this->availableDays = Collection::factory(
-//            'availability',
-//            new AvailableDay(),
-//            $this
-//        );
+        $this->availableDays = Collection::factory(
+            'availability',
+            new AvailableDay(),
+            $this
+        );
 
         $this->specialoffers = Collection::factory(
             'specialoffer',
@@ -630,6 +630,7 @@ class Branding extends Builder
 
     public function quickSet($data)
     {
+        $this->id = $data->id;
         $this->primarybranding = $data->primarybranding;
         $this->primarybookingbrand = $data->primarybookingbrand;
         $this->fromdate = new \DateTime($data->fromdate);
@@ -638,7 +639,11 @@ class Branding extends Builder
         $this->allowbookingonwebuntil = new \DateTime($data->allowbookingonwebuntil);
         $this->showpricingonwebuntil = new \DateTime($data->showpricingonwebuntil);
         $this->status = Status::factory($data->status);
-
+        $this->branding = \tabs\apiclient\Branding::factory($data->branding);
+        $this->brandinggroup = \tabs\apiclient\BrandingGroup::factory($data->brandinggroup);
+        $this->setBookingbrand($data->bookingbrand);
+        $this->setMarketingbrand($data->marketingbrand);
+        $this->status = Status::factory($data->status);
         return $this;
     }
 }

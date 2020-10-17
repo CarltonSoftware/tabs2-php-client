@@ -262,14 +262,16 @@ class Image extends Document
 
     public function quickSet($data)
     {
+        if (gettype($data) == 'array') {
+            $data = (object) $data;
+        }
         $this->id = $data->id;
         $this->name = $data->name;
         $this->filename = $data->filename;
         $this->description = $data->description;
         $this->weight = $data->weight;
-        $this->timeadded = new \DateTime($data->timeadded);
+        $this->timeadded = property_exists($data, 'timeadded') ? new \DateTime($data->timeadded) : new \DateTime();
         $this->private = $data->private;
-        $this->tags = $data->tags;
         $this->alt = $data->alt;
         $this->height = $data->height;
         $this->width = $data->width;
