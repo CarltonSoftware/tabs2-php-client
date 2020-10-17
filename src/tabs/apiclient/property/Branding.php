@@ -630,6 +630,9 @@ class Branding extends Builder
 
     public function quickSet($data)
     {
+        if (gettype($data) == 'array') {
+            $data = (object) $data;
+        }
         $this->id = $data->id;
         $this->primarybranding = $data->primarybranding;
         $this->primarybookingbrand = $data->primarybookingbrand;
