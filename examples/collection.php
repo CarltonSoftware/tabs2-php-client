@@ -131,6 +131,14 @@ if (!empty($collection)) {
                 $element->getRoomType()->getName(),
                 $element->getRoomType()->getSleeps()
             );
+        } elseif ($element instanceof tabs\apiclient\actor\Permission) {
+            echo sprintf(
+                '<li>%s - %s<br />%s - %s</li>',
+                $element->getMarketingbrand()->getName(),
+                $element->getContactdetail()->getValue(),
+                $element->getGranted() ? 'GRANTED' : 'NOT GRANTED',
+                $element->getGranteddatetime()->format('Y-m-d')
+            );
         } else {
             echo sprintf(
                 '<li><a href="../exploreelement/?q=%s">%s</a></li>',

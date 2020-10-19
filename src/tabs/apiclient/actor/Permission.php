@@ -85,6 +85,17 @@ class Permission extends Builder
      */
     public function getContactdetail()
     {
+        switch ($this->contactdetail->getType()) {
+            case 'F':
+                return \tabs\apiclient\actor\PhoneNumber::factory($this->getResponsedata()->contactdetail);
+
+            case 'P':
+                return \tabs\apiclient\actor\Address::factory($this->getResponsedata()->contactdetail);
+
+            case 'C':
+                return \tabs\apiclient\actor\ContactDetailOther::factory($this->getResponsedata()->contactdetail);
+        }
+
         return $this->contactdetail;
     }
 
