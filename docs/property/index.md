@@ -122,6 +122,9 @@ try {
                 <?php
             }
             if (!filter_input(INPUT_GET, 'fromdate')) {
+                $collection = $property->getEvents();
+                include __DIR__ . '/../collection.php';
+
                 $collection = $property->getInspections();
                 include __DIR__ . '/../collection.php';
 
