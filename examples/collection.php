@@ -131,6 +131,15 @@ if (!empty($collection)) {
                 $element->getRoomType()->getName(),
                 $element->getRoomType()->getSleeps()
             );
+        } elseif ($element instanceof tabs\apiclient\property\Event) {
+            echo sprintf(
+                '<li>%s (%s)<br />%s<br />%s - %s</li>',
+                $element->getName(),
+                $element->getPropertyEventCategory()->getName(),
+                $element->getDescription(),
+                $element->getStartdatetime()->format('Y-m-d'),
+                $element->getEnddatetime()->format('Y-m-d')
+            );
         } elseif ($element instanceof tabs\apiclient\actor\Permission) {
             echo sprintf(
                 '<li>%s - %s<br />%s - %s</li>',

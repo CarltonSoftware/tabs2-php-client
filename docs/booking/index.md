@@ -137,7 +137,6 @@ try {
                 echo '<p><a href="add-a-booking-note.php?id=' . $booking->getId() . '">Add a booking note</a></p>';
             }
 
-
             // Vehicles
             $collection = $booking->getVehicles();
             include __DIR__ . '/../collection.php';
