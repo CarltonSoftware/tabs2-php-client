@@ -10,7 +10,7 @@ try {
 
         $booking = new \tabs\apiclient\Booking($id);
         $booking->get();
-        
+
         ?>
             <h2>Booking: <?php echo $booking->getId(); ?> <a href="<?php echo $booking->getTabs2Url(); ?>" target="_blank">view</a></h2>
             <p>From: <?php echo $booking->getFromdate()->format('Y-m-d'); ?></p>
@@ -24,7 +24,7 @@ try {
             <p><a href="provisional-booking.php?id=<?php echo $booking->getId(); ?>">Create provisional booking</a></p>
                 <?php
             }
-        
+
             if (!$booking->isConfirmed() && $booking->isProvisional()) {
                 ?>
             <p>Deposit amount: <?php echo $booking->getProvisionalbooking()->getDeposit(); ?></p>
@@ -32,13 +32,13 @@ try {
             <p><a href="confirm-booking.php?id=<?php echo $booking->getId(); ?>">Confirm booking</a></p>
                 <?php
             }
-        
+
             if (!$booking->isCancelled()) {
                 ?>
             <p><a href="cancel-booking.php?id=<?php echo $booking->getId(); ?>">Cancel booking</a></p>
                 <?php
             }
-        
+
             if ($booking->getCustomers()->count() == 0) {
                 ?>
             <p><a href="add-customer.php?id=<?php echo $booking->getId(); ?>">Add booking customer</a></p>
@@ -50,16 +50,16 @@ try {
             </p>
                 <?php
             }
-        
+
             if ($booking->getGuests()->count() == 0) {
                 ?>
             <p><a href="add-guests.php?id=<?php echo $booking->getId(); ?>">Add booking guest</a></p>
                 <?php
-            } else {                
+            } else {
                 $collection = $booking->getGuests();
                 include __DIR__ . '/../collection.php';
             }
-            
+
             if ($booking->getProperty()->getMaximumpets() >= 2) {
                 ?>
             <p><a href="adding-pets.php?id=<?php echo $booking->getId(); ?>">Add 2 pets to this booking</a></p>
@@ -78,7 +78,7 @@ try {
             <p><a href="create-sagepayment.php?id=<?php echo $booking->getId(); ?>">Add Payment</a></p>
                 <?php
             }
-            
+
             echo '<h5>Price</h5>';
             echo '<p>Brochure: £' . $booking->getBrochurePrice() . '</p>';
             echo '<p>Party saving: £' . $booking->getPartySizeSaving() . '</p>';
@@ -120,7 +120,7 @@ try {
                     );
                 }
             }
-        
+
             // Get the booking notes
             $notes = $booking->getNotes();
             if ($notes->count() > 0) {
@@ -135,7 +135,24 @@ try {
                 }));
                 echo '<p><a href="add-a-booking-note.php?id=' . $booking->getId() . '">Add a booking note</a></p>';
             }
-            
+
+            // Vehicles
+            $collection = $booking->getVehicles();
+            include __DIR__ . '/../collection.php';
+
+            // Rooms
+            $bookingRooms = $booking->getRooms();
+            $propertyRooms = $booking->getProperty()->getRooms();
+            if ($bookingRooms->count()>0 || $propertyRooms->count()>0) {
+                echo '<h5>Rooms</h5>';
+                echo sprintf(
+                    '<p><a href="room-configuration.php?id=%s">%d property rooms / %d booking rooms configured</a></p>',
+                    $booking->getId(),
+                    $propertyRooms->count(),
+                    $bookingRooms->count()
+                );
+            }
+
             // Get the branding extras and output list of available
             $extras = $booking->getBranding()->getExtras();
             if ($extras->count() > 0) {

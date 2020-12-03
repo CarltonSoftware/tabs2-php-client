@@ -13,6 +13,7 @@ use tabs\apiclient\property\SecurityDeposit;
 use tabs\apiclient\property\SecurityFeature;
 use tabs\apiclient\property\Supplier;
 use tabs\apiclient\property\Room;
+use tabs\apiclient\property\Event;
 use tabs\apiclient\property\Target;
 use tabs\apiclient\property\AvailableBreak;
 use tabs\apiclient\property\ParkingPermit;
@@ -85,6 +86,8 @@ use tabs\apiclient\property\ParkingPermit;
  * @method Collection|Supplier[] getSuppliers() Get the property suppliers
  *
  * @method Collection|Room[] getRooms() Get the property rooms
+ *
+ * @method Collection|Event[] getEvents() Get the property events
  *
  * @method Collection|Target[] getTargets() Get the property targets
  *
@@ -279,6 +282,13 @@ class Property extends Builder
     protected $rooms;
 
     /**
+     * Property Events
+     *
+     * @var Collection|Event[]
+     */
+    protected $events;
+
+    /**
      * Property Targets
      *
      * @var Collection|Target[]
@@ -441,6 +451,10 @@ class Property extends Builder
         ),
         'rooms' => array(
             'class' => 'property\\Room',
+            'parent' => true
+        ),
+        'events' => array(
+            'class' => 'property\\Event',
             'parent' => true
         ),
         'answers' => array(
