@@ -38,6 +38,7 @@ try {
         'Unit',
         'Vatrate',
         'Vatband',
+        'PotentialBookingType',
         'WebsiteSection'
     );
 
@@ -70,7 +71,7 @@ try {
         $collection->fetch();
 
         include __DIR__ . '/../collection.php';
-    }   
+    }
 } catch(Exception $e) {
     echo $e->getMessage();
 }

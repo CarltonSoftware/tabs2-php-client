@@ -2,7 +2,7 @@
 
 /**
  * @name Accessing booking data
- *
+ * 
  * This example details some of the basic properties on a booking.
  */
 
@@ -78,6 +78,7 @@ try {
         if ($booking->getTotalOutstanding() > 0 && $booking->getCustomers()->count() > 0) {
             ?>
         <p><a href="create-sagepayment.php?id=<?php echo $booking->getId(); ?>">Add Payment</a></p>
+        <p><a href="create-paypal-payment.php?id=<?php echo $booking->getId(); ?>">Add Paypal Payment</a></p>
             <?php
         }
 
@@ -137,6 +138,7 @@ try {
             }));
             echo '<p><a href="add-a-booking-note.php?id=' . $booking->getId() . '">Add a booking note</a></p>';
         }
+
 
         // Vehicles
         $collection = $booking->getVehicles();

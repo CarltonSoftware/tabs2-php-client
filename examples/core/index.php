@@ -2,7 +2,7 @@
 
 /**
  * @name Accessing core data
- *
+ * 
  * Much of the data in tabs2 has dependencies on common data such as Branding, Booking Brand or Mimetype for example.
  */
 
