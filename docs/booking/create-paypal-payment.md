@@ -1,8 +1,6 @@
-# Creating a sagepay payment
+# Creating a paypal payment
 
-This file documents how to create a sagepay payment and add it to a booking.
-
-The tabs api uses SagePay Server to create an iframe url and return it to you.
+This file documents how to create a paypal payment and add it to a booking.
 
 You will need to provide two callback urls to handle success and failed payments.
 
@@ -34,32 +32,21 @@ try {
         })->first();
 
         $customer = $b->getCustomers()->first()->getCustomer();
-        $sp = new tabs\apiclient\SagePayPayment();
-        $sp->setAmount(10)
+        $pp = new tabs\apiclient\PaypalPayment();
+        $pp->setAmount(10)
             ->setBookingamount(10)
-            ->setCustomer($customer)
             ->setBooking($b);
-
-        // Get the address of the customer.  If you do not have one, you can provide an empty Actor Address object.
-        $addresses = $customer->getContactdetails()->findBy(function($ele) {
-            return $ele instanceof \tabs\apiclient\actor\Address;
-        });
 
         $base = getBaseUrl();
 
-        $sp->setAddress($addresses->first())
-            ->setCurrency($gbp)
+        $pp->setCurrency($gbp)
             ->setPaymentmethod($card)
-
-            // Set the payment type or be either DEFERRED or PAYMENT.
-            // DEFERRED payments need to be released and will not take payment.
-            ->setPaymenttype('DEFERRED')
 
             // Set the callback url so that you can be notified of the confirmed payment
             ->setCallbackurl($base . 'thank-you-for-your-payment.php?id=' . $b->getId())
             ->setFailureurl($base . 'whoops.php?id=' . $b->getId());
 
-        echo $sp->create();
+        echo $pp->create();
 
     }
 

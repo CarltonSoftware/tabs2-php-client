@@ -38,6 +38,7 @@
  * [Cancelling a booking](booking/cancel-booking.html)
  * [Confirming a booking](booking/confirm-booking.html)
  * [Creating a booking](booking/create-booking.html)
+ * [Creating a paypal payment](booking/create-paypal-payment.html)
  * [Creating a payment for an owner](booking/create-sagepayment-for-owner.html)
  * [Creating a sagepay payment](booking/create-sagepayment.html)
  * [Accessing booking data](booking/index.html)

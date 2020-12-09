@@ -109,6 +109,7 @@ try {
                 });
                 include __DIR__ . '/../collection.php';
             }
+
             if (!filter_input(INPUT_GET, 'fromdate')) {
                 ?>
                     <p><a href="add-document.php?id=<?php echo $property->getId(); ?>">Add a document</a></p>
@@ -122,6 +123,9 @@ try {
                 <?php
             }
             if (!filter_input(INPUT_GET, 'fromdate')) {
+                $collection = $property->getParkingpermits();
+                include __DIR__ . '/../collection.php';
+
                 $collection = $property->getEvents();
                 include __DIR__ . '/../collection.php';
 

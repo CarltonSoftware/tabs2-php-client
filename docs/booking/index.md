@@ -76,6 +76,7 @@ try {
             if ($booking->getTotalOutstanding() > 0 && $booking->getCustomers()->count() > 0) {
                 ?>
             <p><a href="create-sagepayment.php?id=<?php echo $booking->getId(); ?>">Add Payment</a></p>
+            <p><a href="create-paypal-payment.php?id=<?php echo $booking->getId(); ?>">Add Paypal Payment</a></p>
                 <?php
             }
 
