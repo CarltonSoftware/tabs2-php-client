@@ -11,28 +11,28 @@ try {
 
         $b = new tabs\apiclient\Booking($id);
         $b->get();
-        
+
         $bc = new tabs\apiclient\booking\Customer();
         $bc->setParent($b);
-        
+
         $customers = tabs\apiclient\Collection::factory(
             'customer',
             new \tabs\apiclient\Customer()
         );
-        $customers->getPagination()->addFilter('surname', 'Dobson')->setLimit(1);
+        $customers->getPagination()->addFilter('id', 1776245)->setLimit(1);
         $customers->fetch();
         if ($customers->getTotal() > 0) {
             $customer = $customers->first();
             $bc->setCustomer($customer);
-        
+
             $bc->create();
         }
-        
+
         if ($b->getPotentialbooking()) {
             $b->getPotentialbooking()->setType('BookingInProgress');
             $b->update();
         }
-        
+
         header('Location: index.php?id=' . $b->getId());
         exit();
 
