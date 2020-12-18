@@ -33,14 +33,16 @@ try {
                 return [
                     'property_room' => $propertyRoom,
                     'roomtype_id' => $bookingRoom->first()->getId(),
-                    'configured_room' => $bookingRoom->first()->getRoomtype()
+                    'configured_room' => $bookingRoom->first()->getRoomtype(),
+                    'lastupdated' => $bookingRoom->first()->getLastupdated(),
+                    'lastupdatedusing' => $bookingRoom->first()->getLastupdatedusing(),
                 ];
             }
 
             return [
                 'property_room' => $propertyRoom,
                 'roomtype_id' => null,
-                'configured_room' => $propertyRoom->getRoomtype()
+                'configured_room' => $propertyRoom->getRoomtype(),
             ];
         });
 
@@ -51,7 +53,7 @@ try {
 
         foreach ($mergedRooms as $room) {
             echo sprintf(
-                '<li>%s<br>%s<br><ul>%s</ul></li>',
+                '<li>%s<br>%s<br><ul>%s</ul>Updated: %s<br>Using: %s</li>',
                 $room['property_room']->getName(),
                 $room['property_room']->getDescription(),
                 implode('', $room['property_room']->getRoomtypes()->map(function ($roomType) use ($room,$id) {
@@ -72,7 +74,9 @@ try {
                         $roomType->getRoomtype()->getId() == $room['configured_room']->getId() ? '</strong>' : '',
                         $roomType->getRoomtype()->getId() != $room['configured_room']->getId() ? ' <a href="set-room-configuration.php?id='.$id.'&'.$params.'">set</a>' : ''
                     );
-                }))
+                })),
+                isset($room['lastupdated']) ? $room['lastupdated']->format('Y-M-d') : '-',
+                isset($room['lastupdatedusing']) ? $room['lastupdatedusing'] : '-'
             );
         }
 
