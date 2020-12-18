@@ -16,6 +16,8 @@ use tabs\apiclient\RoomType;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
+ * @method Room setLastupdatedusing(string $var) Sets the lastupdatedusing
+ *
  */
 
 class Room extends Builder
@@ -35,6 +37,16 @@ class Room extends Builder
      */
     protected $roomroomtypeid;
 
+    /**
+     * @var DateTime
+     */
+    protected $lastupdated;
+
+    /**
+     * @var string
+     */
+    protected $lastupdatedusing;
+
     // -------------------- Public Functions -------------------- //
 
     /**
@@ -45,6 +57,7 @@ class Room extends Builder
         $this->room = new \tabs\apiclient\property\Room();
         $this->roomtype = new RoomType();
         $this->roomroomtypeid = null;
+        $this->lastupdated = new \DateTime();
 
         parent::__construct($id);
     }
@@ -76,6 +89,22 @@ class Room extends Builder
     }
 
     /**
+     * @return DateTime
+     */
+    public function getLastupdated()
+    {
+        return $this->lastupdated;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastupdatedusing()
+    {
+        return $this->lastupdatedusing;
+    }
+
+    /**
      * Set the room room type id
      */
     public function setRoomroomtypeid($id)
@@ -86,17 +115,27 @@ class Room extends Builder
     }
 
     /**
+     * Generic create/update array
+     */
+    private function _getArray()
+    {
+        $array = [];
+        if ($this->roomroomtypeid) {
+            $array['roomroomtypeid'] = $this->roomroomtypeid;
+        }
+        if ($this->lastupdatedusing) {
+            $array['lastupdatedusing'] = $this->lastupdatedusing;
+        }
+
+        return $array;
+    }
+
+    /**
      * @inheritDoc
      */
     public function toCreateArray()
     {
-        if ($this->roomroomtypeid) {
-            return [
-                'roomroomtypeid' => $this->roomroomtypeid
-            ];
-        }
-
-        return [];
+        return $this->_getArray();
     }
 
     /**
@@ -104,12 +143,6 @@ class Room extends Builder
      */
     public function toUpdateArray()
     {
-        if ($this->roomroomtypeid) {
-            return [
-                'roomroomtypeid' => $this->roomroomtypeid
-            ];
-        }
-
-        return [];
+        return $this->_getArray();
     }
 }
