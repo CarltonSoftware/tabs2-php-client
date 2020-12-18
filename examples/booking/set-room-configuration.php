@@ -21,6 +21,7 @@ try {
                     $bookingRoom = new \tabs\apiclient\booking\Room();
                     $bookingRoom->setRoomroomtypeid(filter_input(INPUT_GET, 'prt'));
                     $bookingRoom->setParent($booking);
+                    $bookingRoom->setLastupdatedusing('client');
                     $bookingRoom->create();
                     echo '<p>Booking room added</p>';
                     break;
@@ -30,6 +31,7 @@ try {
                     $bookingRoom = new \tabs\apiclient\booking\Room(filter_input(INPUT_GET, 'br'));
                     $bookingRoom->setRoomroomtypeid(filter_input(INPUT_GET, 'prt'));
                     $bookingRoom->setParent($booking);
+                    $bookingRoom->setLastupdatedusing('client');
                     $bookingRoom->update();
                     echo '<p>Booking room updated</p>';
                     break;
