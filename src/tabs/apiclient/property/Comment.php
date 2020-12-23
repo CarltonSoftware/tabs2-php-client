@@ -19,6 +19,8 @@ use tabs\apiclient\property\comment\Metric;
  *
  * @method Comment setComment(string $var) Sets the comment
  * 
+ * @method Comment setCommentresponse(string $var) Sets the commentresponse
+ * 
  * @method Comment setCommenter(string $var) Sets the commenter
  * 
  * @method Comment setVisibletoowner(boolean $var) Sets the visibletoowner
@@ -37,6 +39,13 @@ class Comment extends Builder
      * @var string
      */
     protected $comment;
+
+    /**
+     * Commentresponse
+     *
+     * @var string
+     */
+    protected $commentresponse;    
     
     /**
      * Commenter
@@ -126,6 +135,16 @@ class Comment extends Builder
     {
         return $this->comment;
     }
+
+    /**
+     * Returns the commentresponse
+     *
+     * @return string
+     */
+    public function getCommentresponse()
+    {
+        return $this->commentresponse;
+    }    
 
     /**
      * Returns the commenter
