@@ -3,6 +3,7 @@
 namespace tabs\apiclient\property;
 
 use tabs\apiclient\Builder;
+use tabs\apiclient\Collection;
 use tabs\apiclient\Booking;
 use tabs\apiclient\property\comment\Metric;
 
@@ -23,13 +24,15 @@ use tabs\apiclient\property\comment\Metric;
  * 
  * @method Comment setCommenter(string $var) Sets the commenter
  * 
+ * @method Comment setCommentdate(\DateTime $var) Sets the commentdate
+ *
  * @method Comment setVisibletoowner(boolean $var) Sets the visibletoowner
  * 
  * @method Comment setVisibleonweb(boolean $var) Sets the visibleonweb
  * 
  * @method Comment setCreateddate(\DateTime $var) Sets the createddate
  * 
- * @method Collection|Metric[] getMetric() Returns the metrics
+ * @method Collection|Metric[] getMetrics() Returns the metrics
  */
 class Comment extends Builder
 {
@@ -53,6 +56,13 @@ class Comment extends Builder
      * @var string
      */
     protected $commenter;
+
+    /**
+     * Commentdate
+     *
+     * @var \DateTime
+     */
+    protected $commentdate;
 
     /**
      * Visibletoowner
@@ -80,9 +90,30 @@ class Comment extends Builder
      *
      * @var Booking
      */
-    protected $booking;    
+    protected $booking;
+
+    /**
+     * Metrics
+     *
+     * @var Collection|Metric[]
+     */
+    protected $metrics;
 
     // -------------------- Public Functions -------------------- //
+
+    /**
+     * Constructor
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->metrics = Collection::factory(
+            'metric',
+            new Metric(),
+            $this
+        );
+    }
 
     /**
      * Set the booking on the property
