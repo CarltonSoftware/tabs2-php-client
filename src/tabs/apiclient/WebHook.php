@@ -14,32 +14,38 @@ use tabs\apiclient\exception\Exception;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
- * 
+ *
  * @method WebsiteSection setSection(string $str) Sets the section name
  */
 class WebHook extends Base
 {
     /**
      * Send a subscription request to the webhook endpoint
-     * 
+     *
      * @param string $url  URL you want to send the web hook responses too
      * @param string $type Type of web hook.  Can be property, actor or booking.
-     * 
+     * @param string $marketingBrandCode Filter SNS webhooks by a marketing brand, i.e. OC
+     * @param array  $entityFilter Filter SNS webhooks by a list of entities
+     *
      * @throws Exception
-     * 
+     *
      * @return void
      */
-    public static function subscribe($url, $type = 'property', $marketingBrandCode = null)
+    public static function subscribe($url, $type = 'property', $marketingBrandCode = null, $entityFilter = [])
     {
         try {
             $args = array(
                 'url' => $url
             );
-            
+
             if ($marketingBrandCode) {
                 $args['brandcode'] = $marketingBrandCode;
             }
-            
+
+            if (is_array($entityFilter) && count($entityFilter) > 0) {
+                $args['entityfilter'] = implode(':', $entityFilter);
+            }
+
             $res = \tabs\apiclient\client\Client::getClient()->get(
                 'webhook/subscribe/' . strtolower($type),
                 $args
@@ -52,14 +58,14 @@ class WebHook extends Base
             throw new Exception(null, $ex->getMessage());
         }
     }
-    
+
     /**
      * Retrieve the subscriptions for an endpoint
-     * 
+     *
      * @param string $url  URL you want to check web hook subscriptions for
-     * 
+     *
      * @throws Exception
-     * 
+     *
      * @return array
      */
     public static function subscribed($url)
@@ -86,11 +92,11 @@ class WebHook extends Base
 
     /**
      * Unsubscribe from a SubscriptionARN
-     * 
+     *
      * @param string $arn  SubscriptionARN you want to unsubscribe from
-     * 
+     *
      * @throws Exception
-     * 
+     *
      * @return void
      */
     public static function unsubscribe($arn)
@@ -107,12 +113,12 @@ class WebHook extends Base
             throw new Exception(null, $ex->getMessage());
         }
     }
-    
+
     /**
      * Get the request body from the webhook notification
-     * 
+     *
      * @return array
-     * 
+     *
      * @throws Exception
      */
     public static function detectRequestBody()
