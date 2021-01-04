@@ -13,7 +13,7 @@ use tabs\apiclient\Builder;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
- * 
+ *
  * @method Address setLine1(string $line1)        Set the Address line 1
  * @method Address setLine2(string $line2)        Set the Address line 2
  * @method Address setLine3(string $line3)        Set the Address line 3
@@ -132,17 +132,12 @@ class Address extends Builder
      */
     public function toArray()
     {
-        return array(
-            'line1' => $this->getLine1(),
-            'line2' => $this->getLine2(),
-            'line3' => $this->getLine3(),
-            'town' => $this->getTown(),
-            'county' => $this->getCounty(),
-            'postcode' => $this->getPostcode(),
-            'countryalpha2code' => $this->getCountry()->getAlpha2(),
-            'longitude' => (float) $this->getLongitude(),
-            'latitude' => (float) $this->getLatitude()
-        );
+        $arr = $this->__toArray();
+        if ($this->getCountry()->getId()) {
+            $arr['countryalpha2code'] = $this->getCountry()->getAlpha2();
+        }
+
+        return $arr;
     }
 
     /**
