@@ -132,8 +132,18 @@ class Address extends Builder
      */
     public function toArray()
     {
-        $arr = $this->__toArray();
-        if ($this->getCountry()->getId()) {
+        $arr = array(
+            'line1' => $this->getLine1(),
+            'line2' => $this->getLine2(),
+            'line3' => $this->getLine3(),
+            'town' => $this->getTown(),
+            'county' => $this->getCounty(),
+            'postcode' => $this->getPostcode(),
+            'longitude' => (float) $this->getLongitude(),
+            'latitude' => (float) $this->getLatitude()
+        );
+
+        if ($this->getCountry()) {
             $arr['countryalpha2code'] = $this->getCountry()->getAlpha2();
         }
 
