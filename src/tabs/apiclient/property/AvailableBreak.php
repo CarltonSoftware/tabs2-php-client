@@ -45,6 +45,14 @@ class AvailableBreak extends Base
      */
     protected $price;
 
+
+    /**
+     * compulsoryextras
+     *
+     * @var integer
+     */
+    protected $compulsoryextras;
+
     // -------------------- Public Functions -------------------- //
 
     /**
@@ -67,7 +75,8 @@ class AvailableBreak extends Base
             'fromdate' => $this->getFromdate()->format('Y-m-d'),
             'todate' => $this->getTodate()->format('Y-m-d'),
             'days' => $this->getDays(),
-            'price' => $this->getPrice()
+            'price' => $this->getPrice(),
+            'compulsoryextras' => $this->getCompulsoryextras()
         );
     }
 
@@ -109,6 +118,16 @@ class AvailableBreak extends Base
     public function getPrice()
     {
         return $this->price;
+    }
+
+    /**
+     * Returns the compulsoryextras
+     *
+     * @return integer
+     */
+    public function getCompulsoryextras()
+    {
+        return $this->compulsoryextras;
     }
 
     /**
@@ -174,4 +193,19 @@ class AvailableBreak extends Base
 
         return $this;
     }
+
+    public function quickSet($data)
+    {
+        if (gettype($data) == 'array') {
+            $data = (object) $data;
+        }
+        $this->days = $data->days;
+        $this->price = $data->price;
+        $this->compulsoryextras = $data->compulsoryextras;
+        $this->fromdate = $data->fromdate instanceof \DateTime ? $data->fromdate : new \DateTime($data->fromdate) ;
+        $this->todate = $data->todate instanceof \DateTime ? $data->todate : new \DateTime($data->todate) ;
+
+        return $this;
+    }
+
 }

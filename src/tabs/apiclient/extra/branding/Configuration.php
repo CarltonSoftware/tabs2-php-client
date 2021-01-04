@@ -15,38 +15,6 @@ use tabs\apiclient\Builder;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * @method Configuration setFromdate(\DateTime $var) Sets the fromdate
- * 
- * @method Configuration setTodate(\DateTime $var) Sets the todate
- * 
- * @method Configuration setCompulsory(boolean $var) Sets the compulsory
- * 
- * @method Configuration setIncluded(boolean $var) Sets the included
- * 
- * @method Configuration setDecimalplaces(integer $var) Sets the decimalplaces
- * 
- * @method Configuration setPayagency(boolean $var) Sets the payagency
- * 
- * @method Configuration setPayowner(boolean $var) Sets the payowner
- * 
- * @method Configuration setVisibletoowner(boolean $var) Sets the visibletoowner
- * 
- * @method Configuration setVisibletocustomer(boolean $var) Sets the visibletocustomer
- * 
- * @method Configuration setCustomerselectable(boolean $var) Sets the customerselectable
- * 
- * @method Configuration setPriceoverrideallowed(boolean $var) Sets the priceoverrideallowed
- * 
- * @method Configuration setDefaultquantity(integer $var) Sets the defaultquantity
- * 
- * @method Configuration setQuantityoverrideallowed(boolean $var) Sets the quantityoverrideallowed
- * 
- * @method Configuration setMaximumquantity(integer $var) Sets the maximumquantity
- * 
- * @method Configuration setUsepropertyprimarybranding(boolean $var) Sets the usepropertyprimarybranding
- * 
- * @method Configuration setChangesbrochureprice(boolean $var) Sets the changesbrochureprice
- * 
  */
 class Configuration extends Builder
 {
@@ -66,18 +34,18 @@ class Configuration extends Builder
 
     /**
      * Bookingbookedfromdate
-     * 
+     *
      * @var \DateTime
-     * 
-     * 
+     *
+     *
      */
 
      protected $bookingbookedfromdate;
 
     /**
-     * Bookingbookedtodate 
-     * 
-     */ 
+     * Bookingbookedtodate
+     *
+     */
 
      protected $bookingbookedtodate;
 
@@ -259,11 +227,11 @@ class Configuration extends Builder
                 'usepropertyprimarybranding' => $this->boolToStr($this->getUsepropertyprimarybranding()),
                 'changesbrochureprice' => $this->boolToStr($this->getChangesbrochureprice())
             );
-            
+
             if ($this->getProperty()) {
                 $arr['propertyid'] = $this->getProperty()->getId();
             }
-            
+
             return $arr;
 	}
 
@@ -465,5 +433,386 @@ class Configuration extends Builder
     public function getProperty()
     {
         return $this->property;
+    }
+
+
+    /**
+     * Set the id
+     *
+     * @param integer $id The id
+     *
+     * @return Configuration
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Set the fromdate
+     *
+     * @param date $fromdate The fromdate
+     *
+     * @return Configuration
+     */
+    public function setFromdate($fromdate)
+    {
+        if (!$fromdate instanceof \DateTime) {
+            $this->fromdate = new \DateTime($fromdate);
+        } else {
+            $this->fromdate = $fromdate;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set the todate
+     *
+     * @param date $todate The todate
+     *
+     * @return Configuration
+     */
+    public function setTodate($todate)
+    {
+        if (!$todate instanceof \DateTime) {
+            $this->todate = new \DateTime($todate);
+        } else {
+            $this->todate = $todate;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set the bookingbookedfromdate
+     *
+     * @param date $bookingbookedfromdate The bookingbookedfromdate
+     *
+     * @return Configuration
+     */
+    public function setBookingbookedfromdate($bookingbookedfromdate)
+    {
+        if (!$bookingbookedfromdate instanceof \DateTime) {
+            $this->bookingbookedfromdate = new \DateTime($bookingbookedfromdate);
+        } else {
+            $this->bookingbookedfromdate = $bookingbookedfromdate;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set the bookingbookedtodate
+     *
+     * @param date $bookingbookedtodate The bookingbookedtodate
+     *
+     * @return Configuration
+     */
+    public function setBookingbookedtodate($bookingbookedtodate)
+    {
+        if (!$bookingbookedtodate instanceof \DateTime) {
+            $this->bookingbookedtodate = new \DateTime($bookingbookedtodate);
+        } else {
+            $this->bookingbookedtodate = $bookingbookedtodate;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set the compulsory
+     *
+     * @param boolean $compulsory The compulsory
+     *
+     * @return Configuration
+     */
+    public function setCompulsory($compulsory)
+    {
+        $this->compulsory = $compulsory;
+
+        return $this;
+    }
+
+    /**
+     * Set the compulsoryontransfer
+     *
+     * @param boolean $compulsoryontransfer The compulsoryontransfer
+     *
+     * @return Configuration
+     */
+    public function setCompulsoryontransfer($compulsoryontransfer)
+    {
+        $this->compulsoryontransfer = $compulsoryontransfer;
+
+        return $this;
+    }
+
+    /**
+     * Set the included
+     *
+     * @param boolean $included The included
+     *
+     * @return Configuration
+     */
+    public function setIncluded($included)
+    {
+        $this->included = $included;
+
+        return $this;
+    }
+
+    /**
+     * Set the decimalplaces
+     *
+     * @param integer $decimalplaces The decimalplaces
+     *
+     * @return Configuration
+     */
+    public function setDecimalplaces($decimalplaces)
+    {
+        $this->decimalplaces = $decimalplaces;
+
+        return $this;
+    }
+
+    /**
+     * Set the payagency
+     *
+     * @param boolean $payagency The payagency
+     *
+     * @return Configuration
+     */
+    public function setPayagency($payagency)
+    {
+        $this->payagency = $payagency;
+
+        return $this;
+    }
+
+    /**
+     * Set the payowner
+     *
+     * @param boolean $payowner The payowner
+     *
+     * @return Configuration
+     */
+    public function setPayowner($payowner)
+    {
+        $this->payowner = $payowner;
+
+        return $this;
+    }
+
+    /**
+     * Set the visibletoowner
+     *
+     * @param boolean $visibletoowner The visibletoowner
+     *
+     * @return Configuration
+     */
+    public function setVisibletoowner($visibletoowner)
+    {
+        $this->visibletoowner = $visibletoowner;
+
+        return $this;
+    }
+
+    /**
+     * Set the visibletocustomer
+     *
+     * @param boolean $visibletocustomer The visibletocustomer
+     *
+     * @return Configuration
+     */
+    public function setVisibletocustomer($visibletocustomer)
+    {
+        $this->visibletocustomer = $visibletocustomer;
+
+        return $this;
+    }
+
+    /**
+     * Set the customerselectable
+     *
+     * @param boolean $customerselectable The customerselectable
+     *
+     * @return Configuration
+     */
+    public function setCustomerselectable($customerselectable)
+    {
+        $this->customerselectable = $customerselectable;
+
+        return $this;
+    }
+
+    /**
+     * Set the priceoverrideallowed
+     *
+     * @param boolean $priceoverrideallowed The priceoverrideallowed
+     *
+     * @return Configuration
+     */
+    public function setPriceoverrideallowed($priceoverrideallowed)
+    {
+        $this->priceoverrideallowed = $priceoverrideallowed;
+
+        return $this;
+    }
+
+    /**
+     * Set the defaultquantity
+     *
+     * @param integer $defaultquantity The defaultquantity
+     *
+     * @return Configuration
+     */
+    public function setDefaultquantity($defaultquantity)
+    {
+        $this->defaultquantity = $defaultquantity;
+
+        return $this;
+    }
+
+    /**
+     * Set the quantityoverrideallowed
+     *
+     * @param boolean $quantityoverrideallowed The quantityoverrideallowed
+     *
+     * @return Configuration
+     */
+    public function setQuantityoverrideallowed($quantityoverrideallowed)
+    {
+        $this->quantityoverrideallowed = $quantityoverrideallowed;
+
+        return $this;
+    }
+
+    /**
+     * Set the maximumquantity
+     *
+     * @param integer $maximumquantity The maximumquantity
+     *
+     * @return Configuration
+     */
+    public function setMaximumquantity($maximumquantity)
+    {
+        $this->maximumquantity = $maximumquantity;
+
+        return $this;
+    }
+
+    /**
+     * Set the usepropertyprimarybranding
+     *
+     * @param boolean $usepropertyprimarybranding The usepropertyprimarybranding
+     *
+     * @return Configuration
+     */
+    public function setUsepropertyprimarybranding($usepropertyprimarybranding)
+    {
+        $this->usepropertyprimarybranding = $usepropertyprimarybranding;
+
+        return $this;
+    }
+
+    /**
+     * Set the changesbrochureprice
+     *
+     * @param boolean $changesbrochureprice The changesbrochureprice
+     *
+     * @return Configuration
+     */
+    public function setChangesbrochureprice($changesbrochureprice)
+    {
+        $this->changesbrochureprice = $changesbrochureprice;
+
+        return $this;
+    }
+
+    /**
+     * Set the commissionpercentage
+     *
+     * @param string $commissionpercentage The commissionpercentage
+     *
+     * @return Configuration
+     */
+    public function setCommissionpercentage($commissionpercentage)
+    {
+        $this->commissionpercentage = $commissionpercentage;
+
+        return $this;
+    }
+
+    /**
+     * Set the keeponbookingcancellation
+     *
+     * @param boolean $keeponbookingcancellation The keeponbookingcancellation
+     *
+     * @return Configuration
+     */
+    public function setKeeponbookingcancellation($keeponbookingcancellation)
+    {
+        $this->keeponbookingcancellation = $keeponbookingcancellation;
+
+        return $this;
+    }
+
+    /**
+     * Set the customerpaymentfirstperiod
+     *
+     * @param boolean $customerpaymentfirstperiod The customerpaymentfirstperiod
+     *
+     * @return Configuration
+     */
+    public function setCustomerpaymentfirstperiod($customerpaymentfirstperiod)
+    {
+        $this->customerpaymentfirstperiod = $customerpaymentfirstperiod;
+
+        return $this;
+    }
+
+    /**
+     * Set the customerpaymentlastperiod
+     *
+     * @param boolean $customerpaymentlastperiod The customerpaymentlastperiod
+     *
+     * @return Configuration
+     */
+    public function setCustomerpaymentlastperiod($customerpaymentlastperiod)
+    {
+        $this->customerpaymentlastperiod = $customerpaymentlastperiod;
+
+        return $this;
+    }
+
+    /**
+     * Set the bookingreasonrequired
+     *
+     * @param boolean $bookingreasonrequired The bookingreasonrequired
+     *
+     * @return Configuration
+     */
+    public function setBookingreasonrequired($bookingreasonrequired)
+    {
+        $this->bookingreasonrequired = $bookingreasonrequired;
+
+        return $this;
+    }
+
+    /**
+     * Set the type
+     *
+     * @param string $type The type
+     *
+     * @return Configuration
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
     }
 }

@@ -13,7 +13,7 @@ use tabs\apiclient\Builder;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
- * 
+ *
  * @method Address setLine1(string $line1)        Set the Address line 1
  * @method Address setLine2(string $line2)        Set the Address line 2
  * @method Address setLine3(string $line3)        Set the Address line 3
@@ -243,5 +243,22 @@ class Address extends Builder
     public function getCountry()
     {
         return $this->country;
+    }
+
+    public function quickSet($data)
+    {
+        $this->id = $data->id;
+        $this->line1 = $data->line1;
+        $this->line2 = $data->line2;
+        $this->line3 = $data->line3;
+        $this->town = $data->town;
+        $this->county = $data->county;
+        $this->postcode = $data->postcode;
+        $this->longitude = $data->longitude;
+        $this->latitude = $data->latitude;
+        $this->geohash = $data->geohash;
+        $this->country = Country::factory($data->country);
+
+        return $this;
     }
 }

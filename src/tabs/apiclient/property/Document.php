@@ -15,7 +15,7 @@ use tabs\apiclient\Builder;
  * @link      http://www.carltonsoftware.co.uk
  *
  * @method Document setCreated(\DateTime $var) Sets the created
- * 
+ *
  */
 class Document extends Builder
 {
@@ -37,7 +37,7 @@ class Document extends Builder
 
     /**
      * Constructor
-     * 
+     *
      * @param integer $id ID
      *
      * @return void
@@ -58,7 +58,7 @@ class Document extends Builder
      */
     public function setDocument($document)
     {
-        $this->document = \tabs\apiclient\Document::factory($document);
+        $this->document = new \tabs\apiclient\Document($document->id, $document);
 
         return $this;
     }
@@ -72,7 +72,7 @@ class Document extends Builder
      */
     public function setImage($document)
     {
-        $this->document = \tabs\apiclient\Image::factory($document);
+        $this->document = new \tabs\apiclient\Image($document->id, $document);
 
         return $this;
     }
@@ -113,5 +113,18 @@ class Document extends Builder
     public function getDocument()
     {
         return $this->document;
+    }
+
+    public function quickSet($data)
+    {
+        $this->id = $data->id;
+        $this->created = new \DateTime($data->created);
+
+        if (isset($data->image)) {
+            $this->document = new \tabs\apiclient\Image($data->image->id, $data->image);
+        } elseif (isset($data->document)) {
+            $this->document = new \tabs\apiclient\Document($data->document->id, $data->document);
+        }
+        return $this;
     }
 }

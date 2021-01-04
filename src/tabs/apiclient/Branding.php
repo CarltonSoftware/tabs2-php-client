@@ -19,9 +19,6 @@ use tabs\apiclient\MarketingBrand;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * 
- * @method Branding setBacsoutputtype(string $var) Sets the bacsoutputtype
- * @method Branding setBacssettings(string $var) Sets the bacssettings
  * @method Collection|branding\Extra[] getExtras() Returns the branding extras
  */
 class Branding extends Builder
@@ -53,7 +50,7 @@ class Branding extends Builder
      * @var Vatband
      */
     protected $lettingincomevatband;
-    
+
     /**
      * Bacsoutputtype
      *
@@ -67,10 +64,10 @@ class Branding extends Builder
      * @var string
      */
     protected $bacssettings;
-    
+
     /**
      * Extra collection
-     * 
+     *
      * @var Collection|branding\Extra[]
      */
     protected $extras;
@@ -87,7 +84,7 @@ class Branding extends Builder
             new branding\Extra(),
             $this
         );
-        
+
         parent::__construct($id);
     }
 
@@ -148,12 +145,12 @@ class Branding extends Builder
 
         return $this;
     }
-    
+
     /**
      * Output a friendly name for the branding
-     * 
+     *
      * @param string $sep Separator
-     * 
+     *
      * @return string
      */
     public function getName($sep = ' / ')
@@ -170,7 +167,7 @@ class Branding extends Builder
 
     /**
      * Output Custome name for Branding
-     * 
+     *
      * @return string
      */
     public function getBrandingCombinedBradingName()
@@ -252,5 +249,26 @@ class Branding extends Builder
     public function getBacssettings()
     {
         return $this->bacssettings;
+    }
+
+    public function quickSet($data)
+    {
+        $this->id = $data->id;
+        $this->inactive = $data->inactive;
+        $this->lettingbranding = $data->lettingbranding;
+        $this->bacsbankaccount = $data->bacsbankaccount;
+        $this->bacsoutputtype = $data->bacsoutputtype;
+        $this->bacssettings = $data->bacssettings;
+        $this->bookingdatesarechangedays = $data->bookingdatesarechangedays;
+        $this->allowbookingonwebuntil = new \DateTime($data->allowbookingonwebuntil);
+        $this->showpricingonwebuntil = new \DateTime($data->showpricingonwebuntil);
+
+        $this->marketingbrand = MarketingBrand::factory($data->marketingbrand);
+        $this->brandinggroup = BrandingGroup::factory($data->brandinggroup);
+        $this->bookingbrand = BookingBrand::factory($data->bookingbrand);
+        $this->lettingincomevatband = Vatband::factory($data->lettingincomevatband);
+        //$this->petextrabranding = extra\Branding::factory($data->petextrabranding);
+
+        return $this;
     }
 }
