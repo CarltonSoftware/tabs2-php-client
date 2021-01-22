@@ -45,6 +45,14 @@ class AvailableBreak extends Base
      */
     protected $price;
 
+    /**
+     * compulsoryextras
+     *
+     * @var integer
+     */
+    protected $compulsoryextras;
+
+
     // -------------------- Public Functions -------------------- //
 
     /**
@@ -67,7 +75,8 @@ class AvailableBreak extends Base
             'fromdate' => $this->getFromdate()->format('Y-m-d'),
             'todate' => $this->getTodate()->format('Y-m-d'),
             'days' => $this->getDays(),
-            'price' => $this->getPrice()
+            'price' => $this->getPrice(),
+            'compulsoryextras' => $this->getCompulsoryextras(),
         );
     }
 
@@ -109,6 +118,26 @@ class AvailableBreak extends Base
     public function getPrice()
     {
         return $this->price;
+    }
+
+    /**
+     * Returns the compulsory extras
+     *
+     * @return integer
+     */
+    public function getCompulsoryextras()
+    {
+        return $this->compulsoryextras;
+    }
+
+    /**
+     * Returns the total price
+     *
+     * @return integer
+     */
+    public function getTotalprice()
+    {
+        return $this->price + $this->compulsoryextras;
     }
 
     /**
