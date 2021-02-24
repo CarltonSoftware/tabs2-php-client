@@ -56,7 +56,8 @@ try {
             ->setPaymenttype('DEFERRED')
 
             // Set the callback url so that you can be notified of the confirmed payment
-            ->setCallbackurl($base . 'thank-you-for-your-payment.php?id=' . $b->getId());
+            ->setCallbackurl($base . 'thank-you-for-your-payment.php?id=' . $b->getId())
+            ->setFailureurl($base . 'whoops.php?id=' . $b->getId());
 
         echo $sp->create();
 
