@@ -226,6 +226,13 @@ class Property extends Builder
     protected $comments;
 
     /**
+     * Property CommentsAndMetrics
+     *
+     * @var Collection|CommentsAndMetrics[]
+     */
+    protected $commentsandmetrics;
+
+    /**
      * Property Commission
      *
      * @var Collection|Commission[]
@@ -956,5 +963,19 @@ class Property extends Builder
     public function getRatinginspectiontype()
     {
         return $this->ratinginspectiontype;
+    }
+
+    /**
+     * @return property\CommentsAndMetrics
+     */
+    public function getCommentsandmetrics()
+    {
+        return property\CommentsAndMetrics::factory(
+            $this->getJson(
+                \tabs\apiclient\client\Client::getClient()->get(
+                    $this->getUpdateUrl() . '/commentsandmetrics'
+                )
+            )
+        );
     }
 }

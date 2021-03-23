@@ -232,7 +232,7 @@ class Collection extends StaticCollection
      */
     public function getRoute()
     {
-        if ($this->getElementParent() && !$this->isPathOverridden()) {
+        if ($this->getElementParent() && $this->getElementParent()->getId() && !$this->isPathOverridden()) {
             return $this->getElementParent()->getUpdateUrl() . '/' . $this->getPath();
         }
 
