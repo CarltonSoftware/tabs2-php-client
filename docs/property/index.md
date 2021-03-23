@@ -152,6 +152,12 @@ try {
 
                 $collection = $property->getRooms();
                 include __DIR__ . '/../collection.php';
+
+                $candm = $property->getCommentsandmetrics();
+                $collection = $candm->getComments();
+                include __DIR__ . '/../collection.php';
+                $collection = $candm->getMetrics();
+                include __DIR__ . '/../collection.php';
             }
 
     } else {
