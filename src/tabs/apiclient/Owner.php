@@ -133,7 +133,7 @@ class Owner extends Actor
         }
 
         if ($this->getEnquirer()) {
-            $arr['enquirer'] = $this->getEnquirer();
+            $arr['enquirer'] = $this->boolToStr($this->getEnquirer());
         }
 
         return $arr;
