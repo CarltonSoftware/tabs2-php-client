@@ -41,11 +41,11 @@ class Client extends \GuzzleHttp\Client
      * @var \tabs\apiclient\client\Client
      */
     static $instance;
-    
+
     /**
      * Middleware
-     * 
-     * @var OAuthMiddleware 
+     *
+     * @var OAuthMiddleware
      */
     protected $middleware;
 
@@ -78,13 +78,13 @@ class Client extends \GuzzleHttp\Client
             $clientSecret,
             $options
         );
-        
+
         return self::$instance;
     }
-    
+
     /**
      * Drop the instance
-     * 
+     *
      * @return void
      */
     public static function dropClient()
@@ -135,11 +135,11 @@ class Client extends \GuzzleHttp\Client
         } else {
             $handlerStack = HandlerStack::create();
         }
-        
+
         if ($username != '') {
             $options['handler'] = $handlerStack;
             $options['auth'] = 'oauth2';
-            
+
             $tokenUri = parse_url(str_replace('/v2/', '', $base_uri) . '/oauth/v2/token');
 
             $config = [
@@ -162,7 +162,7 @@ class Client extends \GuzzleHttp\Client
             $handlerStack->push($this->middleware->onBefore());
             $handlerStack->push($this->middleware->onFailure(5));
         }
-        
+
         parent::__construct(
             array_merge(
                 array(
@@ -172,10 +172,10 @@ class Client extends \GuzzleHttp\Client
             )
         );
     }
-    
+
     /**
      * Get the base uri
-     * 
+     *
      * @return \GuzzleHttp\Psr7\Uri
      */
     public function getBaseUri()
@@ -184,40 +184,40 @@ class Client extends \GuzzleHttp\Client
             'base_uri'
         );
     }
-    
+
     /**
      * Get the host
-     * 
+     *
      * @return string
      */
     public function getHost()
     {
         return strtolower($this->getBaseUri()->getHost());
     }
-    
+
     /**
      * Get the scheme
-     * 
+     *
      * @return string
      */
     public function getScheme()
     {
         return strtolower($this->getBaseUri()->getScheme());
     }
-    
+
     /**
      * Get the segments of the host path
-     * 
+     *
      * @return array
      */
     public function getHostParts()
     {
         return explode('.', $this->getHost());
     }
-    
+
     /**
      * Get the tabs2 front end url
-     * 
+     *
      * @return string
      */
     public function getTabs2Uri($suffix = '')
@@ -231,20 +231,20 @@ class Client extends \GuzzleHttp\Client
             )
         ) . $suffix;
     }
-    
+
     /**
      * Get the agency code
-     * 
+     *
      * @return string
      */
     public function getAgency()
     {
         return $this->getHostParts()[0];
     }
-    
+
     /**
      * Get the agency code
-     * 
+     *
      * @return string
      */
     public function getAgencyAndMode()
@@ -255,10 +255,10 @@ class Client extends \GuzzleHttp\Client
             return $this->getAgency();
         }
     }
-    
+
     /**
      * Test the mode of the api
-     * 
+     *
      * @return boolean
      */
     public function isTest()
@@ -279,10 +279,10 @@ class Client extends \GuzzleHttp\Client
     {
         return $this->createQueryRequest('get', $url, $params, $options);
     }
-    
+
     /**
      * Get the active user
-     * 
+     *
      * @return \tabs\apiclient\actor\Actor
      */
     public function whoami()
@@ -299,17 +299,17 @@ class Client extends \GuzzleHttp\Client
             $actor,
             $json
         );
-        
+
         return $actor;
     }
-    
+
     /**
      * Map a get requests response to an object
-     * 
+     *
      * @param \tabs\apiclient\Base $object  Object to map
      * @param string               $url     Api URL
      * @param array                $params  Query Parameters
-     * 
+     *
      * @return \tabs\apiclient\Base
      */
     public function map(&$object, $url, $params = array())
@@ -320,14 +320,14 @@ class Client extends \GuzzleHttp\Client
                 $params
             )
         );
-        
+
         $object->setResponsedata($json);
-        
+
         \tabs\apiclient\Base::setObjectProperties(
             $object,
             $json
         );
-        
+
         return $object;
     }
 
@@ -386,10 +386,10 @@ class Client extends \GuzzleHttp\Client
     {
         return $this->createPostRequest('put', $url, $params, $options);
     }
-    
+
     /**
      * Get the middleware
-     * 
+     *
      * @return OAuthMiddleware
      */
     public function getMiddleware()
@@ -441,7 +441,7 @@ class Client extends \GuzzleHttp\Client
                 unset($params[$key]);
             }
         }
-        
+
         $options['form_params'] = $params;
         return $this->request($method, $url, $options);
     }
@@ -472,7 +472,7 @@ class Client extends \GuzzleHttp\Client
                 );
             }
         }
-        
+
         $options['multipart'] = array_merge(
             array(
                 array(
@@ -482,16 +482,19 @@ class Client extends \GuzzleHttp\Client
             ),
             $newParams
         );
-        
+
         return $this->request('POST', $url, $options);
     }
-    
+
     /**
      * @inhertDoc
      */
     public function request($method, $uri = '', array $options = array())
     {
         try {
+            // uncomment the following line if using a local api
+            // $options['verify'] = false;
+
             $response = parent::request($method, $uri, $options);
         } catch (\GuzzleHttp\Exception\ClientException $ex) {
             if ($ex->getResponse()->getStatusCode() === 400) {
@@ -505,7 +508,7 @@ class Client extends \GuzzleHttp\Client
                 throw $ex;
             }
         }
-        
+
         return $response;
     }
 }
