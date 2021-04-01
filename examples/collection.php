@@ -148,6 +148,17 @@ if (!empty($collection)) {
                 $element->getGranted() ? 'GRANTED' : 'NOT GRANTED',
                 $element->getGranteddatetime()->format('Y-m-d')
             );
+        } elseif ($element instanceof tabs\apiclient\property\Comment) {
+            echo sprintf(
+                '<li>%s</li>',
+                $element->getComment()
+            );
+        } elseif ($element instanceof tabs\apiclient\MetricAverage) {
+            echo sprintf(
+                '<li>%s = %f</li>',
+                $element->getName(),
+                round($element->getAvg(), 2)
+            );
         } else {
             echo sprintf(
                 '<li><a href="../exploreelement/?q=%s">%s</a></li>',

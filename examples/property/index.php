@@ -2,7 +2,7 @@
 
 /**
  * @name Requesting property information
- * 
+ *
  * This file demonstrates how to request property information.
  */
 
@@ -150,6 +150,12 @@ try {
             include __DIR__ . '/../collection.php';
 
             $collection = $property->getRooms();
+            include __DIR__ . '/../collection.php';
+
+            $candm = $property->getCommentsandmetrics();
+            $collection = $candm->getComments();
+            include __DIR__ . '/../collection.php';
+            $collection = $candm->getMetrics();
             include __DIR__ . '/../collection.php';
         }
 
