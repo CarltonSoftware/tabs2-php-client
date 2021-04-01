@@ -132,6 +132,10 @@ class Owner extends Actor
             $arr['sourceid'] = $this->getSource()->getId();
         }
 
+        if ($this->getEnquirer()) {
+            $arr['enquirer'] = $this->getEnquirer();
+        }
+
         return $arr;
     }
 
