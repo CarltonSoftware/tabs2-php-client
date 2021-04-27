@@ -16,55 +16,55 @@ use tabs\apiclient\Builder;
  * @link      http://www.carltonsoftware.co.uk
  *
  * @method SpecialOffer setType(string $var) Sets the type
- * 
+ *
  * @method SpecialOffer setActive(boolean $var) Sets the active
- * 
+ *
  * @method SpecialOffer setAvailabilityexists(boolean $var) Sets the availabilityexists
- * 
+ *
  * @method SpecialOffer setArchived(boolean $var) Sets the archived
- * 
+ *
  * @method SpecialOffer setArchiveddatetime(\DateTime $var) Sets the archiveddatetime
- * 
+ *
  * @method SpecialOffer setDescription(string $var) Sets the description
- * 
+ *
  * @method SpecialOffer setOfficedescription(string $var) Sets the officedescription
- * 
+ *
  * @method SpecialOffer setMinimumholidaylength(integer $var) Sets the minimumholidaylength
- * 
+ *
  * @method SpecialOffer setMaximumholidaylength(integer $var) Sets the maximumholidaylength
- * 
+ *
  * @method SpecialOffer setMinimumoccupancy(integer $var) Sets the minimumoccupancy
- * 
+ *
  * @method SpecialOffer setMaximumoccupancy(integer $var) Sets the maximumoccupancy
- * 
+ *
  * @method SpecialOffer setMinimumdaysbeforeholiday(integer $var) Sets the minimumdaysbeforeholiday
- * 
+ *
  * @method SpecialOffer setMaximumdaysbeforeholiday(integer $var) Sets the maximumdaysbeforeholiday
- * 
+ *
  * @method SpecialOffer setDaysbeforeappliestowholeholiday(boolean $var) Sets the daysbeforeappliestowholeholiday
- * 
+ *
  * @method SpecialOffer setAdditional(boolean $var) Sets the additional
- * 
+ *
  * @method SpecialOffer setAdvertise(boolean $var) Sets the advertise
- * 
+ *
  * @method SpecialOffer setChangedaystartfinishonly(boolean $var) Sets the changedaystartfinishonly
- * 
+ *
  * @method SpecialOffer setHaspromotions(boolean $var) Sets the haspromotions
- * 
+ *
  * @method SpecialOffer setConfirmedbookingsinperiod(integer $var) Sets the confirmedbookingsinperiod
- * 
+ *
  * @method SpecialOffer setCommissionpercentage(float $var) Sets the commissionpercentage
- * 
+ *
  * @method SpecialOffer setFixedprice(float $var) Sets the fixedprice
- * 
+ *
  * @method SpecialOffer setAmount(float $var) Sets the amount
- * 
+ *
  * @method SpecialOffer setPercentage(float $var) Sets the percentage
- * 
+ *
  * @method SpecialOffer setPerperiod(boolean $var) Sets the perperiod
- * 
+ *
  * @method SpecialOffer setApplytopartysizepricing(boolean $var) Sets the applytopartysizepricing
- * 
+ *
  * @method Collection|specialoffer\BookingPeriod[]          getBookingperiods()          Returns the booking periods collection
  * @method Collection|specialoffer\HolidayPeriod[]          getHolidayperiods()          Returns the holiday periods collection
  * @method Collection|specialoffer\Branding[]               getBrandings()               Returns the offer brandings
@@ -78,6 +78,8 @@ use tabs\apiclient\Builder;
  */
 class SpecialOffer extends Builder
 {
+    const WEBSITESECTION_REDUCEDOCCUPANCYPRICE = 5;
+
     /**
      * Type
      *
@@ -273,73 +275,73 @@ class SpecialOffer extends Builder
      * @var TabsUser
      */
     protected $archivedby;
-    
+
     /**
      * Special offer attributes
-     * 
+     *
      * @var Collection|specialoffer\Attribute[]
      */
     protected $attributes;
-    
+
     /**
      * Special offer booking periods
-     * 
+     *
      * @var Collection|specialoffer\BookingPeriod[]
      */
     protected $bookingperiods;
-    
+
     /**
      * Special offer holiday periods
-     * 
+     *
      * @var Collection|specialoffer\HolidayPeriod[]
      */
     protected $holidayperiods;
-    
+
     /**
      * Special offer brandings
-     * 
+     *
      * @var Collection|specialoffer\Branding[]
      */
     protected $brandings;
-    
+
     /**
      * Special offer marketing brands
-     * 
+     *
      * @var Collection|specialoffer\MarketingBrand[]
      */
     protected $marketingbrands;
 
     /**
      * Special offer property brandings
-     * 
+     *
      * @var Collection|specialoffer\PropertyBranding[]
      */
     protected $propertybrandings;
-    
+
     /**
      * Special offer confirmed booking periods
-     * 
+     *
      * @var Collection|specialoffer\ConfirmedBookingPeriod[]
      */
     protected $confirmedbookingperiods;
-    
+
     /**
      * Special offer promotions
-     * 
+     *
      * @var Collection|specialoffer\Promotion[]
      */
     protected $promotions;
-    
+
     /**
      * Special offer sales channels
-     * 
+     *
      * @var Collection|specialoffer\SalesChannel[]
      */
     protected $saleschannels;
-    
+
     /**
      * Special offer website sections
-     * 
+     *
      * @var Collection|specialoffer\WebsiteSection[]
      */
     protected $websitesections;
@@ -356,25 +358,25 @@ class SpecialOffer extends Builder
             new specialoffer\Attribute(),
             $this
         );
-        
+
         $this->bookingperiods = Collection::factory(
             'bookingperiod',
             new specialoffer\BookingPeriod(),
             $this
         );
-        
+
         $this->holidayperiods = Collection::factory(
             'holidayperiod',
             new specialoffer\HolidayPeriod(),
             $this
         );
-        
+
         $this->brandings = Collection::factory(
             'branding',
             new specialoffer\Branding(),
             $this
         );
-        
+
         $this->marketingbrands = Collection::factory(
             'marketingbrand',
             new specialoffer\MarketingBrand(),
@@ -386,31 +388,31 @@ class SpecialOffer extends Builder
             new specialoffer\PropertyBranding(),
             $this
         );
-        
+
         $this->confirmedbookingperiods = Collection::factory(
             'confirmedbookingperiod',
             new specialoffer\ConfirmedBookingPeriod(),
             $this
         );
-        
+
         $this->promotions = Collection::factory(
             'promotion',
             new specialoffer\Promotion(),
             $this
         );
-        
+
         $this->saleschannels = Collection::factory(
             'saleschannel',
             new specialoffer\SalesChannel(),
             $this
         );
-        
+
         $this->websitesections = Collection::factory(
             'websitesection',
             new specialoffer\WebsiteSection(),
             $this
         );
-        
+
         parent::__construct($id);
     }
 
@@ -455,12 +457,12 @@ class SpecialOffer extends Builder
 
         return $this;
     }
-    
+
     /**
      * Find if a date lies within the special offer holiday periods
-     * 
+     *
      * @param \DateTime $date Date to test
-     * 
+     *
      * @return boolean
      */
     public function isHolidayPeriod(\DateTime $date)
@@ -469,12 +471,12 @@ class SpecialOffer extends Builder
             return $date >= $hp->getFromdate() && $hp->getTodate() >= $date;
         })->count() > 0;
     }
-    
+
     /**
      * Find if a date lies within the special offer booking periods
-     * 
+     *
      * @param \DateTime $date Date to test
-     * 
+     *
      * @return boolean
      */
     public function isBookingPeriod(\DateTime $date)
@@ -490,11 +492,11 @@ class SpecialOffer extends Builder
     public function toArray()
     {
         $arr = $this->__toArray();
-        
+
         if ($this->getCurrency()) {
             $arr['currencycode'] = $this->getCurrency()->getCode();
         }
-        
+
         if ($this->getArchivedby()) {
             $arr['archivedbyactorid'] = $this->getArchivedby()->getId();
         }
@@ -780,5 +782,21 @@ class SpecialOffer extends Builder
     public function getArchivedby()
     {
         return $this->archivedby;
+    }
+
+    /**
+     * Returns the title for the offer, either "Reduced Occupancy Price Offer" or "Special Offer"
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        foreach ($this->getWebsitesections() as $section) {
+            if ($section->getWebsitesection()->getId() == self::WEBSITESECTION_REDUCEDOCCUPANCYPRICE) {
+                return "Reduced Occupancy Price Offer";
+            }
+        }
+
+        return "Special Offer";
     }
 }
