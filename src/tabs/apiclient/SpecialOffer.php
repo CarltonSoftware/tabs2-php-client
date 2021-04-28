@@ -793,7 +793,7 @@ class SpecialOffer extends Builder
     {
         foreach ($this->getWebsitesections() as $section) {
             if ($section->getWebsitesection()->getId() == self::WEBSITESECTION_REDUCEDOCCUPANCYPRICE) {
-                return "Reduced Occupancy Price Offer";
+                return "Reduced Occupancy Offer";
             }
         }
 
