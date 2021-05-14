@@ -13,7 +13,9 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\output;
+namespace tabs\apiclient\actor;
+
+use tabs\apiclient\Builder;
 
 /**
  * Tabs Rest API ActorProgram object.
@@ -41,7 +43,6 @@ namespace tabs\apiclient\output;
  * @method \tabs\apiclient\ApprovalType      getApprovaltype()     Return the ApprovalType
  *
  * @method       setId(integer $id)     Set the id
- * @method       setProgram(\tabs\apiclient\Program $program)     Set the Program
  * @method       setFromdate(date $fromdate)     Set the fromdate
  * @method       setTodate(date $todate)     Set the todate
  * @method       setCreateddatetime(date $createddatetime)     Set the createddatetime
@@ -54,7 +55,7 @@ namespace tabs\apiclient\output;
  * @method       setApproverquestion(string $approverquestion)     Set the approverquestion
  * @method       setApprovaltype(\tabs\apiclient\ApprovalType $approvaltype)     Set the ApprovalType
  */
-class ActorProgram extends \tabs\apiclient\core\Builder
+class Program extends Builder
 {
     /**
      * id
@@ -178,7 +179,7 @@ class ActorProgram extends \tabs\apiclient\core\Builder
      */
     public function setProgram($program)
     {
-        $this->Program = \tabs\apiclient\Program::factory($program);
+        $this->program = \tabs\apiclient\Program::factory($program);
 
         return $this;
     }

@@ -13,7 +13,9 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\output;
+namespace tabs\apiclient;
+
+use tabs\apiclient\Builder;
 
 /**
  * Tabs Rest API ApprovalType object.
@@ -34,7 +36,7 @@ namespace tabs\apiclient\output;
  * @method       setApprovaltype(string $approvaltype)     Set the approvaltype
  * @method       setDescription(string $description)     Set the description
  */
-class ApprovalType extends \tabs\apiclient\core\Builder
+class ApprovalType extends Builder
 {
     /**
      * id

@@ -13,7 +13,9 @@
  * @link      http://www.carltonsoftware.co.uk
  */
 
-namespace tabs\apiclient\output;
+namespace tabs\apiclient;
+
+use tabs\apiclient\Builder;
 
 /**
  * Tabs Rest API Program object.
@@ -50,7 +52,7 @@ namespace tabs\apiclient\output;
  * @method       setActionrequiredonrejection(boolean $actionrequiredonrejection)     Set the actionrequiredonrejection
  * @method       setRejectionactiondescription(string $rejectionactiondescription)     Set the rejectionactiondescription
  */
-class Program extends \tabs\apiclient\core\Builder
+class Program extends Builder
 {
     /**
      * id
