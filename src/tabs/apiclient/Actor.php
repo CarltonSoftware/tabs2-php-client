@@ -11,6 +11,7 @@ use tabs\apiclient\actor\ContactDetail;
 use tabs\apiclient\actor\ContactDetailOther;
 use tabs\apiclient\actor\PhoneNumber;
 use tabs\apiclient\actor\ManagedActivity;
+use tabs\apiclient\actor\Program;
 use tabs\apiclient\ActorSecurity;
 
 /**
@@ -178,6 +179,13 @@ abstract class Actor extends Builder
     protected $managedactivities;
 
     /**
+     * Actor Programs
+     *
+     * @var StaticCollection|Program[]
+     */
+    protected $programs;
+
+    /**
      * Actor Security
      *
      * @var Collection|ActorSecurity[]
@@ -251,6 +259,12 @@ abstract class Actor extends Builder
         $this->managedactivities = Collection::factory(
             'managedactivity',
             new ManagedActivity(),
+            $this
+        );
+
+        $this->programs = Collection::factory(
+            'program',
+            new Program(),
             $this
         );
 
@@ -760,4 +774,14 @@ abstract class Actor extends Builder
     {
         return $this->managedactivities;
     }
+
+    /**
+     * Returns the actor programs
+     *
+     * @return StaticCollection|Program[]
+     */
+    public function getPrograms()
+    {
+        return $this->programs;
+    }    
 }
