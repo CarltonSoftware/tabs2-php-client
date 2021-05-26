@@ -1144,7 +1144,7 @@ class Booking extends Builder
      */
     public function getPartySizeSaving()
     {
-        return $this->_getTotalPriceElement(substr(__FUNCTION__, 3));
+        return $this->_getTotalPriceElement('partysizesaving') + $this->_getTotalPriceElement('reducedoccupancyspecialoffersaving');
     }
 
     /**
