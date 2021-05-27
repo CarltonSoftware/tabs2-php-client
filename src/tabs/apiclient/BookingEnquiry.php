@@ -523,7 +523,7 @@ class BookingEnquiry extends Base
      */
     public function getPartySizeSaving()
     {
-        return $this->_sumTotalsData('partysizesaving') + $this->_sumTotalsData('reducedoccupancyspecialoffersaving');
+        return $this->_sumTotalsData('partysizesaving');
     }
 
     /**
