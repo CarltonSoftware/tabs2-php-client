@@ -53,7 +53,6 @@ use tabs\apiclient\Builder;
  * @method       setActioneddatetime(string $actioneddatetime)     Set the actioneddatetime
  * @method       setPending(boolean $pending)     Set the pending
  * @method       setApproverquestion(string $approverquestion)     Set the approverquestion
- * @method       setApprovaltype(\tabs\apiclient\ApprovalType $approvaltype)     Set the ApprovalType
  */
 class Program extends Builder
 {
@@ -152,13 +151,9 @@ class Program extends Builder
     // ------------------ Public Functions --------------------- //
 
     /**
-     * Constructor.
-     *
-     * Initialise the ActorProgram object
-     *
-     * @return 
+     * @inheritDoc
      */
-    public function __construct()
+    public function __construct($id = null)
     {
         $this->program = new \tabs\apiclient\Program();
         $this->approvaltype = new \tabs\apiclient\ApprovalType();
@@ -168,6 +163,7 @@ class Program extends Builder
         $this->createddatetime = new \DateTime();
         $this->approveddatetime = new \DateTime();
 
+        parent::__construct($id);
     }
 
     /**
@@ -215,20 +211,12 @@ class Program extends Builder
      */
     public function toArray()
     {
-        return array(
-            'id' => $this->getId(),
-            'program' => $this->getProgram()->toArray(),
-            'fromdate' => $this->getFromdate()->format('Y-m-d'),
-            'todate' => $this->getTodate()->format('Y-m-d'),
-            'createddatetime' => $this->getCreateddatetime()->format('Y-m-d'),
-            'approved' => $this->getApproved(),
-            'approveddatetime' => $this->getApproveddatetime()->format('Y-m-d'),
-            'actioned' => $this->getActioned(),
-            'actionedbyactor' => $this->getActionedbyactor(),
-            'actioneddatetime' => $this->getActioneddatetime(),
-            'pending' => $this->getPending(),
-            'approverquestion' => $this->getApproverquestion(),
-            'approvaltype' => $this->getApprovaltype()->toArray(),
-        );
+        $arr = parent::toArray();
+
+        if ($this->getProgram() && $this->getProgram()->getId()) {
+            $arr['programid'] = $this->getProgram()->getId();
+        }
+
+        return $arr;
     }
 }
