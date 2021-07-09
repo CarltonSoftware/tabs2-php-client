@@ -966,14 +966,31 @@ class Property extends Builder
     }
 
     /**
+     * Returns the comments and metrics
+     *
+     * @param DateTime $fromdate optional fromdate for the comments
+     * @param DateTime $todate optional todate for the comments
+     *
      * @return property\CommentsAndMetrics
      */
-    public function getCommentsandmetrics()
+    public function getCommentsandmetrics($fromdate = null, $todate = null)
     {
+        // if parameteres are DateTime objects, convert to strings
+        if ($fromdate && $fromdate instanceof \DateTime) {
+            $fromdate = $fromdate->format('Y-m-d');
+        }
+        if ($todate && $todate instanceof \DateTime) {
+            $todate = $todate->format('Y-m-d');
+        }
+
         return property\CommentsAndMetrics::factory(
             $this->getJson(
                 \tabs\apiclient\client\Client::getClient()->get(
-                    $this->getUpdateUrl() . '/commentsandmetrics'
+                    $this->getUpdateUrl() . '/commentsandmetrics',
+                    [
+                        'fromdate' => $fromdate,
+                        'todate' => $todate,
+                    ]
                 )
             )
         );
