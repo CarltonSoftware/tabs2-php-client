@@ -966,14 +966,27 @@ class Property extends Builder
     }
 
     /**
+     * Returns the comments and metrics
+     *
+     * @param array $params Array of parameters to send to the endpoint
+     *
      * @return property\CommentsAndMetrics
      */
-    public function getCommentsandmetrics()
+    public function getCommentsandmetrics($params = [])
     {
+        // if parameteres are DateTime objects, convert to strings
+        if (isset($params['fromdate']) && $params['fromdate'] instanceof \DateTime) {
+            $params['fromdate'] = $params['fromdate']->format('Y-m-d');
+        }
+        if (isset($params['todate']) && $params['todate'] instanceof \DateTime) {
+            $params['todate'] = $params['todate']->format('Y-m-d');
+        }
+
         return property\CommentsAndMetrics::factory(
             $this->getJson(
                 \tabs\apiclient\client\Client::getClient()->get(
-                    $this->getUpdateUrl() . '/commentsandmetrics'
+                    $this->getUpdateUrl() . '/commentsandmetrics',
+                    $params
                 )
             )
         );
