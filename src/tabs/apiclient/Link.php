@@ -127,7 +127,13 @@ class Link extends Base
      */
     public function get()
     {
-        return $this->toObject()->get();
+        $that = $this->toObject()->get();
+
+        if ($this->getCallee()) {
+            call_user_func($this->getCallee(), $that);
+        }
+
+        return $that;
     }
 
     /**
@@ -140,10 +146,6 @@ class Link extends Base
         $cls = $this->objectClass;
         if (class_exists($cls)) {
             $that = new $cls($this->getId());
-
-            if ($this->getCallee()) {
-                call_user_func($this->getCallee(), $that);
-            }
 
             return $that;
         }
