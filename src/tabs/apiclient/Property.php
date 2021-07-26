@@ -991,4 +991,41 @@ class Property extends Builder
             )
         );
     }
+    
+    /**
+     * @param \DateTime $fromdate From date
+     * @param \DateTime $todate From date
+     *
+     * @return \tabs\apiclient\Collection|property\LinkedProperty[]
+     */
+    public function getLinkedProperties(
+        \DateTime $fromdate = null,
+        \DateTime $todate = null
+    ) {
+        $linkedProperties = Collection::factory(
+            'link',
+            new property\LinkedProperty(),
+            $this
+        );
+
+        if ($fromdate) {
+            $linkedProperties->getPagination()->addParameter(
+                'fromdate',
+                $fromdate->format('Y-m-d')
+            );
+        }
+
+        if ($todate) {
+            $linkedProperties->getPagination()->addParameter(
+                'todate',
+                $todate->format('Y-m-d')
+            );
+        }
+
+        if (!$linkedProperties->isFetched()) {
+            $linkedProperties->fetch();
+        }
+
+        return $linkedProperties;
+    }
 }
