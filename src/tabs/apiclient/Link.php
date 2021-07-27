@@ -157,6 +157,11 @@ class Link extends Base
     {
         $cls = $this->objectClass;
         if (class_exists($cls)) {
+            if (!$this->getId() && $this->getLink()) {
+                $parts = explode('/', $this->getLink());
+                $id = array_pop($parts);
+                $this->setId($id);
+            }
             $that = new $cls($this->getId());
 
             return $that;
