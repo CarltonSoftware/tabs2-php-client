@@ -127,13 +127,25 @@ class Link extends Base
      */
     public function get()
     {
-        $that = $this->toObject()->get();
+        $cls = $this->objectClass;
+        if (class_exists($cls)) {
 
-        if ($this->getCallee()) {
-            call_user_func($this->getCallee(), $that);
+            $json = self::getJson(
+                \tabs\apiclient\client\Client::getClient()->get(
+                    $this->getLink()
+                )
+            );
+            $that = $cls::factory($json);
+            $that->setResponsedata($json);
+
+            if ($this->getCallee()) {
+                call_user_func($this->getCallee(), $that);
+            }
+
+            return $that;
         }
 
-        return $that;
+        throw new \RuntimeException($cls . ' not found');
     }
 
     /**
@@ -145,6 +157,11 @@ class Link extends Base
     {
         $cls = $this->objectClass;
         if (class_exists($cls)) {
+            if (!$this->getId() && $this->getLink()) {
+                $parts = explode('/', $this->getLink());
+                $id = array_pop($parts);
+                $this->setId($id);
+            }
             $that = new $cls($this->getId());
 
             return $that;
