@@ -79,9 +79,14 @@ class PotentialCancellation extends Base
     protected $assignedtoactor;
 
     /**
-     * @var boolean
+     * @var string
      */
     protected $transferfailedreason = '';
+
+    /**
+     * @var string
+     */
+    protected $potentialtransferreason = '';
 
     /**
      * @var boolean
