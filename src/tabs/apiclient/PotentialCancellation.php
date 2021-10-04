@@ -39,6 +39,7 @@ namespace tabs\apiclient;
  * @method PotentialCancellation setOldtotalprice(float $var)
  * @method PotentialCancellation setNewtotalprice(float $var)
  * @method PotentialCancellation setTransferfailedreason(string $var)
+ * @method PotentialCancellation setPotentialtransferreason(string $var)
  * @method PotentialCancellation setAssignedtoactor(\tabs\apiclient\TabsUser $var)
  */
 class PotentialCancellation extends Base
@@ -240,6 +241,14 @@ class PotentialCancellation extends Base
     public function getTransferfailedreason()
     {
         return $this->transferfailedreason;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPotentialtransferreason()
+    {
+        return $this->potentialtransferreason;
     }
 
     /**
