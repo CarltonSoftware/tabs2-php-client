@@ -1168,6 +1168,16 @@ class Booking extends Builder
     }
 
     /**
+     * Get the saving from the percentage paid by an owner
+     *
+     * @return integer
+     */
+    public function getPercentagePaidByOwnerOfferSaving()
+    {
+        return $this->_getTotalPriceElement(substr(__FUNCTION__, 3));
+    }
+
+    /**
      * Get the basic price
      *
      * @return integer

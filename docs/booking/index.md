@@ -85,6 +85,7 @@ try {
             echo '<p>Party saving: £' . $booking->getPartySizeSaving() . '</p>';
             echo '<p>Promotional code saving: £' . $booking->getPromotionCodeSaving() . '</p>';
             echo '<p>Special offer saving: £' . $booking->getSpecialOfferSaving() . '</p>';
+            echo '<p>Percentage paid by owner offer saving: £' . $booking->getPercentagePaidByOwnerOfferSaving() . '</p>';
 
             $extras = $booking->getExtras()->findBy(function($ele) {
                 return !$ele->getConfiguration()->isIncluded();
