@@ -537,6 +537,16 @@ class BookingEnquiry extends Base
     }
 
     /**
+     * Get the saving from the percentage paid by an owner
+     *
+     * @return integer
+     */
+    public function getPercentagePaidByOwnerOfferSaving()
+    {
+        return $this->_sumTotalsData('percentagepaidbyowneroffersaving');
+    }
+
+    /**
      * Return the special offer saving
      *
      * @return integer
