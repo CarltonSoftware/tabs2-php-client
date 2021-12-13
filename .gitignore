@@ -29,3 +29,4 @@ build/logs/
 ubuntu-xenial-16.04-cloudimg-console.log
 html
 .vscode
+.php-cs-fixer.cache

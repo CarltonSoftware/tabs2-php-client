@@ -69,7 +69,7 @@ try {
         }
 
         ?>
-            <p><a href="add-promotion.php?id=<?php echo $booking->getId(); ?>">Add a promotional code</a></p>
+            <p><a href="add-promotion.php?id=<?php echo $booking->getId(); ?>&code=2021xmas2">Add a promotional code</a></p>
         <?php
 
         ?>
