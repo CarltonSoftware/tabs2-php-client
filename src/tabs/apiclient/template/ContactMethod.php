@@ -16,7 +16,7 @@ use tabs\apiclient\Builder;
  * @link      http://www.carltonsoftware.co.uk
  *
  * @method ContactMethod setFromdate(\DateTime $var) Sets the fromdate
- * 
+ *
  * @method ContactMethod setTodate(\DateTime $var) Sets the todate
  * @method Collection\tabs\apiclient\template\Element[] getElements() Returns the elements object
  */
@@ -78,7 +78,7 @@ class ContactMethod extends Builder
                 'TemplateElementText' => new \tabs\apiclient\template\TextElement
             )
         );
-        
+
         parent::__construct($id);
     }
 
@@ -127,12 +127,12 @@ class ContactMethod extends Builder
 
         return $arr;
     }
-    
+
     /**
      * Return the pdf blob
-     * 
+     *
      * @param integer $id Booking reference
-     * 
+     *
      * @return string
      */
     public function pdf($id)
@@ -140,16 +140,16 @@ class ContactMethod extends Builder
         $req = \tabs\apiclient\client\Client::getClient()->get(
             $this->getUpdateUrl() . '/ref/' . $id . '/output'
         );
-        
+
         return (string) $req->getBody();
     }
-    
+
     /**
-     * Return an array of html elements which are concatenated together to form 
+     * Return an array of html elements which are concatenated together to form
      * the email.
-     * 
+     *
      * @param integer $id Booking reference
-     * 
+     *
      * @return array
      */
     public function html($id)
@@ -161,28 +161,29 @@ class ContactMethod extends Builder
             true
         );
     }
-    
+
     /**
      * Attempt to send the email to the correct recipients.
-     * 
+     *
      * @param integer $id Booking reference
-     * 
+     * @param boolean $ifAvailable check whether this is available to send
+     *
      * @return boolean
      */
-    public function email($id)
+    public function email($id, $ifAvailable = false)
     {
         $req = \tabs\apiclient\client\Client::getClient()->put(
-            $this->getUpdateUrl() . '/ref/' . $id . '/send'
+            $this->getUpdateUrl() . '/ref/' . $id . '/send' . ($ifAvailable ? 'ifavailable' : '')
         );
-        
+
         return $req->getStatusCode() === 204;
     }
-    
+
     /**
      * Save the template as a pdf and return a document.
-     * 
+     *
      * @param integer $id Booking reference
-     * 
+     *
      * @return \tabs\apiclient\booking\Document
      */
     public function save($id)
@@ -190,7 +191,7 @@ class ContactMethod extends Builder
         $req = \tabs\apiclient\client\Client::getClient()->post(
             $this->getUpdateUrl() . '/ref/' . $id . '/save'
         );
-        
+
         $segments = array_filter(
             explode('/', $req->getHeader('Content-Location')[0])
         );
