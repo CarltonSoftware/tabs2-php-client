@@ -13,9 +13,9 @@ use tabs\apiclient\Builder;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
- * 
- * 
- * 
+ *
+ *
+ *
  * @method Currency setCode(integer $code)                   Set the code
  * @method Currency setName(integer $name)                   Set the name
  * @method Currency setDecimalplaces(integer $decimalplaces) Set the decimalplaces
@@ -24,30 +24,37 @@ class Currency extends Builder
 {
     /**
      * Code
-     * 
+     *
      * @var string
      */
     protected $code;
-    
+
     /**
      * Name
-     * 
+     *
      * @var string
      */
     protected $name;
-    
+
     /**
      * Decimalplaces
-     * 
+     *
      * @var integer
      */
     protected $decimalplaces;
-    
+
+    /**
+     * Plaintextsymbol
+     *
+     * @var string
+     */
+    protected $plaintextsymbol;
+
     // ------------------ Public Functions --------------------- //
-    
+
     /**
      * Array representation of the address.  Used for creates/updates.
-     * 
+     *
      * @return array
      */
     public function toArray()
@@ -56,6 +63,7 @@ class Currency extends Builder
             'code' => $this->getCode(),
             'name' => $this->getName(),
             'decimalplaces' => $this->getDecimalplaces(),
+            'plaintextsymbol' => $this->getPlaintextsymbol(),
         );
     }
 
@@ -87,5 +95,15 @@ class Currency extends Builder
     public function getDecimalplaces()
     {
         return $this->decimalplaces;
+    }
+
+    /**
+     * Return the plain text symbol
+     *
+     * @return string
+     */
+    public function getPlaintextsymbol()
+    {
+        return $this->plaintextsymbol;
     }
 }
