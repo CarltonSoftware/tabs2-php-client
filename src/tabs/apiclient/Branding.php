@@ -7,6 +7,7 @@ use tabs\apiclient\Vatband;
 use tabs\apiclient\BrandingGroup;
 use tabs\apiclient\BookingBrand;
 use tabs\apiclient\MarketingBrand;
+use tabs\apiclient\Currency;
 
 /**
  * Tabs Rest API object.
@@ -19,7 +20,7 @@ use tabs\apiclient\MarketingBrand;
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
  *
- * 
+ *
  * @method Branding setBacsoutputtype(string $var) Sets the bacsoutputtype
  * @method Branding setBacssettings(string $var) Sets the bacssettings
  * @method Collection|branding\Extra[] getExtras() Returns the branding extras
@@ -53,7 +54,7 @@ class Branding extends Builder
      * @var Vatband
      */
     protected $lettingincomevatband;
-    
+
     /**
      * Bacsoutputtype
      *
@@ -67,10 +68,17 @@ class Branding extends Builder
      * @var string
      */
     protected $bacssettings;
-    
+
+    /**
+     * Currency
+     *
+     * @var Currency
+     */
+    protected $currency;
+
     /**
      * Extra collection
-     * 
+     *
      * @var Collection|branding\Extra[]
      */
     protected $extras;
@@ -87,7 +95,7 @@ class Branding extends Builder
             new branding\Extra(),
             $this
         );
-        
+
         parent::__construct($id);
     }
 
@@ -148,12 +156,27 @@ class Branding extends Builder
 
         return $this;
     }
-    
+
+    /**
+     * Set the currency
+     *
+     * @param stdclass|array|Currency $currency The Currency
+     *
+     * @return Branding
+     */
+    public function setCurrency($currency)
+    {
+        $this->currency = Currency::factory($currency);
+
+        return $this;
+    }
+
+
     /**
      * Output a friendly name for the branding
-     * 
+     *
      * @param string $sep Separator
-     * 
+     *
      * @return string
      */
     public function getName($sep = ' / ')
@@ -170,7 +193,7 @@ class Branding extends Builder
 
     /**
      * Output Custome name for Branding
-     * 
+     *
      * @return string
      */
     public function getBrandingCombinedBradingName()
@@ -191,6 +214,7 @@ class Branding extends Builder
             'lettingincomevatband' => $this->getLettingincomevatband()->getId(),
             'bacsoutputtype' => $this->getBacsoutputtype(),
             'bacssettings' => $this->getBacssettings(),
+            'currency' => $this->getCurrency()->getId(),
         );
     }
 
@@ -252,5 +276,15 @@ class Branding extends Builder
     public function getBacssettings()
     {
         return $this->bacssettings;
+    }
+
+    /**
+     * Returns the currency
+     *
+     * @return Currency
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
     }
 }
