@@ -106,4 +106,14 @@ class Currency extends Builder
     {
         return $this->plaintextsymbol;
     }
+
+    /**
+     * Return string symbol for the currency
+     *
+     * @return string
+     */
+    public function getSymbol()
+    {
+        return $this->plaintextsymbol ?? $this->code;
+    }
 }
