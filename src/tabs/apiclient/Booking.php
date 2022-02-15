@@ -1954,4 +1954,25 @@ class Booking extends Builder
     {
         return $this->donotaddtransferextras;
     }
+
+    /**
+     * Return the currency symbol, using the booking currency if available
+     * and falling back to the brand currency and finally £ if that doesn't
+     * have a currency
+     *
+     * @return string
+     */
+    public function getCurrencysymbol()
+    {
+        $currency = $this->currency;
+        if (!$currency) {
+            $currency = $this->branding->getCurrency();
+        }
+        if (!$currency) {
+            $currency = new Currency(1);
+            $currency->get();
+        }
+
+        return $currency->getSymbol();
+    }
 }
