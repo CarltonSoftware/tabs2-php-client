@@ -120,6 +120,11 @@ class Voucher extends Builder
      */
     protected $frombooking;
 
+    /**
+     * @var \tabs\apiclient\Currency
+     */
+    protected $currency;
+
     // -------------------- Public Functions -------------------- //
 
     /**
@@ -283,4 +288,48 @@ class Voucher extends Builder
 
         return $this;
     }
-}
+
+    /**
+     * Set the currency
+     *
+     * @param stdclass|array|Currency $currency The Currency
+     *
+     * @return Branding
+     */
+    public function setCurrency($currency)
+    {
+        $this->currency = Currency::factory($currency);
+
+        return $this;
+    }
+
+    /**
+     * @return \tabs\apiclient\Currency
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * Return the currency symbol, using the voucher currency if available
+     * and falling back to the booking currency and finally £ if that doesn't
+     * have a currency
+     *
+     * @return string
+     */
+    public function getCurrencysymbol()
+    {
+        if ($this->currency) {
+            return $this->currency->getSymbol();
+        }
+
+        if ($this->frombooking) {
+            return $this->frombooking->getCurrencySymbol();
+        }
+
+        $currency = new Currency(1);
+        $currency->get();
+
+        return $currency->getSymbol();
+    }}
