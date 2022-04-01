@@ -1387,9 +1387,11 @@ class Booking extends Builder
     /**
      * Get the enquiry information about the booking
      *
+     * @param bool $doNotAddTransferExtras control whether the api should not add compulsory transfer extras or not
+     *
      * @return \tabs\apiclient\BookingEnquiry
      */
-    public function getEnquiry()
+    public function getEnquiry($doNotAddTransferExtras = false)
     {
         $be = new \tabs\apiclient\BookingEnquiry();
         $be->setGuestype($this->getGuesttype())
@@ -1414,6 +1416,8 @@ class Booking extends Builder
         if ($this->getGuesttype() === 'Owner') {
             $be->setBranding(array('id' => $this->getProperty()->getPrimarypropertybranding()->getBranding()->getId()));
         }
+
+        $be->setDonotaddtransferextras($doNotAddTransferExtras);
 
         return $be->get();
     }
