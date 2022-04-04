@@ -1417,6 +1417,23 @@ class Booking extends Builder
             $be->setBranding(array('id' => $this->getProperty()->getPrimarypropertybranding()->getBranding()->getId()));
         }
 
+        if ($this->getAdults()) {
+            $be->setAdults($this->getAdults());
+        }
+        if ($this->getChildren()) {
+            $be->setChildren($this->getAdults());
+        }
+        if ($this->getInfants()) {
+            $be->setInfants($this->getInfants());
+        }
+        if ($this->getPets()) {
+            $be->setPets($this->getPets());
+        }
+
+        if ($this->getSaleschannel()) {
+            $be->setSaleschannel($this->getSaleschannel());
+        }
+
         $be->setDonotaddtransferextras($doNotAddTransferExtras);
 
         return $be->get();

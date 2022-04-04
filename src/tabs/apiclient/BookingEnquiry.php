@@ -422,10 +422,14 @@ class BookingEnquiry extends Base
      */
     public function get()
     {
+        // force query parameters into the same order to aid with caching
+        $parameters = $this->toArray();
+        ksort($parameters);
+
         $json = self::getJson(
             \tabs\apiclient\client\Client::getClient()->get(
                 'bookingenquiry',
-                $this->toArray()
+                $parameters
             )
         );
         self::setObjectProperties(
