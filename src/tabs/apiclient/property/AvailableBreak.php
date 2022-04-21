@@ -52,6 +52,13 @@ class AvailableBreak extends Base
      */
     protected $compulsoryextras;
 
+    /**
+     * currency
+     *
+     * @var string
+     */
+    protected $currency;
+
 
     // -------------------- Public Functions -------------------- //
 
