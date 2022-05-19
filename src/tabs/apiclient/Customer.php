@@ -54,13 +54,6 @@ class Customer extends Actor
     protected $confirmedbookingsvalue = 0;
 
     /**
-     * Account balance
-     *
-     * @var integer
-     */
-    protected $accountbalance = 0;
-
-    /**
      * Marketing brands collection
      *
      * @var Collection|MarketingBrand[]
@@ -80,6 +73,8 @@ class Customer extends Actor
      * @var Collection|actor\Payment[]
      */
     protected $payments;
+
+    // TODO: add accountbalances array to support multiple currencies
 
     // -------------------- Public Functions -------------------- //
 
@@ -214,15 +209,5 @@ class Customer extends Actor
     public function getConfirmedbookingsvalue()
     {
         return $this->confirmedbookingsvalue;
-    }
-
-    /**
-     * Returns the accountbalance
-     *
-     * @return integer
-     */
-    public function getAccountbalance()
-    {
-        return $this->accountbalance;
     }
 }
