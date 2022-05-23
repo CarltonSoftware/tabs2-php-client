@@ -159,6 +159,12 @@ if (!empty($collection)) {
                 $element->getName(),
                 round($element->getAvg(), 2)
             );
+        } elseif ($element instanceof tabs\apiclient\Voucher) {
+            echo sprintf(
+                '<li><a href="?id=%s">%s</a></li>',
+                $element->getId(),
+                stristr($text, '<title>') ? htmlentities($text) : $text
+            );
         } else {
             echo sprintf(
                 '<li><a href="../exploreelement/?q=%s">%s</a></li>',
