@@ -86,12 +86,12 @@ class Voucher extends Builder
     protected $expirydate;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $expired;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $refundable;
 
@@ -125,10 +125,15 @@ class Voucher extends Builder
      */
     protected $currency;
 
+    /**
+     * @var \tabs\apiclient\FinancialEntity
+     */
+    protected $financialentity;
+
     // -------------------- Public Functions -------------------- //
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function __construct($id = null)
     {
@@ -140,6 +145,7 @@ class Voucher extends Builder
         $this->useddatetime = '';
         $this->expirydate = new \DateTime();
         $this->vouchersource = new \tabs\apiclient\VoucherSource();
+        $this->financialentity = new \tabs\apiclient\FinancialEntity();
 
         $this->bookingperiods = Collection::factory(
             'bookingperiod',
@@ -234,7 +240,7 @@ class Voucher extends Builder
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getExpired()
     {
@@ -242,7 +248,7 @@ class Voucher extends Builder
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getRefundable()
     {
@@ -250,7 +256,7 @@ class Voucher extends Builder
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function toArray()
     {
@@ -276,7 +282,7 @@ class Voucher extends Builder
     }
 
     /**
-     * @param Booking|Array $booking Booking
+     * @param Booking|array $booking Booking
      *
      * @return $this
      */
@@ -290,15 +296,15 @@ class Voucher extends Builder
     }
 
     /**
-     * Set the currency
+     * Set the currency.
      *
      * @param stdclass|array|Currency $currency The Currency
      *
-     * @return Branding
+     * @return Voucher
      */
     public function setCurrency($currency)
     {
-        $this->currency = Currency::factory($currency);
+        $this->currency = \tabs\apiclient\Currency::factory($currency);
 
         return $this;
     }
@@ -314,7 +320,7 @@ class Voucher extends Builder
     /**
      * Return the currency symbol, using the voucher currency if available
      * and falling back to the booking currency and finally £ if that doesn't
-     * have a currency
+     * have a currency.
      *
      * @return string
      */
@@ -332,4 +338,27 @@ class Voucher extends Builder
         $currency->get();
 
         return $currency->getSymbol();
-    }}
+    }
+
+    /**
+     * Set the financialentity
+     *
+     * @param stdclass|array|FinancialEntity $financialentity The financialentity
+     *
+     * @return Voucher
+     */
+    public function setFinancialentity($financialentity)
+    {
+        $this->financialentity = \tabs\apiclient\FinancialEntity::factory($financialentity);
+
+        return $this;
+    }
+
+    /**
+     * @return \tabs\apiclient\FinancialEntity
+     */
+    public function getFinancialentity()
+    {
+        return $this->financialentity;
+    }
+}
