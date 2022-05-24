@@ -17,24 +17,24 @@ use tabs\apiclient\extra\branding\Configuration;
  * @link      http://www.carltonsoftware.co.uk
  *
  * @method Extra setBookeddatetime(\DateTime $var) Sets the bookeddatetime
- * 
+ *
  * @method Extra setUnitprice(float $var) Sets the unitprice
- * 
- * 
+ *
+ *
  * @method Extra setQuantity(float $var) Sets the quantity
- * 
+ *
  * @method Extra setPriceoverridden(boolean $var) Sets the priceoverridden
- * 
+ *
  * @method Extra setAgencypercentage(string $var) Sets the agencypercentage
- * 
+ *
  * @method Extra setAgencyincomeexvat(float $var) Sets the agencyincomeexvat
- * 
+ *
  * @method Extra setVat(float $var) Sets the vat
- * 
+ *
  * @method Extra setOwnerincome(float $var) Sets the ownerincome
- * 
+ *
  * @method Extra setCancelleddatetime(\DateTime $var) Sets the cancelleddatetime
- * 
+ *
  */
 class Extra extends Builder
 {
@@ -114,20 +114,27 @@ class Extra extends Builder
      * @var float
      */
     protected $ownerincome = 0;
-    
+
     /**
      * Cancelleddatetime
      *
      * @var \DateTime
      */
-    protected $cancelleddatetime;    
-    
+    protected $cancelleddatetime;
+
     /**
      * Extra configuration
-     * 
+     *
      * @var Configuration
      */
     protected $configuration;
+
+    /**
+     * Description override
+     *
+     * @var string
+     */
+    protected $descriptionoverride;
 
     // -------------------- Public Functions -------------------- //
 
@@ -181,19 +188,19 @@ class Extra extends Builder
 
         return $this;
     }
-    
+
     /**
      * Set the price (and the overridden flag)
-     * 
+     *
      * @param float $price Price
-     * 
+     *
      * @return \tabs\apiclient\booking\Extra
      */
     public function setPrice($price)
     {
         $this->set('price', $price)
             ->setPriceoverridden(true);
-        
+
         return $this;
     }
 
@@ -204,7 +211,7 @@ class Extra extends Builder
     {
         $arr = $this->__toArray();
         $arr['extraid'] = $this->getExtra()->getId();
-        
+
         return $arr;
     }
 
@@ -336,5 +343,25 @@ class Extra extends Builder
     public function getConfiguration()
     {
         return $this->configuration;
+    }
+
+    /**
+     * Returns the description override
+     *
+     * @return string
+     */
+    public function getDescriptionoverride()
+    {
+        return strval($this->descriptionoverride);
+    }
+
+    /**
+     * Returns the description override, minus EE and EEIA prefix
+     *
+     * @return string
+     */
+    public function getNoPrefixDescriptionoverride()
+    {
+        return str_replace(['EE - ', 'EEIA - '], '', $this->getDescriptionoverride());
     }
 }
