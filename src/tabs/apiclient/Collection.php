@@ -90,15 +90,23 @@ class Collection extends StaticCollection
     }
 
     /**
-     * @inheritDoc
+     * @deprecated Deprecated in favour of filter()
      */
     public function findBy(callable $fn)
+    {
+        return $this->filter($fn);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function filter(callable $fn)
     {
         if (!$this->isFetched()) {
             $this->fetch();
         }
 
-        return parent::findBy($fn);
+        return parent::filter($fn);
     }
 
     /**
