@@ -287,4 +287,25 @@ class Branding extends Builder
     {
         return $this->currency;
     }
+
+    public function quickSet($data)
+    {
+        $this->id = $data->id;
+        $this->inactive = $data->inactive;
+        $this->lettingbranding = $data->lettingbranding;
+        $this->bacsbankaccount = $data->bacsbankaccount;
+        $this->bacsoutputtype = $data->bacsoutputtype;
+        $this->bacssettings = $data->bacssettings;
+        $this->bookingdatesarechangedays = $data->bookingdatesarechangedays;
+        $this->allowbookingonwebuntil = new \DateTime($data->allowbookingonwebuntil);
+        $this->showpricingonwebuntil = new \DateTime($data->showpricingonwebuntil);
+
+        $this->marketingbrand = MarketingBrand::factory($data->marketingbrand);
+        $this->brandinggroup = BrandingGroup::factory($data->brandinggroup);
+        $this->bookingbrand = BookingBrand::factory($data->bookingbrand);
+        $this->lettingincomevatband = Vatband::factory($data->lettingincomevatband);
+        //$this->petextrabranding = extra\Branding::factory($data->petextrabranding);
+
+        return $this;
+    }
 }

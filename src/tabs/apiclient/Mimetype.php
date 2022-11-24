@@ -13,8 +13,8 @@ use tabs\apiclient\Builder;
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   Release: 1
  * @link      http://www.carltonsoftware.co.uk
- * 
- * 
+ *
+ *
  * @method Mimetype setName(string $name)      Sets the mimetype
  * @method Mimetype setShortname(string $name) Sets the short name
  */
@@ -22,20 +22,20 @@ class Mimetype extends Builder
 {
     /**
      * Name
-     * 
+     *
      * @var string
      */
     protected $name = '';
-    
+
     /**
      * Shortname
-     * 
+     *
      * @var string
      */
     protected $shortname = '';
-    
+
     // ------------------ Public Functions --------------------- //
-    
+
     /**
      * @inheritDoc
      */
@@ -65,5 +65,16 @@ class Mimetype extends Builder
     public function getShortname()
     {
         return $this->shortname;
+    }
+
+    public function quickSet($data)
+    {
+        if (gettype($data) == 'array') {
+            $data = (object) $data;
+        }
+        if (property_exists($data, 'name')) { $this->name = $data->name; }
+        if (property_exists($data, 'shortname')) { $this->shortname = $data->shortname; }
+
+        return $this;
     }
 }

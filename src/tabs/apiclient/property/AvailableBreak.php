@@ -210,4 +210,19 @@ class AvailableBreak extends Base
 
         return $this;
     }
+
+    public function quickSet($data)
+    {
+        if (gettype($data) == 'array') {
+            $data = (object) $data;
+        }
+        $this->days = $data->days;
+        $this->price = $data->price;
+        $this->compulsoryextras = $data->compulsoryextras;
+        $this->fromdate = $data->fromdate instanceof \DateTime ? $data->fromdate : new \DateTime($data->fromdate) ;
+        $this->todate = $data->todate instanceof \DateTime ? $data->todate : new \DateTime($data->todate) ;
+
+        return $this;
+    }
+
 }
